@@ -1,0 +1,2 @@
+<countdown #cd [config]="config" (event)="handleEvent($event)" class="btn btn-sm"></countdown>
+<button *ngIf="isActive" (click)="handleOtp(cd)" class="btn btn-sm">Resend</button>

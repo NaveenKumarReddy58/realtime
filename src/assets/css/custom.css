@@ -1,0 +1,1915 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif !important;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #000305;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.BarlowFont {}
+
+dl,
+ol,
+ul {
+  margin: 0rem;
+  padding: 0;
+}
+
+.LoginSection {
+  padding: 80px 0;
+}
+
+.CustomField label input {
+  width: 100%;
+  height: 55px;
+  border-radius: 15px;
+  border: 2px solid #74838d;
+  padding-left: 15px;
+  color: #20282e;
+  font-weight: 600;
+  color: #74838d;
+}
+
+h2.TitleHeading {
+  font-size: 42px;
+  font-weight: 700;
+}
+
+span.SubHeading {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.CustomField label input:focus {
+  outline: 2px #0eb002;
+  border: 2px solid #0eb002;
+}
+
+.CustomField label {
+  width: 100%;
+  position: relative;
+}
+
+span.LabelT {
+  position: absolute;
+  width: auto;
+  top: 12px;
+  left: 20px;
+  color: #ccc;
+  transform: translateY(-25px);
+  background: #fff;
+}
+
+.CustomField {
+  margin-bottom: 30px;
+}
+
+.CustomField a {
+  color: #000305;
+  text-decoration: none;
+  font-weight: 600;
+  padding-left: 18px;
+}
+
+.loginButton button {
+  background: #0eb002;
+  border: 0;
+  font-weight: 700;
+  width: 100%;
+  display: block;
+  height: 55px;
+  border-radius: 15px;
+  font-size: 20px;
+  color: #fff;
+  margin-bottom: 0;
+}
+
+.CustomField label input:focus~span.LabelT {
+  transform: translateY(-20px);
+  background: #fff;
+  padding: 0 7px;
+  max-width: max-content;
+  font-weight: 500;
+  line-height: 20px;
+  color: #74838d;
+  transition-duration: 0.35s;
+}
+
+.Slider {
+  background: #eaf2f4;
+  border-radius: 30px;
+  padding: 40px 0 40px 30px;
+  float: left;
+  width: 100%;
+}
+
+.BannerSlider_Img img {
+  max-width: 100%;
+}
+
+span.otp-sent {
+  font-weight: 400;
+  line-height: 20px;
+  color: #74838d;
+  padding: 15px 15px 0;
+  display: block;
+}
+
+span.EnterOtp {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.OtpNumber {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  justify-content: space-between;
+  padding-top: 10px;
+}
+
+.OtpNumber input {
+  height: 55px;
+  border-radius: 10px;
+  border: 2px solid #707070;
+  color: #20282e;
+  font-weight: 600;
+  width: 55px;
+  text-align: center;
+}
+
+.Enter_Otp {
+  margin-bottom: 0;
+}
+
+.Resend_Otp a {
+  color: #0eb002;
+  text-decoration: none;
+  font-weight: 600;
+  padding-top: 10px;
+  display: block;
+  text-align: right;
+}
+
+.home-filter ul.Company_Detail_cnt {
+  margin-bottom: 10px;
+}
+
+/* My Profile */
+.ContentArea {
+  width: 100%;
+  background: #fff;
+  border-radius: 15px;
+  height: 100%;
+  padding: 20px;
+}
+
+.section {
+  padding: 30px 0;
+}
+
+.col-md-3.width20 {
+  width: 20%;
+}
+
+.col-md-9.width80 {
+  width: 80%;
+}
+
+.SideBar {
+  position: relative;
+  background: #0d0d0d;
+  border-radius: 20px;
+  padding: 30px 15px;
+  min-height: 900px;
+  height: 100%;
+}
+
+ul.SideBarList {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+ul.SideBarList li {
+  list-style: none;
+  color: #fff;
+  display: block;
+  width: 100%;
+}
+
+ul.SideBarList li a {
+  font-size: 18px;
+  text-decoration: none;
+  color: #ccd2d8;
+  display: block;
+  padding: 10px 10px;
+  border-radius: 20px;
+  transition-duration: 0.35s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+}
+
+ul.SideBarList li a:hover {
+  background: #0eb002;
+  font-weight: 600;
+  color: #fff;
+}
+
+ul.SideBarList li.active a {
+  background: #0eb002;
+  color: #fff;
+}
+
+ul.SideBarList li a img {
+  max-width: 32px;
+  transition-duration: 0.35s;
+}
+
+ul.SideBarList li.active a img {
+  mix-blend-mode: hard-light;
+}
+
+ul.SideBarList li a:hover img {
+  mix-blend-mode: hard-light;
+}
+
+.SearchDiv {
+  width: 100%;
+}
+
+.LogoDiv {
+  text-align: center;
+  padding-bottom: 50px;
+}
+
+.LogoDiv img {
+  max-width: 100px;
+  margin: 0 auto;
+}
+
+form.SearchForm {
+  width: 100%;
+  background: #fff;
+  padding: 19px 20px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  height: 75px;
+}
+
+form.SearchForm input.InPutField {
+  width: 100%;
+  border: 0;
+  padding: 0 10px;
+  font-size: 20px;
+}
+
+form.SearchForm input::placeholder {
+  color: #3c4348;
+}
+
+input:focus {
+  outline: none;
+}
+
+span.SearchIcon {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+span.SearchIcon i {
+  color: #ccd3d8;
+  font-size: 26px;
+}
+
+button.ButtonIcon img {
+  max-width: 35px;
+}
+
+button.ButtonIcon {
+  background: none;
+  border: 0;
+  font-size: 26px;
+  line-height: 26px;
+  color: #0eb002;
+}
+
+.LogoutDiv ul.SideBarList li>span:hover {
+  background: #0eb002;
+}
+
+.LogoutDiv ul.SideBarList li>span {
+  background: dimgray;
+  display: inline-block;
+  padding: 0px 20px;
+  border-radius: 15px;
+  font-size: 28px;
+  height: 30px;
+  line-height: 25px;
+  cursor: pointer;
+}
+
+.LogoutDiv ul.SideBarList li>span i {
+  line-height: 28px;
+}
+
+.LogoutDiv ul.SideBarList li.NextPreview {
+  padding-left: 15px;
+}
+
+.ContentArea_Inner {
+  width: 100%;
+  padding: 20px;
+}
+
+.TabList {
+  width: 100%;
+  background: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  height: 90px;
+}
+
+.TopMenu {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.TopMenu li {
+  list-style: none;
+  text-align: center;
+}
+
+.TopMenu li a {
+  color: #3c4348;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  display: block;
+}
+
+.TopMenu li a:hover {
+  color: #0eb002;
+}
+
+.TopMenu li img {
+  max-width: 25px;
+  padding-bottom: 5px;
+}
+
+.TopMenu li a span {
+  display: block;
+}
+
+.LogoutDiv {
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+  max-width: 90%;
+}
+
+.SearchDivInner {
+  position: relative;
+}
+
+.SearchContentForm {
+  display: none;
+}
+
+.SearchDiv.active+form.SearchContentForm {
+  display: block;
+}
+
+.SearchContent {
+  position: absolute;
+  top: 0;
+  background: #fff;
+  width: 100%;
+  border-radius: 15px;
+  height: 100%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  min-height: 80vh;
+}
+
+.SearchOrder {
+  padding: 20px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #6f6f6f;
+  border-bottom: 1px solid #ebeff2;
+}
+
+.SearchOrder span.searchTitle {
+  font-size: 22px;
+  color: #3c4348;
+  font-weight: 600;
+}
+
+.SearchOrder span.Cross {
+  font-size: 32px;
+  line-height: 30px;
+  color: #6f6f6f;
+  border-bottom: 1px solid #ebeff2;
+}
+
+.SearchOrder span.Cross img {
+  max-width: 25px;
+}
+
+ul.OrderTracking li {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+  padding: 15px 20px;
+  border-bottom: 1px solid #ebeff2;
+  flex-wrap: wrap;
+}
+
+ul.OrderTracking li label img {
+  max-width: 40px;
+}
+
+ul.OrderTracking li input.InPutField_S {
+  border: 0;
+  font-weight: 700;
+  width: 100%;
+  color: #a6a6a6;
+}
+
+ul.OrderTracking li input::placeholder {
+  color: #a6a6a6;
+}
+
+ul.OrderTracking li label {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+}
+
+ul.OrderTracking li span.searchTitle {
+  width: 100%;
+  flex: 0 0 100%;
+  font-size: 22px;
+  color: #3c4348;
+  font-weight: 600;
+  padding-bottom: 5px;
+}
+
+button.ButtonStyle {
+  background: #0eb002;
+  border: 0;
+  color: #fff;
+  font-size: 18px;
+  padding: 10px 25px;
+  border-radius: 15px;
+  font-weight: 600;
+}
+
+.SearchButton {
+  padding: 30px 20px;
+  text-align: right;
+}
+
+.HeadingName h2 {
+  font-size: 30px;
+  font-weight: 600;
+  color: #3c4348;
+  line-height: 32px;
+}
+
+.ChangePic {
+  border: 1px solid #ccd2d8;
+  border-radius: 25px;
+  padding: 40px 20px 60px;
+}
+
+.ChangePic img {
+  max-width: 80px;
+}
+
+.ProfilePik {
+  text-align: center;
+  position: relative;
+}
+
+.ChangeImg {
+  color: #ccd2d8;
+}
+
+.ChangePic span.Edit_Img img {
+  max-width: 30px;
+}
+
+.ChangePic span.Edit_Img {
+  position: absolute;
+  bottom: 38px;
+  right: 10px;
+}
+
+.ProfileField {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+input.Pro_input_Field {
+  width: 100%;
+  height: 55px;
+  border-radius: 15px;
+  border: 1px solid #ccd2d8;
+  padding-left: 15px;
+  font-size: 17px;
+}
+
+select.Pro_input_Field {
+  width: 100%;
+  height: 55px;
+  border-radius: 15px;
+  border: 1px solid #ccd2d8;
+  padding-left: 8px;
+}
+
+a._ViewAll {
+  color: #0eb002;
+  text-decoration: none;
+  padding-left: 20px;
+}
+
+.ChangePass {
+  font-weight: 600;
+  padding: 10px 0;
+}
+
+span.Password {
+  position: relative;
+  width: 100%;
+  display: block;
+}
+
+span.Password i.__eye {
+  position: absolute;
+  right: 15px;
+  top: 18px;
+  cursor: pointer;
+}
+
+span.Password i.green__eye {
+  color: #0eb002;
+}
+
+.Verify__Otp__Number {
+  gap: 5px;
+}
+
+.Verify__Otp__Number input {
+  height: 40px;
+  width: 40px;
+}
+
+button.Verify {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  height: 40px;
+  padding: 0 20px;
+  font-weight: 600;
+}
+
+button.CancelButton {
+  border: 0;
+  background: none;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.MyPlanList ul {
+  display: flex;
+  white-space: nowrap;
+  gap: 15px;
+}
+
+.MyPlanList ul li {
+  list-style: none;
+  width: 100%;
+  padding: 5px 10px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  height: 75px;
+  background: #fff;
+  justify-content: space-between;
+}
+
+.MyPlanList ul li img {
+  max-width: 50px;
+}
+
+.MyPlanList {
+  overflow: auto;
+  overflow-y: hidden;
+  padding-bottom: 5px;
+}
+
+.MyPlanList ul li.BookMark_Title span {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.MyPlanList ul li.BookMark_Title span.__Plan {
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin-left: 15px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.GoldPlan {
+  background: #fff3bb;
+  color: #fcaa17;
+}
+
+.SilverPlan {
+  background: #f4f7f7;
+  color: #96a4a7;
+}
+
+.BronzePlan {
+  background: #ffecde;
+  color: #d5673c;
+}
+
+.IconImg {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.MyPlanList ul li.Tickets_Notification .IconImg {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+li.Tickets_Notification .IconImg img {
+  max-width: 35px;
+}
+
+.MyPlanList ul li.Tickets_Notification {
+  display: flex;
+  gap: 25px;
+  padding: 5px 30px;
+}
+
+.IconImg span {
+  line-height: 15px;
+}
+
+/* Slick Slider */
+.BannerSlider_Img ul.slick-dots li {
+  list-style: none;
+  background: #ccd3d8;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.CustomErr {
+  padding-left: 18px;
+}
+
+.otp-input-field input {
+  text-align: left !important;
+}
+
+.app-timer span {
+  font-weight: bold;
+  color: gray;
+}
+
+.app-timer button {
+  color: #0eb002;  
+  font-weight: bold;
+}
+
+.app-timer {
+  display: inline-block;
+  text-align: right;
+  position: absolute;
+  top: 10px;
+  right: 0;
+}
+
+.ng-otp-input {
+  display: inline-block;
+}
+
+.BannerSlider_Img ul.slick-dots li.slick-active {
+  width: 25px;
+  border-radius: 10px;
+  background: #0eb002;
+}
+
+.BannerSlider_Img .slick-dots li button {
+  display: none;
+}
+
+.BannerSlider_Img button.slick-arrow {
+  display: none !important;
+}
+
+.BannerSlider_Img ul.slick-dots {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  bottom: -80px;
+}
+
+.BannerSlider_Img .slick-track {
+  padding-bottom: 30px;
+}
+
+/* Slick Slider */
+
+.HeadingName span {
+  font-size: 18px;
+  color: #a0aab2;
+}
+
+.FilterSpan {
+  background: #d2f0cf;
+  padding: 10px 15px;
+  border-radius: 30px;
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 120px;
+  justify-content: center;
+  margin: 0 0 0 auto;
+}
+
+.FilterSpan img {
+  max-width: 30px;
+}
+
+.cl{
+  display: inline-block;
+  width: 100%;
+}
+
+.CustomField a.aright{
+  padding-right: 18px;
+}
+
+.ScrollDiv {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0 15px;
+}
+
+.IconImgSet img {
+  width: 100%;
+  max-width: 50px;
+}
+
+.IconImgSet {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.IconImgSet span.IconHeading {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 26px;
+}
+
+.IconImgSet.DayPlans {
+  justify-content: space-between;
+  background: #fff3bb;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.IconImgSet span.__Plan.GoldPlan {
+  padding: 5px 10px;
+  border-radius: 25px;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.IconHeading {
+  color: #3c4348;
+}
+
+span.Deactivated {
+  color: red !important;
+}
+
+.IconImgSet {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.add-company ul {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.add-company ul li {
+  list-style: none;
+  background: #fff;
+  border-radius: 15px;
+  text-align: center;
+  padding: 15px 10px;
+  width: 100%;
+  box-shadow: 0px 4px 10px rgb(0 0 0 / 10%);
+  position: relative;
+}
+
+.add-company ul li img {
+  max-width: 50px;
+  display: block;
+  margin: 0 auto;
+}
+
+.add-company ul li span {
+  display: block;
+  font-size: 20px;
+  font-weight: 600;
+  padding-top: 10px;
+}
+
+.add-company ul li a.KnowMore {
+  color: #fff;
+  text-decoration: none;
+  font-size: 13px;
+  padding: 5px 8px;
+  border-radius: 10px;
+  margin-top: 15px;
+  display: inline-block;
+}
+
+.EditIcn {
+  position: absolute;
+  top: 8px;
+  right: 15px;
+}
+
+.EditIcn .ellipsis {
+  color: #ccd3d8;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.add-company ul li.gold a.KnowMore {
+  background: #fff3bb;
+  color: #fcaa17;
+}
+
+.add-company ul li.silver a.KnowMore {
+  background: #f4f7f7;
+  color: #96a4a7;
+}
+
+.add-company ul li.bronze a.KnowMore {
+  background: #ffecde;
+  color: #d5673c;
+}
+
+.add-company ul .bronze.AddPlan a.KnowMore {
+  background: #ccd3d8;
+  color: #000305;
+}
+
+.Payment_Method {
+  justify-content: space-between;
+}
+
+.Payment_Method label {
+  font-size: 14px;
+}
+
+input.CheckBOx {
+  margin-left: 5px;
+}
+
+.CardPopup .ChangePass {
+  padding: 0 0 10px;
+}
+
+.CardPopup {
+  background: #fff;
+  border-radius: 15px;
+  padding: 20px;
+  width: 100%;
+  box-shadow: 0px 4px 10px rgb(0 0 0 / 10%);
+}
+
+span.CloseIcon {
+  position: absolute;
+  right: 0;
+  text-align: right;
+  top: -10px;
+  font-size: 30px;
+  line-height: 20px;
+}
+
+.CardPopup .row {
+  position: relative;
+}
+
+span.CloseIcon img {
+  max-width: 20px;
+}
+
+.width46 {
+  width: 46%;
+}
+
+.width20 {
+  width: 20%;
+}
+
+.edit-delete ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.edit-delete ul li {
+  box-shadow: 0 0 0;
+  padding: 0;
+  text-align: left;
+}
+
+.edit-delete ul li a {
+  padding: 10px 15px;
+  color: #333;
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 8px;
+  border-bottom: 1px solid #dde5e6;
+}
+
+.edit-delete ul li:last-child a {
+  border-bottom: 0;
+}
+
+.edit-delete {
+  background: #fff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  min-width: 130px;
+  position: absolute;
+  left: -130px;
+  border-radius: 8px;
+  top: 0;
+}
+
+.EditIcn .edit-delete img {
+  position: absolute;
+  right: 5px;
+  z-index: 11;
+  width: 15px;
+  top: 8px;
+}
+
+i.EditIcon {
+  color: #0eb002;
+  font-size: 18px;
+}
+
+i.Delete {
+  color: #de2525;
+  font-size: 18px;
+}
+
+textarea.Pro_input_Field {
+  width: 100%;
+  height: 100px;
+  border-radius: 15px;
+  border: 1px solid #ccd2d8;
+  padding: 15px;
+}
+
+.ChangePic0 img {
+  width: 100%;
+  max-width: 50px;
+}
+
+.EditProfile {
+  display: flex;
+  gap: 15px;
+}
+
+.EditProfile .HeadingName h2 {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+.EditProfile .HeadingName {
+  position: relative;
+}
+
+span.__edit_Img {
+  position: absolute;
+  top: 0;
+  right: -40px;
+}
+
+span.__edit_Img img {
+  max-width: 30px;
+  cursor: pointer;
+}
+
+.HeadingName span {
+  font-size: 18px;
+  color: #a0aab2;
+}
+
+.EditProfile .HeadingName ul.AddressEdit li {
+  list-style: none;
+  line-height: 40px;
+}
+
+.HeadingName span.SurName {
+  display: block;
+  font-weight: 400;
+}
+
+span.SurName {
+  color: #a0aab2;
+  display: block;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.Plane_date_time {
+  background: #fff3bb;
+  border: 1px solid #fdc85d;
+  border-radius: 20px;
+  padding: 20px 20px 10px;
+}
+
+.Plane_date_time ul li {
+  list-style: none;
+}
+
+.Plane_date_time ul li img {
+  max-width: 35px;
+}
+
+.Plane_date_time ul {
+  display: flex;
+  white-space: nowrap;
+  align-items: center;
+  gap: 50px;
+  overflow-y: hidden;
+  overflow-x: auto;
+  padding-bottom: 5px;
+}
+
+.Plane_date_time ul li {
+  list-style: none;
+  position: relative;
+}
+
+.Plane_date_time ul li:before {
+  content: "";
+  height: 18px;
+  width: 2px;
+  top: 4px;
+  position: absolute;
+  left: -25px;
+  background: #fdc85d;
+}
+
+.Plane_date_time ul li:first-child:before {
+  display: none;
+}
+
+.Purchase_Text h4 {
+  font-weight: 600;
+  font-size: 16px;
+  color: #a0aab2;
+  line-height: 26px;
+}
+
+.SendNotification button.ButtonStyle {
+  background: #d8fad6;
+  border: 1px solid #0eb002;
+  color: #0eb002;
+  margin: 0 0 0 auto;
+  float: right;
+}
+
+.DeactivateClient button.ButtonStyle {
+  background: #ffbbbb;
+  border: 1px solid #de2525;
+  color: #de2525;
+  margin: 0 0 0 auto;
+  float: right;
+}
+
+.DeactivateClient input.Pro_input_Field {
+  border: 1px solid #de2525;
+}
+
+.GreenDate {
+  color: #0eb002;
+}
+
+table.NotificationTable tr td .ClearText img {
+  max-width: 20px;
+}
+
+span.username-title {
+  font-weight: 600;
+  line-height: 16px;
+}
+
+span.username-title span.ago {
+  font-size: 14px;
+  font-weight: 400;
+  display: block;
+}
+
+table.NotificationTable tr td img.users_img {
+  float: left;
+  padding-right: 10px;
+  max-width: 45px;
+}
+
+table.NotificationTable tr td {
+  padding: 15px 15px;
+}
+
+table.NotificationTable tr th {
+  padding: 0px 20px 15px;
+}
+
+span.TitleNae {
+  border-left: 2px solid #0eb002;
+  border-right: 2px solid #0eb002;
+  padding: 0 20px;
+  font-weight: 600;
+}
+
+.check {
+  color: #0eb002;
+  font: 12px;
+  padding-left: 10px;
+}
+
+tr.Clear_Noti {
+  border-radius: 15px;
+  background: #d8fad6;
+  overflow: hidden;
+}
+
+span.SelectAll {
+  color: #0eb002;
+}
+
+.ClearText {
+  margin: 10px 0 0 0;
+  padding: 10px 0 0 50px;
+}
+
+a.ClearButton {
+  background: #bff0ba;
+  color: #0eb002;
+  text-decoration: none;
+  padding: 10px 40px;
+  display: inline-block;
+  border-radius: 15px;
+  float: right;
+  position: absolute;
+  right: 60px;
+  margin-top: -55px;
+}
+
+.ActivateClient button.ButtonStyle {
+  background: #0eb002;
+  border: 1px solid #0eb002;
+  color: #fff;
+  margin: 0 0 0 auto;
+  float: right;
+}
+
+.ActivateClient input.Pro_input_Field {
+  border: 1px solid #0eb002;
+}
+
+.FilterTab {
+  margin-top: 0px;
+  width: 100%;
+}
+
+.FilterTab.FilterTabHome {
+  margin-top: 25px;
+}
+
+.FilterTab img {
+  max-width: 25px;
+}
+
+.FilterTab a {
+  color: #000;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  background: #d8fad6;
+  border-radius: 15px;
+  max-width: 100px;
+  justify-content: center;
+  margin: 0 0 0 auto;
+}
+
+ul.Company_Detail_cnt02:last-child {
+  margin-bottom: 0;
+}
+
+/*ul.Company_Detail_cnt {margin-bottom: 10px; }*/
+ul.Company_Detail_cnt02 {
+  margin-bottom: 0;
+}
+
+.DeleteIcon {
+  margin-bottom: -30px;
+  text-align: right;
+}
+
+.DeleteIcon a {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: right;
+  color: #333;
+  text-decoration: none;
+}
+
+.ChatList {
+  padding-top: 20px;
+}
+
+.ChatList ul li {
+  list-style: none;
+  width: 100%;
+  display: block;
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.ChatList ul li p {
+  margin-bottom: 0;
+}
+
+span.Name_U {
+  font-weight: 600;
+}
+
+.ChatList ul li.UserName01 {
+  background: #ebeff2;
+}
+
+li.UserName02 {
+  background: #d8fad6;
+  text-align: right;
+}
+
+li.UserName02 span.Mintago {
+  left: 20px;
+  right: auto;
+}
+
+span.Mintago {
+  position: absolute;
+  right: 20px;
+  font-size: 13px;
+  color: #828486;
+  font-weight: 500;
+  top: 15px;
+}
+
+.ImgUpload {
+  padding-top: 20px;
+}
+
+.ImgUpload img {
+  max-width: 100%;
+  border-radius: 15px;
+}
+
+.SendMessage {
+  display: flex;
+  gap: 20px;
+}
+
+.Message01 {
+  width: 65%;
+}
+
+.Message02 {
+  width: 30%;
+}
+
+.Message01 textarea {
+  width: 100%;
+  height: 120px;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.open-close {
+  display: flex;
+  gap: 50px;
+  font-weight: 600;
+  align-items: center;
+}
+
+.open-close label input {
+  margin-left: 10px;
+}
+
+.AttachFile label input[type="file"] {
+  display: none;
+}
+
+i.paperclip {
+  font-size: 26px;
+  color: #0eb002;
+  padding-left: 10px;
+}
+
+.open-close.AttachFile {
+  padding-top: 30px;
+}
+
+.Ticket_Id h4 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.Ticket_Id h3 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.Ticket_Id {
+  padding-bottom: 20px;
+}
+
+span.Time-Min-Ago {
+  font-size: 20px;
+  color: #c6c6c6;
+  font-weight: 400;
+}
+
+/* Tabs  */
+ul.Tab_List li {
+  list-style: none;
+}
+
+ul.Tab_List {
+  display: flex;
+  overflow: hidden;
+  z-index: 1;
+  position: relative;
+}
+
+ul.Tab_List li a {
+  background: #e2e5e6;
+  padding: 10px 40px;
+  color: #3c4348;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 18px;
+  transition-duration: 0.35s;
+  line-height: 20px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 0px 0px 0px 15px;
+  margin-left: -15px;
+}
+
+ul.Tab_List li:first-child a {
+  border-radius: 15px 0px 0px 0px;
+  margin-left: 0px;
+}
+
+ul.Tab_List li:last-child a {
+  border-radius: 0px 15px 0px 15px;
+  background: #afbac5;
+  color: #3c4348;
+}
+
+ul.Tab_List li a:hover {
+  background: #0eb002 !important;
+  color: #fff;
+}
+
+ul.Tab_List li.active a {
+  background: #0eb002;
+  color: #fff;
+}
+
+ul.Tab_List li a span {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+ul.Tab_List li.MonthlyTab a {
+  background: #d4d9de;
+}
+
+ul.Tab_List li.YearlyTab a {
+  background: #bfc8d1;
+}
+
+/* Tabs Ends  */
+ul.Company_Detail_cnt li:last-child {
+  text-align: right;
+}
+
+.Company_Detail_cnt02 tr td:first-child {
+  width: 20%;
+}
+
+ul.Company_Detail_cnt {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+ul.Company_Detail_cnt li {
+  list-style: none;
+  width: 100%;
+  min-width: max-content;
+}
+
+ul.Company_Detail_cnt>li:nth-child(2) {
+  min-width: 400px;
+}
+
+ul.Company_Detail_cnt li img {
+  max-width: 50px;
+}
+
+ul.Company_Detail_cnt li .BookMarkCnt ul {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.BookMarkCnt ul li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+}
+
+.BookMarkCnt ul li i {
+  color: #0eb002;
+  font-size: 20px;
+}
+
+.ConpanyDetail {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 5px;
+}
+
+.BookMarkCnt {
+  border: 1px solid #0eb002;
+  padding: 15px 20px;
+  border-radius: 15px;
+}
+
+.background_color {
+  border-radius: 15px;
+  background: #fff;
+  padding: 15px;
+  min-width: max-content;
+  margin-bottom: 10px;
+}
+
+table.Company_Detail_cnt {
+  width: 100%;
+}
+
+table.Company_Detail_cnt tr td .IconImgSet.DayPlans {
+  min-width: 400px;
+}
+
+.Company_Detail_cnt02 tr td {
+  white-space: nowrap;
+  padding: 0 20px;
+  text-align: left;
+}
+
+.Company_Detail_cnt02 tr td:first-child {
+  padding: 0 10px 0 0px;
+}
+
+.Company_Detail_cnt02 tr td span {
+  font-weight: 600;
+}
+
+.OverFlow_SCroll {
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+
+.Company_Detail_cnt02 tr {
+  border: 1px solid #fff3bb;
+  border-radius: 15px;
+  background: #fff;
+  float: left;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.Company_Detail_cnt02 span.__Plan {
+  color: #333;
+  text-align: center;
+  width: 200px;
+}
+
+.Company_Detail_cnt .__Silver {
+  background: #f4f7f7;
+}
+
+.Company_Detail_cnt .__Bronze {
+  background: #ffecde;
+}
+
+.TatalSale {
+  background: #d8fad6;
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 25px;
+}
+
+.TatalSale p {
+  margin: 0;
+  color: #5c6e66;
+  font-weight: 600;
+}
+
+.TatalSale h3 {
+  font-weight: 600;
+  margin: 0;
+}
+
+.AngleDown {
+  color: #333;
+}
+
+.AngleDown i {
+  font-size: 30px;
+}
+
+.NotificationPopup:before {
+  content: "";
+  position: fixed;
+  background: rgba(255, 255, 255, 0.7);
+  top: 0;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  right: 0;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.NotificationPopup {
+  position: absolute;
+  top: 0;
+  background: #fff;
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgb(0 0 0 / 10%);
+  z-index: 1;
+  max-width: 600px;
+  padding: 20px;
+  right: 0;
+}
+
+.NotificationPopup .IconImgSet {
+  position: relative;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e4e4e4;
+  padding-bottom: 20px;
+}
+
+.NotificationPopup .IconImgSet:last-child {
+  margin-bottom: 0px;
+  border-bottom: 0px solid #ccc;
+  padding-bottom: 0px;
+}
+
+.RecentNot h4 {
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.RecentNot img {
+  max-width: 18px;
+}
+
+.RecentNot a._ViewAll {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.RecentNot {
+  margin-bottom: 30px;
+  position: relative;
+}
+
+table.Order_Table {
+  width: 100%;
+}
+
+.Table_Scroll {
+  overflow-x: scroll;
+}
+
+tr.T_Head th {
+  background: #ebeff2;
+  padding: 15px 10px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.Order_Table tr td:nth-child(3) {
+  font-weight: normal;
+}
+
+.Order_Table tr td {
+  padding: 15px 10px;
+  font-size: 14px;
+  font-weight: 700;
+  border-bottom: 1px solid #e2e5e6;
+}
+
+tr.T_Head th:first-child {
+  border-radius: 15px 0 0 15px;
+}
+
+tr.T_Head th:last-child {
+  border-radius: 0px 15px 15px 0px;
+}
+
+.GetIocn span.fa {
+  color: #0eb002;
+  font-size: 22px;
+}
+
+.GetIocn span.fa-paper-plane {
+  transform: rotate(45deg);
+}
+
+.GetIocn {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 15px;
+}
+
+.Order_Table tr td:first-child {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.Order_Table tr td img {
+  max-width: 25px;
+}
+
+button.status_button_style {
+  border: 0;
+  padding: 5px 15px;
+  border-radius: 10px;
+  font-weight: 600;
+  width: 100%;
+}
+
+span.GreenColor {
+  color: #0eb002;
+}
+
+.button-Unassigned {
+  background: #ffce23;
+}
+
+.button-Pending {
+  background: #fff3bb;
+}
+
+.button-Successful {
+  background: #d8fad6;
+}
+
+.button-Unsuccessful {
+  background: #ffbbbb;
+}
+
+.button-Cancelled {
+  background: #d0ecfa;
+}
+
+.Track_List tr td:nth-child(3) {
+  font-weight: normal;
+  white-space: nowrap;
+}
+
+td.compleate {
+  color: #0eb002;
+}
+
+.SearchFilter {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  margin-top: 20px;
+}
+
+.Filter_Set span img {
+  width: 20px;
+}
+
+.Filter_Set span {
+  font-weight: 600;
+}
+
+.Filter_Set {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+form.Search {
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+}
+
+form.Search input {
+  width: 100%;
+  border: 1px solid #ccc;
+  height: 50px;
+  border-radius: 15px;
+  padding-left: 40px;
+}
+
+form.Search button {
+  position: absolute;
+  border: 0;
+  background: none;
+  left: 10px;
+  top: 10px;
+  color: #dcdcdc;
+}
+
+.OrderTrackingSearch ul {
+  display: flex;
+}
+
+.OrderTrackingSearch ul li a {
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 5px solid #fff;
+}
+
+.OrderTrackingSearch ul li {
+  border: 0;
+}
+
+.OrderTrackingSearch ul li a:hover {
+  border-bottom: 5px solid #0eb002;
+}
+
+.OrderTrackingSearch ul li.active a {
+  border-bottom: 5px solid #0eb002;
+}
+
+.OrderTrackingSearch .SearchContent {
+  margin-top: 80px;
+  min-height: 50vh;
+}
+
+img.closeimg {
+  display: none;
+}
+
+img.searchicon {
+  display: block;
+}
+
+.active img.searchicon {
+  display: none;
+}
+
+.active img.closeimg {
+  display: block;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.background_None {
+  background: none;
+}
+
+/* Scroll  Bar */
+.ConpanyDetail::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.MyPlanList::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.Plane_date_time ul::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+  background: #fdc85d;
+  border-radius: 30px;
+}
+
+* {
+  scrollbar-width: 10px;
+  scrollbar-color: #999999;
+}
+
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  height: 4px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #999999;
+  border-radius: 10px;
+  height: 1px;
+}

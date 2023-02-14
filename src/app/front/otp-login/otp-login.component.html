@@ -1,0 +1,64 @@
+<!-- Side Bar -->
+<section class="LoginSection">
+  <div class="container">
+    <div class="row">
+      <!-- Login Side -->
+      <div class="col-md-5">
+        <div class="login-form">
+          <div class="LoginTitle">
+            <h2 class="TitleHeading">Login</h2>
+            <span class="SubHeading">Value Your Customers Time</span>
+          </div>
+          <form [formGroup]="otplogin" class="LoginForm mt-5">
+            <div class="CustomField">
+              <label>
+                <input type="text" formControlName="username" maxlength="10" maxlength="10" />
+                <span class="LabelT">Enter Phone No</span>
+              </label>
+            </div>
+            <div class="CustomField" *ngIf="isOtpSent">
+              <label>
+                <ng-otp-input class="ng-otp-input" (onInputChange)="onOtpChange($event)"
+                  [config]="{ length: 6, allowNumbersOnly: true, containerClass: 'otp-input-field' }"></ng-otp-input>
+                <app-timer class="app-timer" [username]="frmValues.username"></app-timer>
+                <span class="LabelT">Enter OTP</span>
+              </label>
+            </div>
+            <div class="CustomField">
+              <a routerLink="/">Go Back</a>
+            </div>
+            <div class="CustomField loginButton mt-4" *ngIf="!isOtpSent">
+              <button type="submit" (click)="handleOtp()">Send <i class="fa fa-spinner fa-spin"
+                  *ngIf="loading"></i></button>
+            </div>
+            <div class="CustomField loginButton mt-4" *ngIf="isOtpSent">
+              <button type="submit" (click)="handleSubmit()">Login <i class="fa fa-spinner fa-spin"
+                  *ngIf="loading"></i></button>
+            </div>
+            <div class="text-danger CustomErr">
+              <div *ngIf="isSubmitted && f['username'].errors">
+                <div *ngIf="f['username'].errors['required']">
+                  Phone number is required
+                </div>
+                <div *ngIf="f['username'].errors['pattern']">
+                  Phone number must be 10 digits
+                </div>
+              </div>
+              <div *ngIf="otpStatus">
+                <div>
+                  OTP is required
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+      <!-- Login Side /////////////////// -->
+      <div class="col-md-6 mt-5">
+        <app-sidebar></app-sidebar>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Side Bar /////////////////// -->
