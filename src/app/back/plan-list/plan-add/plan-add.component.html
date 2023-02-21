@@ -1,1 +1,87 @@
-<p>plan-add works!</p>
+<!-- Side Bar -->
+<section class="section" style="background: #ebeff2;">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Side Bar -->
+            <div class="col-md-2">
+                <app-menu></app-menu>
+            </div>
+            <!-- Side Bar /////////// -->
+            <div class="col-md-10">
+
+                <app-top></app-top>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="ContentArea">
+                            <div class="row mb-4">
+                                <div class="col-md-10">
+                                    <div class="HeadingName">
+                                        <h2>Add Plan</h2>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 loginButton">
+                                    <a routerLink="/plans"><button>Back to List</button></a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="ProfilePik">
+                                        <div class="ChangePic">
+                                            <img src="assets/images/sper-top-icon02.png" />
+                                            <span class="Edit_Img">
+                                                <img src="assets/images/edir-img.png">
+                                            </span>
+                                        </div>
+                                        <div class="ChangeImg">
+                                            Change Picture
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <form class="ProfileFor">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <input type="text" name="" placeholder="Add Name"
+                                                    class="Pro_input_Field">
+                                            </div>
+                                            <div class="col-md-12 mt-3">
+                                                <input type="text" name="" placeholder="Plan Price"
+                                                    class="Pro_input_Field">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-md-6">
+                                                <input type="text" name="" placeholder="# of driver units"
+                                                    class="Pro_input_Field">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="text" name="" placeholder="# of manegement units"
+                                                    class="Pro_input_Field">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-md-12">
+                                                <textarea placeholder="Description" class="Pro_input_Field"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-4">
+                                            <div class="col-md-12">
+                                                <div class="d-flex justify-content-between Cancel_Save">
+                                                    <button class="CancelButton">Cancel</button>
+                                                    <button class="SaveButton ButtonStyle">Save Changes</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Side Bar /////////////////// -->

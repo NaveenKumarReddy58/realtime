@@ -1,7 +1,14 @@
 import { Injectable, NgModule } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { RouterModule, RouterStateSnapshot, Routes, TitleStrategy } from '@angular/router';
+import { CompanyAddComponent } from './back/company-list/company-add/company-add.component';
+import { CompanyListComponent } from './back/company-list/company-list.component';
 import { DashboardComponent } from './back/dashboard/dashboard.component';
+import { PlanAddComponent } from './back/plan-list/plan-add/plan-add.component';
+import { PlanListComponent } from './back/plan-list/plan-list.component';
+import { ProfileComponent } from './back/profile/profile.component';
+import { TicketDetailComponent } from './back/ticket-list/ticket-detail/ticket-detail.component';
+import { TicketListComponent } from './back/ticket-list/ticket-list.component';
 import { ForgotPasswordComponent } from './front/forgot-password/forgot-password.component';
 
 import { LoginComponent } from './front/login/login.component';
@@ -9,33 +16,38 @@ import { OtpLoginComponent } from './front/otp-login/otp-login.component';
 import { PreComponent } from './front/pre/pre.component';
 import { ResetPasswordComponent } from './front/reset-password/reset-password.component';
 import { AuthGuard } from './_shared/auth.guard';
+import { FrontGuard } from './_shared/front.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: PreComponent,
-    // loadComponent: () => import('./front/pre/pre.component').then(m => m.PreComponent),
-    title: 'Home'
+    title: 'Home',
+    canActivate: [FrontGuard]
   },
   {
     path: 'login',
     component: LoginComponent,
-    title: 'Login'
+    title: 'Login',
+    canActivate: [FrontGuard]
   },
   {
     path: 'reset',
     component: ResetPasswordComponent,
-    title: 'Reset Password'
+    title: 'Reset Password',
+    canActivate: [FrontGuard]
   },
   {
     path: 'forgot',
     component: ForgotPasswordComponent,
-    title: 'Forgot Password'
+    title: 'Forgot Password',
+    canActivate: [FrontGuard]
   },
   {
     path: 'otplogin',
     component: OtpLoginComponent,
-    title: 'OTP Login'
+    title: 'OTP Login',
+    canActivate: [FrontGuard]
   },
   {
     path: 'dashboad',
@@ -43,9 +55,52 @@ const routes: Routes = [
     title: 'Dashboard',
     canActivate: [AuthGuard]
   },
-  // { path: 'user-profile/:id', component: DashboardComponent, canActivate: [AuthGuard] }
+  {
+    path: 'plans',
+    component: PlanListComponent,
+    title: 'Plans',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'plans/add',
+    component: PlanAddComponent,
+    title: 'Add Plans',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'tickets',
+    component: TicketListComponent,
+    title: 'Tickets',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'tickets/:id',
+    component: TicketDetailComponent,
+    title: 'Ticket',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    title: 'My Profile',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'company',
+    component: CompanyListComponent,
+    title: 'Company List',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'company/add',
+    component: CompanyAddComponent,
+    title: 'Add Company',
+    canActivate: [AuthGuard]
+  },
 ];
-//{ path: 'a', loadChildren: () => import('./modulea/modulea.module').then(m => m.ModuleaModule) },
+
+// { path: 'user-profile/:id', component: DashboardComponent, canActivate: [AuthGuard] }
+// { path: 'a', loadChildren: () => import('./modulea/modulea.module').then(m => m.ModuleaModule) },
 // { path: 'admin', loadComponent: () => import('./app/admin/admin.component').then(mod => mod.AdminComponent), canActivate: [() => inject(ApiService).isLoggedIn()] },
 // {
 //   path: 'children', loadChildren: () =>

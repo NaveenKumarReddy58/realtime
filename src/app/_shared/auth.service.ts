@@ -15,7 +15,7 @@ export class AuthService {
   endpoint: string = 'http://localhost:4000/api';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
-  constructor(private http: HttpClient, public router: Router) {}
+  constructor(private http: HttpClient, public router: Router) { }
   // Sign-up
   signUp(user: User): Observable<any> {
     let api = `${this.endpoint}/register-user`;

@@ -15,10 +15,7 @@
                 <input type="text" formControlName="username" />
                 <span class="LabelT">Enter Email Address</span>
               </label>
-            </div>
-            <div class="CustomField loginButton mt-4">
-              <button type="submit">Login <i class="fa fa-spinner fa-spin" *ngIf="loading"></i></button>
-            </div>
+            </div>            
             <div class="text-danger CustomErr">
               <div *ngIf="isSubmitted && f['username'].errors">
                 <div *ngIf="f['username'].errors['required']">
@@ -28,6 +25,9 @@
                   Email is not valid
                 </div>
               </div>
+            </div>
+            <div class="CustomField loginButton mt-4">
+              <button type="submit">Login <i class="fa fa-spinner fa-spin" *ngIf="loading"></i></button>
             </div>
           </form>
         </div>

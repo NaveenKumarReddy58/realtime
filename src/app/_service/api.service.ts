@@ -8,15 +8,20 @@ import { ToastrService } from 'ngx-toastr';
   providedIn: 'root',
 })
 export class ApiService {
-
+  
   httpOptions: any = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       // Authorization: 'my-auth-token'
     })
   };
+  flag: boolean = false
 
   constructor(private http: HttpClient, private toastr: ToastrService) { }
+
+  isLoggedIn() {
+    return this.flag
+  }
 
   getOrganization(email: string) {
     return this.http.get<any>(
@@ -32,7 +37,7 @@ export class ApiService {
       })
       .pipe(
         map((data) => {
-          localStorage.setItem('user', JSON.stringify(data));
+          // localStorage.setItem('user', JSON.stringify(data));
           return data;
         })
       );
@@ -53,7 +58,7 @@ export class ApiService {
       })
       .pipe(
         map((data) => {
-          localStorage.setItem('user', JSON.stringify(data));
+          // localStorage.setItem('user', JSON.stringify(data));
           return data;
         })
       );

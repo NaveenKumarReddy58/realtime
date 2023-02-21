@@ -24,17 +24,6 @@
                 <span class="LabelT">Enter OTP</span>
               </label>
             </div>
-            <div class="CustomField">
-              <a routerLink="/">Go Back</a>
-            </div>
-            <div class="CustomField loginButton mt-4" *ngIf="!isOtpSent">
-              <button type="submit" (click)="handleOtp()">Send <i class="fa fa-spinner fa-spin"
-                  *ngIf="loading"></i></button>
-            </div>
-            <div class="CustomField loginButton mt-4" *ngIf="isOtpSent">
-              <button type="submit" (click)="handleSubmit()">Login <i class="fa fa-spinner fa-spin"
-                  *ngIf="loading"></i></button>
-            </div>
             <div class="text-danger CustomErr">
               <div *ngIf="isSubmitted && f['username'].errors">
                 <div *ngIf="f['username'].errors['required']">
@@ -49,6 +38,17 @@
                   OTP is required
                 </div>
               </div>
+            </div>
+            <div class="CustomField">
+              <a routerLink="/">Go Back</a>
+            </div>
+            <div class="CustomField loginButton mt-4" *ngIf="!isOtpSent">
+              <button type="submit" (click)="handleOtp()">Send <i class="fa fa-spinner fa-spin"
+                  *ngIf="loading"></i></button>
+            </div>
+            <div class="CustomField loginButton mt-4" *ngIf="isOtpSent">
+              <button type="submit" (click)="handleSubmit()">Login <i class="fa fa-spinner fa-spin"
+                  *ngIf="loading"></i></button>
             </div>
           </form>
         </div>

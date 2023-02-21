@@ -12,7 +12,6 @@ import { MenuComponent } from './back/layout/menu/menu.component';
 import { TopComponent } from './back/layout/top/top.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ForgotPasswordComponent } from './front/forgot-password/forgot-password.component';
-import { AlertComponent } from './alert/alert.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -27,6 +26,10 @@ import { PlanListComponent } from './back/plan-list/plan-list.component';
 import { PlanAddComponent } from './back/plan-list/plan-add/plan-add.component';
 import { CompanyListComponent } from './back/company-list/company-list.component';
 import { CompanyAddComponent } from './back/company-list/company-add/company-add.component';
+import { LayoutComponent } from './back/layout/layout/layout.component';
+import { TicketListComponent } from './back/ticket-list/ticket-list.component';
+import { TicketDetailComponent } from './back/ticket-list/ticket-detail/ticket-detail.component';
+import { ProfileComponent } from './back/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -41,12 +44,15 @@ import { CompanyAddComponent } from './back/company-list/company-add/company-add
     TopComponent,
     DashboardComponent,
     ForgotPasswordComponent,
-    AlertComponent,
     TimerComponent,
     PlanListComponent,
     PlanAddComponent,
     CompanyListComponent,
     CompanyAddComponent,
+    LayoutComponent,
+    TicketListComponent,
+    TicketDetailComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

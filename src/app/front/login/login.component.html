@@ -28,14 +28,6 @@
                 <span class="LabelT">Enter Password</span>
               </label>
             </div>
-            <div class="CustomField row">
-              <div class="col"><a routerLink="/forgot">Forgot Password</a></div>
-              <div class="col"><a class="aright cl text-end" routerLink="/otplogin">Login with OTP</a></div>
-            </div>
-            <div class="CustomField loginButton mt-4">
-              <button type="submit">Login <i class="fa fa-spinner fa-spin" *ngIf="loading"></i></button>
-            </div>
-
             <div class="text-danger CustomErr">
               <div *ngIf="isSubmitted && f['username'].errors">
                 <div *ngIf="f['username'].errors['required']">
@@ -50,6 +42,13 @@
                   Password is required
                 </div>
               </div>
+            </div>
+            <div class="CustomField row">
+              <div class="col"><a routerLink="/forgot">Forgot Password</a></div>
+              <div class="col"><a class="aright cl text-end" routerLink="/otplogin">Login with OTP</a></div>
+            </div>
+            <div class="CustomField loginButton mt-4">
+              <button type="submit">Login <i class="fa fa-spinner fa-spin" *ngIf="loading"></i></button>
             </div>
           </form>
         </div>
