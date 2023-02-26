@@ -25,9 +25,14 @@ export class AuthService {
       // Authorization: 'my-auth-token'
     })
   };
-  flag: boolean = false
 
-  constructor(private http: HttpClient, public router: Router, private toastr: ToastrService) { }
+  constructor(
+    private http: HttpClient,
+    public router: Router,
+    private toastr: ToastrService
+  ) {
+
+  }
 
   // Sign-up
   signUp(user: User): Observable<any> {
@@ -58,9 +63,14 @@ export class AuthService {
   }
 
   doLogout() {
+    localStorage.removeItem('refresh_token');
+    localStorage.removeItem('name');
+    localStorage.removeItem('role');
+    localStorage.removeItem('user_timezone');
+
     let removeToken = localStorage.removeItem('access_token');
     if (removeToken == null) {
-      this.router.navigate(['log-in']);
+      this.router.navigate(['/']);
     }
   }
 
