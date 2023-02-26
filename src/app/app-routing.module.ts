@@ -97,6 +97,12 @@ const routes: Routes = [
     title: 'Add Company',
     canActivate: [AuthGuard]
   },
+  {
+    path: 'report',
+    component: CompanyListComponent,
+    title: 'Report',
+    canActivate: [AuthGuard]
+  },
 ];
 
 // { path: 'user-profile/:id', component: DashboardComponent, canActivate: [AuthGuard] }

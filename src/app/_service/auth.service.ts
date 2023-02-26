@@ -15,16 +15,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
-  endpoint: string = environment.apiUrl;
-  headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
-
-  httpOptions: any = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      // Authorization: 'my-auth-token'
-    })
-  };
 
   constructor(
     private http: HttpClient,
@@ -36,14 +27,14 @@ export class AuthService {
 
   // Sign-up
   signUp(user: User): Observable<any> {
-    let api = `${this.endpoint}/register-user`;
+    let api = `${environment.apiUrl}/register-user`;
     return this.http.post(api, user).pipe(catchError(this.handleError));
   }
 
   // Sign-in
   signIn(user: User) {
     return this.http
-      .post<any>(`${this.endpoint}/signin`, user)
+      .post<any>(`${environment.apiUrl}/signin`, user)
       .subscribe((res: any) => {
         localStorage.setItem('access_token', res.token);
         this.getUserProfile(res._id).subscribe((res) => {
@@ -76,8 +67,8 @@ export class AuthService {
 
   // User profile
   getUserProfile(id: any): Observable<any> {
-    let api = `${this.endpoint}/user-profile/${id}`;
-    return this.http.get(api, { headers: this.headers }).pipe(
+    let api = `${environment.apiUrl}/user-profile/${id}`;
+    return this.http.get(api).pipe(
       map((res) => {
         return res || {};
       }),
@@ -100,13 +91,13 @@ export class AuthService {
 
   getOrganization(email: string) {
     return this.http.get<any>(
-      `${this.endpoint}/tenant/get-organization/?email=${email}`
+      `${environment.apiUrl}/tenant/get-organization/?email=${email}`
     );
   }
 
   login(email: string, password: string) {
     return this.http
-      .post<any>(`${this.endpoint}/account/token/`, {
+      .post<any>(`${environment.apiUrl}/account/token/`, {
         email,
         password,
       })
@@ -121,13 +112,13 @@ export class AuthService {
 
   sendMobileOtp(mobile_no: string) {
     return this.http.get<any>(
-      `${this.endpoint}/account/send-mobile-otp/?mobile_no=${mobile_no}`
+      `${environment.apiUrl}/account/send-mobile-otp/?mobile_no=${mobile_no}`
     );
   }
 
   loginByOtp(email: string, password: string, login_by: string = 'otp') {
     return this.http
-      .post<any>(`${this.endpoint}/account/token/`, {
+      .post<any>(`${environment.apiUrl}/account/token/`, {
         email,
         password,
         login_by,
@@ -143,22 +134,22 @@ export class AuthService {
 
   sendResetOtp(email: string) {
     return this.http.get<any>(
-      `${this.endpoint}/account/send-reset-otp/?email=${email}`
+      `${environment.apiUrl}/account/send-reset-otp/?email=${email}`
     );
   }
 
   verifyResestOtp(email: string, otp: string) {
     return this.http.get<any>(
-      `${this.endpoint}/account/verify-reset-otp/?email=${email}&otp=${otp}`
+      `${environment.apiUrl}/account/verify-reset-otp/?email=${email}&otp=${otp}`
     );
   }
 
   resetPassword(email: string, new_password: string) {
     return this.http
-      .put<any>(`${this.endpoint}/account/reset-password/`, {
+      .put<any>(`${environment.apiUrl}/account/reset-password/`, {
         email,
         new_password,
-      }, this.httpOptions)
+      })
       .pipe(
         map((data) => {
           return data;

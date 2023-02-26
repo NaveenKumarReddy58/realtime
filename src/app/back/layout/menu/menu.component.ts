@@ -22,6 +22,6 @@ export class MenuComponent {
 
   doLogout() {
     this.authService.doLogout();
-    this.toastr.success('', 'Logout Successfully!');
+    this.toastr.success('', 'logout!');
   }
 }

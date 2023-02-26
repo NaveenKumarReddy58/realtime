@@ -39,37 +39,84 @@
                                     </div>
                                 </div>
                                 <div class="col-md-9">
-                                    <form class="ProfileFor">
+                                    <form [formGroup]="addPlan" (change)="getFile($event)" class="ProfileFor">
+                                        <input type="file" formControlName="img">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <input type="text" name="" placeholder="Add Name"
+                                                <input type="text" formControlName="title" placeholder="Add Name"
                                                     class="Pro_input_Field">
                                             </div>
                                             <div class="col-md-12 mt-3">
-                                                <input type="text" name="" placeholder="Plan Price"
+                                                <input type="text" formControlName="price" placeholder="Plan Price"
                                                     class="Pro_input_Field">
                                             </div>
                                         </div>
                                         <div class="row mt-3">
-                                            <div class="col-md-6">
-                                                <input type="text" name="" placeholder="# of driver units"
-                                                    class="Pro_input_Field">
+                                            <div class="col-md-4">
+                                                <input type="number" formControlName="max_drivers"
+                                                    placeholder="# of driver units" class="Pro_input_Field">
                                             </div>
-                                            <div class="col-md-6">
-                                                <input type="text" name="" placeholder="# of manegement units"
-                                                    class="Pro_input_Field">
+                                            <div class="col-md-4">
+                                                <input type="number" formControlName="max_admin"
+                                                    placeholder="# of management units" class="Pro_input_Field">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <input type="number" formControlName="valid_for"
+                                                    placeholder="# valid for" class="Pro_input_Field">
                                             </div>
                                         </div>
                                         <div class="row mt-3">
                                             <div class="col-md-12">
-                                                <textarea placeholder="Description" class="Pro_input_Field"></textarea>
+                                                <textarea formControlName="desecription" placeholder="Description"
+                                                    class="Pro_input_Field"></textarea>
                                             </div>
                                         </div>
+
+                                        <div class="row mt-3">
+                                            <div class="col-md-12">
+                                                <div class="text-danger CustomErr">
+                                                    <div *ngIf="isSubmitted && f['title'].errors">
+                                                        <div *ngIf="f['title'].errors['required']">
+                                                            Title is required
+                                                        </div>
+                                                    </div>
+                                                    <div *ngIf="isSubmitted && f['price'].errors">
+                                                        <div *ngIf="f['price'].errors['required']">
+                                                            Price is required
+                                                        </div>
+                                                    </div>
+
+                                                    <div *ngIf="isSubmitted && f['max_drivers'].errors">
+                                                        <div *ngIf="f['max_drivers'].errors['required']">
+                                                            Max Drivers is required
+                                                        </div>
+                                                    </div>
+                                                    <div *ngIf="isSubmitted && f['max_admin'].errors">
+                                                        <div *ngIf="f['max_admin'].errors['required']">
+                                                            Max Admin is required
+                                                        </div>
+                                                    </div>
+                                                    <div *ngIf="isSubmitted && f['valid_for'].errors">
+                                                        <div *ngIf="f['valid_for'].errors['required']">
+                                                            Valid For is required
+                                                        </div>
+                                                    </div>
+                                                    <div *ngIf="isSubmitted && f['desecription'].errors">
+                                                        <div *ngIf="f['desecription'].errors['required']">
+                                                            Desecription is required
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="row mt-4">
                                             <div class="col-md-12">
                                                 <div class="d-flex justify-content-between Cancel_Save">
-                                                    <button class="CancelButton">Cancel</button>
-                                                    <button class="SaveButton ButtonStyle">Save Changes</button>
+                                                    <button routerLink="/plans" class="CancelButton">Cancel</button>
+                                                    <button type="submit" (click)="handleSubmit()"
+                                                        class="SaveButton ButtonStyle">Save Changes <i
+                                                            class="fa fa-spinner fa-spin" *ngIf="loading"></i></button>
                                                 </div>
                                             </div>
                                         </div>
