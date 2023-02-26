@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import Validation from 'src/app/_helper/validation';
-import { ApiService } from 'src/app/_service/api.service';
+import { AuthService } from 'src/app/_service/auth.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -21,7 +21,7 @@ export class ResetPasswordComponent {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private apiService: ApiService,
+    public authService: AuthService,
     private toastr: ToastrService
   ) {
 
@@ -62,7 +62,7 @@ export class ResetPasswordComponent {
 
     this.loading = true;
 
-    this.apiService
+    this.authService
       .resetPassword(this.org_email, this.f['password'].value)
       .subscribe(
         (data: any) => {

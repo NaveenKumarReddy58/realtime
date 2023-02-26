@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core";
 import { CountdownConfig, CountdownEvent } from "ngx-countdown";
 import { ToastrService } from "ngx-toastr";
-import { ApiService } from "../_service/api.service";
+import { AuthService } from "../_service/auth.service";
 
 @Component({
   selector: 'app-timer',
@@ -16,7 +16,7 @@ export class TimerComponent {
   @Input() username: any;
 
   constructor(
-    private apiService: ApiService,
+    public authService: AuthService,
     private toastr: ToastrService
   ) {
   }
@@ -38,7 +38,7 @@ export class TimerComponent {
 
   handleOtp(cd: any) {
     cd.restart();
-    this.apiService.sendMobileOtp(this.username).subscribe(
+    this.authService.sendMobileOtp(this.username).subscribe(
       (data: any) => {
         if (data?.resultCode === '0') {
           console.log('Api Data Err', data);

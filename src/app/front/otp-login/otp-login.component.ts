@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ApiService } from 'src/app/_service/api.service';
+import { AuthService } from 'src/app/_service/auth.service';
 
 @Component({
   selector: 'app-otp-login',
@@ -21,7 +21,7 @@ export class OtpLoginComponent {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private apiService: ApiService,
+    public authService: AuthService,
     private toastr: ToastrService
   ) {
     this.otplogin = formBuilder.group({
@@ -56,7 +56,7 @@ export class OtpLoginComponent {
 
     this.loading = true;
 
-    this.apiService.sendMobileOtp(this.f['username'].value).subscribe(
+    this.authService.sendMobileOtp(this.f['username'].value).subscribe(
       (data: any) => {
         if (data?.resultCode === '0') {
           this.loading = false;
@@ -94,7 +94,7 @@ export class OtpLoginComponent {
       return;
     }
 
-    this.apiService
+    this.authService
       .loginByOtp(this.f['username'].value, this.otp, 'otp')
       .subscribe(
         (data: any) => {

@@ -5,7 +5,7 @@ import {
 } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
-import { AuthService } from './auth.service';
+import { AuthService } from '../_service/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +19,7 @@ export class FrontGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    // console.log('guard', this.authService.isLoggedIn)
     if (this.authService.isLoggedIn) {
-      // this.toastr.error('', "Access not allowed!");
       this.router.navigate(['/dashboad']);
       return false;
     }

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ApiService } from 'src/app/_service/api.service';
+import { AuthService } from 'src/app/_service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +22,7 @@ export class LoginComponent {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private apiService: ApiService,
+    public authService: AuthService,
     private toastr: ToastrService
   ) {
     this.org_email = localStorage.getItem('org_email');
@@ -60,8 +60,8 @@ export class LoginComponent {
 
     this.loading = true;
 
-    this.apiService
-      .getToken(this.f['username'].value, this.f['password'].value)
+    this.authService
+      .login(this.f['username'].value, this.f['password'].value)
       .subscribe(
         (data: any) => {
           if (data?.resultCode == 0) {

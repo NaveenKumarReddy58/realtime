@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ApiService } from 'src/app/_service/api.service';
+import { AuthService } from 'src/app/_service/auth.service';
 
 @Component({
   selector: 'app-pre',
@@ -20,7 +20,7 @@ export class PreComponent {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private apiService: ApiService,
+    public authService: AuthService,
     private toastr: ToastrService
   ) {
     this.org_email = localStorage.getItem('org_email');
@@ -58,7 +58,7 @@ export class PreComponent {
 
     this.loading = true;
 
-    this.apiService.getOrganization(this.f['username'].value).subscribe(
+    this.authService.getOrganization(this.f['username'].value).subscribe(
       (data: any) => {
         if (data?.resultCode === '0') {
           this.loading = false;
