@@ -30,6 +30,9 @@ import { LayoutComponent } from './back/layout/layout/layout.component';
 import { TicketListComponent } from './back/ticket-list/ticket-list.component';
 import { TicketDetailComponent } from './back/ticket-list/ticket-detail/ticket-detail.component';
 import { ProfileComponent } from './back/profile/profile.component';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { DateAgo } from './_pipes/date-ago.pipe';
+import { DateDifference } from './_pipes/date-difference.pipe';
 
 @NgModule({
   declarations: [
@@ -53,6 +56,8 @@ import { ProfileComponent } from './back/profile/profile.component';
     TicketListComponent,
     TicketDetailComponent,
     ProfileComponent,
+    DateAgo,
+    DateDifference,
   ],
   imports: [
     BrowserModule,
@@ -65,15 +70,16 @@ import { ProfileComponent } from './back/profile/profile.component';
     ToastrModule.forRoot(), // ToastrModule added
     SlickCarouselModule,
     CountdownModule,
-    StoreModule.forRoot({}, {})
+    StoreModule.forRoot({}, {}),
+    CdkAccordionModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true
-    }
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -17,12 +17,12 @@ import {
     trigger('fade', [
       transition(':enter', [
         style({ opacity: 1 }),
-        animate(5000, style({ opacity: 0 })),
+        animate(2000, style({ opacity: 0 })),
         style({ opacity: 0 }),
       ]),
       transition(':leave', [
         style({ opacity: 1 }),
-        animate(5000, style({ opacity: 0 })),
+        animate(2000, style({ opacity: 0 })),
         style({ opacity: 0 }),
       ]),
     ]),

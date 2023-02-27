@@ -37,6 +37,12 @@ export class PlanService {
       );
   }
 
+  cplist() {
+    return this.http.get<any>(
+      `${environment.apiUrl}/tenant/organization-listing/`
+    );
+  }
+
 
   // Error
   handleError(error: HttpErrorResponse) {
