@@ -10,7 +10,6 @@ import { PlanService } from 'src/app/_service/plan.service';
   styleUrls: ['./company-list.component.css'],
 })
 export class CompanyListComponent {
-  // items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
   expandedIndex = 0;
   loading = false;
   items: any;

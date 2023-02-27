@@ -1,0 +1,7 @@
+.add-company .active {
+    border: 2px solid #0eb002;
+}
+
+.add-company li {
+    border: 2px solid transparent;
+}

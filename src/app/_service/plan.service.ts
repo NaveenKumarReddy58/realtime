@@ -26,9 +26,73 @@ export class PlanService {
     );
   }
 
-  add(plan: Plan) {
+  // plan: Plan
+  add(
+    title: string,
+    max_drivers: Number,
+    max_admin: Number,
+    valid_for: Number,
+    desecription: string,
+    // img: File,
+    price: Number
+  ) {
     return this.http
-      .post<Plan>(`${environment.apiUrl}/tenant/plan/`, plan)
+      .post<Plan>(`${environment.apiUrl}/tenant/plan/`, {
+        title,
+        max_drivers,
+        max_admin,
+        valid_for,
+        desecription,
+        // img,
+        price
+      })
+      .pipe(
+        map((data) => {
+          return data;
+        }),
+        catchError(this.handleError)
+      );
+  }
+
+  delete(id: Number) {
+    return this.http.delete<any>(
+      `${environment.apiUrl}/tenant/plan/${id}`
+    );
+  }
+
+  cpAdd(
+    name: string,
+    country: string,
+    state: string,
+    city: string,
+    description: string,
+    // domain_url: string,
+    admin_email: string,
+    plan_id: Number,
+    first_name: string,
+    last_name: string,
+    phone_number: Number,
+    password: string,
+    // logo: File,
+    user_timezone: string
+  ) {
+    return this.http
+      .post<Plan>(`${environment.apiUrl}/tenant/organization/`, {
+        name,
+        country,
+        state,
+        city,
+        description,
+        // domain_url,
+        admin_email,
+        plan_id,
+        first_name,
+        last_name,
+        phone_number,
+        password,
+        // logo,
+        user_timezone
+      })
       .pipe(
         map((data) => {
           return data;
@@ -43,7 +107,6 @@ export class PlanService {
     );
   }
 
-
   // Error
   handleError(error: HttpErrorResponse) {
     let msg = '';
@@ -56,6 +119,5 @@ export class PlanService {
     }
     return throwError(msg);
   }
-
 
 }

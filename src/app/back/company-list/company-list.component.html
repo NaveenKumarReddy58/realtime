@@ -1,12 +1,11 @@
-<!-- Side Bar -->
 <section class="section" style="background: #ebeff2">
   <div class="container-fluid">
     <div class="row">
-      <!-- Side Bar -->
+
       <div class="col-md-2">
         <app-menu></app-menu>
       </div>
-      <!-- Side Bar /////////// -->
+
       <div class="col-md-10">
         <app-top></app-top>
 
@@ -49,43 +48,27 @@
                 <div class="ConpanyDetail home-filter mb-5">
                   <div class="row pb-1">
                     <cdk-accordion class="example-accordion">
-                      <cdk-accordion-item
-                        *ngFor="let item of items; let index = index"
-                        #accordionItem="cdkAccordionItem"
-                        class="example-accordion-item"
-                        role="button"
-                        tabindex="0"
-                        [attr.id]="'accordion-header-' + index"
-                        [attr.aria-expanded]="accordionItem.expanded"
-                        [attr.aria-controls]="'accordion-body-' + index"
-                      >
+                      <cdk-accordion-item *ngFor="let item of items; let index = index"
+                        #accordionItem="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0"
+                        [attr.id]="'accordion-header-' + index" [attr.aria-expanded]="accordionItem.expanded"
+                        [attr.aria-controls]="'accordion-body-' + index">
                         <ul class="Company_Detail_cnt Company_Detail_cnt02">
                           <li>
                             <div class="IconImgSet Starworld">
-                              <img
-                                *ngIf="!item.logo"
-                                src="assets/images/profilephoto.png"
-                              />
+                              <img *ngIf="!item.logo" src="assets/images/profilephoto.png" />
                               <img *ngIf="item.logo" [src]="item.logo" />
-                              <span class="IconHeading"
-                                >{{ item.name }}
+                              <span class="IconHeading">{{ item.name }}
                                 <span class="SurName">{{ item.name }}</span>
                               </span>
                             </div>
                           </li>
                           <li>
                             <div class="IconImgSet DayPlans">
-                              <img
-                                *ngIf="!item.plans.logo"
-                                src="assets/images/sper-top-icon02.png"
-                              />
-                              <img
-                                *ngIf="item.plans.logo"
-                                [src]="item.plans.logo"
-                              />
+                              <img *ngIf="!item.plans.logo" src="assets/images/sper-top-icon02.png" />
+                              <img *ngIf="item.plans.logo" [src]="item.plans.logo" />
                               <span class="IconHeading">{{
                                 item.plans.title
-                              }}</span>
+                                }}</span>
                               <span class="__Plan GoldPlan">
                                 {{item.plans.exp_date| dateAgo}} Left for plan renewal
                               </span>
@@ -115,24 +98,14 @@
                           </li>
                           <li>
                             <a (click)="accordionItem.toggle()">
-                              <img
-                                *ngIf="!accordionItem.expanded"
-                                src="assets/images/round-arrow.png"
-                              />
-                              <img
-                                *ngIf="accordionItem.expanded"
-                                src="assets/images/round-arrow-up.png"
-                              />
+                              <img *ngIf="!accordionItem.expanded" src="assets/images/round-arrow.png" />
+                              <img *ngIf="accordionItem.expanded" src="assets/images/round-arrow-up.png" />
                             </a>
                           </li>
                         </ul>
-                        <div
-                          class="example-accordion-item-body"
-                          role="region"
-                          [style.display]="accordionItem.expanded ? '' : 'none'"
-                          [attr.id]="'accordion-body-' + index"
-                          [attr.aria-labelledby]="'accordion-header-' + index"
-                        >
+                        <div class="example-accordion-item-body" role="region"
+                          [style.display]="accordionItem.expanded ? '' : 'none'" [attr.id]="'accordion-body-' + index"
+                          [attr.aria-labelledby]="'accordion-header-' + index">
                           Lorem ipsum dolor, sit amet consectetur adipisicing
                           elit. Perferendis excepturi incidunt ipsum deleniti
                           labore, tempore non nam doloribus blanditiis veritatis
@@ -151,4 +124,3 @@
     </div>
   </div>
 </section>
-<!-- Side Bar /////////////////// -->

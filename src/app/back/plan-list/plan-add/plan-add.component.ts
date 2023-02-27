@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Plan } from 'src/app/_interface/plan';
-import { AuthService } from 'src/app/_service/auth.service';
 import { PlanService } from 'src/app/_service/plan.service';
 
 @Component({
@@ -21,18 +19,17 @@ export class PlanAddComponent {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    public authService: AuthService,
     public planService: PlanService,
     private toastr: ToastrService
   ) {
     this.addPlan = formBuilder.group({
       title: ['', [Validators.required]],
-      max_drivers: ['', [Validators.required]],
-      max_admin: ['', [Validators.required]],
-      valid_for: ['', [Validators.required]],
+      max_drivers: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      max_admin: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      valid_for: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
       desecription: ['', [Validators.required]],
-      img: ['', [Validators.required]],
-      price: ['', [Validators.required]],
+      img: [''],
+      price: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
     });
   }
 
@@ -46,7 +43,7 @@ export class PlanAddComponent {
     return this.addPlan.value;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   handleSubmit() {
     this.isSubmitted = true;
@@ -57,12 +54,20 @@ export class PlanAddComponent {
     }
 
     this.loading = true;
-    console.log('Api Data Err ffff', this.f);
-    const planData: Plan = this.addPlan.value; // this is now valid typescript
-    this.planService.add(planData).subscribe(
+    console.log('Api Data Err ffff', this.f, this.frmValues);
+
+    this.planService.add(
+      this.f['title'].value,
+      this.f['max_drivers'].value,
+      this.f['max_admin'].value,
+      this.f['valid_for'].value,
+      this.f['desecription'].value,
+      // this.f['img'].value,
+      this.f['price'].value
+    ).subscribe(
       (data: any) => {
         console.log('Api Data Err', data);
-        if (data?.resultCode == 0) {
+        if (data?.resultCode == 4) {
           console.log('Api Data Err', data);
           this.toastr.error('', data.errorMessage);
           return;
