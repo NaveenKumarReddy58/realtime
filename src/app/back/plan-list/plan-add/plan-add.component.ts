@@ -16,6 +16,7 @@ export class PlanAddComponent {
   addPlan!: FormGroup;
   loading = false;
   isSubmitted = false;
+  imageSrc: any = "assets/images/sper-top-icon02.png";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -79,22 +80,17 @@ export class PlanAddComponent {
       );
   }
 
-  getFile(e: any) {
+  readURL(event:any): void {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
 
-    let extensionAllowed = { "png": true, "jpeg": true };
-    console.log(e.target.files);
-    if (e.target.files[0].size / 1024 / 1024 > 20) {
-      alert("File size should be less than 20MB")
-      return;
+      const reader = new FileReader();
+      reader.onload = e => this.imageSrc = reader.result;
+      this.addPlan.patchValue({
+        img: file,
+      });
+
+      reader.readAsDataURL(file);
     }
-    // if (extensionAllowed) {
-    //   var nam = e.target.files[0].name.split('.').pop();
-    //   if (!extensionAllowed[nam]) {
-    //     alert("Please upload " + Object.keys(extensionAllowed) + " file.")
-    //     return;
-    //   }
-    // }
-    this.addPlan.controls["img"].setValue(e.target.files[0]);
-
   }
 }

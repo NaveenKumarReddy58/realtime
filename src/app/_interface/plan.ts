@@ -4,6 +4,6 @@ export interface Plan {
     max_admin?: Number;
     valid_for?: Number;
     desecription?: string;
-    img?: string;
+    img?: File;
     price?: Number;
 }

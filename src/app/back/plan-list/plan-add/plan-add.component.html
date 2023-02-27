@@ -28,83 +28,81 @@
                                 <div class="col-md-3">
                                     <div class="ProfilePik">
                                         <div class="ChangePic">
-                                            <img src="assets/images/sper-top-icon02.png" />
-                                            <span class="Edit_Img">
+                                            <img *ngIf="imageSrc" [src]="imageSrc" [alt]="'logo'" />
+                                            <span (click)="fileInput.click()" class="Edit_Img">
                                                 <img src="assets/images/edir-img.png">
                                             </span>
                                         </div>
-                                        <div class="ChangeImg">
+                                        <div (click)="fileInput.click()" class="ChangeImg">
                                             Change Picture
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-9">
-                                    <form [formGroup]="addPlan" (change)="getFile($event)" class="ProfileFor">
-                                        <input type="file" formControlName="img">
+                                    <form [formGroup]="addPlan" class="ProfileFor" enctype="multipart/form-data">
+                                        <input #fileInput type="file" (change)="readURL($event)" style="display: none;" accept="image/*" />
+                                        <div *ngIf="isSubmitted && f['img'].errors" class="text-danger">
+                                            <div *ngIf="f['img'].errors['required']">
+                                                Logo is required
+                                            </div>
+                                        </div>
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <input type="text" formControlName="title" placeholder="Add Name"
                                                     class="Pro_input_Field">
+                                                <div *ngIf="isSubmitted && f['title'].errors" class="text-danger">
+                                                    <div *ngIf="f['title'].errors['required']">
+                                                        Title is required
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="col-md-12 mt-3">
                                                 <input type="text" formControlName="price" placeholder="Plan Price"
                                                     class="Pro_input_Field">
+                                                <div *ngIf="isSubmitted && f['price'].errors" class="text-danger">
+                                                    <div *ngIf="f['price'].errors['required']">
+                                                        Price is required
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row mt-3">
                                             <div class="col-md-4">
                                                 <input type="number" formControlName="max_drivers"
                                                     placeholder="# of driver units" class="Pro_input_Field">
+                                                <div *ngIf="isSubmitted && f['max_drivers'].errors" class="text-danger">
+                                                    <div *ngIf="f['max_drivers'].errors['required']">
+                                                        Max Drivers is required
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <input type="number" formControlName="max_admin"
                                                     placeholder="# of management units" class="Pro_input_Field">
+                                                <div *ngIf="isSubmitted && f['max_admin'].errors" class="text-danger">
+                                                    <div *ngIf="f['max_admin'].errors['required']">
+                                                        Max Admin is required
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <input type="number" formControlName="valid_for"
                                                     placeholder="# valid for" class="Pro_input_Field">
+                                                <div *ngIf="isSubmitted && f['valid_for'].errors" class="text-danger">
+                                                    <div *ngIf="f['valid_for'].errors['required']">
+                                                        Valid For is required
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row mt-3">
                                             <div class="col-md-12">
                                                 <textarea formControlName="desecription" placeholder="Description"
                                                     class="Pro_input_Field"></textarea>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mt-3">
-                                            <div class="col-md-12">
-                                                <div class="text-danger CustomErr">
-                                                    <div *ngIf="isSubmitted && f['title'].errors">
-                                                        <div *ngIf="f['title'].errors['required']">
-                                                            Title is required
-                                                        </div>
-                                                    </div>
-                                                    <div *ngIf="isSubmitted && f['price'].errors">
-                                                        <div *ngIf="f['price'].errors['required']">
-                                                            Price is required
-                                                        </div>
-                                                    </div>
-
-                                                    <div *ngIf="isSubmitted && f['max_drivers'].errors">
-                                                        <div *ngIf="f['max_drivers'].errors['required']">
-                                                            Max Drivers is required
-                                                        </div>
-                                                    </div>
-                                                    <div *ngIf="isSubmitted && f['max_admin'].errors">
-                                                        <div *ngIf="f['max_admin'].errors['required']">
-                                                            Max Admin is required
-                                                        </div>
-                                                    </div>
-                                                    <div *ngIf="isSubmitted && f['valid_for'].errors">
-                                                        <div *ngIf="f['valid_for'].errors['required']">
-                                                            Valid For is required
-                                                        </div>
-                                                    </div>
-                                                    <div *ngIf="isSubmitted && f['desecription'].errors">
-                                                        <div *ngIf="f['desecription'].errors['required']">
-                                                            Desecription is required
-                                                        </div>
+                                                <div *ngIf="isSubmitted && f['desecription'].errors"
+                                                    class="text-danger">
+                                                    <div *ngIf="f['desecription'].errors['required']">
+                                                        Desecription is required
                                                     </div>
                                                 </div>
                                             </div>
