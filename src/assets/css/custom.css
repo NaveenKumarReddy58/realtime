@@ -1112,7 +1112,7 @@ span.SurName {
   display: flex;
   white-space: nowrap;
   align-items: center;
-  gap: 50px;
+  gap: 30px;
   overflow-y: hidden;
   overflow-x: auto;
   padding-bottom: 5px;

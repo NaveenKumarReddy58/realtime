@@ -106,11 +106,128 @@
                         <div class="example-accordion-item-body" role="region"
                           [style.display]="accordionItem.expanded ? '' : 'none'" [attr.id]="'accordion-body-' + index"
                           [attr.aria-labelledby]="'accordion-header-' + index">
-                          Lorem ipsum dolor, sit amet consectetur adipisicing
-                          elit. Perferendis excepturi incidunt ipsum deleniti
-                          labore, tempore non nam doloribus blanditiis veritatis
-                          illo autem iure aliquid ullam rem tenetur deserunt
-                          velit culpa?
+
+                          <div class="row mt-2 mb-2" >
+                            <div class="col-md-3" style="padding-left: 0;">
+                              <div class="EditProfile">
+                                <div class="ChangePic0">
+                                  <img *ngIf="!item.logo" src="assets/images/profilephoto.png" />
+                                  <img *ngIf="item.logo" [src]="item.logo" />
+                                </div>
+                                <div class="HeadingName">
+                                  <h2>{{ item.name }}
+                                    <span class="SurName">{{ item.name }}</span>
+                                    <span class="__edit_Img">
+                                      <img src="assets/images/edir-img.png">
+                                    </span>
+                                  </h2>
+                                  <ul class="AddressEdit">
+                                    <li>Mohali, Punjab</li>
+                                    <li>Sandeep Singh</li>
+                                    <li>+91 0011001199</li>
+                                    <li>sandeep@gmail.com</li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-9" style="padding-right: 0;">
+                              <div class="Plane_date_time">
+
+                                <ul>
+                                  <li>
+                                    <img *ngIf="!item.plans.logo" src="assets/images/sper-top-icon02.png" />
+                                    <img *ngIf="item.plans.logo" [src]="item.plans.logo" />
+                                    <span>{{
+                                      item.plans.title
+                                      }}</span>
+                                  </li>
+                                  <li>
+                                    <span>Purchase Date: {{item.plans.exp_date| date:'fullDate'}}</span>
+                                  </li>
+                                  <li>
+                                    <span>Expiry Date: {{item.plans.exp_date| date:'fullDate'}}</span>
+                                  </li>
+                                  <li>
+                                    <span>{{item.plans.exp_date| dateAgo}} Left for renewal</span>
+                                  </li>
+                                </ul>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <div class="mt-4">
+                                    <p><strong>Message</strong>
+                                      Lorem Ipsum is simply dummy text of the printing and
+                                      typesetting industry</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row mt-3">
+                                <div class="col-md-12">
+                                  <h4>Package Purchase history</h4>
+                                </div>
+                                <div class="col-md-4 mt-2">
+                                  <div class="Purchase_Text">
+                                    <h4>Purchase Date & End Date</h4>
+                                  </div>
+                                </div>
+                                <div class="col-md-4 mt-2">
+                                  <div class="Purchase_Text">
+                                    <h4>Purchase Date & End Date</h4>
+                                  </div>
+                                </div>
+                                <div class="col-md-4 mt-2">
+                                  <div class="Purchase_Text">
+                                    <h4>Purchase Date & End Date</h4>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <form class="ProfileFor">
+                                  <div class="row">
+                                    <div class="col-md-6 SendNotification">
+                                      <div class="ChangePass mt-3">
+                                        Send Notification
+                                      </div>
+                                      <span class="Password">
+                                        <input type="text" name="" placeholder="Enter Message" class="Pro_input_Field">
+                                      </span>
+                                      <button class="SaveButton ButtonStyle mt-4">Save
+                                        Changes</button>
+                                    </div>
+                                    <div class="col-md-6 DeactivateClient">
+                                      <div class="ChangePass mt-3">
+                                        Deactivate Client
+                                      </div>
+                                      <span class="Password">
+                                        <input type="text" name="" placeholder="Reason for deactivating"
+                                          class="Pro_input_Field">
+                                      </span>
+                                      <button class="SaveButton ButtonStyle mt-4">Save
+                                        Changes</button>
+                                    </div>
+                                  </div>
+                                </form>
+                              </div>
+                              <div class="row mt-5">
+                                <div class="col-md-12 mb-2">
+                                  <h4>Recente Notification <a href="" class="_ViewAll">View All</a>
+                                  </h4>
+                                </div>
+                                <div class="col-md-12">
+                                  <p>Message Lorem Ipsum is simply dummy text of the printing
+                                    <span class="GreenDate">Wed Nov 12, 2022</span>
+                                  </p>
+                                  <p>Message Lorem Ipsum is simply dummy text of the printing
+                                    <span class="GreenDate">Wed Nov 12, 2022</span>
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+
+
+
                         </div>
                       </cdk-accordion-item>
                     </cdk-accordion>
