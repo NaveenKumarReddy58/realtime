@@ -28,7 +28,6 @@ export class CompanyListComponent {
   cplist() {
     this.planService.cplist().subscribe(
       (data: any) => {
-        console.log('Api Data Err', data);
         if (data?.resultCode == 4) {
           console.log('Api Data Err', data);
           this.toastr.error('', data.errorMessage);
@@ -39,7 +38,7 @@ export class CompanyListComponent {
         this.listCount = data.count;
 
         console.log('data', data);
-        this.toastr.success('Success', data.actionPerformed);
+        //this.toastr.success('Success', data.actionPerformed);
       },
       (data) => {
         this.loading = false;

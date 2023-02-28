@@ -1,7 +1,6 @@
 <section class="section" style="background: #ebeff2">
   <div class="container-fluid">
     <div class="row">
-
       <div class="col-md-3 width20">
         <app-menu></app-menu>
       </div>
@@ -25,7 +24,7 @@
                     <div class="ChangePic">
                       <img *ngIf="imageSrc" [src]="imageSrc" [alt]="'logo'" />
                       <span (click)="fileInput.click()" class="Edit_Img">
-                        <img src="assets/images/edir-img.png">
+                        <img src="assets/images/edir-img.png" />
                       </span>
                     </div>
                     <div (click)="fileInput.click()" class="ChangeImg">
@@ -34,15 +33,25 @@
                   </div>
                 </div>
                 <div class="col-md-5 width46">
-                  <form [formGroup]="addCP" class="ProfileFor" enctype="multipart/form-data">
+                  <form
+                    [formGroup]="addCP"
+                    class="ProfileFor"
+                    enctype="multipart/form-data"
+                  >
                     <div class="row">
-
                       <div class="CardPopup">
                         <div class="row">
-
-                          <input #fileInput type="file" (change)="readURL($event)" style="display: none;"
-                            accept="image/*" />
-                          <div *ngIf="isSubmitted && f['logo'].errors" class="text-danger">
+                          <input
+                            #fileInput
+                            type="file"
+                            (change)="readURL($event)"
+                            style="display: none"
+                            accept="image/*"
+                          />
+                          <div
+                            *ngIf="isSubmitted && f['logo'].errors"
+                            class="text-danger"
+                          >
                             <div *ngIf="f['logo'].errors['required']">
                               Logo is required
                             </div>
@@ -50,9 +59,16 @@
 
                           <div class="col-md-12 mb-4">
                             <span class="Password">
-                              <input type="text" formControlName="name" placeholder="Company Name"
-                                class="Pro_input_Field" />
-                              <div *ngIf="isSubmitted && f['name'].errors" class="text-danger">
+                              <input
+                                type="text"
+                                formControlName="name"
+                                placeholder="Company Name"
+                                class="Pro_input_Field"
+                              />
+                              <div
+                                *ngIf="isSubmitted && f['name'].errors"
+                                class="text-danger"
+                              >
                                 <div *ngIf="f['name'].errors['required']">
                                   Name is required
                                 </div>
@@ -61,12 +77,18 @@
                           </div>
                           <div class="col-md-4">
                             <span class="Password">
-                              <select formControlName="country" class="Pro_input_Field">
+                              <select
+                                formControlName="country"
+                                class="Pro_input_Field"
+                              >
                                 <option value="">Country</option>
                                 <option value="india">India</option>
                                 <option value="usa">USA</option>
                               </select>
-                              <div *ngIf="isSubmitted && f['country'].errors" class="text-danger">
+                              <div
+                                *ngIf="isSubmitted && f['country'].errors"
+                                class="text-danger"
+                              >
                                 <div *ngIf="f['country'].errors['required']">
                                   Country is required
                                 </div>
@@ -75,8 +97,16 @@
                           </div>
                           <div class="col-md-4">
                             <span class="Password">
-                              <input type="text" formControlName="state" placeholder="State" class="Pro_input_Field" />
-                              <div *ngIf="isSubmitted && f['state'].errors" class="text-danger">
+                              <input
+                                type="text"
+                                formControlName="state"
+                                placeholder="State"
+                                class="Pro_input_Field"
+                              />
+                              <div
+                                *ngIf="isSubmitted && f['state'].errors"
+                                class="text-danger"
+                              >
                                 <div *ngIf="f['state'].errors['required']">
                                   State is required
                                 </div>
@@ -85,8 +115,16 @@
                           </div>
                           <div class="col-md-4">
                             <span class="Password">
-                              <input type="text" formControlName="city" placeholder="Address" class="Pro_input_Field" />
-                              <div *ngIf="isSubmitted && f['city'].errors" class="text-danger">
+                              <input
+                                type="text"
+                                formControlName="city"
+                                placeholder="Address"
+                                class="Pro_input_Field"
+                              />
+                              <div
+                                *ngIf="isSubmitted && f['city'].errors"
+                                class="text-danger"
+                              >
                                 <div *ngIf="f['city'].errors['required']">
                                   City is required
                                 </div>
@@ -96,9 +134,16 @@
 
                           <div class="col-md-6 mt-4">
                             <span class="Password">
-                              <input type="text" formControlName="first_name" placeholder="First Name"
-                                class="Pro_input_Field" />
-                              <div *ngIf="isSubmitted && f['first_name'].errors" class="text-danger">
+                              <input
+                                type="text"
+                                formControlName="first_name"
+                                placeholder="First Name"
+                                class="Pro_input_Field"
+                              />
+                              <div
+                                *ngIf="isSubmitted && f['first_name'].errors"
+                                class="text-danger"
+                              >
                                 <div *ngIf="f['first_name'].errors['required']">
                                   First Name is required
                                 </div>
@@ -107,9 +152,16 @@
                           </div>
                           <div class="col-md-6 mt-4">
                             <span class="Password">
-                              <input type="text" formControlName="last_name" placeholder="Last Name"
-                                class="Pro_input_Field" />
-                              <div *ngIf="isSubmitted && f['last_name'].errors" class="text-danger">
+                              <input
+                                type="text"
+                                formControlName="last_name"
+                                placeholder="Last Name"
+                                class="Pro_input_Field"
+                              />
+                              <div
+                                *ngIf="isSubmitted && f['last_name'].errors"
+                                class="text-danger"
+                              >
                                 <div *ngIf="f['last_name'].errors['required']">
                                   Last Name is required
                                 </div>
@@ -119,13 +171,24 @@
 
                           <div class="col-md-12 mt-4">
                             <span class="Password">
-                              <input type="text" formControlName="phone_number" placeholder="Phone No."
-                                class="Pro_input_Field" />
-                              <div *ngIf="isSubmitted && f['phone_number'].errors" class="text-danger">
-                                <div *ngIf="f['phone_number'].errors['required']">
+                              <input
+                                type="text"
+                                formControlName="phone_number"
+                                placeholder="Phone No."
+                                class="Pro_input_Field"
+                              />
+                              <div
+                                *ngIf="isSubmitted && f['phone_number'].errors"
+                                class="text-danger"
+                              >
+                                <div
+                                  *ngIf="f['phone_number'].errors['required']"
+                                >
                                   Phone number is required
                                 </div>
-                                <div *ngIf="f['phone_number'].errors['pattern']">
+                                <div
+                                  *ngIf="f['phone_number'].errors['pattern']"
+                                >
                                   Phone number must be 10 digits
                                 </div>
                               </div>
@@ -134,10 +197,19 @@
 
                           <div class="col-md-12 mt-4">
                             <span class="Password">
-                              <input type="text" formControlName="admin_email" placeholder="Email"
-                                class="Pro_input_Field" />
-                              <div *ngIf="isSubmitted && f['admin_email'].errors" class="text-danger">
-                                <div *ngIf="f['admin_email'].errors['required']">
+                              <input
+                                type="text"
+                                formControlName="admin_email"
+                                placeholder="Email"
+                                class="Pro_input_Field"
+                              />
+                              <div
+                                *ngIf="isSubmitted && f['admin_email'].errors"
+                                class="text-danger"
+                              >
+                                <div
+                                  *ngIf="f['admin_email'].errors['required']"
+                                >
                                   Email is required
                                 </div>
                                 <div *ngIf="f['admin_email'].errors['email']">
@@ -149,9 +221,16 @@
 
                           <div class="col-md-12 mt-4">
                             <span class="Password">
-                              <input type="text" formControlName="password" placeholder="Password"
-                                class="Pro_input_Field" />
-                              <div *ngIf="isSubmitted && f['password'].errors" class="text-danger">
+                              <input
+                                type="text"
+                                formControlName="password"
+                                placeholder="Password"
+                                class="Pro_input_Field"
+                              />
+                              <div
+                                *ngIf="isSubmitted && f['password'].errors"
+                                class="text-danger"
+                              >
                                 <div *ngIf="f['password'].errors['required']">
                                   Password is required
                                 </div>
@@ -161,38 +240,57 @@
 
                           <div class="col-md-12 mt-4">
                             <span class="Password">
-                              <textarea formControlName="description" placeholder="Description"
-                                class="Pro_input_Field"></textarea>
-                              <div *ngIf="isSubmitted && f['description'].errors" class="text-danger">
-                                <div *ngIf="f['description'].errors['required']">
+                              <textarea
+                                formControlName="description"
+                                placeholder="Description"
+                                class="Pro_input_Field"
+                              ></textarea>
+                              <div
+                                *ngIf="isSubmitted && f['description'].errors"
+                                class="text-danger"
+                              >
+                                <div
+                                  *ngIf="f['description'].errors['required']"
+                                >
                                   Description is required
                                 </div>
                               </div>
                             </span>
                           </div>
-
                         </div>
                       </div>
-
                     </div>
                     <div class="row mt-5">
                       <div class="add-company">
-
                         <ul>
-                          <li *ngFor="let plan of planItems; let index = index"
-                            [class]="plan.id === selectedIndex? 'gold active': 'gold'" (click)="choosePlan(plan.id)">
-                            <img *ngIf="!plan.logo" src="assets/images/sper-top-icon02.png" />
-                            <img *ngIf="plan.logo" [src]="plan.logo" />
-                            <span class="GoldColor">{{plan.title}}</span>
+                          <li
+                            *ngFor="let plan of planItems; let index = index"
+                            [class]="
+                              plan.id === selectedIndex ? 'gold active' : 'gold'
+                            "
+                            (click)="choosePlan(plan.id)"
+                          >
+                            <img
+                              *ngIf="!plan.img"
+                              src="assets/images/sper-top-icon02.png"
+                            />
+                            <img *ngIf="plan.img" [src]="plan.img" />
+                            <span class="GoldColor">{{ plan.title }}</span>
                             <a href="#!" class="KnowMore">
                               Know More
-                              <i class="fa fa-angle-down angle-down" aria-hidden="true"></i>
+                              <i
+                                class="fa fa-angle-down angle-down"
+                                aria-hidden="true"
+                              ></i>
                             </a>
                           </li>
                         </ul>
 
                         <input type="hidden" formControlName="plan_id" />
-                        <div *ngIf="isSubmitted && f['plan_id'].errors" class="text-danger">
+                        <div
+                          *ngIf="isSubmitted && f['plan_id'].errors"
+                          class="text-danger"
+                        >
                           <div *ngIf="f['plan_id'].errors['required']">
                             Plan is required
                           </div>
@@ -201,12 +299,24 @@
                           </div>
                         </div>
 
-                        <div class="d-flex justify-content-between mt-4 Cancel_Save">
-                          <button routerLink="/dashboad" class="CancelButton">Cancel</button>
-                          <button type="submit" (click)="handleSubmit()" class="SaveButton ButtonStyle">Add Company <i
-                              class="fa fa-spinner fa-spin" *ngIf="loading"></i></button>
+                        <div
+                          class="d-flex justify-content-between mt-4 Cancel_Save"
+                        >
+                          <button routerLink="/dashboad" class="CancelButton">
+                            Cancel
+                          </button>
+                          <button
+                            type="submit"
+                            (click)="handleSubmit()"
+                            class="SaveButton ButtonStyle"
+                          >
+                            Add Company
+                            <i
+                              class="fa fa-spinner fa-spin"
+                              *ngIf="loading"
+                            ></i>
+                          </button>
                         </div>
-
                       </div>
                     </div>
                   </form>

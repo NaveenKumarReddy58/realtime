@@ -28,59 +28,41 @@ export class PlanService {
     return throwError(msg);
   }
 
-
   list() {
     return this.http.get<any>(`${environment.apiUrl}/tenant/plan/`);
   }
 
   add(form: any) {
-    return this.http
-      .post<any>(`${environment.apiUrl}/tenant/plan/`, form)
-      .pipe(
-        map((data) => {
-          return data;
-        }),
-        catchError(this.handleError)
-      );
+    return this.http.post<any>(`${environment.apiUrl}/tenant/plan/`, form).pipe(
+      map((data) => {
+        return data;
+      }),
+      catchError(this.handleError)
+    );
   }
 
   delete(id: Number) {
     return this.http.delete<any>(`${environment.apiUrl}/tenant/plan/${id}`);
   }
 
-  cpAdd(
-    name: string,
-    country: string,
-    state: string,
-    city: string,
-    description: string,
-    // domain_url: string,
-    admin_email: string,
-    plan_id: Number,
-    first_name: string,
-    last_name: string,
-    phone_number: Number,
-    password: string,
-    // logo: File,
-    user_timezone: string
-  ) {
+  // name: string,
+  // country: string,
+  // state: string,
+  // city: string,
+  // description: string,
+  // // domain_url: string,
+  // admin_email: string,
+  // plan_id: Number,
+  // first_name: string,
+  // last_name: string,
+  // phone_number: Number,
+  // password: string,
+  // // logo: File,
+  // user_timezone: string
+
+  cpAdd(form: any) {
     return this.http
-      .post<Plan>(`${environment.apiUrl}/tenant/organization/`, {
-        name,
-        country,
-        state,
-        city,
-        description,
-        // domain_url,
-        admin_email,
-        plan_id,
-        first_name,
-        last_name,
-        phone_number,
-        password,
-        // logo,
-        user_timezone,
-      })
+      .post<any>(`${environment.apiUrl}/tenant/organization/`, form)
       .pipe(
         map((data) => {
           return data;

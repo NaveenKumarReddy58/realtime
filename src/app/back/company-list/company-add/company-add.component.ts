@@ -7,7 +7,7 @@ import { PlanService } from 'src/app/_service/plan.service';
 @Component({
   selector: 'app-company-add',
   templateUrl: './company-add.component.html',
-  styleUrls: ['./company-add.component.css']
+  styleUrls: ['./company-add.component.css'],
 })
 export class CompanyAddComponent {
   addCP!: FormGroup;
@@ -36,46 +36,18 @@ export class CompanyAddComponent {
       description: ['', [Validators.required]],
       // domain_url: ['', [Validators.required]],
       admin_email: ['', [Validators.required, Validators.email]],
-      plan_id: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      plan_id: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       first_name: ['', [Validators.required]],
       last_name: ['', [Validators.required]],
-      phone_number: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
+      phone_number: [
+        '',
+        [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
+      ],
       password: ['', [Validators.required]],
       logo: [''],
     });
 
     this.list();
-  }
-
-  list() {
-    this.planService.list().subscribe(
-      (data: any) => {
-        console.log('Api Data Err', data);
-        if (data?.resultCode == 4) {
-          console.log('Api Data Err', data);
-          this.toastr.error('', data.errorMessage);
-          return;
-        }
-
-        this.planItems = data.results;
-        this.planCount = data.count;
-
-        console.log('data', data);
-        this.toastr.success('Success', data.actionPerformed);
-      },
-      (data) => {
-        this.loading = false;
-        console.log('Api Err', data);
-      }
-    );
-  }
-
-  choosePlan(id: Number) {
-    this.selectedIndex = id;
-    console.log(id,  this.selectedIndex)
-    this.addCP.patchValue({
-      plan_id: id,
-    });
   }
 
   // convenience getter for easy access to form fields
@@ -88,7 +60,37 @@ export class CompanyAddComponent {
     return this.addCP.value;
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
+
+  list() {
+    this.planService.list().subscribe(
+      (data: any) => {
+        if (data?.resultCode == 4) {
+          console.log('Api Data Err', data);
+          this.toastr.error('', data.errorMessage);
+          return;
+        }
+
+        this.planItems = data.results;
+        this.planCount = data.count;
+
+        // console.log('data', data);
+        // this.toastr.success('Success', data.actionPerformed);
+      },
+      (data) => {
+        this.loading = false;
+        console.log('Api Err', data);
+      }
+    );
+  }
+
+  choosePlan(id: Number) {
+    this.selectedIndex = id;
+    console.log(id, this.selectedIndex);
+    this.addCP.patchValue({
+      plan_id: id,
+    });
+  }
 
   handleSubmit() {
     this.isSubmitted = true;
@@ -99,28 +101,26 @@ export class CompanyAddComponent {
     }
 
     this.loading = true;
-    console.log('Api Data Err ffff', this.f, this.frmValues);
+    // console.log('Api Data Err ffff', this.f, this.frmValues);
 
-    this.userTimezone = localStorage.getItem('user_timezone')
+    const formData = new FormData();
+    for (let i in this.addCP.value) {
+      if (this.addCP.value[i] instanceof Blob) {
+        formData.append(
+          i,
+          this.addCP.value[i],
+          this.addCP.value[i].name ? this.addCP.value[i].name : ''
+        );
+        console.log('blob');
+      } else {
+        formData.append(i, this.addCP.value[i]);
+      }
+    }
+    this.userTimezone = localStorage.getItem('user_timezone');
+    formData.append('user_timezone', this.userTimezone);
 
-    this.planService.cpAdd(
-      this.f['name'].value,
-      this.f['country'].value,
-      this.f['state'].value,
-      this.f['city'].value,
-      this.f['description'].value,
-      // this.f['domain_url'].value,
-      this.f['admin_email'].value,
-      this.f['plan_id'].value,
-      this.f['first_name'].value,
-      this.f['last_name'].value,
-      this.f['phone_number'].value,
-      this.f['password'].value,
-      // this.f['logo'].value,
-      this.userTimezone
-    ).subscribe(
+    this.planService.cpAdd(formData).subscribe(
       (data: any) => {
-        console.log('Api Data Err', data);
         if (data?.resultCode == 4) {
           console.log('Api Data Err', data);
           this.toastr.error('', data.errorMessage);
