@@ -7,7 +7,7 @@ import { Component, ViewChild } from '@angular/core';
 })
 export class SidebarComponent {
 
-  myimg = 'assets/images/bannerslider.png'
+  myimg = 'assets/images/bannerslider1.png'
 
   slides = [
     { img: this.myimg },

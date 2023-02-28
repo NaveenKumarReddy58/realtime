@@ -3,11 +3,49 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/_service/auth.service';
+import {
+  trigger,
+  style,
+  animate,
+  transition,
+  group,
+  query,
+  animateChild,
+  keyframes
+} from '@angular/animations';
 
 @Component({
   selector: 'app-pre',
   templateUrl: './pre.component.html',
   styleUrls: ['./pre.component.css'],
+  animations: [
+    trigger('query', [
+      transition(':enter', [
+        style({ height: 0 }),
+        group([
+          animate(500, style({ height: '*' })),
+          query(':enter', [
+            style({ opacity: 0, transform: 'scale(0)'}),
+            animate(2000, style({ opacity: 1, transform: 'scale(1)' }))
+          ])
+        ]),
+        query('@animateMe', animateChild()),
+      ]),
+      transition(':leave', [
+        style({ height: '*' }),
+        query('@animateMe', animateChild()),
+        group([
+          animate('500ms 500ms', style({ height: '0', padding: '0' })),
+          query(':leave', [
+            style({ opacity: 1, transform: 'scale(1)'}),
+            animate('1s', style({ opacity: 0, transform: 'scale(0)' }))
+          ])
+        ]),
+      ]),
+    ]),
+    trigger('animateMe', [
+    ]),
+  ]
 })
 export class PreComponent {
   prelogin!: FormGroup;
@@ -15,7 +53,9 @@ export class PreComponent {
   isSubmitted = false;
   org_email: any;
   org_domain: any;
-
+  toggleDisabled = false;
+  show = true;
+ 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
