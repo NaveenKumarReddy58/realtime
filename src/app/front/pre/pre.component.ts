@@ -54,8 +54,7 @@ export class PreComponent {
   org_email: any;
   org_domain: any;
   toggleDisabled = false;
-  show = true;
- 
+  
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,

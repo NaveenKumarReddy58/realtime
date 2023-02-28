@@ -1,6 +1,6 @@
 <!-- Side Bar -->
-<section class="LoginSection" *ngIf="show" @query (@query.start)="toggleDisabled = true" (@query.done)="toggleDisabled = false">
-  <div class="container" *ngIf="show">
+<section class="LoginSection" @query (@query.start)="toggleDisabled = true" (@query.done)="toggleDisabled = false">
+  <div class="container">
     <div class="row">
       <!-- Login Side -->
       <div class="col-md-5">
