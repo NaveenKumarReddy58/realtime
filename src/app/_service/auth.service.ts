@@ -15,33 +15,21 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
-  currentUser = {};
-
   constructor(
     private http: HttpClient,
     public router: Router,
     private toastr: ToastrService
-  ) {
+  ) {}
 
-  }
-
-  // Sign-up
-  signUp(user: User): Observable<any> {
-    let api = `${environment.apiUrl}/register-user`;
-    return this.http.post(api, user).pipe(catchError(this.handleError));
-  }
-
-  // Sign-in
-  signIn(user: User) {
-    return this.http
-      .post<any>(`${environment.apiUrl}/signin`, user)
-      .subscribe((res: any) => {
-        localStorage.setItem('access_token', res.token);
-        this.getUserProfile(res._id).subscribe((res) => {
-          this.currentUser = res;
-          this.router.navigate(['user-profile/' + res.msg._id]);
-        });
-      });
+  handleError(error: HttpErrorResponse) {
+    let msg = '';
+    if (error.error instanceof ErrorEvent) {
+      msg = error.error.message;
+    } else {
+      msg = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    console.log('e', msg);
+    return throwError(msg);
   }
 
   getToken() {
@@ -76,19 +64,6 @@ export class AuthService {
     );
   }
 
-  // Error
-  handleError(error: HttpErrorResponse) {
-    let msg = '';
-    if (error.error instanceof ErrorEvent) {
-      // client-side error
-      msg = error.error.message;
-    } else {
-      // server-side error
-      msg = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    return throwError(msg);
-  }
-
   getOrganization(email: string) {
     return this.http.get<any>(
       `${environment.apiUrl}/tenant/get-organization/?email=${email}`
@@ -103,7 +78,6 @@ export class AuthService {
       })
       .pipe(
         map((data) => {
-          // localStorage.setItem('user', JSON.stringify(data));
           return data;
         }),
         catchError(this.handleError)
@@ -125,7 +99,6 @@ export class AuthService {
       })
       .pipe(
         map((data) => {
-          // localStorage.setItem('user', JSON.stringify(data));
           return data;
         }),
         catchError(this.handleError)
@@ -158,4 +131,20 @@ export class AuthService {
       );
   }
 
+  tokenRefresh() {
+    const refresh_token = localStorage.getItem('refresh_token');
+    return this.http
+      .post<any>(`${environment.apiUrl}/account/token/refresh/`, {
+        refresh_token,
+      })
+      .pipe(
+        map((data) => {
+          localStorage.setItem('access_token', data?.access);
+          // localStorage.setItem('user', JSON.stringify(data));
+          console.log('err tokenRefresh', data);
+          return data;
+        }),
+        catchError(this.handleError)
+      );
+  }
 }

@@ -1,143 +1,202 @@
-<section class="section" style="background: #ebeff2;">
-    <div class="container-fluid">
+<section class="section" style="background: #ebeff2">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2">
+        <app-menu></app-menu>
+      </div>
+
+      <div class="col-md-10">
+        <app-top></app-top>
+
         <div class="row">
-
-            <div class="col-md-2">
-                <app-menu></app-menu>
-            </div>
-
-            <div class="col-md-10">
-
-                <app-top></app-top>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="ContentArea">
-                            <div class="row mb-4">
-                                <div class="col-md-10">
-                                    <div class="HeadingName">
-                                        <h2>Add Plan</h2>
-                                    </div>
-                                </div>
-                                <div class="col-md-2 loginButton">
-                                    <a routerLink="/plans"><button>Back to List</button></a>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="ProfilePik">
-                                        <div class="ChangePic">
-                                            <img *ngIf="imageSrc" [src]="imageSrc" [alt]="'logo'" />
-                                            <span (click)="fileInput.click()" class="Edit_Img">
-                                                <img src="assets/images/edir-img.png">
-                                            </span>
-                                        </div>
-                                        <div (click)="fileInput.click()" class="ChangeImg">
-                                            Change Picture
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-9">
-                                    <form [formGroup]="addPlan" class="ProfileFor" enctype="multipart/form-data">
-                                        <input #fileInput type="file" (change)="readURL($event)" style="display: none;"
-                                            accept="image/*" />
-                                        <div *ngIf="isSubmitted && f['img'].errors" class="text-danger">
-                                            <div *ngIf="f['img'].errors['required']">
-                                                Logo is required
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <input type="text" formControlName="title" placeholder="Add Name"
-                                                    class="Pro_input_Field">
-                                                <div *ngIf="isSubmitted && f['title'].errors" class="text-danger">
-                                                    <div *ngIf="f['title'].errors['required']">
-                                                        Title is required
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 mt-3">
-                                                <input type="text" formControlName="price" placeholder="Plan Price"
-                                                    class="Pro_input_Field">
-                                                <div *ngIf="isSubmitted && f['price'].errors" class="text-danger">
-                                                    <div *ngIf="f['price'].errors['required']">
-                                                        Price is required
-                                                    </div>
-                                                    <div *ngIf="f['price'].errors['pattern']">
-                                                        Number Only
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row mt-3">
-                                            <div class="col-md-4">
-                                                <input type="text" formControlName="max_drivers"
-                                                    placeholder="# of driver units" class="Pro_input_Field">
-                                                <div *ngIf="isSubmitted && f['max_drivers'].errors" class="text-danger">
-                                                    <div *ngIf="f['max_drivers'].errors['required']">
-                                                        Max Drivers is required
-                                                    </div>
-                                                    <div *ngIf="f['max_drivers'].errors['pattern']">
-                                                        Number Only
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <input type="text" formControlName="max_admin"
-                                                    placeholder="# of management units" class="Pro_input_Field">
-                                                <div *ngIf="isSubmitted && f['max_admin'].errors" class="text-danger">
-                                                    <div *ngIf="f['max_admin'].errors['required']">
-                                                        Max Admin is required
-                                                    </div>
-                                                    <div *ngIf="f['max_admin'].errors['pattern']">
-                                                        Number Only
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <input type="text" formControlName="valid_for" placeholder="# valid for"
-                                                    class="Pro_input_Field">
-                                                <div *ngIf="isSubmitted && f['valid_for'].errors" class="text-danger">
-                                                    <div *ngIf="f['valid_for'].errors['required']">
-                                                        Valid For is required
-                                                    </div>
-                                                    <div *ngIf="f['valid_for'].errors['pattern']">
-                                                        Number Only
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row mt-3">
-                                            <div class="col-md-12">
-                                                <textarea formControlName="desecription" placeholder="Description"
-                                                    class="Pro_input_Field"></textarea>
-                                                <div *ngIf="isSubmitted && f['desecription'].errors"
-                                                    class="text-danger">
-                                                    <div *ngIf="f['desecription'].errors['required']">
-                                                        Description is required
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mt-4">
-                                            <div class="col-md-12">
-                                                <div class="d-flex justify-content-between Cancel_Save">
-                                                    <button routerLink="/plans" class="CancelButton">Cancel</button>
-                                                    <button type="submit" (click)="handleSubmit()"
-                                                        class="SaveButton ButtonStyle">Add Plan <i
-                                                            class="fa fa-spinner fa-spin" *ngIf="loading"></i></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+          <div class="col-md-12">
+            <div class="ContentArea">
+              <div class="row mb-4">
+                <div class="col-md-10">
+                  <div class="HeadingName">
+                    <h2>Add Plan</h2>
+                  </div>
                 </div>
+                <div class="col-md-2 loginButton">
+                  <a routerLink="/plans"><button>Back to List</button></a>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="ProfilePik">
+                    <div class="ChangePic">
+                      <img *ngIf="imageSrc" [src]="imageSrc" [alt]="'logo'" />
+                      <span (click)="fileInput.click()" class="Edit_Img">
+                        <img src="assets/images/edir-img.png" />
+                      </span>
+                    </div>
+                    <div (click)="fileInput.click()" class="ChangeImg">
+                      Change Picture
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-9">
+                  <form
+                    [formGroup]="addPlan"
+                    class="ProfileFor"
+                    enctype="multipart/form-data"
+                  >
+                    <input
+                      #fileInput
+                      type="file"
+                      (change)="readURL($event)"
+                      style="display: none"
+                      accept="image/*"
+                    />
+                    <div
+                      *ngIf="isSubmitted && f['img'].errors"
+                      class="text-danger"
+                    >
+                      <div *ngIf="f['img'].errors['required']">
+                        Logo is required
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <input
+                          type="text"
+                          formControlName="title"
+                          placeholder="Add Name"
+                          class="Pro_input_Field"
+                        />
+                        <div
+                          *ngIf="isSubmitted && f['title'].errors"
+                          class="text-danger"
+                        >
+                          <div *ngIf="f['title'].errors['required']">
+                            Title is required
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-12 mt-3">
+                        <input
+                          type="text"
+                          formControlName="price"
+                          placeholder="Plan Price"
+                          class="Pro_input_Field"
+                        />
+                        <div
+                          *ngIf="isSubmitted && f['price'].errors"
+                          class="text-danger"
+                        >
+                          <div *ngIf="f['price'].errors['required']">
+                            Price is required
+                          </div>
+                          <div *ngIf="f['price'].errors['pattern']">
+                            Number Only
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-md-4">
+                        <input
+                          type="text"
+                          formControlName="max_drivers"
+                          placeholder="# of driver units"
+                          class="Pro_input_Field"
+                        />
+                        <div
+                          *ngIf="isSubmitted && f['max_drivers'].errors"
+                          class="text-danger"
+                        >
+                          <div *ngIf="f['max_drivers'].errors['required']">
+                            Max Drivers is required
+                          </div>
+                          <div *ngIf="f['max_drivers'].errors['pattern']">
+                            Number Only
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <input
+                          type="text"
+                          formControlName="max_admin"
+                          placeholder="# of management units"
+                          class="Pro_input_Field"
+                        />
+                        <div
+                          *ngIf="isSubmitted && f['max_admin'].errors"
+                          class="text-danger"
+                        >
+                          <div *ngIf="f['max_admin'].errors['required']">
+                            Max Admin is required
+                          </div>
+                          <div *ngIf="f['max_admin'].errors['pattern']">
+                            Number Only
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <input
+                          type="text"
+                          formControlName="valid_for"
+                          placeholder="# valid for"
+                          class="Pro_input_Field"
+                        />
+                        <div
+                          *ngIf="isSubmitted && f['valid_for'].errors"
+                          class="text-danger"
+                        >
+                          <div *ngIf="f['valid_for'].errors['required']">
+                            Valid For is required
+                          </div>
+                          <div *ngIf="f['valid_for'].errors['pattern']">
+                            Number Only
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-md-12">
+                        <textarea
+                          formControlName="desecription"
+                          placeholder="Description"
+                          class="Pro_input_Field"
+                        ></textarea>
+                        <div
+                          *ngIf="isSubmitted && f['desecription'].errors"
+                          class="text-danger"
+                        >
+                          <div *ngIf="f['desecription'].errors['required']">
+                            Description is required
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
+                    <div class="row mt-4">
+                      <div class="col-md-12">
+                        <div class="d-flex justify-content-between Cancel_Save">
+                          <button routerLink="/plans" class="CancelButton">
+                            Cancel
+                          </button>
+                          <button
+                            type="submit"
+                            (click)="handleSubmit()"
+                            class="SaveButton ButtonStyle"
+                          >
+                            Add Plan
+                            <i
+                              class="fa fa-spinner fa-spin"
+                              *ngIf="loading"
+                            ></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </section>

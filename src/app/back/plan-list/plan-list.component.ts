@@ -1,35 +1,49 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { PlanService } from 'src/app/_service/plan.service';
+import { DialogAnimationsComponent } from './dialog-animations/dialog-animations.component';
 
 @Component({
   selector: 'app-plan-list',
   templateUrl: './plan-list.component.html',
-  styleUrls: ['./plan-list.component.css']
+  styleUrls: ['./plan-list.component.css'],
 })
 export class PlanListComponent {
   expandedIndex = 0;
   loading = false;
+  delloading = false;
   items: any;
   listCount: any;
-  toggle: number[] = []
+  toggle: number[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     public planService: PlanService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public dialog: MatDialog
   ) {
     this.list();
+  }
+
+  openDialog(
+    enterAnimationDuration: string,
+    exitAnimationDuration: string
+  ): void {
+    this.dialog.open(DialogAnimationsComponent, {
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
   }
 
   list() {
     this.planService.list().subscribe(
       (data: any) => {
-        console.log('Api Data Err', data);
         if (data?.resultCode == 4) {
           console.log('Api Data Err', data);
           this.toastr.error('', data.errorMessage);
@@ -39,8 +53,8 @@ export class PlanListComponent {
         this.items = data.results;
         this.listCount = data.count;
 
-        console.log('data', data);
-        this.toastr.success('Success', data.actionPerformed);
+        // console.log('data', data);
+        // this.toastr.success('Success', data.actionPerformed);
       },
       (data) => {
         this.loading = false;
@@ -50,9 +64,9 @@ export class PlanListComponent {
   }
 
   deleteAction(id: Number) {
+    this.delloading = true;
     this.planService.delete(id).subscribe(
       (data: any) => {
-        console.log('Api Data Err', data);
         if (data?.resultCode == 4) {
           console.log('Api Data Err', data);
           this.toastr.error('', data.errorMessage);
@@ -61,12 +75,10 @@ export class PlanListComponent {
 
         this.list();
         this.router.navigate(['/plans']);
-
-        console.log('data', data);
-        this.toastr.success('Success', data.actionPerformed);
+        this.toastr.success('Deleted', data.actionPerformed);
       },
       (data) => {
-        this.loading = false;
+        this.delloading = false;
         console.log('Api Err', data);
       }
     );

@@ -8,44 +8,34 @@ import { environment } from 'src/environments/environment';
 import { Plan } from '../_interface/plan';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PlanService {
-
   constructor(
     private http: HttpClient,
     public router: Router,
     private toastr: ToastrService
-  ) {
+  ) {}
 
+  handleError(error: HttpErrorResponse) {
+    let msg = '';
+    if (error.error instanceof ErrorEvent) {
+      msg = error.error.message;
+    } else {
+      msg = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    console.log('e', msg);
+    return throwError(msg);
   }
+
 
   list() {
-    return this.http.get<any>(
-      `${environment.apiUrl}/tenant/plan/`
-    );
+    return this.http.get<any>(`${environment.apiUrl}/tenant/plan/`);
   }
 
-  // plan: Plan
-  add(
-    title: string,
-    max_drivers: Number,
-    max_admin: Number,
-    valid_for: Number,
-    desecription: string,
-    // img: File,
-    price: Number
-  ) {
+  add(form: any) {
     return this.http
-      .post<Plan>(`${environment.apiUrl}/tenant/plan/`, {
-        title,
-        max_drivers,
-        max_admin,
-        valid_for,
-        desecription,
-        // img,
-        price
-      })
+      .post<any>(`${environment.apiUrl}/tenant/plan/`, form)
       .pipe(
         map((data) => {
           return data;
@@ -55,9 +45,7 @@ export class PlanService {
   }
 
   delete(id: Number) {
-    return this.http.delete<any>(
-      `${environment.apiUrl}/tenant/plan/${id}`
-    );
+    return this.http.delete<any>(`${environment.apiUrl}/tenant/plan/${id}`);
   }
 
   cpAdd(
@@ -91,7 +79,7 @@ export class PlanService {
         phone_number,
         password,
         // logo,
-        user_timezone
+        user_timezone,
       })
       .pipe(
         map((data) => {
@@ -106,18 +94,4 @@ export class PlanService {
       `${environment.apiUrl}/tenant/organization-listing/`
     );
   }
-
-  // Error
-  handleError(error: HttpErrorResponse) {
-    let msg = '';
-    if (error.error instanceof ErrorEvent) {
-      // client-side error
-      msg = error.error.message;
-    } else {
-      // server-side error
-      msg = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    return throwError(msg);
-  }
-
 }

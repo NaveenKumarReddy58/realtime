@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/_service/auth.service';
 import { PlanService } from 'src/app/_service/plan.service';
 
 @Component({
@@ -14,22 +15,24 @@ export class PlanAddComponent {
   loading = false;
   isSubmitted = false;
   imageSrc: any = 'assets/images/sper-top-icon02.png';
+  fileName: any;
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
+    public authService: AuthService,
     public planService: PlanService,
     private toastr: ToastrService
   ) {
     this.addPlan = formBuilder.group({
       title: ['', [Validators.required]],
-      max_drivers: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
-      max_admin: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
-      valid_for: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      max_drivers: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      max_admin: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      valid_for: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       desecription: ['', [Validators.required]],
       img: [''],
-      price: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      price: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
     });
   }
 
@@ -43,7 +46,7 @@ export class PlanAddComponent {
     return this.addPlan.value;
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   handleSubmit() {
     this.isSubmitted = true;
@@ -54,19 +57,24 @@ export class PlanAddComponent {
     }
 
     this.loading = true;
-    console.log('Api Data Err ffff', this.f, this.frmValues);
+    // console.log('Api Data Err ffff', this.f, this.frmValues);
 
-    this.planService.add(
-      this.f['title'].value,
-      this.f['max_drivers'].value,
-      this.f['max_admin'].value,
-      this.f['valid_for'].value,
-      this.f['desecription'].value,
-      // this.f['img'].value,
-      this.f['price'].value
-    ).subscribe(
+    const formData = new FormData();
+    for (let i in this.addPlan.value) {
+      if (this.addPlan.value[i] instanceof Blob) {
+        formData.append(
+          i,
+          this.addPlan.value[i],
+          this.addPlan.value[i].name ? this.addPlan.value[i].name : ''
+        );
+        console.log('blob');
+      } else {
+        formData.append(i, this.addPlan.value[i]);
+      }
+    }
+
+    this.planService.add(formData).subscribe(
       (data: any) => {
-        console.log('Api Data Err', data);
         if (data?.resultCode == 4) {
           console.log('Api Data Err', data);
           this.toastr.error('', data.errorMessage);

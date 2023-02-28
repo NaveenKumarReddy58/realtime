@@ -33,6 +33,8 @@ import { ProfileComponent } from './back/profile/profile.component';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { DateAgo } from './_pipes/date-ago.pipe';
 import { DateDifference } from './_pipes/date-difference.pipe';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogAnimationsComponent } from './back/plan-list/dialog-animations/dialog-animations.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,7 @@ import { DateDifference } from './_pipes/date-difference.pipe';
     ProfileComponent,
     DateAgo,
     DateDifference,
+    DialogAnimationsComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,6 +75,7 @@ import { DateDifference } from './_pipes/date-difference.pipe';
     CountdownModule,
     StoreModule.forRoot({}, {}),
     CdkAccordionModule,
+    MatDialogModule,
   ],
   providers: [
     {
