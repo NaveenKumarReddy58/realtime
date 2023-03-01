@@ -11,14 +11,10 @@ import { PlanService } from 'src/app/_service/plan.service';
 })
 export class CompanyListComponent {
   expandedIndex = 0;
-  loading = false;
   items: any;
   listCount: any;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
     public planService: PlanService,
     private toastr: ToastrService
   ) {
@@ -37,11 +33,10 @@ export class CompanyListComponent {
         this.items = data.results;
         this.listCount = data.count;
 
-        console.log('data', data);
-        //this.toastr.success('Success', data.actionPerformed);
+        // console.log('data', data);
+        // this.toastr.success('Success', data.actionPerformed);
       },
       (data) => {
-        this.loading = false;
         console.log('Api Err', data);
       }
     );

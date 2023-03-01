@@ -37,6 +37,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DialogAnimationsComponent } from './back/plan-list/dialog-animations/dialog-animations.component';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { MomentModule } from 'ngx-moment';
+import { CompanyDetailComponent } from './back/company-list/company-detail/company-detail.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { MomentModule } from 'ngx-moment';
     DateAgo,
     DateDifference,
     DialogAnimationsComponent,
+    CompanyDetailComponent,
   ],
   imports: [
     BrowserModule,

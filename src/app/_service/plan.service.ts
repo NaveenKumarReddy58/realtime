@@ -76,4 +76,16 @@ export class PlanService {
       `${environment.apiUrl}/tenant/organization-listing/`
     );
   }
+
+  cpdetail(companyid: Number) {
+    return this.http.get<any>(
+      `${environment.apiUrl}//tenant/organization/${companyid}`
+    );
+  }
+
+  cpdelete(id: Number) {
+    return this.http.delete<any>(
+      `${environment.apiUrl}/tenant/organization/${id}`
+    );
+  }
 }
