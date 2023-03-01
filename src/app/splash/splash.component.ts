@@ -17,12 +17,12 @@ import {
     trigger('fade', [
       transition(':enter', [
         style({ opacity: 1 }),
-        animate(2000, style({ opacity: 0 })),
-        style({ opacity: 0 }),
+        animate(4000, style({ opacity: 1 })),
+        style({ opacity: 1 }),
       ]),
       transition(':leave', [
-        style({ opacity: 1 }),
-        animate(2000, style({ opacity: 0 })),
+        style({ opacity: 0 }),
+        animate(4000, style({ opacity: 0 })),
         style({ opacity: 0 }),
       ]),
     ]),
@@ -30,4 +30,6 @@ import {
 })
 export class SplashComponent {
   fadeToggle = true;
+
+  
 }

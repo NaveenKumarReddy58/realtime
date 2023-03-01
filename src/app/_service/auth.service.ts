@@ -19,7 +19,7 @@ export class AuthService {
     private http: HttpClient,
     public router: Router,
     private toastr: ToastrService
-  ) {}
+  ) { }
 
   handleError(error: HttpErrorResponse) {
     let msg = '';
@@ -132,10 +132,10 @@ export class AuthService {
   }
 
   tokenRefresh() {
-    const refresh_token = localStorage.getItem('refresh_token');
+    const refresh = localStorage.getItem('refresh_token');
     return this.http
       .post<any>(`${environment.apiUrl}/account/token/refresh/`, {
-        refresh_token,
+        refresh,
       })
       .pipe(
         map((data) => {
