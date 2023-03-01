@@ -35,6 +35,8 @@ import { DateAgo } from './_pipes/date-ago.pipe';
 import { DateDifference } from './_pipes/date-difference.pipe';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogAnimationsComponent } from './back/plan-list/dialog-animations/dialog-animations.component';
+import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
+import { MomentModule } from 'ngx-moment';
 
 @NgModule({
   declarations: [
@@ -76,6 +78,8 @@ import { DialogAnimationsComponent } from './back/plan-list/dialog-animations/di
     StoreModule.forRoot({}, {}),
     CdkAccordionModule,
     MatDialogModule,
+    NgIdleKeepaliveModule.forRoot(),
+    MomentModule
   ],
   providers: [
     {

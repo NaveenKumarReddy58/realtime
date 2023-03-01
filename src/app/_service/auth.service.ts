@@ -19,7 +19,7 @@ export class AuthService {
     private http: HttpClient,
     public router: Router,
     private toastr: ToastrService
-  ) { }
+  ) {}
 
   handleError(error: HttpErrorResponse) {
     let msg = '';
@@ -141,7 +141,6 @@ export class AuthService {
         map((data) => {
           localStorage.setItem('access_token', data?.access);
           // localStorage.setItem('user', JSON.stringify(data));
-          console.log('err tokenRefresh', data);
           return data;
         }),
         catchError(this.handleError)

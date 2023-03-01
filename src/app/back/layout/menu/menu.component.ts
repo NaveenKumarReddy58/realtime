@@ -7,11 +7,10 @@ import { AuthService } from 'src/app/_service/auth.service';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.css']
+  styleUrls: ['./menu.component.css'],
 })
 export class MenuComponent {
-
-  timer: any = 0
+  timer: any = 0;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,14 +26,12 @@ export class MenuComponent {
             console.log('Api Data Err', data);
             return;
           }
-
-          console.log('Api tokenRefresh');
+          console.log('tokenRefresh');
         },
-        (data) => {
-          console.log('Api Err', data);
+        (error) => {
+          console.log('Api Err', error);
         }
       );
-      console.log('tokenRefresh');
     }, 290000);
   }
 
