@@ -86,7 +86,7 @@
       </div>
     </div>
     <div class="row">
-      <form class="ProfileFor">
+      <div class="ProfileFor">
         <div class="row">
           <div class="col-md-6 SendNotification">
             <div class="ChangePass mt-3">Send Notification</div>
@@ -105,15 +105,26 @@
             <span class="Password">
               <input
                 type="text"
-                name=""
                 placeholder="Reason for deactivating"
                 class="Pro_input_Field"
+                [(ngModel)]="cpreason"
+                #cpreasonRef="ngModel"
+                required
               />
+              <div *ngIf="cpreasonData" class="text-danger">
+                Reason field is required.
+              </div>
             </span>
-            <button class="SaveButton ButtonStyle mt-4">Save Changes</button>
+            <button
+              class="SaveButton ButtonStyle mt-4"
+              (click)="cpdeactivate(org.company.id)"
+            >
+              Save Changes
+              <i class="fa fa-spinner fa-spin" *ngIf="deactivateLoading"></i>
+            </button>
           </div>
         </div>
-      </form>
+      </div>
     </div>
     <div class="row mt-5">
       <div class="col-md-12 mb-2">

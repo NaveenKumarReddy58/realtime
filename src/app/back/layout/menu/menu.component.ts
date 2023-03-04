@@ -27,7 +27,11 @@ export class MenuComponent {
   tokenRefresh() {
     this.authService.tokenRefresh().subscribe(
       (data: any) => {
-        if (data?.resultCode == 4) {
+        if (
+          data?.resultCode === '0' ||
+          data?.resultCode == 4 ||
+          data?.resultCode == 0
+        ) {
           console.log('Api Data Err', data);
           return;
         }

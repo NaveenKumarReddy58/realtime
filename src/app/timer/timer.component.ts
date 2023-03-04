@@ -35,7 +35,11 @@ export class TimerComponent {
     cd.restart();
     this.authService.sendMobileOtp(this.username).subscribe(
       (data: any) => {
-        if (data?.resultCode === '0') {
+        if (
+          data?.resultCode === '0' ||
+          data?.resultCode == 4 ||
+          data?.resultCode == 0
+        ) {
           console.log('Api Data Err', data);
           this.toastr.error(data.message);
           return;

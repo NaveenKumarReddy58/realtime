@@ -75,7 +75,11 @@ export class PlanAddComponent {
 
     this.planService.add(formData).subscribe(
       (data: any) => {
-        if (data?.resultCode == 4) {
+        if (
+          data?.resultCode === '0' ||
+          data?.resultCode == 4 ||
+          data?.resultCode == 0
+        ) {
           console.log('Api Data Err', data);
           this.toastr.error(data.errorMessage);
           return;

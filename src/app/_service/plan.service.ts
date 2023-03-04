@@ -73,4 +73,17 @@ export class PlanService {
       `${environment.apiUrl}/tenant/organization/${id}`
     );
   }
+
+  cpdeactivate(id: Number, org_status: string) {
+    return this.http
+      .patch<any>(`${environment.apiUrl}/tenant/organization/${id}/`, {
+        org_status,
+      })
+      .pipe(
+        map((data) => {
+          return data;
+        }),
+        catchError(this.handleError)
+      );
+  }
 }

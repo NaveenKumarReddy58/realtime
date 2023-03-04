@@ -1913,6 +1913,11 @@ img.searchicon {
   height: 4px;
 }
 
+.intl-tel-input.separate-dial-code .selected-flag {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
 .Plane_date_time ul::-webkit-scrollbar {
   width: 4px;
   height: 4px;
