@@ -1491,6 +1491,10 @@ ul.Tab_List li.YearlyTab a {
   padding: 15px;
 }
 
+.Password .intl-tel-input {
+  width: 100%;
+}
+
 /* Tabs Ends  */
 ul.Company_Detail_cnt li:last-child {
   text-align: right;
