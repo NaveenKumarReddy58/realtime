@@ -77,16 +77,16 @@ export class PlanAddComponent {
       (data: any) => {
         if (data?.resultCode == 4) {
           console.log('Api Data Err', data);
-          this.toastr.error('', data.errorMessage);
+          this.toastr.error(data.errorMessage);
           return;
         }
 
-        this.toastr.success('Success', data.actionPerformed);
+        this.toastr.success(data.actionPerformed);
         this.router.navigate(['/plans']);
       },
-      (data) => {
+      (error) => {
+        console.log('Api Err', error);
         this.loading = false;
-        console.log('Api Err', data);
       }
     );
   }

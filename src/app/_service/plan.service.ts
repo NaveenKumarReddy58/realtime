@@ -45,21 +45,6 @@ export class PlanService {
     return this.http.delete<any>(`${environment.apiUrl}/tenant/plan/${id}`);
   }
 
-  // name: string,
-  // country: string,
-  // state: string,
-  // city: string,
-  // description: string,
-  // // domain_url: string,
-  // admin_email: string,
-  // plan_id: Number,
-  // first_name: string,
-  // last_name: string,
-  // phone_number: Number,
-  // password: string,
-  // // logo: File,
-  // user_timezone: string
-
   cpAdd(form: any) {
     return this.http
       .post<any>(`${environment.apiUrl}/tenant/organization/`, form)
@@ -79,7 +64,7 @@ export class PlanService {
 
   cpdetail(companyid: Number) {
     return this.http.get<any>(
-      `${environment.apiUrl}//tenant/organization/${companyid}`
+      `${environment.apiUrl}/tenant/organization/${companyid}/`
     );
   }
 

@@ -18,7 +18,8 @@ h3,
 h4,
 h5,
 h6,
-.BarlowFont {}
+.BarlowFont {
+}
 
 dl,
 ol,
@@ -96,7 +97,7 @@ span.LabelT {
   margin-bottom: 0;
 }
 
-.CustomField label input:focus~span.LabelT {
+.CustomField label input:focus ~ span.LabelT {
   transform: translateY(-20px);
   background: #fff;
   padding: 0 7px;
@@ -312,11 +313,11 @@ button.ButtonIcon {
   color: #0eb002;
 }
 
-.LogoutDiv ul.SideBarList li>span:hover {
+.LogoutDiv ul.SideBarList li > span:hover {
   background: #0eb002;
 }
 
-.LogoutDiv ul.SideBarList li>span {
+.LogoutDiv ul.SideBarList li > span {
   background: dimgray;
   display: inline-block;
   padding: 0px 20px;
@@ -327,7 +328,7 @@ button.ButtonIcon {
   cursor: pointer;
 }
 
-.LogoutDiv ul.SideBarList li>span i {
+.LogoutDiv ul.SideBarList li > span i {
   line-height: 28px;
 }
 
@@ -404,7 +405,7 @@ button.ButtonIcon {
   display: none;
 }
 
-.SearchDiv.active+form.SearchContentForm {
+.SearchDiv.active + form.SearchContentForm {
   display: block;
 }
 
@@ -1106,13 +1107,14 @@ span.SurName {
 
 .Plane_date_time ul li img {
   max-width: 35px;
+  margin-right: 15px;
 }
 
 .Plane_date_time ul {
   display: flex;
   white-space: nowrap;
   align-items: center;
-  gap: 30px;
+  gap: 50px;
   overflow-y: hidden;
   overflow-x: auto;
   padding-bottom: 5px;
@@ -1483,6 +1485,12 @@ ul.Tab_List li.YearlyTab a {
   background: #bfc8d1;
 }
 
+.cpdet {
+  border: 2px solid #ccd3d8;
+  border-radius: 25px;
+  padding: 15px;
+}
+
 /* Tabs Ends  */
 ul.Company_Detail_cnt li:last-child {
   text-align: right;
@@ -1492,7 +1500,7 @@ ul.Company_Detail_cnt li:last-child {
   width: 20%;
 }
 
-.loginButton a{
+.loginButton a {
   text-decoration: none;
 }
 
@@ -1501,6 +1509,7 @@ ul.Company_Detail_cnt {
   align-items: center;
   justify-content: space-between;
   gap: 15px;
+  margin: 10px 0;
 }
 
 ul.Company_Detail_cnt li {
@@ -1509,7 +1518,7 @@ ul.Company_Detail_cnt li {
   min-width: max-content;
 }
 
-ul.Company_Detail_cnt>li:nth-child(2) {
+ul.Company_Detail_cnt > li:nth-child(2) {
   min-width: 400px;
 }
 

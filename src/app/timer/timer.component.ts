@@ -1,12 +1,12 @@
-import { Component, Input } from "@angular/core";
-import { CountdownConfig, CountdownEvent } from "ngx-countdown";
-import { ToastrService } from "ngx-toastr";
-import { AuthService } from "../_service/auth.service";
+import { Component, Input } from '@angular/core';
+import { CountdownConfig, CountdownEvent } from 'ngx-countdown';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../_service/auth.service';
 
 @Component({
   selector: 'app-timer',
   templateUrl: './timer.component.html',
-  styleUrls: ['./timer.component.css']
+  styleUrls: ['./timer.component.css'],
 })
 export class TimerComponent {
   config: CountdownConfig = { leftTime: 60, format: 'm:s' };
@@ -15,12 +15,7 @@ export class TimerComponent {
 
   @Input() username: any;
 
-  constructor(
-    public authService: AuthService,
-    private toastr: ToastrService
-  ) {
-  }
-
+  constructor(public authService: AuthService, private toastr: ToastrService) {}
 
   handleEvent(e: CountdownEvent) {
     this.isActive = false;
@@ -42,15 +37,14 @@ export class TimerComponent {
       (data: any) => {
         if (data?.resultCode === '0') {
           console.log('Api Data Err', data);
-          this.toastr.error('', data.message);
+          this.toastr.error(data.message);
           return;
         }
 
-        this.toastr.success('Success', 'OTP sent!');
+        this.toastr.success('OTP Sent!');
       },
-      (data) => {
-        console.log('Api Err', data);
-        this.toastr.error('', data.message);
+      (error) => {
+        console.log('Api Err', error);
       }
     );
   }

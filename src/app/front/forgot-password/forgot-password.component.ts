@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/_service/auth.service';
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.css']
+  styleUrls: ['./forgot-password.component.css'],
 })
 export class ForgotPasswordComponent {
   forgot!: FormGroup;
@@ -15,8 +15,8 @@ export class ForgotPasswordComponent {
   isSubmitted = false;
   isOtpSent = false;
   otp: any;
-  otpStatus = false
-  isVerified: any = 'f'
+  otpStatus = false;
+  isVerified: any = 'f';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -26,8 +26,11 @@ export class ForgotPasswordComponent {
     private toastr: ToastrService
   ) {
     this.forgot = formBuilder.group({
-      username: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
-      password: ['', []]
+      username: [
+        '',
+        [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
+      ],
+      password: ['', []],
     });
   }
 
@@ -41,7 +44,7 @@ export class ForgotPasswordComponent {
     return this.forgot.value;
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   onOtpChange(otp: any) {
     this.otp = otp;
@@ -62,18 +65,17 @@ export class ForgotPasswordComponent {
         if (data?.resultCode === '0') {
           this.loading = false;
           console.log('Api Data Err', data);
-          this.toastr.error('', data.errorMessage);
+          this.toastr.error(data.errorMessage);
           return;
         }
 
-        this.toastr.success('Success', 'OTP sent!');
+        this.toastr.success('OTP Sent!');
         this.isOtpSent = true;
         this.loading = false;
       },
-      (data) => {
+      (error) => {
+        console.log('Api Err', error);
         this.loading = false;
-        console.log('Api Err', data);
-        this.toastr.error('', data.errorMessage);
       }
     );
   }
@@ -88,14 +90,14 @@ export class ForgotPasswordComponent {
 
     this.loading = true;
 
-    this.otpStatus = false
+    this.otpStatus = false;
     if (this.otp === undefined) {
-      this.otpStatus = true
+      this.otpStatus = true;
       this.loading = false;
       return;
     }
 
-    this.isVerified = 'f'
+    this.isVerified = 'f';
 
     this.authService
       .verifyResestOtp(this.f['username'].value, this.otp)
@@ -103,19 +105,18 @@ export class ForgotPasswordComponent {
         (data: any) => {
           if (data?.resultCode == 0) {
             console.log('Api Data Err', data);
-            this.toastr.error('', data.message);
+            this.toastr.error(data.message);
             return;
           }
 
-          this.isVerified = 't'
-          this.toastr.success('Success', data.message);
+          this.isVerified = 't';
+          this.toastr.success(data.message);
           localStorage.setItem('isverified', this.isVerified);
           this.router.navigate(['/reset']);
         },
-        (data) => {
+        (error) => {
+          console.log('Api Err', error);
           this.loading = false;
-          console.log('Api Err', data);
-          this.toastr.error('', data.message);
         }
       );
   }

@@ -46,7 +46,7 @@ export class PreComponent {
     return this.prelogin.value;
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   handleSubmit() {
     this.isSubmitted = true;
@@ -63,20 +63,19 @@ export class PreComponent {
         if (data?.resultCode === '0') {
           this.loading = false;
           console.log('Api Data Err', data);
-          this.toastr.error('', data.errorMessage);
+          this.toastr.error(data.errorMessage);
           return;
         }
         localStorage.setItem('org_email', data?.results?.email);
         localStorage.setItem('org_domain', data?.results?.domain_url);
 
-        this.toastr.success('Success', 'Organization selected!');
+        this.toastr.success('Organization Selected!');
 
         this.router.navigate(['/login']);
       },
-      (data) => {
+      (error) => {
+        console.log('Api Err', error);
         this.loading = false;
-        console.log('Api Err', data);
-        this.toastr.error('', data.errorMessage);
       }
     );
   }

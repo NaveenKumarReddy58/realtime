@@ -24,7 +24,8 @@ export class AuthInterceptor implements HttpInterceptor {
         setHeaders: {},
       });
     }
-    return next.handle(req).pipe(catchError(this.handleError));
+    return next.handle(req);
+    // return next.handle(req).pipe(catchError(this.handleError));
   }
 
   handleError(error: HttpErrorResponse) {

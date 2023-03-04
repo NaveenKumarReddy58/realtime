@@ -1,24 +1,28 @@
-{{companyid}}
-<div class="row mt-2 mb-2">
-  <div class="col-md-3" style="padding-left: 0">
+<div class="row mt-2 mb-2 cpdet" *ngIf="org">
+  <div class="col-md-3">
     <div class="EditProfile">
       <div class="ChangePic0">
-        <img *ngIf="!item.logo" src="assets/images/profilephoto.png" />
-        <img *ngIf="item.logo" [src]="item.logo" />
+        <img *ngIf="!org.company.logo" src="assets/images/profilephoto.png" />
+        <img *ngIf="org.company.logo" [src]="org.company.logo" />
       </div>
       <div class="HeadingName">
         <h2>
-          {{ item.name }}
-          <span class="SurName">{{ item.name }}</span>
+          {{ org.company.name }}
+          <span class="SurName">{{ org.company.schema_name }}</span>
           <span class="__edit_Img">
             <img src="assets/images/edir-img.png" />
           </span>
         </h2>
         <ul class="AddressEdit">
-          <li>Mohali, Punjab</li>
-          <li>Sandeep Singh</li>
-          <li>+91 0011001199</li>
-          <li>sandeep@gmail.com</li>
+          <li>
+            {{ org.company.address ? org.company.address + "," : "" }}
+            {{ org.company.city ? org.company.city + ", " : "" }}
+            {{ org.company.state ? org.company.state + ", " : "" }}
+            {{ org.company.country ? org.company.country : "" }}
+          </li>
+          <li>{{ admin.first_name }} {{ admin.last_name }}</li>
+          <li>{{ org.company.phone }}</li>
+          <li>{{ org.companyadmin_email }}</li>
         </ul>
       </div>
     </div>
@@ -27,28 +31,25 @@
     <div class="Plane_date_time">
       <ul>
         <li>
-          <img
-            *ngIf="!item.plans.logo"
-            src="assets/images/sper-top-icon02.png"
-          />
-          <img *ngIf="item.plans.logo" [src]="item.plans.logo" />
-          <span>{{ item.plans.title }}</span>
+          <img *ngIf="!org.plan.img" src="assets/images/sper-top-icon02.png" />
+          <img *ngIf="org.plan.img" [src]="org.plan.img" />
+          <span>{{ org.plan.title }}</span>
         </li>
         <li>
           <span
             >Purchase Date:
-            {{ item.plans.exp_date | date : "mediumDate" }}
+            {{ org.started_at | date : "mediumDate" }}
           </span>
         </li>
         <li>
           <span
             >Expiry Date:
-            {{ item.plans.exp_date | date : "mediumDate" }}
+            {{ org.expired_at | date : "mediumDate" }}
           </span>
         </li>
         <li>
           <span>
-            {{ item.plans.exp_date | dateDifference }}
+            {{ org.expired_at | dateDifference }}
             Left for renewal
           </span>
         </li>

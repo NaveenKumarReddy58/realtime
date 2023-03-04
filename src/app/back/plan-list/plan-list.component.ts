@@ -46,19 +46,16 @@ export class PlanListComponent {
       (data: any) => {
         if (data?.resultCode == 4) {
           console.log('Api Data Err', data);
-          this.toastr.error('', data.errorMessage);
+          this.toastr.error(data.errorMessage);
           return;
         }
 
         this.items = data.results;
         this.listCount = data.count;
-
-        // console.log('data', data);
-        // this.toastr.success('Success', data.actionPerformed);
       },
-      (data) => {
+      (error) => {
+        console.log('Api Err', error);
         this.loading = false;
-        console.log('Api Err', data);
       }
     );
   }
@@ -69,17 +66,17 @@ export class PlanListComponent {
       (data: any) => {
         if (data?.resultCode == 4) {
           console.log('Api Data Err', data);
-          this.toastr.error('', data.errorMessage);
+          this.toastr.error(data.errorMessage);
           return;
         }
 
         this.list();
         this.router.navigate(['/plans']);
-        this.toastr.success('Deleted', data.actionPerformed);
+        this.toastr.success(data.actionPerformed);
       },
-      (data) => {
+      (error) => {
+        console.log('Api Err', error);
         this.delloading = false;
-        console.log('Api Err', data);
       }
     );
   }

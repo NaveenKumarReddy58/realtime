@@ -106,7 +106,7 @@
                                   <span>Email</span>
                                 </li>
                                 <li>
-                                  <i class="fa fa-bookmark-o"></i>
+                                  <i class="fa fa-bookmark-o {{(item.is_bookmarked)?'active':''}}"></i>
                                   <span>Bookmark</span>
                                 </li>
                               </ul>
@@ -132,7 +132,7 @@
                           [style.display]="accordionItem.expanded ? '' : 'none'"
                           [attr.id]="'accordion-body-' + index"
                           [attr.aria-labelledby]="'accordion-header-' + index"
-                        >{{item.id}}
+                        >
                           <app-company-detail
                             [companyid]="item.id"
                           ></app-company-detail>

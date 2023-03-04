@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/_service/auth.service';
 import { PlanService } from 'src/app/_service/plan.service';
 
 @Component({
@@ -16,9 +17,26 @@ export class CompanyListComponent {
 
   constructor(
     public planService: PlanService,
+    public authService: AuthService,
     private toastr: ToastrService
   ) {
+    // this.tokenRefresh();
     this.cplist();
+  }
+
+  tokenRefresh() {
+    this.authService.tokenRefresh().subscribe(
+      (data: any) => {
+        if (data?.resultCode == 4) {
+          console.log('Api Data Err', data);
+          return;
+        }
+        console.log('tokenRefresh');
+      },
+      (error) => {
+        console.log('Api Err', error);
+      }
+    );
   }
 
   cplist() {
@@ -26,18 +44,15 @@ export class CompanyListComponent {
       (data: any) => {
         if (data?.resultCode == 4) {
           console.log('Api Data Err', data);
-          this.toastr.error('', data.errorMessage);
+          this.toastr.error(data.errorMessage);
           return;
         }
 
         this.items = data.results;
         this.listCount = data.count;
-
-        // console.log('data', data);
-        // this.toastr.success('Success', data.actionPerformed);
       },
-      (data) => {
-        console.log('Api Err', data);
+      (error) => {
+        console.log('Api Err', error);
       }
     );
   }

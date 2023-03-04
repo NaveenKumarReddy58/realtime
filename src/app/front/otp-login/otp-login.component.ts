@@ -25,8 +25,11 @@ export class OtpLoginComponent {
     private toastr: ToastrService
   ) {
     this.otplogin = formBuilder.group({
-      username: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
-      password: ['', []]
+      username: [
+        '',
+        [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
+      ],
+      password: ['', []],
     });
   }
 
@@ -40,7 +43,7 @@ export class OtpLoginComponent {
     return this.otplogin.value;
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   onOtpChange(otp: any) {
     this.otp = otp;
@@ -61,18 +64,17 @@ export class OtpLoginComponent {
         if (data?.resultCode === '0') {
           this.loading = false;
           console.log('Api Data Err', data);
-          this.toastr.error('', data.message);
+          this.toastr.error(data.message);
           return;
         }
 
-        this.toastr.success('Success', 'OTP sent!');
+        this.toastr.success('OTP Sent!');
         this.isOtpSent = true;
         this.loading = false;
       },
-      (data) => {
+      (error) => {
+        console.log('Api Err', error);
         this.loading = false;
-        console.log('Api Err', data);
-        this.toastr.error('', data.message);
       }
     );
   }
@@ -87,9 +89,9 @@ export class OtpLoginComponent {
 
     this.loading = true;
 
-    this.otpStatus = false
+    this.otpStatus = false;
     if (this.otp === undefined) {
-      this.otpStatus = true
+      this.otpStatus = true;
       this.loading = false;
       return;
     }
@@ -100,7 +102,7 @@ export class OtpLoginComponent {
         (data: any) => {
           if (data?.resultCode == 0) {
             console.log('Api Data Err', data);
-            this.toastr.error('', data.errorMessage);
+            this.toastr.error(data.errorMessage);
             return;
           }
 
@@ -110,14 +112,12 @@ export class OtpLoginComponent {
           localStorage.setItem('role', data?.role);
           localStorage.setItem('user_timezone', data?.user_timezone);
 
-          this.toastr.success('Success', data.actionPerformed);
+          this.toastr.success(data.actionPerformed);
           this.router.navigate(['/dashboad']);
         },
-        (data) => {
+        (error) => {
+          console.log('Api Err', error);
           this.loading = false;
-          console.log('Api Err', data);
-          this.toastr.error('', data.errorMessage);
-          this.toastr.error('', data.actionPerformed);
         }
       );
   }

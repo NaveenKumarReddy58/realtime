@@ -48,7 +48,7 @@ export class LoginComponent {
     return this.login.value;
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   handleSubmit() {
     this.isSubmitted = true;
@@ -67,7 +67,7 @@ export class LoginComponent {
           if (data?.resultCode == 0) {
             this.loading = false;
             console.log('Api Data Err', data);
-            this.toastr.error('', data.errorMessage);
+            this.toastr.error(data.errorMessage);
             return;
           }
 
@@ -77,15 +77,13 @@ export class LoginComponent {
           localStorage.setItem('role', data?.role);
           localStorage.setItem('user_timezone', data?.user_timezone);
 
-          this.toastr.success('Success', data.actionPerformed);
+          this.toastr.success(data.actionPerformed);
 
           this.router.navigate(['/dashboad']);
         },
-        (data) => {
+        (error) => {
+          console.log('Api Err', error);
           this.loading = false;
-          console.log('Api Err', data);
-          this.toastr.error('', data.errorMessage);
-          this.toastr.error('', data.actionPerformed);
         }
       );
   }
