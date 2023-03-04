@@ -31,14 +31,14 @@ export class CompanyAddComponent {
     this.addCP = formBuilder.group({
       name: ['', [Validators.required]],
       country: ['', [Validators.required]],
-      state: ['', [Validators.required]],
+      // state: ['', [Validators.required]],
       city: ['', [Validators.required]],
       description: ['', [Validators.required]],
       // domain_url: ['', [Validators.required]],
       admin_email: ['', [Validators.required, Validators.email]],
       plan_id: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       first_name: ['', [Validators.required]],
-      last_name: ['', [Validators.required]],
+      // last_name: ['', [Validators.required]],
       phone_number: [
         '',
         [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
@@ -115,6 +115,8 @@ export class CompanyAddComponent {
     }
     this.userTimezone = localStorage.getItem('user_timezone');
     formData.append('user_timezone', this.userTimezone);
+    formData.append('state', '');
+    formData.append('last_name', '');
 
     this.planService.cpAdd(formData).subscribe(
       (data: any) => {
