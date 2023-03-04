@@ -38,6 +38,7 @@ import { DialogAnimationsComponent } from './back/plan-list/dialog-animations/di
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { MomentModule } from 'ngx-moment';
 import { CompanyDetailComponent } from './back/company-list/company-detail/company-detail.component';
+import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
 
 @NgModule({
   declarations: [
@@ -73,15 +74,16 @@ import { CompanyDetailComponent } from './back/company-list/company-detail/compa
     FormsModule,
     HttpClientModule,
     NgOtpInputModule,
-    BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot(), // ToastrModule added
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     SlickCarouselModule,
     CountdownModule,
     StoreModule.forRoot({}, {}),
     CdkAccordionModule,
     MatDialogModule,
     NgIdleKeepaliveModule.forRoot(),
-    MomentModule
+    MomentModule,
+    MatSelectCountryModule.forRoot('en'),
   ],
   providers: [
     {

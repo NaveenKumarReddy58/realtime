@@ -9,4 +9,10 @@ jQuery(document).ready(function ($) {
     });
     console.log("intlTelInput");
   }, 2000);
+
+  setInterval(() => {
+    $(".Pro_input_Field_Phone").intlTelInput({
+      separateDialCode: true,
+    });
+  }, 1000);
 });

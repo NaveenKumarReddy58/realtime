@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { countries } from 'src/app/_interface/country-data-store';
 import { PlanService } from 'src/app/_service/plan.service';
 
 @Component({
@@ -15,6 +16,8 @@ export class CompanyAddComponent {
   isSubmitted = false;
   imageSrc: any = 'assets/images/profilephoto.png';
   userTimezone: any;
+
+  public countries: any = countries;
 
   planItems: any;
   planCount: any;
@@ -83,7 +86,7 @@ export class CompanyAddComponent {
 
   choosePlan(id: Number) {
     this.selectedIndex = id;
-    console.log(id, this.selectedIndex);
+    // console.log(id, this.selectedIndex);
     this.addCP.patchValue({
       plan_id: id,
     });

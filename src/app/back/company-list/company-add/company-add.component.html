@@ -79,11 +79,17 @@
                             <span class="Password">
                               <select
                                 formControlName="country"
-                                class="Pro_input_Field"
+                                class="Pro_input_Field selectpicker countrypicker"
                               >
-                                <option value="">Country</option>
-                                <option value="india">India</option>
-                                <option value="usa">USA</option>
+                                <option value="" disabled selected>
+                                  Select Country
+                                </option>
+                                <option
+                                  *ngFor="let country of countries"
+                                  [value]="country.name"
+                                >
+                                  {{ country.name }}
+                                </option>
                               </select>
                               <div
                                 *ngIf="isSubmitted && f['country'].errors"
