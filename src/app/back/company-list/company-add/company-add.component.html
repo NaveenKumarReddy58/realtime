@@ -95,7 +95,7 @@
                               </div>
                             </span>
                           </div>
-                          <div class="col-md-4">
+                          <!-- <div class="col-md-4">
                             <span class="Password">
                               <input
                                 type="text"
@@ -112,8 +112,8 @@
                                 </div>
                               </div>
                             </span>
-                          </div>
-                          <div class="col-md-4">
+                          </div> -->
+                          <div class="col-md-8">
                             <span class="Password">
                               <input
                                 type="text"
@@ -132,12 +132,12 @@
                             </span>
                           </div>
 
-                          <div class="col-md-6 mt-4">
+                          <div class="col-md-12 mt-4">
                             <span class="Password">
                               <input
                                 type="text"
                                 formControlName="first_name"
-                                placeholder="First Name"
+                                placeholder="Contact Name"
                                 class="Pro_input_Field"
                               />
                               <div
@@ -145,12 +145,12 @@
                                 class="text-danger"
                               >
                                 <div *ngIf="f['first_name'].errors['required']">
-                                  First Name is required
+                                  Contact Name is required
                                 </div>
                               </div>
                             </span>
                           </div>
-                          <div class="col-md-6 mt-4">
+                          <!-- <div class="col-md-6 mt-4">
                             <span class="Password">
                               <input
                                 type="text"
@@ -167,12 +167,13 @@
                                 </div>
                               </div>
                             </span>
-                          </div>
+                          </div> -->
 
                           <div class="col-md-12 mt-4">
                             <span class="Password">
                               <input
-                                type="text"
+                                type="tel"
+                                id="phone"
                                 formControlName="phone_number"
                                 placeholder="Phone No."
                                 class="Pro_input_Field"
@@ -276,7 +277,7 @@
                             />
                             <img *ngIf="plan.img" [src]="plan.img" />
                             <span class="GoldColor">{{ plan.title }}</span>
-                            <a  class="KnowMore">
+                            <a class="KnowMore">
                               Know More
                               <i
                                 class="fa fa-angle-down angle-down"
