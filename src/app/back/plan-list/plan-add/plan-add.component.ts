@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -17,6 +17,10 @@ export class PlanAddComponent {
   imageSrc: any = 'assets/images/sper-top-icon02.png';
   fileName: any;
 
+  id: Number;
+  isAddMode: boolean;
+  editPlan: any;
+
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -25,6 +29,9 @@ export class PlanAddComponent {
     public planService: PlanService,
     private toastr: ToastrService
   ) {
+    this.id = this.route.snapshot.params['id'];
+    this.isAddMode = !this.id;
+
     this.addPlan = formBuilder.group({
       title: ['', [Validators.required]],
       max_drivers: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
@@ -34,6 +41,34 @@ export class PlanAddComponent {
       img: [''],
       price: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
     });
+
+    if (!this.isAddMode) {
+      console.log('edit', this.id);
+
+      this.planService.pget(this.id).subscribe(
+        (data: any) => {
+          if (
+            data?.resultCode === '0' ||
+            data?.resultCode == 4 ||
+            data?.resultCode == 0
+          ) {
+            console.log('Api Data Err', data);
+            this.toastr.error(data.errorMessage);
+            return;
+          }
+
+          this.editPlan = data.results;
+          if (data.results.img) {
+            this.imageSrc = data.results.img;
+          }
+          this.addPlan.patchValue(data.results);
+        },
+        (error) => {
+          console.log('Api Err', error);
+          this.loading = false;
+        }
+      );
+    }
   }
 
   // convenience getter for easy access to form fields
@@ -73,26 +108,49 @@ export class PlanAddComponent {
       }
     }
 
-    this.planService.add(formData).subscribe(
-      (data: any) => {
-        if (
-          data?.resultCode === '0' ||
-          data?.resultCode == 4 ||
-          data?.resultCode == 0
-        ) {
-          console.log('Api Data Err', data);
-          this.toastr.error(data.errorMessage);
-          return;
-        }
+    if (this.isAddMode) {
+      this.planService.add(formData).subscribe(
+        (data: any) => {
+          if (
+            data?.resultCode === '0' ||
+            data?.resultCode == 4 ||
+            data?.resultCode == 0
+          ) {
+            console.log('Api Data Err', data);
+            this.toastr.error(data.errorMessage);
+            return;
+          }
 
-        this.toastr.success(data.actionPerformed);
-        this.router.navigate(['/plans']);
-      },
-      (error) => {
-        console.log('Api Err', error);
-        this.loading = false;
-      }
-    );
+          this.toastr.success(data.actionPerformed);
+          this.router.navigate(['/plans']);
+        },
+        (error) => {
+          console.log('Api Err', error);
+          this.loading = false;
+        }
+      );
+    } else {
+      this.planService.edit(this.id, formData).subscribe(
+        (data: any) => {
+          if (
+            data?.resultCode === '0' ||
+            data?.resultCode == 4 ||
+            data?.resultCode == 0
+          ) {
+            console.log('Api Data Err', data);
+            this.toastr.error(data.errorMessage);
+            return;
+          }
+
+          this.toastr.success(data.actionPerformed);
+          this.router.navigate(['/plans']);
+        },
+        (error) => {
+          console.log('Api Err', error);
+          this.loading = false;
+        }
+      );
+    }
   }
 
   readURL(event: any): void {

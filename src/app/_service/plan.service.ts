@@ -28,8 +28,12 @@ export class PlanService {
     return throwError(msg);
   }
 
-  list() {
+  plist() {
     return this.http.get<any>(`${environment.apiUrl}/tenant/plan/`);
+  }
+
+  pget(id: Number) {
+    return this.http.get<any>(`${environment.apiUrl}/tenant/plan/${id}`);
   }
 
   add(form: any) {
@@ -39,6 +43,17 @@ export class PlanService {
       }),
       catchError(this.handleError)
     );
+  }
+
+  edit(id: Number, form: any) {
+    return this.http
+      .put<any>(`${environment.apiUrl}/tenant/plan/${id}/`, form)
+      .pipe(
+        map((data) => {
+          return data;
+        }),
+        catchError(this.handleError)
+      );
   }
 
   delete(id: Number) {

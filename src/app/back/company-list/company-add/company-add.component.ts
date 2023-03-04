@@ -50,7 +50,7 @@ export class CompanyAddComponent {
       logo: [''],
     });
 
-    this.list();
+    this.plist();
   }
 
   // convenience getter for easy access to form fields
@@ -65,8 +65,8 @@ export class CompanyAddComponent {
 
   ngOnInit(): void {}
 
-  list() {
-    this.planService.list().subscribe(
+  plist() {
+    this.planService.plist().subscribe(
       (data: any) => {
         if (
           data?.resultCode === '0' ||

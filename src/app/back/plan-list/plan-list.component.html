@@ -40,18 +40,16 @@
                               >
                                 <img
                                   src="assets/images/closeimg.png"
-                                  (click)="clickEvent(index + 1)"
+                                  (click)="boxClose(index + 1)"
                                 />
                                 <ul>
                                   <li>
-                                    <a >
+                                    <a routerLink="/plans/{{ plan.id }}">
                                       <i class="fa fa-pencil EditIcon"></i>
                                       Edit
                                     </a>
                                   </li>
                                   <li>
-                                    <!-- (click)="openDialog('0ms', '0ms')" -->
-                                    <!-- (click)="deleteAction(plan.id)" -->
                                     <a (click)="deleteAction(plan.id)">
                                       <i class="fa fa-trash Delete"></i>
                                       Delete
@@ -74,10 +72,29 @@
                             <span class="GoldColor"
                               >{{ plan.title }} ${{ plan.price }}</span
                             >
-                            <a  class="KnowMore">
+                            <a class="KnowMore" *ngIf="!isView[index + 1]">
                               Know More
                               <i
+                                (click)="isView[index + 1] = index + 1"
                                 class="fa fa-angle-down angle-down"
+                                aria-hidden="true"
+                              ></i>
+                            </a>
+                            <a class="KnowMore" *ngIf="isView[index + 1]">
+                              {{
+                                plan.max_drivers > 1
+                                  ? plan.max_drivers + " Head Drivers"
+                                  : plan.max_drivers + " Head Driver"
+                              }}
+                              <br />
+                              {{
+                                plan.max_admin > 1
+                                  ? plan.max_admin + " Associated Drivers"
+                                  : plan.max_admin + " Associated Driver"
+                              }}
+                              <i
+                                (click)="kmClose(index + 1)"
+                                class="fa fa-angle-up angle-up"
                                 aria-hidden="true"
                               ></i>
                             </a>

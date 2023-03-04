@@ -1,6 +1,11 @@
 import { Injectable, NgModule } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { RouterModule, RouterStateSnapshot, Routes, TitleStrategy } from '@angular/router';
+import {
+  RouterModule,
+  RouterStateSnapshot,
+  Routes,
+  TitleStrategy,
+} from '@angular/router';
 import { CompanyAddComponent } from './back/company-list/company-add/company-add.component';
 import { CompanyListComponent } from './back/company-list/company-list.component';
 import { DashboardComponent } from './back/dashboard/dashboard.component';
@@ -23,85 +28,91 @@ const routes: Routes = [
     path: '',
     component: PreComponent,
     title: 'Home',
-    canActivate: [FrontGuard]
+    canActivate: [FrontGuard],
   },
   {
     path: 'login',
     component: LoginComponent,
     title: 'Login',
-    canActivate: [FrontGuard]
+    canActivate: [FrontGuard],
   },
   {
     path: 'reset',
     component: ResetPasswordComponent,
     title: 'Reset Password',
-    canActivate: [FrontGuard]
+    canActivate: [FrontGuard],
   },
   {
     path: 'forgot',
     component: ForgotPasswordComponent,
     title: 'Forgot Password',
-    canActivate: [FrontGuard]
+    canActivate: [FrontGuard],
   },
   {
     path: 'otplogin',
     component: OtpLoginComponent,
     title: 'OTP Login',
-    canActivate: [FrontGuard]
+    canActivate: [FrontGuard],
   },
   {
     path: 'dashboad',
     component: DashboardComponent,
     title: 'Dashboard',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'plans',
     component: PlanListComponent,
     title: 'Plans',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'plans/add',
     component: PlanAddComponent,
-    title: 'Add Plans',
-    canActivate: [AuthGuard]
+    title: 'Add Plan',
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'plans/:id',
+    component: PlanAddComponent,
+    title: 'Edit Plan',
+    canActivate: [AuthGuard],
   },
   {
     path: 'tickets',
     component: TicketListComponent,
     title: 'Tickets',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'tickets/:id',
     component: TicketDetailComponent,
     title: 'Ticket',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'profile',
     component: ProfileComponent,
     title: 'My Profile',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'company',
     component: CompanyListComponent,
     title: 'Company List',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'company/add',
     component: CompanyAddComponent,
     title: 'Add Company',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'report',
     component: CompanyListComponent,
     title: 'Report',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
 ];
 
@@ -131,8 +142,6 @@ export class TemplatePageTitleStrategy extends TitleStrategy {
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [
-    { provide: TitleStrategy, useClass: TemplatePageTitleStrategy }
-  ]
+  providers: [{ provide: TitleStrategy, useClass: TemplatePageTitleStrategy }],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

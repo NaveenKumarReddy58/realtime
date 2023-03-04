@@ -18,6 +18,7 @@ export class PlanListComponent {
   items: any;
   listCount: any;
   toggle: number[] = [];
+  isView: number[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,7 +28,7 @@ export class PlanListComponent {
     private toastr: ToastrService,
     public dialog: MatDialog
   ) {
-    this.list();
+    this.plist();
   }
 
   openDialog(
@@ -41,8 +42,8 @@ export class PlanListComponent {
     });
   }
 
-  list() {
-    this.planService.list().subscribe(
+  plist() {
+    this.planService.plist().subscribe(
       (data: any) => {
         if (
           data?.resultCode === '0' ||
@@ -78,7 +79,7 @@ export class PlanListComponent {
           return;
         }
 
-        this.list();
+        this.plist();
         this.router.navigate(['/plans']);
         this.toastr.success(data.actionPerformed);
       },
@@ -89,7 +90,11 @@ export class PlanListComponent {
     );
   }
 
-  clickEvent(index: any) {
+  boxClose(index: any) {
     this.toggle[index] = 0;
+  }
+
+  kmClose(index: any) {
+    this.isView[index] = 0;
   }
 }
