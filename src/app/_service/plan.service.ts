@@ -36,7 +36,7 @@ export class PlanService {
     return this.http.get<any>(`${environment.apiUrl}/tenant/plan/${id}`);
   }
 
-  add(form: any) {
+  padd(form: any) {
     return this.http.post<any>(`${environment.apiUrl}/tenant/plan/`, form).pipe(
       map((data) => {
         return data;
@@ -45,7 +45,7 @@ export class PlanService {
     );
   }
 
-  edit(id: Number, form: any) {
+  pedit(id: Number, form: any) {
     return this.http
       .put<any>(`${environment.apiUrl}/tenant/plan/${id}/`, form)
       .pipe(
@@ -56,7 +56,7 @@ export class PlanService {
       );
   }
 
-  delete(id: Number) {
+  pdelete(id: Number) {
     return this.http.delete<any>(`${environment.apiUrl}/tenant/plan/${id}`);
   }
 
@@ -100,5 +100,13 @@ export class PlanService {
         }),
         catchError(this.handleError)
       );
+  }
+
+  cporgcount() {
+    return this.http.get<any>(`${environment.apiUrl}/tenant/org-count/`);
+  }
+
+  plancount() {
+    return this.http.get<any>(`${environment.apiUrl}/tenant/plan-count/`);
   }
 }

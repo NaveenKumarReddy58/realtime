@@ -15,16 +15,45 @@
                 <div class="TabsList">
                   <ul class="Tab_List">
                     <li class="active">
-                      <a>All {{ listCount }}</a>
+                      <a
+                        (click)="
+                          orgfilter(orgdata.all.count, orgdata.all.start_date)
+                        "
+                        >All {{ orgdata?.all?.count }}</a
+                      >
                     </li>
                     <li>
-                      <a>Weekly 20</a>
+                      <a
+                        (click)="
+                          orgfilter(
+                            orgdata.weekly.count,
+                            orgdata.weekly.start_date
+                          )
+                        "
+                        >Weekly {{ orgdata?.weekly?.count }}</a
+                      >
                     </li>
                     <li class="MonthlyTab">
-                      <a>Monthly 120</a>
+                      <a
+                        (click)="
+                          orgfilter(
+                            orgdata.monthly.count,
+                            orgdata.monthly.start_date
+                          )
+                        "
+                        >Monthly {{ orgdata?.monthly?.count }}</a
+                      >
                     </li>
                     <li class="YearlyTab">
-                      <a>Yearly 120</a>
+                      <a
+                        (click)="
+                          orgfilter(
+                            orgdata.yearly.count,
+                            orgdata.yearly.start_date
+                          )
+                        "
+                        >Yearly {{ orgdata?.yearly?.count }}</a
+                      >
                     </li>
                     <li class="MonthlyTab">
                       <a>Custom</a>
@@ -106,7 +135,11 @@
                                   <span>Email</span>
                                 </li>
                                 <li>
-                                  <i class="fa fa-bookmark-o {{(item.is_bookmarked)?'active':''}}"></i>
+                                  <i
+                                    class="fa fa-bookmark-o {{
+                                      item.is_bookmarked ? 'active' : ''
+                                    }}"
+                                  ></i>
                                   <span>Bookmark</span>
                                 </li>
                               </ul>

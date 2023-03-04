@@ -14,6 +14,7 @@ export class CompanyListComponent {
   expandedIndex = 0;
   items: any;
   listCount: any;
+  orgdata: any;
 
   constructor(
     public planService: PlanService,
@@ -22,6 +23,7 @@ export class CompanyListComponent {
   ) {
     // this.tokenRefresh();
     this.cplist();
+    this.cporgcount()
   }
 
   tokenRefresh() {
@@ -63,5 +65,30 @@ export class CompanyListComponent {
         console.log('Api Err', error);
       }
     );
+  }
+
+  cporgcount() {
+    this.planService.cporgcount().subscribe(
+      (data: any) => {
+        if (
+          data?.resultCode === '0' ||
+          data?.resultCode == 4 ||
+          data?.resultCode == 0
+        ) {
+          console.log('Api Data Err', data);
+          this.toastr.error(data.errorMessage);
+          return;
+        }
+
+        this.orgdata = data.result;
+      },
+      (error) => {
+        console.log('Api Err', error);
+      }
+    );
+  }
+
+  orgfilter(count:any, start_date:any){
+
   }
 }

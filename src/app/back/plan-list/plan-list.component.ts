@@ -65,9 +65,9 @@ export class PlanListComponent {
     );
   }
 
-  deleteAction(id: Number) {
+  pdelete(id: Number) {
     this.delloading = true;
-    this.planService.delete(id).subscribe(
+    this.planService.pdelete(id).subscribe(
       (data: any) => {
         if (
           data?.resultCode === '0' ||

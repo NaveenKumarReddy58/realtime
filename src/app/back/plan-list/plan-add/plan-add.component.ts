@@ -109,7 +109,7 @@ export class PlanAddComponent {
     }
 
     if (this.isAddMode) {
-      this.planService.add(formData).subscribe(
+      this.planService.padd(formData).subscribe(
         (data: any) => {
           if (
             data?.resultCode === '0' ||
@@ -130,7 +130,7 @@ export class PlanAddComponent {
         }
       );
     } else {
-      this.planService.edit(this.id, formData).subscribe(
+      this.planService.pedit(this.id, formData).subscribe(
         (data: any) => {
           if (
             data?.resultCode === '0' ||

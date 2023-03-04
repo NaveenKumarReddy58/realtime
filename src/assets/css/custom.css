@@ -402,7 +402,7 @@ button.ButtonIcon {
 }
 
 .SearchContentForm {
-  display: none;
+  /* display: none; */
 }
 
 .SearchDiv.active + form.SearchContentForm {
@@ -417,7 +417,7 @@ button.ButtonIcon {
   border-radius: 15px;
   height: 100%;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  z-index: 1;
+  z-index: 10;
   min-height: 80vh;
 }
 
@@ -457,7 +457,7 @@ ul.OrderTracking li {
 }
 
 ul.OrderTracking li label img {
-  max-width: 40px;
+  max-width: 25px;
 }
 
 ul.OrderTracking li input.InPutField_S {
@@ -481,7 +481,7 @@ ul.OrderTracking li label {
 ul.OrderTracking li span.searchTitle {
   width: 100%;
   flex: 0 0 100%;
-  font-size: 22px;
+  font-size: 14px;
   color: #3c4348;
   font-weight: 600;
   padding-bottom: 5px;
@@ -498,7 +498,7 @@ button.ButtonStyle {
 }
 
 .SearchButton {
-  padding: 30px 20px;
+  padding: 15px 20px;
   text-align: right;
 }
 
