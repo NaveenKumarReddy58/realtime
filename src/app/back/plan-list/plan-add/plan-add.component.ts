@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/_service/auth.service';
 import { PlanService } from 'src/app/_service/plan.service';
 
@@ -20,6 +21,8 @@ export class PlanAddComponent {
   id: Number;
   isAddMode: boolean;
   editPlan: any;
+
+  plans$!: Observable<object[]>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -45,29 +48,17 @@ export class PlanAddComponent {
     if (!this.isAddMode) {
       console.log('edit', this.id);
 
-      this.planService.pget(this.id).subscribe(
-        (data: any) => {
-          if (
-            data?.resultCode === '0' ||
-            data?.resultCode == 4 ||
-            data?.resultCode == 0
-          ) {
-            console.log('Api Data Err', data);
-            this.toastr.error(data.errorMessage);
-            return;
-          }
+      this.planService.plist(this.id);
+      this.plans$ = this.planService.get_plans();
 
-          this.editPlan = data.results;
-          if (data.results.img) {
-            this.imageSrc = data.results.img;
-          }
-          this.addPlan.patchValue(data.results);
-        },
-        (error) => {
-          console.log('Api Err', error);
-          this.loading = false;
+      this.plans$.subscribe((data: any) => {
+        console.log('this.plans$', data);
+        this.editPlan = data.results;
+        if (data.results.img) {
+          this.imageSrc = data.results.img;
         }
-      );
+        this.addPlan.patchValue(data.results);
+      });
     }
   }
 

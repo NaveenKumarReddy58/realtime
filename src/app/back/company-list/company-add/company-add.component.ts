@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 import { countries } from 'src/app/_interface/country-data-store';
 import { PlanService } from 'src/app/_service/plan.service';
 
@@ -23,6 +24,8 @@ export class CompanyAddComponent {
   planCount: any;
 
   selectedIndex: any = 0;
+
+  plans$!: Observable<object[]>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -66,26 +69,14 @@ export class CompanyAddComponent {
   ngOnInit(): void {}
 
   plist() {
-    this.planService.plist().subscribe(
-      (data: any) => {
-        if (
-          data?.resultCode === '0' ||
-          data?.resultCode == 4 ||
-          data?.resultCode == 0
-        ) {
-          console.log('Api Data Err', data);
-          this.toastr.error(data.errorMessage);
-          return;
-        }
+    this.planService.plist();
+    this.plans$ = this.planService.get_plans();
 
-        this.planItems = data.results;
-        this.planCount = data.count;
-      },
-      (error) => {
-        console.log('Api Err', error);
-        this.loading = false;
-      }
-    );
+    this.plans$.subscribe((data: any) => {
+      console.log('this.plans$', data);
+      this.planItems = data.results;
+      this.planCount = data.count;
+    });
   }
 
   choosePlan(id: Number) {

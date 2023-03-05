@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 import { PlanService } from 'src/app/_service/plan.service';
 import { DialogAnimationsComponent } from './dialog-animations/dialog-animations.component';
 
@@ -20,6 +21,8 @@ export class PlanListComponent {
   toggle: number[] = [];
   isView: number[] = [];
 
+  plans$!: Observable<object[]>;
+
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -30,6 +33,8 @@ export class PlanListComponent {
   ) {
     this.plist();
   }
+
+  ngOnInit(): void {}
 
   openDialog(
     enterAnimationDuration: string,
@@ -43,26 +48,14 @@ export class PlanListComponent {
   }
 
   plist() {
-    this.planService.plist().subscribe(
-      (data: any) => {
-        if (
-          data?.resultCode === '0' ||
-          data?.resultCode == 4 ||
-          data?.resultCode == 0
-        ) {
-          console.log('Api Data Err', data);
-          this.toastr.error(data.errorMessage);
-          return;
-        }
+    this.planService.plist();
+    this.plans$ = this.planService.get_plans();
 
-        this.items = data.results;
-        this.listCount = data.count;
-      },
-      (error) => {
-        console.log('Api Err', error);
-        this.loading = false;
-      }
-    );
+    this.plans$.subscribe((data: any) => {
+      console.log('this.plans$', data);
+      this.items = data.results;
+      this.listCount = data.count;
+    });
   }
 
   pdelete(id: Number) {

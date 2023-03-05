@@ -6,7 +6,12 @@
         <form class="SearchForm">
           <span class="SearchIcon"
             ><i class="fa fa-search" aria-hidden="true"></i>
-            <input type="text" placeholder="Search" class="InPutField" />
+            <input
+              type="text"
+              placeholder="Search"
+              class="InPutField"
+              (keyup)="searchfield($event)"
+            />
           </span>
           <button class="ButtonIcon" (click)="searchboxopen()">
             <img src="assets/images/searchicon.png" />
@@ -68,7 +73,7 @@
     <div class="MyPlan">
       <div class="MyPlanList">
         <ul>
-          <li class="BookMark_Title">
+          <li class="BookMark_Title" (click)="bookmarkedfield()">
             <div class="IconImg">
               <img src="assets/images/sper-top-icon01.png" />
               <span class="">Bookmarked</span>
@@ -78,6 +83,7 @@
           <li
             class="BookMark_Title"
             *ngFor="let item of plandata; let index = index"
+            routerLink="/dashboad/{{ item.id }}"
           >
             <div class="IconImg">
               <img *ngIf="!item.img" src="assets/images/sper-top-icon02.png" />
