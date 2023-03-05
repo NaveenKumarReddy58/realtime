@@ -74,7 +74,7 @@ export class PlanListComponent {
 
         this.plist();
         this.router.navigate(['/plans']);
-        this.toastr.success(data.actionPerformed);
+        this.toastr.success('Plan Deleted');
       },
       (error) => {
         console.log('Api Err', error);

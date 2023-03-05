@@ -52,7 +52,6 @@ export class PlanAddComponent {
       this.plans$ = this.planService.get_plans();
 
       this.plans$.subscribe((data: any) => {
-        console.log('this.plans$', data);
         this.editPlan = data.results;
         if (data.results.img) {
           this.imageSrc = data.results.img;

@@ -83,7 +83,7 @@
           <li
             class="BookMark_Title"
             *ngFor="let item of plandata; let index = index"
-            routerLink="/dashboad/{{ item.id }}"
+            (click)="planfield(item.id)"
           >
             <div class="IconImg">
               <img *ngIf="!item.img" src="assets/images/sper-top-icon02.png" />

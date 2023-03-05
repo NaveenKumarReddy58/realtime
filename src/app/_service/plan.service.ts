@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -12,23 +12,38 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 })
 export class PlanService {
   constructor(
+    private route: ActivatedRoute,
+    private router: Router,
     private http: HttpClient,
-    public router: Router,
     private toastr: ToastrService
   ) {}
 
   private _plans = new BehaviorSubject<object[]>([]);
   private plansData: { plans: object[] } = { plans: [] };
 
+  private _company = new BehaviorSubject<object[]>([]);
+  private companyData: { company: object[] } = { company: [] };
+
+  private _plancount = new BehaviorSubject<object[]>([]);
+  private plancountData: { plancount: object[] } = { plancount: [] };
+
+  private _orgcount = new BehaviorSubject<object[]>([]);
+  private orgcountData: { orgcount: object[] } = { orgcount: [] };
+
   get_plans(): Observable<any[]> {
     return this._plans.asObservable();
   }
 
-  private _company = new BehaviorSubject<object[]>([]);
-  private companyData: { company: object[] } = { company: [] };
-
   get_company(): Observable<any[]> {
     return this._company.asObservable();
+  }
+
+  get_plancount(): Observable<any[]> {
+    return this._plancount.asObservable();
+  }
+
+  get_orgcount(): Observable<any[]> {
+    return this._orgcount.asObservable();
   }
 
   plist(id?: Number) {
@@ -51,6 +66,7 @@ export class PlanService {
 
         this.plansData.plans = data;
         this._plans.next(Object.assign({}, this.plansData).plans);
+        this.plancount();
       },
       (error) => {
         console.log('Api Err', error);
@@ -165,14 +181,25 @@ export class PlanService {
   }
 
   cporgcount() {
-    return this.http.get<any>(`${environment.apiUrl}/tenant/org-count/`);
-  }
+    this.http.get<any>(`${environment.apiUrl}/tenant/org-count/`).subscribe(
+      (data: any) => {
+        if (
+          data?.resultCode === '0' ||
+          data?.resultCode == 4 ||
+          data?.resultCode == 0
+        ) {
+          console.log('Api Data Err', data);
+          this.toastr.error(data.errorMessage);
+          return;
+        }
 
-  private _plancount = new BehaviorSubject<object[]>([]);
-  private plancountData: { plancount: object[] } = { plancount: [] };
-
-  get_plancount(): Observable<any[]> {
-    return this._plancount.asObservable();
+        this.orgcountData.orgcount = data;
+        this._orgcount.next(Object.assign({}, this.orgcountData).orgcount);
+      },
+      (error) => {
+        console.log('Api Err', error);
+      }
+    );
   }
 
   plancount() {
@@ -195,5 +222,42 @@ export class PlanService {
         console.log('Api Err', error);
       }
     );
+  }
+
+  clearrouter() {
+    let options = {
+      plan: null,
+      search_text: null,
+      bookmarked: null,
+      deactivated: null,
+      start_date: null,
+      end_date: null,
+    };
+
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {},
+      queryParamsHandling: 'preserve',
+    });
+  }
+
+  setrouter(object: object) {
+    this.clearrouter();
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: object,
+      queryParamsHandling: 'merge',
+    });
+  }
+
+  cbookmark(id: Number) {
+    return this.http
+      .put<any>(`${environment.apiUrl}/tenant/bookmark/${id}`, {})
+      .pipe(
+        map((data) => {
+          return data;
+        }),
+        catchError(this.handleError)
+      );
   }
 }

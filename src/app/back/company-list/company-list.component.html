@@ -14,52 +14,38 @@
               <div class="row">
                 <div class="TabsList">
                   <ul class="Tab_List">
-                    <li class="active">
-                      <a
-                        (click)="
-                          orgfilter(orgdata.all.count, orgdata.all.start_date)
-                        "
+                    <li class="{{ optionstype == 'all' ? 'active' : '' }}">
+                      <a (click)="orgfilter('all', orgdata.all.start_date)"
                         >All {{ orgdata?.all?.count }}</a
                       >
                     </li>
-                    <li>
+                    <li class="{{ optionstype == 'weekly' ? 'active' : '' }}">
                       <a
-                        (click)="
-                          orgfilter(
-                            orgdata.weekly.count,
-                            orgdata.weekly.start_date
-                          )
-                        "
+                        (click)="orgfilter('weekly', orgdata.weekly.start_date)"
                         >Weekly {{ orgdata?.weekly?.count }}</a
                       >
                     </li>
-                    <li class="MonthlyTab">
+                    <li class="{{ optionstype == 'monthly' ? 'active' : '' }}">
                       <a
                         (click)="
-                          orgfilter(
-                            orgdata.monthly.count,
-                            orgdata.monthly.start_date
-                          )
+                          orgfilter('monthly', orgdata.monthly.start_date)
                         "
                         >Monthly {{ orgdata?.monthly?.count }}</a
                       >
                     </li>
-                    <li class="YearlyTab">
+                    <li class="{{ optionstype == 'yearly' ? 'active' : '' }}">
                       <a
-                        (click)="
-                          orgfilter(
-                            orgdata.yearly.count,
-                            orgdata.yearly.start_date
-                          )
-                        "
+                        (click)="orgfilter('yearly', orgdata.yearly.start_date)"
                         >Yearly {{ orgdata?.yearly?.count }}</a
                       >
                     </li>
                     <li class="MonthlyTab">
                       <a>Custom</a>
                     </li>
-                    <li>
-                      <a>Deactivated Companies</a>
+                    <li
+                      class="{{ optionstype == 'deactivate' ? 'active' : '' }}"
+                    >
+                      <a (click)="deactivatedfield()">Deactivated Companies</a>
                     </li>
                   </ul>
                 </div>
@@ -134,7 +120,7 @@
                                   <i class="fa fa-envelope"></i>
                                   <span>Email</span>
                                 </li>
-                                <li>
+                                <li (click)="cbookmark(item.id)">
                                   <i
                                     class="fa fa-bookmark-o {{
                                       item.is_bookmarked ? 'active' : ''

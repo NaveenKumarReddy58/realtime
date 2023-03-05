@@ -31,7 +31,6 @@ export class TopComponent {
     this.plancount$ = this.planService.get_plancount();
 
     this.plancount$.subscribe((data: any) => {
-      console.log('this.plancount$', data);
       this.plandata = data.result;
     });
   }
@@ -41,34 +40,14 @@ export class TopComponent {
   }
 
   bookmarkedfield() {
-    // changes the route without moving from the current view or
-    // triggering a navigation event,
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: {
-        bookmarked: true,
-      },
-      // queryParamsHandling: 'preserve',
-      queryParamsHandling: 'merge',
-      // preserve the existing query params in the route
-      // skipLocationChange: true,
-      // do not trigger navigation
-    });
+    this.planService.setrouter({ bookmarked: true });
   }
 
   searchfield(event: any) {
-    // changes the route without moving from the current view or
-    // triggering a navigation event,
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: {
-        search_text: event.target.value,
-      },
-      // queryParamsHandling: 'preserve',
-      queryParamsHandling: 'merge',
-      // preserve the existing query params in the route
-      // skipLocationChange: true,
-      // do not trigger navigation
-    });
+    this.planService.setrouter({ search_text: event.target.value });
+  }
+
+  planfield(id: Number) {
+    this.planService.setrouter({ plan: id });
   }
 }

@@ -73,7 +73,6 @@ export class CompanyAddComponent {
     this.plans$ = this.planService.get_plans();
 
     this.plans$.subscribe((data: any) => {
-      console.log('this.plans$', data);
       this.planItems = data.results;
       this.planCount = data.count;
     });
@@ -81,7 +80,6 @@ export class CompanyAddComponent {
 
   choosePlan(id: Number) {
     this.selectedIndex = id;
-    // console.log(id, this.selectedIndex);
     this.addCP.patchValue({
       plan_id: id,
     });
