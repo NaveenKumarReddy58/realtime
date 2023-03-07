@@ -20,7 +20,7 @@ export class MenuComponent {
     private toastr: ToastrService
   ) {
     this.timer = setInterval(() => {
-      this.tokenRefresh();
+      // this.tokenRefresh();
     }, 290000);
   }
 

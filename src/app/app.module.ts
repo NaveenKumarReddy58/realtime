@@ -21,7 +21,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { TimerComponent } from './timer/timer.component';
 import { CountdownModule } from 'ngx-countdown';
 import { StoreModule } from '@ngrx/store';
-import { AuthInterceptor } from './_shared/authconfig.interceptor';
+import { AuthInterceptor } from './_shared/auth.interceptor';
 import { PlanListComponent } from './back/plan-list/plan-list.component';
 import { PlanAddComponent } from './back/plan-list/plan-add/plan-add.component';
 import { CompanyListComponent } from './back/company-list/company-list.component';
