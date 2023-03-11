@@ -39,6 +39,7 @@ import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { MomentModule } from 'ngx-moment';
 import { CompanyDetailComponent } from './back/company-list/company-detail/company-detail.component';
 import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
+import { SettingComponent } from './back/setting/setting.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { MatSelectCountryModule } from '@angular-material-extensions/select-coun
     DateDifference,
     DialogAnimationsComponent,
     CompanyDetailComponent,
+    SettingComponent
   ],
   imports: [
     BrowserModule,

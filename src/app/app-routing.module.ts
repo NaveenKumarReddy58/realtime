@@ -12,6 +12,7 @@ import { DashboardComponent } from './back/dashboard/dashboard.component';
 import { PlanAddComponent } from './back/plan-list/plan-add/plan-add.component';
 import { PlanListComponent } from './back/plan-list/plan-list.component';
 import { ProfileComponent } from './back/profile/profile.component';
+import { SettingComponent } from './back/setting/setting.component';
 import { TicketDetailComponent } from './back/ticket-list/ticket-detail/ticket-detail.component';
 import { TicketListComponent } from './back/ticket-list/ticket-list.component';
 import { ForgotPasswordComponent } from './front/forgot-password/forgot-password.component';
@@ -118,6 +119,12 @@ const routes: Routes = [
     path: 'report',
     component: CompanyListComponent,
     title: 'Report',
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'setting',
+    component: SettingComponent,
+    title: 'Setting',
     canActivate: [AuthGuard],
   },
 ];
