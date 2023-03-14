@@ -1943,3 +1943,68 @@ img.searchicon {
   border-radius: 10px;
   height: 1px;
 }
+
+
+
+/* Custom CSS */
+.side_menu {
+	position: absolute;
+	right: -38px;
+	background-color: #0eb002;
+	padding: 8px 10px;
+	color: #FFF;
+	font-size: 20px;
+	border-radius: 0px 8px 8px 0px;
+	top: 67px;
+  display: none;
+}
+
+
+@media ( max-width:1199px ) {
+  .side_menu {display: inline-block; right: -50px;}
+  .side_menu:hover{color: #FFF;}
+  .main_box .left_box {
+    margin-left: -20%;
+    position: relative;
+  } 
+  .main_box .right_box{width: 100%;}
+  .main_box.main .left_box {
+    margin-left: 0;
+    position: fixed;
+    left: 0;
+    z-index: 9;
+    top: 30px;
+  } 
+
+  .main_box.main .over_lay {
+    position: fixed;
+    background-color: rgba(0,0,0,0.5);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+  } 
+
+
+  .main_box.main .side_menu .fa-bars::before {
+    content: "\f00d";
+    font-weight: 900;
+    font-family: "Font Awesome 6 Pro";
+  }
+  .main_box.main .side_menu {
+    background-color: #e11c1c;
+    right: -33px;
+  }
+
+  .LogoutDiv{position: static;margin-top: 30px;margin-bottom: 15px;}
+
+  .SideBar {    
+    min-height: 100%; 
+    max-height: calc(100vh - 50px);
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+ 
+ 
+}

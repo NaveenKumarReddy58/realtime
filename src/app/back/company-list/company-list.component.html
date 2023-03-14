@@ -1,11 +1,16 @@
 <section class="section" style="background: #ebeff2">
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-2">
+    <div class="row main_box">
+       
+      <div class="col-md-3 width20 left_box">
+        <a routerLink="#" class="side_menu">
+          <i class="fa-regular fa-bars"></i>
+      </a>
         <app-menu></app-menu>
+
       </div>
 
-      <div class="col-md-10">
+      <div class="col-md-9 width80 right_box">
         <app-top></app-top>
 
         <div class="row">
@@ -20,13 +25,13 @@
                       >
                     </li>
                     <li class="{{ optionstype == 'weekly' ? 'active' : '' }}">
-                      <a
+                      <a routerLink="#"
                         (click)="orgfilter('weekly', orgdata.weekly.start_date)"
-                        >Weekly {{ orgdata?.weekly?.count }}</a
+                        >Weekly  {{ orgdata?.weekly?.count }}</a
                       >
                     </li>
                     <li class="{{ optionstype == 'monthly' ? 'active' : '' }}">
-                      <a
+                      <a routerLink="#"
                         (click)="
                           orgfilter('monthly', orgdata.monthly.start_date)
                         "
@@ -34,24 +39,24 @@
                       >
                     </li>
                     <li class="{{ optionstype == 'yearly' ? 'active' : '' }}">
-                      <a
+                      <a routerLink="#"
                         (click)="orgfilter('yearly', orgdata.yearly.start_date)"
                         >Yearly {{ orgdata?.yearly?.count }}</a
                       >
                     </li>
                     <li class="MonthlyTab">
-                      <a>Custom</a>
+                      <a routerLink="#">Custom</a>
                     </li>
                     <li
                       class="{{ optionstype == 'deactivate' ? 'active' : '' }}"
                     >
-                      <a (click)="deactivatedfield()">Deactivated Companies</a>
+                      <a routerLink="#" (click)="deactivatedfield()">Deactivated Companies</a>
                     </li>
                   </ul>
                 </div>
                 <div class="row">
                   <div class="FilterTab FilterTabHome">
-                    <a>
+                    <a routerLink="#">
                       <span>Filter</span>
                       <img src="assets/images/filter-icon.png" />
                     </a>
@@ -165,6 +170,8 @@
           </div>
         </div>
       </div>
+
+      <div class="over_lay"></div> 
     </div>
   </div>
 </section>

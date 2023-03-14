@@ -15,4 +15,11 @@ jQuery(document).ready(function ($) {
       separateDialCode: true,
     });
   }, 1000);
+
+
+
+  $(".side_menu").click(function(){
+    $(".main_box").toggleClass("main");
+  }); 
+
 });
