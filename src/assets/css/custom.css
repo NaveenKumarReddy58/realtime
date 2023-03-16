@@ -1961,7 +1961,7 @@ img.searchicon {
 
 
 @media ( max-width:1199px ) {
-  .side_menu {display: inline-block; right: -50px;}
+  .side_menu {display: inline-block; right: -38px;}
   .side_menu:hover{color: #FFF;}
   .main_box .left_box {
     margin-left: -20%;
@@ -1973,8 +1973,12 @@ img.searchicon {
     position: fixed;
     left: 0;
     z-index: 9;
-    top: 30px;
-  } 
+    top: 0;
+    width: 320px;
+    padding-left: 0;
+    border-radius: 0;
+    bottom: 0;
+  }
 
   .main_box.main .over_lay {
     position: fixed;
@@ -1994,7 +1998,7 @@ img.searchicon {
   }
   .main_box.main .side_menu {
     background-color: #e11c1c;
-    right: -33px;
+    right: -21px;
   }
 
   .LogoutDiv{position: static;margin-top: 30px;margin-bottom: 15px;}
@@ -2007,4 +2011,34 @@ img.searchicon {
   }
  
  
+}
+
+
+@media ( max-width:767px ) {
+  .MyPlan {
+    margin-top: 20px;
+  }   
+  ul.Tab_List {
+    
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 13px;
+  }
+  .TabsList .Tab_List li {
+    width: calc(35% - 22px);
+    flex: 0 0 calc(35% - 22px);
+    max-width: calc(35% - 22px);  
+  }
+  ul.Tab_List li a{border-radius: 8px!important;
+    margin-left: 0;}
+}
+
+@media ( max-width:575px ) {
+  .TabsList .Tab_List li {
+    width: calc(50% - 22px);
+    flex: 0 0 calc(50% - 22px);
+    max-width: calc(50% - 22px);  
+  }
+  .TabsList .Tab_List li a{text-align: center;}
 }
