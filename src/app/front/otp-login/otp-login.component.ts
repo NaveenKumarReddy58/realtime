@@ -24,6 +24,10 @@ export class OtpLoginComponent {
     public authService: AuthService,
     private toastr: ToastrService
   ) {
+    if (!this.authService.isOrgIn) {
+      this.router.navigate(['/']);
+    }
+
     this.otplogin = formBuilder.group({
       username: [
         '',

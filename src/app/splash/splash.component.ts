@@ -30,6 +30,4 @@ import {
 })
 export class SplashComponent {
   fadeToggle = true;
-
-  
 }

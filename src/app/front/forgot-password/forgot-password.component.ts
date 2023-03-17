@@ -25,6 +25,10 @@ export class ForgotPasswordComponent {
     public authService: AuthService,
     private toastr: ToastrService
   ) {
+    if (!this.authService.isOrgIn) {
+      this.router.navigate(['/']);
+    }
+
     this.forgot = formBuilder.group({
       username: [
         '',
@@ -104,7 +108,7 @@ export class ForgotPasswordComponent {
     this.isVerified = 'f';
 
     this.authService
-      .verifyResestOtp(this.f['username'].value, this.otp)
+      .verifyResetOtp(this.f['username'].value, this.otp)
       .subscribe(
         (data: any) => {
           if (

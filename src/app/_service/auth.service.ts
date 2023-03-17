@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import {
   HttpClient,
@@ -7,7 +7,6 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { User } from '../_interface/user';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 
@@ -15,6 +14,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
+  toggleDashboard = new BehaviorSubject<string>('');
+
   constructor(
     private http: HttpClient,
     public router: Router,
@@ -32,13 +33,26 @@ export class AuthService {
     return throwError(msg);
   }
 
-  getToken() {
+  get getToken() {
     return localStorage.getItem('access_token');
+  }
+
+  get getOrgEmail() {
+    return localStorage.getItem('org_email');
+  }
+
+  get getOrgDomain() {
+    return localStorage.getItem('org_domain');
   }
 
   get isLoggedIn(): boolean {
     let authToken = localStorage.getItem('access_token');
     return authToken !== null ? true : false;
+  }
+
+  get isOrgIn(): boolean {
+    let orgEmail = localStorage.getItem('org_email');
+    return orgEmail !== null ? true : false;
   }
 
   doLogout() {
@@ -111,7 +125,7 @@ export class AuthService {
     );
   }
 
-  verifyResestOtp(email: string, otp: string) {
+  verifyResetOtp(email: string, otp: string) {
     return this.http.get<any>(
       `${environment.apiUrl}/account/verify-reset-otp/?email=${email}&otp=${otp}`
     );

@@ -13,8 +13,6 @@ export class PreComponent {
   prelogin!: FormGroup;
   loading = false;
   isSubmitted = false;
-  org_email: any;
-  org_domain: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -23,13 +21,9 @@ export class PreComponent {
     public authService: AuthService,
     private toastr: ToastrService
   ) {
-    this.org_email = localStorage.getItem('org_email');
-    this.org_domain = localStorage.getItem('org_domain');
-
-    if (this.org_email !== null || this.org_domain !== null) {
+    if (this.authService.isOrgIn) {
       this.router.navigate(['/login']);
     }
-    // console.log('ls', this.org_email,this.org_domain)
 
     this.prelogin = formBuilder.group({
       username: ['', [Validators.required, Validators.email]], //admin@gmail.com

@@ -12,7 +12,7 @@ import { catchError, throwError } from 'rxjs';
 export class AuthInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) {}
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    const authToken = this.authService.getToken();
+    const authToken = this.authService.getToken;
     if (authToken) {
       req = req.clone({
         setHeaders: {

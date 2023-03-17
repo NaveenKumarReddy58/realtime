@@ -15,8 +15,8 @@ export class LoginComponent {
   isSubmitted = false;
   errorMessage = false;
   actionPerformed = false;
-  org_email: any;
-  org_domain: any;
+  orgEmail: any;
+  orgDomain: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -25,15 +25,15 @@ export class LoginComponent {
     public authService: AuthService,
     private toastr: ToastrService
   ) {
-    this.org_email = localStorage.getItem('org_email');
-    this.org_domain = localStorage.getItem('org_domain');
-
-    if (this.org_email === null || this.org_domain === null) {
+    if (!this.authService.isOrgIn) {
       this.router.navigate(['/']);
     }
 
+    this.orgEmail = this.authService.getOrgEmail;
+    this.orgDomain = this.authService.getOrgDomain;
+
     this.login = formBuilder.group({
-      username: [this.org_email, [Validators.required, Validators.email]], //admin@gmail.com
+      username: [this.orgEmail, [Validators.required, Validators.email]], //admin@gmail.com
       password: ['', Validators.required], //admin@123#
     });
   }

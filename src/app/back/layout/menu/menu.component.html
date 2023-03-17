@@ -1,45 +1,72 @@
 <div class="SideBar">
-   
-    <div class="LogoDiv">
-        <a routerLink="/"><img src="assets/images/logo.png"></a>
-    </div>
+  <div class="LogoDiv">
+    <a routerLink="/"><img src="assets/images/logo.png" /></a>
+  </div>
+  <ul class="SideBarList">
+    <li class="active">
+      <a routerLink="/dashboad"
+        ><img src="assets/images/super-super-icon101.png" /><span
+          >Company</span
+        ></a
+      >
+    </li>
+    <li>
+      <a routerLink="/company/add"
+        ><img src="assets/images/super-super-icon01.png" /><span
+          >Add Company</span
+        ></a
+      >
+    </li>
+    <li>
+      <a routerLink="/tickets"
+        ><img src="assets/images/super-super-icon02.png" /><span
+          >Tickets</span
+        ></a
+      >
+    </li>
+    <li>
+      <a routerLink="/plans"
+        ><img src="assets/images/super-super-icon04.png" /><span>Plans</span></a
+      >
+    </li>
+    <li>
+      <a routerLink="/report"
+        ><img src="assets/images/super-super-icon04.png" /><span
+          >Report</span
+        ></a
+      >
+    </li>
+    <li>
+      <a routerLink="/profile"
+        ><img src="assets/images/super-super-icon05.png" /><span
+          >Profile</span
+        ></a
+      >
+    </li>
+    <li>
+      <a routerLink="/profile"
+        ><img src="assets/images/super-super-icon06.png" /><span
+          >Setting</span
+        ></a
+      >
+    </li>
+  </ul>
+  <div class="LogoutDiv">
     <ul class="SideBarList">
-        <li class="active">
-            <a routerLink="/dashboad"><img src="assets/images/super-super-icon101.png"><span>Company 0001   </span></a>
-        </li>
-        <li>
-            <a routerLink="/company/add"><img src="assets/images/super-super-icon01.png"><span>Add Company</span></a>
-        </li>
-        <li>
-            <a routerLink="/tickets"><img src="assets/images/super-super-icon02.png"><span>Tickets</span></a>
-        </li>
-        <li>
-            <a routerLink="/plans"><img src="assets/images/super-super-icon04.png"><span>Plans</span></a>
-        </li>
-        <li>
-            <a routerLink="/report"><img src="assets/images/super-super-icon04.png"><span>Report</span></a>
-        </li>
-        <li>
-            <a routerLink="/profile"><img src="assets/images/super-super-icon05.png"><span>Profile</span></a>
-        </li>
-        <li>
-            <a routerLink="/profile"><img src="assets/images/super-super-icon06.png"><span>Setting</span></a>
-        </li>
+      <li>
+        <a (click)="doLogout()">
+          <img src="assets/images/logout-icon.png" />
+          <span>Logout</span></a
+        >
+      </li>
+      <li class="NextPreview">
+        <span class="NextTab">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+        </span>
+        <span class="PreviewTab">
+          <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </span>
+      </li>
     </ul>
-    <div class="LogoutDiv">
-        <ul class="SideBarList">
-            <li><a (click)="doLogout()">
-                    <img src="assets/images/logout-icon.png">
-                    <span>Logout</span></a>
-            </li>
-            <li class="NextPreview">
-                <span class="NextTab">
-                    <i class="fa fa-angle-left" aria-hidden="true"></i>
-                </span>
-                <span class="PreviewTab">
-                    <i class="fa fa-angle-right" aria-hidden="true"></i>
-                </span>
-            </li>
-        </ul>
-    </div>
+  </div>
 </div>

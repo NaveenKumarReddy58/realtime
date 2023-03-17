@@ -1,129 +1,91 @@
-<section class="section" style="background: #ebeff2">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-2">
-        <app-menu></app-menu>
-      </div>
-
-      <div class="col-md-10">
-        <app-top></app-top>
-
-        <div class="row">
-          <div class="col-md-12">
-            <div class="ContentArea">
-              <div class="row mb-4">
-                <div class="col-md-10">
-                  <div class="HeadingName">
-                    <h2>Plan</h2>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <form class="ProfileFor">
-                    <div class="row">
-                      <div class="add-company">
-                        <ul>
-                          <li
-                            *ngFor="let plan of items; let index = index"
-                            class="gold"
-                          >
-                            <!-- Edit And Delete -->
-                            <div class="EditIcn">
-                              <i
-                                class="fa fa-ellipsis-v ellipsis"
-                                (click)="toggle[index + 1] = index + 1"
-                              ></i>
-                              <div
-                                *ngIf="toggle[index + 1]"
-                                class="edit-delete"
-                              >
-                                <img
-                                  src="assets/images/closeimg.png"
-                                  (click)="boxClose(index + 1)"
-                                />
-                                <ul>
-                                  <li>
-                                    <a routerLink="/plans/{{ plan.id }}">
-                                      <i class="fa fa-pencil EditIcon"></i>
-                                      Edit
-                                    </a>
-                                  </li>
-                                  <li>
-                                    <a (click)="pdelete(plan.id)">
-                                      <i class="fa fa-trash Delete"></i>
-                                      Delete
-                                      <i
-                                        class="fa fa-spinner fa-spin"
-                                        *ngIf="delloading"
-                                      ></i>
-                                    </a>
-                                  </li>
-                                </ul>
-                              </div>
-                            </div>
-                            <!-- Edit And Delete //////// -->
-                            <img
-                              *ngIf="!plan.img"
-                              src="assets/images/sper-top-icon02.png"
-                            />
-                            <img *ngIf="plan.img" [src]="plan.img" />
-
-                            <span class="GoldColor"
-                              >{{ plan.title }} ${{ plan.price }}</span
-                            >
-                            <a class="KnowMore" *ngIf="!isView[index + 1]">
-                              Know More
-                              <i
-                                (click)="isView[index + 1] = index + 1"
-                                class="fa fa-angle-down angle-down"
-                                aria-hidden="true"
-                              ></i>
-                            </a>
-                            <a class="KnowMore" *ngIf="isView[index + 1]">
-                              {{
-                                plan.max_drivers > 1
-                                  ? plan.max_drivers + " Head Drivers"
-                                  : plan.max_drivers + " Head Driver"
-                              }}
-                              <br />
-                              {{
-                                plan.max_admin > 1
-                                  ? plan.max_admin + " Associated Drivers"
-                                  : plan.max_admin + " Associated Driver"
-                              }}
-                              <i
-                                (click)="kmClose(index + 1)"
-                                class="fa fa-angle-up angle-up"
-                                aria-hidden="true"
-                              ></i>
-                            </a>
-                          </li>
-
-                          <!-- gold / silver / bronze -->
-
-                          <li class="bronze AddPlan" routerLink="/plans/add">
-                            <img src="assets/images/add-plan.png" />
-                            <span class="GoldColor">Add Plan</span>
-                            <a routerLink="/plans/add" class="KnowMore">
-                              Add your custom plan
-                              <i
-                                class="fa fa-angle-down angle-down"
-                                aria-hidden="true"
-                              ></i>
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+<div class="row mb-4">
+  <div class="col-md-10">
+    <div class="HeadingName">
+      <h2>Plan</h2>
     </div>
   </div>
-</section>
-<!-- Side Bar /////////////////// -->
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <form class="ProfileFor">
+      <div class="row">
+        <div class="add-company">
+          <ul>
+            <li *ngFor="let plan of items; let index = index" class="gold">
+              <!-- Edit And Delete -->
+              <div class="EditIcn">
+                <i
+                  class="fa fa-ellipsis-v ellipsis"
+                  (click)="toggle[index + 1] = index + 1"
+                ></i>
+                <div *ngIf="toggle[index + 1]" class="edit-delete">
+                  <img
+                    src="assets/images/closeimg.png"
+                    (click)="boxClose(index + 1)"
+                  />
+                  <ul>
+                    <li>
+                      <a routerLink="/plans/{{ plan.id }}">
+                        <i class="fa fa-pencil EditIcon"></i>
+                        Edit
+                      </a>
+                    </li>
+                    <li>
+                      <a (click)="pdelete(plan.id)">
+                        <i class="fa fa-trash Delete"></i>
+                        Delete
+                        <i class="fa fa-spinner fa-spin" *ngIf="delloading"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <!-- Edit And Delete //////// -->
+              <img *ngIf="!plan.img" src="assets/images/sper-top-icon02.png" />
+              <img *ngIf="plan.img" [src]="plan.img" />
+
+              <span class="GoldColor">{{ plan.title }} ${{ plan.price }}</span>
+              <a class="KnowMore" *ngIf="!isView[index + 1]">
+                Know More
+                <i
+                  (click)="isView[index + 1] = index + 1"
+                  class="fa fa-angle-down angle-down"
+                  aria-hidden="true"
+                ></i>
+              </a>
+              <a class="KnowMore" *ngIf="isView[index + 1]">
+                {{
+                  plan.max_drivers > 1
+                    ? plan.max_drivers + " Head Drivers"
+                    : plan.max_drivers + " Head Driver"
+                }}
+                <br />
+                {{
+                  plan.max_admin > 1
+                    ? plan.max_admin + " Associated Drivers"
+                    : plan.max_admin + " Associated Driver"
+                }}
+                <i
+                  (click)="kmClose(index + 1)"
+                  class="fa fa-angle-up angle-up"
+                  aria-hidden="true"
+                ></i>
+              </a>
+            </li>
+
+            <!-- gold / silver / bronze -->
+
+            <li class="bronze AddPlan" routerLink="/plans/add">
+              <img src="assets/images/add-plan.png" />
+              <span class="GoldColor">Add Plan</span>
+              <a routerLink="/plans/add" class="KnowMore">
+                Add your custom plan
+                <i class="fa fa-angle-down angle-down" aria-hidden="true"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

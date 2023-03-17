@@ -1,5 +1,26 @@
-<app-splash></app-splash>
-<router-outlet></router-outlet>
-<!-- <p><strong>{{idleState}}</strong></p>
-<p *ngIf="lastPing"><small>Last keepalive ping <strong>{{lastPing | amTimeAgo}}</strong></small></p>
-<button (click)="reset()" *ngIf="timedOut">Restart</button> -->
+<app-splash></app-splash>{{ isLoggedIn }}
+<section *ngIf="!isLoggedIn">
+  <router-outlet></router-outlet>
+</section>
+<section *ngIf="isLoggedIn" class="section" style="background: #ebeff2">
+  <div class="container-fluid">
+    <div class="row main_box">
+      <div class="col-md-3 width20 left_box">
+        <a routerLink="#" class="side_menu">
+          <i class="fa-regular fa-bars"></i>
+        </a>
+        <app-menu></app-menu>
+      </div>
+      <div class="col-md-9 width80 right_box">
+        <app-top></app-top>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="ContentArea no-padding">
+              <router-outlet></router-outlet>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

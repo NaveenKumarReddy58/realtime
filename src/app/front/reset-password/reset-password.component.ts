@@ -20,7 +20,7 @@ export class ResetPasswordComponent {
   reset!: FormGroup;
   loading = false;
   isSubmitted = false;
-  org_email: any;
+  orgEmail: any;
   isverified: any;
 
   constructor(
@@ -30,7 +30,11 @@ export class ResetPasswordComponent {
     public authService: AuthService,
     private toastr: ToastrService
   ) {
-    this.org_email = localStorage.getItem('org_email');
+    if (!this.authService.isOrgIn) {
+      this.router.navigate(['/']);
+    }
+
+    this.orgEmail = this.authService.getOrgEmail;
     this.isverified = localStorage.getItem('isverified');
 
     if (this.isverified !== 't') {
@@ -71,7 +75,7 @@ export class ResetPasswordComponent {
     this.loading = true;
 
     this.authService
-      .resetPassword(this.org_email, this.f['password'].value)
+      .resetPassword(this.orgEmail, this.f['password'].value)
       .subscribe(
         (data: any) => {
           if (

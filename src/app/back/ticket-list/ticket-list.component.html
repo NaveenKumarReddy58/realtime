@@ -1,163 +1,128 @@
-<!-- Side Bar -->
-<section class="section" style="background: #ebeff2;">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-2">
-              <app-menu></app-menu>
-            </div>
-      
-            <div class="col-md-10">
-              <app-top></app-top>
-
-                <!-- Content Row -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="ContentArea">
-                            <div class="row mb-4">
-                                <div class="col-md-12">
-                                    <div class="HeadingName">
-                                        <h2>Tickets</h2>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="SearchFilter">
-                                        <form class="Search">
-                                            <input type="text" name="" placeholder="Search">
-                                            <button><i class="fa fa-search"></i></button>
-                                        </form>
-                                        <div class="Filter_Set">
-                                            <span><input type="radio" name=""> All (120)</span>
-                                            <span><input type="radio" name=""> Closed (10)</span>
-                                            <span><input type="radio" name=""> Open (0)</span>
-                                            <span>Filter Results <img src="assets/images/filter-icon.png"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Tab Content Area Start 01-->
-                            <div id="Tb-Tabs01" class="Tabs01 TabsMain">
-                                <!-- Table View -->
-                                <div class="Table mt-4">
-                                    <div class="OrderList">
-                                        <div class="row mt-3">
-                                            <div class="Table_Scroll">
-                                                <table class="Order_Table Track_List" cellpadding="0" cellspacing="0"
-                                                    border="0">
-                                                    <tr class="T_Head">
-                                                        <th>Track Id</th>
-                                                        <th>Customer Name</th>
-                                                        <th>Subject</th>
-                                                        <th>Report Date</th>
-                                                        <th>Report Time</th>
-                                                        <th>Last Update</th>
-                                                        <th>Status</th>
-                                                        <th>Other Option</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><img src="assets/images/p-icon.png">910011001</td>
-                                                        <td>Sandeep Singh</td>
-                                                        <td>Address: 012, XYZ B14</td>
-                                                        <td>Wed Oct 24, 2022</td>
-                                                        <td>12:30 PM</td>
-                                                        <td><span class="">00:00 AM</span></td>
-                                                        <td class="compleate">
-                                                            Completed
-                                                        </td>
-                                                        <td>
-                                                            <div class="GetIocn">
-                                                                <span class="fa fa-phone"></span>
-                                                                <span class="fa fa-paper-plane"></span>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><img src="assets/images/d-icon.png">910011001</td>
-                                                        <td>Sandeep Singh</td>
-                                                        <td>Address: 012, XYZ B14</td>
-                                                        <td>Wed Oct 24, 2022</td>
-                                                        <td>12:30 PM</td>
-                                                        <td><span class="">00:00 AM</span></td>
-                                                        <td class="compleate">
-                                                            Completed
-                                                        </td>
-                                                        <td>
-                                                            <div class="GetIocn">
-                                                                <span class="fa fa-phone"></span>
-                                                                <span class="fa fa-paper-plane"></span>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><img src="assets/images/p-icon.png">910011001</td>
-                                                        <td>Sandeep Singh</td>
-                                                        <td>Address: 012, XYZ B14</td>
-                                                        <td>Wed Oct 24, 2022</td>
-                                                        <td>12:30 PM</td>
-                                                        <td><span class="">00:00 AM</span></td>
-                                                        <td class="compleate">
-                                                            Completed
-                                                        </td>
-                                                        <td>
-                                                            <div class="GetIocn">
-                                                                <span class="fa fa-phone"></span>
-                                                                <span class="fa fa-paper-plane"></span>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><img src="assets/images/p-icon.png">910011001</td>
-                                                        <td>Sandeep Singh</td>
-                                                        <td>Address: 012, XYZ B14</td>
-                                                        <td>Wed Oct 24, 2022</td>
-                                                        <td>12:30 PM</td>
-                                                        <td><span class="">00:00 AM</span></td>
-                                                        <td class="compleate">
-                                                            Completed
-                                                        </td>
-                                                        <td>
-                                                            <div class="GetIocn">
-                                                                <span class="fa fa-phone"></span>
-                                                                <span class="fa fa-paper-plane"></span>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><img src="assets/images/d-icon.png">910011001</td>
-                                                        <td>Sandeep Singh</td>
-                                                        <td>Address: 012, XYZ B14</td>
-                                                        <td>Wed Oct 24, 2022</td>
-                                                        <td>12:30 PM</td>
-                                                        <td><span class="">00:00 AM</span></td>
-                                                        <td class="compleate">
-                                                            Completed
-                                                        </td>
-                                                        <td>
-                                                            <div class="GetIocn">
-                                                                <span class="fa fa-phone"></span>
-                                                                <span class="fa fa-paper-plane"></span>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                            <!-- <div class="row mt-3">
-												<div class="col-md-12 text-end">
-													<button class="ButtonStyle">Assign Order</button>
-												</div>
-											</div> -->
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Table View /////////// -->
-                            </div>
-                            <!-- Tab Content Area Start /////////// 01 -->
-                        </div>
-                    </div>
-                </div>
-                <!-- Content Row /////////// -->
-
-            </div>
-        </div>
+<div class="row mb-4">
+  <div class="col-md-12">
+    <div class="HeadingName">
+      <h2>Tickets</h2>
     </div>
-</section>
-<!-- Side Bar /////////////////// -->
+  </div>
+  <div class="col-md-12">
+    <div class="SearchFilter">
+      <form class="Search">
+        <input type="text" name="" placeholder="Search" />
+        <button><i class="fa fa-search"></i></button>
+      </form>
+      <div class="Filter_Set">
+        <span><input type="radio" name="" /> All (120)</span>
+        <span><input type="radio" name="" /> Closed (10)</span>
+        <span><input type="radio" name="" /> Open (0)</span>
+        <span>Filter Results <img src="assets/images/filter-icon.png" /></span>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="Tb-Tabs01" class="Tabs01 TabsMain">
+  <div class="Table mt-4">
+    <div class="OrderList">
+      <div class="row mt-3">
+        <div class="Table_Scroll">
+          <table
+            class="Order_Table Track_List"
+            cellpadding="0"
+            cellspacing="0"
+            border="0"
+          >
+            <tr class="T_Head">
+              <th>Track Id</th>
+              <th>Customer Name</th>
+              <th>Subject</th>
+              <th>Report Date</th>
+              <th>Report Time</th>
+              <th>Last Update</th>
+              <th>Status</th>
+              <th>Other Option</th>
+            </tr>
+            <tr>
+              <td><img src="assets/images/p-icon.png" />910011001</td>
+              <td>Sandeep Singh</td>
+              <td>Address: 012, XYZ B14</td>
+              <td>Wed Oct 24, 2022</td>
+              <td>12:30 PM</td>
+              <td><span class="">00:00 AM</span></td>
+              <td class="compleate">Completed</td>
+              <td>
+                <div class="GetIocn">
+                  <span class="fa fa-phone"></span>
+                  <span class="fa fa-paper-plane"></span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><img src="assets/images/d-icon.png" />910011001</td>
+              <td>Sandeep Singh</td>
+              <td>Address: 012, XYZ B14</td>
+              <td>Wed Oct 24, 2022</td>
+              <td>12:30 PM</td>
+              <td><span class="">00:00 AM</span></td>
+              <td class="compleate">Completed</td>
+              <td>
+                <div class="GetIocn">
+                  <span class="fa fa-phone"></span>
+                  <span class="fa fa-paper-plane"></span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><img src="assets/images/p-icon.png" />910011001</td>
+              <td>Sandeep Singh</td>
+              <td>Address: 012, XYZ B14</td>
+              <td>Wed Oct 24, 2022</td>
+              <td>12:30 PM</td>
+              <td><span class="">00:00 AM</span></td>
+              <td class="compleate">Completed</td>
+              <td>
+                <div class="GetIocn">
+                  <span class="fa fa-phone"></span>
+                  <span class="fa fa-paper-plane"></span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><img src="assets/images/p-icon.png" />910011001</td>
+              <td>Sandeep Singh</td>
+              <td>Address: 012, XYZ B14</td>
+              <td>Wed Oct 24, 2022</td>
+              <td>12:30 PM</td>
+              <td><span class="">00:00 AM</span></td>
+              <td class="compleate">Completed</td>
+              <td>
+                <div class="GetIocn">
+                  <span class="fa fa-phone"></span>
+                  <span class="fa fa-paper-plane"></span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><img src="assets/images/d-icon.png" />910011001</td>
+              <td>Sandeep Singh</td>
+              <td>Address: 012, XYZ B14</td>
+              <td>Wed Oct 24, 2022</td>
+              <td>12:30 PM</td>
+              <td><span class="">00:00 AM</span></td>
+              <td class="compleate">Completed</td>
+              <td>
+                <div class="GetIocn">
+                  <span class="fa fa-phone"></span>
+                  <span class="fa fa-paper-plane"></span>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <!-- <div class="row mt-3">
+              <div class="col-md-12 text-end">
+                <button class="ButtonStyle">Assign Order</button>
+              </div>
+            </div> -->
+      </div>
+    </div>
+  </div>
+</div>
