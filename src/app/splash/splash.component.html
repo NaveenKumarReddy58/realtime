@@ -1,9 +1,9 @@
 <div
-  *ngIf="fadeToggle"
+  *ngIf="toggleFlag"
   class="app-splash-screen"
   @fade
-  (@fade.done)="fadeToggle = false"
-  (@fade.start)="fadeToggle = false"
+  (@fade.start)="toggleFlag = false"
+  (@fade.done)="toggleFlag = false"
 >
   <div class="app-splash-inner"></div>
 </div>
