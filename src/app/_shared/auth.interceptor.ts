@@ -4,14 +4,28 @@ import {
   HttpRequest,
   HttpHandler,
   HttpErrorResponse,
+  HttpEvent,
+  HttpResponse,
 } from '@angular/common/http';
 import { AuthService } from '../_service/auth.service';
-import { catchError, throwError } from 'rxjs';
+import {
+  catchError,
+  delay,
+  delayWhen,
+  map,
+  Observable,
+  retry,
+  tap,
+  throwError,
+} from 'rxjs';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) {}
-  intercept(req: HttpRequest<any>, next: HttpHandler) {
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
     const authToken = this.authService.getToken;
     if (authToken) {
       req = req.clone({
@@ -24,18 +38,25 @@ export class AuthInterceptor implements HttpInterceptor {
         setHeaders: {},
       });
     }
-    return next.handle(req);
-    // return next.handle(req).pipe(catchError(this.handleError));
-  }
-
-  handleError(error: HttpErrorResponse) {
-    let msg = '';
-    if (error.error instanceof ErrorEvent) {
-      msg = error.error.message;
-    } else {
-      msg = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    console.log('e', msg);
-    return throwError(msg);
+    // return next.handle(req);
+    return next.handle(req).pipe(
+      retry(1),
+      delay(5),
+      tap((evt) => {
+        if (evt instanceof HttpResponse) {
+          if (evt.body.resultCode === '0' || evt.body.resultCode == 0) {
+            console.log('Api Data Err', evt.body);
+            return;
+          } else if (evt.body.resultCode == 4) {
+            this.authService.tokenRefresh();
+            console.log('Api Token Err', evt.body);
+            return;
+          } else {
+            // console.error('Api Data', evt.body);
+          }
+        }
+      }),
+      catchError(this.authService.handleError)
+    );
   }
 }

@@ -6,6 +6,7 @@ import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Plan } from '../_interface/plan';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,8 @@ export class PlanService {
     private route: ActivatedRoute,
     private router: Router,
     private http: HttpClient,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public authService: AuthService
   ) {}
 
   private _plans = new BehaviorSubject<object[]>([]);
@@ -52,37 +54,34 @@ export class PlanService {
       tail = `${id}`;
     }
 
-    this.http.get<any>(`${environment.apiUrl}/tenant/plan/${tail}`).subscribe(
-      (data) => {
-        if (
-          data?.resultCode === '0' ||
-          data?.resultCode == 4 ||
-          data?.resultCode == 0
-        ) {
-          console.log('Api Data Err', data);
-          this.toastr.error(data.errorMessage);
-          return;
+    this.http
+      .get<any>(`${environment.apiUrl}/tenant/plan/${tail}`)
+      .pipe(
+        map((data) => {
+          return data;
+        }),
+        catchError(this.authService.handleError)
+      )
+      .subscribe(
+        (data: any) => {
+          if (
+            data?.resultCode === '0' ||
+            data?.resultCode == 4 ||
+            data?.resultCode == 0
+          ) {
+            console.log('Api Data Err', data);
+            this.toastr.error(data.errorMessage);
+            return;
+          }
+
+          this.plansData.plans = data;
+          this._plans.next(Object.assign({}, this.plansData).plans);
+          this.plancount();
+        },
+        (error) => {
+          console.log('Api Err', error);
         }
-
-        this.plansData.plans = data;
-        this._plans.next(Object.assign({}, this.plansData).plans);
-        this.plancount();
-      },
-      (error) => {
-        console.log('Api Err', error);
-      }
-    );
-  }
-
-  handleError(error: HttpErrorResponse) {
-    let msg = '';
-    if (error.error instanceof ErrorEvent) {
-      msg = error.error.message;
-    } else {
-      msg = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    console.log('e', msg);
-    return throwError(msg);
+      );
   }
 
   padd(form: any) {
@@ -90,7 +89,7 @@ export class PlanService {
       map((data) => {
         return data;
       }),
-      catchError(this.handleError)
+      catchError(this.authService.handleError)
     );
   }
 
@@ -101,7 +100,7 @@ export class PlanService {
         map((data) => {
           return data;
         }),
-        catchError(this.handleError)
+        catchError(this.authService.handleError)
       );
   }
 
@@ -116,7 +115,7 @@ export class PlanService {
         map((data) => {
           return data;
         }),
-        catchError(this.handleError)
+        catchError(this.authService.handleError)
       );
   }
 
@@ -134,8 +133,14 @@ export class PlanService {
     }
     this.http
       .get<any>(`${environment.apiUrl}/tenant/organization-listing/${tail}`)
+      .pipe(
+        map((data) => {
+          return data;
+        }),
+        catchError(this.authService.handleError)
+      )
       .subscribe(
-        (data) => {
+        (data: any) => {
           if (
             data?.resultCode === '0' ||
             data?.resultCode == 4 ||
@@ -176,52 +181,68 @@ export class PlanService {
         map((data) => {
           return data;
         }),
-        catchError(this.handleError)
+        catchError(this.authService.handleError)
       );
   }
 
   cporgcount() {
-    this.http.get<any>(`${environment.apiUrl}/tenant/org-count/`).subscribe(
-      (data: any) => {
-        if (
-          data?.resultCode === '0' ||
-          data?.resultCode == 4 ||
-          data?.resultCode == 0
-        ) {
-          console.log('Api Data Err', data);
-          this.toastr.error(data.errorMessage);
-          return;
-        }
+    this.http
+      .get<any>(`${environment.apiUrl}/tenant/org-count/`)
+      .pipe(
+        map((data) => {
+          return data;
+        }),
+        catchError(this.authService.handleError)
+      )
+      .subscribe(
+        (data: any) => {
+          if (
+            data?.resultCode === '0' ||
+            data?.resultCode == 4 ||
+            data?.resultCode == 0
+          ) {
+            console.log('Api Data Err', data);
+            this.toastr.error(data.errorMessage);
+            return;
+          }
 
-        this.orgcountData.orgcount = data;
-        this._orgcount.next(Object.assign({}, this.orgcountData).orgcount);
-      },
-      (error) => {
-        console.log('Api Err', error);
-      }
-    );
+          this.orgcountData.orgcount = data;
+          this._orgcount.next(Object.assign({}, this.orgcountData).orgcount);
+        },
+        (error) => {
+          console.log('Api Err', error);
+        }
+      );
   }
 
   plancount() {
-    this.http.get<any>(`${environment.apiUrl}/tenant/plan-count/`).subscribe(
-      (data) => {
-        if (
-          data?.resultCode === '0' ||
-          data?.resultCode == 4 ||
-          data?.resultCode == 0
-        ) {
-          console.log('Api Data Err', data);
-          this.toastr.error(data.errorMessage);
-          return;
-        }
+    this.http
+      .get<any>(`${environment.apiUrl}/tenant/plan-count/`)
+      .pipe(
+        map((data) => {
+          return data;
+        }),
+        catchError(this.authService.handleError)
+      )
+      .subscribe(
+        (data: any) => {
+          if (
+            data?.resultCode === '0' ||
+            data?.resultCode == 4 ||
+            data?.resultCode == 0
+          ) {
+            console.log('Api Data Err', data);
+            this.toastr.error(data.errorMessage);
+            return;
+          }
 
-        this.plancountData.plancount = data;
-        this._plancount.next(Object.assign({}, this.plancountData).plancount);
-      },
-      (error) => {
-        console.log('Api Err', error);
-      }
-    );
+          this.plancountData.plancount = data;
+          this._plancount.next(Object.assign({}, this.plancountData).plancount);
+        },
+        (error) => {
+          console.log('Api Err', error);
+        }
+      );
   }
 
   clearrouter() {
@@ -257,7 +278,7 @@ export class PlanService {
         map((data) => {
           return data;
         }),
-        catchError(this.handleError)
+        catchError(this.authService.handleError)
       );
   }
 }

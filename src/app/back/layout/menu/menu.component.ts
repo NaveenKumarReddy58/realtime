@@ -20,27 +20,8 @@ export class MenuComponent {
     private toastr: ToastrService
   ) {
     this.timer = setInterval(() => {
-      // this.tokenRefresh();
+      // code
     }, 290000);
-  }
-
-  tokenRefresh() {
-    this.authService.tokenRefresh().subscribe(
-      (data: any) => {
-        if (
-          data?.resultCode === '0' ||
-          data?.resultCode == 4 ||
-          data?.resultCode == 0
-        ) {
-          console.log('Api Data Err', data);
-          return;
-        }
-        console.log('tokenRefresh');
-      },
-      (error) => {
-        console.log('Api Err', error);
-      }
-    );
   }
 
   doLogout() {

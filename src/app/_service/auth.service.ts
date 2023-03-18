@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
-  toggleDashboard = new BehaviorSubject<string>('');
+  toggleDashboard = new BehaviorSubject<any>(false);
 
   constructor(
     private http: HttpClient,
@@ -45,6 +45,11 @@ export class AuthService {
     return localStorage.getItem('org_domain');
   }
 
+  activeDashboard(): Observable<any[]> {
+    this.toggleDashboard.next(this.isLoggedIn);
+    return this.toggleDashboard.asObservable();
+  }
+
   get isLoggedIn(): boolean {
     let authToken = localStorage.getItem('access_token');
     return authToken !== null ? true : false;
@@ -65,6 +70,8 @@ export class AuthService {
     if (removeToken == null) {
       this.router.navigate(['/']);
     }
+
+    this.toggleDashboard.next(false);
   }
 
   // User profile
@@ -92,6 +99,7 @@ export class AuthService {
       })
       .pipe(
         map((data) => {
+          this.toggleDashboard.next(data?.access_token);
           return data;
         }),
         catchError(this.handleError)
@@ -113,6 +121,7 @@ export class AuthService {
       })
       .pipe(
         map((data) => {
+          this.toggleDashboard.next(data?.access_token);
           return data;
         }),
         catchError(this.handleError)
@@ -158,6 +167,22 @@ export class AuthService {
           return data;
         }),
         catchError(this.handleError)
+      )
+      .subscribe(
+        (data: any) => {
+          if (
+            data?.resultCode === '0' ||
+            data?.resultCode == 4 ||
+            data?.resultCode == 0
+          ) {
+            console.log('Api Data Err', data);
+            return;
+          }
+          console.log('tokenRefresh');
+        },
+        (error) => {
+          console.log('Api Err', error);
+        }
       );
   }
 }

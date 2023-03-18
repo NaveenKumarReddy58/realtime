@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
 import { Keepalive } from '@ng-idle/keepalive';
+import { Observable } from 'rxjs';
 import { AuthService } from './_service/auth.service';
 
 @Component({
@@ -15,9 +16,9 @@ export class AppComponent {
   idleState = 'Not started.';
   timedOut = false;
   lastPing?: Date;
-  isLoggedIn = false;
+  isLoggedIn: any = false;
 
-  toggleDashboard: boolean = false;
+  toggleDashboard: any = false;
   toggleClass: any = '';
   url: any;
   urlName: any;
@@ -29,22 +30,14 @@ export class AppComponent {
     public authService: AuthService,
     public router: Router
   ) {
-    if (this.authService.isLoggedIn) {
-      this.isLoggedIn = this.authService.isLoggedIn;
-    }
-
-    // this.authService.toggleClass.subscribe((res) => {
-    //   console.log('get response', res);
-    //   this.toggleClass = res;
-    // });
+    this.authService.activeDashboard().subscribe((data: any) => {
+      this.isLoggedIn = data;
+    });
 
     // this.router.events.subscribe({
     //   next: (event: any) => {
     //     this.url = window.location.pathname;
     //     this.urlName = this.url.split('/');
-    //     this.showModule = this.urlName[1];
-    //     console.log(this.showModule, 'router url');
-    //     localStorage.setItem('app_current_Route', this.showModule);
     //   },
 
     //   error: (error) => console.error(error),
@@ -61,7 +54,7 @@ export class AppComponent {
     idle.onTimeout.subscribe(() => {
       this.idleState = 'Timed out!';
       this.timedOut = true;
-      this.authService.doLogout();
+      // this.authService.doLogout();
     });
     idle.onIdleStart.subscribe(() => (this.idleState = "You've gone idle!"));
     idle.onTimeoutWarning.subscribe(

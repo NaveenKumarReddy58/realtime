@@ -1,4 +1,4 @@
-<app-splash></app-splash>{{ isLoggedIn }}
+<app-splash></app-splash>
 <section *ngIf="!isLoggedIn">
   <router-outlet></router-outlet>
 </section>
@@ -15,7 +15,7 @@
         <app-top></app-top>
         <div class="row">
           <div class="col-md-12">
-            <div class="ContentArea no-padding">
+            <div class="ContentArea">
               <router-outlet></router-outlet>
             </div>
           </div>
