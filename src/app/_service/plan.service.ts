@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, delay, map, retry } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Plan } from '../_interface/plan';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
@@ -57,6 +57,8 @@ export class PlanService {
     this.http
       .get<any>(`${environment.apiUrl}/tenant/plan/${tail}`)
       .pipe(
+        retry(2),
+        delay(2),
         map((data) => {
           return data;
         }),
@@ -70,7 +72,7 @@ export class PlanService {
             data?.resultCode == 0
           ) {
             console.log('Api Data Err', data);
-            this.toastr.error(data.errorMessage);
+            // this.toastr.error(data.errorMessage);
             return;
           }
 
@@ -86,6 +88,8 @@ export class PlanService {
 
   padd(form: any) {
     return this.http.post<any>(`${environment.apiUrl}/tenant/plan/`, form).pipe(
+      retry(2),
+      delay(2),
       map((data) => {
         return data;
       }),
@@ -97,6 +101,8 @@ export class PlanService {
     return this.http
       .put<any>(`${environment.apiUrl}/tenant/plan/${id}/`, form)
       .pipe(
+        retry(2),
+        delay(2),
         map((data) => {
           return data;
         }),
@@ -112,6 +118,8 @@ export class PlanService {
     return this.http
       .post<any>(`${environment.apiUrl}/tenant/organization/`, form)
       .pipe(
+        retry(2),
+        delay(2),
         map((data) => {
           return data;
         }),
@@ -134,6 +142,8 @@ export class PlanService {
     this.http
       .get<any>(`${environment.apiUrl}/tenant/organization-listing/${tail}`)
       .pipe(
+        retry(2),
+        delay(2),
         map((data) => {
           return data;
         }),
@@ -147,7 +157,7 @@ export class PlanService {
             data?.resultCode == 0
           ) {
             console.log('Api Data Err', data);
-            this.toastr.error(data.errorMessage);
+            // this.toastr.error(data.errorMessage);
             return;
           }
 
@@ -178,6 +188,8 @@ export class PlanService {
         org_status,
       })
       .pipe(
+        retry(2),
+        delay(2),
         map((data) => {
           return data;
         }),
@@ -189,6 +201,8 @@ export class PlanService {
     this.http
       .get<any>(`${environment.apiUrl}/tenant/org-count/`)
       .pipe(
+        retry(2),
+        delay(2),
         map((data) => {
           return data;
         }),
@@ -202,7 +216,7 @@ export class PlanService {
             data?.resultCode == 0
           ) {
             console.log('Api Data Err', data);
-            this.toastr.error(data.errorMessage);
+            // this.toastr.error(data.errorMessage);
             return;
           }
 
@@ -219,6 +233,8 @@ export class PlanService {
     this.http
       .get<any>(`${environment.apiUrl}/tenant/plan-count/`)
       .pipe(
+        retry(2),
+        delay(2),
         map((data) => {
           return data;
         }),
@@ -232,7 +248,7 @@ export class PlanService {
             data?.resultCode == 0
           ) {
             console.log('Api Data Err', data);
-            this.toastr.error(data.errorMessage);
+            // this.toastr.error(data.errorMessage);
             return;
           }
 
@@ -275,6 +291,8 @@ export class PlanService {
     return this.http
       .put<any>(`${environment.apiUrl}/tenant/bookmark/${id}`, {})
       .pipe(
+        retry(2),
+        delay(2),
         map((data) => {
           return data;
         }),

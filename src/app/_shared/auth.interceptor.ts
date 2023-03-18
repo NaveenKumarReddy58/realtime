@@ -40,8 +40,8 @@ export class AuthInterceptor implements HttpInterceptor {
     }
     // return next.handle(req);
     return next.handle(req).pipe(
-      retry(1),
-      delay(5),
+      retry(2),
+      delay(2),
       tap((evt) => {
         if (evt instanceof HttpResponse) {
           if (evt.body.resultCode === '0' || evt.body.resultCode == 0) {

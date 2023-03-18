@@ -4,28 +4,28 @@
       <ul class="Tab_List">
         <li class="{{ optionstype == 'all' ? 'active' : '' }}">
           <a (click)="orgfilter('all', orgdata.all.start_date)"
-            >All {{ orgdata?.all?.count }}</a
+            >All {{ orgdata?.all?.count-1 }}</a
           >
         </li>
         <li class="{{ optionstype == 'weekly' ? 'active' : '' }}">
           <a
             routerLink="#"
             (click)="orgfilter('weekly', orgdata.weekly.start_date)"
-            >Weekly {{ orgdata?.weekly?.count }}</a
+            >Weekly {{ orgdata?.weekly?.count-1 }}</a
           >
         </li>
         <li class="{{ optionstype == 'monthly' ? 'active' : '' }}">
           <a
             routerLink="#"
             (click)="orgfilter('monthly', orgdata.monthly.start_date)"
-            >Monthly {{ orgdata?.monthly?.count }}</a
+            >Monthly {{ orgdata?.monthly?.count-1 }}</a
           >
         </li>
         <li class="{{ optionstype == 'yearly' ? 'active' : '' }}">
           <a
             routerLink="#"
             (click)="orgfilter('yearly', orgdata.yearly.start_date)"
-            >Yearly {{ orgdata?.yearly?.count }}</a
+            >Yearly {{ orgdata?.yearly?.count-1 }}</a
           >
         </li>
         <li class="MonthlyTab">

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, delay, map, retry } from 'rxjs/operators';
 import {
   HttpClient,
   HttpHeaders,
@@ -78,6 +78,8 @@ export class AuthService {
   getUserProfile(id: any): Observable<any> {
     let api = `${environment.apiUrl}/user-profile/${id}`;
     return this.http.get(api).pipe(
+      retry(2),
+      delay(2),
       map((res) => {
         return res || {};
       }),
@@ -98,6 +100,8 @@ export class AuthService {
         password,
       })
       .pipe(
+        retry(2),
+        delay(2),
         map((data) => {
           this.toggleDashboard.next(data?.access_token);
           return data;
@@ -120,6 +124,8 @@ export class AuthService {
         login_by,
       })
       .pipe(
+        retry(2),
+        delay(2),
         map((data) => {
           this.toggleDashboard.next(data?.access_token);
           return data;
@@ -147,6 +153,8 @@ export class AuthService {
         new_password,
       })
       .pipe(
+        retry(2),
+        delay(2),
         map((data) => {
           return data;
         }),
@@ -161,6 +169,8 @@ export class AuthService {
         refresh,
       })
       .pipe(
+        retry(2),
+        delay(2),
         map((data) => {
           localStorage.setItem('access_token', data?.access);
           // localStorage.setItem('user', JSON.stringify(data));

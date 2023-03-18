@@ -444,10 +444,10 @@ li.Status span {
   background: #fff;
   width: 100%;
   border-radius: 15px;
-  height: 100%;
+  /* height: 350px; */
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   z-index: 10;
-  min-height: 80vh;
+  min-height: 350px;
 }
 .SearchOrder {
   padding: 20px 25px;

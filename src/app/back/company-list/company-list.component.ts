@@ -88,7 +88,7 @@ export class CompanyListComponent {
           data?.resultCode == 0
         ) {
           console.log('Api Data Err', data);
-          this.toastr.error(data.errorMessage);
+          // this.toastr.error(data.errorMessage);
           return;
         }
 

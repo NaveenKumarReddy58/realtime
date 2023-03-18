@@ -41,7 +41,7 @@ export class TimerComponent {
           data?.resultCode == 0
         ) {
           console.log('Api Data Err', data);
-          this.toastr.error(data.message);
+          // this.toastr.error(data.message);
           return;
         }
 

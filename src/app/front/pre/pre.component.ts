@@ -61,7 +61,7 @@ export class PreComponent {
         ) {
           this.loading = false;
           console.log('Api Data Err', data);
-          this.toastr.error(data.errorMessage);
+          // this.toastr.error(data.errorMessage);
           return;
         }
         localStorage.setItem('org_email', data?.results?.email);

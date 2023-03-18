@@ -72,7 +72,7 @@ export class OtpLoginComponent {
         ) {
           this.loading = false;
           console.log('Api Data Err', data);
-          this.toastr.error(data.message);
+          // this.toastr.error(data.message);
           return;
         }
 
@@ -114,7 +114,7 @@ export class OtpLoginComponent {
             data?.resultCode == 0
           ) {
             console.log('Api Data Err', data);
-            this.toastr.error(data.errorMessage);
+            // this.toastr.error(data.errorMessage);
             return;
           }
 
