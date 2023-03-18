@@ -1794,6 +1794,7 @@ button.CancelButton {
 }
 .MyPlanList ul li img {
   max-width: 30px;
+  border-radius: 30px;
 }
 .MyPlanList {
   overflow: auto;
@@ -1995,6 +1996,7 @@ span.Deactivated {
   max-width: 50px;
   display: block;
   margin: 0 auto;
+  border-radius: 30px;
 }
 .add-company ul li span {
   display: block;
