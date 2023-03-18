@@ -16,10 +16,7 @@ jQuery(document).ready(function ($) {
     });
   }, 1000);
 
-
-
-  $(".side_menu").click(function(){
+  $(".side_menu").click(function () {
     $(".main_box").toggleClass("main");
-  }); 
-
+  });
 });

@@ -1,139 +1,146 @@
-<div class="row">
-  <div class="TabsList">
-    <ul class="Tab_List">
-      <li class="{{ optionstype == 'all' ? 'active' : '' }}">
-        <a (click)="orgfilter('all', orgdata.all.start_date)"
-          >All {{ orgdata?.all?.count }}</a
-        >
-      </li>
-      <li class="{{ optionstype == 'weekly' ? 'active' : '' }}">
-        <a
-          routerLink="#"
-          (click)="orgfilter('weekly', orgdata.weekly.start_date)"
-          >Weekly {{ orgdata?.weekly?.count }}</a
-        >
-      </li>
-      <li class="{{ optionstype == 'monthly' ? 'active' : '' }}">
-        <a
-          routerLink="#"
-          (click)="orgfilter('monthly', orgdata.monthly.start_date)"
-          >Monthly {{ orgdata?.monthly?.count }}</a
-        >
-      </li>
-      <li class="{{ optionstype == 'yearly' ? 'active' : '' }}">
-        <a
-          routerLink="#"
-          (click)="orgfilter('yearly', orgdata.yearly.start_date)"
-          >Yearly {{ orgdata?.yearly?.count }}</a
-        >
-      </li>
-      <li class="MonthlyTab">
-        <a routerLink="#">Custom</a>
-      </li>
-      <li class="{{ optionstype == 'deactivate' ? 'active' : '' }}">
-        <a routerLink="#" (click)="deactivatedfield()">Deactivated Companies</a>
-      </li>
-    </ul>
-  </div>
+<div class="ContentArea no-padding">
   <div class="row">
-    <div class="FilterTab FilterTabHome">
-      <a routerLink="#">
-        <span>Filter</span>
-        <img src="assets/images/filter-icon.png" />
-      </a>
+    <div class="TabsList">
+      <ul class="Tab_List">
+        <li class="{{ optionstype == 'all' ? 'active' : '' }}">
+          <a (click)="orgfilter('all', orgdata.all.start_date)"
+            >All {{ orgdata?.all?.count }}</a
+          >
+        </li>
+        <li class="{{ optionstype == 'weekly' ? 'active' : '' }}">
+          <a
+            routerLink="#"
+            (click)="orgfilter('weekly', orgdata.weekly.start_date)"
+            >Weekly {{ orgdata?.weekly?.count }}</a
+          >
+        </li>
+        <li class="{{ optionstype == 'monthly' ? 'active' : '' }}">
+          <a
+            routerLink="#"
+            (click)="orgfilter('monthly', orgdata.monthly.start_date)"
+            >Monthly {{ orgdata?.monthly?.count }}</a
+          >
+        </li>
+        <li class="{{ optionstype == 'yearly' ? 'active' : '' }}">
+          <a
+            routerLink="#"
+            (click)="orgfilter('yearly', orgdata.yearly.start_date)"
+            >Yearly {{ orgdata?.yearly?.count }}</a
+          >
+        </li>
+        <li class="MonthlyTab">
+          <a routerLink="#">Custom</a>
+        </li>
+        <li class="{{ optionstype == 'deactivate' ? 'active' : '' }}">
+          <a routerLink="#" (click)="deactivatedfield()"
+            >Deactivated Companies</a
+          >
+        </li>
+      </ul>
+    </div>
+    <div class="row">
+      <div class="FilterTab FilterTabHome">
+        <a routerLink="#">
+          <span>Filter</span>
+          <img src="assets/images/filter-icon.png" />
+        </a>
+      </div>
     </div>
   </div>
-</div>
-<div class="ContentArea_Inner">
-  <div class="ConpanyDetail home-filter mb-5">
-    <div class="row pb-1">
-      <cdk-accordion class="example-accordion">
-        <cdk-accordion-item
-          *ngFor="let item of items; let index = index"
-          #accordionItem="cdkAccordionItem"
-          class="example-accordion-item"
-          role="button"
-          tabindex="0"
-          [attr.id]="'accordion-header-' + index"
-          [attr.aria-expanded]="accordionItem.expanded"
-          [attr.aria-controls]="'accordion-body-' + index"
-        >
-          <ul class="Company_Detail_cnt Company_Detail_cnt02">
-            <li>
-              <div class="IconImgSet Starworld">
-                <img *ngIf="!item.logo" src="assets/images/profilephoto.png" />
-                <img *ngIf="item.logo" [src]="item.logo" />
-                <span class="IconHeading"
-                  >{{ item.name }}
-                  <span class="SurName">{{ item.name }}</span>
-                </span>
-              </div>
-            </li>
-            <li>
-              <div class="IconImgSet DayPlans">
-                <img
-                  *ngIf="!item.plans.logo"
-                  src="assets/images/sper-top-icon02.png"
-                />
-                <img *ngIf="item.plans.logo" [src]="item.plans.logo" />
-                <span class="IconHeading">{{ item.plans.title }}</span>
-                <span class="__Plan GoldPlan">
-                  {{ item.plans.exp_date | dateDifference }} Left for plan
-                  renewal
-                </span>
-              </div>
-            </li>
-            <li>
-              <div class="BookMarkCnt">
-                <ul>
-                  <li>
-                    <i class="fa fa-paper-plane"></i>
-                    <span>Send Notification</span>
-                  </li>
-                  <li>
-                    <i class="fa fa-phone"></i>
-                    <span>Call</span>
-                  </li>
-                  <li>
-                    <i class="fa fa-envelope"></i>
-                    <span>Email</span>
-                  </li>
-                  <li (click)="cbookmark(item.id)">
-                    <i
-                      class="fa fa-bookmark-o {{
-                        item.is_bookmarked ? 'active' : ''
-                      }}"
-                    ></i>
-                    <span>Bookmark</span>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li>
-              <a (click)="accordionItem.toggle()">
-                <img
-                  *ngIf="!accordionItem.expanded"
-                  src="assets/images/round-arrow.png"
-                />
-                <img
-                  *ngIf="accordionItem.expanded"
-                  src="assets/images/round-arrow-up.png"
-                />
-              </a>
-            </li>
-          </ul>
-          <div
-            *ngIf="accordionItem.expanded"
-            class="example-accordion-item-body"
-            role="region"
-            [style.display]="accordionItem.expanded ? '' : 'none'"
-            [attr.id]="'accordion-body-' + index"
-            [attr.aria-labelledby]="'accordion-header-' + index"
+  <div class="ContentArea_Inner">
+    <div class="ConpanyDetail home-filter mb-5">
+      <div class="row pb-1">
+        <cdk-accordion class="example-accordion">
+          <cdk-accordion-item
+            *ngFor="let item of items; let index = index"
+            #accordionItem="cdkAccordionItem"
+            class="example-accordion-item"
+            role="button"
+            tabindex="0"
+            [attr.id]="'accordion-header-' + index"
+            [attr.aria-expanded]="accordionItem.expanded"
+            [attr.aria-controls]="'accordion-body-' + index"
           >
-            <app-company-detail [companyid]="item.id"></app-company-detail>
-          </div>
-        </cdk-accordion-item>
-      </cdk-accordion>
+            <ul class="Company_Detail_cnt Company_Detail_cnt02">
+              <li>
+                <div class="IconImgSet Starworld">
+                  <img
+                    *ngIf="!item.logo"
+                    src="assets/images/profilephoto.png"
+                  />
+                  <img *ngIf="item.logo" [src]="item.logo" />
+                  <span class="IconHeading"
+                    >{{ item.name }}
+                    <span class="SurName">{{ item.name }}</span>
+                  </span>
+                </div>
+              </li>
+              <li>
+                <div class="IconImgSet DayPlans">
+                  <img
+                    *ngIf="!item.plans.logo"
+                    src="assets/images/sper-top-icon02.png"
+                  />
+                  <img *ngIf="item.plans.logo" [src]="item.plans.logo" />
+                  <span class="IconHeading">{{ item.plans.title }}</span>
+                  <span class="__Plan GoldPlan">
+                    {{ item.plans.exp_date | dateDifference }} Left for plan
+                    renewal
+                  </span>
+                </div>
+              </li>
+              <li>
+                <div class="BookMarkCnt">
+                  <ul>
+                    <li>
+                      <i class="fa fa-paper-plane"></i>
+                      <span>Send Notification</span>
+                    </li>
+                    <li>
+                      <i class="fa fa-phone"></i>
+                      <span>Call</span>
+                    </li>
+                    <li>
+                      <i class="fa fa-envelope"></i>
+                      <span>Email</span>
+                    </li>
+                    <li (click)="cbookmark(item.id)">
+                      <i
+                        class="fa fa-bookmark {{
+                          item.is_bookmarked ? 'active' : ''
+                        }}"
+                      ></i>
+                      <span>Bookmark</span>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li>
+                <a (click)="accordionItem.toggle()">
+                  <img
+                    *ngIf="!accordionItem.expanded"
+                    src="assets/images/round-arrow.png"
+                  />
+                  <img
+                    *ngIf="accordionItem.expanded"
+                    src="assets/images/round-arrow-up.png"
+                  />
+                </a>
+              </li>
+            </ul>
+            <div
+              *ngIf="accordionItem.expanded"
+              class="example-accordion-item-body"
+              role="region"
+              [style.display]="accordionItem.expanded ? '' : 'none'"
+              [attr.id]="'accordion-body-' + index"
+              [attr.aria-labelledby]="'accordion-header-' + index"
+            >
+              <app-company-detail [companyid]="item.id"></app-company-detail>
+            </div>
+          </cdk-accordion-item>
+        </cdk-accordion>
+      </div>
     </div>
   </div>
 </div>

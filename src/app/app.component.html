@@ -5,19 +5,17 @@
 <section *ngIf="isLoggedIn" class="section" style="background: #ebeff2">
   <div class="container-fluid">
     <div class="row main_box">
-      <div class="col-md-3 width20 left_box">
+      <div class="col-md-2">
         <a routerLink="#" class="side_menu">
           <i class="fa-regular fa-bars"></i>
         </a>
         <app-menu></app-menu>
       </div>
-      <div class="col-md-9 width80 right_box">
+      <div class="col-md-10">
         <app-top></app-top>
         <div class="row">
           <div class="col-md-12">
-            <div class="ContentArea">
-              <router-outlet></router-outlet>
-            </div>
+            <router-outlet></router-outlet>
           </div>
         </div>
       </div>
