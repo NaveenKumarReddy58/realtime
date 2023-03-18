@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { countries } from 'src/app/_interface/country-data-store';
+import { AuthService } from 'src/app/_service/auth.service';
 import { PlanService } from 'src/app/_service/plan.service';
 
 @Component({
@@ -32,6 +33,7 @@ export class CompanyAddComponent {
     private route: ActivatedRoute,
     private router: Router,
     public planService: PlanService,
+    public authService: AuthService,
     private toastr: ToastrService
   ) {
     this.addCP = formBuilder.group({
@@ -109,7 +111,7 @@ export class CompanyAddComponent {
         formData.append(i, this.addCP.value[i]);
       }
     }
-    this.userTimezone = localStorage.getItem('user_timezone');
+    this.userTimezone = this.authService.getLS('user_timezone');
     formData.append('user_timezone', this.userTimezone);
     formData.append('state', '');
     formData.append('last_name', '');

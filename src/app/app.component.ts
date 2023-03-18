@@ -18,11 +18,9 @@ export class AppComponent {
   lastPing?: Date;
   isLoggedIn: any = false;
 
-  toggleDashboard: any = false;
-  toggleClass: any = '';
+  _isDashboard: any = false;
   url: any;
   urlName: any;
-  showModule: any;
 
   constructor(
     private idle: Idle,
@@ -30,7 +28,7 @@ export class AppComponent {
     public authService: AuthService,
     public router: Router
   ) {
-    this.authService.activeDashboard().subscribe((data: any) => {
+    this.authService.getDashboard().subscribe((data: any) => {
       this.isLoggedIn = data;
     });
 
@@ -54,7 +52,7 @@ export class AppComponent {
     idle.onTimeout.subscribe(() => {
       this.idleState = 'Timed out!';
       this.timedOut = true;
-      // this.authService.doLogout();
+      this.authService.doLogout();
     });
     idle.onIdleStart.subscribe(() => (this.idleState = "You've gone idle!"));
     idle.onTimeoutWarning.subscribe(

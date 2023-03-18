@@ -14,7 +14,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
-  toggleDashboard = new BehaviorSubject<any>(false);
+  _isDashboard = new BehaviorSubject<any>(false);
+  _isRole = new BehaviorSubject<any>(false);
 
   constructor(
     private http: HttpClient,
@@ -34,44 +35,56 @@ export class AuthService {
   }
 
   get getToken() {
-    return localStorage.getItem('access_token');
+    return this.getLS('access_token');
   }
 
   get getOrgEmail() {
-    return localStorage.getItem('org_email');
+    return this.getLS('org_email');
   }
 
   get getOrgDomain() {
-    return localStorage.getItem('org_domain');
+    return this.getLS('org_domain');
   }
 
-  activeDashboard(): Observable<any[]> {
-    this.toggleDashboard.next(this.isLoggedIn);
-    return this.toggleDashboard.asObservable();
+  getDashboard(): Observable<any[]> {
+    this._isDashboard.next(this.isLoggedIn);
+    return this._isDashboard.asObservable();
   }
 
   get isLoggedIn(): boolean {
-    let authToken = localStorage.getItem('access_token');
+    let authToken = this.getLS('access_token');
     return authToken !== null ? true : false;
   }
 
   get isOrgIn(): boolean {
-    let orgEmail = localStorage.getItem('org_email');
+    let orgEmail = this.getLS('org_email');
     return orgEmail !== null ? true : false;
   }
 
-  doLogout() {
-    localStorage.removeItem('refresh_token');
-    localStorage.removeItem('name');
-    localStorage.removeItem('role');
-    localStorage.removeItem('user_timezone');
+  setLS(k: any, v: any) {
+    return localStorage.setItem(k, v);
+  }
 
-    let removeToken = localStorage.removeItem('access_token');
+  getLS(k: any) {
+    return localStorage.getItem(k);
+  }
+
+  rmLS(k: any) {
+    return localStorage.removeItem(k);
+  }
+
+  doLogout() {
+    this.rmLS('refresh_token');
+    this.rmLS('name');
+    this.rmLS('role');
+    this.rmLS('user_timezone');
+
+    let removeToken = this.rmLS('access_token');
     if (removeToken == null) {
       this.router.navigate(['/']);
     }
 
-    this.toggleDashboard.next(false);
+    this._isDashboard.next(false);
   }
 
   // User profile
@@ -103,7 +116,7 @@ export class AuthService {
         retry(2),
         delay(2),
         map((data) => {
-          this.toggleDashboard.next(data?.access_token);
+          this._isDashboard.next(data?.access_token);
           return data;
         }),
         catchError(this.handleError)
@@ -127,7 +140,7 @@ export class AuthService {
         retry(2),
         delay(2),
         map((data) => {
-          this.toggleDashboard.next(data?.access_token);
+          this._isDashboard.next(data?.access_token);
           return data;
         }),
         catchError(this.handleError)
@@ -163,7 +176,7 @@ export class AuthService {
   }
 
   tokenRefresh() {
-    const refresh = localStorage.getItem('refresh_token');
+    const refresh = this.getLS('refresh_token');
     return this.http
       .post<any>(`${environment.apiUrl}/account/token/refresh/`, {
         refresh,
@@ -172,8 +185,8 @@ export class AuthService {
         retry(2),
         delay(2),
         map((data) => {
-          localStorage.setItem('access_token', data?.access);
-          // localStorage.setItem('user', JSON.stringify(data));
+          this.setLS('access_token', data?.access);
+          // this.setLS('user', JSON.stringify(data));
           return data;
         }),
         catchError(this.handleError)

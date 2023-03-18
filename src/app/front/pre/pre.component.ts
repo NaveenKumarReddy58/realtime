@@ -64,8 +64,8 @@ export class PreComponent {
           // this.toastr.error(data.errorMessage);
           return;
         }
-        localStorage.setItem('org_email', data?.results?.email);
-        localStorage.setItem('org_domain', data?.results?.domain_url);
+        this.authService.setLS('org_email', data?.results?.email);
+        this.authService.setLS('org_domain', data?.results?.domain_url);
 
         this.toastr.success('Organization Selected!');
 

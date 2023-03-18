@@ -35,7 +35,7 @@ export class ResetPasswordComponent {
     }
 
     this.orgEmail = this.authService.getOrgEmail;
-    this.isverified = localStorage.getItem('isverified');
+    this.isverified = this.authService.getLS('isverified');
 
     if (this.isverified !== 't') {
       this.router.navigate(['/']);
@@ -90,7 +90,7 @@ export class ResetPasswordComponent {
           }
 
           this.toastr.success(data.actionPerformed);
-          localStorage.removeItem('isverified');
+          this.authService.rmLS('isverified');
           this.router.navigate(['/']);
         },
         (error) => {

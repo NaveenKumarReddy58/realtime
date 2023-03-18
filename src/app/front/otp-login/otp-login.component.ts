@@ -118,11 +118,11 @@ export class OtpLoginComponent {
             return;
           }
 
-          localStorage.setItem('access_token', data?.access_token);
-          localStorage.setItem('refresh_token', data?.refresh_token);
-          localStorage.setItem('name', data?.name);
-          localStorage.setItem('role', data?.role);
-          localStorage.setItem('user_timezone', data?.user_timezone);
+          this.authService.setLS('access_token', data?.access_token);
+          this.authService.setLS('refresh_token', data?.refresh_token);
+          this.authService.setLS('name', data?.name);
+          this.authService.setLS('role', data?.role);
+          this.authService.setLS('user_timezone', data?.user_timezone);
 
           this.toastr.success(data.actionPerformed);
           this.router.navigate(['/dashboad']);

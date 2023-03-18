@@ -123,7 +123,7 @@ export class ForgotPasswordComponent {
 
           this.isVerified = 't';
           this.toastr.success(data.message);
-          localStorage.setItem('isverified', this.isVerified);
+          this.authService.setLS('isverified', this.isVerified);
           this.router.navigate(['/reset']);
         },
         (error) => {
