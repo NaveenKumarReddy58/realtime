@@ -15,7 +15,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
   _isDashboard = new BehaviorSubject<any>(false);
-  _isRole = new BehaviorSubject<any>(false);
+  _isRole = new BehaviorSubject<any>('0');
 
   constructor(
     private http: HttpClient,
@@ -56,6 +56,16 @@ export class AuthService {
     return authToken !== null ? true : false;
   }
 
+  getRole(): Observable<any[]> {
+    this._isRole.next(this.isRoleIn);
+    return this._isRole.asObservable();
+  }
+
+  get isRoleIn(): string {
+    let role = this.getLS('role');
+    return role !== null ? role : '0';
+  }
+
   get isOrgIn(): boolean {
     let orgEmail = this.getLS('org_email');
     return orgEmail !== null ? true : false;
@@ -85,6 +95,7 @@ export class AuthService {
     }
 
     this._isDashboard.next(false);
+    this._isRole.next('0');
   }
 
   // User profile
@@ -117,6 +128,7 @@ export class AuthService {
         delay(2),
         map((data) => {
           this._isDashboard.next(data?.access_token);
+          this._isRole.next(data?.role);
           return data;
         }),
         catchError(this.handleError)
@@ -141,6 +153,7 @@ export class AuthService {
         delay(2),
         map((data) => {
           this._isDashboard.next(data?.access_token);
+          this._isRole.next(data?.role);
           return data;
         }),
         catchError(this.handleError)

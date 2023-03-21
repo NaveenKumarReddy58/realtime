@@ -17,8 +17,8 @@ export class AppComponent {
   timedOut = false;
   lastPing?: Date;
   isLoggedIn: any = false;
+  isRoleIn: any = false;
 
-  _isDashboard: any = false;
   url: any;
   urlName: any;
 
@@ -30,6 +30,14 @@ export class AppComponent {
   ) {
     this.authService.getDashboard().subscribe((data: any) => {
       this.isLoggedIn = data;
+    });
+
+    this.authService.getRole().subscribe((data: any) => {
+      if (data != false) {
+        this.isRoleIn = data[0];
+      } else {
+        this.isRoleIn = data;
+      }
     });
 
     // this.router.events.subscribe({

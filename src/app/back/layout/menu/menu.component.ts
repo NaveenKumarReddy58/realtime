@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/_service/auth.service';
 })
 export class MenuComponent {
   timer: any = 0;
+  @Input() isRoleIn: any;
 
   constructor(
     private formBuilder: FormBuilder,

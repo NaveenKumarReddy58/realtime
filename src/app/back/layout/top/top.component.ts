@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
@@ -13,6 +13,7 @@ import { PlanService } from 'src/app/_service/plan.service';
 export class TopComponent {
   plandata: any;
   searchbox = false;
+  @Input() isRoleIn: any;
 
   plancount$!: Observable<object[]>;
 

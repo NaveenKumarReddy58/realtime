@@ -9,10 +9,10 @@
         <a routerLink="#" class="side_menu">
           <i class="fa-regular fa-bars"></i>
         </a>
-        <app-menu></app-menu>
+        <app-menu [isRoleIn]="isRoleIn"></app-menu>
       </div>
       <div class="col-md-10">
-        <app-top></app-top>
+        <app-top [isRoleIn]="isRoleIn"></app-top>
         <div class="row">
           <div class="col-md-12">
             <router-outlet></router-outlet>
