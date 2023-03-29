@@ -14,14 +14,21 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
+  $apiUrl = environment.apiUrl;
+  _apiUrl = new BehaviorSubject<any>(this.$apiUrl);
   _isDashboard = new BehaviorSubject<any>(false);
   _isRole = new BehaviorSubject<any>('0');
+  currentApiUrl = 0;
 
   constructor(
     private http: HttpClient,
     public router: Router,
     private toastr: ToastrService
-  ) {}
+  ) {
+    this.getApiUrl().subscribe((data: any) => {
+      this.currentApiUrl = data;
+    });
+  }
 
   handleError(error: HttpErrorResponse) {
     let msg = '';
@@ -66,6 +73,16 @@ export class AuthService {
     return role !== null ? role : '0';
   }
 
+  getApiUrl(): Observable<any[]> {
+    this._apiUrl.next(this.isApiUrlIn);
+    return this._apiUrl.asObservable();
+  }
+
+  get isApiUrlIn(): string {
+    let orgDomain = this.getLS('org_domain');
+    return orgDomain !== null ? orgDomain : this.$apiUrl;
+  }
+
   get isOrgIn(): boolean {
     let orgEmail = this.getLS('org_email');
     return orgEmail !== null ? true : false;
@@ -94,6 +111,7 @@ export class AuthService {
       this.router.navigate(['/']);
     }
 
+    this._apiUrl.next(this.$apiUrl);
     this._isDashboard.next(false);
     this._isRole.next('0');
   }
@@ -112,9 +130,18 @@ export class AuthService {
   }
 
   getOrganization(email: string) {
-    return this.http.get<any>(
-      `${environment.apiUrl}/tenant/get-organization/?email=${email}`
-    );
+    return this.http
+      .post<any>(`${environment.apiUrl}/tenant/get-organization/`, {
+        email,
+      })
+      .pipe(
+        retry(2),
+        delay(2),
+        map((data) => {
+          return data;
+        }),
+        catchError(this.handleError)
+      );
   }
 
   login(email: string, password: string) {
@@ -136,9 +163,18 @@ export class AuthService {
   }
 
   sendMobileOtp(mobile_no: string) {
-    return this.http.get<any>(
-      `${environment.apiUrl}/account/send-mobile-otp/?mobile_no=${mobile_no}`
-    );
+    return this.http
+      .post<any>(`${environment.apiUrl}/account/send-mobile-otp/`, {
+        mobile_no,
+      })
+      .pipe(
+        retry(2),
+        delay(2),
+        map((data) => {
+          return data;
+        }),
+        catchError(this.handleError)
+      );
   }
 
   loginByOtp(email: string, password: string, login_by: string = 'otp') {

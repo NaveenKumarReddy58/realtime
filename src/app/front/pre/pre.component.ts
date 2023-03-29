@@ -64,8 +64,14 @@ export class PreComponent {
           // this.toastr.error(data.errorMessage);
           return;
         }
-        this.authService.setLS('org_email', data?.results?.email);
-        this.authService.setLS('org_domain', data?.results?.domain_url);
+
+        this.authService.setLS('org_email', data?.result[0]?.email);
+        this.authService.setLS(
+          'org_domain',
+          data?.result[0]?.organization?.domain_url
+        );
+        this.authService.setLS('org_phone', data?.result[0]?.phone_number);
+        this.authService.setLS('org_data', JSON.stringify(data));
 
         this.toastr.success('Organization Selected!');
 
