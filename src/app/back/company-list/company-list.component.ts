@@ -48,12 +48,13 @@ export class CompanyListComponent {
       if (params['search_text'] != undefined) {
         this.optionstype = 'all';
       }
-      // if (params['search_text'] == '') {
-      //   params['search_text'] = null;
-      // }
-      console.log('cpparms', params);
-      // this.planService.setrouter(params);
-      this.cplist(this.id, params);
+      // console.log('cpparms', params);
+
+      if (Object.keys(params).length === 0 && params.constructor === Object) {
+        this.cplist();
+      } else {
+        this.cplist(this.id, params);
+      }
     });
   }
 
