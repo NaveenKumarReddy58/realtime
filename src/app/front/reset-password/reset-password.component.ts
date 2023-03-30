@@ -78,7 +78,8 @@ export class ResetPasswordComponent {
       .resetPassword(this.orgEmail, this.f['password'].value)
       .subscribe(
         (data: any) => {
-          this.authService.resultCodeError(data, this.loading);
+          this.loading = false;
+          this.authService.resultCodeError(data);
 
           this.toastr.success(data.actionPerformed);
           this.authService.rmLS('isverified');

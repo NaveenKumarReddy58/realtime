@@ -66,7 +66,8 @@ export class ForgotPasswordComponent {
 
     this.authService.sendResetOtp(this.f['username'].value).subscribe(
       (data: any) => {
-        this.authService.resultCodeError(data, this.loading);
+        this.loading = false;
+        this.authService.resultCodeError(data);
 
         this.toastr.success('OTP Sent!');
         this.isOtpSent = true;

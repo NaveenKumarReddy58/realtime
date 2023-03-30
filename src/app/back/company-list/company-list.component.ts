@@ -34,23 +34,26 @@ export class CompanyListComponent {
   ) {
     // this.id = this.route.snapshot.params['id'];
 
-    this.cplist();
+    this.cplist(0);
     this.cporgcount();
 
     this.route.queryParams.subscribe((params) => {
       if (params['plan'] != undefined) {
         this.id = params['plan'];
-        this.optionstype = 'all';
+      } else {
+        this.id = 0;
       }
-      if (params['bookmarked'] != undefined) {
-        this.optionstype = 'all';
-      }
-      if (params['search_text'] != undefined) {
+
+      if (
+        params['plan'] != undefined ||
+        params['bookmarked'] != undefined ||
+        params['search_text'] != undefined
+      ) {
         this.optionstype = 'all';
       }
 
       if (Object.keys(params).length === 0 && params.constructor === Object) {
-        this.cplist();
+        this.cplist(0);
       } else {
         this.cplist(this.id, params);
       }

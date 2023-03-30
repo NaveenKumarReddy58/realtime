@@ -54,7 +54,8 @@ export class PreComponent {
 
     this.authService.getOrganization(this.f['username'].value).subscribe(
       (data: any) => {
-        this.authService.resultCodeError(data, this.loading);
+        this.loading = false;
+        this.authService.resultCodeError(data);
 
         this.authService.setLS('org_email', data?.result[0]?.email);
         this.authService.setLS(

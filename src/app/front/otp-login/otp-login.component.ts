@@ -65,7 +65,8 @@ export class OtpLoginComponent {
 
     this.authService.sendMobileOtp(this.f['username'].value).subscribe(
       (data: any) => {
-        this.authService.resultCodeError(data, this.loading);
+        this.loading = false;
+        this.authService.resultCodeError(data);
 
         this.toastr.success('OTP Sent!');
         this.isOtpSent = true;

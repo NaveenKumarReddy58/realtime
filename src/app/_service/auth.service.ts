@@ -46,14 +46,14 @@ export class AuthService {
     console.log('Api Err', error);
   }
 
-  resultCodeError(data: any, loading?: any) {
+  resultCodeError(data: any) {
     if (
       data?.resultCode === '0' ||
       data?.resultCode == 4 ||
       data?.resultCode == 0
     ) {
-      loading = false;
       console.log('Api Data Err', data);
+      this.toastr.error(data.errorMessage);
       return;
     }
   }

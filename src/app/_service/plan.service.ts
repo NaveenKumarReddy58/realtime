@@ -117,7 +117,7 @@ export class PlanService {
 
   cplist(id?: Number, filter?: any) {
     let tail = '';
-    if (id) {
+    if (id != 0) {
       tail += id;
     }
     let params = new URLSearchParams();

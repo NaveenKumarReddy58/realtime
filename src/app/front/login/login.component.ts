@@ -64,7 +64,8 @@ export class LoginComponent {
       .login(this.f['username'].value, this.f['password'].value)
       .subscribe(
         (data: any) => {
-          this.authService.resultCodeError(data, this.loading);
+          this.loading = false;
+          this.authService.resultCodeError(data);
 
           this.authService.setLS('access_token', data?.access_token);
           this.authService.setLS('refresh_token', data?.refresh_token);
