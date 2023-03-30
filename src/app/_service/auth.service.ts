@@ -28,6 +28,7 @@ export class AuthService {
   ) {
     this.getApiUrl.subscribe((data: any) => {
       this._liveApiUrl = data;
+      console.log('_liveApiUrl', this._liveApiUrl);
     });
   }
 
@@ -120,7 +121,6 @@ export class AuthService {
       this.router.navigate(['/']);
     }
 
-    this._apiUrl.next(this.apiUrl);
     this._isDashboard.next(false);
     this._isRole.next('0');
   }
