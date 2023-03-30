@@ -13,6 +13,7 @@ import { PlanService } from 'src/app/_service/plan.service';
 export class TopComponent {
   plandata: any;
   searchbox = false;
+  isLoggedIn: any = false;
   @Input() isRoleIn: any;
 
   plancount$!: Observable<object[]>;
@@ -24,7 +25,19 @@ export class TopComponent {
     public authService: AuthService,
     private toastr: ToastrService
   ) {
-    if (this.isRoleIn == 1) {
+    this.authService.getDashboard().subscribe((data: any) => {
+      this.isLoggedIn = data;
+    });
+
+    this.authService.getRole().subscribe((data: any) => {
+      if (data != false) {
+        this.isRoleIn = data[0];
+      } else {
+        this.isRoleIn = data;
+      }
+    });
+
+    if (this.isRoleIn == '1') {
       this.plancount();
     }
   }
