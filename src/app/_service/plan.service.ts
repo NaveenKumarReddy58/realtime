@@ -20,9 +20,7 @@ export class PlanService {
     private http: HttpClient,
     private toastr: ToastrService,
     public authService: AuthService
-  ) {
-    console.log('_liveApiUrl', this._liveApiUrl);
-  }
+  ) {}
 
   private _plans = new BehaviorSubject<object[]>([]);
   private plansData: { plans: object[] } = { plans: [] };

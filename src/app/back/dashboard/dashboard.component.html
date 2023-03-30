@@ -1,1 +1,2 @@
-<app-company-list></app-company-list>
+<app-company-list *ngIf="isRoleIn == 1"></app-company-list>
+<app-order-list *ngIf="isRoleIn == 2"></app-order-list>

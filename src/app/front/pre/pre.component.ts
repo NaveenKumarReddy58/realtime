@@ -64,6 +64,11 @@ export class PreComponent {
           'org_domain',
           data?.result[0]?.organization?.domain_url
         );
+        this.authService._apiUrl.next(
+          data?.result[0]?.organization?.domain_url +
+            ':' +
+            this.authService.port
+        );
         this.authService.setLS('org_phone', data?.result[0]?.phone_number);
         this.authService.setLS('org_data', JSON.stringify(data));
 

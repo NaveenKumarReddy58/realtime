@@ -39,6 +39,7 @@ import { MomentModule } from 'ngx-moment';
 import { CompanyDetailComponent } from './back/company-list/company-detail/company-detail.component';
 import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
 import { SettingComponent } from './back/setting/setting.component';
+import { OrderListComponent } from './back/superadmin/order-list/order-list.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { SettingComponent } from './back/setting/setting.component';
     DateDifference,
     DialogAnimationsComponent,
     CompanyDetailComponent,
-    SettingComponent
+    SettingComponent,
+    OrderListComponent
   ],
   imports: [
     BrowserModule,

@@ -24,7 +24,9 @@ export class TopComponent {
     public authService: AuthService,
     private toastr: ToastrService
   ) {
-    this.plancount();
+    if (this.isRoleIn == 1) {
+      this.plancount();
+    }
   }
 
   plancount() {

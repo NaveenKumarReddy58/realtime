@@ -26,7 +26,7 @@ export class AuthService {
     public router: Router,
     private toastr: ToastrService
   ) {
-    this.getApiUrl().subscribe((data: any) => {
+    this.getApiUrl.subscribe((data: any) => {
       this._liveApiUrl = data;
     });
   }
@@ -89,7 +89,7 @@ export class AuthService {
     return this._isRole.asObservable();
   }
 
-  getApiUrl(): Observable<any[]> {
+  get getApiUrl(): Observable<any[]> {
     let orgDomain = this.getLS('org_domain');
     this._apiUrl.next(
       orgDomain !== null ? orgDomain + ':' + this.port : this.apiUrl
