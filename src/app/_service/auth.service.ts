@@ -15,6 +15,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
   apiUrl = environment.apiUrl;
+  port = environment.port;
   _apiUrl = new BehaviorSubject<any>(this.apiUrl);
   _isDashboard = new BehaviorSubject<any>(false);
   _isRole = new BehaviorSubject<any>('0');
@@ -54,7 +55,8 @@ export class AuthService {
   }
 
   getDashboard(): Observable<any[]> {
-    this._isDashboard.next(this.isLoggedIn);
+    let authToken = this.getLS('access_token');
+    this._isDashboard.next(authToken !== null ? true : false);
     return this._isDashboard.asObservable();
   }
 
@@ -64,23 +66,15 @@ export class AuthService {
   }
 
   getRole(): Observable<any[]> {
-    this._isRole.next(this.isRoleIn);
+    let role = this.getLS('role');
+    this._isRole.next(role !== null ? role : '0');
     return this._isRole.asObservable();
   }
 
-  get isRoleIn(): string {
-    let role = this.getLS('role');
-    return role !== null ? role : '0';
-  }
-
   getApiUrl(): Observable<any[]> {
-    this._apiUrl.next(this.isApiUrlIn);
-    return this._apiUrl.asObservable();
-  }
-
-  get isApiUrlIn(): string {
     let orgDomain = this.getLS('org_domain');
-    return orgDomain !== null ? orgDomain : this.apiUrl;
+    this._apiUrl.next(orgDomain !== null ? orgDomain : this.apiUrl);
+    return this._apiUrl.asObservable();
   }
 
   get isOrgIn(): boolean {
