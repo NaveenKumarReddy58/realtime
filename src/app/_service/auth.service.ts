@@ -48,13 +48,15 @@ export class AuthService {
 
   resultCodeError(data: any) {
     if (
-      data?.resultCode === '0' ||
+      data?.resultCode == '0' ||
       data?.resultCode == 4 ||
       data?.resultCode == 0
     ) {
       console.log('Api Data Err', data);
-      this.toastr.error(data.errorMessage);
-      return;
+      this.toastr.error(data?.errorMessage);
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -155,8 +157,10 @@ export class AuthService {
       })
       .pipe(
         map((data) => {
-          this._isDashboard.next(data?.access_token);
-          this._isRole.next(data?.role);
+          if (data?.access_token != undefined) {
+            this._isDashboard.next(data?.access_token);
+            this._isRole.next(data?.role);
+          }
           return data;
         }),
         catchError(this.handleError)
@@ -185,8 +189,10 @@ export class AuthService {
       })
       .pipe(
         map((data) => {
-          this._isDashboard.next(data?.access_token);
-          this._isRole.next(data?.role);
+          if (data?.access_token != undefined) {
+            this._isDashboard.next(data?.access_token);
+            this._isRole.next(data?.role);
+          }
           return data;
         }),
         catchError(this.handleError)
@@ -250,7 +256,9 @@ export class AuthService {
       )
       .subscribe(
         (data: any) => {
-          this.resultCodeError(data);
+          if (this.resultCodeError(data)) {
+            return;
+          }
 
           console.log('TokenRefresh');
         },

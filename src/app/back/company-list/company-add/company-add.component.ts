@@ -118,9 +118,11 @@ export class CompanyAddComponent {
 
     this.planService.cpAdd(formData).subscribe(
       (data: any) => {
-        this.authService.resultCodeError(data);
+        if (this.authService.resultCodeError(data)) {
+          return;
+        }
 
-        this.toastr.success(data.actionPerformed);
+        this.toastr.success(data?.actionPerformed);
         this.router.navigate(['/dashboad']);
       },
       (error) => {

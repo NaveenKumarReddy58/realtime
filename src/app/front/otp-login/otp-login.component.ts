@@ -66,7 +66,9 @@ export class OtpLoginComponent {
     this.authService.sendMobileOtp(this.f['username'].value).subscribe(
       (data: any) => {
         this.loading = false;
-        this.authService.resultCodeError(data);
+        if (this.authService.resultCodeError(data)) {
+          return;
+        }
 
         this.toastr.success('OTP Sent!');
         this.isOtpSent = true;
@@ -100,7 +102,9 @@ export class OtpLoginComponent {
       .loginByOtp(this.f['username'].value, this.otp, 'otp')
       .subscribe(
         (data: any) => {
-          this.authService.resultCodeError(data);
+          if (this.authService.resultCodeError(data)) {
+            return;
+          }
 
           this.authService.setLS('access_token', data?.access_token);
           this.authService.setLS('refresh_token', data?.refresh_token);
@@ -108,7 +112,7 @@ export class OtpLoginComponent {
           this.authService.setLS('role', data?.role);
           this.authService.setLS('user_timezone', data?.user_timezone);
 
-          this.toastr.success(data.actionPerformed);
+          this.toastr.success(data?.actionPerformed);
           this.router.navigate(['/dashboad']);
         },
         (error) => {

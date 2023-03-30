@@ -94,7 +94,9 @@ export class CompanyListComponent {
   cbookmark(id: Number) {
     this.planService.cbookmark(id).subscribe(
       (data: any) => {
-        this.authService.resultCodeError(data);
+        if (this.authService.resultCodeError(data)) {
+            return;
+          }
 
         this.cplist();
         this.cporgcount();

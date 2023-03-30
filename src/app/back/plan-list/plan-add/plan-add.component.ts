@@ -101,9 +101,11 @@ export class PlanAddComponent {
     if (this.isAddMode) {
       this.planService.padd(formData).subscribe(
         (data: any) => {
-          this.authService.resultCodeError(data);
+          if (this.authService.resultCodeError(data)) {
+            return;
+          }
 
-          this.toastr.success(data.actionPerformed);
+          this.toastr.success(data?.actionPerformed);
           this.router.navigate(['/plans']);
         },
         (error) => {
@@ -114,9 +116,11 @@ export class PlanAddComponent {
     } else {
       this.planService.pedit(this.id, formData).subscribe(
         (data: any) => {
-          this.authService.resultCodeError(data);
+          if (this.authService.resultCodeError(data)) {
+            return;
+          }
 
-          this.toastr.success(data.actionPerformed);
+          this.toastr.success(data?.actionPerformed);
           this.router.navigate(['/plans']);
         },
         (error) => {

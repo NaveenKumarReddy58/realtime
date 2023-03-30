@@ -79,9 +79,11 @@ export class ResetPasswordComponent {
       .subscribe(
         (data: any) => {
           this.loading = false;
-          this.authService.resultCodeError(data);
+          if (this.authService.resultCodeError(data)) {
+            return;
+          }
 
-          this.toastr.success(data.actionPerformed);
+          this.toastr.success(data?.actionPerformed);
           this.authService.rmLS('isverified');
           this.router.navigate(['/']);
         },

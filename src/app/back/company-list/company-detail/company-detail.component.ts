@@ -29,7 +29,9 @@ export class CompanyDetailComponent {
   ngOnInit(): void {
     this.planService.cpdetail(this.companyid).subscribe(
       (data: any) => {
-        this.authService.resultCodeError(data);
+        if (this.authService.resultCodeError(data)) {
+          return;
+        }
 
         this.item = data.results;
         this.admin = data.results.admin;
@@ -53,10 +55,12 @@ export class CompanyDetailComponent {
     this.deactivateLoading = true;
     this.planService.cpdeactivate(id, this.org_status).subscribe(
       (data: any) => {
-        this.authService.resultCodeError(data);
+        if (this.authService.resultCodeError(data)) {
+          return;
+        }
 
         this.deactivateLoading = false;
-        this.toastr.success(data.actionPerformed);
+        this.toastr.success(data?.actionPerformed);
       },
       (error) => {
         this.authService.dataError(error);

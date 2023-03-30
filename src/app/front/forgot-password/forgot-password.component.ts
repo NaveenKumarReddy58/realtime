@@ -67,7 +67,9 @@ export class ForgotPasswordComponent {
     this.authService.sendResetOtp(this.f['username'].value).subscribe(
       (data: any) => {
         this.loading = false;
-        this.authService.resultCodeError(data);
+        if (this.authService.resultCodeError(data)) {
+            return;
+          }
 
         this.toastr.success('OTP Sent!');
         this.isOtpSent = true;
@@ -103,7 +105,9 @@ export class ForgotPasswordComponent {
       .verifyResetOtp(this.f['username'].value, this.otp)
       .subscribe(
         (data: any) => {
-          this.authService.resultCodeError(data);
+          if (this.authService.resultCodeError(data)) {
+            return;
+          }
 
           this.isVerified = 't';
           this.toastr.success(data.message);

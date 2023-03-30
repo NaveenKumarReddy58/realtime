@@ -63,7 +63,9 @@ export class PlanListComponent {
     this.delloading = true;
     this.planService.pdelete(id).subscribe(
       (data: any) => {
-        this.authService.resultCodeError(data);
+        if (this.authService.resultCodeError(data)) {
+            return;
+          }
 
         this.plist();
         this.router.navigate(['/plans']);

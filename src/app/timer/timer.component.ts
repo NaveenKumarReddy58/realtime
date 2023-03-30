@@ -35,7 +35,9 @@ export class TimerComponent {
     cd.restart();
     this.authService.sendMobileOtp(this.username).subscribe(
       (data: any) => {
-        this.authService.resultCodeError(data);
+        if (this.authService.resultCodeError(data)) {
+            return;
+          }
 
         this.toastr.success('OTP Sent!');
       },

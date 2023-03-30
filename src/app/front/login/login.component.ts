@@ -14,7 +14,6 @@ export class LoginComponent {
   loading = false;
   isSubmitted = false;
   errorMessage = false;
-  actionPerformed = false;
   orgEmail: any;
   orgDomain: any;
 
@@ -65,7 +64,9 @@ export class LoginComponent {
       .subscribe(
         (data: any) => {
           this.loading = false;
-          this.authService.resultCodeError(data);
+          if (this.authService.resultCodeError(data)) {
+            return;
+          }
 
           this.authService.setLS('access_token', data?.access_token);
           this.authService.setLS('refresh_token', data?.refresh_token);
@@ -73,7 +74,7 @@ export class LoginComponent {
           this.authService.setLS('role', data?.role);
           this.authService.setLS('user_timezone', data?.user_timezone);
 
-          this.toastr.success(data.actionPerformed);
+          this.toastr.success(data?.actionPerformed);
 
           this.router.navigate(['/dashboad']);
         },

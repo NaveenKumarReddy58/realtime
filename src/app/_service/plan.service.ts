@@ -68,7 +68,9 @@ export class PlanService {
       )
       .subscribe(
         (data: any) => {
-          this.authService.resultCodeError(data);
+          if (this.authService.resultCodeError(data)) {
+            return;
+          }
 
           this.plansData.plans = data;
           this._plans.next(Object.assign({}, this.plansData).plans);
@@ -137,7 +139,9 @@ export class PlanService {
       )
       .subscribe(
         (data: any) => {
-          this.authService.resultCodeError(data);
+          if (this.authService.resultCodeError(data)) {
+            return;
+          }
 
           this.companyData.company = data;
           this._company.next(Object.assign({}, this.companyData).company);
@@ -184,7 +188,9 @@ export class PlanService {
       )
       .subscribe(
         (data: any) => {
-          this.authService.resultCodeError(data);
+          if (this.authService.resultCodeError(data)) {
+            return;
+          }
 
           this.orgcountData.orgcount = data;
           this._orgcount.next(Object.assign({}, this.orgcountData).orgcount);
@@ -206,7 +212,9 @@ export class PlanService {
       )
       .subscribe(
         (data: any) => {
-          this.authService.resultCodeError(data);
+          if (this.authService.resultCodeError(data)) {
+            return;
+          }
 
           this.plancountData.plancount = data;
           this._plancount.next(Object.assign({}, this.plancountData).plancount);
