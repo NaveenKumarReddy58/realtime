@@ -41,14 +41,35 @@ export class TopComponent {
   }
 
   bookmarkedfield() {
-    this.planService.setrouter({ bookmarked: true });
+    this.planService.setrouter({
+      bookmarked: true,
+      plan: null,
+      search_text: null,
+      deactivated: null,
+      start_date: null,
+      end_date: null,
+    });
   }
 
   searchfield(event: any) {
-    this.planService.setrouter({ search_text: event.target.value });
+    this.planService.setrouter({
+      search_text: event.target.value,
+      plan: null,
+      bookmarked: null,
+      deactivated: null,
+      start_date: null,
+      end_date: null,
+    });
   }
 
   planfield(id: Number) {
-    this.planService.setrouter({ plan: id });
+    this.planService.setrouter({
+      plan: id,
+      search_text: null,
+      bookmarked: null,
+      deactivated: null,
+      start_date: null,
+      end_date: null,
+    });
   }
 }

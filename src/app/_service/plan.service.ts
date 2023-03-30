@@ -57,8 +57,8 @@ export class PlanService {
     this.http
       .get<any>(`${environment.apiUrl}/tenant/plan/${tail}`)
       .pipe(
-        retry(2),
-        delay(2),
+        // retry(2),
+        // delay(2),
         map((data) => {
           return data;
         }),
@@ -88,8 +88,8 @@ export class PlanService {
 
   padd(form: any) {
     return this.http.post<any>(`${environment.apiUrl}/tenant/plan/`, form).pipe(
-      retry(2),
-      delay(2),
+      // retry(2),
+      // delay(2),
       map((data) => {
         return data;
       }),
@@ -101,8 +101,8 @@ export class PlanService {
     return this.http
       .put<any>(`${environment.apiUrl}/tenant/plan/${id}/`, form)
       .pipe(
-        retry(2),
-        delay(2),
+        // retry(2),
+        // delay(2),
         map((data) => {
           return data;
         }),
@@ -118,8 +118,8 @@ export class PlanService {
     return this.http
       .post<any>(`${environment.apiUrl}/tenant/organization/`, form)
       .pipe(
-        retry(2),
-        delay(2),
+        // retry(2),
+        // delay(2),
         map((data) => {
           return data;
         }),
@@ -142,8 +142,8 @@ export class PlanService {
     this.http
       .get<any>(`${environment.apiUrl}/tenant/organization-listing/${tail}`)
       .pipe(
-        retry(2),
-        delay(2),
+        // retry(2),
+        // delay(2),
         map((data) => {
           return data;
         }),
@@ -188,8 +188,8 @@ export class PlanService {
         org_status,
       })
       .pipe(
-        retry(2),
-        delay(2),
+        // retry(2),
+        // delay(2),
         map((data) => {
           return data;
         }),
@@ -201,8 +201,8 @@ export class PlanService {
     this.http
       .get<any>(`${environment.apiUrl}/tenant/org-count/`)
       .pipe(
-        retry(2),
-        delay(2),
+        // retry(2),
+        // delay(2),
         map((data) => {
           return data;
         }),
@@ -233,8 +233,8 @@ export class PlanService {
     this.http
       .get<any>(`${environment.apiUrl}/tenant/plan-count/`)
       .pipe(
-        retry(2),
-        delay(2),
+        // retry(2),
+        // delay(2),
         map((data) => {
           return data;
         }),
@@ -262,28 +262,26 @@ export class PlanService {
   }
 
   clearrouter() {
-    let options = {
-      plan: null,
-      search_text: null,
-      bookmarked: null,
-      deactivated: null,
-      start_date: null,
-      end_date: null,
-    };
-
-    this.router.navigate([], {
+    this.router.navigate(['/dashboad'], {
       relativeTo: this.route,
-      queryParams: {},
-      queryParamsHandling: 'preserve',
+      queryParams: {
+        plan: null,
+        search_text: null,
+        bookmarked: null,
+        deactivated: null,
+        start_date: null,
+        end_date: null,
+      },
+      queryParamsHandling: 'merge', //preserve
     });
   }
 
   setrouter(object: object) {
     this.clearrouter();
-    this.router.navigate([], {
+    this.router.navigate(['/dashboad'], {
       relativeTo: this.route,
       queryParams: object,
-      queryParamsHandling: 'merge',
+      queryParamsHandling: 'merge', //merge
     });
   }
 
@@ -291,8 +289,8 @@ export class PlanService {
     return this.http
       .put<any>(`${environment.apiUrl}/tenant/bookmark/${id}`, {})
       .pipe(
-        retry(2),
-        delay(2),
+        // retry(2),
+        // delay(2),
         map((data) => {
           return data;
         }),

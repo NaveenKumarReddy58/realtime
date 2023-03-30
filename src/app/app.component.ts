@@ -60,7 +60,7 @@ export class AppComponent {
     idle.onTimeout.subscribe(() => {
       this.idleState = 'Timed out!';
       this.timedOut = true;
-      this.authService.doLogout();
+      // this.authService.doLogout();
     });
     idle.onIdleStart.subscribe(() => (this.idleState = "You've gone idle!"));
     idle.onTimeoutWarning.subscribe(

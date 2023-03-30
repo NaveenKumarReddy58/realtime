@@ -40,19 +40,17 @@ export class CompanyListComponent {
     this.route.queryParams.subscribe((params) => {
       if (params['plan'] != undefined) {
         this.id = params['plan'];
+        this.optionstype = 'all';
       }
-      console.log('params', this.id, params);
+      if (params['bookmarked'] != undefined) {
+        this.optionstype = 'all';
+      }
+      if (params['search_text'] != undefined) {
+        this.optionstype = 'all';
+      }
+      console.log('cpparms', params);
       this.cplist(this.id, params);
     });
-
-    // let options = {
-    //   plan: 'tcl',
-    //   search_text: 'tcl',
-    //   bookmarked: true,
-    //   deactivated: true,
-    //   start_date: '2023-02-15T17:45:52.990851',
-    //   end_date: '2023-02-26T17:45:52.990851',
-    // };
   }
 
   cplist(planid?: number, filter?: any) {
@@ -76,7 +74,14 @@ export class CompanyListComponent {
 
   deactivatedfield() {
     this.optionstype = 'deactivate';
-    this.planService.setrouter({ deactivated: true });
+    this.planService.setrouter({
+      deactivated: true,
+      plan: null,
+      search_text: null,
+      bookmarked: null,
+      start_date: null,
+      end_date: null,
+    });
   }
 
   cbookmark(id: Number) {
@@ -105,8 +110,22 @@ export class CompanyListComponent {
   }
 
   orgfilter(type: any, start_date: any, end_date?: any) {
-    // console.log('type', type, this.todayDate);
     this.optionstype = type;
-    this.planService.setrouter({ start_date: start_date, end_date: end_date });
+    this.planService.setrouter({
+      start_date: start_date,
+      end_date: end_date,
+      plan: null,
+      search_text: null,
+      bookmarked: null,
+      deactivated: null,
+    });
+  }
+
+  setCount(count: any) {
+    if (count > 0) {
+      return count - 1;
+    } else {
+      return count;
+    }
   }
 }

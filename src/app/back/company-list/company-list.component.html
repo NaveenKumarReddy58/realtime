@@ -4,37 +4,29 @@
       <ul class="Tab_List">
         <li class="{{ optionstype == 'all' ? 'active' : '' }}">
           <a (click)="orgfilter('all', orgdata.all.start_date)"
-            >All {{ orgdata?.all?.count-1 }}</a
+            >All {{ setCount(orgdata?.all?.count) }}</a
           >
         </li>
         <li class="{{ optionstype == 'weekly' ? 'active' : '' }}">
-          <a
-            routerLink="#"
-            (click)="orgfilter('weekly', orgdata.weekly.start_date)"
-            >Weekly {{ orgdata?.weekly?.count-1 }}</a
+          <a (click)="orgfilter('weekly', orgdata.weekly.start_date)"
+            >Weekly {{ setCount(orgdata?.weekly?.count) }}</a
           >
         </li>
         <li class="{{ optionstype == 'monthly' ? 'active' : '' }}">
-          <a
-            routerLink="#"
-            (click)="orgfilter('monthly', orgdata.monthly.start_date)"
-            >Monthly {{ orgdata?.monthly?.count-1 }}</a
+          <a (click)="orgfilter('monthly', orgdata.monthly.start_date)"
+            >Monthly {{ setCount(orgdata?.monthly?.count) }}</a
           >
         </li>
         <li class="{{ optionstype == 'yearly' ? 'active' : '' }}">
-          <a
-            routerLink="#"
-            (click)="orgfilter('yearly', orgdata.yearly.start_date)"
-            >Yearly {{ orgdata?.yearly?.count-1 }}</a
+          <a (click)="orgfilter('yearly', orgdata.yearly.start_date)"
+            >Yearly {{ setCount(orgdata?.yearly?.count) }}</a
           >
         </li>
         <li class="MonthlyTab">
-          <a routerLink="#">Custom</a>
+          <a>Custom</a>
         </li>
         <li class="{{ optionstype == 'deactivate' ? 'active' : '' }}">
-          <a routerLink="#" (click)="deactivatedfield()"
-            >Deactivated Companies</a
-          >
+          <a (click)="deactivatedfield()">Deactivated Companies</a>
         </li>
       </ul>
     </div>

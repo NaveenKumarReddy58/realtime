@@ -120,8 +120,8 @@ export class AuthService {
   getUserProfile(id: any): Observable<any> {
     let api = `${environment.apiUrl}/user-profile/${id}`;
     return this.http.get(api).pipe(
-      retry(2),
-      delay(2),
+      // retry(2),
+      // delay(2),
       map((res) => {
         return res || {};
       }),
@@ -135,8 +135,8 @@ export class AuthService {
         email,
       })
       .pipe(
-        retry(2),
-        delay(2),
+        // retry(2),
+        // delay(2),
         map((data) => {
           return data;
         }),
@@ -151,8 +151,8 @@ export class AuthService {
         password,
       })
       .pipe(
-        retry(2),
-        delay(2),
+        // retry(2),
+        // delay(2),
         map((data) => {
           this._isDashboard.next(data?.access_token);
           this._isRole.next(data?.role);
@@ -168,8 +168,8 @@ export class AuthService {
         mobile_no,
       })
       .pipe(
-        retry(2),
-        delay(2),
+        // retry(2),
+        // delay(2),
         map((data) => {
           return data;
         }),
@@ -185,8 +185,8 @@ export class AuthService {
         login_by,
       })
       .pipe(
-        retry(2),
-        delay(2),
+        // retry(2),
+        // delay(2),
         map((data) => {
           this._isDashboard.next(data?.access_token);
           this._isRole.next(data?.role);
@@ -202,8 +202,8 @@ export class AuthService {
         email,
       })
       .pipe(
-        retry(2),
-        delay(2),
+        // retry(2),
+        // delay(2),
         map((data) => {
           return data;
         }),
@@ -218,8 +218,8 @@ export class AuthService {
         otp,
       })
       .pipe(
-        retry(2),
-        delay(2),
+        // retry(2),
+        // delay(2),
         map((data) => {
           return data;
         }),
@@ -234,8 +234,8 @@ export class AuthService {
         new_password,
       })
       .pipe(
-        retry(2),
-        delay(2),
+        // retry(2),
+        // delay(2),
         map((data) => {
           return data;
         }),
@@ -250,8 +250,8 @@ export class AuthService {
         refresh,
       })
       .pipe(
-        retry(2),
-        delay(2),
+        // retry(2),
+        // delay(2),
         map((data) => {
           this.setLS('access_token', data?.access);
           // this.setLS('user', JSON.stringify(data));
