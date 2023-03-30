@@ -1,0 +1,8 @@
+@media only screen and (min-width:1367px) and (max-width:1920px) {
+.TopMenu li a{font-size: 16px;}
+.TopMenu li img {max-width: 35px; padding-bottom: 5px;}
+.ButtonTab ul li a {font-size: 18px;}
+
+tr.T_Head th, .Order_Table tr td {font-size: 18px; }
+
+}
