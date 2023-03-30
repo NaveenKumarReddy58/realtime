@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/_service/auth.service';
 import { PlanService } from 'src/app/_service/plan.service';
 
 @Component({
@@ -19,27 +20,23 @@ export class CompanyDetailComponent {
   cpreason: string = '';
   cpreasonData: any;
 
-  constructor(public planService: PlanService, private toastr: ToastrService) {}
+  constructor(
+    public planService: PlanService,
+    public authService: AuthService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.planService.cpdetail(this.companyid).subscribe(
       (data: any) => {
-        if (
-          data?.resultCode === '0' ||
-          data?.resultCode == 4 ||
-          data?.resultCode == 0
-        ) {
-          console.log('Api Data Err', data);
-          // this.toastr.error(data.errorMessage);
-          return;
-        }
+        this.authService.resultCodeError(data);
 
         this.item = data.results;
         this.admin = data.results.admin;
         this.org = data.results.organization;
       },
       (error) => {
-        console.log('Api Err', error);
+        this.authService.dataError(error);
       }
     );
   }
@@ -56,20 +53,13 @@ export class CompanyDetailComponent {
     this.deactivateLoading = true;
     this.planService.cpdeactivate(id, this.org_status).subscribe(
       (data: any) => {
-        if (
-          data?.resultCode === '0' ||
-          data?.resultCode == 4 ||
-          data?.resultCode == 0
-        ) {
-          console.log('Api Data Err', data);
-          // this.toastr.error(data.errorMessage);
-          return;
-        }
+        this.authService.resultCodeError(data);
+
         this.deactivateLoading = false;
         this.toastr.success(data.actionPerformed);
       },
       (error) => {
-        console.log('Api Err', error);
+        this.authService.dataError(error);
         this.deactivateLoading = false;
       }
     );

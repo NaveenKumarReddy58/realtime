@@ -27,7 +27,7 @@ export class TimerComponent {
     // console.log('Notify', e, e.action, this.username);
     if (e.action == 'done') {
       this.isActive = true;
-      console.log('Notify', e, e.action, this.username);
+      // console.log('Notify', e, e.action, this.username);
     }
   }
 
@@ -35,20 +35,12 @@ export class TimerComponent {
     cd.restart();
     this.authService.sendMobileOtp(this.username).subscribe(
       (data: any) => {
-        if (
-          data?.resultCode === '0' ||
-          data?.resultCode == 4 ||
-          data?.resultCode == 0
-        ) {
-          console.log('Api Data Err', data);
-          // this.toastr.error(data.message);
-          return;
-        }
+        this.authService.resultCodeError(data);
 
         this.toastr.success('OTP Sent!');
       },
       (error) => {
-        console.log('Api Err', error);
+        this.authService.dataError(error);
       }
     );
   }

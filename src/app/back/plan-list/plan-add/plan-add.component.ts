@@ -46,7 +46,7 @@ export class PlanAddComponent {
     });
 
     if (!this.isAddMode) {
-      console.log('edit', this.id);
+      // console.log('edit', this.id);
 
       this.planService.plist(this.id);
       this.plans$ = this.planService.get_plans();
@@ -92,7 +92,7 @@ export class PlanAddComponent {
           this.addPlan.value[i],
           this.addPlan.value[i].name ? this.addPlan.value[i].name : ''
         );
-        console.log('blob');
+        // console.log('blob');
       } else {
         formData.append(i, this.addPlan.value[i]);
       }
@@ -101,42 +101,26 @@ export class PlanAddComponent {
     if (this.isAddMode) {
       this.planService.padd(formData).subscribe(
         (data: any) => {
-          if (
-            data?.resultCode === '0' ||
-            data?.resultCode == 4 ||
-            data?.resultCode == 0
-          ) {
-            console.log('Api Data Err', data);
-            // this.toastr.error(data.errorMessage);
-            return;
-          }
+          this.authService.resultCodeError(data);
 
           this.toastr.success(data.actionPerformed);
           this.router.navigate(['/plans']);
         },
         (error) => {
-          console.log('Api Err', error);
+          this.authService.dataError(error);
           this.loading = false;
         }
       );
     } else {
       this.planService.pedit(this.id, formData).subscribe(
         (data: any) => {
-          if (
-            data?.resultCode === '0' ||
-            data?.resultCode == 4 ||
-            data?.resultCode == 0
-          ) {
-            console.log('Api Data Err', data);
-            // this.toastr.error(data.errorMessage);
-            return;
-          }
+          this.authService.resultCodeError(data);
 
           this.toastr.success(data.actionPerformed);
           this.router.navigate(['/plans']);
         },
         (error) => {
-          console.log('Api Err', error);
+          this.authService.dataError(error);
           this.loading = false;
         }
       );

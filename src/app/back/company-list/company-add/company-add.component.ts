@@ -106,7 +106,7 @@ export class CompanyAddComponent {
           this.addCP.value[i],
           this.addCP.value[i].name ? this.addCP.value[i].name : ''
         );
-        console.log('blob');
+        // console.log('blob');
       } else {
         formData.append(i, this.addCP.value[i]);
       }
@@ -118,21 +118,13 @@ export class CompanyAddComponent {
 
     this.planService.cpAdd(formData).subscribe(
       (data: any) => {
-        if (
-          data?.resultCode === '0' ||
-          data?.resultCode == 4 ||
-          data?.resultCode == 0
-        ) {
-          console.log('Api Data Err', data);
-          // this.toastr.error(data.errorMessage);
-          return;
-        }
+        this.authService.resultCodeError(data);
 
         this.toastr.success(data.actionPerformed);
         this.router.navigate(['/dashboad']);
       },
       (error) => {
-        console.log('Api Err', error);
+        this.authService.dataError(error);
         this.loading = false;
       }
     );

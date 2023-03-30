@@ -78,23 +78,14 @@ export class ResetPasswordComponent {
       .resetPassword(this.orgEmail, this.f['password'].value)
       .subscribe(
         (data: any) => {
-          if (
-            data?.resultCode === '0' ||
-            data?.resultCode == 4 ||
-            data?.resultCode == 0
-          ) {
-            this.loading = false;
-            console.log('Api Data Err', data);
-            // this.toastr.error(data.errorMessage);
-            return;
-          }
+          this.authService.resultCodeError(data, this.loading);
 
           this.toastr.success(data.actionPerformed);
           this.authService.rmLS('isverified');
           this.router.navigate(['/']);
         },
         (error) => {
-          console.log('Api Err', error);
+          this.authService.dataError(error);
           this.loading = false;
         }
       );

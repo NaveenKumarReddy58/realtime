@@ -38,8 +38,24 @@ export class AuthService {
     } else {
       msg = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    console.log('e', msg);
+    console.log('Err', msg);
     return throwError(msg);
+  }
+
+  dataError(error: any) {
+    console.log('Api Err', error);
+  }
+
+  resultCodeError(data: any, loading?: any) {
+    if (
+      data?.resultCode === '0' ||
+      data?.resultCode == 4 ||
+      data?.resultCode == 0
+    ) {
+      loading = false;
+      console.log('Api Data Err', data);
+      return;
+    }
   }
 
   get getToken() {
@@ -54,15 +70,15 @@ export class AuthService {
     return this.getLS('org_domain');
   }
 
+  get isOrgIn(): boolean {
+    let orgEmail = this.getLS('org_email');
+    return orgEmail !== null ? true : false;
+  }
+
   getDashboard(): Observable<any[]> {
     let authToken = this.getLS('access_token');
     this._isDashboard.next(authToken !== null ? true : false);
     return this._isDashboard.asObservable();
-  }
-
-  get isLoggedIn(): boolean {
-    let authToken = this.getLS('access_token');
-    return authToken !== null ? true : false;
   }
 
   getRole(): Observable<any[]> {
@@ -73,13 +89,10 @@ export class AuthService {
 
   getApiUrl(): Observable<any[]> {
     let orgDomain = this.getLS('org_domain');
-    this._apiUrl.next(orgDomain !== null ? orgDomain : this.apiUrl);
+    this._apiUrl.next(
+      orgDomain !== null ? orgDomain + ':' + this.port : this.apiUrl
+    );
     return this._apiUrl.asObservable();
-  }
-
-  get isOrgIn(): boolean {
-    let orgEmail = this.getLS('org_email');
-    return orgEmail !== null ? true : false;
   }
 
   setLS(k: any, v: any) {
@@ -112,10 +125,8 @@ export class AuthService {
 
   // User profile
   getUserProfile(id: any): Observable<any> {
-    let api = `${environment.apiUrl}/user-profile/${id}`;
+    let api = `${this._liveApiUrl}/user-profile/${id}`;
     return this.http.get(api).pipe(
-      // retry(2),
-      // delay(2),
       map((res) => {
         return res || {};
       }),
@@ -125,12 +136,10 @@ export class AuthService {
 
   getOrganization(email: string) {
     return this.http
-      .post<any>(`${environment.apiUrl}/tenant/get-organization/`, {
+      .post<any>(`${this._liveApiUrl}/tenant/get-organization/`, {
         email,
       })
       .pipe(
-        // retry(2),
-        // delay(2),
         map((data) => {
           return data;
         }),
@@ -140,13 +149,11 @@ export class AuthService {
 
   login(email: string, password: string) {
     return this.http
-      .post<any>(`${environment.apiUrl}/account/token/`, {
+      .post<any>(`${this._liveApiUrl}/account/token/`, {
         email,
         password,
       })
       .pipe(
-        // retry(2),
-        // delay(2),
         map((data) => {
           this._isDashboard.next(data?.access_token);
           this._isRole.next(data?.role);
@@ -158,12 +165,10 @@ export class AuthService {
 
   sendMobileOtp(mobile_no: string) {
     return this.http
-      .post<any>(`${environment.apiUrl}/account/send-mobile-otp/`, {
+      .post<any>(`${this._liveApiUrl}/account/send-mobile-otp/`, {
         mobile_no,
       })
       .pipe(
-        // retry(2),
-        // delay(2),
         map((data) => {
           return data;
         }),
@@ -173,14 +178,12 @@ export class AuthService {
 
   loginByOtp(email: string, password: string, login_by: string = 'otp') {
     return this.http
-      .post<any>(`${environment.apiUrl}/account/token/`, {
+      .post<any>(`${this._liveApiUrl}/account/token/`, {
         email,
         password,
         login_by,
       })
       .pipe(
-        // retry(2),
-        // delay(2),
         map((data) => {
           this._isDashboard.next(data?.access_token);
           this._isRole.next(data?.role);
@@ -192,12 +195,10 @@ export class AuthService {
 
   sendResetOtp(email: string) {
     return this.http
-      .post<any>(`${environment.apiUrl}/account/send-reset-otp/`, {
+      .post<any>(`${this._liveApiUrl}/account/send-reset-otp/`, {
         email,
       })
       .pipe(
-        // retry(2),
-        // delay(2),
         map((data) => {
           return data;
         }),
@@ -207,13 +208,11 @@ export class AuthService {
 
   verifyResetOtp(email: string, otp: string) {
     return this.http
-      .post<any>(`${environment.apiUrl}/account/verify-reset-otp/`, {
+      .post<any>(`${this._liveApiUrl}/account/verify-reset-otp/`, {
         email,
         otp,
       })
       .pipe(
-        // retry(2),
-        // delay(2),
         map((data) => {
           return data;
         }),
@@ -223,13 +222,11 @@ export class AuthService {
 
   resetPassword(email: string, new_password: string) {
     return this.http
-      .put<any>(`${environment.apiUrl}/account/reset-password/`, {
+      .put<any>(`${this._liveApiUrl}/account/reset-password/`, {
         email,
         new_password,
       })
       .pipe(
-        // retry(2),
-        // delay(2),
         map((data) => {
           return data;
         }),
@@ -240,12 +237,10 @@ export class AuthService {
   tokenRefresh() {
     const refresh = this.getLS('refresh_token');
     return this.http
-      .post<any>(`${environment.apiUrl}/account/token/refresh/`, {
+      .post<any>(`${this._liveApiUrl}/account/token/refresh/`, {
         refresh,
       })
       .pipe(
-        // retry(2),
-        // delay(2),
         map((data) => {
           this.setLS('access_token', data?.access);
           // this.setLS('user', JSON.stringify(data));
@@ -255,18 +250,12 @@ export class AuthService {
       )
       .subscribe(
         (data: any) => {
-          if (
-            data?.resultCode === '0' ||
-            data?.resultCode == 4 ||
-            data?.resultCode == 0
-          ) {
-            console.log('Api Data Err', data);
-            return;
-          }
-          console.log('tokenRefresh');
+          this.resultCodeError(data);
+
+          console.log('TokenRefresh');
         },
         (error) => {
-          console.log('Api Err', error);
+          this.dataError(error);
         }
       );
   }

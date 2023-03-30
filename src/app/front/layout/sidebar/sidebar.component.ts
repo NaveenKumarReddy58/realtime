@@ -3,11 +3,10 @@ import { Component, ViewChild } from '@angular/core';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css']
+  styleUrls: ['./sidebar.component.css'],
 })
 export class SidebarComponent {
-
-  myimg = 'assets/images/bannerslider.png'
+  myimg = 'assets/images/bannerslider.png';
 
   slides = [
     { img: this.myimg },
@@ -30,18 +29,10 @@ export class SidebarComponent {
   removeSlide() {
     this.slides.length = this.slides.length - 1;
   }
-  slickInit(e: any) {
-    // console.log('slick initialized');
-  }
-  breakpoint(e: any) {
-    // console.log('breakpoint');
-  }
-  afterChange(e: any) {
-    // console.log('afterChange');
-  }
-  beforeChange(e: any) {
-    // console.log('beforeChange');
-  }
-  constructor() { }
-  ngOnInit(): void { }
+  slickInit(e: any) {}
+  breakpoint(e: any) {}
+  afterChange(e: any) {}
+  beforeChange(e: any) {}
+  constructor() {}
+  ngOnInit(): void {}
 }

@@ -14,6 +14,7 @@ import { AuthService } from '../_service/auth.service';
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
+  isLoggedIn: any = false;
   constructor(
     public authService: AuthService,
     public router: Router,
@@ -23,7 +24,10 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    if (!this.authService.getDashboard()) {
+    this.authService.getDashboard().subscribe((data: any) => {
+      this.isLoggedIn = data;
+    });
+    if (!this.isLoggedIn) {
       this.toastr.error('Access not allowed!');
       this.router.navigate(['/']);
       return false;

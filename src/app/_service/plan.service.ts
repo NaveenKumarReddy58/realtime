@@ -12,13 +12,17 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class PlanService {
+  _liveApiUrl: any = this.authService._liveApiUrl;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private http: HttpClient,
     private toastr: ToastrService,
     public authService: AuthService
-  ) {}
+  ) {
+    console.log('_liveApiUrl', this._liveApiUrl);
+  }
 
   private _plans = new BehaviorSubject<object[]>([]);
   private plansData: { plans: object[] } = { plans: [] };
@@ -55,10 +59,8 @@ export class PlanService {
     }
 
     this.http
-      .get<any>(`${environment.apiUrl}/tenant/plan/${tail}`)
+      .get<any>(`${this._liveApiUrl}/tenant/plan/${tail}`)
       .pipe(
-        // retry(2),
-        // delay(2),
         map((data) => {
           return data;
         }),
@@ -66,30 +68,20 @@ export class PlanService {
       )
       .subscribe(
         (data: any) => {
-          if (
-            data?.resultCode === '0' ||
-            data?.resultCode == 4 ||
-            data?.resultCode == 0
-          ) {
-            console.log('Api Data Err', data);
-            // this.toastr.error(data.errorMessage);
-            return;
-          }
+          this.authService.resultCodeError(data);
 
           this.plansData.plans = data;
           this._plans.next(Object.assign({}, this.plansData).plans);
           this.plancount();
         },
         (error) => {
-          console.log('Api Err', error);
+          this.authService.dataError(error);
         }
       );
   }
 
   padd(form: any) {
-    return this.http.post<any>(`${environment.apiUrl}/tenant/plan/`, form).pipe(
-      // retry(2),
-      // delay(2),
+    return this.http.post<any>(`${this._liveApiUrl}/tenant/plan/`, form).pipe(
       map((data) => {
         return data;
       }),
@@ -99,10 +91,8 @@ export class PlanService {
 
   pedit(id: Number, form: any) {
     return this.http
-      .put<any>(`${environment.apiUrl}/tenant/plan/${id}/`, form)
+      .put<any>(`${this._liveApiUrl}/tenant/plan/${id}/`, form)
       .pipe(
-        // retry(2),
-        // delay(2),
         map((data) => {
           return data;
         }),
@@ -111,15 +101,13 @@ export class PlanService {
   }
 
   pdelete(id: Number) {
-    return this.http.delete<any>(`${environment.apiUrl}/tenant/plan/${id}`);
+    return this.http.delete<any>(`${this._liveApiUrl}/tenant/plan/${id}`);
   }
 
   cpAdd(form: any) {
     return this.http
-      .post<any>(`${environment.apiUrl}/tenant/organization/`, form)
+      .post<any>(`${this._liveApiUrl}/tenant/organization/`, form)
       .pipe(
-        // retry(2),
-        // delay(2),
         map((data) => {
           return data;
         }),
@@ -140,10 +128,8 @@ export class PlanService {
       tail += `?` + params.toString();
     }
     this.http
-      .get<any>(`${environment.apiUrl}/tenant/organization-listing/${tail}`)
+      .get<any>(`${this._liveApiUrl}/tenant/organization-listing/${tail}`)
       .pipe(
-        // retry(2),
-        // delay(2),
         map((data) => {
           return data;
         }),
@@ -151,45 +137,35 @@ export class PlanService {
       )
       .subscribe(
         (data: any) => {
-          if (
-            data?.resultCode === '0' ||
-            data?.resultCode == 4 ||
-            data?.resultCode == 0
-          ) {
-            console.log('Api Data Err', data);
-            // this.toastr.error(data.errorMessage);
-            return;
-          }
+          this.authService.resultCodeError(data);
 
           this.companyData.company = data;
           this._company.next(Object.assign({}, this.companyData).company);
         },
         (error) => {
-          console.log('Api Err', error);
+          this.authService.dataError(error);
         }
       );
   }
 
   cpdetail(companyid: Number) {
     return this.http.get<any>(
-      `${environment.apiUrl}/tenant/organization/${companyid}/`
+      `${this._liveApiUrl}/tenant/organization/${companyid}/`
     );
   }
 
   cpdelete(id: Number) {
     return this.http.delete<any>(
-      `${environment.apiUrl}/tenant/organization/${id}`
+      `${this._liveApiUrl}/tenant/organization/${id}`
     );
   }
 
   cpdeactivate(id: Number, org_status: string) {
     return this.http
-      .patch<any>(`${environment.apiUrl}/tenant/organization/${id}/`, {
+      .patch<any>(`${this._liveApiUrl}/tenant/organization/${id}/`, {
         org_status,
       })
       .pipe(
-        // retry(2),
-        // delay(2),
         map((data) => {
           return data;
         }),
@@ -199,10 +175,8 @@ export class PlanService {
 
   cporgcount() {
     this.http
-      .get<any>(`${environment.apiUrl}/tenant/org-count/`)
+      .get<any>(`${this._liveApiUrl}/tenant/org-count/`)
       .pipe(
-        // retry(2),
-        // delay(2),
         map((data) => {
           return data;
         }),
@@ -210,31 +184,21 @@ export class PlanService {
       )
       .subscribe(
         (data: any) => {
-          if (
-            data?.resultCode === '0' ||
-            data?.resultCode == 4 ||
-            data?.resultCode == 0
-          ) {
-            console.log('Api Data Err', data);
-            // this.toastr.error(data.errorMessage);
-            return;
-          }
+          this.authService.resultCodeError(data);
 
           this.orgcountData.orgcount = data;
           this._orgcount.next(Object.assign({}, this.orgcountData).orgcount);
         },
         (error) => {
-          console.log('Api Err', error);
+          this.authService.dataError(error);
         }
       );
   }
 
   plancount() {
     this.http
-      .get<any>(`${environment.apiUrl}/tenant/plan-count/`)
+      .get<any>(`${this._liveApiUrl}/tenant/plan-count/`)
       .pipe(
-        // retry(2),
-        // delay(2),
         map((data) => {
           return data;
         }),
@@ -242,21 +206,13 @@ export class PlanService {
       )
       .subscribe(
         (data: any) => {
-          if (
-            data?.resultCode === '0' ||
-            data?.resultCode == 4 ||
-            data?.resultCode == 0
-          ) {
-            console.log('Api Data Err', data);
-            // this.toastr.error(data.errorMessage);
-            return;
-          }
+          this.authService.resultCodeError(data);
 
           this.plancountData.plancount = data;
           this._plancount.next(Object.assign({}, this.plancountData).plancount);
         },
         (error) => {
-          console.log('Api Err', error);
+          this.authService.dataError(error);
         }
       );
   }
@@ -287,10 +243,8 @@ export class PlanService {
 
   cbookmark(id: Number) {
     return this.http
-      .put<any>(`${environment.apiUrl}/tenant/bookmark/${id}`, {})
+      .put<any>(`${this._liveApiUrl}/tenant/bookmark/${id}`, {})
       .pipe(
-        // retry(2),
-        // delay(2),
         map((data) => {
           return data;
         }),

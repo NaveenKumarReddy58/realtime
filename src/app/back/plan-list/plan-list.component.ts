@@ -4,6 +4,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/_service/auth.service';
 import { PlanService } from 'src/app/_service/plan.service';
 import { DialogAnimationsComponent } from './dialog-animations/dialog-animations.component';
 
@@ -28,6 +29,7 @@ export class PlanListComponent {
     private route: ActivatedRoute,
     private router: Router,
     public planService: PlanService,
+    public authService: AuthService,
     private toastr: ToastrService,
     public dialog: MatDialog
   ) {
@@ -52,7 +54,6 @@ export class PlanListComponent {
     this.plans$ = this.planService.get_plans();
 
     this.plans$.subscribe((data: any) => {
-      console.log('this.plans$', data);
       this.items = data.results;
       this.listCount = data.count;
     });
@@ -62,22 +63,14 @@ export class PlanListComponent {
     this.delloading = true;
     this.planService.pdelete(id).subscribe(
       (data: any) => {
-        if (
-          data?.resultCode === '0' ||
-          data?.resultCode == 4 ||
-          data?.resultCode == 0
-        ) {
-          console.log('Api Data Err', data);
-          // this.toastr.error(data.errorMessage);
-          return;
-        }
+        this.authService.resultCodeError(data);
 
         this.plist();
         this.router.navigate(['/plans']);
         this.toastr.success('Plan Deleted');
       },
       (error) => {
-        console.log('Api Err', error);
+        this.authService.dataError(error);
         this.delloading = false;
       }
     );

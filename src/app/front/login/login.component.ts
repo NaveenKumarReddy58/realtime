@@ -64,16 +64,7 @@ export class LoginComponent {
       .login(this.f['username'].value, this.f['password'].value)
       .subscribe(
         (data: any) => {
-          if (
-            data?.resultCode === '0' ||
-            data?.resultCode == 4 ||
-            data?.resultCode == 0
-          ) {
-            this.loading = false;
-            console.log('Api Data Err', data);
-            // this.toastr.error(data.errorMessage);
-            return;
-          }
+          this.authService.resultCodeError(data, this.loading);
 
           this.authService.setLS('access_token', data?.access_token);
           this.authService.setLS('refresh_token', data?.refresh_token);
@@ -86,7 +77,7 @@ export class LoginComponent {
           this.router.navigate(['/dashboad']);
         },
         (error) => {
-          console.log('Api Err', error);
+          this.authService.dataError(error);
           this.loading = false;
         }
       );

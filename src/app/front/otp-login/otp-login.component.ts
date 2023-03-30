@@ -65,23 +65,14 @@ export class OtpLoginComponent {
 
     this.authService.sendMobileOtp(this.f['username'].value).subscribe(
       (data: any) => {
-        if (
-          data?.resultCode === '0' ||
-          data?.resultCode == 4 ||
-          data?.resultCode == 0
-        ) {
-          this.loading = false;
-          console.log('Api Data Err', data);
-          // this.toastr.error(data.message);
-          return;
-        }
+        this.authService.resultCodeError(data, this.loading);
 
         this.toastr.success('OTP Sent!');
         this.isOtpSent = true;
         this.loading = false;
       },
       (error) => {
-        console.log('Api Err', error);
+        this.authService.dataError(error);
         this.loading = false;
       }
     );
@@ -108,15 +99,7 @@ export class OtpLoginComponent {
       .loginByOtp(this.f['username'].value, this.otp, 'otp')
       .subscribe(
         (data: any) => {
-          if (
-            data?.resultCode === '0' ||
-            data?.resultCode == 4 ||
-            data?.resultCode == 0
-          ) {
-            console.log('Api Data Err', data);
-            // this.toastr.error(data.errorMessage);
-            return;
-          }
+          this.authService.resultCodeError(data);
 
           this.authService.setLS('access_token', data?.access_token);
           this.authService.setLS('refresh_token', data?.refresh_token);
@@ -128,7 +111,7 @@ export class OtpLoginComponent {
           this.router.navigate(['/dashboad']);
         },
         (error) => {
-          console.log('Api Err', error);
+          this.authService.dataError(error);
           this.loading = false;
         }
       );

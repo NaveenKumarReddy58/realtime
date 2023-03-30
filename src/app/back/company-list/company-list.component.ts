@@ -48,7 +48,6 @@ export class CompanyListComponent {
       if (params['search_text'] != undefined) {
         this.optionstype = 'all';
       }
-      // console.log('cpparms', params);
 
       if (Object.keys(params).length === 0 && params.constructor === Object) {
         this.cplist();
@@ -92,15 +91,7 @@ export class CompanyListComponent {
   cbookmark(id: Number) {
     this.planService.cbookmark(id).subscribe(
       (data: any) => {
-        if (
-          data?.resultCode === '0' ||
-          data?.resultCode == 4 ||
-          data?.resultCode == 0
-        ) {
-          console.log('Api Data Err', data);
-          // this.toastr.error(data.errorMessage);
-          return;
-        }
+        this.authService.resultCodeError(data);
 
         this.cplist();
         this.cporgcount();
@@ -109,7 +100,7 @@ export class CompanyListComponent {
         this.toastr.success('Company Bookmarked');
       },
       (error) => {
-        console.log('Api Err', error);
+        this.authService.dataError(error);
       }
     );
   }

@@ -44,10 +44,7 @@ export class AuthInterceptor implements HttpInterceptor {
       delay(2),
       tap((evt) => {
         if (evt instanceof HttpResponse) {
-          if (evt.body.resultCode === '0' || evt.body.resultCode == 0) {
-            console.log('Api Data Err', evt.body);
-            return;
-          } else if (evt.body.resultCode == 4) {
+          if (evt.body.resultCode == 4) {
             this.authService.tokenRefresh();
             console.log('Api Token Err', evt.body);
             return;
