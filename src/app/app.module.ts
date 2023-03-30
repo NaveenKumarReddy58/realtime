@@ -40,6 +40,7 @@ import { CompanyDetailComponent } from './back/company-list/company-detail/compa
 import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
 import { SettingComponent } from './back/setting/setting.component';
 import { OrderListComponent } from './back/superadmin/order-list/order-list.component';
+import { DriverListComponent } from './back/superadmin/driver-list/driver-list.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { OrderListComponent } from './back/superadmin/order-list/order-list.comp
     DialogAnimationsComponent,
     CompanyDetailComponent,
     SettingComponent,
-    OrderListComponent
+    OrderListComponent,
+    DriverListComponent
   ],
   imports: [
     BrowserModule,
