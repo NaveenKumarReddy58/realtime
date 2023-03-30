@@ -14,11 +14,11 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
-  $apiUrl = environment.apiUrl;
-  _apiUrl = new BehaviorSubject<any>(this.$apiUrl);
+  apiUrl = environment.apiUrl;
+  _apiUrl = new BehaviorSubject<any>(this.apiUrl);
   _isDashboard = new BehaviorSubject<any>(false);
   _isRole = new BehaviorSubject<any>('0');
-  currentApiUrl = 0;
+  _liveApiUrl = this.apiUrl;
 
   constructor(
     private http: HttpClient,
@@ -26,7 +26,7 @@ export class AuthService {
     private toastr: ToastrService
   ) {
     this.getApiUrl().subscribe((data: any) => {
-      this.currentApiUrl = data;
+      this._liveApiUrl = data;
     });
   }
 
@@ -80,7 +80,7 @@ export class AuthService {
 
   get isApiUrlIn(): string {
     let orgDomain = this.getLS('org_domain');
-    return orgDomain !== null ? orgDomain : this.$apiUrl;
+    return orgDomain !== null ? orgDomain : this.apiUrl;
   }
 
   get isOrgIn(): boolean {
@@ -111,7 +111,7 @@ export class AuthService {
       this.router.navigate(['/']);
     }
 
-    this._apiUrl.next(this.$apiUrl);
+    this._apiUrl.next(this.apiUrl);
     this._isDashboard.next(false);
     this._isRole.next('0');
   }
@@ -197,15 +197,34 @@ export class AuthService {
   }
 
   sendResetOtp(email: string) {
-    return this.http.get<any>(
-      `${environment.apiUrl}/account/send-reset-otp/?email=${email}`
-    );
+    return this.http
+      .post<any>(`${environment.apiUrl}/account/send-reset-otp/`, {
+        email,
+      })
+      .pipe(
+        retry(2),
+        delay(2),
+        map((data) => {
+          return data;
+        }),
+        catchError(this.handleError)
+      );
   }
 
   verifyResetOtp(email: string, otp: string) {
-    return this.http.get<any>(
-      `${environment.apiUrl}/account/verify-reset-otp/?email=${email}&otp=${otp}`
-    );
+    return this.http
+      .post<any>(`${environment.apiUrl}/account/verify-reset-otp/`, {
+        email,
+        otp,
+      })
+      .pipe(
+        retry(2),
+        delay(2),
+        map((data) => {
+          return data;
+        }),
+        catchError(this.handleError)
+      );
   }
 
   resetPassword(email: string, new_password: string) {
