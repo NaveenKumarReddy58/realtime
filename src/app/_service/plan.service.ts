@@ -276,7 +276,7 @@ export class PlanService {
     });
   }
 
-  setrouter(object: object) {
+  setrouter(object: any) {
     this.clearrouter();
     this.router.navigate(['/dashboad'], {
       relativeTo: this.route,

@@ -52,8 +52,12 @@ export class TopComponent {
   }
 
   searchfield(event: any) {
+    let textVal = event.target.value;
+    if (textVal == '') {
+      textVal = null;
+    }
     this.planService.setrouter({
-      search_text: event.target.value,
+      search_text: textVal,
       plan: null,
       bookmarked: null,
       deactivated: null,

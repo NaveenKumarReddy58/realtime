@@ -48,7 +48,11 @@ export class CompanyListComponent {
       if (params['search_text'] != undefined) {
         this.optionstype = 'all';
       }
+      // if (params['search_text'] == '') {
+      //   params['search_text'] = null;
+      // }
       console.log('cpparms', params);
+      // this.planService.setrouter(params);
       this.cplist(this.id, params);
     });
   }
@@ -111,14 +115,26 @@ export class CompanyListComponent {
 
   orgfilter(type: any, start_date: any, end_date?: any) {
     this.optionstype = type;
-    this.planService.setrouter({
-      start_date: start_date,
-      end_date: end_date,
-      plan: null,
-      search_text: null,
-      bookmarked: null,
-      deactivated: null,
-    });
+
+    if (this.optionstype == 'all') {
+      this.planService.setrouter({
+        start_date: null,
+        end_date: null,
+        plan: null,
+        search_text: null,
+        bookmarked: null,
+        deactivated: null,
+      });
+    } else {
+      this.planService.setrouter({
+        start_date: start_date,
+        end_date: end_date,
+        plan: null,
+        search_text: null,
+        bookmarked: null,
+        deactivated: null,
+      });
+    }
   }
 
   setCount(count: any) {
