@@ -41,6 +41,15 @@ import { MatSelectCountryModule } from '@angular-material-extensions/select-coun
 import { SettingComponent } from './back/setting/setting.component';
 import { OrderListComponent } from './back/superadmin/order-list/order-list.component';
 import { DriverListComponent } from './back/superadmin/driver-list/driver-list.component';
+import { LocateDriverComponent } from './back/superadmin/locate-driver/locate-driver.component';
+import { DriverAddComponent } from './back/superadmin/driver-list/driver-add/driver-add.component';
+import { OrderAddComponent } from './back/superadmin/order-list/order-add/order-add.component';
+import { AddressAddComponent } from './back/superadmin/address-list/address-add/address-add.component';
+import { AddressListComponent } from './back/superadmin/address-list/address-list.component';
+import { WarehouseAddComponent } from './back/superadmin/warehouse-list/warehouse-add/warehouse-add.component';
+import { WarehouseListComponent } from './back/superadmin/warehouse-list/warehouse-list.component';
+import { OrderDetailComponent } from './back/superadmin/order-list/order-detail/order-detail.component';
+import { DriverProfileDetailComponent } from './back/superadmin/driver-list/driver-profile-detail/driver-profile-detail.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +78,16 @@ import { DriverListComponent } from './back/superadmin/driver-list/driver-list.c
     CompanyDetailComponent,
     SettingComponent,
     OrderListComponent,
-    DriverListComponent
+    DriverListComponent,
+    LocateDriverComponent,
+    DriverAddComponent,
+    OrderAddComponent,
+    AddressAddComponent,
+    AddressListComponent,
+    WarehouseAddComponent,
+    WarehouseListComponent,
+    OrderDetailComponent,
+    DriverProfileDetailComponent
   ],
   imports: [
     BrowserModule,

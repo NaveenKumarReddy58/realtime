@@ -138,7 +138,7 @@ export class AuthService {
 
   getOrganization(email: string) {
     return this.http
-      .post<any>(`${this._liveApiUrl}/tenant/get-organization/`, {
+      .post<any>(`${environment.apiUrl}/tenant/get-organization/`, {
         email,
       })
       .pipe(
