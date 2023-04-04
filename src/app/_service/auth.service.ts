@@ -6,7 +6,7 @@ import {
   HttpHeaders,
   HttpErrorResponse,
 } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 
@@ -22,8 +22,9 @@ export class AuthService {
   _liveApiUrl = this.apiUrl;
 
   constructor(
+    private route: ActivatedRoute,
+    private router: Router,
     private http: HttpClient,
-    public router: Router,
     private toastr: ToastrService
   ) {
     this.getApiUrl.subscribe((data: any) => {
@@ -266,5 +267,29 @@ export class AuthService {
           this.dataError(error);
         }
       );
+  }
+
+  clearRouter() {
+    this.router.navigate(['/dashboad'], {
+      relativeTo: this.route,
+      queryParams: {
+        plan: null,
+        search_text: null,
+        bookmarked: null,
+        deactivated: null,
+        start_date: null,
+        end_date: null,
+      },
+      queryParamsHandling: 'merge', //preserve
+    });
+  }
+
+  setRouter(object: any) {
+    this.clearRouter();
+    this.router.navigate(['/dashboad'], {
+      relativeTo: this.route,
+      queryParams: object,
+      queryParamsHandling: 'merge', //merge
+    });
   }
 }

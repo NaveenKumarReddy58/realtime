@@ -25,32 +25,18 @@ export class PlanService {
   private _plans = new BehaviorSubject<object[]>([]);
   private plansData: { plans: object[] } = { plans: [] };
 
-  private _company = new BehaviorSubject<object[]>([]);
-  private companyData: { company: object[] } = { company: [] };
+  private _planCount = new BehaviorSubject<object[]>([]);
+  private planCountData: { planCount: object[] } = { planCount: [] };
 
-  private _plancount = new BehaviorSubject<object[]>([]);
-  private plancountData: { plancount: object[] } = { plancount: [] };
-
-  private _orgcount = new BehaviorSubject<object[]>([]);
-  private orgcountData: { orgcount: object[] } = { orgcount: [] };
-
-  get_plans(): Observable<any[]> {
+  getPlans(): Observable<any[]> {
     return this._plans.asObservable();
   }
 
-  get_company(): Observable<any[]> {
-    return this._company.asObservable();
+  getPlanCount(): Observable<any[]> {
+    return this._planCount.asObservable();
   }
 
-  get_plancount(): Observable<any[]> {
-    return this._plancount.asObservable();
-  }
-
-  get_orgcount(): Observable<any[]> {
-    return this._orgcount.asObservable();
-  }
-
-  plist(id?: Number) {
+  planList(id?: Number) {
     let tail = '';
     if (id) {
       tail = `${id}`;
@@ -72,7 +58,7 @@ export class PlanService {
 
           this.plansData.plans = data;
           this._plans.next(Object.assign({}, this.plansData).plans);
-          this.plancount();
+          this.planCount();
         },
         (error) => {
           this.authService.dataError(error);
@@ -80,7 +66,7 @@ export class PlanService {
       );
   }
 
-  padd(form: any) {
+  planAdd(form: any) {
     return this.http.post<any>(`${this._liveApiUrl}/tenant/plan/`, form).pipe(
       map((data) => {
         return data;
@@ -89,7 +75,7 @@ export class PlanService {
     );
   }
 
-  pedit(id: Number, form: any) {
+  planEdit(id: Number, form: any) {
     return this.http
       .put<any>(`${this._liveApiUrl}/tenant/plan/${id}/`, form)
       .pipe(
@@ -100,106 +86,11 @@ export class PlanService {
       );
   }
 
-  pdelete(id: Number) {
+  planDelete(id: Number) {
     return this.http.delete<any>(`${this._liveApiUrl}/tenant/plan/${id}`);
   }
 
-  cpAdd(form: any) {
-    return this.http
-      .post<any>(`${this._liveApiUrl}/tenant/organization/`, form)
-      .pipe(
-        map((data) => {
-          return data;
-        }),
-        catchError(this.authService.handleError)
-      );
-  }
-
-  cplist(id?: Number, filter?: any) {
-    let tail = '';
-    if (id != 0) {
-      tail += id;
-    }
-    let params = new URLSearchParams();
-    for (let key in filter) {
-      params.set(key, filter[key]);
-    }
-    if (filter) {
-      tail += `?` + params.toString();
-    }
-    this.http
-      .get<any>(`${this._liveApiUrl}/tenant/organization-listing/${tail}`)
-      .pipe(
-        map((data) => {
-          return data;
-        }),
-        catchError(this.authService.handleError)
-      )
-      .subscribe(
-        (data: any) => {
-          if (this.authService.resultCodeError(data)) {
-            return;
-          }
-
-          this.companyData.company = data;
-          this._company.next(Object.assign({}, this.companyData).company);
-        },
-        (error) => {
-          this.authService.dataError(error);
-        }
-      );
-  }
-
-  cpdetail(companyid: Number) {
-    return this.http.get<any>(
-      `${this._liveApiUrl}/tenant/organization/${companyid}/`
-    );
-  }
-
-  cpdelete(id: Number) {
-    return this.http.delete<any>(
-      `${this._liveApiUrl}/tenant/organization/${id}`
-    );
-  }
-
-  cpdeactivate(id: Number, org_status: string) {
-    return this.http
-      .patch<any>(`${this._liveApiUrl}/tenant/organization/${id}/`, {
-        org_status,
-      })
-      .pipe(
-        map((data) => {
-          return data;
-        }),
-        catchError(this.authService.handleError)
-      );
-  }
-
-  cporgcount() {
-    this.http
-      .get<any>(`${this._liveApiUrl}/tenant/org-count/`)
-      .pipe(
-        map((data) => {
-          return data;
-        }),
-        catchError(this.authService.handleError)
-      )
-      .subscribe(
-        (data: any) => {
-          if (this.authService.resultCodeError(data)) {
-            return;
-          }
-
-          this.orgcountData.orgcount = data;
-          this._orgcount.next(Object.assign({}, this.orgcountData).orgcount);
-        },
-        (error) => {
-          this.authService.dataError(error);
-        }
-      );
-  }
-
-  plancount() {
+  planCount() {
     this.http
       .get<any>(`${this._liveApiUrl}/tenant/plan-count/`)
       .pipe(
@@ -214,47 +105,12 @@ export class PlanService {
             return;
           }
 
-          this.plancountData.plancount = data;
-          this._plancount.next(Object.assign({}, this.plancountData).plancount);
+          this.planCountData.planCount = data;
+          this._planCount.next(Object.assign({}, this.planCountData).planCount);
         },
         (error) => {
           this.authService.dataError(error);
         }
-      );
-  }
-
-  clearrouter() {
-    this.router.navigate(['/dashboad'], {
-      relativeTo: this.route,
-      queryParams: {
-        plan: null,
-        search_text: null,
-        bookmarked: null,
-        deactivated: null,
-        start_date: null,
-        end_date: null,
-      },
-      queryParamsHandling: 'merge', //preserve
-    });
-  }
-
-  setrouter(object: any) {
-    this.clearrouter();
-    this.router.navigate(['/dashboad'], {
-      relativeTo: this.route,
-      queryParams: object,
-      queryParamsHandling: 'merge', //merge
-    });
-  }
-
-  cbookmark(id: Number) {
-    return this.http
-      .put<any>(`${this._liveApiUrl}/tenant/bookmark/${id}`, {})
-      .pipe(
-        map((data) => {
-          return data;
-        }),
-        catchError(this.authService.handleError)
       );
   }
 }

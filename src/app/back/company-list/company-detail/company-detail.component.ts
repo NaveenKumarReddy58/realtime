@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/_service/auth.service';
+import { CompanyService } from 'src/app/_service/company.service';
 import { PlanService } from 'src/app/_service/plan.service';
 
 @Component({
@@ -23,11 +24,12 @@ export class CompanyDetailComponent {
   constructor(
     public planService: PlanService,
     public authService: AuthService,
+    public companyService: CompanyService,
     private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
-    this.planService.cpdetail(this.companyid).subscribe(
+    this.companyService.companyDetail(this.companyid).subscribe(
       (data: any) => {
         if (this.authService.resultCodeError(data)) {
           return;
@@ -43,7 +45,7 @@ export class CompanyDetailComponent {
     );
   }
 
-  cpdeactivate(id: Number) {
+  companyActivateDeactivate(id: Number) {
     if (this.cpreason == '') {
       this.cpreasonData = true;
       this.deactivateLoading = false;
@@ -53,7 +55,7 @@ export class CompanyDetailComponent {
     }
 
     this.deactivateLoading = true;
-    this.planService.cpdeactivate(id, this.org_status).subscribe(
+    this.companyService.companyActivateDeactivate(id, this.org_status).subscribe(
       (data: any) => {
         if (this.authService.resultCodeError(data)) {
           return;

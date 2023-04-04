@@ -48,8 +48,8 @@ export class PlanAddComponent {
     if (!this.isAddMode) {
       // console.log('edit', this.id);
 
-      this.planService.plist(this.id);
-      this.plans$ = this.planService.get_plans();
+      this.planService.planList(this.id);
+      this.plans$ = this.planService.getPlans();
 
       this.plans$.subscribe((data: any) => {
         this.editPlan = data.results;
@@ -99,7 +99,7 @@ export class PlanAddComponent {
     }
 
     if (this.isAddMode) {
-      this.planService.padd(formData).subscribe(
+      this.planService.planAdd(formData).subscribe(
         (data: any) => {
           if (this.authService.resultCodeError(data)) {
             return;
@@ -114,7 +114,7 @@ export class PlanAddComponent {
         }
       );
     } else {
-      this.planService.pedit(this.id, formData).subscribe(
+      this.planService.planEdit(this.id, formData).subscribe(
         (data: any) => {
           if (this.authService.resultCodeError(data)) {
             return;

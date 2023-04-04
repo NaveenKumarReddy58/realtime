@@ -33,7 +33,7 @@ export class PlanListComponent {
     private toastr: ToastrService,
     public dialog: MatDialog
   ) {
-    this.plist();
+    this.planList();
   }
 
   ngOnInit(): void {}
@@ -49,9 +49,9 @@ export class PlanListComponent {
     });
   }
 
-  plist() {
-    this.planService.plist();
-    this.plans$ = this.planService.get_plans();
+  planList() {
+    this.planService.planList();
+    this.plans$ = this.planService.getPlans();
 
     this.plans$.subscribe((data: any) => {
       this.items = data.results;
@@ -59,15 +59,15 @@ export class PlanListComponent {
     });
   }
 
-  pdelete(id: Number) {
+  planDelete(id: Number) {
     this.delloading = true;
-    this.planService.pdelete(id).subscribe(
+    this.planService.planDelete(id).subscribe(
       (data: any) => {
         if (this.authService.resultCodeError(data)) {
             return;
           }
 
-        this.plist();
+        this.planList();
         this.router.navigate(['/plans']);
         this.toastr.success('Plan Deleted');
       },

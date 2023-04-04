@@ -16,7 +16,7 @@ export class TopComponent {
   isLoggedIn: any = false;
   @Input() isRoleIn: any;
 
-  plancount$!: Observable<object[]>;
+  planCount$!: Observable<object[]>;
 
   constructor(
     private route: ActivatedRoute,
@@ -38,15 +38,15 @@ export class TopComponent {
     });
 
     if (this.isRoleIn == '1') {
-      this.plancount();
+      this.planCount();
     }
   }
 
-  plancount() {
-    this.planService.plancount();
-    this.plancount$ = this.planService.get_plancount();
+  planCount() {
+    this.planService.planCount();
+    this.planCount$ = this.planService.getPlanCount();
 
-    this.plancount$.subscribe((data: any) => {
+    this.planCount$.subscribe((data: any) => {
       this.plandata = data.result;
     });
   }
@@ -56,7 +56,7 @@ export class TopComponent {
   }
 
   bookmarkedfield() {
-    this.planService.setrouter({
+    this.authService.setRouter({
       bookmarked: true,
       plan: null,
       search_text: null,
@@ -71,7 +71,7 @@ export class TopComponent {
     if (textVal == '') {
       textVal = null;
     }
-    this.planService.setrouter({
+    this.authService.setRouter({
       search_text: textVal,
       plan: null,
       bookmarked: null,
@@ -82,7 +82,7 @@ export class TopComponent {
   }
 
   planfield(id: Number) {
-    this.planService.setrouter({
+    this.authService.setRouter({
       plan: id,
       search_text: null,
       bookmarked: null,

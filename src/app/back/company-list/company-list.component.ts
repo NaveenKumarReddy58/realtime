@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/_service/auth.service';
+import { CompanyService } from 'src/app/_service/company.service';
 import { PlanService } from 'src/app/_service/plan.service';
 
 @Component({
@@ -23,19 +24,20 @@ export class CompanyListComponent {
   todayDate = new Date();
 
   company$!: Observable<object[]>;
-  orgcount$!: Observable<object[]>;
+  orgCount$!: Observable<object[]>;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     public planService: PlanService,
     public authService: AuthService,
+    public companyService: CompanyService,
     private toastr: ToastrService
   ) {
     // this.id = this.route.snapshot.params['id'];
 
-    this.cplist(0);
-    this.cporgcount();
+    this.companyList(0);
+    this.orgCount();
 
     this.route.queryParams.subscribe((params) => {
       if (params['plan'] != undefined) {
@@ -53,16 +55,16 @@ export class CompanyListComponent {
       }
 
       if (Object.keys(params).length === 0 && params.constructor === Object) {
-        this.cplist(0);
+        this.companyList(0);
       } else {
-        this.cplist(this.id, params);
+        this.companyList(this.id, params);
       }
     });
   }
 
-  cplist(planid?: number, filter?: any) {
-    this.planService.cplist(planid, filter);
-    this.company$ = this.planService.get_company();
+  companyList(planid?: number, filter?: any) {
+    this.companyService.companyList(planid, filter);
+    this.company$ = this.companyService.getCompany();
 
     this.company$.subscribe((data: any) => {
       this.items = data.results;
@@ -70,18 +72,18 @@ export class CompanyListComponent {
     });
   }
 
-  cporgcount() {
-    this.planService.cporgcount();
-    this.orgcount$ = this.planService.get_orgcount();
+  orgCount() {
+    this.companyService.orgCount();
+    this.orgCount$ = this.companyService.getOrgCount();
 
-    this.orgcount$.subscribe((data: any) => {
+    this.orgCount$.subscribe((data: any) => {
       this.orgdata = data.result;
     });
   }
 
   deactivatedfield() {
     this.optionstype = 'deactivate';
-    this.planService.setrouter({
+    this.authService.setRouter({
       deactivated: true,
       plan: null,
       search_text: null,
@@ -91,15 +93,15 @@ export class CompanyListComponent {
     });
   }
 
-  cbookmark(id: Number) {
-    this.planService.cbookmark(id).subscribe(
+  companyBookmark(id: Number) {
+    this.companyService.companyBookmark(id).subscribe(
       (data: any) => {
         if (this.authService.resultCodeError(data)) {
-            return;
-          }
+          return;
+        }
 
-        this.cplist();
-        this.cporgcount();
+        this.companyList();
+        this.orgCount();
 
         this.router.navigate(['/dashboad']);
         this.toastr.success('Company Bookmarked');
@@ -114,7 +116,7 @@ export class CompanyListComponent {
     this.optionstype = type;
 
     if (this.optionstype == 'all') {
-      this.planService.setrouter({
+      this.authService.setRouter({
         start_date: null,
         end_date: null,
         plan: null,
@@ -123,7 +125,7 @@ export class CompanyListComponent {
         deactivated: null,
       });
     } else {
-      this.planService.setrouter({
+      this.authService.setRouter({
         start_date: start_date,
         end_date: end_date,
         plan: null,

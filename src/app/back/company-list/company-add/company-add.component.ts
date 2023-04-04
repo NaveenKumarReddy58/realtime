@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { countries } from 'src/app/_interface/country-data-store';
 import { AuthService } from 'src/app/_service/auth.service';
+import { CompanyService } from 'src/app/_service/company.service';
 import { PlanService } from 'src/app/_service/plan.service';
 
 @Component({
@@ -34,6 +35,7 @@ export class CompanyAddComponent {
     private router: Router,
     public planService: PlanService,
     public authService: AuthService,
+    public companyService: CompanyService,
     private toastr: ToastrService
   ) {
     this.addCP = formBuilder.group({
@@ -55,7 +57,7 @@ export class CompanyAddComponent {
       logo: [''],
     });
 
-    this.plist();
+    this.planList();
   }
 
   // convenience getter for easy access to form fields
@@ -70,9 +72,9 @@ export class CompanyAddComponent {
 
   ngOnInit(): void {}
 
-  plist() {
-    this.planService.plist();
-    this.plans$ = this.planService.get_plans();
+  planList() {
+    this.planService.planList();
+    this.plans$ = this.planService.getPlans();
 
     this.plans$.subscribe((data: any) => {
       this.planItems = data.results;
@@ -116,7 +118,7 @@ export class CompanyAddComponent {
     formData.append('state', '');
     formData.append('last_name', '');
 
-    this.planService.cpAdd(formData).subscribe(
+    this.companyService.companyAdd(formData).subscribe(
       (data: any) => {
         if (this.authService.resultCodeError(data)) {
           return;
