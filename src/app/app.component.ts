@@ -1,17 +1,20 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
-import { Keepalive } from '@ng-idle/keepalive';
-import { Observable } from 'rxjs';
+import { Keepalive, NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { AuthService } from './_service/auth.service';
 import { CommonModule } from '@angular/common';
+import { TopComponent } from './back/common/layout/top/top.component';
+import { SplashComponent } from './front/splash/splash.component';
+import { MenuComponent } from './back/common/layout/menu/menu.component';
+import { MomentModule } from 'ngx-moment';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TopComponent, SplashComponent, MenuComponent, NgIdleKeepaliveModule, RouterOutlet, MomentModule],
 })
 export class AppComponent {
   title = 'Real Time Track';
@@ -26,8 +29,8 @@ export class AppComponent {
   urlName: any;
 
   constructor(
-    private idle: Idle,
-    private keepalive: Keepalive,
+    // private idle: Idle,
+    // private keepalive: Keepalive,
     public authService: AuthService,
     public router: Router
   ) {
@@ -42,16 +45,7 @@ export class AppComponent {
         this.isRoleIn = data;
       }
     });
-
-    // this.router.events.subscribe({
-    //   next: (event: any) => {
-    //     this.url = window.location.pathname;
-    //     this.urlName = this.url.split('/');
-    //   },
-
-    //   error: (error) => console.error(error),
-    // });
-
+/*
     // sets an idle timeout of 30 seconds, for testing purposes.
     idle.setIdle(290);
     // sets a timeout period of 5 seconds. after 10 seconds of inactivity, the user will be considered timed out.
@@ -76,12 +70,12 @@ export class AppComponent {
 
     keepalive.onPing.subscribe(() => (this.lastPing = new Date()));
 
-    this.reset();
+    this.reset();*/
   }
 
   reset() {
-    this.idle.watch();
-    this.idleState = 'Started.';
-    this.timedOut = false;
+    // this.idle.watch();
+    // this.idleState = 'Started.';
+    // this.timedOut = false;
   }
 }
