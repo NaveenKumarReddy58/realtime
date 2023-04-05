@@ -24,7 +24,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
-  declarations: [DateAgo, DateDifference],
+  declarations: [DateAgo],
   imports: [
     RouterModule,
     BrowserModule,

@@ -6,18 +6,20 @@ import {
   Validators,
   FormControl,
   AbstractControl,
+  ReactiveFormsModule,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import Validation from 'src/app/_helper/validation';
 import { AuthService } from 'src/app/_service/auth.service';
+import { SidebarComponent } from '../layout/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.css'],
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, SidebarComponent, ReactiveFormsModule],
 })
 export class ResetPasswordComponent {
   reset!: FormGroup;

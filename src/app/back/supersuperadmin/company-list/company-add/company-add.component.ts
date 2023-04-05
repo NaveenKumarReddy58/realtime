@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
@@ -8,13 +8,14 @@ import { countries } from 'src/app/_interface/country-data-store';
 import { AuthService } from 'src/app/_service/auth.service';
 import { CompanyService } from 'src/app/_service/company.service';
 import { PlanService } from 'src/app/_service/plan.service';
+import { SidebarComponent } from 'src/app/front/layout/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-company-add',
   templateUrl: './company-add.component.html',
   styleUrls: ['./company-add.component.css'],
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule, SidebarComponent],
 })
 export class CompanyAddComponent {
   addCP!: FormGroup;

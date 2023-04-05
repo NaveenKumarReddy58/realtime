@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/_service/auth.service';
@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './plan-list.component.html',
   styleUrls: ['./plan-list.component.css'],
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
 })
 export class PlanListComponent {
   expandedIndex = 0;

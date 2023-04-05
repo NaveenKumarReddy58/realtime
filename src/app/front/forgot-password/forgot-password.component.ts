@@ -1,16 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/_service/auth.service';
+import { SidebarComponent } from '../layout/sidebar/sidebar.component';
+import { TimerComponent } from '../timer/timer.component';
+import { NgOtpInputModule } from 'ng-otp-input';
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.css'],
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, SidebarComponent, TimerComponent, NgOtpInputModule, ReactiveFormsModule],
 })
 export class ForgotPasswordComponent {
   forgot!: FormGroup;

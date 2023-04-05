@@ -7,13 +7,16 @@ import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/_service/auth.service';
 import { CompanyService } from 'src/app/_service/company.service';
 import { PlanService } from 'src/app/_service/plan.service';
+import { CompanyDetailComponent } from './company-detail/company-detail.component';
+import { DateDifference } from 'src/app/_pipes/date-difference.pipe';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
 
 @Component({
   selector: 'app-company-list',
   templateUrl: './company-list.component.html',
   styleUrls: ['./company-list.component.css'],
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, CompanyDetailComponent, CdkAccordionModule, DateDifference],
 })
 export class CompanyListComponent {
   expandedIndex = 0;

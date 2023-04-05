@@ -8,6 +8,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
   name: 'dateDifference',
   pure: true,
+  standalone: true,
 })
 export class DateDifference implements PipeTransform {
   transform(startingDate: Date, args?: any): any {

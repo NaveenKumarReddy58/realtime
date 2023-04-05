@@ -1,5 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { CountdownConfig, CountdownEvent } from 'ngx-countdown';
+import {
+  CountdownConfig,
+  CountdownEvent,
+  CountdownModule,
+} from 'ngx-countdown';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../_service/auth.service';
 import { CommonModule } from '@angular/common';
@@ -9,7 +13,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './timer.component.html',
   styleUrls: ['./timer.component.css'],
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, CountdownModule],
 })
 export class TimerComponent {
   config: CountdownConfig = { leftTime: 60, format: 'm:s' };
@@ -39,8 +43,8 @@ export class TimerComponent {
     this.authService.sendMobileOtp(this.username).subscribe(
       (data: any) => {
         if (this.authService.resultCodeError(data)) {
-            return;
-          }
+          return;
+        }
 
         this.toastr.success('OTP Sent!');
       },

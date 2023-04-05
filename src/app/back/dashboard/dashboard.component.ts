@@ -4,13 +4,15 @@ import { Router } from '@angular/router';
 import { Idle } from '@ng-idle/core';
 import { Keepalive } from '@ng-idle/keepalive';
 import { AuthService } from 'src/app/_service/auth.service';
+import { CompanyListComponent } from '../supersuperadmin/company-list/company-list.component';
+import { OrderListComponent } from '../superadmin/order-list/order-list.component';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, CompanyListComponent, OrderListComponent],
 })
 export class DashboardComponent {
   isLoggedIn: any = false;
