@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,6 +9,8 @@ import { AuthService } from 'src/app/_service/auth.service';
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.css'],
+  standalone: true,
+  imports: [CommonModule],
 })
 export class ForgotPasswordComponent {
   forgot!: FormGroup;

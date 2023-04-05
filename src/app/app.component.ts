@@ -4,11 +4,14 @@ import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
 import { Keepalive } from '@ng-idle/keepalive';
 import { Observable } from 'rxjs';
 import { AuthService } from './_service/auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  standalone: true,
+  imports: [CommonModule],
 })
 export class AppComponent {
   title = 'Real Time Track';

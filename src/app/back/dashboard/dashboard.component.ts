@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Idle } from '@ng-idle/core';
@@ -8,6 +9,8 @@ import { AuthService } from 'src/app/_service/auth.service';
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
+  standalone: true,
+  imports: [CommonModule],
 })
 export class DashboardComponent {
   isLoggedIn: any = false;

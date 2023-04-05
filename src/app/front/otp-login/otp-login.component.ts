@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,6 +9,8 @@ import { AuthService } from 'src/app/_service/auth.service';
   selector: 'app-otp-login',
   templateUrl: './otp-login.component.html',
   styleUrls: ['./otp-login.component.css'],
+  standalone: true,
+  imports: [CommonModule],
 })
 export class OtpLoginComponent {
   otplogin!: FormGroup;
@@ -113,7 +116,10 @@ export class OtpLoginComponent {
           this.authService.setLS('user_timezone', data?.user_timezone);
 
           this.toastr.success(data?.actionPerformed);
-          this.router.navigate(['/dashboad']);
+
+          this.router.navigate([
+            '/' + this.authService._isRoleName + '/dashboad',
+          ]);
         },
         (error) => {
           this.authService.dataError(error);

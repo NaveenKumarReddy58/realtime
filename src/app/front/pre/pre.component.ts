@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,6 +9,8 @@ import { AuthService } from 'src/app/_service/auth.service';
   selector: 'app-pre',
   templateUrl: './pre.component.html',
   styleUrls: ['./pre.component.css'],
+  standalone: true,
+  imports: [CommonModule],
 })
 export class PreComponent {
   prelogin!: FormGroup;

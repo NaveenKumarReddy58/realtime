@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,6 +9,8 @@ import { AuthService } from 'src/app/_service/auth.service';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
+  standalone: true,
+  imports: [CommonModule],
 })
 export class LoginComponent {
   login!: FormGroup;
@@ -76,7 +79,9 @@ export class LoginComponent {
 
           this.toastr.success(data?.actionPerformed);
 
-          this.router.navigate(['/dashboad']);
+          this.router.navigate([
+            '/' + this.authService._isRoleName + '/dashboad',
+          ]);
         },
         (error) => {
           this.authService.dataError(error);

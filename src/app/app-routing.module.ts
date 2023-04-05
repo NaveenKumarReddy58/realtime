@@ -6,120 +6,41 @@ import {
   Routes,
   TitleStrategy,
 } from '@angular/router';
-import { CompanyAddComponent } from './back/company-list/company-add/company-add.component';
-import { CompanyListComponent } from './back/company-list/company-list.component';
-import { DashboardComponent } from './back/dashboard/dashboard.component';
-import { PlanAddComponent } from './back/plan-list/plan-add/plan-add.component';
-import { PlanListComponent } from './back/plan-list/plan-list.component';
-import { ProfileComponent } from './back/profile/profile.component';
-import { SettingComponent } from './back/setting/setting.component';
-import { TicketDetailComponent } from './back/ticket-list/ticket-detail/ticket-detail.component';
-import { TicketListComponent } from './back/ticket-list/ticket-list.component';
-import { ForgotPasswordComponent } from './front/forgot-password/forgot-password.component';
-
-import { LoginComponent } from './front/login/login.component';
-import { OtpLoginComponent } from './front/otp-login/otp-login.component';
-import { PreComponent } from './front/pre/pre.component';
-import { ResetPasswordComponent } from './front/reset-password/reset-password.component';
-import { AuthGuard } from './_shared/auth.guard';
 import { FrontGuard } from './_shared/front.guard';
+import { NotFoundComponent } from './front/not-found/not-found.component';
 
 const routes: Routes = [
   {
-    path: '',
-    component: PreComponent,
     title: 'Home',
     canActivate: [FrontGuard],
+    path: '',
+    loadChildren: () =>
+      import('./front-routing.module').then((m) => m.CHILDREN_ROUTES),
   },
   {
-    path: 'login',
-    component: LoginComponent,
-    title: 'Login',
+    title: 'Super Admin',
     canActivate: [FrontGuard],
+    path: 'superadmin',
+    loadChildren: () =>
+      import('./super-super-admin-routing.module').then(
+        (m) => m.CHILDREN_ROUTES
+      ),
   },
   {
-    path: 'reset',
-    component: ResetPasswordComponent,
-    title: 'Reset Password',
+    title: 'Admin',
     canActivate: [FrontGuard],
+    path: 'admin',
+    loadChildren: () =>
+      import('./super-admin-routing.module').then((m) => m.CHILDREN_ROUTES),
   },
   {
-    path: 'forgot',
-    component: ForgotPasswordComponent,
-    title: 'Forgot Password',
-    canActivate: [FrontGuard],
-  },
-  {
-    path: 'otplogin',
-    component: OtpLoginComponent,
-    title: 'OTP Login',
-    canActivate: [FrontGuard],
-  },
-  {
-    path: 'dashboad',
-    component: DashboardComponent,
-    title: 'Dashboard',
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'plans',
-    component: PlanListComponent,
-    title: 'Plans',
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'plans/add',
-    component: PlanAddComponent,
-    title: 'Add Plan',
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'plans/:id',
-    component: PlanAddComponent,
-    title: 'Edit Plan',
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'tickets',
-    component: TicketListComponent,
-    title: 'Tickets',
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'tickets/:id',
-    component: TicketDetailComponent,
-    title: 'Ticket',
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'profile',
-    component: ProfileComponent,
-    title: 'My Profile',
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'company',
-    component: CompanyListComponent,
-    title: 'Company List',
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'company/add',
-    component: CompanyAddComponent,
-    title: 'Add Company',
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'report',
-    component: CompanyListComponent,
-    title: 'Report',
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'setting',
-    component: SettingComponent,
-    title: 'Setting',
-    canActivate: [AuthGuard],
+    path: '**',
+    // component: NotFoundComponent,
+    title: 'Not Found',
+    loadComponent: () =>
+      import('./front/not-found/not-found.component').then(
+        (mod) => mod.NotFoundComponent
+      ),
   },
 ];
 

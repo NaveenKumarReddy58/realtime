@@ -19,7 +19,11 @@ export class AuthService {
   _apiUrl = new BehaviorSubject<any>(this.apiUrl);
   _isDashboard = new BehaviorSubject<any>(false);
   _isRole = new BehaviorSubject<any>('0');
+
   _liveApiUrl = this.apiUrl;
+  _isLoggedIn: any = false;
+  _isRoleIn: any = false;
+  _isRoleName: any = '0';
 
   constructor(
     private route: ActivatedRoute,
@@ -30,6 +34,23 @@ export class AuthService {
     this.getApiUrl.subscribe((data: any) => {
       this._liveApiUrl = data;
       console.log('_liveApiUrl', this._liveApiUrl);
+    });
+
+    this.getDashboard().subscribe((data: any) => {
+      this._isLoggedIn = data;
+    });
+
+    this.getRole().subscribe((data: any) => {
+      if (data != false) {
+        this._isRoleIn = data[0];
+        if (data[0] == 1) {
+          this._isRoleName = 'superadmin';
+        } else {
+          this._isRoleName = 'admin';
+        }
+      } else {
+        this._isRoleIn = data;
+      }
     });
   }
 
@@ -126,7 +147,6 @@ export class AuthService {
     this._isRole.next('0');
   }
 
-  // User profile
   getUserProfile(id: any): Observable<any> {
     let api = `${this._liveApiUrl}/user-profile/${id}`;
     return this.http.get(api).pipe(
@@ -270,7 +290,7 @@ export class AuthService {
   }
 
   clearRouter() {
-    this.router.navigate(['/dashboad'], {
+    this.router.navigate([''], {
       relativeTo: this.route,
       queryParams: {
         plan: null,
@@ -286,7 +306,7 @@ export class AuthService {
 
   setRouter(object: any) {
     this.clearRouter();
-    this.router.navigate(['/dashboad'], {
+    this.router.navigate([''], {
       relativeTo: this.route,
       queryParams: object,
       queryParamsHandling: 'merge', //merge

@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import {
   FormGroup,
@@ -15,6 +16,8 @@ import { AuthService } from 'src/app/_service/auth.service';
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.css'],
+  standalone: true,
+  imports: [CommonModule],
 })
 export class ResetPasswordComponent {
   reset!: FormGroup;
