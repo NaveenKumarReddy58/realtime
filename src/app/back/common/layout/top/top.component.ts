@@ -15,6 +15,7 @@ export class TopComponent {
   searchbox = false;
   isLoggedIn: any = false;
   @Input() isRoleIn: any;
+  _isRoleName: any = '0';
 
   planCount$!: Observable<object[]>;
 
@@ -42,6 +43,8 @@ export class TopComponent {
     if (this.isRoleIn == '1') {
       this.planCount();
     }
+
+    this._isRoleName = this.authService._isRoleName;
   }
 
   planCount() {

@@ -26,6 +26,11 @@ import { NotFoundComponent } from './front/not-found/not-found.component';
 import { PreComponent } from './front/pre/pre.component';
 import { AuthGuard } from './_shared/auth.guard';
 import { FrontGuard } from './_shared/front.guard';
+import { WarehouseListComponent } from './back/superadmin/warehouse-list/warehouse-list.component';
+import { WarehouseAddComponent } from './back/superadmin/warehouse-list/warehouse-add/warehouse-add.component';
+import { DriverListComponent } from './back/superadmin/driver-list/driver-list.component';
+import { DriverAddComponent } from './back/superadmin/driver-list/driver-add/driver-add.component';
+import { LocateDriverComponent } from './back/superadmin/locate-driver/locate-driver.component';
 
 const routes: Routes = [
   {
@@ -60,7 +65,6 @@ const routes: Routes = [
   },
   {
     path: 'superadmin',
-    component: SuperSuperAdminComponent,
     canActivate: [AuthGuard],
     title: 'Super Super Admin',
     children: [
@@ -134,7 +138,6 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    component: SuperAdminComponent,
     canActivate: [AuthGuard],
     title: 'Super Admin',
     children: [
@@ -151,6 +154,36 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
+        path: 'warehouse',
+        component: WarehouseListComponent,
+        title: 'Warehouse List',
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'warehouse/add',
+        component: WarehouseAddComponent,
+        title: 'Warehouse Add',
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'driver',
+        component: DriverListComponent,
+        title: 'Driver List',
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'driver/add',
+        component: DriverAddComponent,
+        title: 'Driver Add',
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'driver/locate',
+        component: LocateDriverComponent,
+        title: 'Driver Locate',
+        canActivate: [AuthGuard],
+      },
+      {
         path: 'tickets',
         component: TicketListComponent,
         title: 'Tickets',
@@ -159,7 +192,7 @@ const routes: Routes = [
       {
         path: 'tickets/:id',
         component: TicketDetailComponent,
-        title: 'Ticket',
+        title: 'Ticket Detail',
         canActivate: [AuthGuard],
       },
       {
