@@ -68,7 +68,7 @@ export class PlanListComponent {
         }
 
         this.planList();
-        this.router.navigate(['/plans']);
+        this.router.navigate(['/' + this.authService._isRoleName + '/plans']);
         this.toastr.success('Plan Deleted');
       },
       (error) => {

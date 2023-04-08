@@ -106,7 +106,7 @@ export class PlanAddComponent {
           }
 
           this.toastr.success(data?.actionPerformed);
-          this.router.navigate(['/plans']);
+          this.router.navigate(['/' + this.authService._isRoleName + '/plans']);
         },
         (error) => {
           this.authService.dataError(error);
@@ -121,7 +121,7 @@ export class PlanAddComponent {
           }
 
           this.toastr.success(data?.actionPerformed);
-          this.router.navigate(['/plans']);
+          this.router.navigate(['/' + this.authService._isRoleName + '/plans']);
         },
         (error) => {
           this.authService.dataError(error);
