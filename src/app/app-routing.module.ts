@@ -16,10 +16,12 @@ import { TicketDetailComponent } from './back/common/ticket-list/ticket-detail/t
 import { TicketListComponent } from './back/common/ticket-list/ticket-list.component';
 import { DashboardComponent } from './back/dashboard/dashboard.component';
 import { OrderAddComponent } from './back/superadmin/order-list/order-add/order-add.component';
+import { SuperAdminComponent } from './back/superadmin/super-admin.component';
 import { CompanyAddComponent } from './back/supersuperadmin/company-list/company-add/company-add.component';
 import { CompanyListComponent } from './back/supersuperadmin/company-list/company-list.component';
 import { PlanAddComponent } from './back/supersuperadmin/plan-list/plan-add/plan-add.component';
 import { PlanListComponent } from './back/supersuperadmin/plan-list/plan-list.component';
+import { SuperSuperAdminComponent } from './back/supersuperadmin/super-super-admin.component';
 import { NotFoundComponent } from './front/not-found/not-found.component';
 import { PreComponent } from './front/pre/pre.component';
 import { AuthGuard } from './_shared/auth.guard';
@@ -58,6 +60,7 @@ const routes: Routes = [
   },
   {
     path: 'superadmin',
+    component: SuperSuperAdminComponent,
     canActivate: [AuthGuard],
     title: 'Super Super Admin',
     children: [
@@ -131,6 +134,7 @@ const routes: Routes = [
   },
   {
     path: 'admin',
+    component: SuperAdminComponent,
     canActivate: [AuthGuard],
     title: 'Super Admin',
     children: [

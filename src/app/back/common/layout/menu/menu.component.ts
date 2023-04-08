@@ -11,8 +11,9 @@ import { AuthService } from 'src/app/_service/auth.service';
 })
 export class MenuComponent {
   timer: any = 0;
-  @Input() isRoleIn: any;
   _isRoleName: any = '0';
+
+  @Input() isRoleIn: any;
 
   ngOnInit(): void {}
 

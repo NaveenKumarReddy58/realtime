@@ -57,6 +57,8 @@ import { ProfileComponent } from './back/common/profile/profile.component';
 import { TopComponent } from './back/common/layout/top/top.component';
 import { MenuComponent } from './back/common/layout/menu/menu.component';
 import { AppComponent } from './app.component';
+import { SuperAdminComponent } from './back/superadmin/super-admin.component';
+import { SuperSuperAdminComponent } from './back/supersuperadmin/super-super-admin.component';
 
 @NgModule({
   declarations: [
@@ -96,6 +98,8 @@ import { AppComponent } from './app.component';
     ProfileComponent,
     TopComponent,
     MenuComponent,
+    SuperAdminComponent,
+    SuperSuperAdminComponent,
   ],
   imports: [
     CommonModule,
