@@ -1,20 +1,17 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/_service/auth.service';
 import { PlanService } from 'src/app/_service/plan.service';
 import { DialogAnimationsComponent } from './dialog-animations/dialog-animations.component';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-plan-list',
   templateUrl: './plan-list.component.html',
   styleUrls: ['./plan-list.component.css'],
-  standalone: true,
-  imports: [CommonModule, RouterModule],
 })
 export class PlanListComponent {
   expandedIndex = 0;

@@ -22,9 +22,11 @@ import { CommonModule } from '@angular/common';
       ]),
     ]),
   ],
-  standalone: true,
-  imports: [CommonModule],
 })
 export class SplashComponent {
   toggleFlag = true;
+
+  constructor() {}
+
+  ngOnInit(): void {}
 }

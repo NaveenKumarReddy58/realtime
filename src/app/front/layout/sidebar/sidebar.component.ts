@@ -6,8 +6,6 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css'],
-  standalone: true,
-  imports: [CommonModule, SlickCarouselModule],
 })
 export class SidebarComponent {
   myimg = 'assets/images/bannerslider.png';
@@ -37,6 +35,7 @@ export class SidebarComponent {
   breakpoint(e: any) {}
   afterChange(e: any) {}
   beforeChange(e: any) {}
+
   constructor() {}
   ngOnInit(): void {}
 }

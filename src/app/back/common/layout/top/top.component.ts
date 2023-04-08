@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -10,8 +9,6 @@ import { PlanService } from 'src/app/_service/plan.service';
   selector: 'app-top',
   templateUrl: './top.component.html',
   styleUrls: ['./top.component.css'],
-  standalone: true,
-  imports: [CommonModule],
 })
 export class TopComponent {
   plandata: any;
@@ -20,6 +17,8 @@ export class TopComponent {
   @Input() isRoleIn: any;
 
   planCount$!: Observable<object[]>;
+
+  ngOnInit(): void {}
 
   constructor(
     private route: ActivatedRoute,

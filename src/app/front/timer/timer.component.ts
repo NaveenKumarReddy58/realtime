@@ -1,19 +1,12 @@
 import { Component, Input } from '@angular/core';
-import {
-  CountdownConfig,
-  CountdownEvent,
-  CountdownModule,
-} from 'ngx-countdown';
+import { CountdownConfig, CountdownEvent } from 'ngx-countdown';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../_service/auth.service';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-timer',
   templateUrl: './timer.component.html',
   styleUrls: ['./timer.component.css'],
-  standalone: true,
-  imports: [CommonModule, CountdownModule],
 })
 export class TimerComponent {
   config: CountdownConfig = { leftTime: 60, format: 'm:s' };
@@ -21,6 +14,8 @@ export class TimerComponent {
   isActive = false;
 
   @Input() username: any;
+
+  ngOnInit(): void {}
 
   constructor(public authService: AuthService, private toastr: ToastrService) {}
 

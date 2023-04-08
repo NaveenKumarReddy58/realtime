@@ -1,9 +1,5 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { FormBuilder, FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { DateDifference } from 'src/app/_pipes/date-difference.pipe';
 import { AuthService } from 'src/app/_service/auth.service';
 import { CompanyService } from 'src/app/_service/company.service';
 import { PlanService } from 'src/app/_service/plan.service';
@@ -12,8 +8,6 @@ import { PlanService } from 'src/app/_service/plan.service';
   selector: 'app-company-detail',
   templateUrl: './company-detail.component.html',
   styleUrls: ['./company-detail.component.css'],
-  standalone: true,
-  imports: [CommonModule, DateDifference, FormsModule],
 })
 export class CompanyDetailComponent {
   @Input() companyid: any;

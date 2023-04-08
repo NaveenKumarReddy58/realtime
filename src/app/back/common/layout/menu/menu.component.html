@@ -1,6 +1,8 @@
 <div class="SideBar" *ngIf="isRoleIn == 1">
   <div class="LogoDiv">
-    <a routerLink="/"><img src="assets/images/logo.png" /></a>
+    <a routerLink="/{{ _isRoleName }}/dashboad"
+      ><img src="assets/images/logo.png"
+    /></a>
   </div>
   <ul class="SideBarList">
     <li [routerLinkActive]="['active']">
@@ -11,40 +13,40 @@
       >
     </li>
     <li [routerLinkActive]="['active']">
-      <a routerLink="/company/add"
+      <a routerLink="/{{ _isRoleName }}/company/add"
         ><img src="assets/images/super-super-icon01.png" /><span
           >Add Company</span
         ></a
       >
     </li>
     <li [routerLinkActive]="['active']">
-      <a routerLink="/tickets"
-        ><img src="assets/images/super-super-icon02.png" /><span
-          >Tickets</span
-        ></a
-      >
-    </li>
-    <li [routerLinkActive]="['active']">
-      <a routerLink="/plans"
+      <a routerLink="/{{ _isRoleName }}/plans"
         ><img src="assets/images/super-super-icon04.png" /><span>Plans</span></a
       >
     </li>
     <li [routerLinkActive]="['active']">
-      <a routerLink="/report"
+      <a routerLink="/{{ _isRoleName }}/report"
         ><img src="assets/images/super-super-icon04.png" /><span
           >Report</span
         ></a
       >
     </li>
     <li [routerLinkActive]="['active']">
-      <a routerLink="/profile"
+      <a routerLink="/{{ _isRoleName }}/tickets"
+        ><img src="assets/images/super-super-icon02.png" /><span
+          >Tickets</span
+        ></a
+      >
+    </li>
+    <li [routerLinkActive]="['active']">
+      <a routerLink="/{{ _isRoleName }}/profile"
         ><img src="assets/images/super-super-icon05.png" /><span
           >Profile</span
         ></a
       >
     </li>
     <li [routerLinkActive]="['active']">
-      <a routerLink="/setting"
+      <a routerLink="/{{ _isRoleName }}/setting"
         ><img src="assets/images/super-super-icon06.png" /><span
           >Setting</span
         ></a
@@ -73,7 +75,9 @@
 
 <div class="SideBar" *ngIf="isRoleIn == 2">
   <div class="LogoDiv">
-    <a routerLink="/"><img src="assets/images/logo.png" /></a>
+    <a routerLink="/{{ _isRoleName }}/dashboad"
+      ><img src="assets/images/logo.png"
+    /></a>
   </div>
   <ul class="SideBarList">
     <li [routerLinkActive]="['active']">
@@ -84,21 +88,28 @@
       >
     </li>
     <li [routerLinkActive]="['active']">
-      <a routerLink="/company/add"
+      <a routerLink="/{{ _isRoleName }}/orders/add"
         ><img src="assets/images/super-super-icon01.png" /><span
           >Add Order</span
         ></a
       >
     </li>
     <li [routerLinkActive]="['active']">
-      <a routerLink="/profile"
+      <a routerLink="/{{ _isRoleName }}/tickets"
+        ><img src="assets/images/super-super-icon02.png" /><span
+          >Tickets</span
+        ></a
+      >
+    </li>
+    <li [routerLinkActive]="['active']">
+      <a routerLink="/{{ _isRoleName }}/profile"
         ><img src="assets/images/super-super-icon05.png" /><span
           >Profile</span
         ></a
       >
     </li>
     <li [routerLinkActive]="['active']">
-      <a routerLink="/setting"
+      <a routerLink="/{{ _isRoleName }}/setting"
         ><img src="assets/images/super-super-icon06.png" /><span
           >Setting</span
         ></a

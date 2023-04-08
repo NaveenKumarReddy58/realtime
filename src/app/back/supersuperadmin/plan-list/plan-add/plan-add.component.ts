@@ -1,6 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
@@ -11,8 +10,6 @@ import { PlanService } from 'src/app/_service/plan.service';
   selector: 'app-plan-add',
   templateUrl: './plan-add.component.html',
   styleUrls: ['./plan-add.component.css'],
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
 })
 export class PlanAddComponent {
   addPlan!: FormGroup;

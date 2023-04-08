@@ -33,7 +33,7 @@ export class AuthService {
   ) {
     this.getApiUrl.subscribe((data: any) => {
       this._liveApiUrl = data;
-      console.log('_liveApiUrl', this._liveApiUrl);
+      // console.log('_liveApiUrl', this._liveApiUrl);
     });
 
     this.getDashboard().subscribe((data: any) => {
