@@ -1,1 +1,155 @@
-<p>warehouse-add works!</p>
+<div class="ContentArea">
+  <div class="row mb-4">
+    <div class="col-md-10">
+      <div class="HeadingName">
+        <h2 *ngIf="isAddMode">Add Warehouse</h2>
+        <h2 *ngIf="!isAddMode">Edit Warehouse</h2>
+      </div>
+    </div>
+    <div class="col-md-2 loginButton">
+      <a routerLink="/superadmin/warehouse"><button>Back to List</button></a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <form
+        [formGroup]="addWare"
+        class="ProfileFor"
+        enctype="multipart/form-data"
+      >
+        <div class="row">
+          <div class="col-md-12">
+            <input
+              type="text"
+              formControlName="warehouse_name"
+              placeholder="Warehouse Name"
+              class="Pro_input_Field"
+            />
+            <div
+              *ngIf="isSubmitted && f['warehouse_name'].errors"
+              class="text-danger"
+            >
+              <div *ngIf="f['warehouse_name'].errors['warehouse_name']">
+                Warehouse Name is required
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12 mt-3">
+            <textarea
+              formControlName="address"
+              placeholder="Address"
+              class="Pro_input_Field"
+            ></textarea>
+            <div *ngIf="isSubmitted && f['address'].errors" class="text-danger">
+              <div *ngIf="f['address'].errors['required']">
+                Address is required
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 mt-3">
+            <input
+              type="text"
+              formControlName="contact_name"
+              placeholder="Contact Name"
+              class="Pro_input_Field"
+            />
+            <div
+              *ngIf="isSubmitted && f['contact_name'].errors"
+              class="text-danger"
+            >
+              <div *ngIf="f['contact_name'].errors['contact_name']">
+                Contact Name is required
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mt-3">
+            <input
+              type="text"
+              formControlName="email"
+              placeholder="Email"
+              class="Pro_input_Field"
+            />
+            <div *ngIf="isSubmitted && f['email'].errors" class="text-danger">
+              <div *ngIf="f['email'].errors['required']">Email is required</div>
+              <div *ngIf="f['email'].errors['email']">Email is not valid</div>
+            </div>
+          </div>
+
+          <div class="col-md-6 mt-3">
+            <input
+              type="text"
+              formControlName="phone"
+              placeholder="Phone"
+              class="Pro_input_Field"
+            />
+            <div *ngIf="isSubmitted && f['phone'].errors" class="text-danger">
+              <div *ngIf="f['phone'].errors['required']">
+                Phone number is required
+              </div>
+              <div *ngIf="f['phone'].errors['pattern']">
+                Phone number must be 10 digits
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 mt-3">
+            <input
+              type="text"
+              formControlName="alt_phone"
+              placeholder="Alternative Phone"
+              class="Pro_input_Field"
+            />
+            <div
+              *ngIf="isSubmitted && f['alt_phone'].errors"
+              class="text-danger"
+            >
+              <div *ngIf="f['alt_phone'].errors['required']">
+                Alternative Phone number is required
+              </div>
+              <div *ngIf="f['alt_phone'].errors['pattern']">
+                Alternative Phone number must be 10 digits
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12 mt-3">
+            <div class="Div01 Div02">
+              Is it main location?
+              <input type="radio" formControlName="is_main_localation" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-md-12">
+            <div class="d-flex justify-content-between Cancel_Save">
+              <button routerLink="/superadmin/warehouse" class="CancelButton">
+                Cancel
+              </button>
+              <button
+                type="submit"
+                (click)="handleSubmit()"
+                class="SaveButton ButtonStyle"
+                *ngIf="isAddMode"
+              >
+                Add Warehouse
+                <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+              </button>
+              <button
+                type="submit"
+                (click)="handleSubmit()"
+                class="SaveButton ButtonStyle"
+                *ngIf="!isAddMode"
+              >
+                Update Warehouse
+                <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

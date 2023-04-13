@@ -7,35 +7,67 @@
         <div class="OrderList">
           <div class="row">
             <div class="col-md-12 Oreder">
-              <span class="RecentTitle AddOrder">Add Driver </span>
+              <span class="RecentTitle AddOrder" *ngIf="isAddMode"
+                >Add Driver</span
+              >
+              <span class="RecentTitle AddOrder" *ngIf="!isAddMode"
+                >Edit Driver</span
+              >
             </div>
           </div>
           <div class="row mt-4">
             <div class="col-md-3 width20">
               <div class="ProfilePik">
                 <div class="ChangePic">
-                  <img src="assets/images/profilephoto.png" />
-                  <span class="Edit_Img">
+                  <img *ngIf="imageSrc" [src]="imageSrc" [alt]="'logo'" />
+                  <span (click)="fileInput.click()" class="Edit_Img">
                     <img src="assets/images/edir-img.png" />
                   </span>
                 </div>
-                <div class="ChangeImg">Change Profile Photo</div>
+                <div (click)="fileInput.click()" class="ChangeImg">
+                  Change Profile Photo
+                </div>
               </div>
             </div>
             <div class="col-md-8">
-              <form class="ProfileFor">
+              <form
+                [formGroup]="addDriver"
+                class="ProfileFor"
+                enctype="multipart/form-data"
+              >
+                <input
+                  #fileInput
+                  type="file"
+                  (change)="readURL($event)"
+                  style="display: none"
+                  accept="image/*"
+                />
+                <div
+                  *ngIf="isSubmitted && f['image'].errors"
+                  class="text-danger"
+                >
+                  <div *ngIf="f['image'].errors['required']">
+                    Logo is required
+                  </div>
+                </div>
+
                 <div class="row">
                   <!-- Popup Box -->
                   <div class="CardPopup">
                     <div class="row mb-4">
                       <div class="col-md-6">
                         <div class="Div01">
-                          Head Deriver <input type="checkbox" name="" />
+                          Head Deriver
+                          <input
+                            type="checkbox"
+                            formControlName="is_head_driver"
+                          />
                         </div>
                       </div>
                       <div class="col-md-6 text-right">
                         <div class="Div01 Div02">
-                          Deriver Status: Active <input type="radio" name="" />
+                          Deriver Status: Active
+                          <input type="radio" formControlName="is_active" />
                         </div>
                       </div>
                     </div>
@@ -44,48 +76,113 @@
                         <span class="Password">
                           <input
                             type="text"
-                            name=""
+                            formControlName="first_name"
                             placeholder="First Name"
                             class="Pro_input_Field"
                           />
+                          <div
+                            *ngIf="isSubmitted && f['first_name'].errors"
+                            class="text-danger"
+                          >
+                            <div *ngIf="f['first_name'].errors['required']">
+                              First Name is required
+                            </div>
+                          </div>
                         </span>
                       </div>
                       <div class="col-md-6 mb-4">
                         <span class="Password">
                           <input
                             type="text"
-                            name=""
+                            formControlName="last_name"
                             placeholder="Last Name"
                             class="Pro_input_Field"
                           />
+                          <div
+                            *ngIf="isSubmitted && f['last_name'].errors"
+                            class="text-danger"
+                          >
+                            <div *ngIf="f['last_name'].errors['required']">
+                              Last Name is required
+                            </div>
+                          </div>
                         </span>
                       </div>
                       <div class="col-md-6 mb-4">
                         <span class="Password">
                           <input
                             type="text"
-                            name=""
+                            formControlName="phone_number"
                             placeholder="Mobile Number"
                             class="Pro_input_Field"
                           />
-                        </span>
-                      </div>
-                      <div class="col-md-6 mb-4">
-                        <span class="Password">
-                          <input
-                            type="text"
-                            name=""
-                            placeholder="Email"
-                            class="Pro_input_Field"
-                          />
+                          <div
+                            *ngIf="isSubmitted && f['phone_number'].errors"
+                            class="text-danger"
+                          >
+                            <div *ngIf="f['phone_number'].errors['required']">
+                              Phone number is required
+                            </div>
+                            <div *ngIf="f['phone_number'].errors['pattern']">
+                              Phone number must be 10 digits
+                            </div>
+                          </div>
                         </span>
                       </div>
                       <div class="col-md-12">
                         <span class="Password">
                           <textarea
+                            formControlName="address"
                             placeholder="Address"
                             class="CompanyField Address"
                           ></textarea>
+                          <div
+                            *ngIf="isSubmitted && f['address'].errors"
+                            class="text-danger"
+                          >
+                            <div *ngIf="f['address'].errors['required']">
+                              Address is required
+                            </div>
+                          </div>
+                        </span>
+                      </div>
+                      <div class="col-md-6 mb-4">
+                        <span class="Password">
+                          <input
+                            type="text"
+                            formControlName="email"
+                            placeholder="Email"
+                            class="Pro_input_Field"
+                          />
+                          <div
+                            *ngIf="isSubmitted && f['email'].errors"
+                            class="text-danger"
+                          >
+                            <div *ngIf="f['email'].errors['required']">
+                              Email is required
+                            </div>
+                            <div *ngIf="f['email'].errors['email']">
+                              Email is not valid
+                            </div>
+                          </div>
+                        </span>
+                      </div>
+                      <div class="col-md-6 mb-4">
+                        <span class="Password">
+                          <input
+                            type="password"
+                            formControlName="password"
+                            placeholder="Password"
+                            class="Pro_input_Field"
+                          />
+                          <div
+                            *ngIf="isSubmitted && f['password'].errors"
+                            class="text-danger"
+                          >
+                            <div *ngIf="f['password'].errors['required']">
+                              Password is required
+                            </div>
+                          </div>
                         </span>
                       </div>
                       <div class="col-md-12">
@@ -132,12 +229,46 @@
                               <span>Add More</span>
                             </label>
                           </li>
-                          <li>
-                            <button class="SaveButton ButtonStyle">
-                              Add Driver
-                            </button>
-                          </li>
                         </ul>
+                      </div>
+
+                      <div class="row mt-4">
+                        <div class="col-md-12">
+                          <div
+                            class="d-flex justify-content-between Cancel_Save"
+                          >
+                            <button
+                              routerLink="/admin/driver"
+                              class="CancelButton"
+                            >
+                              Cancel
+                            </button>
+                            <button
+                              type="submit"
+                              (click)="handleSubmit()"
+                              class="SaveButton ButtonStyle"
+                              *ngIf="isAddMode"
+                            >
+                              Add Driver
+                              <i
+                                class="fa fa-spinner fa-spin"
+                                *ngIf="loading"
+                              ></i>
+                            </button>
+                            <button
+                              type="submit"
+                              (click)="handleSubmit()"
+                              class="SaveButton ButtonStyle"
+                              *ngIf="!isAddMode"
+                            >
+                              Update Driver
+                              <i
+                                class="fa fa-spinner fa-spin"
+                                *ngIf="loading"
+                              ></i>
+                            </button>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './auth.service';
-import { map, catchError } from 'rxjs';
+import { map, catchError, BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +18,13 @@ export class WarehouseService {
     private toastr: ToastrService,
     public authService: AuthService
   ) {}
+
+  private _warehouse = new BehaviorSubject<object[]>([]);
+  private warehouseData: { warehouse: object[] } = { warehouse: [] };
+
+  getWarehouse(): Observable<any[]> {
+    return this._warehouse.asObservable();
+  }
 
   // warehouse_name:Warehouse-1
   // address:2
@@ -38,14 +45,6 @@ export class WarehouseService {
       );
   }
 
-  // warehouse_name:Godown
-  // address:2
-  // contact_name:Sandeep singh
-  // email:sandeep@gmail.com
-  // phone:+919646646757
-  // alt_phone:+919646646757
-  // is_main_localation:true
-
   warehouseEdit(id: Number, form: any) {
     return this.http
       .put<any>(`${this._liveApiUrl}/company/update-warehouse/${id}/`, form)
@@ -57,14 +56,33 @@ export class WarehouseService {
       );
   }
 
-  warehouseList() {
-    return this.http.get<any>(`${this._liveApiUrl}/company/get-warehouse/`);
-  }
+  warehouseList(id?: Number) {
+    let tail = '';
+    if (id) {
+      tail = `${id}`;
+    }
 
-  warehouseDetail(id: Number) {
-    return this.http.get<any>(
-      `${this._liveApiUrl}/company/get-warehouse/${id}/`
-    );
+    this.http
+      .get<any>(`${this._liveApiUrl}/company/get-warehouse/${tail}`)
+      .pipe(
+        map((data) => {
+          return data;
+        }),
+        catchError(this.authService.handleError)
+      )
+      .subscribe(
+        (data: any) => {
+          if (this.authService.resultCodeError(data)) {
+            return;
+          }
+
+          this.warehouseData.warehouse = data;
+          this._warehouse.next(Object.assign({}, this.warehouseData).warehouse);
+        },
+        (error) => {
+          this.authService.dataError(error);
+        }
+      );
   }
 
   warehouseDelete(id: Number) {

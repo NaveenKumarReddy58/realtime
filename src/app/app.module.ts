@@ -59,6 +59,7 @@ import { MenuComponent } from './back/common/layout/menu/menu.component';
 import { AppComponent } from './app.component';
 import { SuperAdminComponent } from './back/superadmin/super-admin.component';
 import { SuperSuperAdminComponent } from './back/supersuperadmin/super-super-admin.component';
+import { NotificationListComponent } from './back/common/notification-list/notification-list.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { SuperSuperAdminComponent } from './back/supersuperadmin/super-super-adm
     MenuComponent,
     SuperAdminComponent,
     SuperSuperAdminComponent,
+    NotificationListComponent,
   ],
   imports: [
     CommonModule,

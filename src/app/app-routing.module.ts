@@ -31,6 +31,7 @@ import { WarehouseAddComponent } from './back/superadmin/warehouse-list/warehous
 import { DriverListComponent } from './back/superadmin/driver-list/driver-list.component';
 import { DriverAddComponent } from './back/superadmin/driver-list/driver-add/driver-add.component';
 import { LocateDriverComponent } from './back/superadmin/locate-driver/locate-driver.component';
+import { NotificationListComponent } from './back/common/notification-list/notification-list.component';
 
 const routes: Routes = [
   {
@@ -117,6 +118,12 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
+        path: 'notification',
+        component: NotificationListComponent,
+        title: 'Notification List',
+        canActivate: [AuthGuard],
+      },
+      {
         path: 'report',
         component: CompanyListComponent,
         title: 'Report',
@@ -193,6 +200,12 @@ const routes: Routes = [
         path: 'tickets/:id',
         component: TicketDetailComponent,
         title: 'Ticket Detail',
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'notification',
+        component: NotificationListComponent,
+        title: 'Notification List',
         canActivate: [AuthGuard],
       },
       {

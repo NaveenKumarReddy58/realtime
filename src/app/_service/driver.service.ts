@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './auth.service';
-import { map, catchError } from 'rxjs';
+import { map, catchError, BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +18,13 @@ export class DriverService {
     private toastr: ToastrService,
     public authService: AuthService
   ) {}
+
+  private _drivers = new BehaviorSubject<object[]>([]);
+  private driversData: { drivers: object[] } = { drivers: [] };
+
+  getDrivers(): Observable<any[]> {
+    return this._drivers.asObservable();
+  }
 
   // first_name:Sandeep
   // last_name:Singh
@@ -34,6 +41,17 @@ export class DriverService {
       .post<any>(`${this._liveApiUrl}/account/add-driver/`, form)
       .pipe(
         map((data: any) => {
+          return data;
+        }),
+        catchError(this.authService.handleError)
+      );
+  }
+
+  driverEdit(id: Number, form: any) {
+    return this.http
+      .put<any>(`${this._liveApiUrl}/account/edit-driver/${id}/`, form)
+      .pipe(
+        map((data) => {
           return data;
         }),
         catchError(this.authService.handleError)
@@ -62,13 +80,32 @@ export class DriverService {
     );
   }
 
-  driverList() {
-    return this.http.get<any>(`${this._liveApiUrl}/account/driver-listing/`);
-  }
+  driverList(id?: Number) {
+    let tail = '';
+    if (id) {
+      tail = `${id}`;
+    }
 
-  driverDetail(id: Number) {
-    return this.http.get<any>(
-      `${this._liveApiUrl}/account/delete-driver/${id}/`
-    );
+    this.http
+      .get<any>(`${this._liveApiUrl}/account/driver-listing/${tail}`)
+      .pipe(
+        map((data) => {
+          return data;
+        }),
+        catchError(this.authService.handleError)
+      )
+      .subscribe(
+        (data: any) => {
+          if (this.authService.resultCodeError(data)) {
+            return;
+          }
+
+          this.driversData.drivers = data;
+          this._drivers.next(Object.assign({}, this.driversData).drivers);
+        },
+        (error) => {
+          this.authService.dataError(error);
+        }
+      );
   }
 }
