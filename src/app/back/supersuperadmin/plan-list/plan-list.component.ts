@@ -64,6 +64,7 @@ export class PlanListComponent {
     this.planService.planDelete(id).subscribe(
       (data: any) => {
         if (this.authService.resultCodeError(data)) {
+          this.delloading = false;
           return;
         }
 

@@ -72,8 +72,8 @@ export class ResetPasswordComponent {
       .resetPassword(this.orgEmail, this.f['password'].value)
       .subscribe(
         (data: any) => {
-          this.loading = false;
           if (this.authService.resultCodeError(data)) {
+            this.loading = false;
             return;
           }
 

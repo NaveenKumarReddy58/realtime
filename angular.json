@@ -54,6 +54,7 @@
             ],
             "styles": [
               "@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/assets/css/bootstrap.min.css",
               "src/assets/css/media.css",
               "node_modules/ngx-toastr/toastr.css",
@@ -140,6 +141,7 @@
             ],
             "styles": [
               "@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/assets/css/bootstrap.min.css",
               "src/assets/css/media.css",
               "node_modules/ngx-toastr/toastr.css",

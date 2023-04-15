@@ -68,6 +68,7 @@ export class ForgotPasswordComponent {
       (data: any) => {
         this.loading = false;
         if (this.authService.resultCodeError(data)) {
+          this.loading = false;
           return;
         }
 
@@ -106,6 +107,7 @@ export class ForgotPasswordComponent {
       .subscribe(
         (data: any) => {
           if (this.authService.resultCodeError(data)) {
+            this.loading = false;
             return;
           }
 

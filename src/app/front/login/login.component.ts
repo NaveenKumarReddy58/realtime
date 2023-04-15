@@ -65,6 +65,7 @@ export class LoginComponent {
         (data: any) => {
           this.loading = false;
           if (this.authService.resultCodeError(data)) {
+            this.loading = false;
             return;
           }
 
@@ -77,7 +78,7 @@ export class LoginComponent {
           this.toastr.success(data?.actionPerformed);
 
           this.router.navigate([
-            '/' + this.authService._isRoleName + '/dashboad',
+            '/' + this.authService._isRoleName + '/dashboard',
           ]);
         },
         (error) => {

@@ -109,6 +109,7 @@ export class DriverAddComponent {
       this.driverService.driverAdd(formData).subscribe(
         (data: any) => {
           if (this.authService.resultCodeError(data)) {
+            this.loading = false;
             return;
           }
 
@@ -126,6 +127,7 @@ export class DriverAddComponent {
       this.driverService.driverEdit(this.id, formData).subscribe(
         (data: any) => {
           if (this.authService.resultCodeError(data)) {
+            this.loading = false;
             return;
           }
 

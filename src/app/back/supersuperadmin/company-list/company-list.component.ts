@@ -105,7 +105,7 @@ export class CompanyListComponent {
         this.orgCount();
 
         this.router.navigate([
-          '/' + this.authService._isRoleName + '/dashboad',
+          '/' + this.authService._isRoleName + '/dashboard',
         ]);
         this.toastr.success('Company Bookmarked');
       },

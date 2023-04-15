@@ -67,6 +67,7 @@ export class OtpLoginComponent {
       (data: any) => {
         this.loading = false;
         if (this.authService.resultCodeError(data)) {
+          this.loading = false;
           return;
         }
 
@@ -103,6 +104,7 @@ export class OtpLoginComponent {
       .subscribe(
         (data: any) => {
           if (this.authService.resultCodeError(data)) {
+            this.loading = false;
             return;
           }
 
@@ -115,7 +117,7 @@ export class OtpLoginComponent {
           this.toastr.success(data?.actionPerformed);
 
           this.router.navigate([
-            '/' + this.authService._isRoleName + '/dashboad',
+            '/' + this.authService._isRoleName + '/dashboard',
           ]);
         },
         (error) => {

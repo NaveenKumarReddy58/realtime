@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './auth.service';
-import { map, catchError } from 'rxjs';
+import { map, catchError, BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +18,13 @@ export class AddressService {
     private toastr: ToastrService,
     public authService: AuthService
   ) {}
+
+  private _address = new BehaviorSubject<object[]>([]);
+  private addressData: { address: object[] } = { address: [] };
+
+  getAddress(): Observable<any[]> {
+    return this._address.asObservable();
+  }
 
   // address:Sector 17 Chandigarh
   // lattitude:30.741482
@@ -34,13 +41,36 @@ export class AddressService {
       );
   }
 
-  addressSearch(adr: string) {
-    return this.http.get<any>(
-      `${this._liveApiUrl}/company/search-address/?adr=${adr}`
-    );
+  addressSearch(adr?: string) {
+    let tail = '';
+    if (adr) {
+      tail = `${adr}`;
+    }
+
+    this.http
+      .get<any>(`${this._liveApiUrl}/company/search-address/?adr=${tail}`)
+      .pipe(
+        map((data) => {
+          return data;
+        }),
+        catchError(this.authService.handleError)
+      )
+      .subscribe(
+        (data: any) => {
+          if (this.authService.resultCodeError(data)) {
+            return;
+          }
+
+          this.addressData.address = data;
+          this._address.next(Object.assign({}, this.addressData).address);
+        },
+        (error) => {
+          this.authService.dataError(error);
+        }
+      );
   }
 
-  addressDelete(id: Number) {
+  addressDelete(id: any) {
     return this.http.delete<any>(
       `${this._liveApiUrl}/company/delete-address/${id}`
     );

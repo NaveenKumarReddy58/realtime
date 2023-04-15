@@ -85,7 +85,7 @@ export class WarehouseService {
       );
   }
 
-  warehouseDelete(id: Number) {
+  warehouseDelete(id: any) {
     return this.http.delete<any>(
       `${this._liveApiUrl}/company/delete-warehouse/${id}`
     );
@@ -93,7 +93,7 @@ export class WarehouseService {
 
   warehouseSet(id: Number) {
     return this.http
-      .patch<any>(`${this._liveApiUrl}/company/make-default/${id}/`, {})
+      .patch<any>(`${this._liveApiUrl}/company/make-default/${id}`, {})
       .pipe(
         map((data) => {
           return data;

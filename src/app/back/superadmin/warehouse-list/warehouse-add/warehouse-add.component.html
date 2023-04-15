@@ -2,12 +2,11 @@
   <div class="row mb-4">
     <div class="col-md-10">
       <div class="HeadingName">
-        <h2 *ngIf="isAddMode">Add Warehouse</h2>
-        <h2 *ngIf="!isAddMode">Edit Warehouse</h2>
+        <h2>Add Warehouse</h2>
       </div>
     </div>
     <div class="col-md-2 loginButton">
-      <a routerLink="/superadmin/warehouse"><button>Back to List</button></a>
+      <a routerLink="/admin/warehouses"><button>Back to List</button></a>
     </div>
   </div>
   <div class="row">
@@ -36,11 +35,17 @@
           </div>
 
           <div class="col-md-12 mt-3">
-            <textarea
+            <select
+              class="Pro_input_Field"
+              (change)="changeAddress($event)"
               formControlName="address"
               placeholder="Address"
-              class="Pro_input_Field"
-            ></textarea>
+            >
+              <option value="">Choose Address</option>
+              <option *ngFor="let addr of addressData" value="{{addr?.id}}">
+                {{ addr?.address }}
+              </option>
+            </select>
             <div *ngIf="isSubmitted && f['address'].errors" class="text-danger">
               <div *ngIf="f['address'].errors['required']">
                 Address is required
@@ -117,7 +122,7 @@
           <div class="col-md-12 mt-3">
             <div class="Div01 Div02">
               Is it main location?
-              <input type="radio" formControlName="is_main_localation" />
+              <input type="radio" formControlName="is_main_localation" value="true" />
             </div>
           </div>
         </div>
@@ -125,25 +130,15 @@
         <div class="row mt-4">
           <div class="col-md-12">
             <div class="d-flex justify-content-between Cancel_Save">
-              <button routerLink="/superadmin/warehouse" class="CancelButton">
+              <button routerLink="/admin/warehouses" class="CancelButton">
                 Cancel
               </button>
               <button
                 type="submit"
                 (click)="handleSubmit()"
                 class="SaveButton ButtonStyle"
-                *ngIf="isAddMode"
               >
                 Add Warehouse
-                <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
-              </button>
-              <button
-                type="submit"
-                (click)="handleSubmit()"
-                class="SaveButton ButtonStyle"
-                *ngIf="!isAddMode"
-              >
-                Update Warehouse
                 <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
               </button>
             </div>

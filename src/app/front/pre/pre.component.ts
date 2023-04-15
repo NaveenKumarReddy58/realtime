@@ -56,6 +56,7 @@ export class PreComponent {
       (data: any) => {
         this.loading = false;
         if (this.authService.resultCodeError(data)) {
+          this.loading = false;
           return;
         }
 

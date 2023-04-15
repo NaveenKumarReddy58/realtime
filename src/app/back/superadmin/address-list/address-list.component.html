@@ -1,1 +1,56 @@
-<p>address-list works!</p>
+<div class="ContentArea no-padding">
+  <div class="ContentArea_Inner">
+    <!-- Tab Content Area Start 01-->
+    <div id="Tb-Tabs01" class="Tabs01 TabsMain">
+      <!-- Table View -->
+      <div class="Table mt-4">
+        <div class="OrderList">
+          <div class="row mt-3">
+            <div class="Table_Scroll">
+              <table
+                class="Order_Table"
+                cellpadding="0"
+                cellspacing="0"
+                border="0"
+              >
+                <tr class="T_Head">
+                  <th>Id</th>
+                  <th>Address</th>
+                  <th>Lattitude</th>
+                  <th>Longitute</th>
+                  <th>Action</th>
+                </tr>
+                <tr *ngFor="let item of addressData; let index = index">
+                  <td>{{ item.id }}</td>
+                  <td>{{ item.address }}</td>
+                  <td>{{ item.lattitude }}</td>
+                  <td>{{ item.longitute }}</td>
+                  <td>
+                    <div class="GetIocn">
+                      <a (click)="addressDelete(item.id)">
+                        <i class="fa fa-trash Delete"></i>
+                        <i
+                          class="fa fa-spinner fa-spin"
+                          *ngIf="delloading && toggle[item.id]"
+                        ></i>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div class="row mt-3">
+              <div class="col-md-12 text-end">
+                <button routerLink="/admin/address/add" class="ButtonStyle">
+                  Add Address
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Table View /////////// -->
+    </div>
+    <!-- Tab Content Area Start /////////// 01 -->
+  </div>
+</div>

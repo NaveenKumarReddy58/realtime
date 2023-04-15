@@ -32,6 +32,8 @@ import { DriverListComponent } from './back/superadmin/driver-list/driver-list.c
 import { DriverAddComponent } from './back/superadmin/driver-list/driver-add/driver-add.component';
 import { LocateDriverComponent } from './back/superadmin/locate-driver/locate-driver.component';
 import { NotificationListComponent } from './back/common/notification-list/notification-list.component';
+import { AddressAddComponent } from './back/superadmin/address-list/address-add/address-add.component';
+import { AddressListComponent } from './back/superadmin/address-list/address-list.component';
 
 const routes: Routes = [
   {
@@ -70,7 +72,7 @@ const routes: Routes = [
     title: 'Super Super Admin',
     children: [
       {
-        path: 'dashboad',
+        path: 'dashboard',
         component: DashboardComponent,
         title: 'Dashboard',
         canActivate: [AuthGuard],
@@ -149,7 +151,7 @@ const routes: Routes = [
     title: 'Super Admin',
     children: [
       {
-        path: 'dashboad',
+        path: 'dashboard',
         component: DashboardComponent,
         title: 'Dashboard',
         canActivate: [AuthGuard],
@@ -161,7 +163,7 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
-        path: 'warehouse',
+        path: 'warehouses',
         component: WarehouseListComponent,
         title: 'Warehouse List',
         canActivate: [AuthGuard],
@@ -170,6 +172,18 @@ const routes: Routes = [
         path: 'warehouse/add',
         component: WarehouseAddComponent,
         title: 'Warehouse Add',
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'addresses',
+        component: AddressListComponent,
+        title: 'Address List',
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'address/add',
+        component: AddressAddComponent,
+        title: 'Address Add',
         canActivate: [AuthGuard],
       },
       {

@@ -102,6 +102,7 @@ export class PlanAddComponent {
       this.planService.planAdd(formData).subscribe(
         (data: any) => {
           if (this.authService.resultCodeError(data)) {
+            this.loading = false;
             return;
           }
 
@@ -117,6 +118,7 @@ export class PlanAddComponent {
       this.planService.planEdit(this.id, formData).subscribe(
         (data: any) => {
           if (this.authService.resultCodeError(data)) {
+            this.loading = false;
             return;
           }
 

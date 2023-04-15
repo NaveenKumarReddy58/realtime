@@ -58,6 +58,7 @@ export class CompanyDetailComponent {
       .subscribe(
         (data: any) => {
           if (this.authService.resultCodeError(data)) {
+            this.deactivateLoading = false;
             return;
           }
 

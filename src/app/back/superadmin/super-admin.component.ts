@@ -12,7 +12,7 @@ export class SuperAdminComponent {
 
   constructor(public authService: AuthService, public router: Router) {
     if (this.authService._isRoleName) {
-      this.router.navigate(['/' + this.authService._isRoleName + '/dashboad']);
+      this.router.navigate(['/' + this.authService._isRoleName + '/dashboard']);
     } else {
       this.router.navigate(['/']);
     }

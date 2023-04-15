@@ -15,21 +15,79 @@
               <div class="from-to-pick">
                 <div class="from-to-pick-inner">
                   <div class="form-div">
-                    <form class="Form-Form">
+                    <form
+                      [formGroup]="addressF"
+                      class="Form-Form"
+                      enctype="multipart/form-data"
+                    >
                       <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                           <div class="filed-input">
                             <input
                               type="text"
-                              name=""
-                              placeholder="Date"
+                              formControlName="address"
+                              placeholder="Address"
                               class="CompanyField"
                             />
+                            <div
+                              *ngIf="isSubmitted && f['address'].errors"
+                              class="text-danger"
+                            >
+                              <div *ngIf="f['address'].errors['required']">
+                                Address is required
+                              </div>
+                            </div>
                           </div>
                         </div>
                         <div class="col-md-4">
                           <div class="filed-input">
-                            <button class="ButtonStyle">Add Address</button>
+                            <input
+                              type="text"
+                              formControlName="lattitude"
+                              placeholder="Lattitude"
+                              class="CompanyField"
+                            />
+                            <div
+                              *ngIf="isSubmitted && f['lattitude'].errors"
+                              class="text-danger"
+                            >
+                              <div *ngIf="f['lattitude'].errors['required']">
+                                Lattitude is required
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="filed-input">
+                            <input
+                              type="text"
+                              formControlName="longitute"
+                              placeholder="Longitute"
+                              class="CompanyField"
+                            />
+                            <div
+                              *ngIf="isSubmitted && f['longitute'].errors"
+                              class="text-danger"
+                            >
+                              <div *ngIf="f['longitute'].errors['required']">
+                                Longitute is required
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="filed-input">
+                            <button
+                              type="submit"
+                              (click)="handleSubmit()"
+                              class="SaveButton ButtonStyle"
+                            >
+                              Add Address
+                              <i
+                                class="fa fa-spinner fa-spin"
+                                *ngIf="loading"
+                              ></i>
+                            </button>
                           </div>
                         </div>
                       </div>

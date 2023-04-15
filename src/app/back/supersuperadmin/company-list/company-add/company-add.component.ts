@@ -121,13 +121,14 @@ export class CompanyAddComponent {
     this.companyService.companyAdd(formData).subscribe(
       (data: any) => {
         if (this.authService.resultCodeError(data)) {
+          this.loading = false;
           return;
         }
 
         this.toastr.success(data?.actionPerformed);
 
         this.router.navigate([
-          '/' + this.authService._isRoleName + '/dashboad',
+          '/' + this.authService._isRoleName + '/dashboard',
         ]);
       },
       (error) => {

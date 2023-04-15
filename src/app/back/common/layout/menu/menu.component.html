@@ -1,12 +1,12 @@
 <div class="SideBar" *ngIf="isRoleIn == 1">
   <div class="LogoDiv">
-    <a routerLink="/{{ _isRoleName }}/dashboad"
+    <a routerLink="/{{ _isRoleName }}/dashboard"
       ><img src="assets/images/logo.png"
     /></a>
   </div>
   <ul class="SideBarList">
     <li [routerLinkActive]="['active']">
-      <a routerLink="/{{ _isRoleName }}/dashboad"
+      <a routerLink="/{{ _isRoleName }}/dashboard"
         ><img src="assets/images/super-super-icon101.png" /><span
           >Companies</span
         ></a
@@ -75,13 +75,13 @@
 
 <div class="SideBar" *ngIf="isRoleIn == 2">
   <div class="LogoDiv">
-    <a routerLink="/{{ _isRoleName }}/dashboad"
+    <a routerLink="/{{ _isRoleName }}/dashboard"
       ><img src="assets/images/logo.png"
     /></a>
   </div>
   <ul class="SideBarList">
     <li [routerLinkActive]="['active']">
-      <a routerLink="/{{ _isRoleName }}/dashboad"
+      <a routerLink="/{{ _isRoleName }}/dashboard"
         ><img src="assets/images/super-super-icon101.png" /><span
           >Order</span
         ></a
@@ -98,6 +98,35 @@
       <a routerLink="/{{ _isRoleName }}/tickets"
         ><img src="assets/images/super-super-icon02.png" /><span
           >Tickets</span
+        ></a
+      >
+    </li>
+    <li [routerLinkActive]="['active']">
+      <a routerLink="/{{ _isRoleName }}/warehouses"
+        ><img src="assets/images/super-super-icon02.png" /><span
+          >Warehouses</span
+        ></a
+      >
+    </li>
+    <li [routerLinkActive]="['active']">
+      <a routerLink="/{{ _isRoleName }}/warehouse/add"
+        ><img src="assets/images/super-super-icon02.png" /><span
+          >Warehouse Add</span
+        ></a
+      >
+    </li>
+
+    <li [routerLinkActive]="['active']">
+      <a routerLink="/{{ _isRoleName }}/addresses"
+        ><img src="assets/images/super-super-icon02.png" /><span
+          >Addresses</span
+        ></a
+      >
+    </li>
+    <li [routerLinkActive]="['active']">
+      <a routerLink="/{{ _isRoleName }}/address/add"
+        ><img src="assets/images/super-super-icon02.png" /><span
+          >Address Add</span
         ></a
       >
     </li>

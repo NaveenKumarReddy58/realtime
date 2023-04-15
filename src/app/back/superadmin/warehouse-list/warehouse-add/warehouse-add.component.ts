@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import { AddressService } from 'src/app/_service/address.service';
 import { AuthService } from 'src/app/_service/auth.service';
 import { WarehouseService } from 'src/app/_service/warehouse.service';
 
@@ -15,12 +16,9 @@ export class WarehouseAddComponent {
   addWare!: FormGroup;
   loading = false;
   isSubmitted = false;
+  addressData: any;
 
-  id: Number;
-  isAddMode: boolean;
-  editPlan: any;
-
-  warehouse$!: Observable<object[]>;
+  address$!: Observable<object[]>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,11 +26,9 @@ export class WarehouseAddComponent {
     private router: Router,
     public authService: AuthService,
     public warehouseService: WarehouseService,
+    public addressService: AddressService,
     private toastr: ToastrService
   ) {
-    this.id = this.route.snapshot.params['id'];
-    this.isAddMode = !this.id;
-
     this.addWare = formBuilder.group({
       warehouse_name: ['', [Validators.required]],
       address: ['', [Validators.required]],
@@ -49,14 +45,7 @@ export class WarehouseAddComponent {
       is_main_localation: [false],
     });
 
-    if (!this.isAddMode) {
-      this.warehouseService.warehouseList(this.id);
-      this.warehouse$ = this.warehouseService.getWarehouse();
-
-      this.warehouse$.subscribe((data: any) => {
-        this.addWare.patchValue(data.results);
-      });
-    }
+    this.addressList();
   }
 
   // convenience getter for easy access to form fields
@@ -69,7 +58,24 @@ export class WarehouseAddComponent {
     return this.addWare.value;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.addressList();
+  }
+
+  addressList() {
+    this.addressService.addressSearch();
+    this.address$ = this.addressService.getAddress();
+
+    this.address$.subscribe((data: any) => {
+      this.addressData = data.result;
+    });
+  }
+
+  changeAddress(e: any) {
+    this.addWare.patchValue({
+      address: e.target.value,
+    });
+  }
 
   handleSubmit() {
     this.isSubmitted = true;
@@ -96,40 +102,22 @@ export class WarehouseAddComponent {
       }
     }
 
-    if (this.isAddMode) {
-      this.warehouseService.warehouseAdd(formData).subscribe(
-        (data: any) => {
-          if (this.authService.resultCodeError(data)) {
-            return;
-          }
-
-          this.toastr.success(data?.actionPerformed);
-          this.router.navigate([
-            '/' + this.authService._isRoleName + '/warehouse',
-          ]);
-        },
-        (error) => {
-          this.authService.dataError(error);
+    this.warehouseService.warehouseAdd(formData).subscribe(
+      (data: any) => {
+        if (this.authService.resultCodeError(data)) {
           this.loading = false;
+          return;
         }
-      );
-    } else {
-      this.warehouseService.warehouseEdit(this.id, formData).subscribe(
-        (data: any) => {
-          if (this.authService.resultCodeError(data)) {
-            return;
-          }
 
-          this.toastr.success(data?.actionPerformed);
-          this.router.navigate([
-            '/' + this.authService._isRoleName + '/warehouse',
-          ]);
-        },
-        (error) => {
-          this.authService.dataError(error);
-          this.loading = false;
-        }
-      );
-    }
+        this.toastr.success(data?.resultDescription);
+        this.router.navigate([
+          '/' + this.authService._isRoleName + '/warehouses',
+        ]);
+      },
+      (error) => {
+        this.authService.dataError(error);
+        this.loading = false;
+      }
+    );
   }
 }

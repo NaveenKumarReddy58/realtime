@@ -290,7 +290,7 @@ export class AuthService {
   }
 
   clearRouter() {
-    this.router.navigate(['/' + this._isRoleName + '/dashboad'], {
+    this.router.navigate(['/' + this._isRoleName + '/dashboard'], {
       relativeTo: this.route,
       queryParams: {
         plan: null,
@@ -306,7 +306,7 @@ export class AuthService {
 
   setRouter(object: any) {
     this.clearRouter();
-    this.router.navigate(['/' + this._isRoleName + '/dashboad'], {
+    this.router.navigate(['/' + this._isRoleName + '/dashboard'], {
       relativeTo: this.route,
       queryParams: object,
       queryParamsHandling: 'merge', //merge
