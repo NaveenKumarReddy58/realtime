@@ -46,7 +46,6 @@ import { OrderListComponent } from './back/superadmin/order-list/order-list.comp
 import { LocateDriverComponent } from './back/superadmin/locate-driver/locate-driver.component';
 import { DriverAddComponent } from './back/superadmin/driver-list/driver-add/driver-add.component';
 import { DriverListComponent } from './back/superadmin/driver-list/driver-list.component';
-import { DriverProfileDetailComponent } from './back/superadmin/driver-list/driver-profile-detail/driver-profile-detail.component';
 import { AddressAddComponent } from './back/superadmin/address-list/address-add/address-add.component';
 import { AddressListComponent } from './back/superadmin/address-list/address-list.component';
 import { DashboardComponent } from './back/dashboard/dashboard.component';
@@ -89,7 +88,6 @@ import { NotificationListComponent } from './back/common/notification-list/notif
     LocateDriverComponent,
     DriverAddComponent,
     DriverListComponent,
-    DriverProfileDetailComponent,
     AddressAddComponent,
     AddressListComponent,
     DashboardComponent,

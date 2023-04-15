@@ -31,9 +31,7 @@ export class WarehouseListComponent {
     this.warehouseList();
   }
 
-  ngOnInit(): void {
-    this.warehouseList();
-  }
+  ngOnInit(): void {}
 
   warehouseList() {
     this.warehouseService.warehouseList();
@@ -63,7 +61,7 @@ export class WarehouseListComponent {
         }
 
         this.warehouseList();
-        this.router.navigate(['/admin/warehouses']);
+        this.router.navigate(['/admin/warehouse']);
         this.toastr.success('Warehouse Status Updated');
       },
       (error) => {
@@ -84,7 +82,7 @@ export class WarehouseListComponent {
         }
 
         this.warehouseList();
-        this.router.navigate(['/admin/warehouses']);
+        this.router.navigate(['/admin/warehouse']);
         this.toastr.success('Warehouse Deleted');
         this.delloading = false;
       },

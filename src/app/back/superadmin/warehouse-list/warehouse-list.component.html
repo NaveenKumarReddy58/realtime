@@ -39,6 +39,9 @@
                         [checked]="item.is_main_localation"
                         (change)="controlOnChange(item.id, $event)"
                       />
+                      <a routerLink="/admin/warehouse/{{ item.id }}">
+                        <i class="fa fa-pencil EditIcon"></i>
+                      </a>
                       <a (click)="warehouseDelete(item.id)">
                         <i class="fa fa-trash Delete"></i>
                         <i

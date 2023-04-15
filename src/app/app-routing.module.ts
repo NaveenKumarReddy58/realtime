@@ -163,7 +163,7 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
-        path: 'warehouses',
+        path: 'warehouse',
         component: WarehouseListComponent,
         title: 'Warehouse List',
         canActivate: [AuthGuard],
@@ -175,7 +175,13 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
-        path: 'addresses',
+        path: 'warehouse/:id',
+        component: WarehouseAddComponent,
+        title: 'Warehouse Edit',
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'address',
         component: AddressListComponent,
         title: 'Address List',
         canActivate: [AuthGuard],

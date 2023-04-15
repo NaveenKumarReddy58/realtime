@@ -2,11 +2,12 @@
   <div class="row mb-4">
     <div class="col-md-10">
       <div class="HeadingName">
-        <h2>Add Warehouse</h2>
+        <h2 *ngIf="isAddMode">Add Warehouse</h2>
+        <h2 *ngIf="!isAddMode">Edit Warehouse</h2>
       </div>
     </div>
     <div class="col-md-2 loginButton">
-      <a routerLink="/admin/warehouses"><button>Back to List</button></a>
+      <a routerLink="/admin/warehouse"><button>Back to List</button></a>
     </div>
   </div>
   <div class="row">
@@ -42,7 +43,11 @@
               placeholder="Address"
             >
               <option value="">Choose Address</option>
-              <option *ngFor="let addr of addressData" value="{{addr?.id}}">
+              <option
+                *ngFor="let addr of addressData"
+                [selected]="addr?.id"
+                [value]="addr?.id"
+              >
                 {{ addr?.address }}
               </option>
             </select>
@@ -122,7 +127,12 @@
           <div class="col-md-12 mt-3">
             <div class="Div01 Div02">
               Is it main location?
-              <input type="radio" formControlName="is_main_localation" value="true" />
+              <input
+                type="radio"
+                formControlName="is_main_localation"
+                value="true"
+                [checked]="this.frmValues.is_main_localation"
+              />
             </div>
           </div>
         </div>
@@ -130,15 +140,22 @@
         <div class="row mt-4">
           <div class="col-md-12">
             <div class="d-flex justify-content-between Cancel_Save">
-              <button routerLink="/admin/warehouses" class="CancelButton">
-                Cancel
+              <button
+                type="submit"
+                (click)="handleSubmit()"
+                class="SaveButton ButtonStyle"
+                *ngIf="isAddMode"
+              >
+                Add Warehouse
+                <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
               </button>
               <button
                 type="submit"
                 (click)="handleSubmit()"
                 class="SaveButton ButtonStyle"
+                *ngIf="!isAddMode"
               >
-                Add Warehouse
+                Update Warehouse
                 <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
               </button>
             </div>

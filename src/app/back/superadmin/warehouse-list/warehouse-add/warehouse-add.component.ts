@@ -18,7 +18,12 @@ export class WarehouseAddComponent {
   isSubmitted = false;
   addressData: any;
 
+  id: Number;
+  isAddMode: boolean;
+  editPlan: any;
+
   address$!: Observable<object[]>;
+  warehouse$!: Observable<object[]>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -29,6 +34,9 @@ export class WarehouseAddComponent {
     public addressService: AddressService,
     private toastr: ToastrService
   ) {
+    this.id = this.route.snapshot.params['id'];
+    this.isAddMode = !this.id;
+
     this.addWare = formBuilder.group({
       warehouse_name: ['', [Validators.required]],
       address: ['', [Validators.required]],
@@ -45,6 +53,23 @@ export class WarehouseAddComponent {
       is_main_localation: [false],
     });
 
+    if (!this.isAddMode) {
+      this.warehouseService.warehouseList(this.id);
+      this.warehouse$ = this.warehouseService.getWarehouse();
+
+      this.warehouse$.subscribe((data: any) => {
+        this.addWare.patchValue({
+          warehouse_name: data.result?.warehouse_name,
+          address: data.result?.address?.id,
+          contact_name: data.result?.contact_name,
+          email: data.result?.email,
+          phone: data.result?.phone,
+          alt_phone: data.result?.alt_phone,
+          is_main_localation: data.result?.is_main_localation,
+        });
+      });
+    }
+
     this.addressList();
   }
 
@@ -58,9 +83,7 @@ export class WarehouseAddComponent {
     return this.addWare.value;
   }
 
-  ngOnInit(): void {
-    this.addressList();
-  }
+  ngOnInit(): void {}
 
   addressList() {
     this.addressService.addressSearch();
@@ -102,22 +125,42 @@ export class WarehouseAddComponent {
       }
     }
 
-    this.warehouseService.warehouseAdd(formData).subscribe(
-      (data: any) => {
-        if (this.authService.resultCodeError(data)) {
-          this.loading = false;
-          return;
-        }
+    if (this.isAddMode) {
+      this.warehouseService.warehouseAdd(formData).subscribe(
+        (data: any) => {
+          if (this.authService.resultCodeError(data)) {
+            this.loading = false;
+            return;
+          }
 
-        this.toastr.success(data?.resultDescription);
-        this.router.navigate([
-          '/' + this.authService._isRoleName + '/warehouses',
-        ]);
-      },
-      (error) => {
-        this.authService.dataError(error);
-        this.loading = false;
-      }
-    );
+          this.toastr.success(data?.resultDescription);
+          this.router.navigate([
+            '/' + this.authService._isRoleName + '/warehouse',
+          ]);
+        },
+        (error) => {
+          this.authService.dataError(error);
+          this.loading = false;
+        }
+      );
+    } else {
+      this.warehouseService.warehouseEdit(this.id, formData).subscribe(
+        (data: any) => {
+          if (this.authService.resultCodeError(data)) {
+            this.loading = false;
+            return;
+          }
+
+          this.toastr.success(data?.resultDescription);
+          this.router.navigate([
+            '/' + this.authService._isRoleName + '/warehouse',
+          ]);
+        },
+        (error) => {
+          this.authService.dataError(error);
+          this.loading = false;
+        }
+      );
+    }
   }
 }

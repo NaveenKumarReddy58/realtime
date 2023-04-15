@@ -30,9 +30,7 @@ export class AddressListComponent {
     this.addressList();
   }
 
-  ngOnInit(): void {
-    this.addressList();
-  }
+  ngOnInit(): void {}
 
   addressList() {
     this.addressService.addressSearch();
@@ -54,7 +52,7 @@ export class AddressListComponent {
         }
 
         this.addressList();
-        this.router.navigate(['/admin/addresses']);
+        this.router.navigate(['/admin/address']);
         this.toastr.success('Address Deleted');
         this.delloading = false;
       },

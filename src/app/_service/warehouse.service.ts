@@ -47,7 +47,7 @@ export class WarehouseService {
 
   warehouseEdit(id: Number, form: any) {
     return this.http
-      .put<any>(`${this._liveApiUrl}/company/update-warehouse/${id}/`, form)
+      .put<any>(`${this._liveApiUrl}/company/update-warehouse/${id}`, form)
       .pipe(
         map((data) => {
           return data;

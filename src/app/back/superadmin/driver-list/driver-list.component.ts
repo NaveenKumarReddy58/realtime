@@ -15,6 +15,10 @@ export class DriverListComponent {
   expandedIndex = 0;
   items: any;
 
+  loading = false;
+  delloading = false;
+  toggle: any = [];
+
   driver$!: Observable<object[]>;
 
   constructor(
@@ -36,5 +40,47 @@ export class DriverListComponent {
     this.driver$.subscribe((data: any) => {
       this.items = data.results;
     });
+  }
+
+  driverActivateDeactivate(id: Number, status: boolean) {
+    this.loading = true;
+    this.driverService.driverActivateDeactivate(id, status).subscribe(
+      (data: any) => {
+        if (this.authService.resultCodeError(data)) {
+          this.loading = false;
+          return;
+        }
+
+        this.driverList();
+        this.router.navigate(['/admin/driver']);
+        this.toastr.success('Warehouse Status Updated');
+      },
+      (error) => {
+        this.authService.dataError(error);
+        this.loading = false;
+      }
+    );
+  }
+
+  driverDelete(id: any) {
+    this.toggle[id] = true;
+    this.delloading = true;
+    this.driverService.driverDelete(id).subscribe(
+      (data: any) => {
+        if (this.authService.resultCodeError(data)) {
+          this.delloading = false;
+          return;
+        }
+
+        this.driverList();
+        this.router.navigate(['/admin/driver']);
+        this.toastr.success('Driver Deleted');
+        this.delloading = false;
+      },
+      (error) => {
+        this.authService.dataError(error);
+        this.delloading = false;
+      }
+    );
   }
 }
