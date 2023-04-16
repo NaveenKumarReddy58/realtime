@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './auth.service';
-import { map, catchError } from 'rxjs';
+import { map, catchError, BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +18,13 @@ export class OrderService {
     private toastr: ToastrService,
     public authService: AuthService
   ) {}
+
+  private _order = new BehaviorSubject<object[]>([]);
+  private orderData: { order: object[] } = { order: [] };
+
+  getOrder(): Observable<any[]> {
+    return this._order.asObservable();
+  }
 
   // po:123545
   // pickup_company_name:Godown
@@ -51,8 +58,57 @@ export class OrderService {
     );
   }
 
-  orderList() {
-    return this.http.get<any>(`${this._liveApiUrl}/company/order-listing/`);
+  orderEdit(id: Number, form: any) {
+    return this.http
+      .put<any>(`${this._liveApiUrl}/company/order/${id}/`, form)
+      .pipe(
+        map((data: any) => {
+          return data;
+        }),
+        catchError(this.authService.handleError)
+      );
+  }
+
+  //page:1
+  //order_date:2023-04-14
+  //order_type:pickup
+  //order_status:successful
+
+  orderList(id?: number, filter?: any) {
+    let tail = '';
+    if (id != 0) {
+      tail += id;
+    }
+    let params = new URLSearchParams();
+    if (params) {
+      for (let key in filter) {
+        params.set(key, filter[key]);
+      }
+    }
+    if (filter) {
+      tail += `?` + params.toString();
+    }
+    this.http
+      .get<any>(`${this._liveApiUrl}/company/order-listing/${tail}`)
+      .pipe(
+        map((data) => {
+          return data;
+        }),
+        catchError(this.authService.handleError)
+      )
+      .subscribe(
+        (data: any) => {
+          if (this.authService.resultCodeError(data)) {
+            return;
+          }
+
+          this.orderData.order = data;
+          this._order.next(Object.assign({}, this.orderData).order);
+        },
+        (error) => {
+          this.authService.dataError(error);
+        }
+      );
   }
 
   orderDelete(id: Number) {

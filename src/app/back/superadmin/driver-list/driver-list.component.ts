@@ -42,7 +42,7 @@ export class DriverListComponent {
     });
   }
 
-  driverActivateDeactivate(id: Number, status: boolean) {
+  driverActivateDeactivate(id: Number, status: any) {
     this.loading = true;
     this.driverService.driverActivateDeactivate(id, status).subscribe(
       (data: any) => {

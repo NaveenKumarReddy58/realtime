@@ -88,101 +88,31 @@
                   <th>Status</th>
                   <th>Other Option</th>
                 </tr>
-                <tr>
-                  <td><img src="assets/images/p-icon.png" />910011001</td>
-                  <td>Sandeep Singh</td>
-                  <td>Address: 012, XYZ B14</td>
-                  <td>Wed Oct 24, 2022</td>
-                  <td>12:30 PM</td>
-                  <td><span class="GreenColor">00:00 AM</span></td>
+                <tr *ngFor="let item of orderData; let index = index">
+                  <td>
+                    <img
+                      src="./../../../../assets/images/p-icon.png"
+                      *ngIf="!item.profile_image"
+                    />
+                    {{ item.id }}
+                  </td>
+                  <td>{{ item.customer_name }}</td>
+                  <td>{{ item.customer_addr }}</td>
+                  <td>{{ item.dely_date | date : "fullDate" }}</td>
+                  <td>{{ item.dely_time }}</td>
+                  <td>
+                    <span class="GreenColor">{{
+                      item.created_at | date : "shortTime"
+                    }}</span>
+                  </td>
                   <td>Na</td>
                   <td>
-                    <button class="button-Unassigned status_button_style">
-                      Unassigned
-                    </button>
-                  </td>
-                  <td>
-                    <div class="GetIocn">
-                      <span class="fa fa-phone"></span>
-                      <span class="fa fa-paper-plane"></span>
-                      <input type="checkbox" name="" />
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td><img src="assets/images/d-icon.png" />910011001</td>
-                  <td>Sandeep Singh</td>
-                  <td>Address: 012, XYZ B14</td>
-                  <td>Wed Oct 24, 2022</td>
-                  <td>12:30 PM</td>
-                  <td><span class="GreenColor">00:00 AM</span></td>
-                  <td>Na</td>
-                  <td>
-                    <button class="button-Pending status_button_style">
-                      Pending
-                    </button>
-                  </td>
-                  <td>
-                    <div class="GetIocn">
-                      <span class="fa fa-phone"></span>
-                      <span class="fa fa-paper-plane"></span>
-                      <input type="checkbox" name="" />
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td><img src="assets/images/p-icon.png" />910011001</td>
-                  <td>Sandeep Singh</td>
-                  <td>Address: 012, XYZ B14</td>
-                  <td>Wed Oct 24, 2022</td>
-                  <td>12:30 PM</td>
-                  <td><span class="GreenColor">00:00 AM</span></td>
-                  <td>Na</td>
-                  <td>
-                    <button class="button-Unsuccessful status_button_style">
-                      Unsuccessful
-                    </button>
-                  </td>
-                  <td>
-                    <div class="GetIocn">
-                      <span class="fa fa-phone"></span>
-                      <span class="fa fa-paper-plane"></span>
-                      <input type="checkbox" name="" />
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td><img src="assets/images/p-icon.png" />910011001</td>
-                  <td>Sandeep Singh</td>
-                  <td>Address: 012, XYZ B14</td>
-                  <td>Wed Oct 24, 2022</td>
-                  <td>12:30 PM</td>
-                  <td><span class="GreenColor">00:00 AM</span></td>
-                  <td>Na</td>
-                  <td>
-                    <button class="button-Cancelled status_button_style">
-                      Cancelled
-                    </button>
-                  </td>
-                  <td>
-                    <div class="GetIocn">
-                      <span class="fa fa-phone"></span>
-                      <span class="fa fa-paper-plane"></span>
-                      <input type="checkbox" name="" />
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td><img src="assets/images/d-icon.png" />910011001</td>
-                  <td>Sandeep Singh</td>
-                  <td>Address: 012, XYZ B14</td>
-                  <td>Wed Oct 24, 2022</td>
-                  <td>12:30 PM</td>
-                  <td><span class="GreenColor">00:00 AM</span></td>
-                  <td>Na</td>
-                  <td>
-                    <button class="button-Successful status_button_style">
-                      Successful
+                    <button
+                      class="button-{{
+                        item.order_status | titlecase
+                      }} status_button_style"
+                    >
+                      {{ item.order_status | titlecase }}
                     </button>
                   </td>
                   <td>
@@ -197,7 +127,9 @@
             </div>
             <div class="row mt-3">
               <div class="col-md-12 text-end">
-                <button class="ButtonStyle">Assign Order</button>
+                <button routerLink="/admin/order/assign" class="ButtonStyle">
+                  Assign Order
+                </button>
               </div>
             </div>
           </div>

@@ -60,6 +60,7 @@
                           Head Deriver
                           <input
                             type="checkbox"
+                            value="true"
                             formControlName="is_head_driver"
                           />
                         </div>
@@ -67,7 +68,11 @@
                       <div class="col-md-6 text-right">
                         <div class="Div01 Div02">
                           Deriver Status: Active
-                          <input type="radio" formControlName="is_active" />
+                          <input
+                            type="radio"
+                            value="true"
+                            formControlName="is_active"
+                          />
                         </div>
                       </div>
                     </div>
@@ -187,49 +192,35 @@
                       </div>
                       <div class="col-md-12">
                         <ul class="UploadMedia Addmedia">
-                          <li>
+                          <li
+                            (click)="fileCertificatesInput.click()"
+                            *ngFor="
+                              let item of certificatesItems;
+                              let index = index
+                            "
+                          >
                             <label>
                               <img src="assets/images/edit-icon.png" />
-                              <span>License</span>
-                            </label>
-                          </li>
-                          <li>
-                            <label>
-                              <img src="assets/images/edit-icon.png" />
-                              <span>Abstract</span>
-                            </label>
-                          </li>
-                          <li>
-                            <label>
-                              <img src="assets/images/edit-icon.png" />
-                              <span>Certificate</span>
-                            </label>
-                          </li>
-                          <li>
-                            <label>
-                              <img src="assets/images/edit-icon.png" />
-                              <span>CVOR</span>
-                            </label>
-                          </li>
-                          <li>
-                            <label>
-                              <img src="assets/images/edit-icon.png" />
-                              <span>Safety</span>
-                            </label>
-                          </li>
-                          <li>
-                            <label>
-                              <img src="assets/images/edit-icon.png" />
-                              <span>Insurance</span>
-                            </label>
-                          </li>
-                          <li>
-                            <label>
-                              <img src="assets/images/edit-icon.png" />
-                              <span>Add More</span>
+                              <span>{{ item }}</span>
                             </label>
                           </li>
                         </ul>
+                        <input
+                          #fileCertificatesInput
+                          type="file"
+                          (change)="readCertificatesURL($event)"
+                          style="display: none"
+                          accept="image/*"
+                          multiple="true"
+                        />
+                        <div
+                          *ngIf="isSubmitted && f['image'].errors"
+                          class="text-danger"
+                        >
+                          <div *ngIf="f['image'].errors['required']">
+                            Certificates are required
+                          </div>
+                        </div>
                       </div>
 
                       <div class="row mt-4">

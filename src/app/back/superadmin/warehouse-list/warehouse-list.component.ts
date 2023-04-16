@@ -38,7 +38,7 @@ export class WarehouseListComponent {
     this.warehouse$ = this.warehouseService.getWarehouse();
 
     this.warehouse$.subscribe((data: any) => {
-      this.warehouseData = data.result;
+      this.warehouseData = data?.result;
     });
   }
 

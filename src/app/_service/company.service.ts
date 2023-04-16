@@ -25,12 +25,12 @@ export class CompanyService {
   private _orgCount = new BehaviorSubject<object[]>([]);
   private orgCountData: { orgCount: object[] } = { orgCount: [] };
 
-  getOrgCount(): Observable<any[]> {
-    return this._orgCount.asObservable();
-  }
-
   getCompany(): Observable<any[]> {
     return this._company.asObservable();
+  }
+
+  getOrgCount(): Observable<any[]> {
+    return this._orgCount.asObservable();
   }
 
   companyAdd(form: any) {
@@ -50,8 +50,10 @@ export class CompanyService {
       tail += id;
     }
     let params = new URLSearchParams();
-    for (let key in filter) {
-      params.set(key, filter[key]);
+    if (params) {
+      for (let key in filter) {
+        params.set(key, filter[key]);
+      }
     }
     if (filter) {
       tail += `?` + params.toString();

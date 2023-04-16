@@ -23,6 +23,16 @@ export class DriverAddComponent {
   isAddMode: boolean;
   editDriver: any;
 
+  certificatesItems: any = [
+    'License',
+    'Abstract',
+    'Certificate',
+    'CVOR',
+    'Safety',
+    'Insurance',
+    'Add More',
+  ];
+
   drivers$!: Observable<object[]>;
 
   constructor(
@@ -155,6 +165,16 @@ export class DriverAddComponent {
       });
 
       reader.readAsDataURL(file);
+    }
+  }
+
+  readCertificatesURL(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files;
+
+      this.addDriver.patchValue({
+        certificates: file,
+      });
     }
   }
 }

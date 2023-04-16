@@ -19,6 +19,7 @@ export class AuthService {
   _apiUrl = new BehaviorSubject<any>(this.apiUrl);
   _isDashboard = new BehaviorSubject<any>(false);
   _isRole = new BehaviorSubject<any>('0');
+  _profile = new BehaviorSubject<any>(false);
 
   _liveApiUrl = this.apiUrl;
   _isLoggedIn: any = false;
@@ -100,6 +101,10 @@ export class AuthService {
     return orgEmail !== null ? true : false;
   }
 
+  getProfile(): Observable<any[]> {
+    return this._profile.asObservable();
+  }
+
   getDashboard(): Observable<any[]> {
     let authToken = this.getLS('access_token');
     this._isDashboard.next(authToken !== null ? true : false);
@@ -145,6 +150,7 @@ export class AuthService {
 
     this._isDashboard.next(false);
     this._isRole.next('0');
+    this._profile.next(false);
   }
 
   getUserProfile(id: any): Observable<any> {
@@ -181,6 +187,7 @@ export class AuthService {
           if (data?.access_token != undefined) {
             this._isDashboard.next(data?.access_token);
             this._isRole.next(data?.role);
+            this._profile.next(data);
           }
           return data;
         }),
@@ -213,6 +220,7 @@ export class AuthService {
           if (data?.access_token != undefined) {
             this._isDashboard.next(data?.access_token);
             this._isRole.next(data?.role);
+            this._profile.next(data);
           }
           return data;
         }),
