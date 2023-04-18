@@ -20,7 +20,6 @@ export class WarehouseAddComponent {
 
   id: Number;
   isAddMode: boolean;
-  editPlan: any;
 
   address$!: Observable<object[]>;
   warehouse$!: Observable<object[]>;
@@ -59,13 +58,13 @@ export class WarehouseAddComponent {
 
       this.warehouse$.subscribe((data: any) => {
         this.addWare.patchValue({
-          warehouse_name: data.result?.warehouse_name,
-          address: data.result?.address?.id,
-          contact_name: data.result?.contact_name,
-          email: data.result?.email,
-          phone: data.result?.phone,
-          alt_phone: data.result?.alt_phone,
-          is_main_localation: data.result?.is_main_localation,
+          warehouse_name: data?.result?.warehouse_name,
+          address: data?.result?.address?.id,
+          contact_name: data?.result?.contact_name,
+          email: data?.result?.email,
+          phone: data?.result?.phone,
+          alt_phone: data?.result?.alt_phone,
+          is_main_localation: data?.result?.is_main_localation,
         });
       });
     }
@@ -90,7 +89,7 @@ export class WarehouseAddComponent {
     this.address$ = this.addressService.getAddress();
 
     this.address$.subscribe((data: any) => {
-      this.addressData = data.result;
+      this.addressData = data?.result;
     });
   }
 

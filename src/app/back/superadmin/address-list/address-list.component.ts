@@ -37,7 +37,7 @@ export class AddressListComponent {
     this.address$ = this.addressService.getAddress();
 
     this.address$.subscribe((data: any) => {
-      this.addressData = data.result;
+      this.addressData = data?.result;
     });
   }
 

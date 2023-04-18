@@ -54,8 +54,8 @@ export class PlanListComponent {
     this.plans$ = this.planService.getPlans();
 
     this.plans$.subscribe((data: any) => {
-      this.items = data.results;
-      this.listCount = data.count;
+      this.items = data?.results;
+      this.listCount = data?.count;
     });
   }
 

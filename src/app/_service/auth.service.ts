@@ -34,7 +34,6 @@ export class AuthService {
   ) {
     this.getApiUrl.subscribe((data: any) => {
       this._liveApiUrl = data;
-      // console.log('_liveApiUrl', this._liveApiUrl);
     });
 
     this.getDashboard().subscribe((data: any) => {
@@ -102,6 +101,7 @@ export class AuthService {
   }
 
   getProfile(): Observable<any[]> {
+    this.getUserProfile();
     return this._profile.asObservable();
   }
 
@@ -153,14 +153,26 @@ export class AuthService {
     this._profile.next(false);
   }
 
-  getUserProfile(id: any): Observable<any> {
-    let api = `${this._liveApiUrl}/user-profile/${id}`;
-    return this.http.get(api).pipe(
-      map((res) => {
-        return res || {};
-      }),
-      catchError(this.handleError)
-    );
+  getUserProfile() {
+    this.http
+      .get<any>(`${this._liveApiUrl}/account/user-profile/`)
+      .pipe(
+        map((data) => {
+          return data;
+        }),
+        catchError(this.handleError)
+      )
+      .subscribe(
+        (data: any) => {
+          if (this.resultCodeError(data)) {
+            return;
+          }
+          this._profile.next(data);
+        },
+        (error) => {
+          this.dataError(error);
+        }
+      );
   }
 
   getOrganization(email: string) {
@@ -187,7 +199,6 @@ export class AuthService {
           if (data?.access_token != undefined) {
             this._isDashboard.next(data?.access_token);
             this._isRole.next(data?.role);
-            this._profile.next(data);
           }
           return data;
         }),
@@ -220,7 +231,6 @@ export class AuthService {
           if (data?.access_token != undefined) {
             this._isDashboard.next(data?.access_token);
             this._isRole.next(data?.role);
-            this._profile.next(data);
           }
           return data;
         }),

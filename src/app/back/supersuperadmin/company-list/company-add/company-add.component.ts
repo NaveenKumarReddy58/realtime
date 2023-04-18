@@ -77,8 +77,8 @@ export class CompanyAddComponent {
     this.plans$ = this.planService.getPlans();
 
     this.plans$.subscribe((data: any) => {
-      this.planItems = data.results;
-      this.planCount = data.count;
+      this.planItems = data?.results;
+      this.planCount = data?.count;
     });
   }
 

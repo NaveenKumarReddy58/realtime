@@ -46,17 +46,15 @@ export class PlanAddComponent {
     });
 
     if (!this.isAddMode) {
-      // console.log('edit', this.id);
-
       this.planService.planList(this.id);
       this.plans$ = this.planService.getPlans();
 
       this.plans$.subscribe((data: any) => {
-        this.editPlan = data.results;
-        if (data.results.img) {
-          this.imageSrc = data.results.img;
+        this.editPlan = data?.results;
+        if (data?.results?.img) {
+          this.imageSrc = data?.results?.img;
         }
-        this.addPlan.patchValue(data.results);
+        this.addPlan.patchValue(data?.results);
       });
     }
   }

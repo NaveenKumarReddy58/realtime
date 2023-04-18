@@ -38,7 +38,7 @@ export class DriverListComponent {
     this.driver$ = this.driverService.getDrivers();
 
     this.driver$.subscribe((data: any) => {
-      this.items = data.results;
+      this.items = data?.results;
     });
   }
 

@@ -24,7 +24,11 @@
                     </span>
                   </div>
                   <div class="form-div">
-                    <form class="Form-Form">
+                    <form
+                      [formGroup]="addOrderF"
+                      class="Form-Form"
+                      enctype="multipart/form-data"
+                    >
                       <div class="row">
                         <div class="col-md-12">
                           <div class="filed-input">

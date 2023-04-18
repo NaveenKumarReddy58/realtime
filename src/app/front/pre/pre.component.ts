@@ -71,7 +71,7 @@ export class PreComponent {
             this.authService.port
         );
         this.authService.setLS('org_phone', data?.result[0]?.phone_number);
-        this.authService.setLS('org_data', JSON.stringify(data));
+        // this.authService.setLS('org_data', JSON.stringify(data));
 
         this.toastr.success('Organization Selected!');
 

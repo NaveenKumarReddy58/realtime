@@ -52,7 +52,7 @@ export class TopComponent {
     this.planCount$ = this.planService.getPlanCount();
 
     this.planCount$.subscribe((data: any) => {
-      this.plandata = data.result;
+      this.plandata = data?.result;
     });
   }
 

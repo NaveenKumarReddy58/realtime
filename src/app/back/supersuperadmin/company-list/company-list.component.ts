@@ -68,8 +68,8 @@ export class CompanyListComponent {
     this.company$ = this.companyService.getCompany();
 
     this.company$.subscribe((data: any) => {
-      this.items = data.results;
-      this.listCount = data.count;
+      this.items = data?.results;
+      this.listCount = data?.count;
     });
   }
 
@@ -78,7 +78,7 @@ export class CompanyListComponent {
     this.orgCount$ = this.companyService.getOrgCount();
 
     this.orgCount$.subscribe((data: any) => {
-      this.orgdata = data.result;
+      this.orgdata = data?.result;
     });
   }
 

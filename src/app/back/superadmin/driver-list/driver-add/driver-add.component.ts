@@ -63,17 +63,15 @@ export class DriverAddComponent {
     });
 
     if (!this.isAddMode) {
-      // console.log('edit', this.id);
-
       this.driverService.driverList(this.id);
       this.drivers$ = this.driverService.getDrivers();
 
       this.drivers$.subscribe((data: any) => {
-        this.editDriver = data.results;
-        if (data.results.img) {
-          this.imageSrc = data.results.img;
+        this.editDriver = data?.results;
+        if (data?.results?.img) {
+          this.imageSrc = data?.results?.img;
         }
-        this.addDriver.patchValue(data.results);
+        this.addDriver.patchValue(data?.results);
       });
     }
   }

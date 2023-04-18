@@ -14,6 +14,8 @@ export class ProfileComponent {
   profileData: any;
   loading = false;
 
+  imageSrc: any = 'assets/images/profilephoto.png';
+
   profile$!: Observable<object[]>;
 
   constructor(
@@ -31,8 +33,7 @@ export class ProfileComponent {
     this.profile$ = this.authService.getProfile();
 
     this.profile$.subscribe((data: any) => {
-      console.log(data);
-      this.profileData = data.result;
+      this.profileData = data?.result;
     });
   }
 }

@@ -10,7 +10,16 @@
     <div class="col-md-3">
       <div class="ProfilePik">
         <div class="ChangePic">
-          <img src="assets/images/profilephoto.png" />
+          <img
+            *ngIf="profileData?.profile_image"
+            [src]="profileData?.profile_image"
+            [alt]="'logo'"
+          />
+          <img
+            *ngIf="!profileData?.profile_image"
+            [src]="imageSrc"
+            [alt]="'logo'"
+          />
           <span class="Edit_Img">
             <img src="assets/images/edir-img.png" />
           </span>
@@ -24,15 +33,17 @@
           <div class="col-md-6">
             <input
               type="text"
-              name=""
-              placeholder="Firts Name"
+              name="first_name"
+              [value]="profileData?.first_name"
+              placeholder="First Name"
               class="Pro_input_Field"
             />
           </div>
           <div class="col-md-6">
             <input
               type="text"
-              name=""
+              name="last_name"
+              [value]="profileData?.last_name"
               placeholder="Last Name"
               class="Pro_input_Field"
             />
@@ -42,7 +53,8 @@
           <div class="col-md-6">
             <input
               type="text"
-              name=""
+              name="phone_number"
+              [value]="profileData?.phone_number"
               placeholder="Mobile Number"
               class="Pro_input_Field"
             />
@@ -50,7 +62,8 @@
           <div class="col-md-6">
             <input
               type="text"
-              name=""
+              name="email"
+              [value]="profileData?.email"
               placeholder="Email"
               class="Pro_input_Field"
             />
@@ -63,7 +76,7 @@
               <i class="fa fa-eye __eye" aria-hidden="true"></i>
               <input
                 type="password"
-                name=""
+                name="password"
                 placeholder="Password"
                 class="Pro_input_Field"
               />
@@ -74,7 +87,7 @@
               <i class="fa fa-eye __eye green__eye" aria-hidden="true"></i>
               <input
                 type="password"
-                name=""
+                name="confirmpassword"
                 placeholder="Confirm Password"
                 class="Pro_input_Field"
               />
