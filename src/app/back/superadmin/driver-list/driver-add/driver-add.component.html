@@ -16,14 +16,16 @@
             </div>
           </div>
           <div class="row mt-4">
-            <div class="col-md-3 width20">
+            <div class="col-md-4 width20">
               <div class="ProfilePik">
-                <div class="ChangePic">
-                  <img *ngIf="imageSrc" [src]="imageSrc" [alt]="'logo'" />
+                <div class="driver-profile-image-container">
+                  <i *ngIf="!(imageSrc.indexOf('profilephoto')>0)" class="fa fa-trash Delete" (click)="removeProfilePhoto($event)"></i>
+                  <img class="driver-profile-image" *ngIf="imageSrc" [src]="imageSrc" [alt]="'logo'" width="100px" height="100px" />
                   <span (click)="fileInput.click()" class="Edit_Img">
-                    <img src="assets/images/edir-img.png" />
+                    <img src="assets/images/edir-img.png" width="30px" height="30px" />
                   </span>
                 </div>
+                <div class="my-2 driver-name">Manjeeth Singh</div>
                 <div (click)="fileInput.click()" class="ChangeImg">
                   Change Profile Photo
                 </div>
@@ -53,19 +55,20 @@
 
                 <div class="row">
                   <!-- Popup Box -->
-                  <div class="CardPopup">
+                  <div class="CardPopup pt-0">
                     <div class="row mb-4">
                       <div class="col-md-6">
-                        <div class="Div01">
-                          Head Deriver
+                        <div class="head-driver">
+                          <strong>Head Driver:</strong>
                           <input
+                            class="head-driver mx-2"
                             type="checkbox"
                             value="true"
                             formControlName="is_head_driver"
                           />
                         </div>
                       </div>
-                      <div class="col-md-6 text-right">
+                      <!-- <div class="col-md-6 text-right">
                         <div class="Div01 Div02">
                           Deriver Status: Active
                           <input
@@ -74,16 +77,16 @@
                             formControlName="is_active"
                           />
                         </div>
-                      </div>
+                      </div> -->
                     </div>
                     <div class="row">
-                      <div class="col-md-6 mb-4">
+                      <div class="col-md-6 mb-3">
                         <span class="Password">
                           <input
                             type="text"
                             formControlName="first_name"
                             placeholder="First Name"
-                            class="Pro_input_Field"
+                            class="Pro_input_Field driver-input-field"
                           />
                           <div
                             *ngIf="isSubmitted && f['first_name'].errors"
@@ -95,13 +98,13 @@
                           </div>
                         </span>
                       </div>
-                      <div class="col-md-6 mb-4">
+                      <div class="col-md-6 mb-3">
                         <span class="Password">
                           <input
                             type="text"
                             formControlName="last_name"
                             placeholder="Last Name"
-                            class="Pro_input_Field"
+                            class="Pro_input_Field driver-input-field"
                           />
                           <div
                             *ngIf="isSubmitted && f['last_name'].errors"
@@ -113,13 +116,13 @@
                           </div>
                         </span>
                       </div>
-                      <div class="col-md-6 mb-4">
+                      <div class="col-md-6 mb-3">
                         <span class="Password">
                           <input
                             type="text"
                             formControlName="phone_number"
                             placeholder="Mobile Number"
-                            class="Pro_input_Field"
+                            class="Pro_input_Field driver-input-field"
                           />
                           <div
                             *ngIf="isSubmitted && f['phone_number'].errors"
@@ -134,12 +137,12 @@
                           </div>
                         </span>
                       </div>
-                      <div class="col-md-12">
+                      <div class="col-md-12 mb-3">
                         <span class="Password">
                           <textarea
                             formControlName="address"
                             placeholder="Address"
-                            class="CompanyField Address"
+                            class="CompanyField Address mb-0"
                           ></textarea>
                           <div
                             *ngIf="isSubmitted && f['address'].errors"
@@ -151,13 +154,13 @@
                           </div>
                         </span>
                       </div>
-                      <div class="col-md-6 mb-4">
+                      <div class="col-md-6 mb-3">
                         <span class="Password">
                           <input
                             type="text"
                             formControlName="email"
                             placeholder="Email"
-                            class="Pro_input_Field"
+                            class="Pro_input_Field driver-input-field"
                           />
                           <div
                             *ngIf="isSubmitted && f['email'].errors"
@@ -172,13 +175,13 @@
                           </div>
                         </span>
                       </div>
-                      <div class="col-md-6 mb-4">
+                      <div class="col-md-6 mb-">
                         <span class="Password">
                           <input
                             type="password"
                             formControlName="password"
                             placeholder="Password"
-                            class="Pro_input_Field"
+                            class="Pro_input_Field driver-input-field"
                           />
                           <div
                             *ngIf="isSubmitted && f['password'].errors"
@@ -191,17 +194,12 @@
                         </span>
                       </div>
                       <div class="col-md-12">
-                        <ul class="UploadMedia Addmedia">
-                          <li
-                            (click)="fileCertificatesInput.click()"
-                            *ngFor="
-                              let item of certificatesItems;
-                              let index = index
-                            "
-                          >
-                            <label>
-                              <img src="assets/images/edit-icon.png" />
-                              <span>{{ item }}</span>
+                        <ul class="UploadMedia Addmedia certificates-container">
+                          <li (click)="fileCertificatesInput.click();onCertificateClick(item.name)" *ngFor="let item of certificatesItems;let index = index">
+                            <label [ngClass]="item.img.indexOf('edit-icon')>0 ? '': 'with-img'">
+                              <i *ngIf="!(item.img.indexOf('edit-icon')>0)" class="fa fa-trash Delete" (click)="removePhoto($event , item.name)"></i>
+                              <img [src]="item.img" [ngClass]="item.img.indexOf('edit-icon')>0 ? '': 'c-width-100'"/>
+                              <span>{{ item.name }}</span>
                             </label>
                           </li>
                         </ul>
@@ -222,7 +220,20 @@
                           </div>
                         </div>
                       </div>
+                      
+                      <div class="row col-md-12 notes mt-3">
+                        <p >Notes: </p>
+                        <ul class="mx-4">
+                          <li>License is mandatory</li>
+                          <li>Abstract is mandatory</li>
+                          <li>Certificate is mandatory</li>
+                          <li>CVOR is mandatory</li>
+                          <li>Safety is mandatory</li>
+                          <li>Insurance is mandatory</li>
 
+                        </ul>
+                        <div *ngIf="isShowCertificationErr" class="text-danger">Please upload all mandatory documents</div>
+                      </div>
                       <div class="row mt-4">
                         <div class="col-md-12">
                           <div
