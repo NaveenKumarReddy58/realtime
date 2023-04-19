@@ -29,6 +29,8 @@ export class AddressAddComponent {
   public addressSearchHistory: any = [];
 
   initialCoordinates!: google.maps.LatLngLiteral;
+  lat: any;
+  lng: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -41,8 +43,8 @@ export class AddressAddComponent {
   ) {
     this.addressF = formBuilder.group({
       address: ['', [Validators.required]],
-      lattitude: ['', [Validators.required]],
-      longitute: ['', [Validators.required]],
+      latitude: ['', [Validators.required]],
+      longitude: ['', [Validators.required]],
     });
   }
 
@@ -62,7 +64,7 @@ export class AddressAddComponent {
           return;
         }
         this.getFromAddress(
-          place?.place_id,
+          place.place_id,
           place.geometry.location.lat(),
           place.geometry.location.lng()
         );
@@ -145,6 +147,16 @@ export class AddressAddComponent {
                 pinCode: pinCode,
               };
 
+              this.lat = String(place.geometry.location.lat()).toString();
+
+              this.lng = String(place.geometry.location.lng()).toString();
+
+              this.addressF.patchValue({
+                address: this.searchElementRefFrom.nativeElement.value,
+                latitude: this.lat,
+                longitude: this.lng,
+              });
+
               this.initialCoordinates = {
                 lat: parseFloat(
                   String(place.geometry.location.lat()).toString()
@@ -177,8 +189,6 @@ export class AddressAddComponent {
   }
 
   ngOnInit(): void {}
-
-
 
   handleSubmit() {
     this.isSubmitted = true;
@@ -213,9 +223,7 @@ export class AddressAddComponent {
         }
 
         this.toastr.success(data?.resultDescription);
-        this.router.navigate([
-          '/' + this.authService._isRoleName + '/dashboard',
-        ]);
+        this.router.navigate(['/' + this.authService._isRoleName + '/address']);
       },
       (error) => {
         this.authService.dataError(error);

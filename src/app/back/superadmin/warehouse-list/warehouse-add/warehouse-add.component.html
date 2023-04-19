@@ -36,21 +36,12 @@
           </div>
 
           <div class="col-md-12 mt-3">
-            <select
+            <select2
+              [data]="data"
               class="Pro_input_Field"
-              (change)="changeAddress($event)"
               formControlName="address"
               placeholder="Address"
-            >
-              <option value="">Choose Address</option>
-              <option
-                *ngFor="let addr of addressData"
-                [selected]="addr?.id"
-                [value]="addr?.id"
-              >
-                {{ addr?.address }}
-              </option>
-            </select>
+            ></select2>
             <div *ngIf="isSubmitted && f['address'].errors" class="text-danger">
               <div *ngIf="f['address'].errors['required']">
                 Address is required

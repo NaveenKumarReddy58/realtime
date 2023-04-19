@@ -5,24 +5,6 @@ import { AuthInterceptor } from './_shared/auth.interceptor';
 import { DateAgo } from './_pipes/date-ago.pipe';
 import { DateDifference } from './_pipes/date-difference.pipe';
 
-import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { SlickCarouselModule } from 'ngx-slick-carousel';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgOtpInputModule } from 'ng-otp-input';
-import { ToastrModule } from 'ngx-toastr';
-import { CountdownModule } from 'ngx-countdown';
-import { StoreModule } from '@ngrx/store';
-import { CdkAccordionModule } from '@angular/cdk/accordion';
-import { MatDialogModule } from '@angular/material/dialog';
-import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
-import { MomentModule } from 'ngx-moment';
-import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
-import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
-
 import { TimerComponent } from './front/timer/timer.component';
 import { SplashComponent } from './front/splash/splash.component';
 import { ResetPasswordComponent } from './front/reset-password/reset-password.component';
@@ -59,6 +41,24 @@ import { AppComponent } from './app.component';
 import { SuperAdminComponent } from './back/superadmin/super-admin.component';
 import { SuperSuperAdminComponent } from './back/supersuperadmin/super-super-admin.component';
 import { NotificationListComponent } from './back/common/notification-list/notification-list.component';
+import { Select2Module } from 'ng-select2-component';
+import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
+import { StoreModule } from '@ngrx/store';
+import { NgOtpInputModule } from 'ng-otp-input';
+import { CountdownModule } from 'ngx-countdown';
+import { MomentModule } from 'ngx-moment';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { ToastrModule } from 'ngx-toastr';
+import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
@@ -121,7 +121,8 @@ import { GoogleMapsModule } from '@angular/google-maps';
     NgIdleKeepaliveModule.forRoot(),
     MomentModule,
     MatSelectCountryModule.forRoot('en'),
-    GoogleMapsModule
+    Select2Module,
+    GoogleMapsModule,
   ],
   providers: [
     {

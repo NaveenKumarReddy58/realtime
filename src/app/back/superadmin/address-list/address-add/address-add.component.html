@@ -21,23 +21,17 @@
                       enctype="multipart/form-data"
                     >
                       <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-8">
                           <div class="filed-input">
                             <input
                               type="search"
                               formControlName="address"
                               placeholder="Address"
                               class="CompanyField"
-
-                              style="font-size: 17px; margin-top: 17px; height: 45px"
-  class="form-control search"
-  type="search"
-  id="pickupkeyword"
-  name="pickupkeyword"
-  placeholder="Enter Location"
-  aria-label="Search"
-  #pickupkeyword
-  autocomplete="off"
+                              id="pickupkeyword"
+                              aria-label="Search"
+                              #pickupkeyword
+                              autocomplete="off"
                             />
                             <div
                               *ngIf="isSubmitted && f['address'].errors"
@@ -45,44 +39,6 @@
                             >
                               <div *ngIf="f['address'].errors['required']">
                                 Address is required
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="filed-input">
-                            <input
-                              type="text"
-                              formControlName="lattitude"
-                              placeholder="Lattitude"
-                              class="CompanyField"
-                              readonly
-                            />
-                            <div
-                              *ngIf="isSubmitted && f['lattitude'].errors"
-                              class="text-danger"
-                            >
-                              <div *ngIf="f['lattitude'].errors['required']">
-                                Lattitude is required
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="filed-input">
-                            <input
-                              type="text"
-                              formControlName="longitute"
-                              placeholder="Longitute"
-                              class="CompanyField"
-                              readonly
-                            />
-                            <div
-                              *ngIf="isSubmitted && f['longitute'].errors"
-                              class="text-danger"
-                            >
-                              <div *ngIf="f['longitute'].errors['required']">
-                                Longitute is required
                               </div>
                             </div>
                           </div>
@@ -102,20 +58,52 @@
                             </button>
                           </div>
                         </div>
+                        <div class="col-md-6">
+                          <div class="filed-input">
+                            <input
+                              type="hidden"
+                              formControlName="latitude"
+                              placeholder="Latitude"
+                              class="CompanyField"
+                              readonly
+                            />
+                            <div
+                              *ngIf="isSubmitted && f['latitude'].errors"
+                              class="text-danger"
+                            >
+                              <div *ngIf="f['latitude'].errors['required']">
+                                Latitude is required
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="filed-input">
+                            <input
+                              type="hidden"
+                              formControlName="longitude"
+                              placeholder="longitude"
+                              class="CompanyField"
+                              readonly
+                            />
+                            <div
+                              *ngIf="isSubmitted && f['longitude'].errors"
+                              class="text-danger"
+                            >
+                              <div *ngIf="f['longitude'].errors['required']">
+                                Longitude is required
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                       <div class="row mt-4">
                         <div class="col-md-12">
-                          <google-map class="GoogleMap" width="100%" [center]="initialCoordinates" ></google-map>
-                          <!-- <iframe
+                          <google-map
                             class="GoogleMap"
-                            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d15258072.40570261!2d82.75252935!3d20.98801345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1673716360166!5m2!1sen!2sin"
                             width="100%"
-                            height="450"
-                            style="border: 0"
-                            allowfullscreen=""
-                            loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"
-                          ></iframe> -->
+                            [center]="initialCoordinates"
+                          ></google-map>
                         </div>
                       </div>
                     </form>

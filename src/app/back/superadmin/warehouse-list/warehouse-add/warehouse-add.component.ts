@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Select2Data } from 'ng-select2-component';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { AddressService } from 'src/app/_service/address.service';
 import { AuthService } from 'src/app/_service/auth.service';
 import { WarehouseService } from 'src/app/_service/warehouse.service';
@@ -17,6 +18,7 @@ export class WarehouseAddComponent {
   loading = false;
   isSubmitted = false;
   addressData: any;
+  data: Select2Data = [];
 
   id: Number;
   isAddMode: boolean;
@@ -90,6 +92,15 @@ export class WarehouseAddComponent {
 
     this.address$.subscribe((data: any) => {
       this.addressData = data?.result;
+      if (data?.result) {
+        data?.result.forEach((data: any) => {
+          // console.log(data);
+          this.data.push({
+            value: data?.id,
+            label: data?.address,
+          });
+        });
+      }
     });
   }
 

@@ -2870,6 +2870,14 @@ img.searchicon {
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
+.select2-selection {
+  border-radius: 15px !important;
+  border: 1px solid #ccd2d8 !important;
+  height: 50px !important;
+  padding: 10px 2px !important;
+  font-weight: 500;
+  font-size: 16px;
+}
 .Plane_date_time ul::-webkit-scrollbar {
   width: 4px;
   height: 4px;

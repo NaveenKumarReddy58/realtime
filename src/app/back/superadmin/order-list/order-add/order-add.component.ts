@@ -28,6 +28,8 @@ export class OrderAddComponent {
   warehouse$!: Observable<object[]>;
   order$!: Observable<object[]>;
 
+  time = { hour: 13, minute: 30 };
+
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
