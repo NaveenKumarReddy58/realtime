@@ -24,10 +24,20 @@
                         <div class="col-md-12">
                           <div class="filed-input">
                             <input
-                              type="text"
+                              type="search"
                               formControlName="address"
                               placeholder="Address"
                               class="CompanyField"
+
+                              style="font-size: 17px; margin-top: 17px; height: 45px"
+  class="form-control search"
+  type="search"
+  id="pickupkeyword"
+  name="pickupkeyword"
+  placeholder="Enter Location"
+  aria-label="Search"
+  #pickupkeyword
+  autocomplete="off"
                             />
                             <div
                               *ngIf="isSubmitted && f['address'].errors"
@@ -46,6 +56,7 @@
                               formControlName="lattitude"
                               placeholder="Lattitude"
                               class="CompanyField"
+                              readonly
                             />
                             <div
                               *ngIf="isSubmitted && f['lattitude'].errors"
@@ -64,6 +75,7 @@
                               formControlName="longitute"
                               placeholder="Longitute"
                               class="CompanyField"
+                              readonly
                             />
                             <div
                               *ngIf="isSubmitted && f['longitute'].errors"
@@ -93,7 +105,8 @@
                       </div>
                       <div class="row mt-4">
                         <div class="col-md-12">
-                          <iframe
+                          <google-map class="GoogleMap" width="100%" [center]="initialCoordinates" ></google-map>
+                          <!-- <iframe
                             class="GoogleMap"
                             src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d15258072.40570261!2d82.75252935!3d20.98801345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1673716360166!5m2!1sen!2sin"
                             width="100%"
@@ -102,7 +115,7 @@
                             allowfullscreen=""
                             loading="lazy"
                             referrerpolicy="no-referrer-when-downgrade"
-                          ></iframe>
+                          ></iframe> -->
                         </div>
                       </div>
                     </form>

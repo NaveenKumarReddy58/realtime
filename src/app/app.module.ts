@@ -59,6 +59,7 @@ import { AppComponent } from './app.component';
 import { SuperAdminComponent } from './back/superadmin/super-admin.component';
 import { SuperSuperAdminComponent } from './back/supersuperadmin/super-super-admin.component';
 import { NotificationListComponent } from './back/common/notification-list/notification-list.component';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
   declarations: [
@@ -120,6 +121,7 @@ import { NotificationListComponent } from './back/common/notification-list/notif
     NgIdleKeepaliveModule.forRoot(),
     MomentModule,
     MatSelectCountryModule.forRoot('en'),
+    GoogleMapsModule
   ],
   providers: [
     {
