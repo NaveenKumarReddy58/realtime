@@ -1,9 +1,93 @@
 <div class="ContentArea no-padding">
-  <div class="ContentArea_Inner">
+  <div class="ContentArea_Inner p-0">
     <!-- Tab Content Area Start 01-->
     <div id="Tb-Tabs01" class="Tabs01 TabsMain">
+      <div class="TabsList">
+        <ul class="Tab_List">
+          <li class="active">
+            <a>Total Drivers : 100</a>
+          </li>
+          <li>
+            <a>Active Drivers : 120 </a>
+          </li>
+          <li>
+            <a>Inactive Drivers : 10</a>
+          </li>
+        </ul>
+      </div>
+      <div class="mx-3">
+        <div class="SearchFilter">
+          <form class="Search">
+            <input type="text" name="" placeholder="Search" />
+            <button><i class="fa fa-search"></i></button>
+          </form>
+          <div class="Filter_Set">
+            <span>Filter Results <img src="assets/images/filter-icon.png"/></span>
+          </div>
+          <div class="action-btns">
+            <a class="mx-3">Send Push Notification to all <img class="push-notification" src="../../../../assets/images/pushnotification-black.jpg" /></a>
+            <a class="slected-count">{{selectedDriversCount}} Selected</a>
+            <a class="select-all-dl" (click)="selectAll()">Select All </a>
+            <a class="deselect-all-dl" (click)="deSelectAll()">Deselect All</a>
+            <a class="drivers-list-delete">
+              <span (click)="onClickDeleteDriverDialog($event)">Delete <img src="../../../../assets/images/delete.jpg" /></span> 
+              <div *ngIf="isShowDeleteDriverDialog" class="drivers-list-delete-dialog">
+                <div class="delete-drivers">Delete Drivers</div>
+                <div class="confirmation-msg">
+                  <div class="row">
+                    <div class="col-9">
+                      Are you sure you want to delete drivers ?
+                    </div>
+                    <div class="col-3">
+                      <img src="../../../../assets/images/big-delete.jpg" width="63px"/>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-center px-4">
+                  <button class="ButtonStyle cancel-btn float-start" (click)="onClickDeleteDriverDialog($event)">Cancel</button>
+                  <button class="ButtonStyle float-end">Delete Driver</button>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
       <!-- Table View -->
-      <div class="Table mt-4">
+      <div class="Table mt-4 mx-3">
+        <div *ngIf="isShowPushNotificationForm" class="create-push-notification-dialog">
+          <div class="cpn mx-2">Create Push Notification</div>
+          <div class="">
+
+            <div class="row mx-2">
+              <div class="col-8 cpn-form-container">
+                <input type="text" placeholder="Enter Title"/>
+                <br>
+                <textarea placeholder="Enter Your Message here..."></textarea>
+              </div>
+              <div class="col-2 text-center">
+                <div class="add-files" (click)="fileInput.click()" >
+                  <img *ngIf="imageSrc" [src]="imageSrc" />
+                  <div>Add Files</div>
+                  <input
+                    #fileInput
+                    type="file"
+                    (change)="readURL($event)"
+                    style="display: none"
+                    accept="image/*"
+                />
+                </div>
+              </div>
+              <div class="col-2 push-notification-btns">
+                <div>
+                  <button class="push-notification-btn-send">Send <img src="../../assets/images/pushnotification-white.jpg"></button>
+                </div>
+                <div>
+                  <button class="push-notification-btn-cancel" (click)="onClickPushNotification()">Cancel <img src="../../assets/images/cancel.jpg"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="OrderList">
           <div class="row mt-3">
             <div class="Table_Scroll">
@@ -14,52 +98,72 @@
                 border="0"
               >
                 <tr class="T_Head">
-                  <th>Id</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Email</th>
-                  <th>Group</th>
-                  <th>Phone</th>
-                  <th>Address</th>
-                  <th>Joined Date</th>
-                  <th>Action</th>
+                  <th class="text-start px-4">Driver/#</th>
+                  <th>Assigned Orders</th>
+                  <th>Completed Deliveries</th>
+                  <th>Last Delivery Time</th>
+                  <th>Time Back Warehouse</th>
+                  <th>Status</th>
+                  <th>Other Options</th>
                 </tr>
                 <tr *ngFor="let item of items; let index = index">
-                  <td>
-                    <img
-                      src="assets/images/p-icon.png"
-                      *ngIf="!item.profile_image"
-                    />
-                    <img
-                      [src]="item.profile_image"
-                      *ngIf="item.profile_image"
-                    />
-                    {{ item.id }}
+                  <td>   
+                    <span [ngClass]="item.is_active ? 'active-dot' : 'inactive-dot'"></span>
+                    {{ item.first_name }} {{ item.last_name }}
                   </td>
-                  <td>{{ item.first_name }}</td>
-                  <td>{{ item.last_name }}</td>
-                  <td>{{ item.email }}</td>
-                  <td>{{ item.groups[0]?.name }}</td>
-                  <td>{{ item.phone_number }}</td>
-                  <td>{{ item.address }}</td>
-                  <td>{{ item.date_joined | date : "mediumDate" }}</td>
+                  <!-- <td>{{ item.email }}</td> -->
+                  <td>70</td>
+                  <td>Deliveries Completed : 60</td>
+                  <td>12:30 PM</td>
+                  <td>00:00 AM</td>
                   <td>
-                    <div class="GetIocn">
-                      <input
+                    <button class="button-Pending status_button_style" [ngClass]="item.is_active ? 'active-status' : 'inactive-status'"> 
+                      {{item.is_active ? "ACTIVE" : "INACTIVE"}}
+                    </button>
+                  </td>
+                  <td>
+                    <div class="GetIocn drivers-other-options">
+                      <!-- <input
                         type="checkbox"
                         [value]="item.is_active"
                         [checked]="item.is_active"
                         (change)="
                           driverActivateDeactivate(item.id, !item.is_active)
                         "
-                      />
-                      <a (click)="driverDelete(item.id)">
+                      /> -->
+                      <a class="drivers-phone-container">
+                        <img (click)="onClickPhone(index)" class="push-notification" src="../../../../assets/images/phone.jpg" />
+                        <!-- <div *ngIf="(isShowContactDialog && index == phoneIndex)" class="drivers-list-delete-dialog">
+                          <div class="delete-drivers">Delete Drivers</div>
+                          <div class="confirmation-msg">
+                            <div class="row">
+                              <div class="col-9">
+                                Are you sure you want to delete drivers ?
+                              </div>
+                              <div class="col-3">
+                                <img src="../../../../assets/images/big-delete.jpg" width="63px"/>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="text-center px-4">
+                            <button class="ButtonStyle cancel-btn float-start">Cancel</button>
+                            <button class="ButtonStyle float-end">Delete Driver</button>
+                          </div>
+                        </div> -->
+                      </a>
+                      <img (click)="onClickPushNotification()" class="push-notification" src="../../../../assets/images/pushnotification.png.jpg" />
+                      <input
+                            class="head-driver mx-2"
+                            type="checkbox"
+                            [checked]="item.checked"
+                            (change)="changeStatus(item.id , item.checked)"/>
+                      <!-- <a (click)="driverDelete(item.id)">
                         <i class="fa fa-trash Delete"></i>
                         <i
                           class="fa fa-spinner fa-spin"
                           *ngIf="delloading && toggle[item.id]"
                         ></i>
-                      </a>
+                      </a> -->
                     </div>
                   </td>
                 </tr>
@@ -80,3 +184,5 @@
     <!-- Tab Content Area Start /////////// 01 -->
   </div>
 </div>
+<div *ngIf="isShowDeleteDriverDialog" (click)="onClickDeleteDriverDialog($event)" class="overlay"></div>
+<div *ngIf="isShowPushNotificationForm" (click)="onClickPushNotification()" class="push-notification-overlay"></div>
