@@ -7,278 +7,592 @@
         <div class="OrderList">
           <div class="row">
             <div class="col-md-12 Oreder">
-              <span class="RecentTitle AddOrder">Add Order</span>
+              <span *ngIf="isAddMode" class="RecentTitle AddOrder"
+                >Add Order</span
+              >
+              <span *ngIf="!isAddMode" class="RecentTitle AddOrder"
+                >Edit Order</span
+              >
             </div>
           </div>
           <div class="row mt-3">
-            <div class="col-md-6">
-              <div class="from-to-pick">
-                <div class="from-to-pick-inner">
-                  <div class="Pickup-title">
-                    <span class="DeliveryTo">
-                      Pickup <strong>From</strong>
-                    </span>
-                    <span class="DeliveryTo">
-                      <strong>PO#</strong>
-                      <span class="Number">12345679890125</span>
-                    </span>
+            <div class="form-div">
+              <form
+                [formGroup]="addOrderF"
+                class="Form-Form"
+                enctype="multipart/form-data"
+              >
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="from-to-pick">
+                      <div class="from-to-pick-inner">
+                        <div class="Pickup-title">
+                          <span class="DeliveryTo">
+                            Pickup <strong>From</strong>
+                          </span>
+                          <span class="DeliveryTo">
+                            <strong>PO#</strong>
+                            <span class="Number">{{ po }}</span>
+                          </span>
+                        </div>
+                        <input
+                          type="hidden"
+                          formControlName="po"
+                          value="{{ po }}"
+                        />
+                        <!-- <input
+                          type="hidden"
+                          formControlName="order_no"
+                          value="{{ po }}"
+                        /> -->
+                        <div class="row mt-3">
+                          <div class="col-md-12">
+                            <div class="filed-input">
+                              <input
+                                type="text"
+                                formControlName="pickup_company_name"
+                                placeholder="Company Name"
+                                class="CompanyField"
+                              />
+                              <div
+                                *ngIf="
+                                  isSubmitted && f['pickup_company_name'].errors
+                                "
+                                class="text-danger"
+                              >
+                                <div
+                                  *ngIf="
+                                    f['pickup_company_name'].errors['required']
+                                  "
+                                >
+                                  Company Name is required
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="filed-input">
+                              <select2
+                                [data]="data"
+                                class="CompanyField"
+                                formControlName="pickup_address"
+                                placeholder="Company Address"
+                              ></select2>
+                              <div
+                                *ngIf="
+                                  isSubmitted && f['pickup_address'].errors
+                                "
+                                class="text-danger"
+                              >
+                                <div
+                                  *ngIf="f['pickup_address'].errors['required']"
+                                >
+                                  Address is required
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-12 mt3 mb3">
+                            <div class="filed-input">
+                              Is this warehouse?
+                              <input
+                                type="radio"
+                                formControlName="is_pickup_warehouse"
+                                value="true"
+                                checked="true"
+                              />
+                              <div
+                                *ngIf="
+                                  isSubmitted && f['is_pickup_warehouse'].errors
+                                "
+                                class="text-danger"
+                              >
+                                <div
+                                  *ngIf="
+                                    f['is_pickup_warehouse'].errors['required']
+                                  "
+                                >
+                                  Warehouse is required
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-4">
+                            <div class="filed-input">
+                              <input
+                                type="date"
+                                formControlName="pickup_date"
+                                placeholder="Date"
+                                class="CompanyField"
+                              />
+                              <div
+                                *ngIf="isSubmitted && f['pickup_date'].errors"
+                                class="text-danger"
+                              >
+                                <div
+                                  *ngIf="f['pickup_date'].errors['required']"
+                                >
+                                  Date field is required
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="filed-input">
+                              <input
+                                type="time"
+                                formControlName="pickup_time"
+                                placeholder="Time"
+                                class="CompanyField"
+                              />
+                              <div
+                                *ngIf="isSubmitted && f['pickup_time'].errors"
+                                class="text-danger"
+                              >
+                                <div
+                                  *ngIf="f['pickup_time'].errors['required']"
+                                >
+                                  Time field is required
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="filed-input">
+                              <button
+                                class="ButtonStyle"
+                                mat-raised-button
+                                (click)="openDialog('0ms', '0ms')"
+                              >
+                                Add Address
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="filed-input">
+                              <input
+                                type="text"
+                                formControlName="pickup_contact_name"
+                                placeholder="Contact Name"
+                                class="CompanyField"
+                              />
+
+                              <div
+                                *ngIf="
+                                  isSubmitted && f['pickup_contact_name'].errors
+                                "
+                                class="text-danger"
+                              >
+                                <div
+                                  *ngIf="
+                                    f['pickup_contact_name'].errors['required']
+                                  "
+                                >
+                                  Contact Name is required
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="filed-input">
+                              <input
+                                type="text"
+                                formControlName="pickup_email"
+                                placeholder="Email"
+                                class="CompanyField"
+                              />
+                              <div
+                                *ngIf="isSubmitted && f['pickup_email'].errors"
+                                class="text-danger"
+                              >
+                                <div
+                                  *ngIf="f['pickup_email'].errors['required']"
+                                >
+                                  Email is required
+                                </div>
+                                <div *ngIf="f['pickup_email'].errors['email']">
+                                  Email is not valid
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="filed-input">
+                              <input
+                                type="text"
+                                formControlName="pickup_phone"
+                                placeholder="Phone"
+                                class="CompanyField"
+                              />
+
+                              <div
+                                *ngIf="isSubmitted && f['pickup_phone'].errors"
+                                class="text-danger"
+                              >
+                                <div
+                                  *ngIf="f['pickup_phone'].errors['required']"
+                                >
+                                  Phone number is required
+                                </div>
+                                <div
+                                  *ngIf="f['pickup_phone'].errors['pattern']"
+                                >
+                                  Phone number must be 10 digits
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="filed-input">
+                              <input
+                                type="text"
+                                formControlName="pickup_alt_phone"
+                                placeholder="Alternate Phone"
+                                class="CompanyField"
+                              />
+                              <div
+                                *ngIf="
+                                  isSubmitted && f['pickup_alt_phone'].errors
+                                "
+                                class="text-danger"
+                              >
+                                <div
+                                  *ngIf="
+                                    f['pickup_alt_phone'].errors['required']
+                                  "
+                                >
+                                  Alternative Phone number is required
+                                </div>
+                                <div
+                                  *ngIf="
+                                    f['pickup_alt_phone'].errors['pattern']
+                                  "
+                                >
+                                  Alternative Phone number must be 10 digits
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="filed-input">
+                              <textarea
+                                formControlName="pickup_note"
+                                placeholder="Note"
+                                class="CompanyField TextareaField"
+                              ></textarea>
+
+                              <div
+                                *ngIf="isSubmitted && f['pickup_note'].errors"
+                                class="text-danger"
+                              >
+                                <div
+                                  *ngIf="f['pickup_note'].errors['required']"
+                                >
+                                  Note Field is required
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="form-div">
-                    <form
-                      [formGroup]="addOrderF"
-                      class="Form-Form"
-                      enctype="multipart/form-data"
-                    >
-                      <div class="row">
-                        <div class="col-md-12">
-                          <div class="filed-input">
-                            <input
-                              type="text"
-                              name=""
-                              placeholder="Company Name"
-                              class="CompanyField"
-                            />
-                          </div>
+                  <div class="col-md-6">
+                    <div class="from-to-pick">
+                      <div class="from-to-pick-inner">
+                        <div class="Pickup-title">
+                          <span class="DeliveryTo">
+                            Delivery <strong>TOP</strong>
+                          </span>
+                          <span class="DeliveryTo">
+                            <strong>Order#</strong>
+                            <span class="Number">{{ po }}</span>
+                          </span>
                         </div>
-                        <div class="col-md-12">
-                          <div class="filed-input">
-                            <input
-                              type="text"
-                              name=""
-                              placeholder="Company Address"
-                              class="CompanyField"
-                            />
+                        <div class="form-div">
+                          <div class="row mt-3">
+                            <div class="col-md-12">
+                              <div class="filed-input">
+                                <input
+                                  type="text"
+                                  formControlName="dely_company_name"
+                                  placeholder="Company Name"
+                                  class="CompanyField"
+                                />
+                                <div
+                                  *ngIf="
+                                    isSubmitted && f['dely_company_name'].errors
+                                  "
+                                  class="text-danger"
+                                >
+                                  <div
+                                    *ngIf="
+                                      f['dely_company_name'].errors['required']
+                                    "
+                                  >
+                                    Company Name is required
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="filed-input">
+                                <select2
+                                  [data]="data"
+                                  class="CompanyField"
+                                  formControlName="dely_address"
+                                  placeholder="Company Address"
+                                ></select2>
+                                <div
+                                  *ngIf="
+                                    isSubmitted && f['dely_address'].errors
+                                  "
+                                  class="text-danger"
+                                >
+                                  <div
+                                    *ngIf="f['dely_address'].errors['required']"
+                                  >
+                                    Address is required
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="col-md-12">
+                              <div class="filed-input">
+                                Is this warehouse?
+                                <input
+                                  type="radio"
+                                  formControlName="is_dely_warehouse"
+                                  value="true"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-4">
+                              <div class="filed-input">
+                                <input
+                                  type="date"
+                                  formControlName="dely_date"
+                                  placeholder="Date"
+                                  class="CompanyField"
+                                />
+                                <div
+                                  *ngIf="isSubmitted && f['dely_date'].errors"
+                                  class="text-danger"
+                                >
+                                  <div
+                                    *ngIf="f['dely_date'].errors['required']"
+                                  >
+                                    Date field is required
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="filed-input">
+                                <input
+                                  type="time"
+                                  formControlName="dely_time"
+                                  placeholder="Time"
+                                  class="CompanyField"
+                                />
+                                <div
+                                  *ngIf="isSubmitted && f['dely_time'].errors"
+                                  class="text-danger"
+                                >
+                                  <div
+                                    *ngIf="f['dely_time'].errors['required']"
+                                  >
+                                    Time field is required
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="filed-input">
+                                <button
+                                  class="ButtonStyle"
+                                  mat-raised-button
+                                  (click)="openDialog('0ms', '0ms')"
+                                >
+                                  Add Address
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6">
+                              <div class="filed-input">
+                                <input
+                                  type="text"
+                                  formControlName="dely_contact_name"
+                                  placeholder="Contact Name"
+                                  class="CompanyField"
+                                />
+
+                                <div
+                                  *ngIf="
+                                    isSubmitted && f['dely_contact_name'].errors
+                                  "
+                                  class="text-danger"
+                                >
+                                  <div
+                                    *ngIf="
+                                      f['dely_contact_name'].errors['required']
+                                    "
+                                  >
+                                    Contact Name is required
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="filed-input">
+                                <input
+                                  type="text"
+                                  formControlName="dely_email"
+                                  placeholder="Email"
+                                  class="CompanyField"
+                                />
+                                <div
+                                  *ngIf="isSubmitted && f['dely_email'].errors"
+                                  class="text-danger"
+                                >
+                                  <div
+                                    *ngIf="f['dely_email'].errors['required']"
+                                  >
+                                    Email is required
+                                  </div>
+                                  <div *ngIf="f['dely_email'].errors['email']">
+                                    Email is not valid
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6">
+                              <div class="filed-input">
+                                <input
+                                  type="text"
+                                  formControlName="dely_phone"
+                                  placeholder="Phone"
+                                  class="CompanyField"
+                                />
+
+                                <div
+                                  *ngIf="isSubmitted && f['dely_phone'].errors"
+                                  class="text-danger"
+                                >
+                                  <div
+                                    *ngIf="f['dely_phone'].errors['required']"
+                                  >
+                                    Phone number is required
+                                  </div>
+                                  <div
+                                    *ngIf="f['dely_phone'].errors['pattern']"
+                                  >
+                                    Phone number must be 10 digits
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="filed-input">
+                                <input
+                                  type="text"
+                                  formControlName="dely_alt_phone"
+                                  placeholder="Alternate Phone"
+                                  class="CompanyField"
+                                />
+                                <div
+                                  *ngIf="
+                                    isSubmitted && f['dely_alt_phone'].errors
+                                  "
+                                  class="text-danger"
+                                >
+                                  <div
+                                    *ngIf="
+                                      f['dely_alt_phone'].errors['required']
+                                    "
+                                  >
+                                    Alternative Phone number is required
+                                  </div>
+                                  <div
+                                    *ngIf="
+                                      f['dely_alt_phone'].errors['pattern']
+                                    "
+                                  >
+                                    Alternative Phone number must be 10 digits
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="filed-input">
+                                <textarea
+                                  formControlName="dely_note"
+                                  placeholder="Note"
+                                  class="CompanyField TextareaField"
+                                ></textarea>
+
+                                <div
+                                  *ngIf="isSubmitted && f['dely_note'].errors"
+                                  class="text-danger"
+                                >
+                                  <div
+                                    *ngIf="f['dely_note'].errors['required']"
+                                  >
+                                    Note Field is required
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
-                      <div class="row">
-                        <div class="col-md-4">
-                          <div class="filed-input">
-                            <input
-                              type="text"
-                              name=""
-                              placeholder="Date"
-                              class="CompanyField"
-                            />
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="filed-input">
-                            <input
-                              type="text"
-                              name=""
-                              placeholder="Time"
-                              class="CompanyField"
-                            />
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="filed-input">
-                            <button class="ButtonStyle">Add Address</button>
-                          </div>
-                        </div>
+                    </div>
+                  </div>
+
+                  <div class="row mt-4">
+                    <div class="col-md-10"></div>
+                    <div class="col-md-2">
+                      <div class="text-right Cancel_Save" style="float: right">
+                        <button
+                          type="submit"
+                          (click)="handleSubmit()"
+                          class="SaveButton ButtonStyle"
+                          *ngIf="isAddMode"
+                        >
+                          Add Order
+                          <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+                        </button>
+                        <button
+                          type="submit"
+                          (click)="handleSubmit()"
+                          class="SaveButton ButtonStyle"
+                          *ngIf="!isAddMode"
+                        >
+                          Update Order
+                          <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+                        </button>
                       </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="filed-input">
-                            <input
-                              type="text"
-                              name=""
-                              placeholder="Contact Name"
-                              class="CompanyField"
-                            />
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="filed-input">
-                            <input
-                              type="text"
-                              name=""
-                              placeholder="Email"
-                              class="CompanyField"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="filed-input">
-                            <input
-                              type="text"
-                              name=""
-                              placeholder="Phone"
-                              class="CompanyField"
-                            />
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="filed-input">
-                            <input
-                              type="text"
-                              name=""
-                              placeholder="Alternate Phone"
-                              class="CompanyField"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-12">
-                          <div class="filed-input">
-                            <textarea
-                              placeholder="Note"
-                              class="CompanyField TextareaField"
-                            ></textarea>
-                          </div>
-                        </div>
-                      </div>
-                    </form>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="from-to-pick">
-                <div class="from-to-pick-inner">
-                  <div class="Pickup-title">
-                    <span class="DeliveryTo">
-                      Delivery <strong>TOP</strong>
-                    </span>
-                    <span class="DeliveryTo">
-                      <strong>Order#</strong>
-                      <span class="Number">12345679890125</span>
-                    </span>
-                  </div>
-                  <div class="form-div">
-                    <form class="Form-Form">
-                      <div class="row">
-                        <div class="col-md-12">
-                          <div class="filed-input">
-                            <input
-                              type="text"
-                              name=""
-                              placeholder="Company Name"
-                              class="CompanyField"
-                            />
-                          </div>
-                        </div>
-                        <div class="col-md-12">
-                          <div class="filed-input">
-                            <input
-                              type="text"
-                              name=""
-                              placeholder="Company Address"
-                              class="CompanyField"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-4">
-                          <div class="filed-input">
-                            <input
-                              type="text"
-                              name=""
-                              placeholder="Date"
-                              class="CompanyField"
-                            />
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="filed-input">
-                            <input
-                              type="text"
-                              name=""
-                              placeholder="Time"
-                              class="CompanyField"
-                            />
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="filed-input">
-                            <button class="ButtonStyle">Add Address</button>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="filed-input">
-                            <input
-                              type="text"
-                              name=""
-                              placeholder="Contact Name"
-                              class="CompanyField"
-                            />
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="filed-input">
-                            <input
-                              type="text"
-                              name=""
-                              placeholder="Email"
-                              class="CompanyField"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="filed-input">
-                            <input
-                              type="text"
-                              name=""
-                              placeholder="Phone"
-                              class="CompanyField"
-                            />
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="filed-input">
-                            <input
-                              type="text"
-                              name=""
-                              placeholder="Alternate Phone"
-                              class="CompanyField"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="filed-input">
-                            <select class="CompanyField">
-                              <option>Service Leval</option>
-                              <option>01</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="filed-input">
-                            <select class="CompanyField">
-                              <option>Delivery Type</option>
-                              <option>01</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="col-md-12">
-                          <div class="filed-input">
-                            <textarea
-                              placeholder="Note"
-                              class="CompanyField"
-                            ></textarea>
-                          </div>
-                        </div>
-                        <div class="col-md-4 jus">
-                          <div class="filed-input">
-                            <button class="ButtonStyle">Add Address</button>
-                          </div>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>

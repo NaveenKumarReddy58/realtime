@@ -15,7 +15,7 @@ import { LoginComponent } from './front/login/login.component';
 import { SidebarComponent } from './front/layout/sidebar/sidebar.component';
 import { ForgotPasswordComponent } from './front/forgot-password/forgot-password.component';
 import { PlanAddComponent } from './back/supersuperadmin/plan-list/plan-add/plan-add.component';
-import { DialogAnimationsComponent } from './back/supersuperadmin/plan-list/dialog-animations/dialog-animations.component';
+import { DialogAnimationsComponent } from './back/common/dialog-animations/dialog-animations.component';
 import { PlanListComponent } from './back/supersuperadmin/plan-list/plan-list.component';
 import { CompanyAddComponent } from './back/supersuperadmin/company-list/company-add/company-add.component';
 import { CompanyDetailComponent } from './back/supersuperadmin/company-list/company-detail/company-detail.component';
@@ -60,6 +60,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [

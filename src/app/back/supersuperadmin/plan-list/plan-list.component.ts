@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/_service/auth.service';
 import { PlanService } from 'src/app/_service/plan.service';
-import { DialogAnimationsComponent } from './dialog-animations/dialog-animations.component';
+import { DialogAnimationsComponent } from '../../common/dialog-animations/dialog-animations.component';
 
 @Component({
   selector: 'app-plan-list',

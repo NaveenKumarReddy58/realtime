@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Select2Data } from 'ng-select2-component';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { AddressService } from 'src/app/_service/address.service';
 import { AuthService } from 'src/app/_service/auth.service';
 import { OrderService } from 'src/app/_service/order.service';
 import { WarehouseService } from 'src/app/_service/warehouse.service';
+import { AddressAddComponent } from '../../address-list/address-add/address-add.component';
 
 @Component({
   selector: 'app-order-add',
@@ -18,8 +21,11 @@ export class OrderAddComponent {
   loading = false;
   isSubmitted = false;
   addressData: any;
+  data: Select2Data = [];
   warehouseData: any;
   orderData: any;
+
+  po: any = Math.floor(100000 + Math.random() * 900000);
 
   id: Number;
   isAddMode: boolean;
@@ -38,54 +44,68 @@ export class OrderAddComponent {
     public warehouseService: WarehouseService,
     public addressService: AddressService,
     public orderService: OrderService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+
+    public dialog: MatDialog
   ) {
     this.id = this.route.snapshot.params['id'];
     this.isAddMode = !this.id;
 
     this.addOrderF = formBuilder.group({
-      po: ['', [Validators.required]],
+      po: [''],
       pickup_company_name: ['', [Validators.required]],
       pickup_address: ['', [Validators.required]],
       is_pickup_warehouse: ['', [Validators.required]],
       pickup_date: ['', [Validators.required]],
       pickup_time: ['', [Validators.required]],
       pickup_contact_name: ['', [Validators.required]],
-      pickup_email: ['', [Validators.required]],
-      pickup_phone: ['', [Validators.required]],
-      pickup_alt_phone: ['', [Validators.required]],
+      pickup_email: ['', [Validators.required, Validators.email]],
+      pickup_phone: [
+        '',
+        [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
+      ],
+      pickup_alt_phone: [
+        '',
+        [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
+      ],
       pickup_note: ['', [Validators.required]],
       dely_company_name: ['', [Validators.required]],
       dely_address: ['', [Validators.required]],
-      is_dely_warehouse: ['', [Validators.required]],
+      is_dely_warehouse: [''],
       dely_date: ['', [Validators.required]],
       dely_time: ['', [Validators.required]],
       dely_contact_name: ['', [Validators.required]],
-      dely_email: ['', [Validators.required]],
-      dely_phone: ['', [Validators.required]],
-      dely_alt_phone: ['', [Validators.required]],
+      dely_email: ['', [Validators.required, Validators.email]],
+      dely_phone: [
+        '',
+        [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
+      ],
+      dely_alt_phone: [
+        '',
+        [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
+      ],
       dely_note: ['', [Validators.required]],
-      // order_no: ['', [Validators.required]],
+      order_no: [''],
     });
 
     if (!this.isAddMode) {
-      this.warehouseService.warehouseList(this.id);
-      this.warehouse$ = this.warehouseService.getWarehouse();
-
-      this.warehouse$.subscribe((data: any) => {
-        this.addOrderF.patchValue({
-          warehouse_name: data?.result?.warehouse_name,
-          address: data?.result?.address?.id,
-          contact_name: data?.result?.contact_name,
-          email: data?.result?.email,
-          phone: data?.result?.phone,
-          alt_phone: data?.result?.alt_phone,
-          is_main_localation: data?.result?.is_main_localation,
-        });
-      });
+      // this.warehouseService.warehouseList(this.id);
+      // this.warehouse$ = this.warehouseService.getWarehouse();
+      // this.warehouse$.subscribe((data: any) => {
+      //   this.addOrderF.patchValue({
+      //     warehouse_name: data?.result?.warehouse_name,
+      //     address: data?.result?.address?.id,
+      //     contact_name: data?.result?.contact_name,
+      //     email: data?.result?.email,
+      //     phone: data?.result?.phone,
+      //     alt_phone: data?.result?.alt_phone,
+      //     is_main_localation: data?.result?.is_main_localation,
+      //   });
+      // });
     }
 
     this.addressList();
+    this.addOrderF.patchValue({ po: this.po });
   }
 
   // convenience getter for easy access to form fields
@@ -100,12 +120,32 @@ export class OrderAddComponent {
 
   ngOnInit(): void {}
 
+  openDialog(
+    enterAnimationDuration: string,
+    exitAnimationDuration: string
+  ): void {
+    this.dialog.open(AddressAddComponent, {
+      width: '800px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+  }
+
   addressList() {
     this.addressService.addressSearch();
     this.address$ = this.addressService.getAddress();
 
     this.address$.subscribe((data: any) => {
       this.addressData = data.result;
+      if (data?.result) {
+        data?.result.forEach((data: any) => {
+          // console.log(data);
+          this.data.push({
+            value: data?.id,
+            label: data?.address,
+          });
+        });
+      }
     });
   }
 

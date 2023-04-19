@@ -155,6 +155,7 @@ export class DriverAddComponent {
   readURL(event: any): void {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
+      console.log('image', file);
 
       const reader = new FileReader();
       reader.onload = (e) => (this.imageSrc = reader.result);
@@ -169,6 +170,7 @@ export class DriverAddComponent {
   readCertificatesURL(event: any): void {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files;
+      console.log('file', file);
 
       this.addDriver.patchValue({
         certificates: file,
