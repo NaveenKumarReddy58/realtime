@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import { CountryPhoneCodes } from 'src/app/_interface/country-phone-codes';
 import { AuthService } from 'src/app/_service/auth.service';
 import { DriverService } from 'src/app/_service/driver.service';
 import { PlanService } from 'src/app/_service/plan.service';
@@ -22,7 +23,7 @@ export class DriverAddComponent {
   id: Number;
   isAddMode: boolean;
   editDriver: any;
-
+  countryCodes: any = CountryPhoneCodes;
   certificatesItems: any = [
     {
       name : 'Licence',
@@ -79,7 +80,7 @@ export class DriverAddComponent {
         '',
         [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
       ],
-      country_code:['+91'],
+      country_code:['Country'],
       address: ['', [Validators.required]],
       is_head_driver: [''],
       is_active: [''],

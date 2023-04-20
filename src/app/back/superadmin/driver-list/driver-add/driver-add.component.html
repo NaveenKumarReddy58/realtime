@@ -119,15 +119,15 @@
                           </div>
                         </span>
                       </div>
-                      <div class="col-md-3 mb-3">
+                      <div class="col-md-2 mb-3">
                         <span class="Password">
-                          <input
-                            type="number"
-                            formControlName="country_code"
-                            placeholder="Country Code"
-                            value="+"
-                            class="Pro_input_Field driver-input-field"
-                          />
+
+                           <select aria-placeholder="Country" formControlName="country_code" class="Pro_input_Field selectpicker countrypicker">
+                              <option value="" disabled selected>Select Country</option>
+                              <option *ngFor="let country of countryCodes" [value]="country.dial_code">
+                               <span class="mx-3 fw-bold">{{country.dial_code+" "+ country.name }}</span>
+                              </option>
+                            </select>
                         </span>
                       </div>
                       <div class="col-md-6 mb-3">

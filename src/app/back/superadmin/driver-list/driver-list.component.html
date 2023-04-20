@@ -25,7 +25,7 @@
             <span>Filter Results <img src="assets/images/filter-icon.png"/></span>
           </div>
           <div class="action-btns">
-            <a class="mx-3">Send Push Notification to all <img class="push-notification" src="../../../../assets/images/pushnotification-black.jpg" /></a>
+            <a class="mx-3" (click)="onClickPushNotification()">Send Push Notification to all <img class="push-notification" src="../../../../assets/images/pushnotification-black.jpg" /></a>
             <a class="slected-count">{{selectedDriversCount}} Selected</a>
             <a class="select-all-dl" (click)="selectAll()">Select All </a>
             <a class="deselect-all-dl" (click)="deSelectAll()">Deselect All</a>

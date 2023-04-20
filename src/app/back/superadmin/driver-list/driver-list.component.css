@@ -69,9 +69,6 @@
 .slected-count{
     opacity: 0.5;
 }
-.Order_Table tr td:nth-child(3){
-    font-weight: 700;
-}
 .active-status{
     background-color: #d8fad6;
 }
@@ -256,4 +253,7 @@
 }
 tr > td:last-child {
     background-color:none !important;
+}
+.tr-driver-list td{
+    font-weight: 400;
 }
