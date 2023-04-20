@@ -59,6 +59,7 @@ import { AppComponent } from './app.component';
 import { SuperAdminComponent } from './back/superadmin/super-admin.component';
 import { SuperSuperAdminComponent } from './back/supersuperadmin/super-super-admin.component';
 import { NotificationListComponent } from './back/common/notification-list/notification-list.component';
+import { DriverDetailsComponent } from './back/superadmin/driver-list/driver-details/driver-details.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { NotificationListComponent } from './back/common/notification-list/notif
     SuperAdminComponent,
     SuperSuperAdminComponent,
     NotificationListComponent,
+    DriverDetailsComponent,
   ],
   imports: [
     CommonModule,

@@ -16,8 +16,8 @@
         </ul>
       </div>
       <div class="mx-3">
-        <div class="SearchFilter">
-          <form class="Search">
+        <div class="SearchFilter gap-13px">
+          <form class="Search max-width-230px">
             <input type="text" name="" placeholder="Search" />
             <button><i class="fa fa-search"></i></button>
           </form>
@@ -29,7 +29,7 @@
             <a class="slected-count">{{selectedDriversCount}} Selected</a>
             <a class="select-all-dl" (click)="selectAll()">Select All </a>
             <a class="deselect-all-dl" (click)="deSelectAll()">Deselect All</a>
-            <a class="drivers-list-delete">
+            <a class="drivers-list-delete" [ngClass]="selectedDriversCount > 0 ? '' : 'pe-none'">
               <span (click)="onClickDeleteDriverDialog($event)">Delete <img src="../../../../assets/images/delete.jpg" /></span> 
               <div *ngIf="isShowDeleteDriverDialog" class="drivers-list-delete-dialog">
                 <div class="delete-drivers">Delete Drivers</div>
@@ -106,50 +106,32 @@
                   <th>Status</th>
                   <th>Other Options</th>
                 </tr>
-                <tr *ngFor="let item of items; let index = index">
-                  <td>   
-                    <span [ngClass]="item.is_active ? 'active-dot' : 'inactive-dot'"></span>
-                    {{ item.first_name }} {{ item.last_name }}
-                  </td>
-                  <!-- <td>{{ item.email }}</td> -->
-                  <td>70</td>
-                  <td>Deliveries Completed : 60</td>
-                  <td>12:30 PM</td>
-                  <td>00:00 AM</td>
-                  <td>
-                    <button class="button-Pending status_button_style" [ngClass]="item.is_active ? 'active-status' : 'inactive-status'"> 
-                      {{item.is_active ? "ACTIVE" : "INACTIVE"}}
-                    </button>
-                  </td>
-                  <td>
+                <tr class="tr-driver-list" routerLink="/admin/driver/details" *ngFor="let item of items; let index = index">
+                    <td>   
+                      <span [ngClass]="item.is_active ? 'active-dot' : 'inactive-dot'"></span>
+                      {{ item.first_name }} {{ item.last_name }}
+                    </td>
+                    <!-- <td>{{ item.email }}</td> -->
+                    <td>70</td>
+                    <td>Deliveries Completed : 60</td>
+                    <td>12:30 PM</td>
+                    <td>00:00 AM</td>
+                    <td>
+                      <button class="button-Pending status_button_style" [ngClass]="item.is_active ? 'active-status' : 'inactive-status'"> 
+                        {{item.is_active ? "ACTIVE" : "INACTIVE"}}
+                      </button>
+                    </td>
+                  <td (click)="stopNav($event)">
                     <div class="GetIocn drivers-other-options">
-                      <!-- <input
-                        type="checkbox"
-                        [value]="item.is_active"
-                        [checked]="item.is_active"
-                        (change)="
-                          driverActivateDeactivate(item.id, !item.is_active)
-                        "
-                      /> -->
                       <a class="drivers-phone-container">
                         <img (click)="onClickPhone(index)" class="push-notification" src="../../../../assets/images/phone.jpg" />
-                        <!-- <div *ngIf="(isShowContactDialog && index == phoneIndex)" class="drivers-list-delete-dialog">
-                          <div class="delete-drivers">Delete Drivers</div>
+                        <div *ngIf="(isShowContactDialog && index == phoneIndex)" class="drivers-list-phone-dialog">
                           <div class="confirmation-msg">
-                            <div class="row">
-                              <div class="col-9">
-                                Are you sure you want to delete drivers ?
-                              </div>
-                              <div class="col-3">
-                                <img src="../../../../assets/images/big-delete.jpg" width="63px"/>
-                              </div>
+                            <div class="row mx-2">
+                                <span class="contact-number">+91 9874359345 <i class="fa fa-copy px-2"  (click)="copyText('+91 9874359345')" aria-hidden="true"></i></span>
                             </div>
                           </div>
-                          <div class="text-center px-4">
-                            <button class="ButtonStyle cancel-btn float-start">Cancel</button>
-                            <button class="ButtonStyle float-end">Delete Driver</button>
-                          </div>
-                        </div> -->
+                        </div>
                       </a>
                       <img (click)="onClickPushNotification()" class="push-notification" src="../../../../assets/images/pushnotification.png.jpg" />
                       <input
@@ -185,4 +167,5 @@
   </div>
 </div>
 <div *ngIf="isShowDeleteDriverDialog" (click)="onClickDeleteDriverDialog($event)" class="overlay"></div>
+<div *ngIf="isShowContactDialog" (click)="onClickPhone($event)" class="overlay"></div>
 <div *ngIf="isShowPushNotificationForm" (click)="onClickPushNotification()" class="push-notification-overlay"></div>

@@ -1,0 +1,118 @@
+.driver-name{
+    color: black;
+    font-weight: bold;
+    font-size: 18px;
+  }
+  .percentage{
+    font-size: 14px;
+    color: black;
+    font-weight: bold;
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+  }
+  .google-map{
+    color: #646464 !important;
+  }
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 20px;
+  }
+  
+  .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 25px;
+    width: 25px;
+    left: -2px;
+    bottom: -3px;
+    background-color: #0eb002;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: white;
+    border: 1px solid #0eb002;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+  .rtt-checkbox[type=checkbox] {
+    position: relative;
+    cursor: pointer;
+  }
+  .rtt-checkbox[type=checkbox]:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 0;
+    left: 0;
+    border: 2px solid #555555;
+    border-radius: 3px;
+    background-color: white;
+  }
+  .rtt-checkbox[type=checkbox]:checked:after {
+    content: "";
+    display: block;
+    width: 5px;
+    height: 10px;
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    position: absolute;
+    top: 2px;
+    left: 6px;
+  }
+  .action-icon{
+    font-size: 14px !important;
+  }
+  .Pro_input_Field:focus , .Address:focus{
+    border: 2px solid #0eb002;
+}
+.Recente__Noti a{
+    padding: 0px;
+}
+.back-to-list{
+    margin-left: auto;
+}

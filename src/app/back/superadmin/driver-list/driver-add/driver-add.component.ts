@@ -79,6 +79,7 @@ export class DriverAddComponent {
         '',
         [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
       ],
+      country_code:['+91'],
       address: ['', [Validators.required]],
       is_head_driver: [''],
       is_active: [''],
@@ -190,10 +191,8 @@ export class DriverAddComponent {
       const file = event.target.files[0];
 
       const reader = new FileReader();
-      console.log(reader.result)
       reader.onload = (e) => {
         this.imageSrc = reader.result
-        console.log(this.imageSrc)
       };
       this.addDriver.patchValue({
         image: file,
@@ -210,7 +209,6 @@ export class DriverAddComponent {
       const file = event.target.files;
       const singleFile = event.target.files[0];
       const reader = new FileReader();
-      console.log("Naveen")
       reader.onload = (e) => {
         for(var i=0; i < this.certificatesItems.length; i++){
           if(this.certificatesItems[i].name == this.certificateName){

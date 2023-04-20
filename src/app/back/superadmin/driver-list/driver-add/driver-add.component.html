@@ -2,6 +2,9 @@
   <div class="ContentArea_Inner">
     <!-- Tab Content Area Start 01-->
     <div id="Tb-Tabs01" class="Tabs01 TabsMain">
+      <div class="back-to-list">
+        <a routerLink="/admin/driver"><button>Back to List</button></a>
+    </div>
       <!-- Table View -->
       <div class="Table">
         <div class="OrderList">
@@ -16,7 +19,7 @@
             </div>
           </div>
           <div class="row mt-4">
-            <div class="col-md-4 width20">
+            <div class="col-3">
               <div class="ProfilePik">
                 <div class="driver-profile-image-container">
                   <i *ngIf="!(imageSrc.indexOf('profilephoto')>0)" class="fa fa-trash Delete" (click)="removeProfilePhoto($event)"></i>
@@ -31,7 +34,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-9">
               <form
                 [formGroup]="addDriver"
                 class="ProfileFor"
@@ -116,12 +119,24 @@
                           </div>
                         </span>
                       </div>
+                      <div class="col-md-3 mb-3">
+                        <span class="Password">
+                          <input
+                            type="number"
+                            formControlName="country_code"
+                            placeholder="Country Code"
+                            value="+"
+                            class="Pro_input_Field driver-input-field"
+                          />
+                        </span>
+                      </div>
                       <div class="col-md-6 mb-3">
                         <span class="Password">
                           <input
-                            type="text"
+                            type="number"
                             formControlName="phone_number"
                             placeholder="Mobile Number"
+                            onKeyPress="if(this.value.length==10) return false;"
                             class="Pro_input_Field driver-input-field"
                           />
                           <div

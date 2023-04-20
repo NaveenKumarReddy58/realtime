@@ -2,3 +2,22 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.back-to-list button{
+    background: #0eb002;
+    border: 0;
+    font-weight: 700;
+    /* width: 100%; */
+    padding: 8px;
+    /* height: 36px; */
+    border-radius: 15px;
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 0;
+  }
+  .back-to-list a{
+    text-decoration: none;
+  }
+  .back-to-list{
+    text-align: right;
+  }
