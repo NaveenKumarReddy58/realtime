@@ -1,5 +1,9 @@
 <!-- Side Bar -->
-<section class="LoginSection">
+<section class="LoginSection"
+*ngIf="!isLoggedIn"
+@fade1
+(@fade1.start)="isLoggedIn = false"
+(@fade1.done)="isLoggedIn = false">
   <div class="container">
     <div class="row">
       <!-- Login Side -->

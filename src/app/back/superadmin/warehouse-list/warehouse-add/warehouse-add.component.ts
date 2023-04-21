@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import { CountryPhoneCodes } from 'src/app/_interface/country-phone-codes';
 import { AddressService } from 'src/app/_service/address.service';
 import { AuthService } from 'src/app/_service/auth.service';
 import { WarehouseService } from 'src/app/_service/warehouse.service';
@@ -17,6 +18,7 @@ export class WarehouseAddComponent {
   loading = false;
   isSubmitted = false;
   addressData: any;
+  countryCodes: any = CountryPhoneCodes;
 
   id: Number;
   isAddMode: boolean;
@@ -48,8 +50,8 @@ export class WarehouseAddComponent {
       ],
       alt_phone: [
         '',
-        [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
       ],
+      country_code:['',[Validators.required]],
       is_main_localation: [false],
     });
 

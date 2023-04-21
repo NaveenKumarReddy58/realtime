@@ -16,10 +16,14 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./splash.component.css'],
   animations: [
     trigger('fade', [
-      transition(':enter', [animate(1, style({ opacity: 1 }))]),
-      transition(':leave', [
-        animate(2000, style({ opacity: 0, transform: 'translateX(-250px)' })),
+      transition(':enter', [
+        style({transform: 'translateX(0%)'}),
+        animate('1500ms ease-in', style({transform: 'translateX(100%)'}))
       ]),
+      transition(':leave', [
+        style({transform: 'translateX(0%)'}),
+        animate('1500ms ease-in', style({transform: 'translateX(-100%)'}))
+      ])
     ]),
   ],
 })
