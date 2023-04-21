@@ -63,6 +63,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
+import { DriverDetailsComponent } from './back/superadmin/driver-list/driver-details/driver-details.component';
 
 @NgModule({
   declarations: [
