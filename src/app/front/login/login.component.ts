@@ -1,3 +1,4 @@
+import { trigger, transition, style, animate } from '@angular/animations';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,6 +9,18 @@ import { AuthService } from 'src/app/_service/auth.service';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
+  animations: [
+    trigger('fade1', [
+      transition(':enter', [
+        style({transform: 'translateX(100%)'}),
+        animate('1500ms ease-in', style({transform: 'translateX(0%)', left:0}))
+      ]),
+      transition(':leave', [
+        style({transform: 'translateX(0%)'}),
+        animate('15000ms ease-in', style({transform: 'translateX(100%)',left: 0}))
+      ])
+    ]),
+  ],
 })
 export class LoginComponent {
   login!: FormGroup;
@@ -16,6 +29,7 @@ export class LoginComponent {
   errorMessage = false;
   orgEmail: any;
   orgDomain: any;
+  isAnimate: boolean= false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -47,7 +61,12 @@ export class LoginComponent {
     return this.login.value;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    var self = this;
+    setTimeout(function(){
+      self.isAnimate= false;
+    },1000)
+  }
 
   handleSubmit() {
     this.isSubmitted = true;

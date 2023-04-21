@@ -13,11 +13,11 @@ import { AuthService } from 'src/app/_service/auth.service';
     trigger('fade1', [
       transition(':enter', [
         style({transform: 'translateX(100%)'}),
-        animate('1500ms ease-in', style({transform: 'translateX(0%)'}))
+        animate('1500ms ease-in', style({transform: 'translateX(0%)', left:0}))
       ]),
       transition(':leave', [
         style({transform: 'translateX(0%)'}),
-        animate('15000ms ease-in', style({transform: 'translateX(100%)'}))
+        animate('15000ms ease-in', style({transform: 'translateX(100%)',left: 0}))
       ])
     ]),
   ],
@@ -55,10 +55,7 @@ export class PreComponent {
   }
 
   ngOnInit(): void {
-    var self = this;
-    setTimeout(function(){
-      self.isLoggedIn = false;
-    }, 500)
+    
   }
 
   handleSubmit() {
