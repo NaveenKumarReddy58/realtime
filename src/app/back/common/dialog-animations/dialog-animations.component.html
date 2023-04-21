@@ -1,6 +1,6 @@
-<h1 mat-dialog-title>Delete</h1>
-<div mat-dialog-content>Would you like to delete?</div>
-<div mat-dialog-actions>
-  <button mat-button mat-dialog-close>No</button>
-  <button mat-button mat-dialog-close cdkFocusInitial>Ok</button>
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>{{data.message}}</div>
+<div mat-dialog-actions class="dialog-btn">
+  <button class="Yes-btn" (click)="onConfirm()" mat-button mat-dialog-close cdkFocusInitial>Yes</button>
+  <button class="No-btn" (click)="onDismiss()" mat-button mat-dialog-close>No</button>
 </div>

@@ -25,7 +25,7 @@ export class MenuComponent {
     private toastr: ToastrService
   ) {
     this.timer = setInterval(() => {
-      // code
+      this.authService.tokenRefresh();
     }, 290000);
 
     this._isRoleName = this.authService._isRoleName;

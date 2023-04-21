@@ -104,6 +104,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     SuperAdminComponent,
     SuperSuperAdminComponent,
     NotificationListComponent,
+    DriverDetailsComponent
   ],
   imports: [
     CommonModule,

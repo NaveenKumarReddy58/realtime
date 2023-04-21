@@ -34,6 +34,7 @@ import { LocateDriverComponent } from './back/superadmin/locate-driver/locate-dr
 import { NotificationListComponent } from './back/common/notification-list/notification-list.component';
 import { AddressAddComponent } from './back/superadmin/address-list/address-add/address-add.component';
 import { AddressListComponent } from './back/superadmin/address-list/address-list.component';
+import { DriverDetailsComponent } from './back/superadmin/driver-list/driver-details/driver-details.component';
 
 const routes: Routes = [
   {
@@ -202,6 +203,12 @@ const routes: Routes = [
         path: 'driver/add',
         component: DriverAddComponent,
         title: 'Driver Add',
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'driver/details',
+        component: DriverDetailsComponent,
+        title: 'Driver Details',
         canActivate: [AuthGuard],
       },
       {

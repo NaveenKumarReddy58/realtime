@@ -1,3 +1,4 @@
+import { trigger, transition, animate, style } from '@angular/animations';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,11 +9,24 @@ import { AuthService } from 'src/app/_service/auth.service';
   selector: 'app-pre',
   templateUrl: './pre.component.html',
   styleUrls: ['./pre.component.css'],
+  animations: [
+    trigger('fade1', [
+      transition(':enter', [
+        style({transform: 'translateX(100%)'}),
+        animate('1500ms ease-in', style({transform: 'translateX(0%)', left:0}))
+      ]),
+      transition(':leave', [
+        style({transform: 'translateX(0%)'}),
+        animate('15000ms ease-in', style({transform: 'translateX(100%)',left: 0}))
+      ])
+    ]),
+  ],
 })
 export class PreComponent {
   prelogin!: FormGroup;
   loading = false;
   isSubmitted = false;
+  isLoggedIn = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -40,7 +54,9 @@ export class PreComponent {
     return this.prelogin.value;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    
+  }
 
   handleSubmit() {
     this.isSubmitted = true;

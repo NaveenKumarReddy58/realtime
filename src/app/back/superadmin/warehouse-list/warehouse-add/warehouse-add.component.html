@@ -6,7 +6,7 @@
         <h2 *ngIf="!isAddMode">Edit Warehouse</h2>
       </div>
     </div>
-    <div class="col-md-2 loginButton">
+    <div class="col-md-2 back-to-list">
       <a routerLink="/admin/warehouse"><button>Back to List</button></a>
     </div>
   </div>
@@ -29,7 +29,7 @@
               *ngIf="isSubmitted && f['warehouse_name'].errors"
               class="text-danger"
             >
-              <div *ngIf="f['warehouse_name'].errors['warehouse_name']">
+              <div *ngIf="f['warehouse_name'].errors['required']">
                 Warehouse Name is required
               </div>
             </div>
@@ -60,7 +60,7 @@
               *ngIf="isSubmitted && f['contact_name'].errors"
               class="text-danger"
             >
-              <div *ngIf="f['contact_name'].errors['contact_name']">
+              <div *ngIf="f['contact_name'].errors['required']">
                 Contact Name is required
               </div>
             </div>
@@ -77,14 +77,29 @@
               <div *ngIf="f['email'].errors['email']">Email is not valid</div>
             </div>
           </div>
-
-          <div class="col-md-6 mt-3">
-            <input
-              type="text"
+          <div class="col-md-2 mt-3">
+            <span class="Password">
+              <select placeholder="Country" formControlName="country_code" class="Pro_input_Field selectpicker countrypicker">
+                 <option value="" disabled [selected]="true">Select Country</option>
+                 <option *ngFor="let country of countryCodes" [value]="country.dial_code">
+                  <span class="mx-3 fw-bold">{{country.dial_code+" "+ country.name }}</span>
+                 </option>
+               </select>
+               <div *ngIf="isSubmitted && f['country_code'].errors" class="text-danger">
+                <div *ngIf="f['country_code'].errors['required']">
+                  Country is required
+                </div>
+              </div>
+           </span>
+          </div>
+          <div class="col-md-5 mt-3">
+            <input type="number"
+              name="" 
               formControlName="phone"
-              placeholder="Phone"
-              class="Pro_input_Field"
-            />
+              placeholder="Mobile Number"
+              class="Pro_input_Field driver-input-field"
+              onKeyPress="if(this.value.length==10) return false;"
+             >
             <div *ngIf="isSubmitted && f['phone'].errors" class="text-danger">
               <div *ngIf="f['phone'].errors['required']">
                 Phone number is required
@@ -95,12 +110,13 @@
             </div>
           </div>
 
-          <div class="col-md-6 mt-3">
+          <div class="col-md-5 mt-3">
             <input
-              type="text"
+              type="number"
               formControlName="alt_phone"
               placeholder="Alternative Phone"
               class="Pro_input_Field"
+              onKeyPress="if(this.value.length==10) return false;"
             />
             <div
               *ngIf="isSubmitted && f['alt_phone'].errors"
@@ -115,8 +131,8 @@
             </div>
           </div>
 
-          <div class="col-md-12 mt-3">
-            <div class="Div01 Div02">
+          <!-- <div class="col-md-12 mt-3">
+            <div class="Div01 Div02 d-flex justify-content-start">
               Is it main location?
               <input
                 type="radio"
@@ -125,12 +141,12 @@
                 [checked]="this.frmValues.is_main_localation"
               />
             </div>
-          </div>
+          </div> -->
         </div>
 
         <div class="row mt-4">
           <div class="col-md-12">
-            <div class="d-flex justify-content-between Cancel_Save">
+            <div class="d-flex justify-content-end Cancel_Save">
               <button
                 type="submit"
                 (click)="handleSubmit()"

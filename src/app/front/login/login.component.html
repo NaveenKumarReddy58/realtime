@@ -1,5 +1,8 @@
 <!-- Side Bar -->
-<section class="LoginSection">
+<section class="LoginSection" *ngIf="!isAnimate"
+ @fade1
+(@fade1.start)="isAnimate = false"
+(@fade1.done)="isAnimate = false">
   <div class="container">
     <div class="row">
       <!-- Login Side -->

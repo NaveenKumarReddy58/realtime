@@ -2,3 +2,236 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.back-to-list button{
+    background: #0eb002;
+    border: 0;
+    font-weight: 700;
+    /* width: 100%; */
+    padding: 8px;
+    /* height: 36px; */
+    border-radius: 15px;
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 0;
+  }
+  .back-to-list a{
+    text-decoration: none;
+  }
+  .back-to-list{
+    text-align: right;
+  }
+  input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+.Pro_input_Field:focus , .Address:focus{
+  border: 2px solid #0eb002;
+}
+.action-btns{
+  margin-left: auto;
+}
+.action-btns a{
+  font-weight: 600;
+  color: #202020;
+  padding-left: 20px;
+  text-decoration: none;
+}
+.slected-count{
+  opacity: 0.5;
+}
+.head-driver{
+  font-size: 16px;
+  
+}
+.head-driver[type=checkbox] {
+  position: relative;
+    cursor: pointer;
+}
+.head-driver[type=checkbox]:before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  top: 0;
+  left: 0;
+  border: 2px solid #555555;
+  border-radius: 3px;
+  background-color: white;
+}
+.head-driver[type=checkbox]:checked:before {
+  border: 2px solid #0eb002;
+  background-color: #0eb002;
+}
+.head-driver[type=checkbox]:checked:after {
+  content: "";
+  display: block;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  position: absolute;
+  top: 3px;
+  left: 6px;
+}
+.select-all-dl{
+  color: #0eb002 !important;
+  cursor: pointer;
+}
+.deselect-all-dl{
+  cursor: pointer;
+}
+.drivers-list-delete img{
+  margin-top: -6px;
+}
+.drivers-list-delete {
+  position: relative;
+}
+.drivers-list-delete span{
+  cursor: pointer;
+}
+.drivers-list-delete-dialog{
+  width: 350px;
+  border-radius: 15px;
+  filter: drop-shadow(0px 3px 3.5px rgba(0,0,0,0.16));
+  background-color: #ffffff;
+  position: absolute;
+  z-index: 11;
+  right: 0;
+  padding: 10px;
+}
+.drivers-list-delete-dialog .delete-drivers{
+  font-size: 14px;
+  color: #202020;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.drivers-list-delete-dialog .confirmation-msg{
+  font-weight: 700;
+  font-size: 19px;
+  line-height: 30px;
+  margin-bottom: 30px;
+}
+.cancel-btn {
+  background-color: white !important;
+  color: black !important;
+}
+.overlay{
+  background-color: #202020;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.2;
+  z-index: 1;
+}
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 20px;
+  }
+  
+  .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 25px;
+    width: 25px;
+    left: -2px;
+    bottom: -2.5px;
+    background-color: #0eb002;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: white;
+    border: 1px solid #0eb002;
+  }
+  input + .slider::before {
+    background-color: gray;
+  }
+  input:checked + .slider::before {
+    background-color: #0eb002;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+  .mat-mdc-dialog-container {
+    --mdc-dialog-container-color: white;
+    --mdc-dialog-subhead-color: black;
+    --mdc-dialog-supporting-text-color: black;
+  }
+  .mat-mdc-dialog-container .mdc-dialog__surface {
+    border-radius: 15px;
+}
+.dialog-btn{
+  justify-content: flex-end !important;
+  }
+.mdc-dialog__actions .Yes-btn , .Yes-btn:active{
+  background: #0eb002;
+    padding: 10px;
+    width: 100px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+.mdc-dialog__actions .No-btn{
+  background: white;
+    padding: 10px;
+    width: 100px;
+    border-radius: 10px;
+    border: none;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+}
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: 15px !important;
+}
