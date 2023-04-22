@@ -26,39 +26,39 @@ export class DriverAddComponent {
   countryCodes: any = CountryPhoneCodes;
   certificatesItems: any = [
     {
-      name : 'Licence',
-      img: 'assets/images/edit-icon.png'
+      name: 'Licence',
+      img: 'assets/images/edit-icon.png',
     },
     {
       name: 'Abstract',
-      img: 'assets/images/edit-icon.png'
+      img: 'assets/images/edit-icon.png',
     },
     {
-      name : 'Certificate',
-      img: 'assets/images/edit-icon.png'
+      name: 'Certificate',
+      img: 'assets/images/edit-icon.png',
     },
     {
       name: 'CVOR',
-      img: 'assets/images/edit-icon.png'
+      img: 'assets/images/edit-icon.png',
     },
     {
-      name : 'Safety',
-      img: 'assets/images/edit-icon.png'
+      name: 'Safety',
+      img: 'assets/images/edit-icon.png',
     },
     {
       name: 'Insurance',
-      img: 'assets/images/edit-icon.png'
+      img: 'assets/images/edit-icon.png',
     },
     {
       name: 'Add more',
-      img: 'assets/images/edit-icon.png'
-    }
+      img: 'assets/images/edit-icon.png',
+    },
   ];
 
   drivers$!: Observable<object[]>;
-  certificateImages:any;
+  certificateImages: any;
   certificateName: any;
-  isShowCertificationErr: boolean= false;
+  isShowCertificationErr: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -80,10 +80,9 @@ export class DriverAddComponent {
         '',
         [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
       ],
-      country_code:['Country'],
       address: ['', [Validators.required]],
       is_head_driver: [''],
-      is_active: [''],
+      is_active: ['true'],
       image: [''],
       certificates: [''],
     });
@@ -116,17 +115,22 @@ export class DriverAddComponent {
 
   handleSubmit() {
     this.isSubmitted = true;
-    for(var i=0; i < this.certificatesItems.length-1; i++){
-
-      if(this.certificatesItems[i].img.indexOf('edit-icon')> -1){
-        this.isShowCertificationErr= true;
+    for (var i = 0; i < this.certificatesItems.length - 1; i++) {
+      if (this.certificatesItems[i].img.indexOf('edit-icon') > -1) {
+        this.isShowCertificationErr = true;
         return;
       }
-
     }
+
     // stop here if form is invalid
     if (this.addDriver.invalid) {
       return;
+    }
+
+    if (this.addDriver.value['is_head_driver'] == '') {
+      this.addDriver.patchValue({
+        is_head_driver: false,
+      });
     }
 
     this.loading = true;
@@ -135,11 +139,18 @@ export class DriverAddComponent {
     const formData = new FormData();
     for (let i in this.addDriver.value) {
       if (this.addDriver.value[i] instanceof Blob) {
-        formData.append(
-          i,
-          this.addDriver.value[i],
-          this.addDriver.value[i].name ? this.addDriver.value[i].name : ''
-        );
+        const files = this.addDriver.value[i];
+        if (files.length > 0) {
+          for (let j = 0; j < files.length; j++) {
+            formData.append(i, files[j], files[j].name);
+          }
+        } else {
+          formData.append(
+            i,
+            this.addDriver.value[i],
+            this.addDriver.value[i].name ? this.addDriver.value[i].name : ''
+          );
+        }
         // console.log('blob');
       } else {
         formData.append(i, this.addDriver.value[i]);
@@ -192,7 +203,7 @@ export class DriverAddComponent {
 
       const reader = new FileReader();
       reader.onload = (e) => {
-        this.imageSrc = reader.result
+        this.imageSrc = reader.result;
       };
       this.addDriver.patchValue({
         image: file,
@@ -201,52 +212,62 @@ export class DriverAddComponent {
       reader.readAsDataURL(file);
     }
   }
-  onCertificateClick(certificateName:any){
+  onCertificateClick(certificateName: any) {
     this.certificateName = certificateName;
   }
   readCertificatesURL(event: any): void {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files;
+
+      console.log('certificates', file);
+
       const singleFile = event.target.files[0];
       const reader = new FileReader();
       reader.onload = (e) => {
-        for(var i=0; i < this.certificatesItems.length; i++){
-          if(this.certificatesItems[i].name == this.certificateName){
+        for (var i = 0; i < this.certificatesItems.length; i++) {
+          if (this.certificatesItems[i].name == this.certificateName) {
             this.certificatesItems[i].img = reader.result;
-            if(this.certificateName == 'Add more'){
+            if (this.certificateName == 'Add more') {
               this.certificatesItems[i].name = event.target.files[0].name;
             }
           }
-
         }
       };
-      this.addDriver.patchValue({
-        certificates: file,
-      });
-      reader.readAsDataURL(singleFile);
-      setTimeout(()=>{
-        const i = this.certificatesItems.findIndex((e:any) => e.name === 'Add more');
-        if (i == -1) {
-          this.certificatesItems.push(
-            {
-              name: 'Add more',
-              img: 'assets/images/edit-icon.png'
-            }
-          )
-        }
-      },500)
-    }
 
+      let fArr = [];
+      for (var i = 0; i < file.length; i++) {
+        fArr.push(file[i]);
+        console.log('certificates' + i, file[i]);
+      }
+
+      this.addDriver.patchValue({
+        certificates: fArr,
+      });
+
+      reader.readAsDataURL(singleFile);
+
+      setTimeout(() => {
+        const i = this.certificatesItems.findIndex(
+          (e: any) => e.name === 'Add more'
+        );
+        if (i == -1) {
+          this.certificatesItems.push({
+            name: 'Add more',
+            img: 'assets/images/edit-icon.png',
+          });
+        }
+      }, 500);
+    }
   }
-  removePhoto(e:any , imgName:any){
+  removePhoto(e: any, imgName: any) {
     e.stopPropagation();
-    for(var i=0; i < this.certificatesItems.length; i++){
-      if(this.certificatesItems[i].name == this.certificateName){
-        this.certificatesItems[i].img = "assets/images/edit-icon.png";
+    for (var i = 0; i < this.certificatesItems.length; i++) {
+      if (this.certificatesItems[i].name == this.certificateName) {
+        this.certificatesItems[i].img = 'assets/images/edit-icon.png';
       }
     }
   }
-  removeProfilePhoto(e:any){
+  removeProfilePhoto(e: any) {
     e.stopPropagation();
     this.imageSrc = 'assets/images/profilephoto.png';
   }
