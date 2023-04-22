@@ -79,27 +79,41 @@
           </div>
           <div class="col-md-2 mt-3">
             <span class="Password">
-              <select placeholder="Country" formControlName="country_code" class="Pro_input_Field selectpicker countrypicker">
-                 <option value="" disabled [selected]="true">Select Country</option>
-                 <option *ngFor="let country of countryCodes" [value]="country.dial_code">
-                  <span class="mx-3 fw-bold">{{country.dial_code+" "+ country.name }}</span>
-                 </option>
-               </select>
-               <div *ngIf="isSubmitted && f['country_code'].errors" class="text-danger">
+              <select
+                placeholder="Country"
+                class="Pro_input_Field selectpicker countrypicker"
+              >
+                <option value="" disabled [selected]="true">
+                  Select Country
+                </option>
+                <option
+                  *ngFor="let country of countryCodes"
+                  [value]="country.dial_code"
+                >
+                  <span class="mx-3 fw-bold">{{
+                    country.dial_code + " " + country.name
+                  }}</span>
+                </option>
+              </select>
+              <div
+                *ngIf="isSubmitted && f['country_code'].errors"
+                class="text-danger"
+              >
                 <div *ngIf="f['country_code'].errors['required']">
                   Country is required
                 </div>
               </div>
-           </span>
+            </span>
           </div>
           <div class="col-md-5 mt-3">
-            <input type="number"
-              name="" 
+            <input
+              type="number"
+              name=""
               formControlName="phone"
               placeholder="Mobile Number"
               class="Pro_input_Field driver-input-field"
               onKeyPress="if(this.value.length==10) return false;"
-             >
+            />
             <div *ngIf="isSubmitted && f['phone'].errors" class="text-danger">
               <div *ngIf="f['phone'].errors['required']">
                 Phone number is required
@@ -131,7 +145,7 @@
             </div>
           </div>
 
-          <!-- <div class="col-md-12 mt-3">
+          <div class="col-md-12 mt-3">
             <div class="Div01 Div02 d-flex justify-content-start">
               Is it main location?
               <input
@@ -141,7 +155,7 @@
                 [checked]="this.frmValues.is_main_localation"
               />
             </div>
-          </div> -->
+          </div>
         </div>
 
         <div class="row mt-4">

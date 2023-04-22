@@ -49,10 +49,7 @@ export class WarehouseAddComponent {
         '',
         [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
       ],
-      alt_phone: [
-        '',
-      ],
-      country_code:['',[Validators.required]],
+      alt_phone: [''],
       is_main_localation: [false],
     });
 

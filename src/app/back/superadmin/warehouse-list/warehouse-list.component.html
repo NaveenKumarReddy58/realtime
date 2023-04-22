@@ -1,15 +1,22 @@
 <div class="ContentArea no-padding">
   <div class="ContentArea_Inner">
-
     <div class="mx-3">
       <div class="SearchFilter gap-13px">
         <div class="action-btns">
-          <a class="slected-count">{{selectedDriversCount}} Selected</a>
+          <a class="slected-count">{{ selectedDriversCount }} Selected</a>
           <a class="select-all-dl" (click)="selectAll()">Select All </a>
           <a class="deselect-all-dl" (click)="deSelectAll()">Deselect All</a>
-          <a class="drivers-list-delete" [ngClass]="selectedDriversCount > 0 ? '' : 'pe-none'">
-            <span (click)="onClickDeleteDriverDialog($event)">Delete <img src="../../../../assets/images/delete.jpg" /></span> 
-            <div *ngIf="isShowDeleteDriverDialog" class="drivers-list-delete-dialog">
+          <a
+            class="drivers-list-delete"
+            [ngClass]="selectedDriversCount > 0 ? '' : 'pe-none'"
+          >
+            <span (click)="onClickDeleteDriverDialog($event)"
+              >Delete <img src="../../../../assets/images/delete.jpg"
+            /></span>
+            <div
+              *ngIf="isShowDeleteDriverDialog"
+              class="drivers-list-delete-dialog"
+            >
               <div class="delete-drivers">Delete Drivers</div>
               <div class="confirmation-msg">
                 <div class="row">
@@ -17,12 +24,20 @@
                     Are you sure you want to delete drivers ?
                   </div>
                   <div class="col-3">
-                    <img src="../../../../assets/images/big-delete.jpg" width="63px"/>
+                    <img
+                      src="../../../../assets/images/big-delete.jpg"
+                      width="63px"
+                    />
                   </div>
                 </div>
               </div>
               <div class="text-center px-4">
-                <button class="ButtonStyle cancel-btn float-start" (click)="onClickDeleteDriverDialog($event)">Cancel</button>
+                <button
+                  class="ButtonStyle cancel-btn float-start"
+                  (click)="onClickDeleteDriverDialog($event)"
+                >
+                  Cancel
+                </button>
                 <button class="ButtonStyle float-end">Delete Driver</button>
               </div>
             </div>
@@ -63,25 +78,39 @@
                   <td>{{ item.alt_phone }}</td>
                   <td>
                     <div class="GetIocn">
+                      <!-- <input
+                        class="head-driver mx-2"
+                        type="checkbox"
+                        [checked]="item.checked"
+                        (change)="changeStatus(item.id, item.checked)"
+                      /> -->
                       <input
-                            class="head-driver mx-2"
-                            type="checkbox"
-                            [checked]="item.checked"
-                            (change)="changeStatus(item.id , item.checked)"/>
+                        type="checkbox"
+                        [value]="item.is_main_localation"
+                        [checked]="item.is_main_localation"
+                        (change)="controlOnChange(item.id, $event)"
+                      />
                       <a routerLink="/admin/warehouse/{{ item.id }}">
                         <i class="fa fa-pencil EditIcon"></i>
                       </a>
-                      <label class="switch" (click)="openDialog('250ms','250ms')">
-                        <input type="checkbox" disabled [checked]="isDefaultAddress">
+                      <!-- <label
+                        class="switch"
+                        (click)="openDialog('250ms', '250ms')"
+                      >
+                        <input
+                          type="checkbox"
+                          disabled
+                          [checked]="isDefaultAddress"
+                        />
                         <span class="slider round"></span>
-                      </label>
-                      <!-- <a (click)="warehouseDelete(item.id)">
+                      </label> -->
+                      <a (click)="warehouseDelete(item.id)">
                         <i class="fa fa-trash Delete"></i>
                         <i
                           class="fa fa-spinner fa-spin"
                           *ngIf="delloading && toggle[item.id]"
                         ></i>
-                      </a> -->
+                      </a>
                     </div>
                   </td>
                 </tr>
@@ -102,5 +131,8 @@
     <!-- Tab Content Area Start /////////// 01 -->
   </div>
 </div>
-<div *ngIf="isShowDeleteDriverDialog" (click)="onClickDeleteDriverDialog($event)" class="overlay"></div>
-
+<div
+  *ngIf="isShowDeleteDriverDialog"
+  (click)="onClickDeleteDriverDialog($event)"
+  class="overlay"
+></div>
