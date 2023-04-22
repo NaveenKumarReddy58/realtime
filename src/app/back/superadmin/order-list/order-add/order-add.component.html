@@ -32,7 +32,12 @@
                           </span>
                           <span class="DeliveryTo">
                             <strong>PO#</strong>
-                            <span class="Number">{{ po }}</span>
+                            <span class="Number"><input
+                              type="number"
+                              formControlName="po"
+                              placeholder="Order#"
+                              class="border-0 fw-bold"
+                            /></span>
                           </span>
                         </div>
                         <input
@@ -46,6 +51,32 @@
                           value="{{ po }}"
                         /> -->
                         <div class="row mt-3">
+                          <div class="col-md-12 mb-3">
+                            <div class="filed-input text-end">
+                              Is this warehouse?
+                              <input disable
+                                  (click)="changeStatus('pickup',isCheckedWarehous[0].pickup)"
+                                  class="head-driver mx-2"
+                                  type="checkbox"
+                                  [checked]="isCheckedWarehous[0].pickup"
+                                  formControlName="is_pickup_warehouse"
+                                />
+                              <div
+                                *ngIf="
+                                  isSubmitted && f['is_pickup_warehouse'].errors
+                                "
+                                class="text-danger"
+                              >
+                                <div
+                                  *ngIf="
+                                    f['is_pickup_warehouse'].errors['required']
+                                  "
+                                >
+                                  Warehouse is required
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                           <div class="col-md-12">
                             <div class="filed-input">
                               <input
@@ -92,31 +123,7 @@
                               </div>
                             </div>
                           </div>
-                          <div class="col-md-12 mt3 mb3">
-                            <div class="filed-input">
-                              Is this warehouse?
-                              <input
-                                type="radio"
-                                formControlName="is_pickup_warehouse"
-                                value="true"
-                                checked="true"
-                              />
-                              <div
-                                *ngIf="
-                                  isSubmitted && f['is_pickup_warehouse'].errors
-                                "
-                                class="text-danger"
-                              >
-                                <div
-                                  *ngIf="
-                                    f['is_pickup_warehouse'].errors['required']
-                                  "
-                                >
-                                  Warehouse is required
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                          
                         </div>
                         <div class="row">
                           <div class="col-md-4">
@@ -327,15 +334,35 @@
                       <div class="from-to-pick-inner">
                         <div class="Pickup-title">
                           <span class="DeliveryTo">
-                            Delivery <strong>TOP</strong>
+                            Delivery <strong>TO</strong>
                           </span>
                           <span class="DeliveryTo">
                             <strong>Order#</strong>
-                            <span class="Number">{{ po }}</span>
+                            <span class="Number">
+                              <input
+                                  type="number"
+                                  formControlName="po"
+                                  placeholder="Order#"
+                                  class="border-0 fw-bold"
+                                />
+                            </span>
                           </span>
                         </div>
                         <div class="form-div">
                           <div class="row mt-3">
+                            
+                            <div class="col-md-12 mb-3">
+                              <div class="filed-input text-end">
+                                Is this warehouse?
+                                <input
+                                (click)="changeStatus('to',isCheckedWarehous[0].to)"
+                                class="head-driver mx-2"
+                                  type="checkbox"
+                                  [checked]="isCheckedWarehous[1].to"
+                                  formControlName="is_dely_warehouse"
+                                />
+                              </div>
+                            </div>
                             <div class="col-md-12">
                               <div class="filed-input">
                                 <input
@@ -383,16 +410,6 @@
                               </div>
                             </div>
 
-                            <div class="col-md-12">
-                              <div class="filed-input">
-                                Is this warehouse?
-                                <input
-                                  type="radio"
-                                  formControlName="is_dely_warehouse"
-                                  value="true"
-                                />
-                              </div>
-                            </div>
                           </div>
                           <div class="row">
                             <div class="col-md-4">

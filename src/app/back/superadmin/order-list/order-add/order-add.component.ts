@@ -38,7 +38,10 @@ export class OrderAddComponent {
   order$!: Observable<object[]>;
 
   time = { hour: 13, minute: 30 };
-
+  isCheckedWarehous: any= [
+    {'pickup': false},
+    {'to': false}
+  ];
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -128,7 +131,7 @@ export class OrderAddComponent {
     enterAnimationDuration: string,
     exitAnimationDuration: string
   ): void {
-    this.dialog.open(AddressAddComponent, {
+    const dialogRef = this.dialog.open(AddressAddComponent, {
       width: '800px',
       enterAnimationDuration,
       exitAnimationDuration,
@@ -232,6 +235,27 @@ export class OrderAddComponent {
           this.loading = false;
         }
       );
+    }
+  }
+  changeStatus(name:string , value:boolean){
+    if(name == 'to'){
+      if(value){
+        this.isCheckedWarehous[1].to = false;
+      } else if(this.isCheckedWarehous[0].pickup){
+        this.isCheckedWarehous[1].to = true;
+        this.isCheckedWarehous[0].pickup = false;
+      } else if(!value ){
+        this.isCheckedWarehous[1].to = true;
+      }
+    } else{
+      if(value){
+        this.isCheckedWarehous[0].pickup = false;
+      } else if(this.isCheckedWarehous[1].to){
+        this.isCheckedWarehous[0].pickup = true;
+        this.isCheckedWarehous[1].to = false;
+      } else if(!value ){
+        this.isCheckedWarehous[0].pickup = true;
+      }
     }
   }
 }
