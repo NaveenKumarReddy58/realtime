@@ -256,20 +256,10 @@ const routes: Routes = [
   },
   {
     path: '**',
-    // component: NotFoundComponent,
     redirectTo: '/',
     title: 'Not Found',
   },
 ];
-
-// { path: 'user-profile/:id', component: DashboardComponent, canActivate: [AuthGuard] }
-// { path: 'a', loadChildren: () => import('./modulea/modulea.module').then(m => m.ModuleaModule) },
-// { path: 'admin', loadComponent: () => import('./app/admin/admin.component').then(mod => mod.AdminComponent), canActivate: [() => inject(authService).getDashboard()] },
-// {
-//   path: 'children', loadChildren: () =>
-//     import('./app/children/children.routes').then(m => m.CHILDREN_ROUTES)
-// },
-// { path: '**', component: NotFoundComponent },
 
 @Injectable()
 export class TemplatePageTitleStrategy extends TitleStrategy {
