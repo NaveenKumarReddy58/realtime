@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 
+import { AppComponent } from './app.component';
+
 import { AuthInterceptor } from './_shared/auth.interceptor';
 
 import { DateAgo } from './_pipes/date-ago.pipe';
@@ -37,7 +39,6 @@ import { SettingComponent } from './back/common/setting/setting.component';
 import { ProfileComponent } from './back/common/profile/profile.component';
 import { TopComponent } from './back/common/layout/top/top.component';
 import { MenuComponent } from './back/common/layout/menu/menu.component';
-import { AppComponent } from './app.component';
 import { SuperAdminComponent } from './back/superadmin/super-admin.component';
 import { SuperSuperAdminComponent } from './back/supersuperadmin/super-super-admin.component';
 import { NotificationListComponent } from './back/common/notification-list/notification-list.component';
@@ -60,9 +61,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { GoogleMapsModule } from '@angular/google-maps';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatNativeDateModule } from '@angular/material/core';
 import { DriverDetailsComponent } from './back/superadmin/driver-list/driver-details/driver-details.component';
 
 @NgModule({
@@ -105,7 +103,7 @@ import { DriverDetailsComponent } from './back/superadmin/driver-list/driver-det
     SuperAdminComponent,
     SuperSuperAdminComponent,
     NotificationListComponent,
-    DriverDetailsComponent
+    DriverDetailsComponent,
   ],
   imports: [
     CommonModule,

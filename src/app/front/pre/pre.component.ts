@@ -12,13 +12,19 @@ import { AuthService } from 'src/app/_service/auth.service';
   animations: [
     trigger('fade1', [
       transition(':enter', [
-        style({transform: 'translateX(100%)'}),
-        animate('1500ms ease-in', style({transform: 'translateX(0%)', left:0}))
+        style({ transform: 'translateX(100%)' }),
+        animate(
+          '1500ms ease-in',
+          style({ transform: 'translateX(0%)', left: 0 })
+        ),
       ]),
       transition(':leave', [
-        style({transform: 'translateX(0%)'}),
-        animate('15000ms ease-in', style({transform: 'translateX(100%)',left: 0}))
-      ])
+        style({ transform: 'translateX(0%)' }),
+        animate(
+          '15000ms ease-in',
+          style({ transform: 'translateX(100%)', left: 0 })
+        ),
+      ]),
     ]),
   ],
 })
@@ -54,9 +60,7 @@ export class PreComponent {
     return this.prelogin.value;
   }
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
   handleSubmit() {
     this.isSubmitted = true;

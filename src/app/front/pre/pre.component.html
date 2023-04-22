@@ -1,8 +1,9 @@
 <!-- Side Bar -->
-<section class="LoginSection" @fade1
-(@fade1.start)="isLoggedIn = false"
-(@fade1.done)="isLoggedIn = false"
-*ngIf="!isLoggedIn"
+<section
+  class="LoginSection"
+  @fade1
+  (@fade1.start)="isLoggedIn = false"
+  (@fade1.done)="isLoggedIn = false"
 >
   <div class="container">
     <div class="row">
@@ -13,13 +14,17 @@
             <h2 class="TitleHeading">Login</h2>
             <span class="SubHeading">Value Your Customers Time</span>
           </div>
-          <form [formGroup]="prelogin" (ngSubmit)="handleSubmit()" class="LoginForm mt-5">
+          <form
+            [formGroup]="prelogin"
+            (ngSubmit)="handleSubmit()"
+            class="LoginForm mt-5"
+          >
             <div class="CustomField">
               <label>
                 <input type="text" formControlName="username" />
                 <span class="LabelT">Enter Email Address</span>
               </label>
-            </div>            
+            </div>
             <div class="text-danger CustomErr">
               <div *ngIf="isSubmitted && f['username'].errors">
                 <div *ngIf="f['username'].errors['required']">
@@ -31,7 +36,9 @@
               </div>
             </div>
             <div class="CustomField loginButton mt-4">
-              <button type="submit">Login <i class="fa fa-spinner fa-spin" *ngIf="loading"></i></button>
+              <button type="submit">
+                Login <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+              </button>
             </div>
           </form>
         </div>
