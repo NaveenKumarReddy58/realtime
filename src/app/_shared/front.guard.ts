@@ -27,7 +27,7 @@ export class FrontGuard implements CanActivate {
     this.authService.getDashboard().subscribe((data: any) => {
       this.isLoggedIn = data;
     });
-    if (this.isLoggedIn && this.authService._isRoleName !=0) {
+    if (this.isLoggedIn && this.authService._isRoleName != 0) {
       this.router.navigate(['/' + this.authService._isRoleName + '/dashboard']);
       return false;
     }
