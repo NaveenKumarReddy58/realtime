@@ -16,12 +16,10 @@ import { TicketDetailComponent } from './back/common/ticket-list/ticket-detail/t
 import { TicketListComponent } from './back/common/ticket-list/ticket-list.component';
 import { DashboardComponent } from './back/dashboard/dashboard.component';
 import { OrderAddComponent } from './back/superadmin/order-list/order-add/order-add.component';
-import { SuperAdminComponent } from './back/superadmin/super-admin.component';
 import { CompanyAddComponent } from './back/supersuperadmin/company-list/company-add/company-add.component';
 import { CompanyListComponent } from './back/supersuperadmin/company-list/company-list.component';
 import { PlanAddComponent } from './back/supersuperadmin/plan-list/plan-add/plan-add.component';
 import { PlanListComponent } from './back/supersuperadmin/plan-list/plan-list.component';
-import { SuperSuperAdminComponent } from './back/supersuperadmin/super-super-admin.component';
 import { NotFoundComponent } from './front/not-found/not-found.component';
 import { PreComponent } from './front/pre/pre.component';
 import { AuthGuard } from './_shared/auth.guard';
@@ -35,6 +33,7 @@ import { NotificationListComponent } from './back/common/notification-list/notif
 import { AddressAddComponent } from './back/superadmin/address-list/address-add/address-add.component';
 import { AddressListComponent } from './back/superadmin/address-list/address-list.component';
 import { DriverDetailsComponent } from './back/superadmin/driver-list/driver-details/driver-details.component';
+import { OrderDetailComponent } from './back/superadmin/order-list/order-detail/order-detail.component';
 
 const routes: Routes = [
   {
@@ -164,6 +163,12 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
+        path: 'orders/details',
+        component: OrderDetailComponent,
+        title: 'Order Details',
+        canActivate: [AuthGuard],
+      },
+      {
         path: 'warehouse',
         component: WarehouseListComponent,
         title: 'Warehouse List',
@@ -251,7 +256,8 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: NotFoundComponent,
+    // component: NotFoundComponent,
+    redirectTo: '/',
     title: 'Not Found',
   },
 ];

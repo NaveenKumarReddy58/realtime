@@ -27,7 +27,7 @@ export class AuthGuard implements CanActivate {
     this.authService.getDashboard().subscribe((data: any) => {
       this.isLoggedIn = data;
     });
-    if (!this.isLoggedIn) {
+    if (!this.isLoggedIn && this.authService._isRoleName ==0) {
       this.toastr.error('Access not allowed!');
       this.router.navigate(['/']);
       return false;
