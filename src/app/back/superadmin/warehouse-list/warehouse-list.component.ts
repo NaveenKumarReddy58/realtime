@@ -24,6 +24,7 @@ export class WarehouseListComponent {
   selectedDriversCount: any= 0;
   isShowDeleteDriverDialog: boolean= false;
   isDefaultAddress: boolean= false;
+  wareHouseId: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -130,7 +131,8 @@ export class WarehouseListComponent {
   }
   openDialog(
     enterAnimationDuration: string,
-    exitAnimationDuration: string
+    exitAnimationDuration: string,
+    id:any
   ): void {
     const dialogRef = this.dialog.open(DialogAnimationsComponent, {
       width: '450px',
@@ -143,6 +145,7 @@ export class WarehouseListComponent {
     });
     dialogRef.afterClosed().subscribe(dialogResult => {
       if(dialogResult){
+        this.wareHouseId= id;
         this.isDefaultAddress= !this.isDefaultAddress;
       }
     });

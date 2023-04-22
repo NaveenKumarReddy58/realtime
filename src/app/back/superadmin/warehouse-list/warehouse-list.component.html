@@ -62,6 +62,7 @@
                   <td>{{ item.phone }}</td>
                   <td>{{ item.alt_phone }}</td>
                   <td>
+                    
                     <div class="GetIocn">
                       <input
                             class="head-driver mx-2"
@@ -71,8 +72,8 @@
                       <a routerLink="/admin/warehouse/{{ item.id }}">
                         <i class="fa fa-pencil EditIcon"></i>
                       </a>
-                      <label class="switch" (click)="openDialog('250ms','250ms')">
-                        <input type="checkbox" disabled [checked]="isDefaultAddress">
+                      <label class="switch" (click)="openDialog('250ms','250ms', item.id)">
+                        <input type="checkbox" disabled [checked]="(isDefaultAddress &&  wareHouseId == item.id)">
                         <span class="slider round"></span>
                       </label>
                       <!-- <a (click)="warehouseDelete(item.id)">

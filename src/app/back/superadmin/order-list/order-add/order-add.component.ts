@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/_service/auth.service';
 import { OrderService } from 'src/app/_service/order.service';
 import { WarehouseService } from 'src/app/_service/warehouse.service';
 import { AddressAddComponent } from '../../address-list/address-add/address-add.component';
+import { CountryPhoneCodes } from 'src/app/_interface/country-phone-codes';
 
 @Component({
   selector: 'app-order-add',
@@ -24,6 +25,8 @@ export class OrderAddComponent {
   data: Select2Data = [];
   warehouseData: any;
   orderData: any;
+  countryCodes: any = CountryPhoneCodes;
+
 
   po: any = Math.floor(100000 + Math.random() * 900000);
 
@@ -60,6 +63,7 @@ export class OrderAddComponent {
       pickup_time: ['', [Validators.required]],
       pickup_contact_name: ['', [Validators.required]],
       pickup_email: ['', [Validators.required, Validators.email]],
+      country_code: [],
       pickup_phone: [
         '',
         [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],

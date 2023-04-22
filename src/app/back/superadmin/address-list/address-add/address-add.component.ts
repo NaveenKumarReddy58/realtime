@@ -31,6 +31,8 @@ export class AddressAddComponent {
   initialCoordinates!: google.maps.LatLngLiteral;
   lat: any;
   lng: any;
+  markers: any=[];
+  place: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -57,9 +59,23 @@ export class AddressAddComponent {
     let autocompletefrom = new google.maps.places.Autocomplete(
       this.searchElementRefFrom.nativeElement
     );
+
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.initialCoordinates = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      };
+      this.getFromAddress(
+          "place.place_id",
+          position.coords.latitude,
+          position.coords.longitude
+        );
+      this.addMarker(position.coords.latitude,position.coords.longitude)
+    });
     autocompletefrom.addListener('place_changed', () => {
       this.zone.run(() => {
         let place = autocompletefrom.getPlace();
+        this.place = autocompletefrom.getPlace();
         if (place.geometry === undefined || place.geometry === null) {
           return;
         }
@@ -70,7 +86,17 @@ export class AddressAddComponent {
         );
       });
     });
+    
   }
+markerOptions: any = []
+markerPositions: google.maps.LatLngLiteral[] = [];
+addMarker(latitude:any, long:any) {
+  this.markerPositions=[];
+  let cord = {lat: latitude, lng: long}
+    if (cord != null) this.markerPositions.push(cord);
+}
+
+
   getFromAddress(place_id: string, latitude: number, longitude: number) {
     this.geoCoder.geocode(
       { location: { lat: latitude, lng: longitude } },
@@ -168,6 +194,8 @@ export class AddressAddComponent {
 
               console.log('addr', obj);
             }
+
+            this.addMarker(latitude, longitude);
           } else {
             console.log('No results found');
           }
