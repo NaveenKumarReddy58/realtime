@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/_service/auth.service';
 import { OrderService } from 'src/app/_service/order.service';
 import { WarehouseService } from 'src/app/_service/warehouse.service';
 import { AddressAddComponent } from '../../address-list/address-add/address-add.component';
+import { CountryPhoneCodes } from 'src/app/_interface/country-phone-codes';
 
 @Component({
   selector: 'app-order-add',
@@ -24,6 +25,8 @@ export class OrderAddComponent {
   data: Select2Data = [];
   warehouseData: any;
   orderData: any;
+  countryCodes: any = CountryPhoneCodes;
+
 
   po: any = Math.floor(100000 + Math.random() * 900000);
 
@@ -35,7 +38,10 @@ export class OrderAddComponent {
   order$!: Observable<object[]>;
 
   time = { hour: 13, minute: 30 };
-
+  isCheckedWarehous: any= [
+    {'pickup': false},
+    {'to': false}
+  ];
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -60,6 +66,7 @@ export class OrderAddComponent {
       pickup_time: ['', [Validators.required]],
       pickup_contact_name: ['', [Validators.required]],
       pickup_email: ['', [Validators.required, Validators.email]],
+      country_code: [],
       pickup_phone: [
         '',
         [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
@@ -124,7 +131,7 @@ export class OrderAddComponent {
     enterAnimationDuration: string,
     exitAnimationDuration: string
   ): void {
-    this.dialog.open(AddressAddComponent, {
+    const dialogRef = this.dialog.open(AddressAddComponent, {
       width: '800px',
       enterAnimationDuration,
       exitAnimationDuration,
@@ -228,6 +235,27 @@ export class OrderAddComponent {
           this.loading = false;
         }
       );
+    }
+  }
+  changeStatus(name:string , value:boolean){
+    if(name == 'to'){
+      if(value){
+        this.isCheckedWarehous[1].to = false;
+      } else if(this.isCheckedWarehous[0].pickup){
+        this.isCheckedWarehous[1].to = true;
+        this.isCheckedWarehous[0].pickup = false;
+      } else if(!value ){
+        this.isCheckedWarehous[1].to = true;
+      }
+    } else{
+      if(value){
+        this.isCheckedWarehous[0].pickup = false;
+      } else if(this.isCheckedWarehous[1].to){
+        this.isCheckedWarehous[0].pickup = true;
+        this.isCheckedWarehous[1].to = false;
+      } else if(!value ){
+        this.isCheckedWarehous[0].pickup = true;
+      }
     }
   }
 }

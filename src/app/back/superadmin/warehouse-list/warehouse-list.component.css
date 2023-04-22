@@ -1,3 +1,9 @@
 .Order_Table tr td{
     font-weight: normal;
 }
+.switch{
+    width: 43px;
+}
+.slider:berfore{
+    left: -7px;
+}

@@ -99,11 +99,15 @@
                       </div>
                       <div class="row mt-4">
                         <div class="col-md-12">
-                          <google-map
-                            class="GoogleMap"
-                            width="100%"
-                            [center]="initialCoordinates"
-                          ></google-map>
+                          <google-map 
+                              class="GoogleMap"
+                              width="100%"
+                              [center]="initialCoordinates">
+                              <map-marker 
+                                #marker="mapMarker"
+                                [position]="markerPositions[0]">
+                              </map-marker>
+                          </google-map>
                         </div>
                       </div>
                     </form>
