@@ -22,7 +22,7 @@
                 </div>
                 <div class="DeliveryNumber">
                   <h4>{{ orderData?.po }}</h4>
-                  Delivery : {{ orderData?.dely_time | date : "shortTime" }} |
+                  Delivery : {{ orderData?.dely_time }} |
                   {{ orderData?.dely_date | date : "fullDate" }}
                 </div>
                 <div class="ChangePic NoPhoto mt-4">&nbsp;</div>
@@ -38,10 +38,13 @@
                 <div class="AddEdit-Delete">
                   <span>Status</span>
                   <div class="Edi_Delete">
-                    <span class="__Edit">
+                    <span
+                      class="__Edit"
+                      routerLink="/admin/orders/{{ orderData.id }}"
+                    >
                       <span>Edit <i class="fa fa-pencil"></i></span>
                     </span>
-                    <span class="__Edit">
+                    <span class="__Edit" (click)="orderDelete(orderData.id)">
                       <span>Delete <i class="fa fa-trash"></i></span>
                     </span>
                   </div>

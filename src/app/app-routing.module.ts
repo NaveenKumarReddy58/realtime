@@ -163,6 +163,12 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
+        path: 'orders/:id',
+        component: OrderAddComponent,
+        title: 'Edit Order',
+        canActivate: [AuthGuard],
+      },
+      {
         path: 'orders/detail/:id',
         component: OrderDetailComponent,
         title: 'Order Details',

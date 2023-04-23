@@ -49,4 +49,20 @@ export class OrderDetailComponent {
       }
     );
   }
+
+  orderDelete(id: any) {
+    this.orderService.orderDelete(id).subscribe(
+      (data: any) => {
+        if (this.authService.resultCodeError(data)) {
+          return;
+        }
+
+        this.router.navigate(['/admin/dashboard']);
+        this.toastr.success('Order Deleted');
+      },
+      (error) => {
+        this.authService.dataError(error);
+      }
+    );
+  }
 }

@@ -92,6 +92,7 @@ export class OrderAddComponent {
     });
 
     if (!this.isAddMode) {
+      this.orderDetail(this.route.snapshot.params['id']);
     }
 
     this.addressList();
@@ -120,6 +121,26 @@ export class OrderAddComponent {
       enterAnimationDuration,
       exitAnimationDuration,
     });
+  }
+
+  orderDetail(id: number) {
+    this.orderService.orderDetail(id).subscribe(
+      (data: any) => {
+        this.loading = false;
+        if (this.authService.resultCodeError(data)) {
+          this.loading = false;
+          return;
+        }
+
+        this.orderData = data?.result;
+        // this.addOrderF.patchValue({});
+        this.loading = false;
+      },
+      (error) => {
+        this.authService.dataError(error);
+        this.loading = false;
+      }
+    );
   }
 
   addressList() {
@@ -174,15 +195,6 @@ export class OrderAddComponent {
       this.addOrderF.patchValue({ pickup_address: null });
       this.addOrderF.patchValue({ dely_address: null });
     }
-  }
-
-  orderList(filter?: any) {
-    this.orderService.orderList(filter);
-    this.order$ = this.orderService.getOrder();
-
-    this.order$.subscribe((data: any) => {
-      this.orderData = data?.result?.results;
-    });
   }
 
   handleSubmit() {
