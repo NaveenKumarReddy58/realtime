@@ -57,7 +57,7 @@ export class OrderAddComponent {
       po: [''],
       pickup_company_name: ['', [Validators.required]],
       pickup_address: ['', [Validators.required]],
-      is_pickup_warehouse: ['', [Validators.required]],
+      is_pickup_warehouse: [''],
       pickup_date: ['', [Validators.required]],
       pickup_time: ['', [Validators.required]],
       pickup_contact_name: ['', [Validators.required]],
@@ -92,22 +92,10 @@ export class OrderAddComponent {
     });
 
     if (!this.isAddMode) {
-      // this.warehouseService.warehouseList(this.id);
-      // this.warehouse$ = this.warehouseService.getWarehouse();
-      // this.warehouse$.subscribe((data: any) => {
-      //   this.addOrderF.patchValue({
-      //     warehouse_name: data?.result?.warehouse_name,
-      //     address: data?.result?.address?.id,
-      //     contact_name: data?.result?.contact_name,
-      //     email: data?.result?.email,
-      //     phone: data?.result?.phone,
-      //     alt_phone: data?.result?.alt_phone,
-      //     is_main_localation: data?.result?.is_main_localation,
-      //   });
-      // });
     }
 
     this.addressList();
+    this.warehouseList();
     this.addOrderF.patchValue({ po: this.po });
   }
 
@@ -142,7 +130,6 @@ export class OrderAddComponent {
       this.addressData = data.result;
       if (data?.result) {
         data?.result.forEach((data: any) => {
-          // console.log(data);
           this.data.push({
             value: data?.id,
             label: data?.address,
@@ -157,8 +144,36 @@ export class OrderAddComponent {
     this.warehouse$ = this.warehouseService.getWarehouse();
 
     this.warehouse$.subscribe((data: any) => {
-      this.warehouseData = data?.result;
+      if (data?.result) {
+        data?.result.forEach((obj: any) => {
+          if (obj.is_main_localation) {
+            this.warehouseData = obj;
+          }
+        });
+      }
     });
+  }
+
+  setPickupWarehouse(e: any) {
+    if (e.target.checked) {
+      this.addOrderF.patchValue({
+        pickup_address: this.warehouseData?.address?.id,
+      });
+    } else {
+      this.addOrderF.patchValue({ pickup_address: null });
+      this.addOrderF.patchValue({ dely_address: null });
+    }
+  }
+
+  setDelyWarehouse(e: any) {
+    if (e.target.checked) {
+      this.addOrderF.patchValue({
+        dely_address: this.warehouseData?.address?.id,
+      });
+    } else {
+      this.addOrderF.patchValue({ pickup_address: null });
+      this.addOrderF.patchValue({ dely_address: null });
+    }
   }
 
   orderList(filter?: any) {

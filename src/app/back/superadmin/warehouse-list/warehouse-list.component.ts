@@ -47,7 +47,7 @@ export class WarehouseListComponent {
     this.warehouse$.subscribe((data: any) => {
       this.warehouseData = data?.result;
       this.warehouseData &&
-        this.warehouseData.forEach((obj: any) => (obj['checked'] = false));
+        this.warehouseData.forEach((obj: any) => (obj['is_main_localation'] = false));
     });
   }
 

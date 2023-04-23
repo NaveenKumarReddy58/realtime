@@ -281,7 +281,7 @@ export class AuthService {
 
   tokenRefresh() {
     const refresh = this.getLS('refresh_token');
-    if (refresh) {
+    if (!refresh) {
       return;
     }
     return this.http

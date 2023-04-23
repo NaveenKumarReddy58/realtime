@@ -32,11 +32,12 @@
                           </span>
                           <span class="DeliveryTo">
                             <strong>PO#</strong>
-                            <span class="Number"><input
-                              type="number"
-                              formControlName="po"
-                              placeholder="Order#"
-                              class="border-0 fw-bold"
+                            <span class="Number"
+                              ><input
+                                type="number"
+                                formControlName="po"
+                                placeholder="Order#"
+                                class="border-0 fw-bold"
                             /></span>
                           </span>
                         </div>
@@ -54,27 +55,20 @@
                           <div class="col-md-12 mb-3">
                             <div class="filed-input text-end">
                               Is this warehouse?
-                              <input disable
-                                  (click)="changeStatus('pickup',isCheckedWarehous[0].pickup)"
-                                  class="head-driver mx-2"
-                                  type="checkbox"
-                                  [checked]="isCheckedWarehous[0].pickup"
-                                  formControlName="is_pickup_warehouse"
-                                />
-                              <div
-                                *ngIf="
-                                  isSubmitted && f['is_pickup_warehouse'].errors
+                              <input
+                                disable
+                                (click)="
+                                  changeStatus(
+                                    'pickup',
+                                    isCheckedWarehous[0].pickup
+                                  )
                                 "
-                                class="text-danger"
-                              >
-                                <div
-                                  *ngIf="
-                                    f['is_pickup_warehouse'].errors['required']
-                                  "
-                                >
-                                  Warehouse is required
-                                </div>
-                              </div>
+                                class="head-driver mx-2"
+                                type="checkbox"
+                                [checked]="isCheckedWarehous[0].pickup"
+                                formControlName="is_pickup_warehouse"
+                                (change)="setPickupWarehouse($event)"
+                              />
                             </div>
                           </div>
                           <div class="col-md-12">
@@ -123,7 +117,6 @@
                               </div>
                             </div>
                           </div>
-                          
                         </div>
                         <div class="row">
                           <div class="col-md-4">
@@ -231,18 +224,34 @@
                         <div class="row">
                           <div class="col-md-2">
                             <span class="Password">
-                              <select placeholder="Country" formControlName="country_code" class="CompanyField country-addorder">
-                                 <option value="" disabled [selected]="true">Select Country</option>
-                                 <option *ngFor="let country of countryCodes" [value]="country.dial_code">
-                                  <span class="mx-3 fw-bold">{{country.dial_code+" "+ country.name }}</span>
-                                 </option>
-                               </select>
-                               <div *ngIf="isSubmitted && f['country_code'].errors" class="text-danger">
-                                <div *ngIf="f['country_code'].errors['required']">
+                              <select
+                                placeholder="Country"
+                                formControlName="country_code"
+                                class="CompanyField country-addorder"
+                              >
+                                <option value="" disabled [selected]="true">
+                                  Select Country
+                                </option>
+                                <option
+                                  *ngFor="let country of countryCodes"
+                                  [value]="country.dial_code"
+                                >
+                                  <span class="mx-3 fw-bold">{{
+                                    country.dial_code + " " + country.name
+                                  }}</span>
+                                </option>
+                              </select>
+                              <div
+                                *ngIf="isSubmitted && f['country_code'].errors"
+                                class="text-danger"
+                              >
+                                <div
+                                  *ngIf="f['country_code'].errors['required']"
+                                >
                                   Country is required
                                 </div>
                               </div>
-                           </span>
+                            </span>
                           </div>
                           <div class="col-md-5">
                             <div class="filed-input">
@@ -340,26 +349,28 @@
                             <strong>Order#</strong>
                             <span class="Number">
                               <input
-                                  type="number"
-                                  formControlName="po"
-                                  placeholder="Order#"
-                                  class="border-0 fw-bold"
-                                />
+                                type="number"
+                                formControlName="po"
+                                placeholder="Order#"
+                                class="border-0 fw-bold"
+                              />
                             </span>
                           </span>
                         </div>
                         <div class="form-div">
                           <div class="row mt-3">
-                            
                             <div class="col-md-12 mb-3">
                               <div class="filed-input text-end">
                                 Is this warehouse?
                                 <input
-                                (click)="changeStatus('to',isCheckedWarehous[0].to)"
-                                class="head-driver mx-2"
+                                  (click)="
+                                    changeStatus('to', isCheckedWarehous[0].to)
+                                  "
+                                  class="head-driver mx-2"
                                   type="checkbox"
                                   [checked]="isCheckedWarehous[1].to"
                                   formControlName="is_dely_warehouse"
+                                  (change)="setDelyWarehouse($event)"
                                 />
                               </div>
                             </div>
@@ -409,7 +420,6 @@
                                 </div>
                               </div>
                             </div>
-
                           </div>
                           <div class="row">
                             <div class="col-md-4">
@@ -517,18 +527,36 @@
                           <div class="row">
                             <div class="col-md-2">
                               <span class="Password">
-                                <select placeholder="Country" formControlName="country_code" class="CompanyField country-addorder">
-                                   <option value="" disabled [selected]="true">Select Country</option>
-                                   <option *ngFor="let country of countryCodes" [value]="country.dial_code">
-                                    <span class="mx-3 fw-bold">{{country.dial_code+" "+ country.name }}</span>
-                                   </option>
-                                 </select>
-                                 <div *ngIf="isSubmitted && f['country_code'].errors" class="text-danger">
-                                  <div *ngIf="f['country_code'].errors['required']">
+                                <select
+                                  placeholder="Country"
+                                  formControlName="country_code"
+                                  class="CompanyField country-addorder"
+                                >
+                                  <option value="" disabled [selected]="true">
+                                    Select Country
+                                  </option>
+                                  <option
+                                    *ngFor="let country of countryCodes"
+                                    [value]="country.dial_code"
+                                  >
+                                    <span class="mx-3 fw-bold">{{
+                                      country.dial_code + " " + country.name
+                                    }}</span>
+                                  </option>
+                                </select>
+                                <div
+                                  *ngIf="
+                                    isSubmitted && f['country_code'].errors
+                                  "
+                                  class="text-danger"
+                                >
+                                  <div
+                                    *ngIf="f['country_code'].errors['required']"
+                                  >
                                     Country is required
                                   </div>
                                 </div>
-                             </span>
+                              </span>
                             </div>
                             <div class="col-md-5">
                               <div class="filed-input">
