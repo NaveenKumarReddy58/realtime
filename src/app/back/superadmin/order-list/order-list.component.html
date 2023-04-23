@@ -88,8 +88,11 @@
                   <th>Status</th>
                   <th>Other Option</th>
                 </tr>
-                <tr class="tr-driver-list" routerLink="/admin/orders/details" *ngFor="let item of orderData; let index = index">
-                  <td>
+                <tr
+                  class="tr-driver-list"
+                  *ngFor="let item of orderData; let index = index"
+                >
+                  <td routerLink="/admin/orders/detail/{{ item.id }}">
                     <img
                       src="./../../../../assets/images/p-icon.png"
                       *ngIf="!item.profile_image"
@@ -105,7 +108,15 @@
                       item.created_at | date : "shortTime"
                     }}</span>
                   </td>
-                  <td>Na</td>
+                  <td>
+                    {{ item?.assigned_order[0]?.driver?.first_name }}
+                    {{ item?.assigned_order[0]?.driver?.last_name }}
+                    {{
+                      item?.assigned_order[0]?.driver?.id
+                        ? "(" + item?.assigned_order[0]?.driver?.id + ")"
+                        : ""
+                    }}
+                  </td>
                   <td>
                     <button
                       class="button-{{
@@ -119,19 +130,62 @@
                     <div class="GetIocn">
                       <span class="fa fa-phone"></span>
                       <span class="fa fa-paper-plane"></span>
-                      <input type="checkbox" name="" />
+
+                      <a (click)="orderDelete(item.id)">
+                        <i class="fa fa-trash Delete"></i>
+                        <i
+                          class="fa fa-spinner fa-spin"
+                          *ngIf="delloading && toggle[item.id]"
+                        ></i>
+                      </a>
+
+                      <input
+                        *ngIf="item?.assigned_order.length == 0"
+                        type="checkbox"
+                        (change)="updateAsign(item.id, $event)"
+                      />
+                      <input
+                        *ngIf="item?.assigned_order.length != 0"
+                        type="checkbox"
+                        disabled
+                      />
                     </div>
                   </td>
                 </tr>
               </table>
             </div>
-            <div class="row mt-3">
-              <div class="col-md-12 text-end">
-                <button routerLink="/admin/order/assign" class="ButtonStyle">
-                  Assign Order
-                </button>
+            <form [formGroup]="addAssign">
+              <div class="row mt-3">
+                <div class="col-md-7"></div>
+                <div class="col-md-3">
+                  <select2
+                    [data]="data"
+                    class="Pro_input_Field"
+                    formControlName="driver_id"
+                    placeholder="Search Driver"
+                  ></select2>
+                  <div
+                    *ngIf="isSubmitted && f['driver_id'].errors"
+                    class="text-danger"
+                  >
+                    <div *ngIf="f['driver_id'].errors['required']">
+                      Driver is required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2 text-end">
+                  <button
+                    type="submit"
+                    (click)="handleSubmit()"
+                    class="ButtonStyle"
+                    [disabled]="!this.assignArr.length"
+                  >
+                    Assign Order
+                    <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+                  </button>
+                </div>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>

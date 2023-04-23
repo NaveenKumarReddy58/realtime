@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Select2Data } from 'ng-select2-component';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/_service/auth.service';
+import { DriverService } from 'src/app/_service/driver.service';
 import { OrderService } from 'src/app/_service/order.service';
 
 @Component({
@@ -12,17 +14,22 @@ import { OrderService } from 'src/app/_service/order.service';
   styleUrls: ['./order-list.component.css'],
 })
 export class OrderListComponent {
-  orderData: any;
+  addAssign!: FormGroup;
   loading = false;
+  isSubmitted = false;
+  orderData: any;
   delloading = false;
   toggle: any = [];
-
+  assignArr: any = [];
+  data: Select2Data = [];
+  orderCountData: any;
   id: any;
   optionstype: any = 'all';
-
   buttonData: any = ['Unassigned', 'Pending', 'Cancelled', 'Successful'];
 
   order$!: Observable<object[]>;
+  driver$!: Observable<object[]>;
+  orderCount$!: Observable<object[]>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,42 +37,69 @@ export class OrderListComponent {
     private router: Router,
     public authService: AuthService,
     public orderService: OrderService,
+    public driverService: DriverService,
     private toastr: ToastrService
   ) {
-    this.orderList(0);
+    this.orderList();
+    this.driverList(0);
 
-    // this.route.queryParams.subscribe((params) => {
-    //   if (params['plan'] != undefined) {
-    //     this.id = params['plan'];
-    //   } else {
-    //     this.id = 0;
-    //   }
+    this.addAssign = formBuilder.group({
+      driver_id: ['', [Validators.required]],
+    });
+  }
 
-    //   if (
-    //     params['plan'] != undefined ||
-    //     params['bookmarked'] != undefined ||
-    //     params['search_text'] != undefined
-    //   ) {
-    //     this.optionstype = 'all';
-    //   }
+  // convenience getter for easy access to form fields
+  get f() {
+    return this.addAssign.controls;
+  }
 
-    //   if (Object.keys(params).length === 0 && params.constructor === Object) {
-    //     this.orderList(0);
-    //   } else {
-    //     this.orderList(this.id, params);
-    //   }
-    // });
+  // convenience getter for easy access to form values
+  get frmValues() {
+    return this.addAssign.value;
   }
 
   ngOnInit(): void {}
 
-  orderList(id?: number, filter?: any) {
-    this.orderService.orderList(id, filter);
+  orderList(filter?: any) {
+    this.orderService.orderList(filter);
     this.order$ = this.orderService.getOrder();
 
     this.order$.subscribe((data: any) => {
       this.orderData = data?.result?.results;
     });
+  }
+
+  orderCount() {
+    this.orderService.orderCount();
+    this.orderCount$ = this.orderService.getOrderCount();
+
+    this.orderCount$.subscribe((data: any) => {
+      this.orderCountData = data?.result;
+    });
+  }
+
+  driverList(id?: number) {
+    this.driverService.driverList(id);
+    this.driver$ = this.driverService.getDrivers();
+
+    this.driver$.subscribe((data: any) => {
+      if (data && data.result && data.result.results) {
+        data.result.results.forEach((data: any) => {
+          this.data.push({
+            value: data?.id,
+            label: data?.first_name + ' ' + data?.last_name,
+          });
+        });
+      }
+    });
+  }
+
+  updateAsign(id: number, e: any) {
+    if (e.target.checked) {
+      this.assignArr.push(id);
+    } else {
+      this.assignArr.pop(id);
+    }
   }
 
   orderDelete(id: any) {
@@ -79,13 +113,48 @@ export class OrderListComponent {
         }
 
         this.orderList();
-        this.router.navigate(['/admin/order']);
+        this.router.navigate(['/admin/dashboard']);
         this.toastr.success('Order Deleted');
         this.delloading = false;
       },
       (error) => {
         this.authService.dataError(error);
         this.delloading = false;
+      }
+    );
+  }
+
+  handleSubmit() {
+    this.isSubmitted = true;
+
+    // stop here if form is invalid
+    if (this.addAssign.invalid) {
+      return;
+    }
+
+    this.loading = true;
+    // console.log('Api Data Err ffff', this.f, this.frmValues);
+
+    var formdata = new FormData();
+    formdata.append('order_ids', JSON.stringify(this.assignArr));
+    formdata.append('driver_id', this.f['driver_id'].value);
+
+    this.orderService.orderAssign(formdata).subscribe(
+      (data: any) => {
+        if (this.authService.resultCodeError(data)) {
+          this.loading = false;
+          return;
+        }
+
+        this.toastr.success(data?.resultDescription);
+        this.router.navigate([
+          '/' + this.authService._isRoleName + '/dashboard',
+        ]);
+        this.loading = false;
+      },
+      (error) => {
+        this.authService.dataError(error);
+        this.loading = false;
       }
     );
   }

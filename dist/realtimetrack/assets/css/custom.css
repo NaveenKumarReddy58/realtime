@@ -513,9 +513,13 @@ button.ButtonStyle {
   border: 0;
   color: #fff;
   font-size: 18px;
-  padding: 10px 25px;
+  padding: 15px 25px;
   border-radius: 15px;
   font-weight: 600;
+}
+button.ButtonStyle:disabled,
+button.ButtonStyle[disabled]{
+  background: #b8ceb6;
 }
 .SearchButton {
   padding: 15px 20px;

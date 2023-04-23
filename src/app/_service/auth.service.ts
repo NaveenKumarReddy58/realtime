@@ -281,6 +281,9 @@ export class AuthService {
 
   tokenRefresh() {
     const refresh = this.getLS('refresh_token');
+    if (refresh) {
+      return;
+    }
     return this.http
       .post<any>(`${this._liveApiUrl}/account/token/refresh/`, {
         refresh,

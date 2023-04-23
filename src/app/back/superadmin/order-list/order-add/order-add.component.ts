@@ -27,7 +27,6 @@ export class OrderAddComponent {
   orderData: any;
   countryCodes: any = CountryPhoneCodes;
 
-
   po: any = Math.floor(100000 + Math.random() * 900000);
 
   id: Number;
@@ -38,10 +37,7 @@ export class OrderAddComponent {
   order$!: Observable<object[]>;
 
   time = { hour: 13, minute: 30 };
-  isCheckedWarehous: any= [
-    {'pickup': false},
-    {'to': false}
-  ];
+  isCheckedWarehous: any = [{ pickup: false }, { to: false }];
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -165,8 +161,8 @@ export class OrderAddComponent {
     });
   }
 
-  orderList(id?: number, filter?: any) {
-    this.orderService.orderList(id, filter);
+  orderList(filter?: any) {
+    this.orderService.orderList(filter);
     this.order$ = this.orderService.getOrder();
 
     this.order$.subscribe((data: any) => {
@@ -237,23 +233,23 @@ export class OrderAddComponent {
       );
     }
   }
-  changeStatus(name:string , value:boolean){
-    if(name == 'to'){
-      if(value){
+  changeStatus(name: string, value: boolean) {
+    if (name == 'to') {
+      if (value) {
         this.isCheckedWarehous[1].to = false;
-      } else if(this.isCheckedWarehous[0].pickup){
+      } else if (this.isCheckedWarehous[0].pickup) {
         this.isCheckedWarehous[1].to = true;
         this.isCheckedWarehous[0].pickup = false;
-      } else if(!value ){
+      } else if (!value) {
         this.isCheckedWarehous[1].to = true;
       }
-    } else{
-      if(value){
+    } else {
+      if (value) {
         this.isCheckedWarehous[0].pickup = false;
-      } else if(this.isCheckedWarehous[1].to){
+      } else if (this.isCheckedWarehous[1].to) {
         this.isCheckedWarehous[0].pickup = true;
         this.isCheckedWarehous[1].to = false;
-      } else if(!value ){
+      } else if (!value) {
         this.isCheckedWarehous[0].pickup = true;
       }
     }

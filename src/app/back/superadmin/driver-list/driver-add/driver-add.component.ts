@@ -241,7 +241,7 @@ export class DriverAddComponent {
       }
 
       this.addDriver.patchValue({
-        certificates: fArr,
+        certificates: JSON.stringify(file),
       });
 
       reader.readAsDataURL(singleFile);

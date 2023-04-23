@@ -21,12 +21,13 @@
                   </div>
                 </div>
                 <div class="DeliveryNumber">
-                  <h4>091100991100</h4>
-                  Delivery : 2-6PM | Wed 20, 2022
+                  <h4>{{ orderData?.po }}</h4>
+                  Delivery : {{ orderData?.dely_time | date : "shortTime" }} |
+                  {{ orderData?.dely_date | date : "fullDate" }}
                 </div>
                 <div class="ChangePic NoPhoto mt-4">&nbsp;</div>
                 <div class="TrackDriver mt-3">
-                  <a href="#!"> Track Order</a>
+                  <a> Track Order</a>
                 </div>
               </div>
             </div>
@@ -53,25 +54,25 @@
                 <div class="Step_List">
                   <ul>
                     <li class="active">
-                      <a href="#!">
+                      <a>
                         <span class="DotSpan">&nbsp;</span>
                         <span class="DotSpan_Title"> Processed </span>
                       </a>
                     </li>
                     <li>
-                      <a href="#!">
+                      <a>
                         <span class="DotSpan">&nbsp;</span>
                         <span class="DotSpan_Title"> Shipped </span>
                       </a>
                     </li>
                     <li>
-                      <a href="#!">
+                      <a>
                         <span class="DotSpan">&nbsp;</span>
                         <span class="DotSpan_Title"> En route </span>
                       </a>
                     </li>
                     <li>
-                      <a href="#!">
+                      <a>
                         <span class="DotSpan">&nbsp;</span>
                         <span class="DotSpan_Title"> Delivered </span>
                       </a>
@@ -87,19 +88,19 @@
                     <div class="OrderDate_Time">
                       <span>
                         <strong>Order (Services ID):</strong>
-                        001199001199
+                        {{ orderData?.po }}
                       </span>
                       <span>
                         <strong>Request By:</strong>
-                        XZY UserName
+                        {{ orderData?.created_by?.email }}
                       </span>
                       <span>
                         <strong>Order Date:</strong>
-                        Wed Now 20, 2022
+                        {{ orderData?.created_at | date : "fullDate" }}
                       </span>
                       <span>
                         <strong>Order Time:</strong>
-                        00 : 00 AM
+                        {{ orderData?.created_at | date : "shortTime" }}
                       </span>
                     </div>
                   </div>
@@ -110,15 +111,15 @@
                       </span>
                       <span>
                         <strong>Delivery Date:</strong>
-                        Wed Now 20, 2022
+                        {{ orderData?.dely_date | date : "fullDate" }}
                       </span>
                       <span>
                         <strong>Delivery Time:</strong>
-                        00 : 00 AM
+                        {{ orderData?.dely_time }}
                       </span>
                       <span>
                         <strong>Remarks:</strong>
-                        00: 00 AM
+                        {{ orderData?.dely_note }}
                       </span>
                     </div>
                   </div>
@@ -126,7 +127,7 @@
                 <div class="row mb-5">
                   <div class="col-md-12">
                     <div class="NewDriver">
-                      <a href="#!">Reassign to new driver</a>
+                      <a>Reassign to new driver</a>
                     </div>
                   </div>
                 </div>
@@ -136,10 +137,19 @@
                     <div class="row">
                       <div class="col-md-12 mb-3">
                         <span class="Password FileUpload">
-                          <strong>Assigned To: Manjeet Singh</strong> On 5 SEP
-                          2023
+                          <strong
+                            >Assigned To:
+                            {{
+                              orderData?.assigned_order[0]?.driver?.first_name
+                            }}
+                            {{
+                              orderData?.assigned_order[0]?.driver?.last_name
+                            }}</strong
+                          >
+                          On {{ orderData?.dely_date | date : "fullDate" }}
                         </span>
                       </div>
+
                       <div class="col-md-6 mb-4">
                         <span class="Password">
                           <input
@@ -147,9 +157,13 @@
                             name=""
                             placeholder="Contact Driver "
                             class="Pro_input_Field"
+                            value="{{
+                              orderData?.assigned_order[0]?.driver?.phone_number
+                            }}"
                           />
                         </span>
                       </div>
+
                       <div class="col-md-6 mb-4">
                         <span class="Password">
                           <input
@@ -157,32 +171,44 @@
                             name=""
                             placeholder="Contact Customer"
                             class="Pro_input_Field"
+                            value="{{ orderData?.customer_phone }}"
                           />
                         </span>
                       </div>
 
-                      <div class="col-md-12 mb-4">
-                        <span class="Password SendNoti">
+                      <div class="col-md-10 mb-4">
+                        <span class="Password">
                           <input
                             type="text"
                             name=""
                             placeholder="Push Notification message to Customer"
                             class="Pro_input_Field"
                           />
+                        </span>
+                      </div>
+
+                      <div class="col-md-2 mb-4">
+                        <span class="Password SendNoti">
                           <button class="SendButton_S">
                             Send
                             <i class="fa fa-paper-plane"></i>
                           </button>
                         </span>
                       </div>
-                      <div class="col-md-12 mb-4">
-                        <span class="Password SendNoti">
+
+                      <div class="col-md-10 mb-4">
+                        <span class="Password">
                           <input
                             type="text"
                             name=""
                             placeholder="Push Notification message to Driver"
                             class="Pro_input_Field"
                           />
+                        </span>
+                      </div>
+
+                      <div class="col-md-2 mb-4">
+                        <span class="Password SendNoti">
                           <button class="SendButton_S">
                             Send
                             <i class="fa fa-paper-plane"></i>
@@ -205,14 +231,12 @@
               <span class="RecentTitleNto">Recent Notification</span>
               <div class="Recente__Noti">
                 <span class="Recent__">
-                  <a href="#!" class="active">Customer</a>
-                  <a href="#!">Driver</a>
+                  <a class="active">Customer</a>
+                  <a>Driver</a>
                 </span>
                 <span class="view__all">
-                  <a href="#!">View All</a>
-                  <a href="#!"
-                    >Clear All <img src="assets/images/filter-icon.png"
-                  /></a>
+                  <a>View All</a>
+                  <a>Clear All <img src="assets/images/filter-icon.png" /></a>
                 </span>
               </div>
               <div class="PacelId mt-4">
