@@ -208,14 +208,14 @@
             </li>
           </ul> -->
         </li>
-        <li >
-          <a [ngClass]="(clickedItem =='driver') ? 'active-link':''">
+        <li class="link-driver" >
+          <a>
             <img src="assets/images/top-icon01.png" />
             <span>Drivers</span>
           </a>
           <ul class="SubMenuBar">
             <li (click)="onClickTopItem('driver')">
-              <a routerLink="/{{ _isRoleName }}/driver/add">
+              <a routerLink="/{{ _isRoleName }}/driver/add"  routerLinkActive="active-link">
                 <img src="assets/images/top-icon01.png" />
                 <span>Add Driver</span>
               </a>
