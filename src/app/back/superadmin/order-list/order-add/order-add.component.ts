@@ -111,6 +111,7 @@ export class OrderAddComponent {
     }
 
     this.addressList();
+    this.warehouseList();
     this.addOrderF.patchValue({ po: this.po });
   }
 
@@ -268,10 +269,21 @@ export class OrderAddComponent {
         this.isCheckedWarehous[0].pickup = true;
       }
     }
-    if( this.isCheckedWarehous[0].pickup){
-      this.addOrderF.patchValue({ dely_address: null });    } 
-      else{
+    if (this.isCheckedWarehous[0].pickup) {
+      this.addOrderF.patchValue({
+        pickup_address: this.warehouseData?.address?.id,
+      });
+      this.addOrderF.patchValue({ dely_address: null });
+    }
+    else if(this.isCheckedWarehous[1].to){
+      this.addOrderF.patchValue({
+        dely_address: this.warehouseData?.address?.id,
+      });
+      this.addOrderF.patchValue({ pickup_address: null });
+    } else{
+      this.addOrderF.patchValue({ dely_address: null });
       this.addOrderF.patchValue({ pickup_address: null });
     }
   }
+  
 }
