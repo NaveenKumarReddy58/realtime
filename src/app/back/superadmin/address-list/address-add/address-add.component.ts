@@ -1,9 +1,11 @@
-import { Component, ElementRef, NgZone, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, NgZone, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AddressService } from 'src/app/_service/address.service';
 import { AuthService } from 'src/app/_service/auth.service';
+import { DialogData, DialogAnimationsComponent } from 'src/app/back/common/dialog-animations/dialog-animations.component';
 
 declare var google: {
   maps: {
@@ -33,8 +35,11 @@ export class AddressAddComponent {
   lng: any;
   markers: any=[];
   place: any;
+  dialogData!: DialogData;
+  isCloseBtn:any;
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: DialogData | any, public dialogRef: MatDialogRef<DialogAnimationsComponent>,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
@@ -48,18 +53,17 @@ export class AddressAddComponent {
       latitude: ['', [Validators.required]],
       longitude: ['', [Validators.required]],
     });
+    this.isCloseBtn = data.isCloseBtn;
   }
 
   ngAfterViewInit() {
     this.initializeMap();
   }
-
-  initializeMap() {
+  closeTheDialog(){
+    this.dialogRef.close();
+  }
+  getCurrentLocation(){
     this.geoCoder = new google.maps.Geocoder();
-    let autocompletefrom = new google.maps.places.Autocomplete(
-      this.searchElementRefFrom.nativeElement
-    );
-
     navigator.geolocation.getCurrentPosition((position) => {
       this.initialCoordinates = {
         lat: position.coords.latitude,
@@ -70,8 +74,26 @@ export class AddressAddComponent {
           position.coords.latitude,
           position.coords.longitude
         );
+
+        this.addressF.patchValue({
+          address: "adsfadfs",
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
+    
       this.addMarker(position.coords.latitude,position.coords.longitude)
     });
+
+   
+
+
+  }
+  initializeMap() {
+    
+    let autocompletefrom = new google.maps.places.Autocomplete(
+      this.searchElementRefFrom.nativeElement
+    );
+    
     autocompletefrom.addListener('place_changed', () => {
       this.zone.run(() => {
         let place = autocompletefrom.getPlace();
@@ -110,6 +132,11 @@ addMarker(latitude:any, long:any) {
             let city: string = '';
             let country: string = '';
             let pinCode: string = '';
+            this.addressF.patchValue({
+              address: place.formatted_address,
+              latitude: this.lat,
+              longitude: this.lng,
+            });
             for (let i = 0; i < place.address_components.length; i++) {
               for (
                 let j = 0;
@@ -216,7 +243,9 @@ addMarker(latitude:any, long:any) {
     return this.addressF.value;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getCurrentLocation();
+  }
 
   handleSubmit() {
     this.isSubmitted = true;
@@ -245,8 +274,8 @@ addMarker(latitude:any, long:any) {
 
     this.addressService.addressAdd(formData).subscribe(
       (data: any) => {
+        this.loading = false;
         if (this.authService.resultCodeError(data)) {
-          this.loading = false;
           return;
         }
 
@@ -254,8 +283,8 @@ addMarker(latitude:any, long:any) {
         this.router.navigate(['/' + this.authService._isRoleName + '/address']);
       },
       (error) => {
-        this.authService.dataError(error);
         this.loading = false;
+        this.authService.dataError(error);
       }
     );
   }

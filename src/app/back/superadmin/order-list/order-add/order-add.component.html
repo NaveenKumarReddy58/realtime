@@ -32,11 +32,12 @@
                           </span>
                           <span class="DeliveryTo">
                             <strong>PO#</strong>
-                            <span class="Number"><input
-                              type="number"
-                              formControlName="po"
-                              placeholder="Order#"
-                              class="border-0 fw-bold"
+                            <span class="Number"
+                              ><input
+                                type="number"
+                                formControlName="po"
+                                placeholder="PO#"
+                                class="border-0 fw-bold"
                             /></span>
                           </span>
                         </div>
@@ -52,7 +53,7 @@
                         /> -->
                         <div class="row mt-3">
                           <div class="col-md-12 mb-3">
-                            <div class="filed-input text-end">
+                            <div class="filed-input mb-3 text-end">
                               Is this warehouse?
                               <input disable
                                   (click)="changeStatus('pickup',isCheckedWarehous[0].pickup)"
@@ -78,12 +79,12 @@
                             </div>
                           </div>
                           <div class="col-md-12">
-                            <div class="filed-input">
+                            <div class="filed-input mb-3">
                               <input
                                 type="text"
                                 formControlName="pickup_company_name"
                                 placeholder="Company Name"
-                                class="CompanyField"
+                                class="CompanyField mb-0"
                               />
                               <div
                                 *ngIf="
@@ -102,10 +103,10 @@
                             </div>
                           </div>
                           <div class="col-md-12">
-                            <div class="filed-input">
+                            <div class="filed-input mb-3">
                               <select2
                                 [data]="data"
-                                class="CompanyField"
+                                class="CompanyField mb-0"
                                 formControlName="pickup_address"
                                 placeholder="Company Address"
                               ></select2>
@@ -127,12 +128,12 @@
                         </div>
                         <div class="row">
                           <div class="col-md-4">
-                            <div class="filed-input">
+                            <div class="filed-input mb-3">
                               <input
                                 type="date"
                                 formControlName="pickup_date"
                                 placeholder="Date"
-                                class="CompanyField"
+                                class="CompanyField mb-0"
                               />
                               <div
                                 *ngIf="isSubmitted && f['pickup_date'].errors"
@@ -147,12 +148,12 @@
                             </div>
                           </div>
                           <div class="col-md-4">
-                            <div class="filed-input">
+                            <div class="filed-input mb-3">
                               <input
                                 type="time"
                                 formControlName="pickup_time"
                                 placeholder="Time"
-                                class="CompanyField"
+                                class="CompanyField mb-0"
                               />
                               <div
                                 *ngIf="isSubmitted && f['pickup_time'].errors"
@@ -167,7 +168,7 @@
                             </div>
                           </div>
                           <div class="col-md-4">
-                            <div class="filed-input">
+                            <div class="filed-input mb-3">
                               <button
                                 class="ButtonStyle"
                                 mat-raised-button
@@ -180,12 +181,12 @@
                         </div>
                         <div class="row">
                           <div class="col-md-6">
-                            <div class="filed-input">
+                            <div class="filed-input mb-3">
                               <input
                                 type="text"
                                 formControlName="pickup_contact_name"
                                 placeholder="Contact Name"
-                                class="CompanyField"
+                                class="CompanyField mb-0"
                               />
 
                               <div
@@ -205,12 +206,12 @@
                             </div>
                           </div>
                           <div class="col-md-6">
-                            <div class="filed-input">
+                            <div class="filed-input mb-3">
                               <input
                                 type="text"
                                 formControlName="pickup_email"
                                 placeholder="Email"
-                                class="CompanyField"
+                                class="CompanyField mb-0"
                               />
                               <div
                                 *ngIf="isSubmitted && f['pickup_email'].errors"
@@ -245,12 +246,12 @@
                            </span>
                           </div>
                           <div class="col-md-5">
-                            <div class="filed-input">
+                            <div class="filed-input mb-3">
                               <input
                                 type="number"
                                 formControlName="pickup_phone"
                                 placeholder="Phone"
-                                class="CompanyField"
+                                class="CompanyField mb-0"
                                 onKeyPress="if(this.value.length==10) return false;"
                               />
 
@@ -272,12 +273,12 @@
                             </div>
                           </div>
                           <div class="col-md-5">
-                            <div class="filed-input">
+                            <div class="filed-input mb-3">
                               <input
                                 type="number"
                                 formControlName="pickup_alt_phone"
                                 placeholder="Alternate Phone"
-                                class="CompanyField"
+                                class="CompanyField mb-0"
                                 onKeyPress="if(this.value.length==10) return false;"
                               />
                               <div
@@ -306,11 +307,12 @@
                         </div>
                         <div class="row">
                           <div class="col-md-12">
-                            <div class="filed-input">
+                            <div class="filed-input mb-3">
                               <textarea
                                 formControlName="pickup_note"
                                 placeholder="Note"
-                                class="CompanyField TextareaField"
+                                maxlength="200"
+                                class="CompanyField mb-0 TextareaField"
                               ></textarea>
 
                               <div
@@ -352,7 +354,7 @@
                           <div class="row mt-3">
                             
                             <div class="col-md-12 mb-3">
-                              <div class="filed-input text-end">
+                              <div class="filed-input mb-3 text-end">
                                 Is this warehouse?
                                 <input
                                 (click)="changeStatus('to',isCheckedWarehous[0].to)"
@@ -364,12 +366,12 @@
                               </div>
                             </div>
                             <div class="col-md-12">
-                              <div class="filed-input">
+                              <div class="filed-input mb-3">
                                 <input
                                   type="text"
                                   formControlName="dely_company_name"
                                   placeholder="Company Name"
-                                  class="CompanyField"
+                                  class="CompanyField mb-0"
                                 />
                                 <div
                                   *ngIf="
@@ -388,10 +390,10 @@
                               </div>
                             </div>
                             <div class="col-md-12">
-                              <div class="filed-input">
+                              <div class="filed-input mb-3">
                                 <select2
                                   [data]="data"
-                                  class="CompanyField"
+                                  class="CompanyField mb-0"
                                   formControlName="dely_address"
                                   placeholder="Company Address"
                                 ></select2>
@@ -413,12 +415,12 @@
                           </div>
                           <div class="row">
                             <div class="col-md-4">
-                              <div class="filed-input">
+                              <div class="filed-input mb-3">
                                 <input
                                   type="date"
                                   formControlName="dely_date"
                                   placeholder="Date"
-                                  class="CompanyField"
+                                  class="CompanyField mb-0"
                                 />
                                 <div
                                   *ngIf="isSubmitted && f['dely_date'].errors"
@@ -433,12 +435,12 @@
                               </div>
                             </div>
                             <div class="col-md-4">
-                              <div class="filed-input">
+                              <div class="filed-input mb-3">
                                 <input
                                   type="time"
                                   formControlName="dely_time"
                                   placeholder="Time"
-                                  class="CompanyField"
+                                  class="CompanyField mb-0"
                                 />
                                 <div
                                   *ngIf="isSubmitted && f['dely_time'].errors"
@@ -453,7 +455,7 @@
                               </div>
                             </div>
                             <div class="col-md-4">
-                              <div class="filed-input">
+                              <div class="filed-input mb-3">
                                 <button
                                   class="ButtonStyle"
                                   mat-raised-button
@@ -466,12 +468,12 @@
                           </div>
                           <div class="row">
                             <div class="col-md-6">
-                              <div class="filed-input">
+                              <div class="filed-input mb-3">
                                 <input
                                   type="text"
                                   formControlName="dely_contact_name"
                                   placeholder="Contact Name"
-                                  class="CompanyField"
+                                  class="CompanyField mb-0"
                                 />
 
                                 <div
@@ -491,12 +493,12 @@
                               </div>
                             </div>
                             <div class="col-md-6">
-                              <div class="filed-input">
+                              <div class="filed-input mb-3">
                                 <input
                                   type="text"
                                   formControlName="dely_email"
                                   placeholder="Email"
-                                  class="CompanyField"
+                                  class="CompanyField mb-0"
                                 />
                                 <div
                                   *ngIf="isSubmitted && f['dely_email'].errors"
@@ -531,12 +533,12 @@
                              </span>
                             </div>
                             <div class="col-md-5">
-                              <div class="filed-input">
+                              <div class="filed-input mb-3">
                                 <input
                                   type="number"
                                   formControlName="dely_phone"
                                   placeholder="Phone"
-                                  class="CompanyField"
+                                  class="CompanyField mb-0"
                                   onKeyPress="if(this.value.length==10) return false;"
                                 />
 
@@ -558,12 +560,12 @@
                               </div>
                             </div>
                             <div class="col-md-5">
-                              <div class="filed-input">
+                              <div class="filed-input mb-3">
                                 <input
                                   type="number"
                                   formControlName="dely_alt_phone"
                                   placeholder="Alternate Phone"
-                                  class="CompanyField"
+                                  class="CompanyField mb-0"
                                   onKeyPress="if(this.value.length==10) return false;"
                                 />
                                 <div
@@ -592,11 +594,12 @@
                           </div>
                           <div class="row">
                             <div class="col-md-12">
-                              <div class="filed-input">
+                              <div class="filed-input mb-3">
                                 <textarea
                                   formControlName="dely_note"
                                   placeholder="Note"
-                                  class="CompanyField TextareaField"
+                                  maxlength="200"
+                                  class="CompanyField mb-0 TextareaField"
                                 ></textarea>
 
                                 <div

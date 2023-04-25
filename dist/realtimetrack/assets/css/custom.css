@@ -772,7 +772,7 @@ textarea.CompanyField {
   margin-bottom: 15px;
 }
 textarea.TextareaField {
-  height: 260px;
+  height: 150px;
 }
 .filed-input button.ButtonStyle {
   padding: 0;
@@ -2874,7 +2874,6 @@ img.searchicon {
   border-radius: 15px !important;
   height: 45px !important;
   padding: 10px 2px !important;
-  margin-bottom: 15px !important;
   border: 0px solid #ccd2d8 !important;
 }
 .from-to-pick-inner .row {

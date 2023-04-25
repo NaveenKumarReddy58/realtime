@@ -27,8 +27,7 @@ export class OrderAddComponent {
   orderData: any;
   countryCodes: any = CountryPhoneCodes;
 
-
-  po: any = Math.floor(100000 + Math.random() * 900000);
+  po: any;
 
   id: Number;
   isAddMode: boolean;
@@ -61,9 +60,9 @@ export class OrderAddComponent {
       po: [''],
       pickup_company_name: ['', [Validators.required]],
       pickup_address: ['', [Validators.required]],
-      is_pickup_warehouse: ['', [Validators.required]],
-      pickup_date: ['', [Validators.required]],
-      pickup_time: ['', [Validators.required]],
+      is_pickup_warehouse: [''],
+      pickup_date: [''],
+      pickup_time: [''],
       pickup_contact_name: ['', [Validators.required]],
       pickup_email: ['', [Validators.required, Validators.email]],
       country_code: [],
@@ -73,14 +72,14 @@ export class OrderAddComponent {
       ],
       pickup_alt_phone: [
         '',
-        [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
+        [Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
       ],
       pickup_note: ['', [Validators.required]],
       dely_company_name: ['', [Validators.required]],
       dely_address: ['', [Validators.required]],
       is_dely_warehouse: [''],
-      dely_date: ['', [Validators.required]],
-      dely_time: ['', [Validators.required]],
+      dely_date: [''],
+      dely_time: [''],
       dely_contact_name: ['', [Validators.required]],
       dely_email: ['', [Validators.required, Validators.email]],
       dely_phone: [
@@ -89,7 +88,7 @@ export class OrderAddComponent {
       ],
       dely_alt_phone: [
         '',
-        [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
+        [Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
       ],
       dely_note: ['', [Validators.required]],
       order_no: [''],
@@ -135,6 +134,9 @@ export class OrderAddComponent {
       width: '800px',
       enterAnimationDuration,
       exitAnimationDuration,
+      data: {
+        isCloseBtn: true
+      },
     });
   }
 
@@ -161,7 +163,16 @@ export class OrderAddComponent {
     this.warehouse$ = this.warehouseService.getWarehouse();
 
     this.warehouse$.subscribe((data: any) => {
-      this.warehouseData = data?.result;
+      // if (data?.result) {
+      //   data?.result.forEach((obj: any) => {
+      //     if (obj.is_main_localation) {
+      //       this.warehouseData = obj;
+      //     }
+      //   });
+      // }
+      if (data?.result) {
+        this.warehouseData = data?.result[0]
+      }
     });
   }
 
@@ -256,6 +267,11 @@ export class OrderAddComponent {
       } else if(!value ){
         this.isCheckedWarehous[0].pickup = true;
       }
+    }
+    if( this.isCheckedWarehous[0].pickup){
+      this.addOrderF.patchValue({ dely_address: null });    } 
+      else{
+      this.addOrderF.patchValue({ pickup_address: null });
     }
   }
 }
