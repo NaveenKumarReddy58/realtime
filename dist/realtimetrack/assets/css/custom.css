@@ -332,6 +332,8 @@ button.ButtonIcon {
 .TopMenu li a:hover {
   color: #0eb002;
 }
+.TopMenu li a:active {
+}
 .TopMenu li img {
   max-width: 25px;
   padding-bottom: 5px;
@@ -776,7 +778,7 @@ textarea.CompanyField {
   margin-bottom: 15px;
 }
 textarea.TextareaField {
-  height: 150px;
+  height: 260px;
 }
 .filed-input button.ButtonStyle {
   padding: 0;
