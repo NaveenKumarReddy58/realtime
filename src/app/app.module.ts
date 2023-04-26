@@ -47,7 +47,7 @@ import { MatSelectCountryModule } from '@angular-material-extensions/select-coun
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
@@ -133,6 +133,8 @@ import { DriverDetailsComponent } from './back/superadmin/driver-list/driver-det
       useClass: AuthInterceptor,
       multi: true,
     },
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+    { provide: MatDialogRef, useValue: {} }
   ],
   bootstrap: [AppComponent],
 })

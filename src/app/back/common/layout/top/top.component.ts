@@ -18,6 +18,7 @@ export class TopComponent {
   _isRoleName: any = '0';
 
   planCount$!: Observable<object[]>;
+  clickedItem: string= '';
 
   ngOnInit(): void {}
 
@@ -95,5 +96,8 @@ export class TopComponent {
       start_date: null,
       end_date: null,
     });
+  }
+  onClickTopItem(item:string){
+    this.clickedItem = item;
   }
 }
