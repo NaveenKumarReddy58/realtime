@@ -238,3 +238,25 @@ input[type=number] {
 .mat-mdc-dialog-container .mdc-dialog__surface {
   border-radius: 15px !important;
 }
+.drivers-list-phone-dialog{
+  width: 216px;
+  border-radius: 15px;
+  filter: drop-shadow(0px 3px 3.5px rgba(0,0,0,0.16));
+  background-color: #ffffff;
+  position: absolute;
+  z-index: 11;
+  right: 0;
+  top: 0;
+  padding: 10px;
+}
+.drivers-list-phone-dialog .fa-copy{
+  border-left: 1px solid gray;
+  cursor: pointer;
+  color: #555555;
+}
+.drivers-list-phone-dialog .contact-number{
+  color: black;
+}
+.cursor-pointer{
+  cursor: pointer;
+}

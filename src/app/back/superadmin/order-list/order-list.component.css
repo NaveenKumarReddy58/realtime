@@ -1,0 +1,30 @@
+.list-of-items{
+    list-style: none;
+}
+.drop-down-search{
+    width: 100%;
+    height: 31px;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+.drop-down-active{
+    background-color: white;
+    width: 130px;
+}
+.dropdown-multiselect{
+    width: 130px;
+}
+.list-item{
+    display: flex;
+    font-weight: normal;
+}
+.list-checkbox{
+    width: 25%;
+}
+.list-value{
+    width: 75%;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

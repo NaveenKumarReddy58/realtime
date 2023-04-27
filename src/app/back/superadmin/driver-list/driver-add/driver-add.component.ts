@@ -84,7 +84,14 @@ export class DriverAddComponent {
       is_head_driver: [''],
       is_active: ['true'],
       image: [''],
+      driver_insurance:[''],
       certificates: [''],
+      country_code:[''],
+      driver_license:[''],
+      driver_safety:[''],
+      driver_abstract:[''],
+      driver_certificate:[''],
+      driver_cvor:['']
     });
 
     if (!this.isAddMode) {
@@ -115,12 +122,12 @@ export class DriverAddComponent {
 
   handleSubmit() {
     this.isSubmitted = true;
-    for (var i = 0; i < this.certificatesItems.length - 1; i++) {
-      if (this.certificatesItems[i].img.indexOf('edit-icon') > -1) {
-        this.isShowCertificationErr = true;
-        return;
-      }
-    }
+    // for (var i = 0; i < this.certificatesItems.length - 1; i++) {
+    //   if (this.certificatesItems[i].img.indexOf('edit-icon') > -1) {
+    //     this.isShowCertificationErr = true;
+    //     return;
+    //   }
+    // }
 
     // stop here if form is invalid
     if (this.addDriver.invalid) {
@@ -239,10 +246,37 @@ export class DriverAddComponent {
         fArr.push(file[i]);
         console.log('certificates' + i, file[i]);
       }
-
-      this.addDriver.patchValue({
-        certificates: fArr,
-      });
+      if(this.certificateName == 'Licence'){
+        this.addDriver.patchValue({
+          driver_license: singleFile,
+        });
+      } else if(this.certificateName == 'CVOR'){
+        this.addDriver.patchValue({
+          driver_cvor: singleFile,
+        });
+      } else if(this.certificateName == 'Insurance'){
+        this.addDriver.patchValue({
+          driver_insurance: singleFile,
+        });
+      } else if(this.certificateName == 'Certificate'){
+        this.addDriver.patchValue({
+          driver_certificate: singleFile,
+        });
+      } else if(this.certificateName == 'Abstract'){
+        this.addDriver.patchValue({
+          driver_abstract: singleFile,
+        });
+      } else if(this.certificateName == 'Safety'){
+        this.addDriver.patchValue({
+          driver_safety: singleFile,
+        });
+      } else if(this.certificateName == 'Add More'){
+        console.log("Add more")
+        // this.addDriver.patchValue({
+        //   other_certificates: singleFile,
+        // });
+      }
+      
 
       reader.readAsDataURL(singleFile);
 

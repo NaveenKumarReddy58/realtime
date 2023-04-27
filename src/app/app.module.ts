@@ -62,6 +62,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { DriverDetailsComponent } from './back/superadmin/driver-list/driver-details/driver-details.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -126,6 +127,7 @@ import { DriverDetailsComponent } from './back/superadmin/driver-list/driver-det
     MatSelectCountryModule.forRoot('en'),
     Select2Module,
     GoogleMapsModule,
+    MatSelectModule
   ],
   providers: [
     {
