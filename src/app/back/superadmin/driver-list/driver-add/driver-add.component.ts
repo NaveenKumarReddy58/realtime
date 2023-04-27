@@ -136,7 +136,7 @@ export class DriverAddComponent {
 
     if (this.addDriver.value['is_head_driver'] == '') {
       this.addDriver.patchValue({
-        is_head_driver: false,
+        is_head_driver: true,
       });
     }
 
