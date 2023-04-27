@@ -70,7 +70,7 @@
             </div>
           </div>
           <div class="row mt-3">
-            <div class="Table_Scroll">
+            <div class="">
               <table
                 class="Order_Table"
                 cellpadding="0"
@@ -84,8 +84,54 @@
                   <th>Delivery Date</th>
                   <th>Delivery Time</th>
                   <th>Actual time</th>
-                  <th>Driver</th>
-                  <th>Status</th>
+                  <th [ngClass]="isShowDriversFilter? 'drop-down-active':''" class=" cursor-pointer position-relative width-130">
+                     <span (click)="openDriversFilter()">Driver</span>
+                    <div *ngIf="isShowDriversFilter" class="dropdown-multiselect drivers-list-phone-dialog top-100 right-0">
+                      <div class="mb-3">
+                        <input type="text" placeholder="Search" class="drop-down-search" (input)="filterOptione($event)"/>
+                      </div>
+                      <ul class="list-of-items">
+                        <li class="list-item mb-2" *ngFor="let val of options">
+                          <div class="list-value">
+                            {{val}}
+                          </div>
+                          <div class="list-checkbox">
+                            <input
+                              class="head-driver mx-2"
+                              type="checkbox"
+                              value="true"
+                            />
+                          </div>
+                        </li>
+                        
+                        
+                      </ul>
+                    </div>                 
+                  </th>
+                  <th [ngClass]="isShowStatusFilter? 'drop-down-active':''" class="width-130 cursor-pointer position-relative"> 
+                    <span (click)="openStatusFilter()">Status</span>
+                    <div *ngIf="isShowStatusFilter" class="dropdown-multiselect drivers-list-phone-dialog top-100 right-0">
+                      <div class="mb-3">
+                        <input type="text" placeholder="Search" class="drop-down-search" (input)="filterStatusOptione($event)"/>
+                      </div>
+                      <ul class="list-of-items">
+                        <li class="list-item mb-2" *ngFor="let value of statusOptions">
+                          <div class="list-value">
+                            {{value}}
+                          </div>
+                          <div class="list-checkbox">
+                            <input
+                              class="head-driver mx-2"
+                              type="checkbox"
+                              value="true"
+                            />
+                          </div>
+                        </li>
+                        
+                        
+                      </ul>
+                    </div>
+                 </th>
                   <th>Other Option</th>
                 </tr>
                 <tr
@@ -123,7 +169,16 @@
                   </td>
                   <td>
                     <div class="GetIocn">
-                      <span class="fa fa-phone"></span>
+                      <a class="drivers-phone-container position-relative">
+                        <img (click)="onClickPhone(index)" class="push-notification" src="../../../../assets/images/phone.jpg" />
+                        <div *ngIf="(isShowContactDialog && index == phoneIndex)" class="drivers-list-phone-dialog">
+                          <div class="confirmation-msg">
+                            <div class="row mx-2">
+                                <span class="contact-number">+91 9874359345 <i class="fa fa-copy px-2"  (click)="copyText('+91 9874359345')" aria-hidden="true"></i></span>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
                       <span class="fa fa-paper-plane"></span>
 
                       <a (click)="orderDelete(item.id)">
@@ -189,3 +244,6 @@
     <!-- Tab Content Area Start /////////// 01 -->
   </div>
 </div>
+<div *ngIf="isShowDriversFilter" (click)="openDriversFilter()" class="overlay bg-none"></div>
+<div *ngIf="isShowStatusFilter" (click)="openStatusFilter()" class="overlay bg-none"></div>
+<div *ngIf="isShowContactDialog" (click)="onClickPhone($event)" class="overlay"></div>

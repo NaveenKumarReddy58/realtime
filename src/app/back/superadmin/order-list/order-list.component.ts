@@ -30,6 +30,14 @@ export class OrderListComponent {
   order$!: Observable<object[]>;
   driver$!: Observable<object[]>;
   orderCount$!: Observable<object[]>;
+  _unfilteredOptions: any = [];
+  _unfilteredStatus: any = [];
+  options: any;
+  isShowDriversFilter: boolean = false;
+  isShowStatusFilter: boolean= false;
+  phoneIndex: any;
+  isShowContactDialog: boolean= false;
+  statusOptions: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -58,7 +66,8 @@ export class OrderListComponent {
     return this.addAssign.value;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   orderList(filter?: any) {
     this.orderService.orderList(filter);
@@ -66,6 +75,15 @@ export class OrderListComponent {
 
     this.order$.subscribe((data: any) => {
       this.orderData = data?.result?.results;
+      this._unfilteredOptions=[];
+      this.orderData.forEach((element:any) => {
+        this._unfilteredOptions.push(element?.assigned_order[0]?.driver?.first_name+" "+element?.assigned_order[0]?.driver?.last_name)
+        this._unfilteredStatus.push(element?.order_status)
+      });
+
+      this.options = this._unfilteredOptions;
+      this.statusOptions= this._unfilteredStatus;
+
     });
   }
 
@@ -78,6 +96,21 @@ export class OrderListComponent {
     });
   }
 
+  copyText(val: string){
+    let selBox = document.createElement('textarea');
+      selBox.style.position = 'fixed';
+      selBox.style.left = '0';
+      selBox.style.top = '0';
+      selBox.style.opacity = '0';
+      selBox.value = val;
+      document.body.appendChild(selBox);
+      selBox.focus();
+      selBox.select();
+      document.execCommand('copy');
+      document.body.removeChild(selBox);
+      this.isShowContactDialog= !this.isShowContactDialog;
+
+  }
   driverList(id?: number) {
     this.driverService.driverList(id);
     this.driver$ = this.driverService.getDrivers();
@@ -101,7 +134,22 @@ export class OrderListComponent {
       this.assignArr.pop(id);
     }
   }
-
+  public filterOptione(filter: any): void {
+    this.options = this._unfilteredOptions.filter((x:any) => x.toLowerCase().includes(filter.target.value.toLowerCase()));
+   }
+   public filterStatusOptione(filter: any): void {
+    this.statusOptions = this._unfilteredStatus.filter((x:any) => x.toLowerCase().includes(filter.target.value.toLowerCase()));
+   }
+   openDriversFilter(){
+    this.isShowDriversFilter= !this.isShowDriversFilter;
+   }
+   openStatusFilter(){
+    this.isShowStatusFilter= !this.isShowStatusFilter;
+   }
+   onClickPhone(index:any){
+    this.phoneIndex = index;
+    this.isShowContactDialog= !this.isShowContactDialog;
+  }
   orderDelete(id: any) {
     this.toggle[id] = true;
     this.delloading = true;
