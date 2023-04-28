@@ -217,7 +217,7 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
-        path: 'driver/details',
+        path: 'driver/details/:id',
         component: DriverDetailsComponent,
         title: 'Driver Details',
         canActivate: [AuthGuard],

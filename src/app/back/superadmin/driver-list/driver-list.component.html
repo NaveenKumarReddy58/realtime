@@ -106,7 +106,7 @@
                   <th>Status</th>
                   <th>Other Options</th>
                 </tr>
-                <tr class="tr-driver-list" routerLink="/admin/driver/details" *ngFor="let item of items; let index = index">
+                <tr class="tr-driver-list" routerLink="/admin/driver/details/{{item.id}}" *ngFor="let item of items; let index = index">
                     <td>   
                       <span [ngClass]="item.is_active ? 'active-dot' : 'inactive-dot'"></span>
                       {{ item.first_name }} {{ item.last_name }}

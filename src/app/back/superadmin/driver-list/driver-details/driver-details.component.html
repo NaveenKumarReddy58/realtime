@@ -18,11 +18,11 @@
                             <div class="ProfilePik">
                                 <div class="ChangePic NoPhoto position-relative">
                                     <span class="percentage">90%</span>
-                                    <img src="assets/images/profilephoto.png">
+                                    <img [src]="editDriverForm.value.profile_img">
                                 </div>
                                 <div class="ChangeImg NoPhoto mt-2">
-                                    <p class="m-0 driver-name">Manjeeth Singh</p>
-                                    <p>joined on: 00-00-0000</p>
+                                    <p class="m-0 driver-name">{{editDriverForm.value.first_name+" "+editDriverForm.value.last_name}}</p>
+                                    <p>Joined On: {{editDriverForm.value.date_joined | date}}</p>
                                 </div>
                                 <div class="ChangePic NoPhoto mt-4 google-map">
                                     Google Map Location
@@ -33,7 +33,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <form class="ProfileFor">
+                            <form class="ProfileFor" [formGroup]="editDriverForm">
                                 <div class="row">
                                     <!-- Popup Box -->
                                     <div class="CardPopup py-0">
@@ -42,9 +42,9 @@
                                                 <table class="__TodayOrder">
                                                     <tr>
                                                         <td class="px-0">
-                                                            Driver Status: ACTIVE
+                                                            Driver Status: {{editDriverForm.value.is_active ? 'ACTIVE':'INACTIVE'}}
                                                             <label class="switch">
-                                                                <input type="checkbox" checked>
+                                                                <input type="checkbox" formControlName="is_active">
                                                                 <span class="slider round"></span>
                                                               </label>
                                                         </td>
@@ -72,6 +72,7 @@
                                             <div class="col-md-6 mb-4">
                                                 <span class="Password">
                                                     <input type="text" name=""
+                                                    formControlName="first_name"
                                                         placeholder="First Name"
                                                         class="Pro_input_Field">
                                                 </span>
@@ -79,6 +80,7 @@
                                             <div class="col-md-6 mb-4">
                                                 <span class="Password">
                                                     <input type="text" name=""
+                                                        formControlName="last_name"
                                                         placeholder="Last Name"
                                                         class="Pro_input_Field">
                                                 </span>
@@ -88,6 +90,7 @@
                                                 <span class="Password">
                                                     <input type="number" name=""
                                                         placeholder="Mobile Number"
+                                                        formControlName="phone_number"
                                                         class="Pro_input_Field driver-input-field"
                                                         onKeyPress="if(this.value.length==10) return false;">
                                                 </span>
@@ -95,6 +98,7 @@
                                             <div class="col-md-6 mb-4">
                                                 <span class="Password">
                                                     <input type="text" name=""
+                                                        formControlName="email"
                                                         placeholder="Email"
                                                         class="Pro_input_Field">
                                                 </span>
@@ -102,7 +106,7 @@
                                             <div class="col-md-6 mb-4">
                                                 <span class="Password FileUpload">
                                                     <strong>Address:</strong>
-                                                    <span>012, XYZ, Dummy text</span>
+                                                    <span>{{editDriverForm.value.address}}</span>
                                                 </span>
                                             </div>
                                             <div class="col-md-6 mb-4">

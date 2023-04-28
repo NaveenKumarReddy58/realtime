@@ -59,6 +59,7 @@ export class DriverAddComponent {
   certificateImages: any;
   certificateName: any;
   isShowCertificationErr: boolean = false;
+  moreCertificates: any=[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -91,7 +92,8 @@ export class DriverAddComponent {
       driver_safety:[''],
       driver_abstract:[''],
       driver_certificate:[''],
-      driver_cvor:['']
+      driver_cvor:[''],
+      other_certificates:[]
     });
 
     if (!this.isAddMode) {
@@ -133,7 +135,12 @@ export class DriverAddComponent {
     if (this.addDriver.invalid) {
       return;
     }
-
+    if(this.moreCertificates.length > 0){
+      this.addDriver.patchValue({
+        other_certificates: this.moreCertificates,
+      });
+    }
+    
     if (this.addDriver.value['is_head_driver'] == '') {
       this.addDriver.patchValue({
         is_head_driver: true,
@@ -235,7 +242,11 @@ export class DriverAddComponent {
           if (this.certificatesItems[i].name == this.certificateName) {
             this.certificatesItems[i].img = reader.result;
             if (this.certificateName == 'Add more') {
-              this.certificatesItems[i].name = event.target.files[0].name;
+              const index = this.certificatesItems.findIndex((object:any) => {
+                return object.name === 'Add more';
+              });
+              this.certificatesItems[i].name = index+event.target.files[0].name;
+              this.certificatesItems[i].originalName= 'Add more';
             }
           }
         }
@@ -270,11 +281,9 @@ export class DriverAddComponent {
         this.addDriver.patchValue({
           driver_safety: singleFile,
         });
-      } else if(this.certificateName == 'Add More'){
-        console.log("Add more")
-        // this.addDriver.patchValue({
-        //   other_certificates: singleFile,
-        // });
+      } else if(this.certificateName == 'Add more'){
+        this.moreCertificates.push(singleFile) 
+        
       }
       
 
@@ -296,10 +305,34 @@ export class DriverAddComponent {
   removePhoto(e: any, imgName: any) {
     e.stopPropagation();
     for (var i = 0; i < this.certificatesItems.length; i++) {
-      if (this.certificatesItems[i].name == this.certificateName) {
-        this.certificatesItems[i].img = 'assets/images/edit-icon.png';
+      if (this.certificatesItems[i].name == imgName) {
+        if(this.certificatesItems[i].originalName == 'Add more'){
+          this.certificatesItems[i].name= 'Add more';
+          this.certificatesItems[i].img = 'assets/images/edit-icon.png';
+          this.removeDuplicateAddMores(this.certificatesItems);
+        } else{
+          this.certificatesItems[i].img = 'assets/images/edit-icon.png';
+
+        }
       }
     }
+  }
+  removeDuplicateAddMores(arr:any){
+    
+    const uniqueIds:any = [];
+    
+    const unique = arr.filter((element:any) => {
+      const isDuplicate = uniqueIds.includes(element.name);
+    
+      if (!isDuplicate) {
+        uniqueIds.push(element.name);
+    
+        return true;
+      }
+    
+      return false;
+    });
+    this.certificatesItems= unique;
   }
   removeProfilePhoto(e: any) {
     e.stopPropagation();

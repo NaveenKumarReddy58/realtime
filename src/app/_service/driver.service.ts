@@ -77,6 +77,12 @@ export class DriverService {
     );
   }
 
+  driverDetails(id:any){
+    return this.http.get<any>(
+      `${this._liveApiUrl}/account/driver-details/${id}`
+    );
+  }
+
   driverList(id?: Number) {
     let tail = '';
     if (id) {

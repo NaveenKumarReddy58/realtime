@@ -57,3 +57,7 @@
 .back-to-list{
     margin-left: auto;
 }
+input.Pro_input_Field {
+  height: 46px;
+  font-weight: 400;
+}
