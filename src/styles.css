@@ -351,3 +351,6 @@ input[type=number] {
   border-radius: 20px;
   font-weight: 600;
 }
+.Order_Table tr td {
+  font-weight: normal;
+}
