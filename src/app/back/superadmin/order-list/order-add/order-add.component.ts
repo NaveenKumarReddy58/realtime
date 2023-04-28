@@ -168,7 +168,10 @@ export class OrderAddComponent {
     this.warehouse$ = this.warehouseService.getWarehouse();
 
     this.warehouse$.subscribe((data: any) => {
-      this.warehouseData = data?.result;
+      if(data){
+        this.warehouseData = data?.result[0];
+      }
+      
     });
   }
 
