@@ -179,8 +179,20 @@
                           </div>
                         </div>
                       </a>
-                      <span class="fa fa-paper-plane"></span>
-
+                      <img class="push-notification" src="../../../../assets/images/pushnotification.png.jpg" />
+                      <input
+                        *ngIf="item?.assigned_order.length == 0"
+                        (change)="updateAsign(item.id, $event)"
+                        class="head-driver"
+                        type="checkbox"
+                      />
+                      <input
+                        *ngIf="item?.assigned_order.length != 0"
+                        class="head-driver"
+                        type="checkbox"
+                        disabled
+                      />
+                      <a [routerLink]="'/admin/orders/detail/'+item.id"><i style="font-size: 18px;" class="fa fa-eye" aria-hidden="true"></i></a>
                       <a (click)="orderDelete(item.id)">
                         <i class="fa fa-trash Delete"></i>
                         <i
@@ -188,17 +200,6 @@
                           *ngIf="delloading && toggle[item.id]"
                         ></i>
                       </a>
-
-                      <input
-                        *ngIf="item?.assigned_order.length == 0"
-                        type="checkbox"
-                        (change)="updateAsign(item.id, $event)"
-                      />
-                      <input
-                        *ngIf="item?.assigned_order.length != 0"
-                        type="checkbox"
-                        disabled
-                      />
                     </div>
                   </td>
                 </tr>

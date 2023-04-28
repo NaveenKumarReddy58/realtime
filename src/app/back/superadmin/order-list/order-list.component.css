@@ -23,8 +23,26 @@
 }
 .list-value{
     width: 75%;
+    font-size: 12px;
     text-align: left;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.GetIcon{
+    gap: 13px;
+}
+.Order_Table tr td img {
+    max-width: 18px;
+}
+td,tr,th{
+    border:1px solid white;
+    border-collapse: collapse;
+    cursor:all-scroll;
+   }
+   table{
+    border-collapse: collapse;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10+ and Edge */
+    user-select: none; /* Standard syntax */
+   }

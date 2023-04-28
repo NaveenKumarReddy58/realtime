@@ -86,7 +86,7 @@ export class OrderListComponent {
 
     });
   }
-
+  
   orderCount() {
     this.orderService.orderCount();
     this.orderCount$ = this.orderService.getOrderCount();
