@@ -38,6 +38,9 @@ export class OrderListComponent {
   phoneIndex: any;
   isShowContactDialog: boolean= false;
   statusOptions: any;
+  isShowPushNotificationForm: boolean= false;
+  imageSrc: any= "../../assets/images/photoupload.png";
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -76,11 +79,13 @@ export class OrderListComponent {
     this.order$.subscribe((data: any) => {
       this.orderData = data?.result?.results;
       this._unfilteredOptions=[];
-      this.orderData.forEach((element:any) => {
-        this._unfilteredOptions.push(element?.assigned_order[0]?.driver?.first_name+" "+element?.assigned_order[0]?.driver?.last_name)
-        this._unfilteredStatus.push(element?.order_status)
-      });
-
+      if(this.orderData){
+        this.orderData.forEach((element:any) => {
+          this._unfilteredOptions.push(element?.assigned_order[0]?.driver?.first_name+" "+element?.assigned_order[0]?.driver?.last_name)
+          this._unfilteredStatus.push(element?.order_status)
+        });
+      }
+     
       this.options = this._unfilteredOptions;
       this.statusOptions= this._unfilteredStatus;
 
@@ -126,12 +131,27 @@ export class OrderListComponent {
       }
     });
   }
+  onClickPushNotification(){
+    this.isShowPushNotificationForm = !this.isShowPushNotificationForm;
+  }
 
   updateAsign(id: number, e: any) {
     if (e.target.checked) {
       this.assignArr.push(id);
     } else {
       this.assignArr.pop(id);
+    }
+  }
+  readURL(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.imageSrc = reader.result
+      };
+
+      reader.readAsDataURL(file);
     }
   }
   public filterOptione(filter: any): void {

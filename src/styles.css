@@ -260,3 +260,94 @@ input[type=number] {
 .cursor-pointer{
   cursor: pointer;
 }
+
+.create-push-notification-dialog{
+  width: 100%;
+  border-radius: 15px;
+  filter: drop-shadow(0px 3px 0px rgba(0,0,0,0.16));
+  background-color: #ffffff;
+  position: absolute;
+  z-index: 11;
+  right: 0;
+  padding: 10px;
+}
+.push-notification-overlay{
+  background-color: white;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.6;
+  z-index: 1;
+}
+.cpn{
+  font-size: 14px;
+  color: #202020;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.cpn-form-container{
+  border: 1px solid gray;
+  border-radius: 15px;
+}
+.cpn-form-container input{
+  border: none;
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 5px;
+  width: 100%;
+  height: 40px;
+}
+.cpn-form-container input::placeholder{
+  font-size: 14px;
+  color: #202020;
+  font-weight: bold;
+}
+.cpn-form-container textarea, textarea::placeholder{
+  border: none;
+  width: 100%;
+  height: 80px;
+  overflow: hidden;
+  font-size: 14px;
+  color: lightgray;
+}
+.add-files{
+  border: 1px solid gray;
+  border-radius: 15px;
+}
+.add-files img{
+  text-align: center;
+  width: 100px;
+  height: 70px;
+  margin: 20px 20px 10px 20px;
+}
+.add-files div{
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #202020;
+  font-weight: 500;
+}
+.push-notification-btn-send{
+  background: #0eb002;
+  border: 0;
+  color: #fff;
+  width: 100%;
+  font-size: 18px;
+  padding: 20px 25px;
+  border-radius: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.push-notification-btn-send img,.push-notification-btn-cancel img{
+  width: 27px;
+  margin-top: -8px;
+}
+.push-notification-btn-cancel{
+  background: white;
+  width: 100%;
+  border: 1px solid gray;
+  color: black;
+  font-size: 18px;
+  padding: 20px 25px;
+  border-radius: 20px;
+  font-weight: 600;
+}

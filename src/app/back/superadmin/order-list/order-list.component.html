@@ -56,6 +56,40 @@
       <!-- Status Button /////////// -->
       <!-- Table View -->
       <div class="Table mt-4">
+        <div *ngIf="isShowPushNotificationForm" class="create-push-notification-dialog">
+          <div class="cpn mx-2">Create Push Notification</div>
+          <div class="">
+
+            <div class="row mx-2">
+              <div class="col-8 cpn-form-container">
+                <input type="text" placeholder="Enter Title"/>
+                <br>
+                <textarea placeholder="Enter Your Message here..."></textarea>
+              </div>
+              <div class="col-2 text-center">
+                <div class="add-files" (click)="fileInput.click()" >
+                  <img *ngIf="imageSrc" [src]="imageSrc" />
+                  <div>Add Files</div>
+                  <input
+                    #fileInput
+                    type="file"
+                    (change)="readURL($event)"
+                    style="display: none"
+                    accept="image/*"
+                />
+                </div>
+              </div>
+              <div class="col-2 push-notification-btns">
+                <div>
+                  <button class="push-notification-btn-send">Send <img src="../../assets/images/pushnotification-white.jpg"></button>
+                </div>
+                <div>
+                  <button class="push-notification-btn-cancel" (click)="onClickPushNotification()">Cancel <img src="../../assets/images/cancel.jpg"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="OrderList">
           <div class="row">
             <div class="col-md-6 Oreder">
@@ -179,7 +213,7 @@
                           </div>
                         </div>
                       </a>
-                      <img class="push-notification" src="../../../../assets/images/pushnotification.png.jpg" />
+                      <img (click)="onClickPushNotification()" class="push-notification" src="../../../../assets/images/pushnotification.png.jpg" />
                       <input
                         *ngIf="item?.assigned_order.length == 0"
                         (change)="updateAsign(item.id, $event)"
@@ -248,3 +282,4 @@
 <div *ngIf="isShowDriversFilter" (click)="openDriversFilter()" class="overlay bg-none"></div>
 <div *ngIf="isShowStatusFilter" (click)="openStatusFilter()" class="overlay bg-none"></div>
 <div *ngIf="isShowContactDialog" (click)="onClickPhone($event)" class="overlay"></div>
+<div *ngIf="isShowPushNotificationForm" (click)="onClickPushNotification()" class="push-notification-overlay"></div>
