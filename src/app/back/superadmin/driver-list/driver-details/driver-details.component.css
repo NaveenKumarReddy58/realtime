@@ -61,3 +61,22 @@ input.Pro_input_Field {
   height: 46px;
   font-weight: 400;
 }
+.uploaded-documenst{
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  color: black;
+}
+.fa-file{
+  font-size: 22px;
+  color: #0eb002;
+}
+.fa-paperclip{
+  color: #0eb002;
+  position: absolute;
+  left: 2px;
+  top: 5px;
+}
+.view-mode{
+  pointer-events: none;
+}

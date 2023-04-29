@@ -10,6 +10,7 @@ import { DriverService } from 'src/app/_service/driver.service';
 })
 export class DriverDetailsComponent {
   public editDriverForm:any;
+  public isEditMode: boolean= false;
   
   constructor(private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder,private router: Router , private driverService: DriverService){
     this.editDriverForm = formBuilder.group({
@@ -34,6 +35,7 @@ export class DriverDetailsComponent {
         driver_cvor:[''],
         date_joined:[''],
         profile_img:['assets/images/profilephoto.png']
+
     })
     let driverId = this.activatedRoute.snapshot.paramMap.get('id');
     this.getDriverDetails(driverId);
@@ -51,9 +53,11 @@ export class DriverDetailsComponent {
           address: driverDetails.address,
           is_active: driverDetails.is_active,
           date_joined: driverDetails.date_joined,
-          profile_img: driverDetails.profile_image
+          profile_img: driverDetails.profile_image,
+          certificates: driverDetails.certificate
         })
       }
+      debugger
     })
   }
 
