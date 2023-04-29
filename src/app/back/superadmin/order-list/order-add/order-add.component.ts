@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -60,11 +60,11 @@ export class OrderAddComponent {
       pickup_company_name: ['', [Validators.required]],
       pickup_address: ['', [Validators.required]],
       is_pickup_warehouse: ['', [Validators.required]],
-      pickup_date: [''],
+      pickup_date: ['', [Validators.required]],
       pickup_time: [''],
       pickup_contact_name: ['', [Validators.required]],
       pickup_email: ['', [Validators.required, Validators.email]],
-      country_code: ['+91'],
+      pickup_country_code: [''],
       pickup_phone: [
         '',
         [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
@@ -77,7 +77,7 @@ export class OrderAddComponent {
       dely_company_name: ['', [Validators.required]],
       dely_address: ['', [Validators.required]],
       is_dely_warehouse: [''],
-      dely_date: [''],
+      dely_date: ['', [Validators.required]],
       dely_time: [''],
       dely_contact_name: ['', [Validators.required]],
       dely_email: ['', [Validators.required, Validators.email]],
@@ -85,6 +85,7 @@ export class OrderAddComponent {
         '',
         [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
       ],
+      dely_country_code: [''],
       dely_alt_phone: [
         '',
         [Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
@@ -116,7 +117,8 @@ export class OrderAddComponent {
 
   openDialog(
     enterAnimationDuration: string,
-    exitAnimationDuration: string
+    exitAnimationDuration: string,
+    addressType:string
   ): void {
     const dialogRef = this.dialog.open(AddressAddComponent, {
       width: '800px',
@@ -126,8 +128,37 @@ export class OrderAddComponent {
         isCloseBtn: true
       },
     });
+    dialogRef.afterClosed().subscribe(res => {
+      if(res){
+        this.setTheLatestAddress(addressType);
+      }
+      
+    })
   }
-
+  setTheLatestAddress(addressType:any){
+    this.addressService.addressSearch();
+    this.address$ = this.addressService.getAddress();
+    this.address$.subscribe((data: any) => {
+      this.addressData = data.result;
+      if (data?.result) {
+        data?.result.forEach((data: any) => {
+          this.data.push({
+            value: data?.id,
+            label: data?.address,
+          });
+        });
+        if(addressType == 'pickup'){
+          this.addOrderF.patchValue({
+            pickup_address: this.addressData[this.addressData.length-1].id ,
+          });
+        } else{
+          this.addOrderF.patchValue({
+            dely_address: this.addressData[this.addressData.length-1].id ,
+          });
+        }
+      }
+    });
+  }
   orderDetail(id: number) {
     this.orderService.orderDetail(id).subscribe(
       (data: any) => {

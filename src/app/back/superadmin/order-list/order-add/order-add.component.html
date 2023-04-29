@@ -32,12 +32,13 @@
                           </span>
                           <span class="DeliveryTo">
                             <strong>PO#</strong>
-                            <span class="Number"
+                            <span [ngClass]="isCheckedWarehous[0].pickup ? 'input-disabled':''" class="Number"
                               ><input
                                 type="text"
                                 formControlName="po"
                                 placeholder="PO#"
                                 class="border-0 fw-bold"
+                                [ngClass]="isCheckedWarehous[0].pickup ? 'input-disabled':''" 
                                 [attr.disabled]="isCheckedWarehous[0].pickup?'disabled':null"
                                 (keyup)="isAlphaNumeric($event, 'PO')"
                             /></span>
@@ -114,7 +115,7 @@
                                 <div
                                   *ngIf="f['pickup_address'].errors['required']"
                                 >
-                                  Address is required
+                                  Company Address is required
                                 </div>
                               </div>
                             </div>
@@ -136,7 +137,7 @@
                                 <div
                                   *ngIf="f['pickup_date'].errors['required']"
                                 >
-                                  Date field is required
+                                  Date is required
                                 </div>
                               </div>
                             </div>
@@ -166,7 +167,7 @@
                               <button
                                 class="ButtonStyle"
                                 mat-raised-button
-                                (click)="openDialog('0ms', '0ms')"
+                                (click)="openDialog('0ms', '0ms', 'pickup')"
                               >
                                 Add Address
                               </button>
@@ -226,14 +227,14 @@
                         <div class="row">
                           <div class="col-md-2">
                             <span class="Password">
-                              <select placeholder="Country" formControlName="country_code" class="CompanyField country-addorder">
-                                 <option value="sssdf" disabled [selected]="true">Select Country</option>
+                              <select placeholder="Country" formControlName="pickup_country_code" class="CompanyField country-addorder">
+                                 <option value="" disabled [selected]="true">Country</option>
                                  <option *ngFor="let country of countryCodes" [value]="country.dial_code">
                                   <span class="mx-3 fw-bold">{{country.name+" "+ country.dial_code }}</span>
                                  </option>
                                </select>
-                               <div *ngIf="isSubmitted && f['country_code'].errors" class="text-danger">
-                                <div *ngIf="f['country_code'].errors['required']">
+                               <div *ngIf="isSubmitted && f['pickup_country_code'].errors" class="text-danger">
+                                <div *ngIf="f['pickup_country_code'].errors['required']">
                                   Country is required
                                 </div>
                               </div>
@@ -244,7 +245,7 @@
                               <input
                                 type="number"
                                 formControlName="pickup_phone"
-                                placeholder="Phone"
+                                placeholder="Phone Number"
                                 class="CompanyField mb-0"
                                 onKeyPress="if(this.value.length==10) return false;"
                               />
@@ -256,12 +257,12 @@
                                 <div
                                   *ngIf="f['pickup_phone'].errors['required']"
                                 >
-                                  Phone number is required
+                                  Phone Number is required
                                 </div>
                                 <div
                                   *ngIf="f['pickup_phone'].errors['pattern']"
                                 >
-                                  Phone number must be 10 digits
+                                  Phone Number must be 10 digits
                                 </div>
                               </div>
                             </div>
@@ -334,11 +335,13 @@
                           </span>
                           <span class="DeliveryTo">
                             <strong>ON#</strong>
-                            <span class="Number">
+                            <span class="Number" [ngClass]="isCheckedWarehous[1].to ? 'input-disabled':''" 
+                            >
                               <input
                                 type="text"
                                 formControlName="on"
                                 placeholder="ON#"
+                                [ngClass]="isCheckedWarehous[1].to ? 'input-disabled':''" 
                                 class="border-0 fw-bold"
                                 [attr.disabled]="isCheckedWarehous[1].to?'disabled':null"
                                 (keyup)="isAlphaNumeric($event, 'ON')"
@@ -402,7 +405,7 @@
                                   <div
                                     *ngIf="f['dely_address'].errors['required']"
                                   >
-                                    Address is required
+                                    Company Address is required
                                   </div>
                                 </div>
                               </div>
@@ -424,7 +427,7 @@
                                   <div
                                     *ngIf="f['dely_date'].errors['required']"
                                   >
-                                    Date field is required
+                                    Date is required
                                   </div>
                                 </div>
                               </div>
@@ -444,7 +447,7 @@
                                   <div
                                     *ngIf="f['dely_time'].errors['required']"
                                   >
-                                    Time field is required
+                                    Time is required
                                   </div>
                                 </div>
                               </div>
@@ -454,7 +457,7 @@
                                 <button
                                   class="ButtonStyle"
                                   mat-raised-button
-                                  (click)="openDialog('0ms', '0ms')"
+                                  (click)="openDialog('0ms', '0ms','to')"
                                 >
                                   Add Address
                                 </button>
@@ -515,12 +518,14 @@
                             <div class="col-md-2">
                               <span class="Password">
                                 <select
+                                  
+                                  id="delyCountryCode"
                                   placeholder="Country"
-                                  formControlName="country_code"
+                                  formControlName="dely_country_code"
                                   class="CompanyField country-addorder"
                                 >
                                   <option value="" disabled [selected]="true">
-                                    Select Country
+                                    Country
                                   </option>
                                   <option
                                     *ngFor="let country of countryCodes"
@@ -533,12 +538,12 @@
                                 </select>
                                 <div
                                   *ngIf="
-                                    isSubmitted && f['country_code'].errors
+                                    isSubmitted && f['dely_country_code'].errors
                                   "
                                   class="text-danger"
                                 >
                                   <div
-                                    *ngIf="f['country_code'].errors['required']"
+                                    *ngIf="f['dely_country_code'].errors['required']"
                                   >
                                     Country is required
                                   </div>
@@ -550,7 +555,7 @@
                                 <input
                                   type="number"
                                   formControlName="dely_phone"
-                                  placeholder="Phone"
+                                  placeholder="Phone Number"
                                   class="CompanyField mb-0"
                                   onKeyPress="if(this.value.length==10) return false;"
                                 />
@@ -562,12 +567,12 @@
                                   <div
                                     *ngIf="f['dely_phone'].errors['required']"
                                   >
-                                    Phone number is required
+                                    Phone Number is required
                                   </div>
                                   <div
                                     *ngIf="f['dely_phone'].errors['pattern']"
                                   >
-                                    Phone number must be 10 digits
+                                    Phone Number must be 10 digits
                                   </div>
                                 </div>
                               </div>

@@ -4,3 +4,7 @@
 .TextareaField{
     height: 150px !important;
 }
+.input-disabled{
+    background: lightgray;
+    pointer-events: none;
+}

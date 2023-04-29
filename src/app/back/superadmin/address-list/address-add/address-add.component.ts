@@ -280,7 +280,11 @@ addMarker(latitude:any, long:any) {
         }
 
         this.toastr.success(data?.resultDescription);
-        this.router.navigate(['/' + this.authService._isRoleName + '/address']);
+        if(this.isCloseBtn){
+          this.dialogRef.close("sadf");
+        } else{
+          this.router.navigate(['/' + this.authService._isRoleName + '/address']);
+        }
       },
       (error) => {
         this.loading = false;
