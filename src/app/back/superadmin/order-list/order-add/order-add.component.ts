@@ -38,6 +38,8 @@ export class OrderAddComponent {
 
   time = { hour: 13, minute: 30 };
   isCheckedWarehous: any = [{ pickup: false }, { to: false }];
+  isPickupWareHouseEnabled: boolean =false;
+  isDelyWareHouseEnabled: boolean= false;
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -58,11 +60,11 @@ export class OrderAddComponent {
       pickup_company_name: ['', [Validators.required]],
       pickup_address: ['', [Validators.required]],
       is_pickup_warehouse: ['', [Validators.required]],
-      pickup_date: ['', [Validators.required]],
-      pickup_time: ['', [Validators.required]],
+      pickup_date: [''],
+      pickup_time: [''],
       pickup_contact_name: ['', [Validators.required]],
       pickup_email: ['', [Validators.required, Validators.email]],
-      country_code: [],
+      country_code: ['+91'],
       pickup_phone: [
         '',
         [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
@@ -71,7 +73,7 @@ export class OrderAddComponent {
         '',
         [Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
       ],
-      pickup_note: ['', [Validators.required]],
+      pickup_note: [''],
       dely_company_name: ['', [Validators.required]],
       dely_address: ['', [Validators.required]],
       is_dely_warehouse: [''],
@@ -87,8 +89,8 @@ export class OrderAddComponent {
         '',
         [Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
       ],
-      dely_note: ['', [Validators.required]],
-      order_no: [''],
+      dely_note: [''],
+      on: [''],
     });
 
     if (!this.isAddMode) {
@@ -168,13 +170,39 @@ export class OrderAddComponent {
     this.warehouse$ = this.warehouseService.getWarehouse();
 
     this.warehouse$.subscribe((data: any) => {
-      if(data){
+      if(data && data.result){
         this.warehouseData = data?.result[0];
       }
       
     });
   }
 
+  isAlphaNumeric(event:any , inputType:string){
+    if(inputType == 'PO'){
+      if( event.target.value.match(/^[a-zA-Z0-9]+$/)){
+        this.addOrderF.patchValue({
+          po: event.target.value
+        })
+      } else{
+        let val= event.target.value.replace(event.key , '')
+        this.addOrderF.patchValue({
+          po: val
+        })
+      }
+    }else if(inputType == 'ON'){
+      if( event.target.value.match(/^[a-zA-Z0-9]+$/)){
+        this.addOrderF.patchValue({
+          on: event.target.value
+        })
+      } else{
+        let val= event.target.value.replace(event.key , '')
+        this.addOrderF.patchValue({
+          on: val
+        })
+      }
+    }
+    
+  }
   setPickupWarehouse(e: any) {
     if (e.target.checked) {
       this.addOrderF.patchValue({
@@ -281,20 +309,57 @@ export class OrderAddComponent {
       }
     }
     if (this.isCheckedWarehous[0].pickup) {
+      this.isPickupWareHouseEnabled = true;
+      this.isDelyWareHouseEnabled = false;
+
       this.addOrderF.patchValue({
         pickup_address: this.warehouseData?.address?.id,
+        pickup_company_name: this.warehouseData?.warehouse_name,
+        pickup_contact_name: this.warehouseData?.contact_name,
+        pickup_phone: this.warehouseData?.phone,
+        pickup_email: this.warehouseData?.email,
+        pickup_alt_phone: this.warehouseData?.alt_phone
+
       });
-      this.addOrderF.patchValue({ dely_address: null });
+      this.setNullDelyValue();
     }
     else if(this.isCheckedWarehous[1].to){
+      this.isPickupWareHouseEnabled = false;
+      this.isDelyWareHouseEnabled = true;
       this.addOrderF.patchValue({
         dely_address: this.warehouseData?.address?.id,
+        dely_company_name: this.warehouseData?.warehouse_name,
+        dely_contact_name: this.warehouseData?.contact_name,
+        dely_email:this.warehouseData?.email,
+        dely_phone: this.warehouseData?.phone,
+        dely_alt_phone: this.warehouseData?.alt_phone
       });
-      this.addOrderF.patchValue({ pickup_address: null });
+      this.setNullPickupValue();
     } else{
-      this.addOrderF.patchValue({ dely_address: null });
-      this.addOrderF.patchValue({ pickup_address: null });
+      this.isPickupWareHouseEnabled = false;
+      this.isDelyWareHouseEnabled = false;
+      this.setNullDelyValue();
+      this.setNullPickupValue();
     }
   }
-
+  setNullPickupValue(){
+    this.addOrderF.patchValue( {
+      pickup_address: null,
+      pickup_company_name: null,
+      pickup_contact_name: null,
+      pickup_phone: null,
+      pickup_email: null,
+      pickup_alt_phone: null
+    });
+  }
+  setNullDelyValue(){
+    this.addOrderF.patchValue({ 
+      dely_address: null,
+      dely_company_name: null,
+      dely_contact_name: null,
+      dely_email:null,
+      dely_phone: null,
+      dely_alt_phone: null
+     });
+  }
 }

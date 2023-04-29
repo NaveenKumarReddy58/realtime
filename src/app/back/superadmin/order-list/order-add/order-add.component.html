@@ -34,10 +34,12 @@
                             <strong>PO#</strong>
                             <span class="Number"
                               ><input
-                                type="number"
+                                type="text"
                                 formControlName="po"
                                 placeholder="PO#"
                                 class="border-0 fw-bold"
+                                [attr.disabled]="isCheckedWarehous[0].pickup?'disabled':null"
+                                (keyup)="isAlphaNumeric($event, 'PO')"
                             /></span>
                           </span>
                         </div>
@@ -225,9 +227,9 @@
                           <div class="col-md-2">
                             <span class="Password">
                               <select placeholder="Country" formControlName="country_code" class="CompanyField country-addorder">
-                                 <option value="" disabled [selected]="true">Select Country</option>
+                                 <option value="sssdf" disabled [selected]="true">Select Country</option>
                                  <option *ngFor="let country of countryCodes" [value]="country.dial_code">
-                                  <span class="mx-3 fw-bold">{{country.dial_code+" "+ country.name }}</span>
+                                  <span class="mx-3 fw-bold">{{country.name+" "+ country.dial_code }}</span>
                                  </option>
                                </select>
                                <div *ngIf="isSubmitted && f['country_code'].errors" class="text-danger">
@@ -331,13 +333,15 @@
                             Delivery <strong>TO</strong>
                           </span>
                           <span class="DeliveryTo">
-                            <strong>Order#</strong>
+                            <strong>ON#</strong>
                             <span class="Number">
                               <input
-                                type="number"
-                                formControlName="po"
-                                placeholder="Order#"
+                                type="text"
+                                formControlName="on"
+                                placeholder="ON#"
                                 class="border-0 fw-bold"
+                                [attr.disabled]="isCheckedWarehous[1].to?'disabled':null"
+                                (keyup)="isAlphaNumeric($event, 'ON')"
                               />
                             </span>
                           </span>
@@ -348,7 +352,7 @@
                               <div class="filed-input mb-3 text-end">
                                 Is this warehouse?
                                 <input
-                                (click)="changeStatus('to',isCheckedWarehous[0].to)"
+                                (click)="changeStatus('to',isCheckedWarehous[1].to)"
                                 class="head-driver mx-2"
                                   type="checkbox"
                                   [checked]="isCheckedWarehous[1].to"
@@ -411,7 +415,7 @@
                                   type="date"
                                   formControlName="dely_date"
                                   placeholder="Date"
-                                  class="CompanyField mb-0"
+                                  class="CompanyField mb-0 date"
                                 />
                                 <div
                                   *ngIf="isSubmitted && f['dely_date'].errors"
@@ -523,7 +527,7 @@
                                     [value]="country.dial_code"
                                   >
                                     <span class="mx-3 fw-bold">{{
-                                      country.dial_code + " " + country.name
+                                      country.name + " " + country.dial_code
                                     }}</span>
                                   </option>
                                 </select>
