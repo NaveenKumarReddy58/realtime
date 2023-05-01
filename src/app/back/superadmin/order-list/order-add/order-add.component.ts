@@ -64,7 +64,7 @@ export class OrderAddComponent {
       pickup_time: [''],
       pickup_contact_name: ['', [Validators.required]],
       pickup_email: ['', [Validators.required, Validators.email]],
-      pickup_country_code: [''],
+      pickup_country_code: ['+91'],
       pickup_phone: [
         '',
         [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
@@ -85,7 +85,7 @@ export class OrderAddComponent {
         '',
         [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
       ],
-      dely_country_code: [''],
+      dely_country_code: ['+91'],
       dely_alt_phone: [
         '',
         [Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],

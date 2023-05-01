@@ -8,3 +8,14 @@
     background: lightgray;
     pointer-events: none;
 }
+.pickup-country{
+    position: absolute;
+    height: 38px;
+    top: 6%;
+    line-height: 40px;
+    width: 68%;
+    left: 5%;
+    vertical-align: middle;
+    background: white;
+    text-align: center;
+}

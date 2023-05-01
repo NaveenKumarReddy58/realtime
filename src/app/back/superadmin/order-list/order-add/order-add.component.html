@@ -227,6 +227,7 @@
                         <div class="row">
                           <div class="col-md-2">
                             <span class="Password">
+                              <span class="pickup-country">{{addOrderF.value.pickup_country_code}}</span>
                               <select placeholder="Country" formControlName="pickup_country_code" class="CompanyField country-addorder">
                                  <option value="" disabled [selected]="true">Country</option>
                                  <option *ngFor="let country of countryCodes" [value]="country.dial_code">
@@ -517,6 +518,7 @@
                           <div class="row">
                             <div class="col-md-2">
                               <span class="Password">
+                                <span class="pickup-country">{{addOrderF.value.dely_country_code}}</span>
                                 <select
                                   
                                   id="delyCountryCode"
