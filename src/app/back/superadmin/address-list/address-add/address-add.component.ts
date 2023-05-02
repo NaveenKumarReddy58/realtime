@@ -70,16 +70,11 @@ export class AddressAddComponent {
         lng: position.coords.longitude,
       };
       this.getFromAddress(
-          "place.place_id",
+          "null",
           position.coords.latitude,
           position.coords.longitude
         );
 
-        this.addressF.patchValue({
-          address: "adsfadfs",
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        });
     
       this.addMarker(position.coords.latitude,position.coords.longitude)
     });
@@ -132,11 +127,13 @@ addMarker(latitude:any, long:any) {
             let city: string = '';
             let country: string = '';
             let pinCode: string = '';
-            this.addressF.patchValue({
-              address: place.formatted_address,
-              latitude: this.lat,
-              longitude: this.lng,
-            });
+            if(place_id == 'null'){
+              this.addressF.patchValue({
+                  address: place.formatted_address,
+                  latitude: this.lat,
+                  longitude: this.lng,
+              });
+            }
             for (let i = 0; i < place.address_components.length; i++) {
               for (
                 let j = 0;
@@ -271,8 +268,8 @@ addMarker(latitude:any, long:any) {
         formData.append(i, this.addressF.value[i]);
       }
     }
-
     this.addressService.addressAdd(formData).subscribe(
+      
       (data: any) => {
         this.loading = false;
         if (this.authService.resultCodeError(data)) {
@@ -281,7 +278,12 @@ addMarker(latitude:any, long:any) {
 
         this.toastr.success(data?.resultDescription);
         if(this.isCloseBtn){
-          this.dialogRef.close("sadf");
+          this.dialogRef.close({
+            type: 'pickup',
+            address: this.addressF.value.address,
+            latitude: this.addressF.value.latitude,
+            longitude: this.addressF.value.longitude,
+          });
         } else{
           this.router.navigate(['/' + this.authService._isRoleName + '/address']);
         }

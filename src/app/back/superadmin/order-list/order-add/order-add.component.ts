@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Select2Data } from 'ng-select2-component';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
+import { Observable, Subscriber, Subscription } from 'rxjs';
 import { AddressService } from 'src/app/_service/address.service';
 import { AuthService } from 'src/app/_service/auth.service';
 import { OrderService } from 'src/app/_service/order.service';
@@ -40,6 +40,8 @@ export class OrderAddComponent {
   isCheckedWarehous: any = [{ pickup: false }, { to: false }];
   isPickupWareHouseEnabled: boolean =false;
   isDelyWareHouseEnabled: boolean= false;
+  addressPickup$: any;
+  addressDely$: any;
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -113,7 +115,9 @@ export class OrderAddComponent {
     return this.addOrderF.value;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.setTheValidatorsForPOON();
+  }
 
   openDialog(
     enterAnimationDuration: string,
@@ -130,7 +134,19 @@ export class OrderAddComponent {
     });
     dialogRef.afterClosed().subscribe(res => {
       if(res){
-        this.setTheLatestAddress(addressType);
+        let self = this;
+        this.addressList();
+        setTimeout(function(){
+          if(addressType == 'pickup'){
+            self.addOrderF.patchValue({
+              pickup_address: self.addressData[self.addressData.length-1].id,
+            });
+          } else if(addressType == 'to'){
+            self.addOrderF.patchValue({
+              dely_address: self.addressData[self.addressData.length-1].id,
+            });
+          }
+        },1500)
       }
       
     })
@@ -141,21 +157,13 @@ export class OrderAddComponent {
     this.address$.subscribe((data: any) => {
       this.addressData = data.result;
       if (data?.result) {
+        this.data=[];
         data?.result.forEach((data: any) => {
           this.data.push({
             value: data?.id,
             label: data?.address,
           });
         });
-        if(addressType == 'pickup'){
-          this.addOrderF.patchValue({
-            pickup_address: this.addressData[this.addressData.length-1].id ,
-          });
-        } else{
-          this.addOrderF.patchValue({
-            dely_address: this.addressData[this.addressData.length-1].id ,
-          });
-        }
       }
     });
   }
@@ -186,6 +194,7 @@ export class OrderAddComponent {
     this.address$.subscribe((data: any) => {
       this.addressData = data.result;
       if (data?.result) {
+        this.data=[];
         data?.result.forEach((data: any) => {
           this.data.push({
             value: data?.id,
@@ -202,7 +211,12 @@ export class OrderAddComponent {
 
     this.warehouse$.subscribe((data: any) => {
       if(data && data.result){
-        this.warehouseData = data?.result[0];
+
+        data.result.forEach((element:any) => {
+          if(element.is_main_localation){
+            this.warehouseData = element;
+          }
+        });
       }
       
     });
@@ -258,7 +272,7 @@ export class OrderAddComponent {
 
   handleSubmit() {
     this.isSubmitted = true;
-
+    
     // stop here if form is invalid
     if (this.addOrderF.invalid) {
       return;
@@ -372,6 +386,24 @@ export class OrderAddComponent {
       this.setNullDelyValue();
       this.setNullPickupValue();
     }
+
+    this.setTheValidatorsForPOON();
+  }
+  setTheValidatorsForPOON(){
+    if(!this.isCheckedWarehous[1].to){
+      this.addOrderF.controls['on'].setValidators([Validators.required]);
+    } else{
+      this.addOrderF.controls['on'].clearValidators();
+    }
+    if(!this.isCheckedWarehous[0].pickup){
+      this.addOrderF.controls['po'].setValidators([Validators.required]);
+    } else{
+      this.addOrderF.controls['po'].clearValidators();
+    }
+
+    this.addOrderF.controls['po'].updateValueAndValidity();
+    this.addOrderF.controls['on'].updateValueAndValidity();
+
   }
   setNullPickupValue(){
     this.addOrderF.patchValue( {

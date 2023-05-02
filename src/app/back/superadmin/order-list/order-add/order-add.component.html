@@ -41,7 +41,13 @@
                                 [ngClass]="isCheckedWarehous[0].pickup ? 'input-disabled':''" 
                                 [attr.disabled]="isCheckedWarehous[0].pickup?'disabled':null"
                                 (keyup)="isAlphaNumeric($event, 'PO')"
-                            /></span>
+                            />
+                          </span>
+                          <div *ngIf="isSubmitted && f['po'].errors" class="text-danger">
+                            <div *ngIf="f['po'].errors['required']">
+                              <span class="invisible">PO###</span>PO is required
+                            </div>
+                          </div>
                           </span>
                         </div>
                         <input
@@ -310,7 +316,7 @@
                                 maxlength="200"
                                 class="CompanyField mb-0 TextareaField"
                               ></textarea>
-
+                              <div class="notes-msg">{{200 - addOrderF.value.pickup_note.length}}/200</div>
                               <div
                                 *ngIf="isSubmitted && f['pickup_note'].errors"
                                 class="text-danger"
@@ -348,6 +354,11 @@
                                 (keyup)="isAlphaNumeric($event, 'ON')"
                               />
                             </span>
+                            <div *ngIf="isSubmitted && f['on'].errors" class="text-danger">
+                              <div *ngIf="f['on'].errors['required']">
+                                <span class="invisible">ON###</span>ON is required
+                              </div>
+                            </div>
                           </span>
                         </div>
                         <div class="form-div">
@@ -621,7 +632,7 @@
                                   maxlength="200"
                                   class="CompanyField mb-0 TextareaField"
                                 ></textarea>
-
+                                <div class="notes-msg">{{200 - addOrderF.value.dely_note.length}}/200</div>
                                 <div
                                   *ngIf="isSubmitted && f['dely_note'].errors"
                                   class="text-danger"

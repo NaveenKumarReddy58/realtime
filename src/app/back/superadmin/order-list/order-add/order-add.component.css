@@ -19,3 +19,7 @@
     background: white;
     text-align: center;
 }
+.notes-msg{
+    text-align: right;
+    color: gray;
+}
