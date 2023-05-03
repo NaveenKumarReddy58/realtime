@@ -93,7 +93,7 @@ export class OrderAddComponent {
         [Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
       ],
       dely_note: [''],
-      on: [''],
+      order_no: [''],
     });
 
     if (!this.isAddMode) {
@@ -237,12 +237,12 @@ export class OrderAddComponent {
     }else if(inputType == 'ON'){
       if( event.target.value.match(/^[a-zA-Z0-9]+$/)){
         this.addOrderF.patchValue({
-          on: event.target.value
+          order_no: event.target.value
         })
       } else{
         let val= event.target.value.replace(event.key , '')
         this.addOrderF.patchValue({
-          on: val
+          order_no: val
         })
       }
     }
@@ -334,6 +334,7 @@ export class OrderAddComponent {
     }
   }
   changeStatus(name: string, value: boolean) {
+    
     if (name == 'to') {
       if (value) {
         this.isCheckedWarehous[1].to = false;
@@ -391,18 +392,20 @@ export class OrderAddComponent {
   }
   setTheValidatorsForPOON(){
     if(!this.isCheckedWarehous[1].to){
-      this.addOrderF.controls['on'].setValidators([Validators.required]);
+      this.addOrderF.controls['order_no'].setValidators([Validators.required]);
     } else{
-      this.addOrderF.controls['on'].clearValidators();
+      this.addOrderF.patchValue({order_no: ''})
+      this.addOrderF.controls['order_no'].clearValidators();
     }
     if(!this.isCheckedWarehous[0].pickup){
       this.addOrderF.controls['po'].setValidators([Validators.required]);
     } else{
+      this.addOrderF.patchValue({po: ''})
       this.addOrderF.controls['po'].clearValidators();
     }
 
     this.addOrderF.controls['po'].updateValueAndValidity();
-    this.addOrderF.controls['on'].updateValueAndValidity();
+    this.addOrderF.controls['order_no'].updateValueAndValidity();
 
   }
   setNullPickupValue(){
