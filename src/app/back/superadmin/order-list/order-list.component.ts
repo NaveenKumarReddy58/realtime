@@ -87,6 +87,7 @@ export class OrderListComponent {
   orderDate: any;
   orderType: any;
   orderStatus: any;
+  selectedDateVal: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -184,6 +185,7 @@ export class OrderListComponent {
     return newItem.order_type === this;
   }
   onClickTodaysOrder(type:string){
+    this.selectedDateVal= null;
     for (let index = 0; index < this.todayOrdersCount.length; index++) {
       if(this.todayOrdersCount[index].order_type == type){
         this.todayOrdersCount[index].isActive = !this.todayOrdersCount[index].isActive;

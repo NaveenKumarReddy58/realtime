@@ -107,7 +107,7 @@
             <div class="col-md-6 SelectDate">
               <a class="Select_Date">
                 Select Date: <i class="fa fa-calendar-o"></i>
-                <input type="date" class="border-0" (change)="selectedDate($event)"/>
+                <input type="date" [(ngModel)]="selectedDateVal" class="border-0" (change)="selectedDate($event)"/>
               </a>
               <a class="Select_Date"> Filter <i class="fa fa-sliders"></i> </a>
             </div>
