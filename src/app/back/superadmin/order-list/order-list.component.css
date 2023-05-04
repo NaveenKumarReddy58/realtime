@@ -9,7 +9,6 @@
 }
 .drop-down-active{
     background-color: white;
-    width: 130px;
 }
 .dropdown-multiselect{
     width: 130px;
@@ -52,8 +51,7 @@
     padding: 0px 15px;
 }
 
-element.style {
-}
+
 ul.Tab_List li:first-child a {
     border-radius: 15px 0px 0px 0px;
     margin-left: 0px;

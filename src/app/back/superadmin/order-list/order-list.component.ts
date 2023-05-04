@@ -128,8 +128,12 @@ export class OrderListComponent {
       this._unfilteredOptions=[];
       if(this.orderData){
         this.orderData.forEach((element:any) => {
-          this._unfilteredOptions.push(element?.assigned_order[0]?.driver?.first_name+" "+element?.assigned_order[0]?.driver?.last_name)
-          this._unfilteredStatus.push(element?.order_status)
+          if(element?.assigned_order.length > 0){
+            this._unfilteredOptions.push(element?.assigned_order[0]?.driver?.first_name+" "+element?.assigned_order[0]?.driver?.last_name)
+          }
+          if(!(this._unfilteredStatus.indexOf(element?.order_status) >-1)){
+            this._unfilteredStatus.push(element?.order_status)
+          }
         });
       }
      
@@ -139,8 +143,8 @@ export class OrderListComponent {
     });
   }
   
-  orderCount() {
-    this.orderService.orderCount();
+  orderCount(order_date?: any, order_type?:any) {
+    this.orderService.orderCount(order_date, order_type);
     this.orderCount$ = this.orderService.getOrderCount();
 
     this.orderCount$.subscribe((data: any) => {
@@ -165,7 +169,7 @@ export class OrderListComponent {
   updateAllCount(newItem:any){
     let updateItem = this.allOrdersCount.find(this.findIndexToUpdateAllCount, newItem.order_status);
     let index = this.allOrdersCount.indexOf(updateItem);
-    this.allOrdersCount[index] = newItem;
+    this.allOrdersCount[index].count = newItem.count;
   }
   findIndexToUpdateAllCount(newItem:any) { 
     return newItem.order_status === this;
@@ -173,16 +177,13 @@ export class OrderListComponent {
   showUpdatedItem(newItem:any){
     let updateItem = this.todayOrdersCount.find(this.findIndexToUpdate, newItem.order_type);
     let index = this.todayOrdersCount.indexOf(updateItem);
-    this.todayOrdersCount[index] = newItem;
+    this.todayOrdersCount[index].count = newItem.count;
   }
   
   findIndexToUpdate(newItem:any) { 
     return newItem.order_type === this;
   }
   onClickTodaysOrder(type:string){
-    for (let index = 0; index < this.allOrdersCount.length; index++) {
-      this.allOrdersCount[index].isActive = false;
-    }
     for (let index = 0; index < this.todayOrdersCount.length; index++) {
       if(this.todayOrdersCount[index].order_type == type){
         this.todayOrdersCount[index].isActive = !this.todayOrdersCount[index].isActive;
@@ -190,32 +191,32 @@ export class OrderListComponent {
         this.todayOrdersCount[index].isActive = false;
       }
     }
-    if(!(type == this.orderType) ){
-      for (let index = 0; index < this.todayOrdersCount.length; index++) {
-        if(this.todayOrdersCount[index].isActive){
-          let date = new Date();
-          let formatDate= date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDay();
-          this.orderType = type;
-          if(this.todayOrdersCount[index].order_type == 'both'){
-            this.orderList(formatDate);
-          } else{
-            this.orderList(formatDate, this.orderType);
-          }
-        }
-      }
-    } else{
-      this.orderList();
+    if (!(type == this.orderType)) {
+      let date = new Date();
+      let formatDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDay();
+      this.orderDate = formatDate;
+      this.orderType = type;
+      this.orderList(this.orderDate, this.orderType, this.orderStatus);
+      this.orderCount(this.orderDate, this.orderType);
+    } else {
+      this.orderType = null;
+      this.orderDate = null;
+      this.orderList(this.orderDate, this.orderType, this.orderStatus);
+      this.orderCount(this.orderDate, this.orderType);
     }
     
   }
   selectedDate(event:any){
+    for (let index = 0; index < this.todayOrdersCount.length; index++) {
+        this.todayOrdersCount[index].isActive = false;
+    }
     this.orderDate= event.target.value;
-    this.orderList(event.target.value, null, this.orderStatus);
+    this.orderType= null;
+    this.orderList(event.target.value, this.orderType, this.orderStatus);
+    this.orderCount(this.orderDate, this.orderType);
+
   }
   onClickStatus(status:string){
-    for (let index = 0; index < this.todayOrdersCount.length; index++) {
-      this.todayOrdersCount[index].isActive = false;
-    }
     for (let index = 0; index < this.allOrdersCount.length; index++) {
       if(this.allOrdersCount[index].order_status == status){
         this.allOrdersCount[index].isActive = !this.allOrdersCount[index].isActive;
@@ -223,17 +224,12 @@ export class OrderListComponent {
         this.allOrdersCount[index].isActive = false;
       }
     }
-    if(!(status == this.orderStatus)){
-      if(status == 'all'){
-        this.orderList()
-      } else{
-        for (let index = 0; index < this.allOrdersCount.length; index++) {
-          if(this.allOrdersCount[index].isActive){
-            this.orderStatus= status;
-          }
-        }
-        this.orderList(null, null, this.orderStatus);
-      }
+    if (!(status == this.orderStatus)) {
+      this.orderStatus = status;
+      this.orderList(this.orderDate, this.orderType, this.orderStatus);
+    } else {
+      this.orderStatus = null;
+      this.orderList(this.orderDate, this.orderType, this.orderStatus);
     }
   }
   getCountOfTodayOrders(){

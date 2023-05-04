@@ -66,10 +66,10 @@ export class OrderService {
       if(order_date && order_date.length > 0){
         params.set('order_date', order_date)
       }
-      if(order_type && order_type.length > 0){
+      if(order_type && order_type.length > 0 && order_type != 'both'){
         params.set('order_type', order_type)
       }
-      if(order_status && order_status.length > 0){
+      if(order_status && order_status.length > 0 && order_status != 'all'){
         params.set('order_status', order_status)
       }
     }
@@ -125,9 +125,22 @@ export class OrderService {
       );
   }
 
-  orderCount() {
+  orderCount(order_date?: any, order_type?:any) {
+    let tail = '';
+    let params = new URLSearchParams();
+    if (params) {
+      if(order_date && order_date.length > 0){
+        params.set('order_date', order_date)
+      }
+      if(order_type && order_type.length > 0 && order_type != 'both'){
+        params.set('order_type', order_type)
+      }
+    }
+    if(order_date || order_type){
+      tail += `?` + params.toString();
+    }
     this.http
-      .get<any>(`${this._liveApiUrl}/company/order-counts/`)
+      .get<any>(`${this._liveApiUrl}/company/order-counts/${tail}`)
       .pipe(
         map((data) => {
           return data;
