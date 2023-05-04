@@ -22,11 +22,11 @@ export class OrderListComponent {
   toggle: any = [];
   assignArr: any = [];
   data: Select2Data = [];
-  orderCountData: any;
+  orderCountData: any ;
   id: any;
   optionstype: any = 'all';
   buttonData: any = ['Unassigned', 'Pending', 'Cancelled', 'Successful'];
-
+  todayDate: Date = new Date();
   order$!: Observable<object[]>;
   driver$!: Observable<object[]>;
   orderCount$!: Observable<object[]>;
@@ -40,7 +40,53 @@ export class OrderListComponent {
   statusOptions: any;
   isShowPushNotificationForm: boolean= false;
   imageSrc: any= "../../assets/images/photoupload.png";
-
+  todayOrdersCount: any = [
+    {
+      "order_type": "both",
+      "count": 0,
+      "isActive": false
+    },
+    {
+      "order_type": "delivery",
+      "count": 0,
+      "isActive": false
+    },
+    {
+      "order_type": "pickup",
+      "count": 0,
+      "isActive": false
+    }       
+  ]
+  allOrdersCount: any = [
+    {
+      "order_status": "all",
+      "count": 0,
+      "isActive": false
+    },
+    {
+      "order_status": "pending",
+      "count": 0,
+      "isActive": false
+    },
+    {
+      "order_status": "successful",
+      "count": 0,
+      "isActive": false
+    },
+    {
+      "order_status": "unsuccessful",
+      "count": 0,
+      "isActive": false
+    },
+    {
+      "order_status": "cancelled",
+      "count": 0,
+      "isActive": false
+    },   
+  ]
+  orderDate: any;
+  orderType: any;
+  orderStatus: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -70,10 +116,11 @@ export class OrderListComponent {
   }
 
   ngOnInit(): void {
+    this.orderCount();
   }
 
-  orderList(filter?: any) {
-    this.orderService.orderList(filter);
+  orderList(order_date?: any, order_type?:any, order_status?:any) {
+    this.orderService.orderList(order_date, order_type, order_status);
     this.order$ = this.orderService.getOrder();
 
     this.order$.subscribe((data: any) => {
@@ -98,9 +145,103 @@ export class OrderListComponent {
 
     this.orderCount$.subscribe((data: any) => {
       this.orderCountData = data?.result;
+      if(data && data.result ){
+        if(data.result.today.length > 0){
+          data?.result.today.forEach((element:any) => {
+            this.showUpdatedItem(element);
+          });
+        }
+        if(data.result.all.length > 0){
+          data?.result.all.forEach((element:any) => {
+            this.updateAllCount(element);
+          });
+        }
+       
+      }
+      
     });
   }
 
+  updateAllCount(newItem:any){
+    let updateItem = this.allOrdersCount.find(this.findIndexToUpdateAllCount, newItem.order_status);
+    let index = this.allOrdersCount.indexOf(updateItem);
+    this.allOrdersCount[index] = newItem;
+  }
+  findIndexToUpdateAllCount(newItem:any) { 
+    return newItem.order_status === this;
+  }
+  showUpdatedItem(newItem:any){
+    let updateItem = this.todayOrdersCount.find(this.findIndexToUpdate, newItem.order_type);
+    let index = this.todayOrdersCount.indexOf(updateItem);
+    this.todayOrdersCount[index] = newItem;
+  }
+  
+  findIndexToUpdate(newItem:any) { 
+    return newItem.order_type === this;
+  }
+  onClickTodaysOrder(type:string){
+    for (let index = 0; index < this.allOrdersCount.length; index++) {
+      this.allOrdersCount[index].isActive = false;
+    }
+    for (let index = 0; index < this.todayOrdersCount.length; index++) {
+      if(this.todayOrdersCount[index].order_type == type){
+        this.todayOrdersCount[index].isActive = !this.todayOrdersCount[index].isActive;
+      } else{
+        this.todayOrdersCount[index].isActive = false;
+      }
+    }
+    if(!(type == this.orderType) ){
+      for (let index = 0; index < this.todayOrdersCount.length; index++) {
+        if(this.todayOrdersCount[index].isActive){
+          let date = new Date();
+          let formatDate= date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDay();
+          this.orderType = type;
+          if(this.todayOrdersCount[index].order_type == 'both'){
+            this.orderList(formatDate);
+          } else{
+            this.orderList(formatDate, this.orderType);
+          }
+        }
+      }
+    } else{
+      this.orderList();
+    }
+    
+  }
+  selectedDate(event:any){
+    this.orderDate= event.target.value;
+    this.orderList(event.target.value, null, this.orderStatus);
+  }
+  onClickStatus(status:string){
+    for (let index = 0; index < this.todayOrdersCount.length; index++) {
+      this.todayOrdersCount[index].isActive = false;
+    }
+    for (let index = 0; index < this.allOrdersCount.length; index++) {
+      if(this.allOrdersCount[index].order_status == status){
+        this.allOrdersCount[index].isActive = !this.allOrdersCount[index].isActive;
+      } else{
+        this.allOrdersCount[index].isActive = false;
+      }
+    }
+    if(!(status == this.orderStatus)){
+      if(status == 'all'){
+        this.orderList()
+      } else{
+        for (let index = 0; index < this.allOrdersCount.length; index++) {
+          if(this.allOrdersCount[index].isActive){
+            this.orderStatus= status;
+          }
+        }
+        this.orderList(null, null, this.orderStatus);
+      }
+    }
+  }
+  getCountOfTodayOrders(){
+    return this.todayOrdersCount[1].count + this.todayOrdersCount[2].count;
+  }
+  getCountOfAllOrders(){
+    return this.allOrdersCount.reduce((acc:any, el:any) => acc + el.count, 0)
+  }
   copyText(val: string){
     let selBox = document.createElement('textarea');
       selBox.style.position = 'fixed';

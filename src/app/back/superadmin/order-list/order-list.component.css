@@ -46,3 +46,28 @@
     -ms-user-select: none; 
     user-select: none; 
    } */
+
+
+.order-list td{
+    padding: 0px 15px;
+}
+
+element.style {
+}
+ul.Tab_List li:first-child a {
+    border-radius: 15px 0px 0px 0px;
+    margin-left: 0px;
+}
+ul.Tab_List li:first-child a {
+    background: #afbac5;
+}
+ul.Tab_List li.active a {
+    background: #0eb002 !important;
+}
+.ButtonTab ul li a.active {
+    background: #0eb002;
+    color: white;
+}
+.ButtonTab ul li a.active:before {
+    background: #0eb002;
+}

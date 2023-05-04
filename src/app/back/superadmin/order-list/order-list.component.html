@@ -1,17 +1,12 @@
 <div class="ContentArea no-padding">
   <div class="TabsList">
     <ul class="Tab_List">
-      <li class="active">
-        <a
-          >Todays Order 480
-          <span>Wed Oct 26,2023</span>
+      <li class="cursor-pointer" (click)="onClickTodaysOrder(item.order_type)" [ngClass]="item.isActive ? 'active': ''" *ngFor="let item of todayOrdersCount; let i = index">
+        <a *ngIf="item.order_type == 'pickup'">Todays Pickup: {{item.count}} </a>
+        <a *ngIf="item.order_type == 'delivery'">Todays Deliveries: {{item.count}} </a>
+        <a *ngIf="item.order_type == 'both'">Todays Order: {{getCountOfTodayOrders()}}
+          <span>{{todayDate | date: 'EEE'}} {{todayDate | date}}</span>
         </a>
-      </li>
-      <li>
-        <a>Todays Deliveries 220 </a>
-      </li>
-      <li>
-        <a>Todays Pickup 260 </a>
       </li>
     </ul>
   </div>
@@ -21,13 +16,26 @@
       <!-- Status Button -->
       <div class="ButtonTab">
         <ul>
-          <li class="All">
-            <a>
-              <span class="All">All</span>
-              <span class="All-Noti">480</span>
+          <li (click)="onClickStatus(item.order_status)" class="cursor-pointer" *ngFor="let item of allOrdersCount" [ngClass]="{
+            'All': item.order_status == 'all',
+            'Pending': item.order_status == 'pending',
+            'Successful': item.order_status == 'successful',
+            'Unsuccessful': item.order_status == 'unsuccessful',
+            'Cancelled': item.order_status == 'cancelled'
+            }">
+            <a [ngClass]="item.isActive? 'active': ''">
+              <span *ngIf="item.order_status == 'all'" class="All">All</span>
+              <span *ngIf="item.order_status == 'pending'" class="All">Pending</span>
+              <span *ngIf="item.order_status == 'successful'" class="All">Successful</span>
+              <span *ngIf="item.order_status == 'unsuccessful'" class="All">Unsuccessful</span>
+              <span *ngIf="item.order_status == 'cancelled'" class="All">Cancelled</span>
+
+              <span class="All-Noti">
+                {{item.order_status == 'all' ? getCountOfAllOrders() : item.count}}
+              </span>
             </a>
           </li>
-          <li class="Pending">
+          <!-- <li class="Pending">
             <a>
               <span class="All">Pending</span>
               <span class="All-Noti">120</span>
@@ -50,7 +58,7 @@
               <span class="All">Cancelled</span>
               <span class="All-Noti">120</span>
             </a>
-          </li>
+          </li> -->
         </ul>
       </div>
       <!-- Status Button /////////// -->
@@ -98,7 +106,8 @@
             </div>
             <div class="col-md-6 SelectDate">
               <a class="Select_Date">
-                Select Date <i class="fa fa-calendar-o"></i>
+                Select Date: <i class="fa fa-calendar-o"></i>
+                <input type="date" class="border-0" (change)="selectedDate($event)"/>
               </a>
               <a class="Select_Date"> Filter <i class="fa fa-sliders"></i> </a>
             </div>
@@ -169,15 +178,18 @@
                   <th>Other Option</th>
                 </tr>
                 <tr
-                  class="tr-driver-list"
+                  class="tr-driver-list order-list"
                   *ngFor="let item of orderData; let index = index"
                 >
-                  <td routerLink="/admin/orders/detail/{{ item.id }}">
-                    <img
+                  <td>
+                    <img *ngIf="item.order_type == 'pickup'"
                       src="./../../../../assets/images/p-icon.png"
-                      *ngIf="!item.profile_image"
                     />
-                    {{ item.id }}
+                    <img *ngIf="item.order_type == 'delivery'"
+                      src="./../../../../assets/images/d-icon.png"
+                    />
+
+                    {{ item.order_type == 'pickup' ? item.po :  item.order_no}}
                   </td>
                   <td>{{ item.customer_name }}</td>
                   <td>{{ item.customer_addr }}</td>
@@ -226,6 +238,7 @@
                         class="head-driver"
                         type="checkbox"
                         disabled
+                        checked
                       />
                       <a [routerLink]="'/admin/orders/detail/'+item.id"><i style="font-size: 18px;" class="fa fa-eye" aria-hidden="true"></i></a>
                       <a (click)="orderDelete(item.id)">

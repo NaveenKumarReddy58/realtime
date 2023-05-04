@@ -59,15 +59,21 @@ export class OrderService {
   //order_type:pickup
   //order_status:successful
 
-  orderList(filter?: any) {
+  orderList(order_date?: any, order_type?:any, order_status?:any) {
     let tail = '';
     let params = new URLSearchParams();
     if (params) {
-      for (let key in filter) {
-        params.set(key, filter[key]);
+      if(order_date && order_date.length > 0){
+        params.set('order_date', order_date)
+      }
+      if(order_type && order_type.length > 0){
+        params.set('order_type', order_type)
+      }
+      if(order_status && order_status.length > 0){
+        params.set('order_status', order_status)
       }
     }
-    if (filter) {
+    if(order_date || order_type || order_status){
       tail += `?` + params.toString();
     }
     this.http
