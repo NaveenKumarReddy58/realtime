@@ -59,7 +59,7 @@ export class OrderService {
   //order_type:pickup
   //order_status:successful
 
-  orderList(order_date?: any, order_type?:any, order_status?:any) {
+  orderList(order_date?: any, order_type?:any, order_status?:any, page?:any) {
     let tail = '';
     let params = new URLSearchParams();
     if (params) {
@@ -72,8 +72,11 @@ export class OrderService {
       if(order_status && order_status.length > 0 && order_status != 'all'){
         params.set('order_status', order_status)
       }
+      if(page){
+        params.set('page', page+1)
+      }
     }
-    if(order_date || order_type || order_status){
+    if(order_date || order_type || order_status || page){
       tail += `?` + params.toString();
     }
     this.http

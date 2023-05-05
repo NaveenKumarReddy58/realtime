@@ -255,7 +255,19 @@
             </div>
             <form [formGroup]="addAssign">
               <div class="row mt-3">
-                <div class="col-md-7"></div>
+                <div class="col-md-7 ">
+
+                  <div class="pagination" >
+                    <span [ngClass]="page == 0 ? 'disabled' : ''" class="prev" (click)="prevPage()">
+                      <i class="mx-2 fa fa-angle-left"></i>
+                    </span>
+                    <span class="numbers">{{startNumber}}-{{endNumber}} of {{ordersListCount}}</span> 
+                    <span [ngClass]="endNumber == ordersListCount ? 'disabled' : ''"  (click)="nextPage()" class="next">
+                      <i class="mx-2 fa fa-angle-right"></i>
+                    </span>
+                  </div>
+
+                </div>
                 <div class="col-md-3">
                   <select2
                     [data]="data"

@@ -69,3 +69,25 @@ ul.Tab_List li.active a {
 .ButtonTab ul li a.active:before {
     background: #0eb002;
 }
+.pagination{
+    font-size: 20px;
+    line-height: 47px;
+
+}
+.numbers{
+    color: slategray;
+}
+.pagination .fa{
+    padding: 10px;
+}
+.pagination .fa:hover{
+    background: lightgray;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+}
+.disabled{
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.5;
+}

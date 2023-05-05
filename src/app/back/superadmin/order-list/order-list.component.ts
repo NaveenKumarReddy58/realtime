@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Select2Data } from 'ng-select2-component';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
+import { Observable, count } from 'rxjs';
 import { AuthService } from 'src/app/_service/auth.service';
 import { DriverService } from 'src/app/_service/driver.service';
 import { OrderService } from 'src/app/_service/order.service';
@@ -88,6 +88,11 @@ export class OrderListComponent {
   orderType: any;
   orderStatus: any;
   selectedDateVal: any;
+  page: number=0;
+  startNumber: number = 1;
+  endNumber: number= 10;
+  ordersListCount: number = 0;
+  perPageSize: number= 10;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -98,7 +103,7 @@ export class OrderListComponent {
     public driverService: DriverService,
     private toastr: ToastrService
   ) {
-    this.orderList();
+    this.orderList(this.orderDate, this.orderType, this.orderStatus, this.page);
     this.driverList(0);
 
     this.addAssign = formBuilder.group({
@@ -120,14 +125,18 @@ export class OrderListComponent {
     this.orderCount();
   }
 
-  orderList(order_date?: any, order_type?:any, order_status?:any) {
-    this.orderService.orderList(order_date, order_type, order_status);
+  orderList(order_date?: any, order_type?:any, order_status?:any, page?:any) {
+    this.orderService.orderList(order_date, order_type, order_status,page);
     this.order$ = this.orderService.getOrder();
 
     this.order$.subscribe((data: any) => {
       this.orderData = data?.result?.results;
       this._unfilteredOptions=[];
       if(this.orderData){
+        this.ordersListCount= data.result.count;
+        if(this.endNumber >= this.ordersListCount){
+          this.endNumber= this.ordersListCount;
+        }
         this.orderData.forEach((element:any) => {
           if(element?.assigned_order.length > 0){
             this._unfilteredOptions.push(element?.assigned_order[0]?.driver?.first_name+" "+element?.assigned_order[0]?.driver?.last_name)
@@ -137,7 +146,6 @@ export class OrderListComponent {
           }
         });
       }
-     
       this.options = this._unfilteredOptions;
       this.statusOptions= this._unfilteredStatus;
 
@@ -150,6 +158,7 @@ export class OrderListComponent {
 
     this.orderCount$.subscribe((data: any) => {
       this.orderCountData = data?.result;
+      
       if(data && data.result ){
         if(data.result.today.length > 0){
           data?.result.today.forEach((element:any) => {
@@ -198,12 +207,12 @@ export class OrderListComponent {
       let formatDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDay();
       this.orderDate = formatDate;
       this.orderType = type;
-      this.orderList(this.orderDate, this.orderType, this.orderStatus);
+      this.orderList(this.orderDate, this.orderType, this.orderStatus, this.page);
       this.orderCount(this.orderDate, this.orderType);
     } else {
       this.orderType = null;
       this.orderDate = null;
-      this.orderList(this.orderDate, this.orderType, this.orderStatus);
+      this.orderList(this.orderDate, this.orderType, this.orderStatus, this.page);
       this.orderCount(this.orderDate, this.orderType);
     }
     
@@ -214,7 +223,7 @@ export class OrderListComponent {
     }
     this.orderDate= event.target.value;
     this.orderType= null;
-    this.orderList(event.target.value, this.orderType, this.orderStatus);
+    this.orderList(event.target.value, this.orderType, this.orderStatus, this.page);
     this.orderCount(this.orderDate, this.orderType);
 
   }
@@ -228,10 +237,10 @@ export class OrderListComponent {
     }
     if (!(status == this.orderStatus)) {
       this.orderStatus = status;
-      this.orderList(this.orderDate, this.orderType, this.orderStatus);
+      this.orderList(this.orderDate, this.orderType, this.orderStatus, this.page);
     } else {
       this.orderStatus = null;
-      this.orderList(this.orderDate, this.orderType, this.orderStatus);
+      this.orderList(this.orderDate, this.orderType, this.orderStatus, this.page);
     }
   }
   getCountOfTodayOrders(){
@@ -364,5 +373,29 @@ export class OrderListComponent {
         this.loading = false;
       }
     );
+  }
+
+  nextPage(){
+      if(this.endNumber > this.ordersListCount){
+        this.page = this.page + 1;
+        this.startNumber= (this.page * 10)+1;
+        this.endNumber= this.startNumber + 10-1;
+      } else{
+        this.page = this.page + 1;
+        this.endNumber = this.ordersListCount;
+        this.startNumber= (this.page * 10)+1;
+      }
+      this.orderList(this.orderDate, this.orderType, this.orderStatus, this.page)
+  }
+  prevPage(){
+
+    if(this.page > 0){
+      this.page = this.page - 1;
+      this.startNumber= (this.page * 10)+1;
+      this.endNumber= this.startNumber + 10-1;
+    }
+    
+    this.orderList(this.orderDate, this.orderType, this.orderStatus, this.page)
+
   }
 }
