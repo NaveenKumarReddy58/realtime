@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: serif;background: #ebeff2 !important; }
 
 .back-to-list button{
     background: #0eb002;
@@ -96,6 +96,7 @@ input[type=number] {
 }
 .drivers-list-delete img{
   margin-top: -6px;
+  max-width: 63px !important;
 }
 .drivers-list-delete {
   position: relative;
@@ -112,6 +113,7 @@ input[type=number] {
   z-index: 11;
   right: 0;
   padding: 10px;
+  text-align: left;
 }
 .drivers-list-delete-dialog .delete-drivers{
   font-size: 14px;
@@ -124,6 +126,7 @@ input[type=number] {
   font-size: 19px;
   line-height: 30px;
   margin-bottom: 30px;
+  color: black;
 }
 .cancel-btn {
   background-color: white !important;

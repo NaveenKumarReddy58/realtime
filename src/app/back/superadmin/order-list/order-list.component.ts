@@ -93,6 +93,8 @@ export class OrderListComponent {
   endNumber: number= 10;
   ordersListCount: number = 0;
   perPageSize: number= 10;
+  isShowDeleteOrdersDialog: boolean= false;
+  deleteOrderId: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -169,6 +171,29 @@ export class OrderListComponent {
           data?.result.all.forEach((element:any) => {
             this.updateAllCount(element);
           });
+        } else if(data.result.all.length == 0){
+          this.allOrdersCount=[
+            {
+              "order_status": "all",
+              "count": 0
+            },
+            {
+              "order_status": "pending",
+              "count": 0
+            },
+            {
+              "order_status": "successful",
+              "count": 0
+            },
+            {
+              "order_status": "unsuccessful",
+              "count": 0
+            },
+            {
+              "order_status": "cancelled",
+              "count": 0
+            },   
+          ]
         }
        
       }
@@ -319,6 +344,7 @@ export class OrderListComponent {
     this.isShowContactDialog= !this.isShowContactDialog;
   }
   orderDelete(id: any) {
+    this.isShowDeleteOrdersDialog= false;
     this.toggle[id] = true;
     this.delloading = true;
     this.orderService.orderDelete(id).subscribe(
@@ -398,4 +424,12 @@ export class OrderListComponent {
     this.orderList(this.orderDate, this.orderType, this.orderStatus, this.page)
 
   }
+
+  onClickDeleteOrderDialog(e:any, id:any){
+    e.preventDefault()
+    this.deleteOrderId= id;
+    this.isShowDeleteOrdersDialog = !this.isShowDeleteOrdersDialog;
+  }
+
+
 }

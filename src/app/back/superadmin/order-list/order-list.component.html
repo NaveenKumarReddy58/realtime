@@ -69,7 +69,7 @@
           <div class="">
 
             <div class="row mx-2">
-              <div class="col-8 cpn-form-container">
+              <div class="col-7 cpn-form-container">
                 <input type="text" placeholder="Enter Title"/>
                 <br>
                 <textarea placeholder="Enter Your Message here..."></textarea>
@@ -87,12 +87,24 @@
                 />
                 </div>
               </div>
-              <div class="col-2 push-notification-btns">
-                <div>
-                  <button class="push-notification-btn-send">Send <img src="../../assets/images/pushnotification-white.jpg"></button>
+              <div class="col-3 push-notification-btns">
+                <div class="orders-pnb">
+                  <div class="customer">
+                    <button class="push-notification-btn-cancel" (click)="onClickPushNotification()">
+                      Coustmer</button>
+                  </div>
+                  <div class="driver">
+                    <button class="push-notification-btn-send">
+                       Driver</button>
+                  </div>
                 </div>
-                <div>
-                  <button class="push-notification-btn-cancel" (click)="onClickPushNotification()">Cancel <img src="../../assets/images/cancel.jpg"></button>
+                <div class="orders-pnb">
+                  <div class="w-100">
+                    <button class="push-notification-btn-cancel" (click)="onClickPushNotification()">Cancel</button>
+                  </div>
+                  <div class="w-100">
+                    <button class="push-notification-btn-send">Send</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -238,18 +250,40 @@
                       />
                       <input
                         *ngIf="item?.assigned_order.length != 0"
-                        class="head-driver"
+                        class="head-driver head-driver-disable"
                         type="checkbox"
                         disabled
                         checked
                       />
                       <a [routerLink]="'/admin/orders/detail/'+item.id"><i style="font-size: 18px;" class="fa fa-eye" aria-hidden="true"></i></a>
-                      <a (click)="orderDelete(item.id)">
-                        <i class="fa fa-trash Delete"></i>
-                        <i
+                      <!-- <a (click)="orderDelete(item.id)">
+                        
+                      </a> -->
+                      <a class="drivers-list-delete" >
+                        <span (click)="onClickDeleteOrderDialog($event, item.id)">
+                          <i class="fa fa-trash Delete"></i>
+                          <i
                           class="fa fa-spinner fa-spin"
                           *ngIf="delloading && toggle[item.id]"
                         ></i>
+                        </span> 
+                        <div *ngIf="isShowDeleteOrdersDialog && deleteOrderId == item.id" class="drivers-list-delete-dialog">
+                          <div class="delete-drivers">Delete Order</div>
+                          <div class="confirmation-msg">
+                            <div class="row">
+                              <div class="col-9">
+                                Are you sure you want to delete the order ?
+                              </div>
+                              <div class="col-3">
+                                <img src="../../../../assets/images/big-delete.jpg" width="63px"/>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="text-center px-4">
+                            <button class="ButtonStyle cancel-btn float-start" (click)="onClickDeleteOrderDialog($event, item.id)">Cancel</button>
+                            <button class="ButtonStyle float-end" (click)="orderDelete(item.id)">Delete Order</button>
+                          </div>
+                        </div>
                       </a>
                     </div>
                   </td>
@@ -312,3 +346,4 @@
 <div *ngIf="isShowStatusFilter" (click)="openStatusFilter()" class="overlay bg-none"></div>
 <div *ngIf="isShowContactDialog" (click)="onClickPhone($event)" class="overlay"></div>
 <div *ngIf="isShowPushNotificationForm" (click)="onClickPushNotification()" class="push-notification-overlay"></div>
+<div *ngIf="isShowDeleteOrdersDialog" (click)="onClickDeleteOrderDialog($event,'')" class="overlay"></div>

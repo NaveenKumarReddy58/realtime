@@ -88,3 +88,13 @@ ul.Tab_List li.active a {
 .Order_Table tr td:first-child {
     display: revert;
 }
+.orders-pnb{
+    display: flex;
+    gap: 10px;
+}
+.customer{
+    width: 100%;
+}
+.driver{
+    width: 100%;
+}
