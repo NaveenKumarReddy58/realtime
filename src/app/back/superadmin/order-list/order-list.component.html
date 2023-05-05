@@ -182,14 +182,17 @@
                   *ngFor="let item of orderData; let index = index"
                 >
                   <td>
-                    <img *ngIf="item.order_type == 'pickup'"
+                    <div class="d-flex">
+                      <img class="mx-1" *ngIf="item.order_type == 'pickup'"
                       src="./../../../../assets/images/p-icon.png"
                     />
-                    <img *ngIf="item.order_type == 'delivery'"
+                    <img class="mx-1" *ngIf="item.order_type == 'delivery'"
                       src="./../../../../assets/images/d-icon.png"
                     />
 
                     {{ item.order_type == 'pickup' ? item.po :  item.order_no}}
+                    </div>
+                    
                   </td>
                   <td>{{ item.customer_name }}</td>
                   <td>{{ item.customer_addr }}</td>

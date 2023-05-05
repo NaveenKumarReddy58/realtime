@@ -46,12 +46,6 @@
     user-select: none; 
    } */
 
-
-.order-list td{
-    padding: 0px 15px;
-}
-
-
 ul.Tab_List li:first-child a {
     border-radius: 15px 0px 0px 0px;
     margin-left: 0px;
@@ -90,4 +84,7 @@ ul.Tab_List li.active a {
     pointer-events: none;
     cursor: default;
     opacity: 0.5;
+}
+.Order_Table tr td:first-child {
+    display: revert;
 }
