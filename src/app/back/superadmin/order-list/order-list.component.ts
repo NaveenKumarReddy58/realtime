@@ -402,11 +402,11 @@ export class OrderListComponent {
   }
 
   nextPage(){
-      if(this.endNumber > this.ordersListCount){
+      if(this.endNumber < this.ordersListCount){
         this.page = this.page + 1;
         this.startNumber= (this.page * 10)+1;
         this.endNumber= this.startNumber + 10-1;
-      } else{
+      } else if(this.endNumber == this.ordersListCount){
         this.page = this.page + 1;
         this.endNumber = this.ordersListCount;
         this.startNumber= (this.page * 10)+1;
