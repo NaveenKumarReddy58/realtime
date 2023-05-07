@@ -642,6 +642,7 @@ ul.Tab_List li.active a {
   color: #0eb002;
   padding-left: 25px;
   text-decoration: none;
+  cursor: pointer;
 }
 .SelectDate a.Select_Date {
   font-weight: 600;

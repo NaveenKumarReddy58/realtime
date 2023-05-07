@@ -1,5 +1,5 @@
 <div class="ContentArea no-padding">
-  <div class="TabsList">
+  <div class="TabsList" *ngIf="!isViewAllMode">
     <ul class="Tab_List">
       <li class="cursor-pointer" (click)="onClickTodaysOrder(item.order_type)" [ngClass]="item.isActive ? 'active': ''" *ngFor="let item of todayOrdersCount; let i = index">
         <a *ngIf="item.order_type == 'pickup'">Todays Pickup: {{item.count}} </a>
@@ -14,7 +14,7 @@
     <!-- Tab Content Area Start 01-->
     <div id="Tb-Tabs01" class="Tabs01 TabsMain">
       <!-- Status Button -->
-      <div class="ButtonTab">
+      <div class="ButtonTab" *ngIf="!isViewAllMode">
         <ul>
           <li (click)="onClickStatus(item.order_status)" class="cursor-pointer" *ngFor="let item of allOrdersCount" [ngClass]="{
             'All': item.order_status == 'all',
@@ -112,9 +112,12 @@
         </div>
         <div class="OrderList">
           <div class="row">
-            <div class="col-md-6 Oreder">
+            <div class="col-md-6 Oreder" *ngIf="!isViewAllMode">
               <span class="RecentTitle">Recent Order</span>
-              <a class="ViewAll">View All</a>
+              <a class="ViewAll" (click)="viewAll()">View All</a>
+            </div>
+            <div class="col-md-6 Oreder" *ngIf="isViewAllMode">
+              <a class="ViewAll p-0" (click)="backToNormalMode()"><i class="fa fa-angle-left mx-2"></i>Back</a>
             </div>
             <div class="col-md-6 SelectDate">
               <a class="Select_Date">

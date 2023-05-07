@@ -95,6 +95,7 @@ export class OrderListComponent {
   perPageSize: number= 10;
   isShowDeleteOrdersDialog: boolean= false;
   deleteOrderId: any;
+  public isViewAllMode: boolean= false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -429,6 +430,30 @@ export class OrderListComponent {
     e.preventDefault()
     this.deleteOrderId= id;
     this.isShowDeleteOrdersDialog = !this.isShowDeleteOrdersDialog;
+  }
+
+  viewAll(){
+    this.isViewAllMode= true;
+    this.orderStatus= null;
+    this.orderDate= null;
+    this.orderType= null;
+    this.page= 0;
+    this.startNumber = 1;
+    this.endNumber= 10;
+    this.orderList(this.orderDate,this.orderType, this.orderStatus, this.page);
+    this.orderCount(this.orderDate, this.orderType);
+  }
+
+  backToNormalMode(){
+    this.isViewAllMode= false;
+    this.orderStatus= null;
+    this.orderDate= null;
+    this.orderType= null;
+    this.page= 0;
+    this.startNumber = 1;
+    this.endNumber= 10;
+    this.orderList(this.orderDate,this.orderType, this.orderStatus, this.page);
+    this.orderCount(this.orderDate, this.orderType);
   }
 
 
