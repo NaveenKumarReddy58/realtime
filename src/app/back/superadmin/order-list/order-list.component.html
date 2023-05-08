@@ -75,7 +75,7 @@
                 <textarea placeholder="Enter Your Message here..."></textarea>
               </div>
               <div class="col-2 text-center">
-                <div class="add-files" (click)="fileInput.click()" >
+                <div class="add-files order-list-add-files" (click)="fileInput.click()" >
                   <img *ngIf="imageSrc" [src]="imageSrc" />
                   <div>Add Files</div>
                   <input
@@ -88,22 +88,23 @@
                 </div>
               </div>
               <div class="col-3 push-notification-btns">
+                <p class="fw-bold">Select User</p>
                 <div class="orders-pnb">
                   <div class="customer">
-                    <button class="push-notification-btn-cancel" (click)="onClickPushNotification()">
-                      Coustmer</button>
+                    <button class="push-notification-btn-cancel p-0" (click)="onClickPushNotification()">
+                      <img class="" src="../../assets/images/user-icon.png"> Coustmer</button>
                   </div>
                   <div class="driver">
-                    <button class="push-notification-btn-send">
-                       Driver</button>
+                    <button class="push-notification-btn-send p-0">
+                      <img class="" src="../../assets/images/car-user-icon.png">  Driver</button>
                   </div>
                 </div>
-                <div class="orders-pnb">
+                <div class="orders-pnb orders-list-pn">
                   <div class="w-100">
-                    <button class="push-notification-btn-cancel" (click)="onClickPushNotification()">Cancel</button>
+                    <button class="push-notification-btn-cancel p-0" (click)="onClickPushNotification()">Cancel  <img class="" src="../../assets/images/cancel.jpg"></button>
                   </div>
                   <div class="w-100">
-                    <button class="push-notification-btn-send">Send</button>
+                    <button class="push-notification-btn-send p-0">Send <img class="" src="../../assets/images/gray-pn.jpg"></button>
                   </div>
                 </div>
               </div>

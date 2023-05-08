@@ -1,3 +1,25 @@
-.width-46{
-    width: 46%;
+.width-52{
+    width: 52%;
+}
+.width18{
+    width: 18%;
+}
+.ChangePic.P_Photo .ChangeImg.NoPhoto i {
+    font-size: 13px;
+}
+.ChangePic img {
+    max-width: 55px;
+}
+.width30{
+    width: 30%;
+}
+.order-details-table th ,.order-details-table td{
+    vertical-align: baseline;
+}
+.lh-50{
+    line-height: 50px;
+}
+.send{
+    width: 24px;
+    margin-top: -5px;
 }

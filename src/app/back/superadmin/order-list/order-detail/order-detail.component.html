@@ -12,15 +12,15 @@
           </div>
           <!-- Step Div Area -->
           <div class="row mt-4">
-            <div class="col-md-3 width20">
+            <div class="col-md-3 width18">
               <div class="ProfilePik">
                 <div class="ChangePic P_Photo">
                   <img src="assets/images/p-icon02.png" />
-                  <div class="ChangeImg NoPhoto">
+                  <div class="ChangeImg NoPhoto fontSize12">
                     <i class="fa fa-star"></i> Priority Delivery
                   </div>
                 </div>
-                <div class="DeliveryNumber">
+                <div class="DeliveryNumber fontSize10">
                   <h4>{{ orderData?.po }}</h4>
                   Delivery : {{ orderData?.dely_time }} |
                   {{ orderData?.dely_date | date : "fullDate" }}
@@ -32,19 +32,20 @@
               </div>
             </div>
             <!-- Step Inner -->
-            <div class="col-md-5 width-46">
+            <div class="col-md-5 width-52">
               <!--Edit Delete -->
               <div class="col-md-12">
                 <div class="AddEdit-Delete">
-                  <span>Status</span>
+                  <span class="fontSize12">Status</span>
                   <div class="Edi_Delete">
                     <span
-                      class="__Edit"
+                      *ngIf="orderData && orderData.id"
+                      class="__Edit fontSize12"
                       routerLink="/admin/orders/{{ orderData.id }}"
                     >
                       <span>Edit <i class="fa fa-pencil"></i></span>
                     </span>
-                    <span class="__Edit" (click)="orderDelete(orderData.id)">
+                    <span class="__Edit fontSize12" (click)="orderDelete(orderData.id)">
                       <span>Delete <i class="fa fa-trash"></i></span>
                     </span>
                   </div>
@@ -59,25 +60,25 @@
                     <li class="active">
                       <a>
                         <span class="DotSpan">&nbsp;</span>
-                        <span class="DotSpan_Title"> Processed </span>
+                        <span class="DotSpan_Title fontSize10"> Processed </span>
                       </a>
                     </li>
                     <li>
                       <a>
                         <span class="DotSpan">&nbsp;</span>
-                        <span class="DotSpan_Title"> Shipped </span>
+                        <span class="DotSpan_Title fontSize10"> Shipped </span>
                       </a>
                     </li>
                     <li>
                       <a>
                         <span class="DotSpan">&nbsp;</span>
-                        <span class="DotSpan_Title"> En route </span>
+                        <span class="DotSpan_Title fontSize10"> En route </span>
                       </a>
                     </li>
                     <li>
                       <a>
                         <span class="DotSpan">&nbsp;</span>
-                        <span class="DotSpan_Title"> Delivered </span>
+                        <span class="DotSpan_Title fontSize10"> Delivered </span>
                       </a>
                     </li>
                   </ul>
@@ -88,58 +89,87 @@
               <form class="ProfileFor">
                 <div class="row mb-4">
                   <div class="col-md-6">
-                    <div class="OrderDate_Time">
-                      <span>
-                        <strong>Order (Services ID):</strong>
-                        {{ orderData?.po }}
-                      </span>
-                      <span>
-                        <strong>Request By:</strong>
-                        {{ orderData?.created_by?.email }}
-                      </span>
-                      <span>
-                        <strong>Order Date:</strong>
-                        {{ orderData?.created_at | date : "fullDate" }}
-                      </span>
-                      <span>
-                        <strong>Order Time:</strong>
-                        {{ orderData?.created_at | date : "shortTime" }}
-                      </span>
-                    </div>
+                    <!-- <div class="row">
+                      <div class="col-md-6">
+                        <div class="fontSize12">
+                          <strong>Order (Services ID):</strong>
+                        </div>
+                        <div class="fontSize12">
+                          <strong>Request By:</strong>
+                        </div>
+                        <div class="fontSize12">
+                          <strong>Order Date:</strong>
+                        </div>
+                        <div class="fontSize12">
+                          <strong>Order Time:</strong>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="fontSize12">
+                          {{ orderData?.po }}
+                        </div>
+                        <div class="fontSize12">
+                          {{ orderData?.created_by?.first_name }}
+                        </div>
+                        <div class="fontSize12">
+                          {{ orderData?.created_at | date : "fullDate" }}
+                        </div>
+                        <div class="fontSize12">
+                          {{ orderData?.created_at | date : "shortTime" }}
+                        </div>
+                      </div>
+                      
+                    </div> -->
+                    <table class="order-details-table">
+                      <tbody>
+                        <tr>
+                          <th class="fontSize12">Order (Services ID):</th>
+                          <td class="fontSize12">{{ orderData?.po }}</td>
+                        </tr>
+                        <tr>
+                          <th class="fontSize12">Requested By:</th>
+                          <td class="fontSize12">{{ orderData?.created_by?.first_name }}</td>
+                        </tr>
+                        <tr>
+                          <th class="fontSize12">Order Date:</th>
+                          <td class="fontSize12">{{ orderData?.created_at | date : "fullDate" }}</td>
+                        </tr>
+                        <tr>
+                          <th class="fontSize12">Order Time:</th>
+                          <td class="fontSize12">{{ orderData?.created_at | date : "shortTime" }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
-                  <div class="col-md-6">
-                    <div class="OrderDate_Time">
-                      <span>
-                        <strong>Estimated Time Arrival</strong>
-                      </span>
-                      <span>
-                        <strong>Delivery Date:</strong>
-                        {{ orderData?.dely_date | date : "fullDate" }}
-                      </span>
-                      <span>
-                        <strong>Delivery Time:</strong>
-                        {{ orderData?.dely_time }}
-                      </span>
-                      <span>
-                        <strong>Remarks:</strong>
-                        {{ orderData?.dely_note }}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div class="row mb-5">
-                  <div class="col-md-12">
-                    <div class="NewDriver">
-                      <a>Reassign to new driver</a>
-                    </div>
+                  <div class="col-md-6 p-0">
+                    <table class="w-100 order-details-table">
+                      <tbody>
+                        <tr>
+                          <th class="fontSize12">Estimated Time Arrival:</th>
+                          <td class="fontSize12"></td>
+                        </tr>
+                        <tr>
+                          <th class="fontSize12">Delivery Date:</th>
+                          <td class="fontSize12">{{ orderData?.dely_date | date : "fullDate" }}</td>
+                        </tr>
+                        <tr>
+                          <th class="fontSize12">Delivery Time:</th>
+                          <td class="fontSize12">{{ orderData?.dely_time }}</td>
+                        </tr>
+                        <tr>
+                          <th class="fontSize12">Remarks:</th>
+                          <td class="fontSize12">{{ orderData?.dely_note }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
                 <div class="row">
                   <!-- Order Detail -->
                   <div class="CardPopup">
                     <div class="row">
-                      <div class="col-md-12 mb-3">
-                        <span class="Password FileUpload">
+                      <div class="col-8 mb-3">
+                        <span class="Password FileUpload lh-50">
                           <strong
                             >Assigned To:
                             {{
@@ -152,20 +182,26 @@
                           On {{ orderData?.dely_date | date : "fullDate" }}
                         </span>
                       </div>
-
-                      <div class="col-md-6 mb-4">
-                        <span class="Password">
-                          <input
-                            type="text"
-                            name=""
-                            placeholder="Contact Driver "
-                            class="Pro_input_Field"
-                            value="{{
-                              orderData?.assigned_order[0]?.driver?.phone_number
-                            }}"
-                          />
-                        </span>
+                      <div class="col-4 mb-2 p-0">
+                        <div class="NewDriver">
+                          <a>Reassign to new driver</a>
+                        </div>
                       </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6 mb-4">
+                          <span class="Password">
+                            <input
+                              type="text"
+                              name=""
+                              placeholder="Contact Driver "
+                              class="Pro_input_Field fontSize12"
+                              value="{{
+                                orderData?.assigned_order[0]?.driver?.phone_number
+                              }}"
+                            />
+                          </span>
+                        </div>
 
                       <div class="col-md-6 mb-4">
                         <span class="Password">
@@ -173,7 +209,7 @@
                             type="text"
                             name=""
                             placeholder="Contact Customer"
-                            class="Pro_input_Field"
+                            class="Pro_input_Field fontSize12"
                             value="{{ orderData?.customer_phone }}"
                           />
                         </span>
@@ -194,7 +230,7 @@
                         <span class="Password SendNoti">
                           <button class="SendButton_S">
                             Send
-                            <i class="fa fa-paper-plane"></i>
+                            <img class="send" src="../../assets/images/pushnotification-white.jpg">
                           </button>
                         </span>
                       </div>
@@ -214,15 +250,15 @@
                         <span class="Password SendNoti">
                           <button class="SendButton_S">
                             Send
-                            <i class="fa fa-paper-plane"></i>
+                            <img class="send" src="../../assets/images/pushnotification-white.jpg">
                           </button>
                         </span>
                       </div>
+                    </div>
 
                       <!-- <div class="d-flex justify-content-between mt-4 Cancel_Save">
                       <button class="SaveButton ButtonStyle">Send Push Notification</button>
                     </div> -->
-                    </div>
                   </div>
                   <!--Order Detail ///////// -->
                 </div>
@@ -230,38 +266,38 @@
               <!-- Step Content Area ///// -->
             </div>
             <!-- Step Inner -->
-            <div class="col-md-4">
-              <span class="RecentTitleNto">Recent Notification</span>
+            <div class="col-md-4 width30">
+              <span class="RecentTitleNto fontSize12">Recent Notification</span>
               <div class="Recente__Noti">
                 <span class="Recent__">
-                  <a class="active">Customer</a>
-                  <a>Driver</a>
+                  <a class="active fontSize12">Customer</a>
+                  <a class="fontSize12">Driver</a>
                 </span>
-                <span class="view__all">
-                  <a>View All</a>
-                  <a>Clear All <img src="assets/images/filter-icon.png" /></a>
+                <span class="view__all fontSize12">
+                  <a class="fontSize12">View All</a>
+                  <a class="fontSize12">Clear All <img src="assets/images/filter-icon.png" /></a>
                 </span>
               </div>
               <div class="PacelId mt-4">
                 <ul>
                   <li class="UserName02">
-                    <span class="Mintago">50min ago</span>
-                    <span class="Name_U">Sandeep Singh</span>
-                    <p class="Chat_text">
+                    <span class="Mintago fontSize12">50min ago</span>
+                    <span class="Name_U fontSize12">Sandeep Singh</span>
+                    <p class="Chat_text fontSize12">
                       Query or general message here.......... !
                     </p>
                   </li>
                   <li class="UserName02">
-                    <span class="Mintago">50min ago</span>
-                    <span class="Name_U">Sandeep Singh</span>
-                    <p class="Chat_text">
+                    <span class="Mintago fontSize12">50min ago</span>
+                    <span class="Name_U fontSize12">Sandeep Singh</span>
+                    <p class="Chat_text fontSize12">
                       Query or general message here.......... !
                     </p>
                   </li>
                   <li class="UserName02">
-                    <span class="Mintago">50min ago</span>
-                    <span class="Name_U">Sandeep Singh</span>
-                    <div class="ImgUpload">
+                    <span class="Mintago fontSize12">50min ago</span>
+                    <span class="Name_U fontSize12">Sandeep Singh</span>
+                    <div class="ImgUpload ">
                       <img src="assets/images/download.png" />
                     </div>
                   </li>

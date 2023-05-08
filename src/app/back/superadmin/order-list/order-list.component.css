@@ -98,3 +98,43 @@ ul.Tab_List li.active a {
 .driver{
     width: 100%;
 }
+.customer button{
+    height: 50px;
+    font-weight: 500;
+    background: none;
+    font-size: 17px;
+}
+.driver button{
+    height: 50px;
+    font-weight: 500;
+    background: none;
+    border: 1px solid gray;
+    color: black;
+    font-size: 17px;
+}
+.orders-list-pn button{
+    height: 50px;
+    font-weight: 500;
+    padding-left: 3px !important;
+
+}
+.orders-list-pn img {
+    width: 21px;
+    margin-left: 12px;
+    margin-top: -4px;
+}
+
+.orders-list-pn .push-notification-btn-send{
+    background: #5e5e5e;
+}
+.driver img{
+    margin-right: 19px;
+    margin-top: -3px;
+}
+.customer img{
+    margin-right: 8px;
+    margin-top: -3px;
+}
+.order-list-add-files div{
+    margin-bottom: 23px;
+}
