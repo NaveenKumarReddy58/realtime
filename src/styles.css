@@ -366,3 +366,9 @@ input[type=number] {
 .fontSize12{
   font-size: 12px !important;
 }
+.cdk-overlay-connected-position-bounding-box {
+  z-index: 99999 !important;
+}
+.order-detail .mdc-dialog__content{
+  height: 69% !important;
+}

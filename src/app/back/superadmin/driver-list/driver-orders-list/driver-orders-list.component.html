@@ -1,0 +1,115 @@
+<div class="row mt-3">
+    <div class="">
+      <table
+        class="Order_Table"
+        cellpadding="0"
+        cellspacing="0"
+        border="0"
+      >
+        <tr class="T_Head">
+          <th>Order Id</th>
+          <th>Customer Name</th>
+          <th>Customer Address</th>
+          <th>Delivery Date</th>
+          <th>Delivery Time</th>
+          <th>Actual time</th>
+          <th>Driver</th>
+          <th>Status</th>
+        </tr>
+        <tr *ngIf="orderData && orderData.length == 0">
+            No Orders Assigned
+        </tr>
+        <ng-container *ngIf="orderData && orderData.length > 0">
+            <tr
+            class="tr-driver-list order-list"
+            *ngFor="let item of orderData; let index = index"
+          >
+            <td>
+              <div class="d-flex">
+                <img class="mx-1" *ngIf="item.order_type == 'pickup'"
+                src="./../../../../assets/images/p-icon.png"
+              />
+              <img class="mx-1" *ngIf="item.order_type == 'delivery'"
+                src="./../../../../assets/images/d-icon.png"
+              />
+  
+              {{ item.order_type == 'pickup' ? item.po :  item.order_no}}
+              </div>
+              
+            </td>
+            <td>{{ item.customer_name }}</td>
+            <td>{{ item.customer_addr }}</td>
+            <td>{{ item.dely_date | date : "fullDate" }}</td>
+            <td>{{ item.dely_time }}</td>
+            <td>
+              <!-- <span class="GreenColor">{{
+                item.created_at | date : "shortTime"
+              }}</span> -->
+              NA
+            </td>
+            <td>
+              {{ item?.assigned_order[0]?.driver?.first_name }}
+              {{ item?.assigned_order[0]?.driver?.last_name }}
+            </td>
+            <td>
+              <button
+                class="button-{{
+                  item.order_status | titlecase
+                }} status_button_style"
+              >
+                {{ item.order_status | titlecase }}
+              </button>
+            </td>
+          </tr>
+        </ng-container>
+        
+      </table>
+    </div>
+    <!-- <form [formGroup]="addAssign">
+      <div class="row mt-3">
+        <div class="col-md-7 ">
+
+          <div class="pagination" >
+            <span [ngClass]="page == 0 ? 'disabled' : ''" class="prev" (click)="prevPage()">
+              <i class="mx-2 fa fa-angle-left"></i>
+            </span>
+            <span class="numbers">{{startNumber}}-{{endNumber}} of {{ordersListCount}}</span> 
+            <span [ngClass]="endNumber == ordersListCount ? 'disabled' : ''"  (click)="nextPage()" class="next">
+              <i class="mx-2 fa fa-angle-right"></i>
+            </span>
+          </div>
+
+        </div>
+        <div class="col-md-3">
+          <select2
+            [data]="data"
+            class="Pro_input_Field"
+            formControlName="driver_id"
+            placeholder="Search Driver"
+          ></select2>
+          <div
+            *ngIf="isSubmitted && f['driver_id'].errors"
+            class="text-danger"
+          >
+            <div *ngIf="f['driver_id'].errors['required']">
+              Driver is required
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2 text-end">
+          <button
+            type="submit"
+            (click)="handleSubmit()"
+            class="ButtonStyle"
+            [disabled]="!this.assignArr.length"
+          >
+            Assign Order
+            <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+          </button>
+        </div>
+      </div>
+    </form> -->
+  </div>
+  <br><br>
+  <p class="mx-2">Total Assigned Orders : {{assignedOrdersCount}}</p>
+  <select2 onchange="getDriverOrders(driverId)" (change)="getDriverOrders(driverId)" [data]="dataList" class="Pro_input_Field" [(ngModel)]="driverId" placeholder="Search Driver"></select2>

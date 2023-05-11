@@ -111,4 +111,12 @@ export class DriverService {
         }
       );
   }
+
+  driverOrders(id:any){
+    let tail = '';
+    if (id) {
+      tail = `${id}`;
+    }
+    return this.http.get<any>(`${this._liveApiUrl}/company/driver-orders/${tail}`)
+  }
 }

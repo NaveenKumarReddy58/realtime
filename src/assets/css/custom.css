@@ -1605,7 +1605,7 @@ span.SendNoti button.SendButton_S {
 }
 .Step_List ul:before {
   content: "";
-  width: 90%;
+  width: 95%;
   position: absolute;
   height: 2px;
   left: 0;

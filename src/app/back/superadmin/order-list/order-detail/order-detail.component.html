@@ -12,7 +12,7 @@
           </div>
           <!-- Step Div Area -->
           <div class="row mt-4">
-            <div class="col-md-3 width18">
+            <div class="col-md-3">
               <div class="ProfilePik">
                 <div class="ChangePic P_Photo">
                   <img src="assets/images/p-icon02.png" />
@@ -32,7 +32,7 @@
               </div>
             </div>
             <!-- Step Inner -->
-            <div class="col-md-5 width-52">
+            <div class="col-md-8">
               <!--Edit Delete -->
               <div class="col-md-12">
                 <div class="AddEdit-Delete">
@@ -47,6 +47,10 @@
                     </span>
                     <span class="__Edit fontSize12" (click)="orderDelete(orderData.id)">
                       <span>Delete <i class="fa fa-trash"></i></span>
+                    </span>
+                    <span class="__Edit cursor-pointer fontSize12" (click)="getRecentNotifications()">
+                      <span>Recent Notifications <i class="fa fa-bell" aria-hidden="true"></i>
+                      </span>
                     </span>
                   </div>
                 </div>
@@ -86,7 +90,7 @@
               </div>
               <!-- Step Title List ///// -->
               <!-- Step Content Area -->
-              <form class="ProfileFor">
+              <form [formGroup]="orderDetailsPushForm" class="ProfileFor">
                 <div class="row mb-4">
                   <div class="col-md-6">
                     <!-- <div class="row">
@@ -183,7 +187,7 @@
                         </span>
                       </div>
                       <div class="col-4 mb-2 p-0">
-                        <div class="NewDriver">
+                        <div (click)="reassignNewDriver('200ms','200ms')" class="NewDriver">
                           <a>Reassign to new driver</a>
                         </div>
                       </div>
@@ -194,12 +198,14 @@
                             <input
                               type="text"
                               name=""
+                              disabled
                               placeholder="Contact Driver "
                               class="Pro_input_Field fontSize12"
                               value="{{
                                 orderData?.assigned_order[0]?.driver?.phone_number
                               }}"
                             />
+                            <i *ngIf="orderData?.assigned_order[0]?.driver?.phone_number?.length > 0" (click)="copyText(orderData?.assigned_order[0]?.driver?.phone_number)" class="fa-solid fa-copy order-details-copy"></i>
                           </span>
                         </div>
 
@@ -210,8 +216,10 @@
                             name=""
                             placeholder="Contact Customer"
                             class="Pro_input_Field fontSize12"
+                            disabled
                             value="{{ orderData?.customer_phone }}"
                           />
+                          <i *ngIf="orderData?.customer_phone?.length > 0" (click)="copyText( orderData?.customer_phone)" class="fa-solid fa-copy order-details-copy"></i>
                         </span>
                       </div>
 
@@ -220,15 +228,21 @@
                           <input
                             type="text"
                             name=""
+                            formControlName="pnMsgCustomer"
                             placeholder="Push Notification message to Customer"
                             class="Pro_input_Field"
                           />
                         </span>
+                        <div *ngIf="isSubmittedCustomer && f['pnMsgCustomer'].errors" class="text-danger">
+                          <div *ngIf="f['pnMsgCustomer'].errors['required']">
+                            Message is required
+                          </div>
+                        </div>
                       </div>
 
                       <div class="col-md-2 mb-4">
                         <span class="Password SendNoti">
-                          <button class="SendButton_S">
+                          <button class="SendButton_S" (click)="sendMessage()">
                             Send
                             <img class="send" src="../../assets/images/pushnotification-white.jpg">
                           </button>
@@ -241,14 +255,20 @@
                             type="text"
                             name=""
                             placeholder="Push Notification message to Driver"
+                            formControlName="pnMsgDriver"
                             class="Pro_input_Field"
                           />
                         </span>
+                        <div *ngIf="isSubmitted && f['pnMsgDriver'].errors" class="text-danger">
+                          <div *ngIf="f['pnMsgDriver'].errors['required']">
+                            Message is required
+                          </div>
+                        </div>
                       </div>
 
                       <div class="col-md-2 mb-4">
                         <span class="Password SendNoti">
-                          <button class="SendButton_S">
+                          <button class="SendButton_S" (click)="sendMessage()">
                             Send
                             <img class="send" src="../../assets/images/pushnotification-white.jpg">
                           </button>
@@ -266,8 +286,9 @@
               <!-- Step Content Area ///// -->
             </div>
             <!-- Step Inner -->
-            <div class="col-md-4 width30">
+             <div *ngIf="isShowRecentNotifications" class="col-md-4 recent-notifications">
               <span class="RecentTitleNto fontSize12">Recent Notification</span>
+              <img class="cancel" src="../../assets/images/cancel.jpg" (click)="closeRecentNotifications()">
               <div class="Recente__Noti">
                 <span class="Recent__">
                   <a class="active fontSize12">Customer</a>
@@ -279,7 +300,8 @@
                 </span>
               </div>
               <div class="PacelId mt-4">
-                <ul>
+                No Recent Notifications
+                <!-- <ul>
                   <li class="UserName02">
                     <span class="Mintago fontSize12">50min ago</span>
                     <span class="Name_U fontSize12">Sandeep Singh</span>
@@ -301,9 +323,9 @@
                       <img src="assets/images/download.png" />
                     </div>
                   </li>
-                </ul>
+                </ul> -->
               </div>
-            </div>
+            </div> 
           </div>
           <!-- Step Div Area /////////// -->
         </div>

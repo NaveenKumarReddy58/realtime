@@ -1,5 +1,9 @@
 <h1 mat-dialog-title>{{data.title}}</h1>
-<div mat-dialog-content>{{data.message}}</div>
+<div mat-dialog-content>{{data.message}}
+  <div *ngIf="data.pageName == 'order-details'">
+    <app-driver-orders-list [dataDriverId]="data.driverData.id" [assignedOrdersCount]="data.driverData.assignedOrdersCount"></app-driver-orders-list>
+  </div>
+</div>
 <div mat-dialog-actions class="dialog-btn">
   <button class="Yes-btn" (click)="onConfirm()" mat-button mat-dialog-close cdkFocusInitial>Yes</button>
   <button class="No-btn" (click)="onDismiss()" mat-button mat-dialog-close>No</button>

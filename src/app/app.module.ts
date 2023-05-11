@@ -63,6 +63,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { DriverDetailsComponent } from './back/superadmin/driver-list/driver-details/driver-details.component';
 import {MatSelectModule} from '@angular/material/select';
+import { DriverOrdersListComponent } from './back/superadmin/driver-list/driver-orders-list/driver-orders-list.component';
 
 @NgModule({
   declarations: [
@@ -105,6 +106,7 @@ import {MatSelectModule} from '@angular/material/select';
     SuperSuperAdminComponent,
     NotificationListComponent,
     DriverDetailsComponent,
+    DriverOrdersListComponent,
   ],
   imports: [
     CommonModule,
