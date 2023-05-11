@@ -152,7 +152,7 @@ span.EnterOtp {
   /* padding: 20px; */
 }
 .section {
-  padding: 30px 0;
+  padding: 20px 0;
 }
 .width20 {
   width: 20%;
@@ -165,11 +165,10 @@ span.EnterOtp {
 }
 .SideBar {
   position: relative;
-  background: #0d0d0d;
-  border-radius: 20px;
-  padding: 30px 15px;
-  min-height: 900px;
-  height: 100%;
+    background: #0d0d0d;
+    border-radius: 20px;
+    padding: 30px 15px;
+    height: 100%;
 }
 ul.SideBarList {
   padding: 0;
@@ -221,7 +220,7 @@ ul.SideBarList li a:hover img {
 }
 .LogoDiv {
   text-align: center;
-  padding-bottom: 50px;
+  padding-bottom: 30px;
 }
 .LogoDiv img {
   max-width: 100px;
@@ -643,6 +642,7 @@ ul.Tab_List li.active a {
   color: #0eb002;
   padding-left: 25px;
   text-decoration: none;
+  cursor: pointer;
 }
 .SelectDate a.Select_Date {
   font-weight: 600;
@@ -1605,14 +1605,13 @@ span.SendNoti button.SendButton_S {
 }
 .Step_List ul:before {
   content: "";
-  width: 100%;
+  width: 95%;
   position: absolute;
   height: 2px;
   left: 0;
   top: 6px;
   background: #bbc2c7;
   z-index: 0;
-  max-width: 340px;
   margin: 0 auto;
   right: 0;
 }
