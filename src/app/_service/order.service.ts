@@ -113,6 +113,17 @@ export class OrderService {
       );
   }
 
+  editOrder(id: number) {
+    return this.http
+      .get<any>(`${this._liveApiUrl}/company/order/${id}`)
+      .pipe(
+        map((data) => {
+          return data;
+        }),
+        catchError(this.authService.handleError)
+      );
+  }
+
   orderDelete(id: Number) {
     return this.http.delete<any>(`${this._liveApiUrl}/company/order/${id}`);
   }

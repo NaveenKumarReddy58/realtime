@@ -96,9 +96,6 @@ export class OrderAddComponent {
       order_no: [''],
     });
 
-    if (!this.isAddMode) {
-      this.orderDetail(this.route.snapshot.params['id']);
-    }
 
     this.addressList();
     this.warehouseList();
@@ -168,16 +165,48 @@ export class OrderAddComponent {
     });
   }
   orderDetail(id: number) {
-    this.orderService.orderDetail(id).subscribe(
+    this.orderService.editOrder(id).subscribe(
       (data: any) => {
         this.loading = false;
         if (this.authService.resultCodeError(data)) {
           this.loading = false;
           return;
         }
-
         this.orderData = data?.result;
-        // this.addOrderF.patchValue({});
+        if(this.orderData.is_pickup_warehouse){
+          this.isCheckedWarehous[1].to = false;
+          this.isCheckedWarehous[0].pickup = true;
+        } else if(this.orderData.is_dely_warehouse){
+          this.isCheckedWarehous[1].to = true;
+          this.isCheckedWarehous[0].pickup = false;
+        }
+       
+        this.addOrderF.patchValue({
+          po: this.orderData?.po,
+          pickup_company_name: this.orderData?.pickup_company_name,
+          pickup_address: this.orderData?.pickup_address?.id,
+          is_pickup_warehouse: this.orderData.is_pickup_warehouse,
+          pickup_date: this.orderData?.pickup_date,
+          pickup_time: this.orderData?.pickup_time,
+          pickup_contact_name: this.orderData?.pickup_contact_name,
+          pickup_email: this.orderData?.pickup_email,
+          pickup_country_code: this.orderData?.country_code,
+          pickup_phone: this.orderData?.pickup_phone,
+          pickup_alt_phone: this.orderData?.pickup_alt_phone,
+          pickup_note: this.orderData?.pickup_note?this.orderData?.pickup_note : '',
+          dely_company_name: this.orderData?.dely_company_name,
+          dely_address: this.orderData?.dely_address?.id,
+          is_dely_warehouse: this.orderData?.is_dely_warehouse,
+          dely_date: this.orderData?.dely_date,
+          dely_time: this.orderData?.dely_time,
+          dely_contact_name: this.orderData?.dely_contact_name,
+          dely_email:this.orderData?.dely_email,
+          dely_phone: this.orderData?.dely_phone,
+          dely_country_code: this.orderData?.country_code,
+          dely_alt_phone: this.orderData?.dely_alt_phone,
+          dely_note: this.orderData?.dely_note?this.orderData?.dely_note : '',
+          order_no: this.orderData?.order_no,
+        });
         this.loading = false;
       },
       (error) => {
@@ -201,6 +230,10 @@ export class OrderAddComponent {
             label: data?.address,
           });
         });
+        
+        if (!this.isAddMode) {
+          this.orderDetail(this.route.snapshot.params['id']);
+        }
       }
     });
   }
