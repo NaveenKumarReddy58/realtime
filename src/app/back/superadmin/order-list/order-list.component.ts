@@ -7,6 +7,8 @@ import { Observable, count } from 'rxjs';
 import { AuthService } from 'src/app/_service/auth.service';
 import { DriverService } from 'src/app/_service/driver.service';
 import { OrderService } from 'src/app/_service/order.service';
+import { DialogAnimationsComponent } from '../../common/dialog-animations/dialog-animations.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-order-list',
@@ -97,6 +99,7 @@ export class OrderListComponent {
   deleteOrderId: any;
   public isViewAllMode: boolean= false;
 
+
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -104,7 +107,8 @@ export class OrderListComponent {
     public authService: AuthService,
     public orderService: OrderService,
     public driverService: DriverService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private dialog: MatDialog
   ) {
     this.orderList(this.orderDate, this.orderType, this.orderStatus, this.page);
     this.driverList(0);
@@ -456,5 +460,28 @@ export class OrderListComponent {
     this.orderCount(this.orderDate, this.orderType);
   }
 
+  setPriority(enterAnimationDuration:string,exitAnimationDuration:string){
+      const dialogRef = this.dialog.open(DialogAnimationsComponent, {
+        height: '500px',
+        enterAnimationDuration,
+        exitAnimationDuration,
+        panelClass: 'order-listing-dialog',
+        data: {
+          title: 'Set the Priority',
+          pageName: 'order-listing',
+          orderListingData: {
+            totalOrders: this.ordersListCount
+          },
+          message:'',
+        },
+      });
+      dialogRef.afterClosed().subscribe(dialogResult => {
+        if(dialogResult){
+          if(dialogResult.res){
+            
+          }
+        }
+      });
+  }
 
 }

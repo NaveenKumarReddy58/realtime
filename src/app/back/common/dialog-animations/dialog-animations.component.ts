@@ -7,6 +7,8 @@ export interface DialogData {
   pageName: string;
   assignedOrdersCount: string;
   driverData: any;
+  orderListingData:any;
+
 
 }
 @Component({
@@ -22,7 +24,12 @@ export class DialogAnimationsComponent {
   dataList:any=[];
   driverId:any;
   orderData:any;
+  lengthOfOrders!: number[];
+  selectedPriorityNumber!: number;
   ngOnInit(): void {
+    if(this.data.pageName == 'order-listing'){
+      this.lengthOfOrders = [...Array(this.data.orderListingData.totalOrders).keys()]
+    }
   }
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData, public dialogRef: MatDialogRef<DialogAnimationsComponent>, private driverService: DriverService) {}
   onConfirm(): void {
@@ -40,5 +47,8 @@ export class DialogAnimationsComponent {
 
   onDismiss(): void {
       this.dialogRef.close(false);
+  }
+  selectNumber(val:number){
+    this.selectedPriorityNumber= val;
   }
 }

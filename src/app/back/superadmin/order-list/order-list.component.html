@@ -137,6 +137,7 @@
                 border="0"
               >
                 <tr class="T_Head">
+                  <th>Priority</th>
                   <th>Order Id</th>
                   <th>Customer Name</th>
                   <th>Customer Address</th>
@@ -197,6 +198,7 @@
                   class="tr-driver-list order-list"
                   *ngFor="let item of orderData; let index = index"
                 >
+                <td class="text-center"><span (click)="setPriority('200ms','200ms')" class="priority">{{item.priority}}</span></td>
                   <td>
                     <div class="d-flex">
                       <img class="mx-1" *ngIf="item.order_type == 'pickup'"

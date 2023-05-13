@@ -3,8 +3,20 @@
   <div *ngIf="data.pageName == 'order-details'">
     <app-driver-orders-list [dataDriverId]="data.driverData.id" [assignedOrdersCount]="data.driverData.assignedOrdersCount"></app-driver-orders-list>
   </div>
+  <div *ngIf="data.pageName == 'order-listing'">
+    <ul class="priority-numbers">
+      <li *ngFor="let key of lengthOfOrders">
+        {{key+1}}
+        <span (click)="selectNumber(key)" class="dot" [ngClass]="selectedPriorityNumber== key ? 'active':''">&nbsp;</span>
+      </li>
+    </ul>
+  </div>
 </div>
-<div mat-dialog-actions class="dialog-btn">
+<div *ngIf="data.pageName != 'order-listing'" mat-dialog-actions class="dialog-btn">
   <button class="Yes-btn" (click)="onConfirm()" mat-button mat-dialog-close cdkFocusInitial>Yes</button>
+  <button class="No-btn" (click)="onDismiss()" mat-button mat-dialog-close>No</button>
+</div>
+<div *ngIf="data.pageName == 'order-listing'" mat-dialog-actions class="dialog-btn">
+  <button class="Yes-btn" (click)="onConfirm()" mat-button mat-dialog-close cdkFocusInitial>Save</button>
   <button class="No-btn" (click)="onDismiss()" mat-button mat-dialog-close>No</button>
 </div>

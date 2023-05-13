@@ -138,3 +138,9 @@ ul.Tab_List li.active a {
 .order-list-add-files div{
     margin-bottom: 23px;
 }
+.priority{
+    background: #c7ffc3;
+    padding: 10px;
+    border-radius: 18px;
+    font-weight: 600;
+}

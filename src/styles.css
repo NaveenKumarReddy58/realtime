@@ -372,3 +372,6 @@ input[type=number] {
 .order-detail .mdc-dialog__content{
   height: 69% !important;
 }
+.order-listing-dialog .mdc-dialog__content{
+  height: 73% !important;
+}
