@@ -7,7 +7,7 @@
     <ul class="priority-numbers">
       <li *ngFor="let key of lengthOfOrders">
         {{key+1}}
-        <span (click)="selectNumber(key)" class="dot" [ngClass]="selectedPriorityNumber== key ? 'active':''">&nbsp;</span>
+        <span (click)="selectNumber(key+1)" class="dot" [ngClass]="selectedPriorityNumber== key+1 ? 'active':''">&nbsp;</span>
       </li>
     </ul>
   </div>
@@ -17,6 +17,9 @@
   <button class="No-btn" (click)="onDismiss()" mat-button mat-dialog-close>No</button>
 </div>
 <div *ngIf="data.pageName == 'order-listing'" mat-dialog-actions class="dialog-btn">
-  <button class="Yes-btn" (click)="onConfirm()" mat-button mat-dialog-close cdkFocusInitial>Save</button>
+  <button class="Yes-btn" (click)="onConfirm()" mat-button mat-dialog-close cdkFocusInitial>
+    Save
+    <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+  </button>
   <button class="No-btn" (click)="onDismiss()" mat-button mat-dialog-close>No</button>
 </div>

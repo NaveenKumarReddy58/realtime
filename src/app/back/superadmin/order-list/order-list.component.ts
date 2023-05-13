@@ -460,7 +460,7 @@ export class OrderListComponent {
     this.orderCount(this.orderDate, this.orderType);
   }
 
-  setPriority(enterAnimationDuration:string,exitAnimationDuration:string){
+  setPriority(enterAnimationDuration:string,exitAnimationDuration:string, id:string){
       const dialogRef = this.dialog.open(DialogAnimationsComponent, {
         height: '500px',
         enterAnimationDuration,
@@ -470,15 +470,22 @@ export class OrderListComponent {
           title: 'Set the Priority',
           pageName: 'order-listing',
           orderListingData: {
-            totalOrders: this.ordersListCount
+            totalOrders: this.ordersListCount,
+            order_id: id
           },
           message:'',
         },
       });
       dialogRef.afterClosed().subscribe(dialogResult => {
         if(dialogResult){
-          if(dialogResult.res){
-            
+          if(dialogResult){
+            this.orderStatus= null;
+            this.orderDate= null;
+            this.orderType= null;
+            this.page= 0;
+            this.startNumber = 1;
+            this.endNumber= 10;
+            this.orderList(this.orderDate,this.orderType, this.orderStatus, this.page);
           }
         }
       });

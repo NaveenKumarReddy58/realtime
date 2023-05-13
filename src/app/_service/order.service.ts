@@ -177,4 +177,15 @@ export class OrderService {
         }
       );
   }
+
+  orderPriority(form: any) {
+    return this.http
+      .post<any>(`${this._liveApiUrl}/company/order-priority/`, form)
+      .pipe(
+        map((data: any) => {
+          return data;
+        }),
+        catchError(this.authService.handleError)
+      );
+  }
 }
