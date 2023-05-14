@@ -295,11 +295,13 @@ export class OrderListComponent {
 
   }
   driverList(id?: number) {
+    this.data= []
     this.driverService.driverList(id);
     this.driver$ = this.driverService.getDrivers();
 
     this.driver$.subscribe((data: any) => {
       if (data && data.result && data.result.results) {
+        this.data= [];
         data.result.results.forEach((data: any) => {
           this.data.push({
             value: data?.id,

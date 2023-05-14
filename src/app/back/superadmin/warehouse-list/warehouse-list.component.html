@@ -87,6 +87,7 @@
                       /> -->
                       <input
                         type="checkbox"
+                        class="head-driver"
                         [value]="item.is_main_localation"
                         [checked]="item.is_main_localation"
                         (change)="controlOnChange(item.id, $event)"
@@ -94,7 +95,7 @@
                       <a routerLink="/admin/warehouse/{{ item.id }}">
                         <i class="fa fa-pencil EditIcon"></i>
                       </a>
-                      <label
+                      <!-- <label
                         class="switch"
                         (click)="openDialog('250ms', '250ms', item.id)"
                       >
@@ -104,7 +105,7 @@
                           [checked]="(isDefaultAddress &&  wareHouseId == item.id)"
                         />
                         <span class="slider round"></span>
-                      </label>
+                      </label> -->
                       <a (click)="warehouseDelete(item.id)">
                         <i class="fa fa-trash Delete"></i>
                         <i

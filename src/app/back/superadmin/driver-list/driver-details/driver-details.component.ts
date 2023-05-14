@@ -57,7 +57,6 @@ export class DriverDetailsComponent {
           certificates: driverDetails.certificate
         })
       }
-      debugger
     })
   }
 

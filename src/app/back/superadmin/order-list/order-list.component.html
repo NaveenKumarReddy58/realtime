@@ -201,13 +201,22 @@
                 <!-- <td class="text-center"><span (click)="setPriority('200ms','200ms')" class="priority">{{item.priority}}</span></td> -->
                   <td>
                     <div class="d-flex">
-                      <img (click)="setPriority('200ms','200ms', item.id)" class="mx-1" *ngIf="item.order_type == 'pickup'"
-                      src="./../../../../assets/images/p-icon.png"
-                    />
-                    <img (click)="setPriority('200ms','200ms',item.id)" class="mx-1" *ngIf="item.order_type == 'delivery'"
-                      src="./../../../../assets/images/d-icon.png"
-                    />
-
+                      <ng-container *ngIf="item.order_type == 'pickup'" >
+                        <img *ngIf="(!(item?.assigned_order[0]?.driver?.first_name) || item?.assigned_order[0]?.driver?.first_name?.length == 0)" (click)="setPriority('200ms','200ms', item.id)" class="mx-1"
+                        src="./../../../../assets/images/p-icon.png"
+                        />
+                        <img *ngIf="item?.assigned_order[0]?.driver?.first_name?.length > 0" (click)="setPriority('200ms','200ms', item.id)" class="mx-1"
+                        src="./../../../../assets/images/p_assigned.svg"
+                        />
+                      </ng-container>
+                      <ng-container *ngIf="item.order_type == 'delivery'">
+                        <img *ngIf="(!(item?.assigned_order[0]?.driver?.first_name) ||item?.assigned_order[0]?.driver?.first_name?.length == 0)" (click)="setPriority('200ms','200ms',item.id)" class="mx-1"
+                        src="./../../../../assets/images/d-icon.png"
+                        />
+                        <img *ngIf="item?.assigned_order[0]?.driver?.first_name?.length > 0" (click)="setPriority('200ms','200ms',item.id)" class="mx-1"
+                          src="./../../../../assets/images/d_assigned.svg"
+                        />
+                      </ng-container>
                     {{ item.order_type == 'pickup' ? item.po :  item.order_no}}
                     </div>
                     

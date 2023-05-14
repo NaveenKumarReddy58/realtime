@@ -5,13 +5,13 @@
       <div class="TabsList">
         <ul class="Tab_List">
           <li class="active">
-            <a>Total Drivers : 100</a>
+            <a *ngIf="items">Total Drivers : {{items.length}}</a>
           </li>
           <li>
-            <a>Active Drivers : 120 </a>
+            <a>Active Drivers : {{activeDriversCount}} </a>
           </li>
           <li>
-            <a>Inactive Drivers : 10</a>
+            <a *ngIf="items">Inactive Drivers : {{items.length - activeDriversCount }}</a>
           </li>
         </ul>
       </div>
@@ -45,7 +45,7 @@
                 </div>
                 <div class="text-center px-4">
                   <button class="ButtonStyle cancel-btn float-start" (click)="onClickDeleteDriverDialog($event)">Cancel</button>
-                  <button class="ButtonStyle float-end">Delete Driver</button>
+                  <button (click)="deleteDriversList(this.selectedDriversCount)" class="ButtonStyle float-end">Delete Driver</button>
                 </div>
               </div>
             </a>

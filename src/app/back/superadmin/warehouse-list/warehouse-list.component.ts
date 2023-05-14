@@ -53,15 +53,17 @@ export class WarehouseListComponent {
 
   controlOnChange(id: Number, e: any) {
     if (e.target.checked) {
-      this.warehouseSet(id);
+      this.warehouseSet(id, true);
     } else {
-      this.warehouseSet(id);
+      this.warehouseSet(id, false);
     }
     this.warehouseList();
   }
 
-  warehouseSet(id: Number) {
+  warehouseSet(id: any, val:any) {
     this.loading = true;
+    var formdata = new FormData();
+    formdata.append('is_main_localation',val);
     this.warehouseService.warehouseSet(id).subscribe(
       (data: any) => {
         if (this.authService.resultCodeError(data)) {
@@ -70,7 +72,6 @@ export class WarehouseListComponent {
         }
 
         this.warehouseList();
-        this.router.navigate(['/admin/warehouse']);
         this.toastr.success('Warehouse Status Updated');
       },
       (error) => {

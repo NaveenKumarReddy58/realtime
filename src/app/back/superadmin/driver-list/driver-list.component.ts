@@ -28,6 +28,7 @@ export class DriverListComponent {
   selectedDriversCount: any=0;
   isShowPushNotificationForm: boolean= false;
   imageSrc: any= "../../assets/images/photoupload.png";
+  activeDriversCount: any= 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -52,6 +53,7 @@ export class DriverListComponent {
       if(data && data.result && data.result.results){
         this.items = data.result.results;
         this.items.forEach((obj:any) => obj["checked"] = false)
+        this.getCountOfActiveDrivers();
       }
     });
 
@@ -191,7 +193,9 @@ export class DriverListComponent {
     //   ]
   }
 
-
+  getCountOfActiveDrivers(){
+    this.activeDriversCount = this.items.reduce((counter:any, obj:any) => obj.is_active === true ? counter += 1 : counter, 0);
+  }
   getSelectedDrivers(dList:any){
     this.selectedDriversCount = this.items.reduce((counter:any, obj:any) => obj.checked === true ? counter += 1 : counter, 0); // 6
   }
@@ -284,6 +288,13 @@ export class DriverListComponent {
       document.body.removeChild(selBox);
       this.isShowContactDialog= !this.isShowContactDialog;
 
+  }
+  deleteDriversList(data:any){
+    this.isShowDeleteDriverDialog = !this.isShowDeleteDriverDialog;
+    let selectedDrivers = this.items.filter((item:any) => item.checked);
+    selectedDrivers.forEach((elt:any) => {
+      this.driverDelete(elt.id);
+    });
   }
   driverDelete(id: any) {
     this.toggle[id] = true;
