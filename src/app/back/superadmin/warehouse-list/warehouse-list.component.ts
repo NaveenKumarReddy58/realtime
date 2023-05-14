@@ -46,8 +46,8 @@ export class WarehouseListComponent {
 
     this.warehouse$.subscribe((data: any) => {
       this.warehouseData = data?.result;
-      this.warehouseData &&
-        this.warehouseData.forEach((obj: any) => (obj['is_main_localation'] = false));
+      // this.warehouseData &&
+      //   this.warehouseData.forEach((obj: any) => (obj['is_main_localation'] = false));
     });
   }
 
@@ -57,7 +57,6 @@ export class WarehouseListComponent {
     } else {
       this.warehouseSet(id, false);
     }
-    this.warehouseList();
   }
 
   warehouseSet(id: any, val:any) {
@@ -75,6 +74,8 @@ export class WarehouseListComponent {
         this.toastr.success('Warehouse Status Updated');
       },
       (error) => {
+        this.toastr.error('Failed to update');
+        this.warehouseList();
         this.authService.dataError(error);
         this.loading = false;
       }
