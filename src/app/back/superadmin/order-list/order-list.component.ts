@@ -234,7 +234,7 @@ export class OrderListComponent {
     }
     if (!(type == this.orderType)) {
       let date = new Date();
-      let formatDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDay();
+      let formatDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
       this.orderDate = formatDate;
       this.orderType = type;
       this.orderList(this.orderDate, this.orderType, this.orderStatus, this.page);

@@ -201,7 +201,7 @@ export class OrderAddComponent {
           dely_time: this.orderData?.dely_time,
           dely_contact_name: this.orderData?.dely_contact_name,
           dely_email:this.orderData?.dely_email,
-          dely_phone: this.orderData?.dely_phone,
+          dely_phone: this.orderData?.dely_phone ? this.orderData?.dely_phone.replace('+91',''):'',
           dely_country_code: this.orderData?.country_code,
           dely_alt_phone: this.orderData?.dely_alt_phone,
           dely_note: this.orderData?.dely_note?this.orderData?.dely_note : '',

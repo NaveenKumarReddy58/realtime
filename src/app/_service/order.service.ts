@@ -45,7 +45,7 @@ export class OrderService {
 
   orderEdit(id: Number, form: any) {
     return this.http
-      .put<any>(`${this._liveApiUrl}/company/order/${id}/`, form)
+      .put<any>(`${this._liveApiUrl}/company/order/${id}`, form)
       .pipe(
         map((data: any) => {
           return data;
