@@ -41,10 +41,10 @@
                                             <div class="col-md-12 mb-4">
                                                 <table class="__TodayOrder">
                                                     <tr>
-                                                        <td class="px-0"  [ngClass]="!isEditMode? 'view-mode' : ''">
+                                                        <td class="px-0">
                                                             Driver Status: {{editDriverForm.value.is_active ? 'ACTIVE':'INACTIVE'}}
                                                             <label class="switch">
-                                                                <input type="checkbox" formControlName="is_active">
+                                                                <input type="checkbox" (click)="toggleStatus(editDriverForm.value.is_active)" formControlName="is_active">
                                                                 <span class="slider round"></span>
                                                               </label>
                                                         </td>
@@ -155,7 +155,11 @@
                                             </div>
 
                                             <div
-                                                class="text-end mt-4 Cancel_Save">
+                                                class="text-end mt-4 Cancel_Save my-3">
+                                                <button style="float: left;" (click)="updateDriverStatus()" [disabled]="!isEnabledSave" class="SaveButton ButtonStyle">Update <i
+                                                    class="fa fa-spinner fa-spin"
+                                                    *ngIf="delloading"
+                                                  ></i></button>
                                                 <button class="SaveButton ButtonStyle">Send
                                                     Push Notification</button>
                                             </div>

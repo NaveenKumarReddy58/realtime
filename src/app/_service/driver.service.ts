@@ -60,9 +60,7 @@ export class DriverService {
 
   driverActivateDeactivate(id: Number, status: any) {
     return this.http
-      .put<any>(`${this._liveApiUrl}/account/activatedeactivate-driver/${id}`, {
-        status,
-      })
+      .put<any>(`${this._liveApiUrl}/account/activatedeactivate-driver/${id}`, status)
       .pipe(
         map((data) => {
           return data;

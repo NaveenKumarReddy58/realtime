@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { DriverService } from 'src/app/_service/driver.service';
 
 @Component({
@@ -11,8 +12,12 @@ import { DriverService } from 'src/app/_service/driver.service';
 export class DriverDetailsComponent {
   public editDriverForm:any;
   public isEditMode: boolean= false;
+  driverId: any;
+  isEnabledSave: boolean = false;
+  isActivate: any;
+  delloading: boolean= false;
   
-  constructor(private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder,private router: Router , private driverService: DriverService){
+  constructor( private toastr: ToastrService, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder,private router: Router , private driverService: DriverService){
     this.editDriverForm = formBuilder.group({
       first_name: ['', [Validators.required]],
         last_name: ['', [Validators.required]],
@@ -38,6 +43,7 @@ export class DriverDetailsComponent {
 
     })
     let driverId = this.activatedRoute.snapshot.paramMap.get('id');
+    this.driverId = driverId;
     this.getDriverDetails(driverId);
   }
   getDriverDetails(driverId: string | null) {
@@ -62,5 +68,25 @@ export class DriverDetailsComponent {
 
   ngOnInit(){
 
+  }
+
+  toggleStatus(e:any){
+    this.isEnabledSave= true;
+    this.isActivate = !e;
+  }
+
+  updateDriverStatus(){
+    this.delloading= true;
+    var formdata = new FormData();
+    formdata.append('status', this.isActivate);
+    this.driverService.driverActivateDeactivate(this.driverId , formdata).subscribe((res)=>{
+      this.isEnabledSave= false;
+      this.delloading= false;
+      this.getDriverDetails(this.driverId);
+      this.toastr.success(res.result);
+    }, (err)=>{
+      this.toastr.error("Failed to update");
+      this.delloading= false;
+    })
   }
 }

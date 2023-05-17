@@ -217,6 +217,12 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
+        path: 'driver/edit/:id',
+        component: DriverAddComponent,
+        title: 'Driver Edit',
+        canActivate: [AuthGuard],
+      },
+      {
         path: 'driver/details/:id',
         component: DriverDetailsComponent,
         title: 'Driver Details',
