@@ -26,7 +26,7 @@ export class DriverAddComponent {
   countryCodes: any = CountryPhoneCodes;
   certificatesItems: any = [
     {
-      name: 'Licence',
+      name: 'License',
       img: 'assets/images/edit-icon.png',
     },
     {
@@ -42,7 +42,7 @@ export class DriverAddComponent {
       img: 'assets/images/edit-icon.png',
     },
     {
-      name: 'Safety',
+      name: 'Safety Certificate',
       img: 'assets/images/edit-icon.png',
     },
     {
@@ -70,6 +70,9 @@ export class DriverAddComponent {
     private toastr: ToastrService
   ) {
     this.id = this.route.snapshot.params['id'];
+    if(this.id){
+      this.getDriverDetails(this.id);
+    }
     this.isAddMode = !this.id;
 
     this.addDriver = formBuilder.group({
@@ -122,6 +125,40 @@ export class DriverAddComponent {
 
   ngOnInit(): void {}
 
+  getDriverDetails(driverId: any) {
+    this.driverService.driverDetails(driverId).subscribe((res)=>{
+      if(res && res.result){
+        let driverDetails= res.result
+        this.addDriver.patchValue({
+          first_name: driverDetails.first_name,
+          last_name: driverDetails.last_name,
+          email: driverDetails.email,
+          password: driverDetails?.password, 
+          phone_number: driverDetails.phone_number,
+          address: driverDetails.address,
+          is_active: driverDetails.is_active,
+          date_joined: driverDetails.date_joined,
+          profile_img: driverDetails.profile_image,
+          certificates: driverDetails.certificate,
+          is_head_driver: '',
+          country_code:'',
+        });
+        if (driverDetails.groups[0].name == 'Head Driver') {
+          this.addDriver.patchValue({
+            is_head_driver: true,
+          });
+        }
+        for (let index = 0; index < this.certificatesItems.length; index++) {
+          for (let j = 0; j < driverDetails.certificate.length; j++) {
+            if(this.certificatesItems[index].name == driverDetails.certificate[j].doc_name){
+              this.certificatesItems[index].img = driverDetails.certificate[j].image;
+            }
+          }
+        }
+        this.imageSrc= driverDetails.profile_image;
+      }
+    })
+  }
   handleSubmit() {
     this.isSubmitted = true;
     // for (var i = 0; i < this.certificatesItems.length - 1; i++) {
