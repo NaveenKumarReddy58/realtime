@@ -89,4 +89,8 @@ export class DriverDetailsComponent {
       this.delloading= false;
     })
   }
+
+  edit(){
+    this.router.navigate(['admin/driver/edit',this.driverId]);
+  }
 }
