@@ -18,7 +18,7 @@
       <div class="mx-3">
         <div class="SearchFilter gap-13px">
           <form class="Search max-width-230px">
-            <input type="text" name="" placeholder="Search" />
+            <input (keyup)="search($event)" type="text" name="" placeholder="Search" />
             <button><i class="fa fa-search"></i></button>
           </form>
           <div class="Filter_Set">
@@ -90,8 +90,9 @@
         </div>
         <div class="OrderList">
           <div class="row mt-3">
-            <div class="Table_Scroll">
+            <div class="Table_Scroll" >
               <table
+                *ngIf="items && items.length > 0"
                 class="Order_Table"
                 cellpadding="0"
                 cellspacing="0"
@@ -150,7 +151,26 @@
                   </td>
                 </tr>
               </table>
+              <table
+                *ngIf="items && items.length == 0"
+                class="Order_Table"
+                cellpadding="0"
+                cellspacing="0"
+                border="0"
+              >
+                <tr class="T_Head">
+                  <th class="text-start px-4">Driver/#</th>
+                  <th>Assigned Orders</th>
+                  <th>Completed Deliveries</th>
+                  <th>Last Delivery Time</th>
+                  <th>Time Back Warehouse</th>
+                  <th>Status</th>
+                  <th>Other Options</th>
+                </tr>
+                <tr>No Results Found</tr>
+                </table>
             </div>
+            
             <div class="row mt-3">
               <div class="col-md-12 text-end">
                 <button routerLink="/admin/driver/add" class="ButtonStyle">

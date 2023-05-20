@@ -206,4 +206,13 @@ export class DriverListComponent {
       }
     })
   }
+
+  search(e:any){
+    this.items = this.copyOfDriversList.filter(function(element:any){
+      let str = element.first_name+element.last_name;
+      if(str.toLowerCase().indexOf(e.target.value.toLowerCase()) > -1){
+        return element;
+      }
+    })
+  }
 }
