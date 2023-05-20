@@ -21,7 +21,7 @@ export class DriverAddComponent {
   fileName: any;
 
   id: Number;
-  isAddMode: boolean;
+  isAddMode: boolean= true;
   editDriver: any;
   countryCodes: any = CountryPhoneCodes;
   certificatesItems: any = [
@@ -72,8 +72,9 @@ export class DriverAddComponent {
     this.id = this.route.snapshot.params['id'];
     if(this.id){
       this.getDriverDetails(this.id);
+      this.isAddMode = false;
+
     }
-    this.isAddMode = !this.id;
 
     this.addDriver = formBuilder.group({
       first_name: ['', [Validators.required]],
@@ -99,7 +100,7 @@ export class DriverAddComponent {
       other_certificates:[]
     });
 
-    if (!this.isAddMode) {
+    if (this.isAddMode) {
       this.driverService.driverList(this.id);
       this.drivers$ = this.driverService.getDrivers();
 
@@ -178,10 +179,18 @@ export class DriverAddComponent {
       });
     }
     
-    if (this.addDriver.value['is_head_driver'] == '') {
+    
+
+    if(!this.isAddMode){
       this.addDriver.patchValue({
-        is_head_driver: true,
+        is_head_driver: this.addDriver.value['is_head_driver'] ? this.addDriver.value['is_head_driver'] : true,
       });
+    } else{
+      if (this.addDriver.value['is_head_driver'] == '') {
+        this.addDriver.patchValue({
+          is_head_driver: true,
+        });
+      }
     }
 
     this.loading = true;
@@ -215,11 +224,11 @@ export class DriverAddComponent {
             this.loading = false;
             return;
           }
-
           this.toastr.success(data?.actionPerformed);
-          this.router.navigate([
-            '/' + this.authService._isRoleName + '/driver',
-          ]);
+            this.router.navigate([
+              '/' + this.authService._isRoleName + '/driver',
+            ]);
+          
         },
         (error) => {
           this.authService.dataError(error);
@@ -234,10 +243,8 @@ export class DriverAddComponent {
             return;
           }
 
-          this.toastr.success(data?.actionPerformed);
-          this.router.navigate([
-            '/' + this.authService._isRoleName + '/driver',
-          ]);
+          this.toastr.success(data?.resultDescription);
+
         },
         (error) => {
           this.authService.dataError(error);
