@@ -70,11 +70,7 @@ export class DriverAddComponent {
     private toastr: ToastrService
   ) {
     this.id = this.route.snapshot.params['id'];
-    if(this.id){
-      this.getDriverDetails(this.id);
-      this.isAddMode = false;
-
-    }
+    
 
     this.addDriver = formBuilder.group({
       first_name: ['', [Validators.required]],
@@ -99,7 +95,12 @@ export class DriverAddComponent {
       driver_cvor:[''],
       other_certificates:[]
     });
+    if(this.id){
+      this.getDriverDetails(this.id);
+      this.isAddMode = false;
+      this.addDriver.get('password')?.clearValidators();
 
+    }
     if (this.isAddMode) {
       this.driverService.driverList(this.id);
       this.drivers$ = this.driverService.getDrivers();
