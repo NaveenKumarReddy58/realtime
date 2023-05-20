@@ -375,3 +375,30 @@ input[type=number] {
 .order-listing-dialog .mdc-dialog__content{
   height: 73% !important;
 }
+.recent-notifications{
+  position: absolute;
+  height: 100%;
+  background: white;
+  right: 0;
+  padding: 20px;
+  top: 0;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+  width: 400px;
+}
+
+.recent-notifications .cancel{
+  position: absolute;
+  width: 20px;
+  top: 22px;
+  cursor: pointer;
+  right: 24px;
+
+}
+.RecentTitleNto{
+  font-weight: 600;
+  padding-bottom: 10px;
+  display: block;
+  font-size: 16px !important;
+  margin-bottom: 12px;
+  color: black;
+}

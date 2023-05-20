@@ -4,14 +4,14 @@
     <div id="Tb-Tabs01" class="Tabs01 TabsMain">
       <div class="TabsList">
         <ul class="Tab_List">
-          <li class="active">
-            <a *ngIf="items">Total Drivers : {{items.length}}</a>
+          <li (click)="totalDrivers()" [ngClass]="tabName == 'TD' ? 'active' : ''">
+            <a *ngIf="copyOfDriversList">Total Drivers : {{copyOfDriversList.length}}</a>
           </li>
-          <li>
+          <li [ngClass]="tabName == 'AD' ? 'active' : ''" (click)="activeDrivers()">
             <a>Active Drivers : {{activeDriversCount}} </a>
           </li>
-          <li>
-            <a *ngIf="items">Inactive Drivers : {{items.length - activeDriversCount }}</a>
+          <li [ngClass]="tabName == 'INAD' ? 'active' : ''"  (click)="inActiveDrivers()">
+            <a *ngIf="items">Inactive Drivers : {{copyOfDriversList.length - activeDriversCount }}</a>
           </li>
         </ul>
       </div>
@@ -112,10 +112,10 @@
                       {{ item.first_name }} {{ item.last_name }}
                     </td>
                     <!-- <td>{{ item.email }}</td> -->
-                    <td>70</td>
-                    <td>Deliveries Completed : 60</td>
-                    <td>12:30 PM</td>
-                    <td>00:00 AM</td>
+                    <td>{{item.assigned_orders_count}}</td>
+                    <td>Deliveries Completed : 0</td>
+                    <td>--</td>
+                    <td>--</td>
                     <td>
                       <button class="button-Pending status_button_style" [ngClass]="item.is_active ? 'active-status' : 'inactive-status'"> 
                         {{item.is_active ? "ACTIVE" : "INACTIVE"}}

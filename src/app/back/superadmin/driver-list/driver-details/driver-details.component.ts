@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/_service/auth.service';
 import { DriverService } from 'src/app/_service/driver.service';
+import { DialogAnimationsComponent } from 'src/app/back/common/dialog-animations/dialog-animations.component';
 
 @Component({
   selector: 'app-driver-details',
@@ -16,8 +19,10 @@ export class DriverDetailsComponent {
   isEnabledSave: boolean = false;
   isActivate: any;
   delloading: boolean= false;
+  isShowRecentNotifications: boolean= false;
   
-  constructor( private toastr: ToastrService, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder,private router: Router , private driverService: DriverService){
+  constructor( private dialog: MatDialog,
+    private authService: AuthService, private toastr: ToastrService, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder,private router: Router , private driverService: DriverService){
     this.editDriverForm = formBuilder.group({
       first_name: ['', [Validators.required]],
         last_name: ['', [Validators.required]],
@@ -62,6 +67,12 @@ export class DriverDetailsComponent {
           profile_img: driverDetails.profile_image,
           certificates: driverDetails.certificate
         })
+
+        if (driverDetails.groups[0].name == 'Head Driver') {
+          this.editDriverForm.patchValue({
+            is_head_driver: true,
+          });
+        }
       }
     })
   }
@@ -92,5 +103,49 @@ export class DriverDetailsComponent {
 
   edit(){
     this.router.navigate(['admin/driver/edit',this.driverId]);
+  }
+
+  showRecentNotifications(){
+    this.isShowRecentNotifications= true;
+  }
+  closeRecentNotifications(){
+    this.isShowRecentNotifications= false;
+  }
+  deleteDriver() {
+
+    let enterAnimationDuration = '200ms';
+    let exitAnimationDuration = '200ms';
+
+    const dialogRef = this.dialog.open(DialogAnimationsComponent, {
+      width: '450px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+      data: {
+        title: 'Alert?',
+        message:
+          'Are you sure want to delete this Driver?',
+      },
+    });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult) {
+        this.delloading = true;
+        this.driverService.driverDelete(this.driverId).subscribe(
+          (data: any) => {
+            if (this.authService.resultCodeError(data)) {
+              this.delloading = false;
+              return;
+            }
+            this.router.navigate(['/admin/driver']);
+            this.toastr.success('Driver Deleted');
+            this.delloading = false;
+          },
+          (error) => {
+            this.authService.dataError(error);
+            this.delloading = false;
+          }
+        );
+      }
+    });
+
   }
 }

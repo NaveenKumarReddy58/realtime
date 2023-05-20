@@ -32,7 +32,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-9">
                             <form class="ProfileFor" [formGroup]="editDriverForm">
                                 <div class="row">
                                     <!-- Popup Box -->
@@ -49,23 +49,28 @@
                                                               </label>
                                                         </td>
                                                         <td  [ngClass]="!isEditMode? 'view-mode' : ''">
-                                                            Head Driver: <input class="rtt-checkbox" type="checkbox" name="a">
+                                                            Head Driver: <input
+                                                            class="head-driver mx-2"
+                                                            type="checkbox"
+                                                            formControlName="is_head_driver"
+                                                          />
 
                                                         </td>
                                                         <td class="px-0 float-end">
                                                             <span (click)="edit()" class="mx-3">Edit <i
                                                                     class="fa fa-pencil action-icon"></i></span>
-                                                            <span>Delete <i
+                                                            <span (click)="deleteDriver()">Delete <i
                                                                     class="fa fa-trash action-icon"></i></span>
+                                                            <span class="mx-3 cursor-pointer" (click)="showRecentNotifications()">Recent Notifications <i class="fa fa-bell mx-2" aria-hidden="true"></i></span>
                                                         </td>
                                                     </tr>
                                                 </table>
                                                 <table class="TodayOrder mt-4">
                                                     <tr>
-                                                        <td>Today's Order 15</td>
-                                                        <td>Pending 02</td>
-                                                        <td>Successful 12</td>
-                                                        <td>UnSuccessful 12</td>
+                                                        <td>Today's Order: 0</td>
+                                                        <td>Pending: 0</td>
+                                                        <td>Successful: 0</td>
+                                                        <td>UnSuccessful: 0</td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -169,8 +174,9 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="col-md-4">
-                            <div class="Recente__Noti">
+                        <div class="col-md-4 recent-notifications" *ngIf="isShowRecentNotifications">
+                            <img class="cancel" src="../../assets/images/cancel.jpg" (click)="closeRecentNotifications()">
+                            <div class="Recente__Noti mt-4 pt-4">
                                 <span class="Recent__">
                                     <a  class="active">Recent Trip History</a>
                                     <a >Recent Notification</a>
@@ -180,7 +186,10 @@
                                             src="assets/images/filter-icon.png"></a>
                                 </span>
                             </div>
-                            <div class="PacelId mt-4">
+                             <div class="mt-4 PacelId">
+                                No Recent Trip History
+                            </div>
+                            <!-- <div class="PacelId mt-4">
                                 <ul>
                                     <li>
                                         <span class="Parcel_T">Parcel ID 001199001199 <span
@@ -253,7 +262,7 @@
                                         </div>
                                     </li>
                                 </ul>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
