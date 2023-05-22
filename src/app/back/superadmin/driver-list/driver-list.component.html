@@ -107,14 +107,14 @@
                   <th>Status</th>
                   <th>Other Options</th>
                 </tr>
-                <tr class="tr-driver-list" routerLink="/admin/driver/details/{{item.id}}" *ngFor="let item of items; let index = index">
+                <tr class="tr-driver-list" *ngFor="let item of items; let index = index">
                     <td>   
                       <span [ngClass]="item.is_active ? 'active-dot' : 'inactive-dot'"></span>
                       {{ item.first_name }} {{ item.last_name }}
                     </td>
                     <!-- <td>{{ item.email }}</td> -->
                     <td>{{item.assigned_orders_count}}</td>
-                    <td>Deliveries Completed : 0</td>
+                    <td>0</td>
                     <td>--</td>
                     <td>--</td>
                     <td>
@@ -140,6 +140,8 @@
                             type="checkbox"
                             [checked]="item.checked"
                             (change)="changeStatus(item.id , item.checked)"/>
+                      <a routerLink="/admin/driver/details/{{item.id}}"><i style="font-size: 18px;" class="fa fa-eye" aria-hidden="true"></i></a>
+
                       <!-- <a (click)="driverDelete(item.id)">
                         <i class="fa fa-trash Delete"></i>
                         <i

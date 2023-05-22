@@ -157,13 +157,16 @@
 .gap-13px{
     gap: 13px;
 }
-.tr-driver-list:hover{
-    background-color: #ebeff2;
-    cursor: pointer;
-}
+
 tr > td:last-child {
     background-color:none !important;
 }
-.tr-driver-list td{
-    font-weight: 400;
-}
+
+button.status_button_style {
+    border: 0;
+    padding: 5px 15px;
+    border-radius: 10px;
+    font-weight: 500;
+    width: 100%;
+    font-size: 12px;
+  }

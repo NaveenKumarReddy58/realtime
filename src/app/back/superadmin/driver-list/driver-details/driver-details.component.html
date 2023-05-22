@@ -21,7 +21,7 @@
                                     <img [src]="editDriverForm.value.profile_img">
                                 </div>
                                 <div class="ChangeImg NoPhoto mt-2">
-                                    <p class="m-0 driver-name">{{editDriverForm.value.first_name+" "+editDriverForm.value.last_name}}</p>
+                                    <p class="m-0 driver-name">{{editDriverForm.value.first_name+" "+editDriverForm.value.last_name}} <span *ngIf="editDriverForm.value.is_head_driver">(HD)</span></p>
                                     <p>Joined On: {{editDriverForm.value.date_joined | date}}</p>
                                 </div>
                                 <div class="ChangePic NoPhoto mt-4 google-map">

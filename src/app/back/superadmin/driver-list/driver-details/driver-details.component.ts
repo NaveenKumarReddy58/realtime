@@ -61,6 +61,7 @@ export class DriverDetailsComponent {
           last_name: driverDetails.last_name,
           email: driverDetails.email,
           phone_number: driverDetails.phone_number,
+          country_code:driverDetails.country_code,
           address: driverDetails.address,
           is_active: driverDetails.is_active,
           date_joined: driverDetails.date_joined,

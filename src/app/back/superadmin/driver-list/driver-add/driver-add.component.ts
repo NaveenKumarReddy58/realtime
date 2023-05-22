@@ -137,13 +137,13 @@ export class DriverAddComponent {
           email: driverDetails.email,
           password: driverDetails?.password, 
           phone_number: driverDetails.phone_number,
+          country_code:driverDetails.country_code,
           address: driverDetails.address,
           is_active: driverDetails.is_active,
           date_joined: driverDetails.date_joined,
           profile_img: driverDetails.profile_image,
           certificates: driverDetails.certificate,
           is_head_driver: '',
-          country_code:'',
         });
         if (driverDetails.groups[0].name == 'Head Driver') {
           this.addDriver.patchValue({

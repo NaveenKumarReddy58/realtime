@@ -53,7 +53,13 @@ export class DriverListComponent {
 
     this.driver$.subscribe((data: any) => {
       if(data && data.result && data.result.results){
-        this.items = data.result.results;
+        this.items = data.result.results.sort((a:any, b:any) => {
+          if (a.is_active > b.is_active)
+            return -1;
+          if (a.is_active < b.is_active)
+            return 1;
+          return 0;
+        });
         this.copyOfDriversList= this.items;
         this.items.forEach((obj:any) => obj["checked"] = false)
         this.getCountOfActiveDrivers();

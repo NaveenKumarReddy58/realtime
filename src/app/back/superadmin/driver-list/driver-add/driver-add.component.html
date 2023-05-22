@@ -43,7 +43,7 @@
                     />
                   </span>
                 </div>
-                <div class="my-2 driver-name">{{(this.frmValues.first_name | titlecase) +" "+ (this.frmValues.last_name | titlecase)}}</div>
+                <div class="my-2 driver-name">{{(this.frmValues.first_name | titlecase) +" "+ (this.frmValues.last_name | titlecase)}} <span *ngIf="frmValues.is_head_driver">(HD)</span></div>
                 <div (click)="fileInput.click()" class="ChangeImg">
                   Change Profile Photo
                 </div>
@@ -276,7 +276,7 @@
                         </div>
                       </div>
 
-                      <div class="row col-md-12 notes mt-3">
+                      <!-- <div class="row col-md-12 notes mt-3">
                         <p>Notes:</p>
                         <ul class="mx-4">
                           <li>License is mandatory</li>
@@ -289,7 +289,7 @@
                         <div *ngIf="isShowCertificationErr" class="text-danger">
                           Please upload all mandatory documents
                         </div>
-                      </div>
+                      </div> -->
                       <div class="row mt-4">
                         <div class="col-md-12">
                           <div
