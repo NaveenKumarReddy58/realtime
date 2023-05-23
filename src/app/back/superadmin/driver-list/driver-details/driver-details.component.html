@@ -48,14 +48,14 @@
                                                                 <span class="slider round"></span>
                                                               </label>
                                                         </td>
-                                                        <td  [ngClass]="!isEditMode? 'view-mode' : ''">
+                                                        <!-- <td  [ngClass]="!isEditMode? 'view-mode' : ''">
                                                             Head Driver: <input
                                                             class="head-driver mx-2"
                                                             type="checkbox"
                                                             formControlName="is_head_driver"
                                                           />
 
-                                                        </td>
+                                                        </td> -->
                                                         <td class="px-0 float-end">
                                                             <span (click)="edit()" class="mx-3">Edit <i
                                                                     class="fa fa-pencil action-icon"></i></span>
@@ -91,13 +91,17 @@
                                                 </span>
                                             </div>
 
-                                            <div class="col-md-6 mb-4"  [ngClass]="!isEditMode? 'view-mode' : ''">
+                                            <div class="col-md-6 mb-4">
                                                 <span class="Password">
-                                                    <input type="number" name=""
-                                                        placeholder="Mobile Number"
-                                                        formControlName="phone_number"
-                                                        class="Pro_input_Field driver-input-field"
-                                                        onKeyPress="if(this.value.length==10) return false;">
+                                                            <input
+                                                              type="text"
+                                                              name=""
+                                                              style="pointer-events: none;"
+                                                              formControlName="phone_number"
+                                                              class="Pro_input_Field driver-input-field"
+                                                              
+                                                            />
+                                                            <i (click)="copyText(editDriverForm.value.phone_number)" class="fa-solid fa-copy order-details-copy"></i>
                                                 </span>
                                             </div>
                                             <div class="col-md-6 mb-4"  [ngClass]="!isEditMode? 'view-mode' : ''">
@@ -153,7 +157,7 @@
                                             <div class="col-md-12 mb-4"  [ngClass]="!isEditMode? 'view-mode' : ''">
                                                 <label><strong>Title:</strong></label>
                                                 <span class="Password">
-                                                    <textarea class="HelpArea">
+                                                    <textarea class="HelpArea" style="height: 150px">
                                                     Custom Message /Push Notification message
                                                 </textarea>
                                                 </span>

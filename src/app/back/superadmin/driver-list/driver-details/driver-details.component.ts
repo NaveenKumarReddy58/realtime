@@ -29,7 +29,7 @@ export class DriverDetailsComponent {
         email: ['', [Validators.required, Validators.email]],
         phone_number: [
           '',
-          [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
+          [Validators.required],
         ],
         address: ['', [Validators.required]],
         is_head_driver: [''],
@@ -60,7 +60,7 @@ export class DriverDetailsComponent {
           first_name: driverDetails.first_name,
           last_name: driverDetails.last_name,
           email: driverDetails.email,
-          phone_number: driverDetails.phone_number,
+          phone_number: driverDetails.country_code+" "+driverDetails.phone_number,
           country_code:driverDetails.country_code,
           address: driverDetails.address,
           is_active: driverDetails.is_active,
@@ -68,7 +68,6 @@ export class DriverDetailsComponent {
           profile_img: driverDetails.profile_image,
           certificates: driverDetails.certificate
         })
-
         if (driverDetails.groups[0].name == 'Head Driver') {
           this.editDriverForm.patchValue({
             is_head_driver: true,
@@ -147,6 +146,20 @@ export class DriverDetailsComponent {
         );
       }
     });
+
+  }
+  copyText(val: string){
+    let selBox = document.createElement('textarea');
+      selBox.style.position = 'fixed';
+      selBox.style.left = '0';
+      selBox.style.top = '0';
+      selBox.style.opacity = '0';
+      selBox.value = val;
+      document.body.appendChild(selBox);
+      selBox.focus();
+      selBox.select();
+      document.execCommand('copy');
+      document.body.removeChild(selBox);
 
   }
 }

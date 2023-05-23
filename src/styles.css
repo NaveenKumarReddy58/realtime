@@ -402,3 +402,10 @@ input[type=number] {
   margin-bottom: 12px;
   color: black;
 }
+.order-details-copy{
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+  color: #0eb002;
+}

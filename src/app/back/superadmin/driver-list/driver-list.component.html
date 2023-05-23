@@ -108,9 +108,9 @@
                   <th>Other Options</th>
                 </tr>
                 <tr class="tr-driver-list" *ngFor="let item of items; let index = index">
-                    <td>   
+                    <td class="text-start">   
                       <span [ngClass]="item.is_active ? 'active-dot' : 'inactive-dot'"></span>
-                      {{ item.first_name }} {{ item.last_name }}
+                      {{ item.first_name }} {{ item.last_name }} <span *ngIf="(item.groups[0].name.indexOf('Head') > -1)">(HD)</span>
                     </td>
                     <!-- <td>{{ item.email }}</td> -->
                     <td>{{item.assigned_orders_count}}</td>
