@@ -64,6 +64,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { DriverDetailsComponent } from './back/superadmin/driver-list/driver-details/driver-details.component';
 import {MatSelectModule} from '@angular/material/select';
 import { DriverOrdersListComponent } from './back/superadmin/driver-list/driver-orders-list/driver-orders-list.component';
+import { ReusableGoogleMapComponent } from './reusable-google-map/reusable-google-map.component';
 
 @NgModule({
   declarations: [
@@ -107,6 +108,7 @@ import { DriverOrdersListComponent } from './back/superadmin/driver-list/driver-
     NotificationListComponent,
     DriverDetailsComponent,
     DriverOrdersListComponent,
+    ReusableGoogleMapComponent,
   ],
   imports: [
     CommonModule,

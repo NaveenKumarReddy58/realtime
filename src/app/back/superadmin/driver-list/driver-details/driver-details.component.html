@@ -10,7 +10,8 @@
                 <div class="OrderList">
                     <div class="row">
                         <div class="col-md-12 Oreder">
-                            <span class="RecentTitle AddOrder">Associate Driver </span>
+                            <span *ngIf="!editDriverForm.value.is_head_driver" class="RecentTitle AddOrder">Associate Driver </span>
+                            <span *ngIf="editDriverForm.value.is_head_driver" class="RecentTitle AddOrder">Head Driver </span>
                         </div>
                     </div>
                     <div class="row mt-4">
@@ -25,9 +26,10 @@
                                     <p>Joined On: {{editDriverForm.value.date_joined | date}}</p>
                                 </div>
                                 <div class="ChangePic NoPhoto mt-4 google-map">
-                                    Google Map Location
+                                    
+                                    <app-reusable-google-map></app-reusable-google-map>
                                 </div>
-                                <div class="TrackDriver mt-3">
+                                <div class="TrackDriver mt-3" (click)="trackDriver()">
                                     <a > Track Driver</a>
                                 </div>
                             </div>
@@ -154,12 +156,19 @@
                                                     <strong>Vehicle Documents:</strong>
                                                 </span>
                                             </div>
-                                            <div class="col-md-12 mb-4"  [ngClass]="!isEditMode? 'view-mode' : ''">
+                                            <div class="col-md-12 mb-4">
                                                 <label><strong>Title:</strong></label>
                                                 <span class="Password">
-                                                    <textarea class="HelpArea" style="height: 150px">
-                                                    Custom Message /Push Notification message
-                                                </textarea>
+                                                    <textarea class="HelpArea" maxlength="200" placeholder="Custome Message/Push Notification" style="height: 150px"
+                                                        formControlName="push_notification">
+                                                    </textarea>
+                                                    <div class="notes-msg">{{200 - editDriverForm.value.push_notification.length}}/200</div>
+
+                                                    <div *ngIf="isSubmitted && editDriverForm.controls.push_notification.errors" class="text-danger">
+                                                        <div *ngIf="isSubmitted && editDriverForm.controls.push_notification.errors['required']">
+                                                            Custome Message/Push Notification is required
+                                                        </div>
+                                                    </div>
                                                 </span>
                                             </div>
 
@@ -169,7 +178,7 @@
                                                     class="fa fa-spinner fa-spin"
                                                     *ngIf="delloading"
                                                   ></i></button>
-                                                <button class="SaveButton ButtonStyle">Send
+                                                <button class="SaveButton ButtonStyle" (click)="sendPushNotification()">Send
                                                     Push Notification</button>
                                             </div>
                                         </div>

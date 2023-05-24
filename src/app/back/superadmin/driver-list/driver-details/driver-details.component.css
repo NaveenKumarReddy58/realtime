@@ -13,8 +13,12 @@
   }
   .google-map{
     color: #646464 !important;
+    padding: 20px 20px 20px !important;
   }
 
+  .google-map .map-container{
+    height: 75px;
+  }
   .rtt-checkbox[type=checkbox] {
     position: relative;
     cursor: pointer;
@@ -79,4 +83,9 @@ input.Pro_input_Field {
 }
 .view-mode{
   pointer-events: none;
+}
+.notes-msg{
+  text-align: right;
+  color: gray;
+  float: right;
 }

@@ -6,7 +6,13 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/_service/auth.service';
 import { DriverService } from 'src/app/_service/driver.service';
 import { DialogAnimationsComponent } from 'src/app/back/common/dialog-animations/dialog-animations.component';
-
+import { ReusableGoogleMapComponent } from 'src/app/reusable-google-map/reusable-google-map.component';
+declare var google: {
+  maps: {
+    Geocoder: new () => any;
+    places: { Autocomplete: new (arg0: any) => any };
+  };
+};
 @Component({
   selector: 'app-driver-details',
   templateUrl: './driver-details.component.html',
@@ -20,6 +26,9 @@ export class DriverDetailsComponent {
   isActivate: any;
   delloading: boolean= false;
   isShowRecentNotifications: boolean= false;
+  geoCoder: any;
+  isSubmitted: boolean = false;
+
   
   constructor( private dialog: MatDialog,
     private authService: AuthService, private toastr: ToastrService, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder,private router: Router , private driverService: DriverService){
@@ -44,7 +53,8 @@ export class DriverDetailsComponent {
         driver_certificate:[''],
         driver_cvor:[''],
         date_joined:[''],
-        profile_img:['assets/images/profilephoto.png']
+        profile_img:['assets/images/profilephoto.png'],
+        push_notification: ['', [Validators.required]]
 
     })
     let driverId = this.activatedRoute.snapshot.paramMap.get('id');
@@ -78,14 +88,14 @@ export class DriverDetailsComponent {
   }
 
   ngOnInit(){
-
+    console.log(this.editDriverForm)
   }
 
   toggleStatus(e:any){
     this.isEnabledSave= true;
     this.isActivate = !e;
   }
-
+  
   updateDriverStatus(){
     this.delloading= true;
     var formdata = new FormData();
@@ -161,5 +171,30 @@ export class DriverDetailsComponent {
       document.execCommand('copy');
       document.body.removeChild(selBox);
 
+  }
+  sendPushNotification(){
+    this.isSubmitted= true;
+    
+  }
+  trackDriver(){
+    
+    let enterAnimationDuration = '200ms';
+    let exitAnimationDuration = '200ms';
+
+    const dialogRef = this.dialog.open(ReusableGoogleMapComponent, {
+      width: '750px',
+      height:'500px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+      data: {
+       height: '500px',
+      },
+      
+    });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult) {
+        
+      }
+    });
   }
 }
