@@ -115,7 +115,7 @@
             </div>
           </div>
         </div>
-        <div class="row mt-4" *ngIf="isOtpSent">
+        <div class="row mt-4" >
           
           <div class="col-md-12 mb-3">
 
@@ -123,16 +123,23 @@
               <ng-otp-input class="ng-otp-input" (onInputChange)="onOtpChange($event)"
 
                 [config]="{ length: 6, allowNumbersOnly: true, containerClass: 'otp-input-field' }"></ng-otp-input>
-                <button class="Verify mx-3" (click)="updatePassword()">Update</button>
+                
+                <button class="Verify mx-3" (click)="updatePassword()">Change Password</button>
+                
                 <div class="position-relative d-inline-block">
                   <app-timer [mobileNumber]="phoneNumber" [countryCode]="'+91'" class="app-timer"></app-timer>
                 </div>
-
+                <div *ngIf="" class="text-danger">
+                  <div *ngIf="otp && otp.length != 6 || otp == null">
+                      OTP Should be 6 digit long.
+                  </div>
+                </div>
             </label>            
           </div>
           <div>
+            
             <div class="col-md-12">
-              <span>To change password enter OTP Sent to: ********</span>
+              <span>To change password enter OTP Sent to: ********{{phoneNumber!.substr(-2)}}</span>
             </div>
           </div>
         </div>

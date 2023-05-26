@@ -26,7 +26,7 @@ export class ProfileComponent {
   otp: any;
   verifyOtp$!: Observable<any>;
   resetPassword$!: any;
-  phoneNumber = '7528943768';
+  phoneNumber = '9640371045';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -86,9 +86,15 @@ export class ProfileComponent {
     this.verifyOtp$ = this.authService.verifyResetOtp(this.phoneNumber, this.otp);
 
     this.verifyOtp$.subscribe((data: any) => {
-      this.upLoading= false;
-      this.toastr.success("Please Wait...")
-      this.resetPassword();
+      if(data.resultCode == '1'){
+        this.upLoading= false;
+        this.toastr.success("Please Wait...")
+        this.resetPassword();
+      } else{
+        this.toastr.error(data.message)
+      }
+
+      
     }, (err)=>{
       this.isLoading= false;
       this.toastr.error("Failed to Verify an OTP")
@@ -98,6 +104,7 @@ export class ProfileComponent {
   resetPassword(){
     this.resetPassword$ = this.authService.resetPassword(this.profileData?.email, this.ProfileFor.value.pswd);
     this.resetPassword$.subscribe((data: any) => {
+
       this.isOtpSent= false;
       this.isSubmitted= false;
       this.ProfileFor.patchValue({
