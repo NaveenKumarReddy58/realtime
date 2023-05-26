@@ -26,7 +26,8 @@ export class ProfileComponent {
   otp: any;
   verifyOtp$!: Observable<any>;
   resetPassword$!: any;
-  phoneNumber = '9640371045';
+  phoneNumber = '7528943768';
+  otpSubmitted: boolean= false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -64,6 +65,7 @@ export class ProfileComponent {
     this.isSubmitted= true;
     if(this.ProfileFor.controls['pswd'].status == 'INVALID' || 
     this.ProfileFor.controls['confirm_password'].status == 'INVALID' || 
+     !(this.ProfileFor.value.pswd?.length >= 6) ||
     (this.ProfileFor.value.confirm_password != this.ProfileFor.value.pswd)){
       return;
     }
@@ -83,6 +85,7 @@ export class ProfileComponent {
 
   updatePassword(){
     this.upLoading = true;
+    this.otpSubmitted= true;
     this.verifyOtp$ = this.authService.verifyResetOtp(this.phoneNumber, this.otp);
 
     this.verifyOtp$.subscribe((data: any) => {
