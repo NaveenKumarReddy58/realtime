@@ -16,7 +16,8 @@
       <!-- Status Button -->
       <div class="ButtonTab" *ngIf="!isViewAllMode">
         <ul>
-          <li (click)="onClickStatus(item.order_status)" class="cursor-pointer" *ngFor="let item of allOrdersCount" [ngClass]="{
+          <ng-container *ngFor="let item of allOrdersCount">
+            <li *ngIf="item.order_status != 'shipped'" (click)="onClickStatus(item.order_status)" class="cursor-pointer" [ngClass]="{
             'All': item.order_status == 'all',
             'Pending': item.order_status == 'pending',
             'Successful': item.order_status == 'successful',
@@ -35,6 +36,8 @@
               </span>
             </a>
           </li>
+        </ng-container>
+
           <!-- <li class="Pending">
             <a>
               <span class="All">Pending</span>

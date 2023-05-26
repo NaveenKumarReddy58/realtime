@@ -206,10 +206,11 @@ export class AuthService {
       );
   }
 
-  sendMobileOtp(mobile_no: string) {
+  sendMobileOtp(mobile_no: string, country_code?: string) {
     return this.http
       .post<any>(`${this._liveApiUrl}/account/send-mobile-otp/`, {
         mobile_no,
+        country_code
       })
       .pipe(
         map((data) => {

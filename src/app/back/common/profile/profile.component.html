@@ -1,5 +1,5 @@
-<div class="ContentArea">
-  <div class="row mb-4">
+<div class="ContentArea p-5">
+  <div class="row mb-2">
     <div class="col-md-6">
       <div class="HeadingName">
         <h2>My Profile</h2>
@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class="col-md-9">
-      <form class="ProfileFor">
+      <form [formGroup]="ProfileFor" class="ProfileFor">
         <div class="row">
           <div class="col-md-6">
             <input
@@ -69,50 +69,70 @@
             />
           </div>
         </div>
-        <div class="ChangePass mt-3">Changge Password</div>
+        <div class="justify-content-between mt-3 text-end Cancel_Save">
+          <button class="SaveButton ButtonStyle" >Save Changes</button>
+        </div>
+        <div class="ChangePass mt-3">Change Password</div>
         <div class="row">
           <div class="col-md-6">
             <span class="Password">
-              <i class="fa fa-eye __eye" aria-hidden="true"></i>
               <input
                 type="password"
                 name="password"
-                placeholder="Password"
+                placeholder="Enter New Password"
+                formControlName="pswd"
                 class="Pro_input_Field"
               />
+              <div *ngIf="isSubmitted && ProfileFor.controls['pswd'].errors" class="text-danger">
+                <div *ngIf="isSubmitted && ProfileFor.controls['pswd'].errors['required']">
+                  Password Required
+                </div>
+              </div>
             </span>
           </div>
           <div class="col-md-6">
             <span class="Password">
-              <i class="fa fa-eye __eye green__eye" aria-hidden="true"></i>
               <input
                 type="password"
                 name="confirmpassword"
                 placeholder="Confirm Password"
+                formControlName="confirm_password"
                 class="Pro_input_Field"
               />
+              <div *ngIf="isSubmitted && ProfileFor.controls['confirm_password'].errors" class="text-danger">
+                <div *ngIf="isSubmitted && ProfileFor.controls['confirm_password'].errors['required']">
+                    Confirm Password Required
+                </div>
+              </div>
+              <div class="text-danger">
+                <div *ngIf=" (ProfileFor.value.pswd.length > 0 || ProfileFor.value.confirm_password.length > 0) &&  (ProfileFor.value.confirm_password != ProfileFor.value.pswd) ">
+                    Password should match
+                </div>
+              </div>
             </span>
+            <div *ngIf="!isOtpSent" class="justify-content-between mt-3 text-end Cancel_Save">
+              <button class="SaveButton ButtonStyle" (click)="sendOTP()">Send OTP <i class="fa fa-spinner fa-spin" *ngIf="isLoading"></i></button>
+            </div>
           </div>
         </div>
-        <div class="row mt-4">
-          <div class="col-md-6">
-            <span>To change password enter OTP Sent to: ********</span>
+        <div class="row mt-4" *ngIf="isOtpSent">
+          
+          <div class="col-md-12 mb-3">
+
+            <label>
+              <ng-otp-input class="ng-otp-input" (onInputChange)="onOtpChange($event)"
+
+                [config]="{ length: 6, allowNumbersOnly: true, containerClass: 'otp-input-field' }"></ng-otp-input>
+                <button class="Verify mx-3" (click)="updatePassword()">Update</button>
+                <div class="position-relative d-inline-block">
+                  <app-timer [mobileNumber]="phoneNumber" [countryCode]="'+91'" class="app-timer"></app-timer>
+                </div>
+
+            </label>            
           </div>
-          <div class="col-md-6">
-            <div class="Verify__Otp">
-              <div class="Verify__Otp__Number OtpNumber">
-                <input type="text" name="" />
-                <input type="text" name="" />
-                <input type="text" name="" />
-                <input type="text" name="" />
-                <input type="text" name="" />
-                <input type="text" name="" />
-                <button class="Verify">Verify</button>
-              </div>
-            </div>
-            <div class="d-flex justify-content-between mt-5 Cancel_Save">
-              <button class="CancelButton">Cancel</button>
-              <button class="SaveButton ButtonStyle">Save Changes</button>
+          <div>
+            <div class="col-md-12">
+              <span>To change password enter OTP Sent to: ********</span>
             </div>
           </div>
         </div>

@@ -409,3 +409,15 @@ input[type=number] {
   cursor: pointer;
   color: #0eb002;
 }
+
+.otp-input{
+  height: 40px !important;
+  width: 40px !important;
+  border-radius: 10px !important;
+  border: solid 2px #707070 !important;
+  text-align: center !important;
+  font-size: 22px !important;
+}
+.otp-input-field input {
+  text-align: center !important;
+}

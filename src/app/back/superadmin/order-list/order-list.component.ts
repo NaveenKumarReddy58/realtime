@@ -84,6 +84,11 @@ export class OrderListComponent {
       "order_status": "cancelled",
       "count": 0,
       "isActive": false
+    },
+    {
+      "order_status": "shipped",
+      "count": 0,
+      "isActive": false
     },   
   ]
   orderDate: any;
@@ -165,7 +170,7 @@ export class OrderListComponent {
 
     this.orderCount$.subscribe((data: any) => {
       this.orderCountData = data?.result;
-      
+      this.makeDefaultCount();
       if(data && data.result ){
         if(data.result.today.length > 0){
           data?.result.today.forEach((element:any) => {
@@ -173,37 +178,46 @@ export class OrderListComponent {
           });
         }
         if(data.result.all.length > 0){
+
           data?.result.all.forEach((element:any) => {
             this.updateAllCount(element);
           });
         } else if(data.result.all.length == 0){
-          this.allOrdersCount=[
-            {
-              "order_status": "all",
-              "count": 0
-            },
-            {
-              "order_status": "pending",
-              "count": 0
-            },
-            {
-              "order_status": "successful",
-              "count": 0
-            },
-            {
-              "order_status": "unsuccessful",
-              "count": 0
-            },
-            {
-              "order_status": "cancelled",
-              "count": 0
-            },   
-          ]
+          this.makeDefaultCount();
         }
        
       }
       
     });
+  }
+
+  makeDefaultCount(){
+    this.allOrdersCount=[
+      {
+        "order_status": "all",
+        "count": 0
+      },
+      {
+        "order_status": "pending",
+        "count": 0
+      },
+      {
+        "order_status": "successful",
+        "count": 0
+      },
+      {
+        "order_status": "unsuccessful",
+        "count": 0
+      },
+      {
+        "order_status": "cancelled",
+        "count": 0
+      },   
+      {
+        "order_status": "shipped",
+        "count": 0
+      },   
+    ]
   }
 
   updateAllCount(newItem:any){

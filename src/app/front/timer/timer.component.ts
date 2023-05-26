@@ -14,6 +14,9 @@ export class TimerComponent {
   isActive = false;
 
   @Input() username: any;
+  @Input() mobileNumber: any;
+  @Input() countryCode: any;
+
 
   ngOnInit(): void {}
 
@@ -35,7 +38,7 @@ export class TimerComponent {
 
   handleOtp(cd: any) {
     cd.restart();
-    this.authService.sendMobileOtp(this.username).subscribe(
+    this.authService.sendMobileOtp(this.mobileNumber, this.countryCode).subscribe(
       (data: any) => {
         if (this.authService.resultCodeError(data)) {
           return;
