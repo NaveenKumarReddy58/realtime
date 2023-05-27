@@ -1690,7 +1690,7 @@ img.CreateTitcke {
   height: 4px;
 }
 .HeadingName h2 {
-  font-size: 30px;
+  font-size: 22px;
   font-weight: 600;
   color: #3c4348;
   line-height: 32px;
@@ -1746,6 +1746,7 @@ a._ViewAll {
 .ChangePass {
   font-weight: 600;
   padding: 10px 0;
+  font-size: 18px;
 }
 span.Password {
   position: relative;
