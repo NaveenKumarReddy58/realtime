@@ -1,4 +1,5 @@
 <div class="row mt-3">
+  <p class="model-description">List of Assigned Orders: {{assignedOrdersCount}}</p>
     <div class="">
       <table
         class="Order_Table"
@@ -112,4 +113,4 @@
   </div>
   <br><br>
   <p class="mx-2">Total Assigned Orders : {{assignedOrdersCount}}</p>
-  <select2 onchange="getDriverOrders(driverId)" (change)="getDriverOrders(driverId)" [data]="dataList" class="Pro_input_Field" [(ngModel)]="driverId" placeholder="Search Driver"></select2>
+  <select2 *ngIf="modelData.isShowDropdownValues" onchange="getDriverOrders(driverId)" (change)="getDriverOrders(driverId)" [data]="dataList" class="Pro_input_Field" [(ngModel)]="driverId" placeholder="Search Driver"></select2>

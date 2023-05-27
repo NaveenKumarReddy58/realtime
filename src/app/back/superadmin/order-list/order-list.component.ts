@@ -42,6 +42,7 @@ export class OrderListComponent {
   statusOptions: any;
   isShowPushNotificationForm: boolean= false;
   imageSrc: any= "../../assets/images/photoupload.png";
+  showPaginator= true;
   todayOrdersCount: any = [
     {
       "order_type": "both",
@@ -103,6 +104,7 @@ export class OrderListComponent {
   isShowDeleteOrdersDialog: boolean= false;
   deleteOrderId: any;
   public isViewAllMode: boolean= false;
+  driverData: any = [];
 
 
   constructor(
@@ -140,15 +142,13 @@ export class OrderListComponent {
   orderList(order_date?: any, order_type?:any, order_status?:any, page?:any) {
     this.orderService.orderList(order_date, order_type, order_status,page);
     this.order$ = this.orderService.getOrder();
-
+    this.showPaginator= false;
     this.order$.subscribe((data: any) => {
       this.orderData = data?.result?.results;
       this._unfilteredOptions=[];
       if(this.orderData){
         this.ordersListCount= data.result.count;
-        if(this.endNumber >= this.ordersListCount){
-          this.endNumber= this.ordersListCount;
-        }
+        this.showPaginator= true;
         this.orderData.forEach((element:any) => {
           if(element?.assigned_order.length > 0){
             this._unfilteredOptions.push(element?.assigned_order[0]?.driver?.first_name+" "+element?.assigned_order[0]?.driver?.last_name)
@@ -238,6 +238,9 @@ export class OrderListComponent {
     return newItem.order_type === this;
   }
   onClickTodaysOrder(type:string){
+    this.page= 0;
+    this.startNumber = 1;
+    this.endNumber= 10;
     this.selectedDateVal= null;
     for (let index = 0; index < this.todayOrdersCount.length; index++) {
       if(this.todayOrdersCount[index].order_type == type){
@@ -271,7 +274,14 @@ export class OrderListComponent {
     this.orderCount(this.orderDate, this.orderType);
 
   }
+  handlePageEvent(e: any) {
+    this.page= e.pageIndex;
+    this.orderList(this.orderDate, this.orderType, this.orderStatus, this.page)
+  }
   onClickStatus(status:string){
+    this.page= 0;
+    this.startNumber = 1;
+    this.endNumber= 10;
     for (let index = 0; index < this.allOrdersCount.length; index++) {
       if(this.allOrdersCount[index].order_status == status){
         this.allOrdersCount[index].isActive = !this.allOrdersCount[index].isActive;
@@ -322,6 +332,8 @@ export class OrderListComponent {
             label: data?.first_name + ' ' + data?.last_name,
           });
         });
+        this.driverData = [];
+        this.driverData= data.result.results;
       }
     });
   }
@@ -368,15 +380,17 @@ export class OrderListComponent {
     this.isShowDeleteOrdersDialog= false;
     this.toggle[id] = true;
     this.delloading = true;
+    this.showPaginator= false;
+
     this.orderService.orderDelete(id).subscribe(
       (data: any) => {
         if (this.authService.resultCodeError(data)) {
           this.delloading = false;
           return;
         }
-
+        this.showPaginator= true;
+        this.backToNormalMode();
         this.orderList();
-        this.router.navigate(['/admin/dashboard']);
         this.toastr.success('Order Deleted');
         this.delloading = false;
       },
@@ -394,14 +408,56 @@ export class OrderListComponent {
     if (this.addAssign.invalid) {
       return;
     }
-
-    this.loading = true;
+    this.loading= true;
     // console.log('Api Data Err ffff', this.f, this.frmValues);
 
     var formdata = new FormData();
     formdata.append('order_ids', JSON.stringify(this.assignArr));
     formdata.append('driver_id', this.f['driver_id'].value);
 
+    let assignedCount= 0;
+    this.driverData.forEach((element:any) => {
+      if(element.id == this.f['driver_id'].value){
+        assignedCount = element.assigned_orders_count;
+      }
+    });
+
+    if(assignedCount != 0){
+      let enterAnimationDuration= "250ms";
+      let exitAnimationDuration= "250ms";
+  
+      const dialogRef = this.dialog.open(DialogAnimationsComponent, {
+        height: '500px',
+        enterAnimationDuration,
+        exitAnimationDuration,
+        panelClass: 'order-detail',
+        data: {
+          title: 'Do you want to assign this order to driver?',
+          pageName: 'order-details',
+          driverData: {
+            id: this.f['driver_id'].value,
+            assignedOrdersCount:assignedCount,
+            isShowDropdownValues: false,
+          },
+          
+          message:
+            '',
+        },
+      });
+      dialogRef.afterClosed().subscribe(dialogResult => {
+        if(dialogResult){
+          if(dialogResult.res){
+            this.assignOrder(formdata);
+          }
+        }
+      });
+    } else{
+      this.assignOrder(formdata)
+    }
+    
+  }
+
+  assignOrder(formdata:any){
     this.orderService.orderAssign(formdata).subscribe(
       (data: any) => {
         if (this.authService.resultCodeError(data)) {

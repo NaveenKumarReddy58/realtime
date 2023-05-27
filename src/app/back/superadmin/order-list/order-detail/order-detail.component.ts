@@ -117,6 +117,7 @@ export class OrderDetailComponent {
           driverData: {
             id: this.orderData?.assigned_order[0]?.driver.id,
             assignedOrdersCount:this.orderData?.assigned_order[0]?.driver?.assigned_orders_count,
+            isShowDropdownValues: true,
           },
           
           message:

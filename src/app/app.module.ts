@@ -65,6 +65,8 @@ import { DriverDetailsComponent } from './back/superadmin/driver-list/driver-det
 import {MatSelectModule} from '@angular/material/select';
 import { DriverOrdersListComponent } from './back/superadmin/driver-list/driver-orders-list/driver-orders-list.component';
 import { ReusableGoogleMapComponent } from './reusable-google-map/reusable-google-map.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 
 @NgModule({
   declarations: [
@@ -131,7 +133,8 @@ import { ReusableGoogleMapComponent } from './reusable-google-map/reusable-googl
     MatSelectCountryModule.forRoot('en'),
     Select2Module,
     GoogleMapsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatPaginatorModule
   ],
   providers: [
     {

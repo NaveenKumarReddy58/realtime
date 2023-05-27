@@ -421,3 +421,16 @@ input[type=number] {
 .otp-input-field input {
   text-align: center !important;
 }
+.mat-mdc-paginator {
+  background: white;
+  color: black;
+  border: 1px solid gray;
+  border-radius: 10px;
+  font-size: 14px !important;
+}
+.mat-mdc-icon-button[disabled] .mat-mdc-paginator-icon {
+  fill: darkgray;
+}
+.mat-mdc-icon-button .mat-mdc-paginator-icon {
+  fill: black;
+}

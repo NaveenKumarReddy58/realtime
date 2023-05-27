@@ -11,6 +11,8 @@ export class DriverOrdersListComponent {
   dataList: any=[];
   driverId: any;
   @Input() dataDriverId: any;
+  @Input() modelData: any;
+
   @Input() assignedOrdersCount: any;
   orderData: any;
   copyDriverId: any;

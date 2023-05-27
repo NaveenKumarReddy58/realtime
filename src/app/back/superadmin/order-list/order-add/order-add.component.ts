@@ -61,7 +61,7 @@ export class OrderAddComponent {
       po: [''],
       pickup_company_name: ['', [Validators.required]],
       pickup_address: ['', [Validators.required]],
-      is_pickup_warehouse: ['', [Validators.required]],
+      is_pickup_warehouse: [''],
       pickup_date: ['', [Validators.required]],
       pickup_time: [''],
       pickup_contact_name: ['', [Validators.required]],
