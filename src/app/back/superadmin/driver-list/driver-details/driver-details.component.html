@@ -69,10 +69,10 @@
                                                 </table>
                                                 <table class="TodayOrder mt-4">
                                                     <tr>
-                                                        <td>Today's Order: 0</td>
-                                                        <td>Pending: 0</td>
-                                                        <td>Successful: 0</td>
-                                                        <td>UnSuccessful: 0</td>
+                                                        <td (click)="showOrdersList('today')">Today's Order: 0</td>
+                                                        <td  (click)="showOrdersList('pending')">Pending: 0</td>
+                                                        <td  (click)="showOrdersList('successful')">Successful: 0</td>
+                                                        <td  (click)="showOrdersList('unsuccessful')">UnSuccessful: 0</td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -174,10 +174,10 @@
 
                                             <div
                                                 class="text-end mt-4 Cancel_Save my-3">
-                                                <button style="float: left;" (click)="updateDriverStatus()" [disabled]="!isEnabledSave" class="SaveButton ButtonStyle">Update <i
+                                                <!-- <button style="float: left;" (click)="updateDriverStatus()" [disabled]="!isEnabledSave" class="SaveButton ButtonStyle">Update <i
                                                     class="fa fa-spinner fa-spin"
                                                     *ngIf="delloading"
-                                                  ></i></button>
+                                                  ></i></button> -->
                                                 <button class="SaveButton ButtonStyle" (click)="sendPushNotification()">Send
                                                     Push Notification</button>
                                             </div>

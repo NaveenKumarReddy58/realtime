@@ -19,42 +19,42 @@ declare var google: {
   styleUrls: ['./driver-details.component.css']
 })
 export class DriverDetailsComponent {
-  public editDriverForm:any;
-  public isEditMode: boolean= false;
+  public editDriverForm: any;
+  public isEditMode: boolean = false;
   driverId: any;
   isEnabledSave: boolean = false;
   isActivate: any;
-  delloading: boolean= false;
-  isShowRecentNotifications: boolean= false;
+  delloading: boolean = false;
+  isShowRecentNotifications: boolean = false;
   geoCoder: any;
   isSubmitted: boolean = false;
 
-  
-  constructor( private dialog: MatDialog,
-    private authService: AuthService, private toastr: ToastrService, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder,private router: Router , private driverService: DriverService){
+
+  constructor(private dialog: MatDialog,
+    private authService: AuthService, private toastr: ToastrService, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder, private router: Router, private driverService: DriverService) {
     this.editDriverForm = formBuilder.group({
       first_name: ['', [Validators.required]],
-        last_name: ['', [Validators.required]],
-        email: ['', [Validators.required, Validators.email]],
-        phone_number: [
-          '',
-          [Validators.required],
-        ],
-        address: ['', [Validators.required]],
-        is_head_driver: [''],
-        is_active: ['true'],
-        image: [''],
-        driver_insurance:[''],
-        certificates: [''],
-        country_code:[''],
-        driver_license:[''],
-        driver_safety:[''],
-        driver_abstract:[''],
-        driver_certificate:[''],
-        driver_cvor:[''],
-        date_joined:[''],
-        profile_img:['assets/images/profilephoto.png'],
-        push_notification: ['', [Validators.required]]
+      last_name: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      phone_number: [
+        '',
+        [Validators.required],
+      ],
+      address: ['', [Validators.required]],
+      is_head_driver: [''],
+      is_active: ['true'],
+      image: [''],
+      driver_insurance: [''],
+      certificates: [''],
+      country_code: [''],
+      driver_license: [''],
+      driver_safety: [''],
+      driver_abstract: [''],
+      driver_certificate: [''],
+      driver_cvor: [''],
+      date_joined: [''],
+      profile_img: ['assets/images/profilephoto.png'],
+      push_notification: ['', [Validators.required]]
 
     })
     let driverId = this.activatedRoute.snapshot.paramMap.get('id');
@@ -62,16 +62,16 @@ export class DriverDetailsComponent {
     this.getDriverDetails(driverId);
   }
   getDriverDetails(driverId: string | null) {
-    this.driverService.driverDetails(driverId).subscribe((res)=>{
-      if(res && res.result){
+    this.driverService.driverDetails(driverId).subscribe((res) => {
+      if (res && res.result) {
         console.log(res.result)
-        let driverDetails= res.result
+        let driverDetails = res.result
         this.editDriverForm.patchValue({
           first_name: driverDetails.first_name,
           last_name: driverDetails.last_name,
           email: driverDetails.email,
-          phone_number: driverDetails.country_code+" "+driverDetails.phone_number,
-          country_code:driverDetails.country_code,
+          phone_number: driverDetails.country_code + " " + driverDetails.phone_number,
+          country_code: driverDetails.country_code,
           address: driverDetails.address,
           is_active: driverDetails.is_active,
           date_joined: driverDetails.date_joined,
@@ -87,39 +87,39 @@ export class DriverDetailsComponent {
     })
   }
 
-  ngOnInit(){
-    console.log(this.editDriverForm)
+  ngOnInit() {
   }
 
-  toggleStatus(e:any){
-    this.isEnabledSave= true;
+  toggleStatus(e: any) {
+    this.isEnabledSave = true;
     this.isActivate = !e;
+    this.updateDriverStatus();
   }
-  
-  updateDriverStatus(){
-    this.delloading= true;
+
+  updateDriverStatus() {
+    this.delloading = true;
     var formdata = new FormData();
     formdata.append('status', this.isActivate);
-    this.driverService.driverActivateDeactivate(this.driverId , formdata).subscribe((res)=>{
-      this.isEnabledSave= false;
-      this.delloading= false;
+    this.driverService.driverActivateDeactivate(this.driverId, formdata).subscribe((res) => {
+      this.isEnabledSave = false;
+      this.delloading = false;
       this.getDriverDetails(this.driverId);
       this.toastr.success(res.result);
-    }, (err)=>{
+    }, (err) => {
       this.toastr.error("Failed to update");
-      this.delloading= false;
+      this.delloading = false;
     })
   }
 
-  edit(){
-    this.router.navigate(['admin/driver/edit',this.driverId]);
+  edit() {
+    this.router.navigate(['admin/driver/edit', this.driverId]);
   }
 
-  showRecentNotifications(){
-    this.isShowRecentNotifications= true;
+  showRecentNotifications() {
+    this.isShowRecentNotifications = true;
   }
-  closeRecentNotifications(){
-    this.isShowRecentNotifications= false;
+  closeRecentNotifications() {
+    this.isShowRecentNotifications = false;
   }
   deleteDriver() {
 
@@ -158,42 +158,67 @@ export class DriverDetailsComponent {
     });
 
   }
-  copyText(val: string){
+  copyText(val: string) {
     let selBox = document.createElement('textarea');
-      selBox.style.position = 'fixed';
-      selBox.style.left = '0';
-      selBox.style.top = '0';
-      selBox.style.opacity = '0';
-      selBox.value = val;
-      document.body.appendChild(selBox);
-      selBox.focus();
-      selBox.select();
-      document.execCommand('copy');
-      document.body.removeChild(selBox);
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = val;
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
 
   }
-  sendPushNotification(){
-    this.isSubmitted= true;
-    
+  sendPushNotification() {
+    this.isSubmitted = true;
+
   }
-  trackDriver(){
-    
+  showOrdersList(status:string) {
+    let enterAnimationDuration, exitAnimationDuration = '250ms';
+    const dialogRef = this.dialog.open(DialogAnimationsComponent, {
+      height: '500px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+      panelClass: 'order-detail',
+      data: {
+        title: 'List of Orders',
+        pageName: 'order-details',
+        driverData: {
+          id: this.driverId,
+          status: status,
+          isDriverDetailsPage: true,
+          isShowDropdownValues: false,
+          isShowAssignedCount: false
+        },
+      },
+    });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult) {
+
+      }
+    });
+  }
+  trackDriver() {
+
     let enterAnimationDuration = '200ms';
     let exitAnimationDuration = '200ms';
 
     const dialogRef = this.dialog.open(ReusableGoogleMapComponent, {
       width: '750px',
-      height:'500px',
+      height: '500px',
       enterAnimationDuration,
       exitAnimationDuration,
       data: {
-       height: '500px',
+        height: '500px',
       },
-      
+
     });
     dialogRef.afterClosed().subscribe(dialogResult => {
       if (dialogResult) {
-        
+
       }
     });
   }

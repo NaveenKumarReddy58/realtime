@@ -54,7 +54,13 @@ export class DriverOrdersListComponent {
   getDriverOrders(id:any){
     this.driverService.driverOrders(id).subscribe((res:any)=>{
       if(res && res.result){
-        this.orderData= res.result;
+        if(this.modelData.status){
+          this.orderData = res.result.filter((obj:any) => {
+            return obj.order_status == this.modelData.status
+          })
+        } else{
+          this.orderData= res.result;
+        }
       } else{
         this.orderData=[];
         this.assignedOrdersCount=0;

@@ -438,6 +438,8 @@ export class OrderListComponent {
             id: this.f['driver_id'].value,
             assignedOrdersCount:assignedCount,
             isShowDropdownValues: false,
+            isShowAssignedCount: true
+
           },
           
           message:

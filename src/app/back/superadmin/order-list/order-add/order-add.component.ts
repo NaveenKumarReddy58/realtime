@@ -395,10 +395,9 @@ export class OrderAddComponent {
         pickup_address: this.warehouseData?.address?.id,
         pickup_company_name: this.warehouseData?.warehouse_name,
         pickup_contact_name: this.warehouseData?.contact_name,
-        pickup_phone: this.warehouseData?.phone,
+        pickup_phone: this.warehouseData?.phone ? this.warehouseData?.phone.replace('+91',''):'',
         pickup_email: this.warehouseData?.email,
-        pickup_alt_phone: this.warehouseData?.alt_phone
-
+        pickup_alt_phone: this.warehouseData?.alt_phone ? this.warehouseData?.alt_phone.replace('+91',''):''
       });
       this.setNullDelyValue();
     }
@@ -410,8 +409,8 @@ export class OrderAddComponent {
         dely_company_name: this.warehouseData?.warehouse_name,
         dely_contact_name: this.warehouseData?.contact_name,
         dely_email:this.warehouseData?.email,
-        dely_phone: this.warehouseData?.phone,
-        dely_alt_phone: this.warehouseData?.alt_phone
+        dely_phone: this.warehouseData?.phone ? this.warehouseData?.phone.replace('+91',''):'',
+        dely_alt_phone: this.warehouseData?.alt_phone ? this.warehouseData?.alt_phone.replace('+91',''):''
       });
       this.setNullPickupValue();
     } else{

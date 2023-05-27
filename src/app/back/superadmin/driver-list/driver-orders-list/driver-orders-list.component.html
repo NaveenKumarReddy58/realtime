@@ -1,5 +1,5 @@
 <div class="row mt-3">
-  <p class="model-description">List of Assigned Orders: {{assignedOrdersCount}}</p>
+  <p *ngIf="modelData.isShowAssignedCount" class="model-description">List of Assigned Orders: {{assignedOrdersCount}}</p>
     <div class="">
       <table
         class="Order_Table"
@@ -18,7 +18,7 @@
           <th>Status</th>
         </tr>
         <tr *ngIf="orderData && orderData.length == 0">
-            No Orders Assigned
+            Zero {{this.modelData.status}} Orders
         </tr>
         <ng-container *ngIf="orderData && orderData.length > 0">
             <tr
@@ -112,5 +112,5 @@
     </form> -->
   </div>
   <br><br>
-  <p class="mx-2">Total Assigned Orders : {{assignedOrdersCount}}</p>
+  <p class="mx-2" *ngIf="modelData.isShowAssignedCount">Total Assigned Orders : {{assignedOrdersCount}}</p>
   <select2 *ngIf="modelData.isShowDropdownValues" onchange="getDriverOrders(driverId)" (change)="getDriverOrders(driverId)" [data]="dataList" class="Pro_input_Field" [(ngModel)]="driverId" placeholder="Search Driver"></select2>

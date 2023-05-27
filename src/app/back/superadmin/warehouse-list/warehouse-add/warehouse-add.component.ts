@@ -51,6 +51,7 @@ export class WarehouseAddComponent {
       ],
       alt_phone: [''],
       is_main_localation: [false],
+      country_code: ['']
     });
 
     if (!this.isAddMode) {
@@ -66,6 +67,7 @@ export class WarehouseAddComponent {
           phone: data?.result?.phone,
           alt_phone: data?.result?.alt_phone,
           is_main_localation: data?.result?.is_main_localation,
+          country_code: data.result?.country_code
         });
       });
     }
