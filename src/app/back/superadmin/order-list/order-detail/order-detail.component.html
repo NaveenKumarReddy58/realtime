@@ -3,6 +3,9 @@
     <!-- Tab Content Area Start 01-->
     <div id="Tb-Tabs01" class="Tabs01 TabsMain">
       <!-- Table View -->
+      <div class="back-to-list">
+        <a routerLink="/admin/dashboard"><button>Back to List</button></a>
+      </div>
       <div class="Table AssociateDriver">
         <div class="OrderList">
           <div class="row">
@@ -21,12 +24,14 @@
                   </div>
                 </div>
                 <div class="DeliveryNumber fontSize10">
-                  <h4>{{ orderData?.po }}</h4>
+                  <h4>{{ orderData?.po ? orderData?.po : orderData?.order_no }}</h4>
                   Delivery : {{ orderData?.dely_time }} |
                   {{ orderData?.dely_date | date : "fullDate" }}
                 </div>
-                <div class="ChangePic NoPhoto mt-4">&nbsp;</div>
-                <div class="TrackDriver mt-3">
+                <div class="NoPhoto mt-4 google-map">
+                  <app-reusable-google-map></app-reusable-google-map>
+              </div>
+                <div class="TrackDriver mt-3" (click)="trackDriver()">
                   <a> Track Order</a>
                 </div>
               </div>
@@ -128,7 +133,7 @@
                       <tbody>
                         <tr>
                           <th class="fontSize12">Order (Services ID):</th>
-                          <td class="fontSize12">{{ orderData?.po }}</td>
+                          <td class="fontSize12">{{ orderData?.po ? orderData?.po : orderData?.order_no  }}</td>
                         </tr>
                         <tr>
                           <th class="fontSize12">Requested By:</th>

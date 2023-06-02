@@ -105,6 +105,7 @@ export class OrderListComponent {
   deleteOrderId: any;
   public isViewAllMode: boolean= false;
   driverData: any = [];
+  copyOrderData: any;
 
 
   constructor(
@@ -144,17 +145,24 @@ export class OrderListComponent {
     this.order$ = this.orderService.getOrder();
     this.showPaginator= false;
     this.order$.subscribe((data: any) => {
+      this.copyOrderData= [];
       this.orderData = data?.result?.results;
+      this.copyOrderData= this.orderData;
       this._unfilteredOptions=[];
+      this._unfilteredStatus=[];
       if(this.orderData){
         this.ordersListCount= data.result.count;
         this.showPaginator= true;
         this.orderData.forEach((element:any) => {
           if(element?.assigned_order.length > 0){
-            this._unfilteredOptions.push(element?.assigned_order[0]?.driver?.first_name+" "+element?.assigned_order[0]?.driver?.last_name)
+            if(!(this._unfilteredOptions.indexOf(element?.assigned_order[0]?.driver?.first_name+" "+element?.assigned_order[0]?.driver?.last_name) > -1)){
+              this._unfilteredOptions.push(element?.assigned_order[0]?.driver?.first_name+" "+element?.assigned_order[0]?.driver?.last_name)
+            }
           }
           if(!(this._unfilteredStatus.indexOf(element?.order_status) >-1)){
-            this._unfilteredStatus.push(element?.order_status)
+            if(!(this._unfilteredStatus.indexOf(element?.order_status) > -1)){
+              this._unfilteredStatus.push(element?.order_status)
+            }
           }
         });
       }
@@ -162,6 +170,14 @@ export class OrderListComponent {
       this.statusOptions= this._unfilteredStatus;
 
     });
+  }
+
+  updateOrderList(e : any , val:string){
+    if(e.target.value){
+      this.orderData = this.copyOrderData.filter((element:any)=>{
+        return element?.assigned_order[0]?.driver?.first_name+" "+element?.assigned_order[0]?.driver?.last_name == val
+      })
+    }
   }
   
   orderCount(order_date?: any, order_type?:any) {
@@ -466,7 +482,11 @@ export class OrderListComponent {
           this.loading = false;
           return;
         }
-
+        this.orderList(this.orderDate, this.orderType, this.orderStatus, this.page);
+        this.addAssign.patchValue({
+          driver_id : null
+        })
+        this.isSubmitted = false;
         this.toastr.success(data?.resultDescription);
         this.router.navigate([
           '/' + this.authService._isRoleName + '/dashboard',

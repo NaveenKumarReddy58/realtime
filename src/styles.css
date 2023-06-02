@@ -220,8 +220,8 @@ input[type=number] {
   }
 .mdc-dialog__actions .Yes-btn , .Yes-btn:active{
   background: #0eb002;
-    padding: 10px;
-    width: 100px;
+    padding: 12px;
+    width: auto;
     border-radius: 10px;
     border: none;
     color: white;

@@ -176,13 +176,15 @@ export class OrderAddComponent {
         if(this.orderData.is_pickup_warehouse){
           this.isCheckedWarehous[1].to = false;
           this.isCheckedWarehous[0].pickup = true;
+            this.addOrderF.controls['po'].clearValidators();
         } else if(this.orderData.is_dely_warehouse){
+          this.addOrderF.controls['order_no'].clearValidators();
           this.isCheckedWarehous[1].to = true;
           this.isCheckedWarehous[0].pickup = false;
         }
        
         this.addOrderF.patchValue({
-          po: this.orderData?.po,
+          po: this.orderData?.po?this.orderData?.po : '',
           pickup_company_name: this.orderData?.pickup_company_name,
           pickup_address: this.orderData?.pickup_address?.id,
           is_pickup_warehouse: this.orderData.is_pickup_warehouse,
@@ -205,7 +207,7 @@ export class OrderAddComponent {
           dely_country_code: this.orderData?.country_code,
           dely_alt_phone: this.orderData?.dely_alt_phone,
           dely_note: this.orderData?.dely_note?this.orderData?.dely_note : '',
-          order_no: this.orderData?.order_no,
+          order_no: this.orderData?.order_no ? this.orderData?.order_no:'',
         });
         this.loading = false;
       },

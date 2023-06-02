@@ -878,9 +878,11 @@ img.FilterIcon {
   border: 1px solid #ccd2d8;
   border-radius: 25px;
   padding: 40px 20px 60px;
+  display: inline-block;
 }
 .ChangePic img {
-  max-width: 80px;
+  max-width: 50%;
+  border-radius: 50%;
 }
 .ProfilePik {
   text-align: center;
@@ -1484,6 +1486,7 @@ i.Trash {
   padding: 20px 30px;
 }
 .ChangePic.P_Photo {
+  display: block;
   padding: 30px 0 15px;
 }
 .ChangePic.P_Photo .ChangeImg.NoPhoto {
@@ -1699,9 +1702,6 @@ img.CreateTitcke {
   border: 1px solid #ccd2d8;
   border-radius: 25px;
   padding: 40px 20px 60px;
-}
-.ChangePic img {
-  max-width: 80px;
 }
 .ProfilePik {
   text-align: center;
@@ -2748,7 +2748,7 @@ tr.T_Head th:last-child {
   gap: 15px;
 }
 .Order_Table tr td:first-child {
-  display: flex;
+  display: revert;
   align-items: center;
   gap: 10px;
 }

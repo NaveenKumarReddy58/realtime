@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/_service/auth.service';
 import { DriverService } from 'src/app/_service/driver.service';
 import { OrderService } from 'src/app/_service/order.service';
 import { DialogAnimationsComponent } from 'src/app/back/common/dialog-animations/dialog-animations.component';
+import { ReusableGoogleMapComponent } from 'src/app/reusable-google-map/reusable-google-map.component';
 
 @Component({
   selector: 'app-order-detail',
@@ -157,6 +158,27 @@ export class OrderDetailComponent {
       );
     }
 
+    trackDriver() {
+
+      let enterAnimationDuration = '200ms';
+      let exitAnimationDuration = '200ms';
+  
+      const dialogRef = this.dialog.open(ReusableGoogleMapComponent, {
+        width: '750px',
+        height: '500px',
+        enterAnimationDuration,
+        exitAnimationDuration,
+        data: {
+          height: '500px',
+        },
+  
+      });
+      dialogRef.afterClosed().subscribe(dialogResult => {
+        if (dialogResult) {
+  
+        }
+      });
+    }
     getRecentNotifications(){
       this.isShowRecentNotifications= true;
     }

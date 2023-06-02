@@ -24,3 +24,11 @@
     margin-top: -5px;
 }
 
+
+.google-map{
+    color: #646464 !important;
+    padding: 20px 20px 20px !important;
+    border: 1px solid lightgray !important;
+    border-radius: 25px !important;
+
+  }

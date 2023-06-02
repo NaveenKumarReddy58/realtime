@@ -148,7 +148,8 @@
                   <th>Delivery Time</th>
                   <th>Actual time</th>
                   <th [ngClass]="isShowDriversFilter? 'drop-down-active':''" class=" cursor-pointer position-relative width-130">
-                     <span (click)="openDriversFilter()">Driver</span>
+                     <span (click)="openDriversFilter()">Driver <i class="fa-regular fa-filter"></i>
+                     </span>
                     <div *ngIf="isShowDriversFilter" class="dropdown-multiselect drivers-list-phone-dialog top-100 right-0">
                       <div class="mb-3">
                         <input type="text" placeholder="Search" class="drop-down-search" (input)="filterOptione($event)"/>
@@ -172,7 +173,7 @@
                     </div>                 
                   </th>
                   <th [ngClass]="isShowStatusFilter? 'drop-down-active':''" class="width-130 cursor-pointer position-relative"> 
-                    <span (click)="openStatusFilter()">Status</span>
+                    <span (click)="openStatusFilter()">Status <i class="fa-regular fa-filter"></i></span>
                     <div *ngIf="isShowStatusFilter" class="dropdown-multiselect drivers-list-phone-dialog top-100 right-0">
                       <div class="mb-3">
                         <input type="text" placeholder="Search" class="drop-down-search" (input)="filterStatusOptione($event)"/>

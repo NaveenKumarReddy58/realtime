@@ -28,7 +28,7 @@ export class DriverOrdersListComponent {
 
     this.driver$.subscribe((data: any) => {
       if (data && data.result && data.result.results) {
-
+        this.dataList=[];
         data.result.results.forEach((data: any) => {
           this.dataList.push({
             value: data?.id,

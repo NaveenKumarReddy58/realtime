@@ -3,6 +3,12 @@
     <!-- Tab Content Area Start 01-->
     <div id="Tb-Tabs01" class="Tabs01 TabsMain">
       <!-- Table View -->
+      <div *ngIf="!isAddMode" class="back-to-list">
+        <a routerLink='/admin/orders/detail/{{id}}'><button>Back to Details</button></a>
+      </div>
+      <div *ngIf="isAddMode" class="back-to-list">
+        <a routerLink='/admin/dashboard'><button>Back to List</button></a>
+      </div>
       <div class="Table">
         <div class="OrderList">
           <div class="row">
