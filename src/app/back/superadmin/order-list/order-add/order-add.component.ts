@@ -72,8 +72,7 @@ export class OrderAddComponent {
         [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
       ],
       pickup_alt_phone: [
-        '',
-        [Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
+        ''
       ],
       pickup_note: [''],
       dely_company_name: ['', [Validators.required]],
@@ -89,8 +88,7 @@ export class OrderAddComponent {
       ],
       dely_country_code: ['+91'],
       dely_alt_phone: [
-        '',
-        [Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
+        ''
       ],
       dely_note: [''],
       order_no: [''],

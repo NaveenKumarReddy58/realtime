@@ -25,6 +25,7 @@ export class WarehouseListComponent {
   isShowDeleteDriverDialog: boolean = false;
   isDefaultAddress: boolean = false;
   wareHouseId: any;
+  page: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -51,6 +52,9 @@ export class WarehouseListComponent {
     });
   }
 
+  handlePageEvent(e: any) {
+    this.page= e.pageIndex;
+  }
   controlOnChange(id: Number, e: any) {
     if (e.target.checked) {
       this.warehouseSet(id, true);
