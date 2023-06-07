@@ -1528,7 +1528,7 @@ li.UserName02 {
 }
 .ChatList ul li {
   list-style: none;
-  width: 100%;
+  width: 80%;
   display: block;
   padding: 20px;
   border-radius: 15px;
@@ -2384,7 +2384,7 @@ ul.Company_Detail_cnt02 {
 }
 .ChatList ul li {
   list-style: none;
-  width: 100%;
+  width: 80%;
   display: block;
   padding: 20px;
   border-radius: 15px;
@@ -2403,6 +2403,7 @@ span.Name_U {
 li.UserName02 {
   background: #d8fad6;
   text-align: right;
+  margin-left: auto;
 }
 li.UserName02 span.Mintago {
   left: 20px;
