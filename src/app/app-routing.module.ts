@@ -113,6 +113,7 @@ const routes: Routes = [
         title: 'Tickets',
         canActivate: [AuthGuard],
       },
+      
       {
         path: 'tickets/:id',
         component: TicketDetailComponent,
@@ -238,6 +239,12 @@ const routes: Routes = [
         path: 'tickets',
         component: TicketListComponent,
         title: 'Tickets',
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'create-ticket',
+        component: TicketDetailComponent,
+        title: 'Ticket',
         canActivate: [AuthGuard],
       },
       {

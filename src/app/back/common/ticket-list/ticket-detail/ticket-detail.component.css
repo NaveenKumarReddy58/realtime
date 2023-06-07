@@ -1,0 +1,24 @@
+.tickt-edit-delte{
+    float: right;
+}
+.tickt-edit-delte .__Edit{
+    font-weight: bold;
+}
+.bubble{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    margin: auto;
+    bottom: 50%;
+    transform: translateY(-50%);
+    transform: rotate(45deg);
+}
+.you{
+    background: #ebeff2;
+    left: -9px;
+}
+.me{
+    background: #d8fad6;
+    right: -9px;
+}

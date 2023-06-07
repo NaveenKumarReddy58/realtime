@@ -1,5 +1,19 @@
-<div class="ContentArea p-4">
-  <div class="row mb-4">
+<div class="ContentArea">
+  <div class="TabsList">
+    <ul class="Tab_List">
+      <li (click)="driverTickets()" [ngClass]="tabName == 'DT' ? 'active' : ''">
+        <a >Driver Tickets : 180 <span>Total: 100</span></a>
+      </li>
+      <li (click)="customerTickets()" [ngClass]="tabName == 'CT' ? 'active' : ''">
+        <a>Customer Tickets: 20 </a>
+      </li>
+      <li (click)="myTickets()" [ngClass]="tabName == 'MT' ? 'active' : ''">
+        <a >My Tickets : 78
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="row p-4 pb-0">
     <div class="col-md-12">
       <div class="HeadingName">
         <h2>Tickets</h2>
@@ -22,7 +36,7 @@
       </div>
     </div>
   </div>
-  <div id="Tb-Tabs01" class="Tabs01 TabsMain">
+  <div  id="Tb-Tabs01" class="Tabs01 TabsMain  p-4">
     <div class="Table mt-4">
       <div class="OrderList">
         <div class="row mt-3">
@@ -43,7 +57,7 @@
                 <th>Status</th>
                 <th>Other Option</th>
               </tr>
-              <tr>
+              <tr *ngFor="let i of [1,2,3,4,5,6]">
                 <td><img src="assets/images/p-icon.png" />910011001</td>
                 <td>Sandeep Singh</td>
                 <td>Address: 012, XYZ B14</td>
@@ -55,76 +69,18 @@
                   <div class="GetIocn">
                     <span class="fa fa-phone"></span>
                     <span class="fa fa-paper-plane"></span>
+                    <a [routerLink]="'/admin/tickets/1'"><i style="font-size: 18px;" class="fa fa-eye" aria-hidden="true"></i></a>
                   </div>
                 </td>
               </tr>
-              <tr>
-                <td><img src="assets/images/d-icon.png" />910011001</td>
-                <td>Sandeep Singh</td>
-                <td>Address: 012, XYZ B14</td>
-                <td>Wed Oct 24, 2022</td>
-                <td>12:30 PM</td>
-                <td><span class="">00:00 AM</span></td>
-                <td class="compleate">Completed</td>
-                <td>
-                  <div class="GetIocn">
-                    <span class="fa fa-phone"></span>
-                    <span class="fa fa-paper-plane"></span>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td><img src="assets/images/p-icon.png" />910011001</td>
-                <td>Sandeep Singh</td>
-                <td>Address: 012, XYZ B14</td>
-                <td>Wed Oct 24, 2022</td>
-                <td>12:30 PM</td>
-                <td><span class="">00:00 AM</span></td>
-                <td class="compleate">Completed</td>
-                <td>
-                  <div class="GetIocn">
-                    <span class="fa fa-phone"></span>
-                    <span class="fa fa-paper-plane"></span>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td><img src="assets/images/p-icon.png" />910011001</td>
-                <td>Sandeep Singh</td>
-                <td>Address: 012, XYZ B14</td>
-                <td>Wed Oct 24, 2022</td>
-                <td>12:30 PM</td>
-                <td><span class="">00:00 AM</span></td>
-                <td class="compleate">Completed</td>
-                <td>
-                  <div class="GetIocn">
-                    <span class="fa fa-phone"></span>
-                    <span class="fa fa-paper-plane"></span>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td><img src="assets/images/d-icon.png" />910011001</td>
-                <td>Sandeep Singh</td>
-                <td>Address: 012, XYZ B14</td>
-                <td>Wed Oct 24, 2022</td>
-                <td>12:30 PM</td>
-                <td><span class="">00:00 AM</span></td>
-                <td class="compleate">Completed</td>
-                <td>
-                  <div class="GetIocn">
-                    <span class="fa fa-phone"></span>
-                    <span class="fa fa-paper-plane"></span>
-                  </div>
-                </td>
-              </tr>
+              
             </table>
           </div>
-          <!-- <div class="row mt-3">
+          <div class="row mt-3" *ngIf="tabName == 'MT'">
               <div class="col-md-12 text-end">
-                <button class="ButtonStyle">Assign Order</button>
+                <button (click)="createTicket()" class="ButtonStyle">Create Ticket</button>
               </div>
-            </div> -->
+            </div>
         </div>
       </div>
     </div>

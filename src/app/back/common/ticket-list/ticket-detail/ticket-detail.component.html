@@ -1,17 +1,28 @@
-<div class="ContentArea">
+<div class="ContentArea p-4">
+  <div class="back-to-list">
+    <a routerLink="/admin/tickets"><button>Back to List</button></a>
+</div>
   <div class="row">
     <div class="col-md-12">
       <div class="HeadingName">
         <h2>Tickets</h2>
       </div>
     </div>
+    
   </div>
-  <div class="row">
+  <div *ngIf="!isCreateTicketMode" class="row">
     <div class="col-md-10">
       <div class="ChatList">
         <div class="Ticket_Id">
-          <div class="DeleteIcon">
-            <a> Delete <i class="fa fa-trash Trash" aria-hidden="true"></i></a>
+          <div class="Edi_Delete tickt-edit-delte">
+            <span
+              class="__Edit fontSize12"
+            >
+              <span>Edit <i class="fa fa-pencil"></i></span>
+            </span>
+            <span class="__Edit fontSize12">
+              <span>Delete <i class="fa fa-trash"></i></span>
+            </span>
           </div>
           <h3>Manjeet Singh <span class="Time-Min-Ago">2 mins ago</span></h3>
           <h4>Ticket ID: 001199</h4>
@@ -22,21 +33,26 @@
         </div>
         <ul>
           <li class="UserName01">
+            <div class="bubble you"></div>
             <span class="Mintago">50min ago</span>
             <span class="Name_U">Sandeep Singh</span>
             <p class="Chat_text">Query or general message here.......... !</p>
           </li>
           <li class="UserName02">
+            <div class="bubble me"></div>
+
             <span class="Mintago">50min ago</span>
             <span class="Name_U">Sandeep Singh</span>
             <p class="Chat_text">Query or general message here.......... !</p>
           </li>
           <li class="UserName01">
+            <div class="bubble you"></div>
             <span class="Mintago">50min ago</span>
             <span class="Name_U">Sandeep Singh</span>
             <p class="Chat_text">Query or general message here.......... !</p>
           </li>
           <li class="UserName02">
+            <div class="bubble me"></div>
             <span class="Mintago">50min ago</span>
             <span class="Name_U">Sandeep Singh</span>
             <div class="ImgUpload">
@@ -54,11 +70,9 @@
               <label> Close <input type="radio" name="" /> </label>
             </div>
             <div class="open-close AttachFile">
-              <label
-                >Attach File
+              <label>Attach File
                 <i class="fa fa-paperclip paperclip" aria-hidden="true"></i>
-                <input type="file" name=""
-              /></label>
+                <input type="file" name="" /></label>
               <button class="ButtonStyle">Send</button>
             </div>
           </div>
@@ -66,4 +80,21 @@
       </div>
     </div>
   </div>
-</div>
+
+  <div *ngIf="isCreateTicketMode">
+    <div class="SendMessage d-block">
+      <div class="Message01">
+        <textarea placeholder="Custom Message"></textarea>
+      </div>
+      <div class="Message02">
+        <div class="open-close">
+        </div>
+        <div class="open-close AttachFile pt-2">
+          <label>Attach File
+            <i class="fa fa-paperclip paperclip" aria-hidden="true"></i>
+            <input type="file" name="" /></label>
+          <button class="ButtonStyle">Create Ticket</button>
+        </div>
+      </div>
+    </div>
+  </div>
