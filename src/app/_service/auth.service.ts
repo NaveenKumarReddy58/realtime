@@ -219,6 +219,16 @@ export class AuthService {
         catchError(this.handleError)
       );
   }
+  profileUpdate(form:any) {
+    return this.http
+      .put<any>(`${this._liveApiUrl}/account/update-profile/1`, form)
+      .pipe(
+        map((data) => {
+          return data;
+        }),
+        catchError(this.handleError)
+      );
+  }
 
   loginByOtp(email: string, password: string, login_by: string = 'otp') {
     return this.http

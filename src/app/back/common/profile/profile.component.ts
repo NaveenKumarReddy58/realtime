@@ -26,8 +26,10 @@ export class ProfileComponent {
   otp: any;
   verifyOtp$!: Observable<any>;
   resetPassword$!: any;
-  phoneNumber = '7528943768';
+  phone_number = '7528943768';
   otpSubmitted: boolean= false;
+  isProfileSubmitted: boolean= false;
+  profileUpdate$: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,10 +40,14 @@ export class ProfileComponent {
   ) {
     this.ProfileFor = formBuilder.group({
       pswd: ['', [Validators.required]],
-      confirm_password: ['', [Validators.required]]
+      confirm_password: ['', [Validators.required]],
+      first_name: ['', [Validators.required]],
+      last_name: ['', [Validators.required]],
+      phone_number: ['', [Validators.required]],
+      email: ['', [Validators.required]],
+      profile_image:[''],
+      country_code: ['+91']
     });
-
-    console.log(this.ProfileFor)
 
     this.getProfile();
   }
@@ -54,13 +60,59 @@ export class ProfileComponent {
 
     this.profile$.subscribe((data: any) => {
       this.profileData = data?.result;
+      this.ProfileFor.patchValue({
+        first_name: this.profileData?.first_name,
+        last_name: this.profileData?.last_name,
+        phone_number: this.profileData?.phone_number,
+        email: this.profileData?.email,
+        profile_image: this.profileData?.profile_image,
+
+      })
+      this.imageSrc= this.profileData?.profile_image;
+      this.phone_number= this.profileData?.phone_number
     });
   }
 
   onOtpChange(otp: any){
     this.otp= otp;
   }
+  saveChanges(){
+    this.isProfileSubmitted= true;
+    if(this.ProfileFor.controls['first_name'].status == 'INVALID' || 
+    this.ProfileFor.controls['last_name'].status == 'INVALID' ||
+    this.ProfileFor.controls['email'].status == 'INVALID' ||
+    this.ProfileFor.controls['phone_number'].status == 'INVALID'){
+      return;
+    }
 
+    this.loading = true;
+
+    const formData = new FormData();
+    for (let i in this.ProfileFor.value) {
+      if (this.ProfileFor.value[i] instanceof Blob) {
+        formData.append(
+          i,
+          this.ProfileFor.value[i],
+          this.ProfileFor.value[i].name ? this.ProfileFor.value[i].name : ''
+        );
+        // console.log('blob');
+      } else {
+        formData.append(i, this.ProfileFor.value[i]);
+      }
+    }
+
+    this.profileUpdate$ = this.authService.profileUpdate(formData);
+
+    this.profileUpdate$.subscribe((data: any) => {
+      this.isLoading= false;
+      this.toastr.success(data.resultDescription)
+      this.getProfile()
+    }, (err:any)=>{
+      this.isLoading= false;
+      this.toastr.error("Failed to Update")
+    });
+    console.log(formData);
+  }
   sendOTP(){
     this.isSubmitted= true;
     if(this.ProfileFor.controls['pswd'].status == 'INVALID' || 
@@ -71,7 +123,7 @@ export class ProfileComponent {
     }
     this.isLoading = true;
 
-    this.sendOtp$ = this.authService.sendMobileOtp(this.phoneNumber, '+91');
+    this.sendOtp$ = this.authService.sendMobileOtp(this.phone_number, '+91');
 
     this.sendOtp$.subscribe((data: any) => {
       this.isOtpSent= true;
@@ -86,7 +138,7 @@ export class ProfileComponent {
   updatePassword(){
     this.upLoading = true;
     this.otpSubmitted= true;
-    this.verifyOtp$ = this.authService.verifyResetOtp(this.phoneNumber, this.otp);
+    this.verifyOtp$ = this.authService.verifyResetOtp(this.phone_number, this.otp);
 
     this.verifyOtp$.subscribe((data: any) => {
       if(data.resultCode == '1'){
@@ -103,7 +155,22 @@ export class ProfileComponent {
       this.toastr.error("Failed to Verify an OTP")
     });
   }
+  readURL(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      console.log('image', file);
 
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.imageSrc = reader.result;
+      };
+      this.ProfileFor.patchValue({
+        profile_image: file
+      })
+
+      reader.readAsDataURL(file);
+    }
+  }
   resetPassword(){
     this.resetPassword$ = this.authService.resetPassword(this.profileData?.email, this.ProfileFor.value.pswd);
     this.resetPassword$.subscribe((data: any) => {

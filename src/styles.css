@@ -434,3 +434,21 @@ input[type=number] {
 .mat-mdc-icon-button .mat-mdc-paginator-icon {
   fill: black;
 }
+.driver-profile-image-container{
+  position: relative;
+  height: 180px;
+  width: 230px;
+  margin: auto;
+  border: 1px solid #ccd2d8;
+  border-radius: 20px;
+  line-height: 180px;
+
+}
+.driver-profile-image{
+  border-radius: 50%;
+}
+.Edit_Img{
+  position: absolute;
+  bottom: -36%;
+  right: 5%;
+}

@@ -8,7 +8,7 @@
   </div>
   <div class="row">
     <div class="col-md-3">
-      <div class="ProfilePik">
+      <!-- <div class="ProfilePik">
         <div class="ChangePic">
           <img
             *ngIf="profileData?.profile_image"
@@ -16,16 +16,43 @@
             [alt]="'logo'"
           />
           <img
-            *ngIf="!profileData?.profile_image"
             [src]="imageSrc"
             [alt]="'logo'"
           />
           <span class="Edit_Img">
-            <img src="assets/images/edir-img.png" />
+            <img (click)="fileInput.click()" src="assets/images/edir-img.png" />
           </span>
         </div>
         <div class="ChangeImg">Change Profile Photo</div>
+      </div> -->
+      <div class="ProfilePik">
+        <div class="driver-profile-image-container">
+          <!-- <i
+            *ngIf="!(imageSrc.indexOf('profilephoto') > 0)"
+            class="fa fa-trash Delete"
+            (click)="removeProfilePhoto($event)"
+          ></i> -->
+          <img
+            class="driver-profile-image"
+            *ngIf="imageSrc"
+            [src]="imageSrc"
+            [alt]="'logo'"
+            width="100px"
+            height="100px"
+          />
+          <span (click)="fileInput.click()" class="Edit_Img">
+            <img
+              src="assets/images/edir-img.png"
+              width="30px"
+              height="30px"
+            />
+          </span>
+        </div>
+        <div (click)="fileInput.click()" class="ChangeImg">
+          Change Profile Photo
+        </div>
       </div>
+      <input #fileInput type="file" (change)="readURL($event)" style="display: none" accept="image/*" />
     </div>
     <div class="col-md-9">
       <form [formGroup]="ProfileFor" class="ProfileFor">
@@ -34,43 +61,58 @@
             <input
               type="text"
               name="first_name"
-              [value]="profileData?.first_name"
+              formControlName="first_name"
               placeholder="First Name"
               class="Pro_input_Field"
             />
+            <div *ngIf="isProfileSubmitted && ProfileFor.controls['first_name'].errors" class="text-danger">
+              <div *ngIf="isProfileSubmitted && ProfileFor.controls['first_name'].errors['required']">
+                First Name Required 
+              </div>
+            </div>
           </div>
           <div class="col-md-6">
             <input
               type="text"
+              formControlName="last_name"
               name="last_name"
-              [value]="profileData?.last_name"
               placeholder="Last Name"
               class="Pro_input_Field"
             />
+            <div *ngIf="isProfileSubmitted && ProfileFor.controls['last_name'].errors" class="text-danger">
+              <div *ngIf="isProfileSubmitted && ProfileFor.controls['last_name'].errors['required']">
+                Last Name Required 
+              </div>
+            </div>
           </div>
         </div>
         <div class="row mt-4">
           <div class="col-md-6">
-            <input
-              type="text"
-              name="phone_number"
-              [value]="profileData?.phone_number"
-              placeholder="Mobile Number"
-              class="Pro_input_Field"
-            />
+            <input type="number" formControlName="phone_number" placeholder="Mobile Number"
+              onKeyPress="if(this.value.length==10) return false;" class="Pro_input_Field driver-input-field" />
+              <div *ngIf="isProfileSubmitted && ProfileFor.controls['phone_number'].errors" class="text-danger">
+                <div *ngIf="isProfileSubmitted && ProfileFor.controls['phone_number'].errors['required']">
+                  Phone Number Required 
+                </div>
+              </div>
           </div>
           <div class="col-md-6">
             <input
               type="text"
               name="email"
-              [value]="profileData?.email"
+              formControlName="email"
               placeholder="Email"
               class="Pro_input_Field"
             />
+            <div *ngIf="isProfileSubmitted && ProfileFor.controls['email'].errors" class="text-danger">
+              <div *ngIf="isProfileSubmitted && ProfileFor.controls['email'].errors['required']">
+                Email Required 
+              </div>
+            </div>
           </div>
         </div>
         <div class="justify-content-between mt-3 text-end Cancel_Save">
-          <button class="SaveButton ButtonStyle" >Save Changes</button>
+          <button (click)="saveChanges()" class="SaveButton ButtonStyle" >Save Changes</button>
         </div>
         <div class="ChangePass mt-3">Change Password</div>
         <div class="row">
@@ -132,7 +174,7 @@
                 <button class="Verify mx-3" (click)="updatePassword()">Change Password</button>
                 
                 <div class="position-relative d-inline-block">
-                  <app-timer [mobileNumber]="phoneNumber" [countryCode]="'+91'" class="app-timer"></app-timer>
+                  <app-timer [mobileNumber]="phone_number" [countryCode]="'+91'" class="app-timer"></app-timer>
                 </div>
                 <div *ngIf="otpSubmitted" class="text-danger">
                   <div *ngIf="otp && otp.length != 6 || otp == null">
@@ -144,7 +186,7 @@
           <div>
             
             <div class="col-md-12">
-              <span>To change password enter OTP Sent to: ********{{phoneNumber!.substr(-2)}}</span>
+              <span>To change password enter OTP Sent to: ********{{phone_number!.substr(-2)}}</span>
             </div>
           </div>
         </div>
