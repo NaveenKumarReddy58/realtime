@@ -245,7 +245,7 @@ export class OrderAddComponent {
     this.warehouse$.subscribe((data: any) => {
       if(data && data.result){
 
-        data.result.forEach((element:any) => {
+        data.result.results.forEach((element:any) => {
           if(element.is_main_localation){
             this.warehouseData = element;
           }

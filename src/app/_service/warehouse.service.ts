@@ -66,18 +66,24 @@ export class WarehouseService {
       .get<any>(`${this._liveApiUrl}/company/get-warehouse/${tail}`)
       .pipe(
         map((data) => {
+          console.log("map", data)
           return data;
         }),
         catchError(this.authService.handleError)
-      )
-      .subscribe(
+      ).subscribe(
         (data: any) => {
+          console.log("subscribe", data)
+
           if (this.authService.resultCodeError(data)) {
             return;
           }
 
           this.warehouseData.warehouse = data;
+          console.log("this.warehouseData.warehouse", this.warehouseData.warehouse)
+
           this._warehouse.next(Object.assign({}, this.warehouseData).warehouse);
+          console.log("this._warehouse.next(Object.assign({}", this._warehouse)
+
         },
         (error) => {
           this.authService.dataError(error);

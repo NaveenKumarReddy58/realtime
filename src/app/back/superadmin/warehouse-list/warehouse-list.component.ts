@@ -46,7 +46,8 @@ export class WarehouseListComponent {
     this.warehouse$ = this.warehouseService.getWarehouse();
 
     this.warehouse$.subscribe((data: any) => {
-      this.warehouseData = data?.result;
+      this.warehouseData = data?.result?.results;
+      console.log("compoennt",data)
       // this.warehouseData &&
       //   this.warehouseData.forEach((obj: any) => (obj['is_main_localation'] = false));
     });
