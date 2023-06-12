@@ -55,7 +55,7 @@ export class WarehouseAddComponent {
     });
 
     if (!this.isAddMode) {
-      this.warehouseService.warehouseList(this.id);
+      this.warehouseService.warehouseDetails(this.id);
       this.warehouse$ = this.warehouseService.getWarehouse();
 
       this.warehouse$.subscribe((data: any) => {
@@ -72,7 +72,7 @@ export class WarehouseAddComponent {
       });
     }
 
-    this.addressList();
+    this.addressList(1);
   }
 
   // convenience getter for easy access to form fields
@@ -87,8 +87,8 @@ export class WarehouseAddComponent {
 
   ngOnInit(): void {}
 
-  addressList() {
-    this.addressService.addressSearch();
+  addressList(page:any) {
+    this.addressService.addressSearch(page);
     this.address$ = this.addressService.getAddress();
 
     this.address$.subscribe((data: any) => {

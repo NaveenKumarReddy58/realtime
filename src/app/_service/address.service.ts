@@ -41,14 +41,17 @@ export class AddressService {
       );
   }
 
-  addressSearch(adr?: string) {
+  addressSearch(page: any, searchVal?:string) {
     let tail = '';
-    if (adr) {
-      tail = `${adr}`;
+    if (page) {
+      tail = `${page}`;
+    }
+    if(searchVal){
+      tail += "&search_text="+searchVal;
     }
 
     this.http
-      .get<any>(`${this._liveApiUrl}/company/search-address/?adr=${tail}`)
+      .get<any>(`${this._liveApiUrl}/company/address-listing/?page=${tail}`)
       .pipe(
         map((data) => {
           return data;

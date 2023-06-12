@@ -3,6 +3,10 @@
     <!-- Tab Content Area Start 01-->
     <div id="Tb-Tabs01" class="Tabs01 TabsMain">
       <!-- Table View -->
+      <form class="Search max-width-230px">
+        <input (keyup)="search($event)" type="text" name="" placeholder="Search" />
+        <button><i class="fa fa-search"></i></button>
+      </form>
       <div class="Table mt-4">
         <div class="OrderList">
           <div class="row mt-3">
@@ -40,7 +44,17 @@
               </table>
             </div>
             <div class="row mt-3">
-              <div class="col-md-12 text-end">
+              <div class="col-md-7">
+                <div class="pagination" *ngIf="showPaginator">
+                  <mat-paginator [length]="totalAddressess"
+                      [pageSize]="10"
+                      (page)="handlePageEvent($event)"
+                      aria-label="Select page">
+                  </mat-paginator>
+                </div>
+              </div>
+              <div class="col-md-5 text-end">
+
                 <button routerLink="/admin/address/add" class="ButtonStyle">
                   Add Address
                 </button>

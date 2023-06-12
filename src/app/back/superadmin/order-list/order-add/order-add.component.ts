@@ -95,7 +95,7 @@ export class OrderAddComponent {
     });
 
 
-    this.addressList();
+    this.addressList(1);
     this.warehouseList();
     this.addOrderF.patchValue({ po: this.po });
   }
@@ -130,7 +130,7 @@ export class OrderAddComponent {
     dialogRef.afterClosed().subscribe(res => {
       if(res){
         let self = this;
-        this.addressList();
+        this.addressList(1);
         setTimeout(function(){
           if(addressType == 'pickup'){
             self.addOrderF.patchValue({
@@ -147,13 +147,13 @@ export class OrderAddComponent {
     })
   }
   setTheLatestAddress(addressType:any){
-    this.addressService.addressSearch();
+    this.addressService.addressSearch(1);
     this.address$ = this.addressService.getAddress();
     this.address$.subscribe((data: any) => {
-      this.addressData = data.result;
-      if (data?.result) {
+      this.addressData = data.result?.results;
+      if (data?.result?.results) {
         this.data=[];
-        data?.result.forEach((data: any) => {
+        data?.result?.results.forEach((data: any) => {
           this.data.push({
             value: data?.id,
             label: data?.address,
@@ -216,15 +216,15 @@ export class OrderAddComponent {
     );
   }
 
-  addressList() {
-    this.addressService.addressSearch();
+  addressList(page:any) {
+    this.addressService.addressSearch(page);
     this.address$ = this.addressService.getAddress();
 
     this.address$.subscribe((data: any) => {
-      this.addressData = data.result;
+      this.addressData = data?.result?.results;
       if (data?.result) {
         this.data=[];
-        data?.result.forEach((data: any) => {
+        data?.result?.results.forEach((data: any) => {
           this.data.push({
             value: data?.id,
             label: data?.address,

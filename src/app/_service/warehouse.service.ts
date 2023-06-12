@@ -56,7 +56,41 @@ export class WarehouseService {
       );
   }
 
-  warehouseList(id?: Number) {
+  warehouseList(page: Number=1) {
+    let tail = '';
+    if (page) {
+      tail = `${page}`;
+    }
+
+    this.http
+      .get<any>(`${this._liveApiUrl}/company/get-warehouse/?page=${tail}`)
+      .pipe(
+        map((data) => {
+          console.log("map", data)
+          return data;
+        }),
+        catchError(this.authService.handleError)
+      ).subscribe(
+        (data: any) => {
+          console.log("subscribe", data)
+
+          if (this.authService.resultCodeError(data)) {
+            return;
+          }
+
+          this.warehouseData.warehouse = data;
+          console.log("this.warehouseData.warehouse", this.warehouseData.warehouse)
+
+          this._warehouse.next(Object.assign({}, this.warehouseData).warehouse);
+          console.log("this._warehouse.next(Object.assign({}", this._warehouse)
+
+        },
+        (error) => {
+          this.authService.dataError(error);
+        }
+      );
+  }
+  warehouseDetails(id?: Number) {
     let tail = '';
     if (id) {
       tail = `${id}`;
@@ -90,7 +124,6 @@ export class WarehouseService {
         }
       );
   }
-
   warehouseDelete(id: any) {
     return this.http.delete<any>(
       `${this._liveApiUrl}/company/delete-warehouse/${id}`

@@ -16,8 +16,11 @@ export class AddressListComponent {
   loading = false;
   delloading = false;
   toggle: any = [];
+  public page: number= 1;
 
   address$!: Observable<object[]>;
+  showPaginator: boolean= false;
+  totalAddressess: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,20 +30,29 @@ export class AddressListComponent {
     public addressService: AddressService,
     private toastr: ToastrService
   ) {
-    this.addressList();
+    this.addressList(1);
   }
 
   ngOnInit(): void {}
-
-  addressList() {
-    this.addressService.addressSearch();
+  search(e:any){
+    this.addressList(this.page, e.target.value);
+  }
+  addressList(page?:number,search_text?:string) {
+    this.addressService.addressSearch(page,search_text);
     this.address$ = this.addressService.getAddress();
 
     this.address$.subscribe((data: any) => {
-      this.addressData = data?.result;
+      this.showPaginator= false;
+      this.showPaginator= true;
+      this.totalAddressess= data?.result?.count;
+
+      this.addressData = data?.result?.results;
     });
   }
-
+  handlePageEvent(e: any) {
+    this.page= e.pageIndex+1;
+    this.addressList(this.page)
+  }
   addressDelete(id: any) {
     this.toggle[id] = true;
     this.delloading = true;

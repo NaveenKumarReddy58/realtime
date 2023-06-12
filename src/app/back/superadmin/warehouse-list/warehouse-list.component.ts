@@ -25,7 +25,9 @@ export class WarehouseListComponent {
   isShowDeleteDriverDialog: boolean = false;
   isDefaultAddress: boolean = false;
   wareHouseId: any;
-  page: any;
+  page: any= 1;
+  public showPaginator: boolean= false;
+  public totalWarehouses: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,16 +38,19 @@ export class WarehouseListComponent {
     private toastr: ToastrService,
     private dialog: MatDialog
   ) {
-    this.warehouseList();
+    this.warehouseList(this.page);
   }
 
   ngOnInit(): void {}
 
-  warehouseList() {
-    this.warehouseService.warehouseList();
+  warehouseList(page?: number) {
+    this.warehouseService.warehouseList(page);
     this.warehouse$ = this.warehouseService.getWarehouse();
 
     this.warehouse$.subscribe((data: any) => {
+      this.showPaginator= false;
+      this.showPaginator= true;
+      this.totalWarehouses= data?.result?.count;
       this.warehouseData = data?.result?.results;
       console.log("compoennt",data)
       // this.warehouseData &&
@@ -54,7 +59,9 @@ export class WarehouseListComponent {
   }
 
   handlePageEvent(e: any) {
-    this.page= e.pageIndex;
+    this.page= e.pageIndex+1;
+    this.warehouseList(this.page)
+
   }
   controlOnChange(id: Number, e: any) {
     if (e.target.checked) {
@@ -75,12 +82,12 @@ export class WarehouseListComponent {
           return;
         }
 
-        this.warehouseList();
+        this.warehouseList(this.page);
         this.toastr.success('Warehouse Status Updated');
       },
       (error) => {
         this.toastr.error('Failed to update');
-        this.warehouseList();
+        this.warehouseList(this.page);
         this.authService.dataError(error);
         this.loading = false;
       }
@@ -97,7 +104,7 @@ export class WarehouseListComponent {
           return;
         }
 
-        this.warehouseList();
+        this.warehouseList(this.page);
         this.router.navigate(['/admin/warehouse']);
         this.toastr.success('Warehouse Deleted');
         this.delloading = false;
