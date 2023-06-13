@@ -25,12 +25,21 @@ export class OrderService {
   private _orderCount = new BehaviorSubject<object[]>([]);
   private orderCountData: { orderCount: object[] } = { orderCount: [] };
 
+  private searchText = new BehaviorSubject<any>('');
+
   getOrder(): Observable<any[]> {
     return this._order.asObservable();
   }
 
   getOrderCount(): Observable<any[]> {
     return this._orderCount.asObservable();
+  }
+
+  updateSearchText(val:any){
+    this.searchText.next(val)
+  }
+  getSearchText(){
+    return this.searchText;
   }
   // order_no:4444
 
@@ -59,24 +68,31 @@ export class OrderService {
   //order_type:pickup
   //order_status:successful
 
-  orderList(order_date?: any, order_type?:any, order_status?:any, page?:any) {
+  orderList(order_date?: any, order_type?:any, order_status?:any, page?:any, search_text?:any) {
     let tail = '';
     let params = new URLSearchParams();
     if (params) {
-      if(order_date && order_date.length > 0){
-        params.set('order_date', order_date)
-      }
-      if(order_type && order_type.length > 0 && order_type != 'both'){
-        params.set('order_type', order_type)
-      }
-      if(order_status && order_status.length > 0 && order_status != 'all'){
-        params.set('order_status', order_status)
-      }
-      if(page){
-        params.set('page', page+1)
+      if(search_text && search_text>0){
+        params.set('search_text', search_text)
+  
+      } else{
+        if(order_date && order_date.length > 0){
+          params.set('order_date', order_date)
+        }
+        if(order_type && order_type.length > 0 && order_type != 'both'){
+          params.set('order_type', order_type)
+        }
+        if(order_status && order_status.length > 0 && order_status != 'all'){
+          params.set('order_status', order_status)
+        }
+        if(page){
+          params.set('page', page+1)
+        }
       }
     }
-    if(order_date || order_type || order_status || page){
+    if(search_text && search_text>0){
+      tail += `?` + params.toString();
+    } else if(order_date || order_type || order_status || page){
       tail += `?` + params.toString();
     }
     this.http

@@ -138,10 +138,17 @@ export class OrderListComponent {
 
   ngOnInit(): void {
     this.orderCount();
+    this.orderService.getSearchText().subscribe((res)=>{
+      if(res && res.length > 0){
+        this.orderList(this.orderDate,this.orderType, this.orderStatus, this.page,res);
+      } else{
+        this.orderList(this.orderDate,this.orderType, this.orderStatus, this.page)
+      }
+    })
   }
 
-  orderList(order_date?: any, order_type?:any, order_status?:any, page?:any) {
-    this.orderService.orderList(order_date, order_type, order_status,page);
+  orderList(order_date?: any, order_type?:any, order_status?:any, page?:any,search_text?:any) {
+    this.orderService.orderList(order_date, order_type, order_status,page,search_text);
     this.order$ = this.orderService.getOrder();
     this.showPaginator= false;
     this.order$.subscribe((data: any) => {

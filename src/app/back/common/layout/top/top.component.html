@@ -8,8 +8,9 @@
             ><i class="fa fa-search" aria-hidden="true"></i>
             <input
               type="text"
-              placeholder="Search"
+              placeholder="Search by Order"
               class="InPutField"
+              disabled
               (keyup)="searchfield($event)"
             />
           </span>
@@ -61,6 +62,7 @@
             </li>
           </ul>
           <div class="SearchButton">
+
             <button class="ButtonStyle">Search</button>
           </div>
         </div>
@@ -118,8 +120,10 @@
             ><i class="fa fa-search" aria-hidden="true"></i>
             <input
               type="text"
-              placeholder="Search"
+              disabled
+              placeholder="Search for Orders"
               class="InPutField"
+              value="{{searchText}}"
               (keyup)="searchfield($event)"
             />
           </span>
@@ -129,7 +133,8 @@
         </form>
       </div>
       <!-- Search Box -->
-      <form class="SearchContentForm" *ngIf="searchbox">
+      <form class="SearchContentForm" [formGroup]="searchForm"
+      *ngIf="searchbox">
         <div class="SearchContent">
           <div class="SearchOrder">
             <span class="searchTitle">Search by Order</span>
@@ -140,10 +145,11 @@
           <ul class="OrderTracking">
             <li>
               <label
-                ><img src="assets/images/search-icon01.png" />
+                ><img src="assets/images/search-icon01.png" />{{orderNumber}}
                 <input
                   type="text"
                   name=""
+                  formControlName="order_number"
                   placeholder="Enter Tracking/Order Number"
                   class="InPutField_S"
               /></label>
@@ -155,6 +161,7 @@
                 <input
                   type="text"
                   name=""
+                  formControlName="name"
                   placeholder="Enter Name"
                   class="InPutField_S"
               /></label>
@@ -165,13 +172,15 @@
                 <input
                   type="text"
                   name=""
+                  formControlName="address"
                   placeholder="Enter Address"
                   class="InPutField_S"
               /></label>
             </li>
           </ul>
           <div class="SearchButton">
-            <button class="ButtonStyle">Search</button>
+            <button class="ButtonStyle clear"  (click)="clearSearch()">Clear</button>
+            <button class="ButtonStyle"  (click)="updateSearch()">Search</button>
           </div>
         </div>
       </form>

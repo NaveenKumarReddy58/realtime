@@ -1,8 +1,10 @@
 import { Component, Input } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/_service/auth.service';
+import { OrderService } from 'src/app/_service/order.service';
 import { PlanService } from 'src/app/_service/plan.service';
 
 @Component({
@@ -16,9 +18,15 @@ export class TopComponent {
   isLoggedIn: any = false;
   @Input() isRoleIn: any;
   _isRoleName: any = '0';
+  orderNumber:any;
+  address:any;
+  name:any;
+  searchForm!: FormGroup;
+
 
   planCount$!: Observable<object[]>;
   clickedItem: string= '';
+  searchText: any;
 
   ngOnInit(): void {}
 
@@ -27,8 +35,16 @@ export class TopComponent {
     private router: Router,
     public planService: PlanService,
     public authService: AuthService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private orderService: OrderService,
+    private formBuilder: FormBuilder
   ) {
+
+    this.searchForm = formBuilder.group({
+      order_number: [''],
+      name:[''],
+      address: ['']
+    });
     this.authService.getDashboard().subscribe((data: any) => {
       this.isLoggedIn = data;
     });
@@ -99,5 +115,34 @@ export class TopComponent {
   }
   onClickTopItem(item:string){
     this.clickedItem = item;
+  }
+
+  updateSearch(){
+    this.searchbox = !this.searchbox;
+    console.log(this.searchForm.controls['order_number'].value)
+    if(this.searchForm.controls['order_number'].value && this.searchForm.controls['order_number'].value.length > 0){
+      this.searchText=this.searchForm.controls['order_number'].value;
+      this.orderService.updateSearchText(this.searchForm.controls['order_number'].value);
+    } else if(this.searchForm.controls['name'].value && this.searchForm.controls['name'].value.length > 0){
+      this.searchText=this.searchForm.controls['name'].value;
+      this.orderService.updateSearchText(this.searchForm.controls['name'].value);
+    }else if(this.searchForm.controls['address'].value && this.searchForm.controls['address'].value.length > 0){
+      this.searchText=this.searchForm.controls['address'].value;
+      this.orderService.updateSearchText(this.searchForm.controls['address'].value);
+    } else{
+      this.searchText=undefined;
+      this.orderService.updateSearchText('');
+
+    }
+  }
+  clearSearch(){
+    this.searchbox = !this.searchbox;
+    this.searchText=undefined;
+    this.searchForm.patchValue({
+      order_number: '',
+      name:'',
+      address:''
+    })
+    this.orderService.updateSearchText('');
   }
 }
