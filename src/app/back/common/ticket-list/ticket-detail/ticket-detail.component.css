@@ -22,3 +22,28 @@
     background: #d8fad6;
     right: -9px;
 }
+.ticket-title{
+    border: 1px solid gray;
+}
+span.gallery {
+    margin: 5px;
+    width: 180px;
+    display: inline-block;
+    border-radius: 10%;
+  }
+  
+  span.gallery:hover {
+    border: 1px solid #777;
+  }
+  
+  span.gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 10%;
+  }
+  
+  span.desc {
+    padding: 15px;
+    text-align: center;
+  }
+  

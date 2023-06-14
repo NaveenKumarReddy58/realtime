@@ -81,20 +81,51 @@
     </div>
   </div>
 
-  <div *ngIf="isCreateTicketMode">
+  <form *ngIf="isCreateTicketMode" [formGroup]="createTicketForm"
+  >
     <div class="SendMessage d-block">
       <div class="Message01">
-        <textarea placeholder="Custom Message"></textarea>
+        <input type="text"
+            placeholder="Title"
+            formControlName="subject"
+            class="CompanyField mb-0 ticket-title"
+          />
+
+          <div *ngIf="isSubmitted && createTicketForm.controls['subject'].errors" class="text-danger">
+            <div *ngIf="createTicketForm.controls['subject'].errors['required']">
+              Title is required
+            </div>
+          </div>
       </div>
+      <br>
+      <div class="Message01">
+        <textarea placeholder="Custom Message" formControlName="description"
+        ></textarea>
+        <div *ngIf="isSubmitted && createTicketForm.controls['description'].errors" class="text-danger">
+          <div *ngIf="createTicketForm.controls['description'].errors['required']">
+            Description is required
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="Message01">
+        <span class="gallery" *ngFor="let img of attachments">
+          <a target="_blank" href="img_forest.jpg">
+            <img [src]="img" alt="Forest" width="600" height="400">
+          </a>
+        </span>
+      </div>
+      <br>
       <div class="Message02">
         <div class="open-close">
         </div>
         <div class="open-close AttachFile pt-2">
-          <label>Attach File
-            <i class="fa fa-paperclip paperclip" aria-hidden="true"></i>
-            <input type="file" name="" /></label>
-          <button class="ButtonStyle">Create Ticket</button>
+          <label (click)="fileInput.click()" >Attach File
+            <i class="fa fa-paperclip paperclip" aria-hidden="true"></i></label>
+            <input #fileInput type="file" (change)="readURL($event)" style="display: none" accept="image/*" />
+          <button class="ButtonStyle" (click)="createTicket()">Create Ticket <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+          </button>
         </div>
       </div>
     </div>
-  </div>
+  </form>
