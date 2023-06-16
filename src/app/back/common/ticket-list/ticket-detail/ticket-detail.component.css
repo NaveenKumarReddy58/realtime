@@ -46,4 +46,8 @@ span.gallery {
     padding: 15px;
     text-align: center;
   }
-  
+  .conversation-container{
+    padding: 20px;
+    height: 400px;
+    overflow: auto;
+  }
