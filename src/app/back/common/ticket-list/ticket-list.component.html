@@ -57,14 +57,14 @@
                 <th>Status</th>
                 <th>Other Option</th>
               </tr>
-              <tr *ngFor="let i of [1,2,3,4,5,6]">
-                <td><img src="assets/images/p-icon.png" />910011001</td>
-                <td>Sandeep Singh</td>
-                <td>Address: 012, XYZ B14</td>
-                <td>Wed Oct 24, 2022</td>
-                <td>12:30 PM</td>
+              <tr *ngFor="let item of ticketsData">
+                <td><img src="assets/images/p-icon.png" class="mx-2" />{{item.id}}</td>
+                <td>{{item.created_by}}</td>
+                <td>{{item.subject}}</td>
+                <td>{{item.created_date}}</td>
+                <td>{{item.created_time}}</td>
                 <td><span class="">00:00 AM</span></td>
-                <td class="compleate">Completed</td>
+                <td class="compleate">{{item.ticket_status}}</td>
                 <td>
                   <div class="GetIocn">
                     <span class="fa fa-phone"></span>
@@ -76,8 +76,17 @@
               
             </table>
           </div>
-          <div class="row mt-3" *ngIf="tabName == 'MT'">
-              <div class="col-md-12 text-end">
+          <div class="row mt-3">
+            <div class="col-md-7 text-left">
+              <div class="pagination" *ngIf="showPaginator">
+                <mat-paginator [length]="ticketsCount"
+                    [pageSize]="10"
+                    (page)="handlePageEvent($event)"
+                    aria-label="Select page">
+                </mat-paginator>
+              </div>
+            </div>
+              <div class="col-md-5 text-end"  *ngIf="tabName == 'MT'">
                 <button (click)="createTicket()" class="ButtonStyle">Create Ticket</button>
               </div>
             </div>

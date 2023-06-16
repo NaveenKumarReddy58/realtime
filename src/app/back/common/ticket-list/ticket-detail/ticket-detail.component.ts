@@ -22,8 +22,6 @@ export class TicketDetailComponent {
     this.createTicketForm = formBuilder.group({
       subject: ['', [Validators.required]],
       description: ['', [Validators.required]],
-      images:['']
-
     });
     this.id = this.route.snapshot.params['id'];
     if(this.id){
@@ -35,6 +33,7 @@ export class TicketDetailComponent {
   ngOnInit(): void {
     
   }
+  imgs:any = [];
   readURL(event: any): void {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
@@ -44,9 +43,11 @@ export class TicketDetailComponent {
       reader.onload = (e) => {
         this.attachments.push(reader.result);
       };
-      this.createTicketForm.patchValue({
-        images: file
-      })
+      this.imgs.push(file)
+      console.log(this.imgs)
+      // this.createTicketForm.patchValue({
+      //   images: this.imgs
+      // })
       //this.createTicketForm.controls['images'].value.push(file);
       reader.readAsDataURL(file);
     }
@@ -70,7 +71,12 @@ export class TicketDetailComponent {
           formData.append(i, this.createTicketForm.value[i]);
         } 
       }
-
+    }
+    
+    if(this.imgs && this.imgs.length > 0){
+      for(var i=0; this.imgs.length > i; i++){
+        formData.append('images',this.imgs[i])
+      }
     }
     this.loading = true;
     this.ticketService.createTicket(formData).subscribe((data:any)=>{

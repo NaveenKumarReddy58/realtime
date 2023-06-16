@@ -27,4 +27,23 @@ export class TicketsService {
             catchError(this.authService.handleError)
         );
     }
+
+    getTickets(page: any) {
+        let tail = '';
+        let params = new URLSearchParams();
+        if (params) {
+            if(page && page>0){
+                params.set('page', page)
+            }
+        }
+       if(page){
+        tail += `?` + params.toString();
+        }
+        return this.http.get<any>(`${this._liveApiUrl}/helpdesk/ticket-listing/${tail}`).pipe(
+            map((data: any) => {
+                return data;
+            }),
+            catchError(this.authService.handleError)
+        );
+    }
 }
