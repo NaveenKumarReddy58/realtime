@@ -2,13 +2,13 @@
   <div class="TabsList">
     <ul class="Tab_List">
       <li (click)="driverTickets()" [ngClass]="tabName == 'DT' ? 'active' : ''">
-        <a >Driver Tickets : 180 <span>Total: 100</span></a>
+        <a >Driver Tickets : {{headerCountsData[0]?.count}} <span>Total: {{headerCountsData[0]?.count+headerCountsData[1]?.count+headerCountsData[2]?.count}}</span></a>
       </li>
       <li (click)="customerTickets()" [ngClass]="tabName == 'CT' ? 'active' : ''">
-        <a>Customer Tickets: 20 </a>
+        <a>Customer Tickets: {{headerCountsData[1]?.count}} </a>
       </li>
       <li (click)="myTickets()" [ngClass]="tabName == 'MT' ? 'active' : ''">
-        <a >My Tickets : 78
+        <a >My Tickets : {{headerCountsData[2]?.count}}
         </a>
       </li>
     </ul>
@@ -26,9 +26,9 @@
           <button><i class="fa fa-search"></i></button>
         </form>
         <div class="Filter_Set">
-          <span><input type="radio" name="" /> All (120)</span>
-          <span><input type="radio" name="" /> Closed (10)</span>
-          <span><input type="radio" name="" /> Open (0)</span>
+          <span><input (click)="onStatusChange('all_ticket')" type="radio" name="status" /> All ({{statusCountsData[0]?.count}})</span>
+          <span><input (click)="onStatusChange('close')" type="radio" name="status" /> Closed ({{statusCountsData[2]?.count}})</span>
+          <span><input (click)="onStatusChange('open')" type="radio" name="status" /> Open ({{statusCountsData[1]?.count}})</span>
           <span
             >Filter Results <img src="assets/images/filter-icon.png"
           /></span>
@@ -69,7 +69,7 @@
                   <div class="GetIocn">
                     <span class="fa fa-phone"></span>
                     <span class="fa fa-paper-plane"></span>
-                    <a [routerLink]="'/admin/tickets/1'"><i style="font-size: 18px;" class="fa fa-eye" aria-hidden="true"></i></a>
+                    <a [routerLink]="'/admin/tickets/'+item.id"><i style="font-size: 18px;" class="fa fa-eye" aria-hidden="true"></i></a>
                   </div>
                 </td>
               </tr>

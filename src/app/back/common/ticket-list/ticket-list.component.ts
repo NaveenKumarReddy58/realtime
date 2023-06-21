@@ -11,16 +11,19 @@ import { TicketsService } from 'src/app/_service/tickets.service';
 })
 export class TicketListComponent {
   tabName: string= "DT";
-  page:number= 1;
+  page:number= 0;
   ticketsData:any;
   ticketsCount:any;
   showPaginator: boolean= false;
+  headerCountsData: any= [];
+  statusCountsData: any=[];
+  selectedStatus: string='';
   constructor(private authService: AuthService, private ticketService: TicketsService, private router: Router) {}
   ngOnInit(): void {
     this.ticketsList()
   }
   ticketsList(){
-    this.ticketService.getTickets(this.page).subscribe((data)=>{
+    this.ticketService.getTickets(this.page, this.tabName, this.selectedStatus).subscribe((data)=>{
       if (this.authService.resultCodeError(data)) {
         return;
       }
@@ -28,26 +31,57 @@ export class TicketListComponent {
       this.showPaginator= true;
       this.ticketsData= data?.result?.results;
       this.ticketsCount= data?.result?.count;
+      this.getTicketsCount();
 
     },(error)=>{
       this.authService.dataError(error);
     })
   }
   handlePageEvent(e: any) {
-    this.page= e.pageIndex+1;
+    this.page= e.pageIndex;
     this.ticketsList()
   }
   myTickets(){
     this.tabName= "MT";
+    this.ticketsList();
+  }
+  onStatusChange(val:string){
+    this.selectedStatus= val;
+    this.ticketsList();
+  }
+  getTicketsCount(){
+    this.ticketService.getTicketsCount().subscribe((data)=>{
+      if (this.authService.resultCodeError(data)) {
+        return;
+      }
+      this.headerCountsData= data?.result;
+      this.getStatusCount()
+    },(error)=>{
+      this.authService.dataError(error);
+    })
   }
 
+  getStatusCount(){
+    this.ticketService.getStatusCount(this.tabName).subscribe((data)=>{
+      if (this.authService.resultCodeError(data)) {
+        return;
+      }
+      this.statusCountsData= data?.result;
+    },(error)=>{
+      this.authService.dataError(error);
+    })
+  }
   customerTickets(){
     this.tabName= "CT";
+    this.ticketsList();
+
   }
   driverTickets(){
     this.tabName= "DT";
+    this.ticketsList();
   }
   createTicket(){
+    
     this.router.navigate(['/admin/create-ticket'])
   }
 }

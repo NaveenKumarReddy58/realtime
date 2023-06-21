@@ -50,4 +50,24 @@ span.gallery {
     padding: 20px;
     height: 400px;
     overflow: auto;
+    border: 1px solid darkgray;
+    border-radius: 22px;
+    box-shadow: inset 0px 0px 10px rgba(0,0,0,0.5);
+  }
+  .h-150{
+    height: 150px !important;
+  }
+  .h-300{
+    height: 300px !important;
+  }
+  .h-200{
+    height: 200px !important;
+  }
+  .h-342{
+    height: 342px !important;
+  }
+  .message-container{
+    border: 1px solid darkgray;
+    border-radius: 22px;
+    padding: 15px;
   }
