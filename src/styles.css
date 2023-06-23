@@ -452,3 +452,7 @@ input[type=number] {
   bottom: -36%;
   right: 5%;
 }
+.disabled-custom{
+  opacity: 0.5;
+  pointer-events: none;
+}

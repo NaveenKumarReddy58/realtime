@@ -8,6 +8,7 @@ export interface DialogData {
   title: string;
   message: string;
   pageName: string;
+  btns: any;
   assignedOrdersCount: string;
   driverData: any;
   orderListingData:any;

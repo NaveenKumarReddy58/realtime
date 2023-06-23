@@ -1,0 +1,9 @@
+.ticket-open{
+    color: red;
+    text-transform: uppercase;
+}
+.ticket-close{
+    color: green;
+    text-transform: uppercase;
+
+}

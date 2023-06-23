@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/_service/auth.service';
 import { TicketsService } from 'src/app/_service/tickets.service';
+import { DialogAnimationsComponent } from '../../dialog-animations/dialog-animations.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-ticket-detail',
@@ -21,8 +23,10 @@ export class TicketDetailComponent {
   ticketDetails: any;
   messagesHistory: any;
   customMessage: string='';
-  ticketStatus: string= '';
-  constructor(private authService: AuthService, private router: Router , private toastr:ToastrService ,private ticketService: TicketsService, private route: ActivatedRoute, private formBuilder: FormBuilder) {
+  ticketStatus: boolean= false;
+  isShowImagesError: boolean= false;
+  constructor( private dialog: MatDialog,
+    private authService: AuthService, private router: Router , private toastr:ToastrService ,private ticketService: TicketsService, private route: ActivatedRoute, private formBuilder: FormBuilder) {
     this.createTicketForm = formBuilder.group({
       subject: ['', [Validators.required]],
       description: ['', [Validators.required]],
@@ -58,19 +62,46 @@ export class TicketDetailComponent {
   }
 
   sendChat(){
-    var formdata = new FormData();
-      formdata.append('ticket_id', JSON.stringify(Number(this.id)));
-      if(this.ticketStatus.length > 0){
-        formdata.append('ticket_status', this.ticketStatus);
-      }
-      if(this.customMessage.trim().length > 0){
-        formdata.append('message', this.customMessage);
-      }
-      if(this.imgs && this.imgs.length > 0){
-          formdata.append('chat_image',this.imgs[0])
-      }
-      //formdata.append('chat_image', '');
+    if(this.ticketStatus){
+    
+        let enterAnimationDuration = '200ms';
+        let exitAnimationDuration = '200ms';
+    
+        const dialogRef = this.dialog.open(DialogAnimationsComponent, {
+          width: '450px',
+          enterAnimationDuration,
+          exitAnimationDuration,
+          data: {
+            title: 'Alert?',
+            pageName: 'ticket-details',
+            btns:['Cancel', 'Continue'],
+            message:
+              'Are you sure you want to close this ticket?',
+          },
+        });
+        dialogRef.afterClosed().subscribe(dialogResult => {
+          if(dialogResult){
+            this.ticketStatus= true;
+            this.updateTheTicket();
+          }
+        });
+    } else {
+      this.ticketStatus= false;
+      this.updateTheTicket();
+    }
+    
+  }
 
+  updateTheTicket(){
+    var formdata = new FormData();
+    formdata.append('ticket_id', JSON.stringify(Number(this.id)));
+    formdata.append('is_close', ''+this.ticketStatus);
+    if(this.customMessage.trim().length > 0){
+      formdata.append('message', this.customMessage);
+    }
+    if(this.imgs && this.imgs.length > 0){
+        formdata.append('chat_image',this.imgs[0])
+    }
     this.ticketService.sendChat(formdata).subscribe((data:any)=>{
       this.loading= false;
       if (this.authService.resultCodeError(data)) {
@@ -79,7 +110,7 @@ export class TicketDetailComponent {
       }
       this.imgs=[];
       this.attachments=[];
-      this.ticketStatus='';
+      this.ticketStatus=false;
       this.customMessage='';
       this.getTicketDetails();
     } , ()=>{
@@ -89,7 +120,7 @@ export class TicketDetailComponent {
     })
   }
 
-  updateTicketStatus(val:string){
+  updateTicketStatus(val:boolean){
     this.ticketStatus= val;
   }
 
@@ -114,20 +145,28 @@ export class TicketDetailComponent {
       }
     });
 
-    console.log(this.messagesHistory);
   }
   imgs:any = [];
   readURL(event: any): void {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
-      console.log('image', file);
-
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        this.attachments.push(reader.result);
-      };
-      this.imgs.push(file)
-      reader.readAsDataURL(file);
+      if(this.attachments.length > 5){
+        this.isShowImagesError= true;
+      } else{
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.attachments.push(reader.result);
+        };
+        this.imgs.push(file)
+        reader.readAsDataURL(file);
+      }
+      
+    }
+  }
+  removeAttachment(data:any){
+    let indx = this.attachments.indexOf(data);
+    if(indx > -1){
+      this.attachments.splice(indx, 1)
     }
   }
   createTicket(){

@@ -12,19 +12,31 @@
     </ul>
   </div>
 </div>
-<div *ngIf="data.pageName != 'order-listing' && data.pageName != 'order-details' " mat-dialog-actions class="dialog-btn">
-  <button class="Yes-btn" (click)="onConfirm()" mat-button mat-dialog-close cdkFocusInitial>Yes</button>
-  <button class="No-btn" (click)="onDismiss()" mat-button mat-dialog-close>No</button>
-</div>
-<div *ngIf="data.pageName == 'order-details'" mat-dialog-actions class="dialog-btn">
-  <button class="Yes-btn" (click)="onConfirm()" mat-button mat-dialog-close cdkFocusInitial>Assign Order</button>
-  <button class="No-btn" (click)="onDismiss()" mat-button mat-dialog-close>Cancel</button>
-</div>
+<ng-container *ngIf="data.btns&&data.btns.length > 0">
+  <div mat-dialog-actions class="dialog-btn">
+    <button class="Yes-btn" (click)="onConfirm()" mat-button mat-dialog-close cdkFocusInitial>
+      {{data.btns[1]}}
+      <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+    </button>
+    <button class="No-btn" (click)="onDismiss()" mat-button mat-dialog-close>{{data.btns[0]}}</button>
+  </div>
+</ng-container>
+<ng-container *ngIf="data.btns == undefined">
+  <div *ngIf="data.pageName != 'order-listing' && data.pageName != 'order-details' " mat-dialog-actions class="dialog-btn">
+    <button class="Yes-btn" (click)="onConfirm()" mat-button mat-dialog-close cdkFocusInitial>Yes</button>
+    <button class="No-btn" (click)="onDismiss()" mat-button mat-dialog-close>No</button>
+  </div>
+  <div *ngIf="data.pageName == 'order-details'" mat-dialog-actions class="dialog-btn">
+    <button class="Yes-btn" (click)="onConfirm()" mat-button mat-dialog-close cdkFocusInitial>Assign Order</button>
+    <button class="No-btn" (click)="onDismiss()" mat-button mat-dialog-close>Cancel</button>
+  </div>
+  
+  <div *ngIf="data.pageName == 'order-listing'" mat-dialog-actions class="dialog-btn">
+    <button class="Yes-btn" (click)="onConfirm()" mat-button mat-dialog-close cdkFocusInitial>
+      Save
+      <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+    </button>
+    <button class="No-btn" (click)="onDismiss()" mat-button mat-dialog-close>No</button>
+  </div>
+</ng-container>
 
-<div *ngIf="data.pageName == 'order-listing'" mat-dialog-actions class="dialog-btn">
-  <button class="Yes-btn" (click)="onConfirm()" mat-button mat-dialog-close cdkFocusInitial>
-    Save
-    <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
-  </button>
-  <button class="No-btn" (click)="onDismiss()" mat-button mat-dialog-close>No</button>
-</div>
