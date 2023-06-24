@@ -59,12 +59,13 @@
                 <th>Other Option</th>
               </tr>
               <tr *ngFor="let item of ticketsData">
-                <td><img src="assets/images/p-icon.png" class="mx-2" />{{item.id}}</td>
+                <td><img src="assets/images/p-icon.png" class="mx-2" />{{item?.id}}</td>
                 <td *ngIf="tabName != 'MT'">{{item.created_by}}</td>
                 <td>{{item.subject}}</td>
                 <td>{{item.created_date}}</td>
                 <td>{{item.created_time}}</td>
-                <td><span class="">00:00 AM</span></td>
+                <td *ngIf="item.messages.length > 0"><span class="">{{convertLastUpdateTime(item.messages[item.messages.length -1].sent_at) | uppercase}}</span></td>
+                <td *ngIf="item.messages.length == 0"><span class="">{{item.created_time}}</span></td>
                 <td *ngIf="item.ticket_status == 'open'" class="ticket-open">{{item.ticket_status}}</td>
                 <td *ngIf="item.ticket_status == 'close'" class="ticket-close">{{item.ticket_status}}</td>
                 <td>

@@ -120,6 +120,41 @@ export class TicketDetailComponent {
     })
   }
 
+  deleteTicket(){
+      let enterAnimationDuration = '200ms';
+      let exitAnimationDuration = '200ms';
+  
+      const dialogRef = this.dialog.open(DialogAnimationsComponent, {
+        width: '450px',
+        enterAnimationDuration,
+        exitAnimationDuration,
+        data: {
+          title: 'Alert?',
+          pageName: 'ticket-details',
+          message:
+            'Are you sure you want to delete this ticket?',
+        },
+      });
+      dialogRef.afterClosed().subscribe(dialogResult => {
+        if(dialogResult){
+          this.delete();
+        }
+      });
+  }
+  delete(){
+    this.ticketService.deleteTicket(this.id).subscribe((data:any)=>{
+      this.loading= false;
+      if (this.authService.resultCodeError(data)) {
+        this.loading = false;
+        return;
+      }
+      this.router.navigate(['/admin/tickets']); 
+    } , ()=>{
+      this.loading= false;
+      this.toastr.error("Unable to Delete");
+
+    })
+  }
   updateTicketStatus(val:boolean){
     this.ticketStatus= val;
   }

@@ -29,6 +29,14 @@ export class TicketsService {
             catchError(this.authService.handleError)
         );
     }
+    deleteTicket(id: any) {
+        return this.http.delete<any>(`${this._liveApiUrl}/helpdesk/ticket/${id}`).pipe(
+            map((data: any) => {
+                return data;
+            }),
+            catchError(this.authService.handleError)
+        );
+    }
 
     getTickets(page: any, val:any, status: any) {
         let tail = '';

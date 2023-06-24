@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 import { AuthService } from 'src/app/_service/auth.service';
 import { TicketsService } from 'src/app/_service/tickets.service';
 
@@ -20,7 +21,16 @@ export class TicketListComponent {
   selectedStatus: string='';
   constructor(private authService: AuthService, private ticketService: TicketsService, private router: Router) {}
   ngOnInit(): void {
+    let tabVal= sessionStorage.getItem('ticket_selected_tab');
+    if(tabVal == 'CT'){
+      this.tabName= 'CT'
+    } else if(tabVal == 'MT') {
+      this.tabName= 'MT';
+    } else{
+      this.tabName= 'DT';
+    }
     this.ticketsList()
+    
   }
   ticketsList(){
     this.ticketService.getTickets(this.page, this.tabName, this.selectedStatus).subscribe((data)=>{
@@ -37,11 +47,15 @@ export class TicketListComponent {
       this.authService.dataError(error);
     })
   }
+  convertLastUpdateTime(s:any){
+      return moment(s).format("h:mm a");
+  }
   handlePageEvent(e: any) {
     this.page= e.pageIndex;
     this.ticketsList()
   }
   myTickets(){
+    sessionStorage.setItem('ticket_selected_tab', 'MT')
     this.tabName= "MT";
     this.ticketsList();
   }
@@ -72,16 +86,22 @@ export class TicketListComponent {
     })
   }
   customerTickets(){
+    sessionStorage.setItem('ticket_selected_tab', 'CT')
     this.tabName= "CT";
     this.ticketsList();
 
   }
   driverTickets(){
+    sessionStorage.setItem('ticket_selected_tab', 'DT')
     this.tabName= "DT";
     this.ticketsList();
   }
   createTicket(){
     
     this.router.navigate(['/admin/create-ticket'])
+  }
+  ngOnDestroy(){
+    sessionStorage.removeItem('ticket_selected_tab');
+
   }
 }
