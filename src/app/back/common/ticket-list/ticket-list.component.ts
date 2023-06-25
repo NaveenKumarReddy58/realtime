@@ -11,7 +11,7 @@ import { TicketsService } from 'src/app/_service/tickets.service';
   providers:[TicketsService]
 })
 export class TicketListComponent {
-  tabName: string= "DT";
+  tabName: string | undefined= "DT";
   page:number= 0;
   ticketsData:any;
   ticketsCount:any;
@@ -19,17 +19,22 @@ export class TicketListComponent {
   headerCountsData: any= [];
   statusCountsData: any=[];
   selectedStatus: string='';
-  constructor(private authService: AuthService, private ticketService: TicketsService, private router: Router) {}
+  constructor(public authService: AuthService, private ticketService: TicketsService, private router: Router) {}
   ngOnInit(): void {
-    let tabVal= sessionStorage.getItem('ticket_selected_tab');
-    if(tabVal == 'CT'){
-      this.tabName= 'CT'
-    } else if(tabVal == 'MT') {
-      this.tabName= 'MT';
+    if(this.authService._isRoleName == 'superadmin'){
+      this.tabName= undefined;
     } else{
-      this.tabName= 'DT';
+      let tabVal= sessionStorage.getItem('ticket_selected_tab');
+      if(tabVal == 'CT'){
+        this.tabName= 'CT'
+      } else if(tabVal == 'MT') {
+        this.tabName= 'MT';
+      } else{
+        this.tabName= 'DT';
+      }
     }
     this.ticketsList()
+    
     
   }
   ticketsList(){

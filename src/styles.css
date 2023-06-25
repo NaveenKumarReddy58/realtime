@@ -456,3 +456,8 @@ input[type=number] {
   opacity: 0.5;
   pointer-events: none;
 }
+.notes-msg{
+  text-align: right;
+  color: gray;
+  float: right;
+}

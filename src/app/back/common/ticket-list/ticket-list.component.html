@@ -1,6 +1,6 @@
 <div class="ContentArea">
   <div class="TabsList">
-    <ul class="Tab_List">
+    <ul class="Tab_List" *ngIf="authService._isRoleName != 'superadmin' ">
       <li (click)="driverTickets()" [ngClass]="tabName == 'DT' ? 'active' : ''">
         <a >Driver Tickets : {{headerCountsData[0]?.count}} <span>Total: {{headerCountsData[0]?.count+headerCountsData[1]?.count+headerCountsData[2]?.count}}</span></a>
       </li>
@@ -10,6 +10,11 @@
       <li (click)="myTickets()" [ngClass]="tabName == 'MT' ? 'active' : ''">
         <a >My Tickets : {{headerCountsData[2]?.count}}
         </a>
+      </li>
+    </ul>
+    <ul class="Tab_List" *ngIf="authService._isRoleName == 'superadmin'">
+      <li class="active">
+        <a >Organisation Tickets : {{ticketsCount}} <span>Total: {{ticketsCount}}</span></a>
       </li>
     </ul>
   </div>
@@ -51,6 +56,7 @@
                 <th>Track Id</th>
                 <th *ngIf="tabName == 'CT'">Customer Name</th>
                 <th *ngIf="tabName == 'DT'">Driver Name</th>
+                <th *ngIf="tabName == undefined">Admin Name</th>
                 <th>Subject</th>
                 <th>Report Date</th>
                 <th>Report Time</th>
