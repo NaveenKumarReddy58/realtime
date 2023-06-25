@@ -5,8 +5,8 @@
   <div class="row">
     <div class="col-md-12">
       <div class="HeadingName">
-        <h2 *ngIf="!isCreateTicketMode" class="m-0">Tickets</h2>
-        <h2 *ngIf="isCreateTicketMode" >Tickets</h2>
+        <h2 *ngIf="!isCreateTicketMode" class="m-0">Ticket Details</h2>
+        <h2 *ngIf="isCreateTicketMode" >Create Ticket</h2>
 
       </div>
     </div>
@@ -24,7 +24,10 @@
           <!-- <h3>{{ticketDetails?.created_by}} <span class="Time-Min-Ago">2 mins ago</span></h3> -->
           <h4>Ticket ID: {{ticketDetails?.id}}</h4>
           <p>
-            Subject: {{ ticketDetails?.subject}} | {{ ticketDetails?.description}} 
+            <strong>Subject:</strong> {{ ticketDetails?.subject}}
+          </p>
+          <p>
+            <strong>Description:</strong> {{ ticketDetails?.description}} 
           </p>
         </div>
         <div class="col-md-6 mb-4">
