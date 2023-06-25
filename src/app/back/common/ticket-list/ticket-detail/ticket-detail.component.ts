@@ -20,6 +20,7 @@ export class TicketDetailComponent {
   createTicketForm!: FormGroup;
   isSubmitted: boolean= false;
   loading: boolean= false;
+  sendloadin: boolean= false;
   ticketDetails: any;
   messagesHistory: any;
   customMessage: string='';
@@ -102,10 +103,11 @@ export class TicketDetailComponent {
     if(this.imgs && this.imgs.length > 0){
         formdata.append('chat_image',this.imgs[0])
     }
+    this.sendloadin= true;
     this.ticketService.sendChat(formdata).subscribe((data:any)=>{
-      this.loading= false;
+      this.sendloadin= false;
       if (this.authService.resultCodeError(data)) {
-        this.loading = false;
+        this.sendloadin = false;
         return;
       }
       this.imgs=[];
@@ -114,7 +116,7 @@ export class TicketDetailComponent {
       this.customMessage='';
       this.getTicketDetails();
     } , ()=>{
-      this.loading= false;
+      this.sendloadin= false;
       this.toastr.error("Unable to Send");
 
     })

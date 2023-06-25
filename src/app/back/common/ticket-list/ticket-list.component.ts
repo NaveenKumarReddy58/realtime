@@ -54,7 +54,7 @@ export class TicketListComponent {
     })
   }
   convertLastUpdateTime(s:any){
-      return moment(s).format("h:mm a");
+      return moment(s).format("ddd MM yyyy , h:mm a");
   }
   handlePageEvent(e: any) {
     this.page= e.pageIndex;
@@ -111,7 +111,6 @@ export class TicketListComponent {
     this.router.navigate(['/admin/create-ticket'])
   }
   ngOnDestroy(){
-    sessionStorage.removeItem('ticket_selected_tab');
 
   }
 }
