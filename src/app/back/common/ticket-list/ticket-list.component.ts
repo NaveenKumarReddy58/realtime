@@ -19,6 +19,7 @@ export class TicketListComponent {
   headerCountsData: any= [];
   statusCountsData: any=[];
   selectedStatus: string='';
+  searchText: any='';
   constructor(public authService: AuthService, private ticketService: TicketsService, private router: Router) {}
   ngOnInit(): void {
     if(this.authService._isRoleName == 'superadmin'){
@@ -38,7 +39,7 @@ export class TicketListComponent {
     
   }
   ticketsList(){
-    this.ticketService.getTickets(this.page, this.tabName, this.selectedStatus).subscribe((data)=>{
+    this.ticketService.getTickets(this.page, this.tabName, this.selectedStatus, this.searchText).subscribe((data)=>{
       if (this.authService.resultCodeError(data)) {
         return;
       }
@@ -58,6 +59,10 @@ export class TicketListComponent {
   handlePageEvent(e: any) {
     this.page= e.pageIndex;
     this.ticketsList()
+  }
+  search(e:any){
+    this.searchText= e.target.value;
+    this.ticketsList();
   }
   myTickets(){
     sessionStorage.setItem('ticket_selected_tab', 'MT')

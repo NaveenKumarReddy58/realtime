@@ -38,7 +38,7 @@ export class TicketsService {
         );
     }
 
-    getTickets(page: any, val:any, status: any) {
+    getTickets(page: any, val:any, status: any, searchVal: any) {
         let tail = '';
         let label= '';
         if(val == "DT"){
@@ -56,11 +56,14 @@ export class TicketsService {
             if (status && status.length > 0) {
                 params.set('status', status)
             }
+            if(searchVal && searchVal.length > 0){
+                params.set('search_text', searchVal)
+            }
             if (page) {
                 params.set('page', page + 1)
             }
         }
-        if(label || status || page){
+        if(label || status || page || searchVal){
         tail += `?` + params.toString();
         }
         return this.http.get<any>(`${this._liveApiUrl}/helpdesk/ticket-listing/${tail}`).pipe(

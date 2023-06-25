@@ -27,8 +27,8 @@
     <div class="col-md-12">
       <div class="SearchFilter">
         <form class="Search">
-          <input type="text" name="" placeholder="Search" />
-          <button><i class="fa fa-search"></i></button>
+          <input type="text" name="" (keyup)="search($event)" placeholder="Search" />
+          <button><i class="fa fa-search my-2"></i></button>
         </form>
         <div class="Filter_Set">
           <span><input (click)="onStatusChange('all_ticket')" type="radio" name="status" checked="checked" /> All ({{statusCountsData[0]?.count}})</span>
@@ -72,8 +72,8 @@
                 <td>{{item.created_time}}</td>
                 <td *ngIf="item.messages.length > 0"><span class="">{{convertLastUpdateTime(item.messages[item.messages.length -1].sent_at) | uppercase}}</span></td>
                 <td *ngIf="item.messages.length == 0"><span class="">{{item.created_time}}</span></td>
-                <td *ngIf="item.ticket_status == 'open'" class="ticket-open">{{item.ticket_status}}</td>
-                <td *ngIf="item.ticket_status == 'close'" class="ticket-close">{{item.ticket_status}}</td>
+                <td *ngIf="item.ticket_status == 'open'" class="ticket-close">{{item.ticket_status}}</td>
+                <td *ngIf="item.ticket_status == 'close'" class="ticket-open">{{item.ticket_status}}D</td>
                 <td>
                   <div class="GetIocn">
                     <span class="fa fa-phone"></span>

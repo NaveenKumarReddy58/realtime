@@ -9,7 +9,7 @@ import { DriverService } from 'src/app/_service/driver.service';
 export class DriverOrdersListComponent {
   driver$: any;
   dataList: any=[];
-  driverId: any;
+  driverId: any='';
   @Input() dataDriverId: any;
   @Input() modelData: any;
 

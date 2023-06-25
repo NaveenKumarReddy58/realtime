@@ -95,7 +95,7 @@ export class OrderListComponent {
   orderDate: any;
   orderType: any;
   orderStatus: any;
-  selectedDateVal: any;
+  selectedDateVal: any='';
   page: number=0;
   startNumber: number = 1;
   endNumber: number= 10;
