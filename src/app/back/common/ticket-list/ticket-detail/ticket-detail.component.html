@@ -43,7 +43,7 @@
           </label>
         </div>
         <div *ngIf="ticketDetails?.ticket_status == 'close'" class="alert alert-success mx-3" role="alert">
-          <strong>This is ticket Closed by {{ticketDetails?.messages[ticketDetails.messages.length -1]?.sender_name}} on {{ticketDetails?.messages[ticketDetails.messages.length -1]?.sent_at | date}}! </strong>
+          <strong>This ticket is Closed by {{ticketDetails?.messages[ticketDetails.messages.length -1]?.sender_name}} on {{ticketDetails?.messages[ticketDetails.messages.length -1]?.sent_at | date}}! </strong>
         </div>
         
         <div  class="conversation-container" *ngIf="messagesHistory && messagesHistory.length > 0">
