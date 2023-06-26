@@ -93,6 +93,26 @@ export class TicketDetailComponent {
     
   }
 
+  getHeaderName(){
+    let tabVal= sessionStorage.getItem('ticket_selected_tab');
+    if(tabVal == 'DT'){
+      return "Driver Ticket Details";
+    } else if(tabVal == 'MT'){
+      return "My Ticket Details";
+    } else if(tabVal == 'CT'){
+      return "Customer Ticket Details";
+    } else if(tabVal == undefined){
+      return "Organisation Ticket Details";
+    } else{
+      return ''
+    }
+  }
+
+  removeChatAttachment(){
+    this.attachments= [];
+    this.imgs = []
+  }
+
   updateTheTicket(){
     var formdata = new FormData();
     formdata.append('ticket_id', JSON.stringify(Number(this.id)));

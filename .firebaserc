@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "realtimetrac-48416": {
+      "hosting": {
+        "realtimetrack": [
+          "realtimetrac-48416"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "realtimetrac-48416"
+  }
+}
