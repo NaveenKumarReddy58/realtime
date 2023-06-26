@@ -79,7 +79,7 @@
                     <span class="fa fa-phone"></span>
                     <!-- <span class="fa fa-paper-plane"></span> -->
                     <a [routerLink]="'/admin/tickets/'+item.id"><span class="fa fa-message unread-msg">
-                     <span class="unread"></span>
+                     <span *ngIf="oneIsTrue(item.messages)" class="unread"></span>
                     </span></a>
                     <a [routerLink]="'/admin/tickets/'+item.id"><i style="font-size: 18px;" class="fa fa-eye" aria-hidden="true"></i></a>
                   </div>

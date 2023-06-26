@@ -98,6 +98,14 @@ export class TicketsService {
             catchError(this.authService.handleError)
         );
     }
+    messageRead(id:any) {
+        return this.http.put<any>(`${this._liveApiUrl}/helpdesk/message-read/${id}/`, {}).pipe(
+            map((data: any) => {
+                return data;
+            }),
+            catchError(this.authService.handleError)
+        );
+    }
     getStatusCount(val:any) {
         let created_by='';
         if(val == "DT"){

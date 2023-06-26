@@ -49,7 +49,7 @@
         </div>
         
         <div  class="conversation-container" *ngIf="messagesHistory && messagesHistory.length > 0">
-          <ul *ngFor="let item of messagesHistory">
+          <ul id="chatBox" *ngFor="let item of messagesHistory">
             <li class="UserName01" *ngIf="item?.user_type == 'USER1'">
               <div class="bubble you"></div>
               <span class="Mintago">{{item.chat_since}}</span>
@@ -81,7 +81,7 @@
           <h2 class="text-center">No Messages to Display</h2>
         </div>
         
-        <div  *ngIf="ticketDetails.ticket_status != 'close'" class="SendMessage py-4">
+        <div  *ngIf="ticketDetails?.ticket_status != 'close'" class="SendMessage py-4">
           <div style="width: 80%">
           <div class="w-100 Message01 message-container">
             <textarea class="border-0" maxlength="500" [(ngModel)]="customMessage" placeholder="Write your Message"></textarea>

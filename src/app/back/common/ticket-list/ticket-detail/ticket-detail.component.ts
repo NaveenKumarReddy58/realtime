@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -14,6 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
   providers:[TicketsService]
 })
 export class TicketDetailComponent {
+  
   public id;
   public isCreateTicketMode: boolean= true;
   attachments: any= [];
@@ -55,11 +56,27 @@ export class TicketDetailComponent {
       }
       this.ticketDetails= data?.results;
       this.generateMessageHistory(this.ticketDetails?.messages);
+      if(this.ticketDetails?.messages.length > 0){
+        this.markAsReadAllMessages(this.ticketDetails?.messages);
+      }
+            
     } , ()=>{
       this.loading= false;
       this.toastr.error("Unable to create ticket");
 
     })
+  }
+
+  markAsReadAllMessages(messages:any){
+    let msgs:any = messages.filter(function(elm:any){
+      return elm.is_read == false;
+    })
+    if(msgs && msgs.length > 0){
+      msgs.forEach((element:any) => {
+        this.ticketService.messageRead(element.id).subscribe((res)=>{
+        })
+      });
+    }
   }
 
   sendChat(){
@@ -90,8 +107,8 @@ export class TicketDetailComponent {
       this.ticketStatus= false;
       this.updateTheTicket();
     }
-    
   }
+
 
   getHeaderName(){
     let tabVal= sessionStorage.getItem('ticket_selected_tab');

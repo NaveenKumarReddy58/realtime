@@ -73,6 +73,16 @@ export class TicketListComponent {
     this.selectedStatus= val;
     this.ticketsList();
   }
+  oneIsTrue(data:any) {
+    if(data && data.length > 0){
+      return data.some(function (el:any) {
+        return !el.is_read;
+      });
+    } else{
+      return false;
+    }
+    
+  }
   getTicketsCount(){
     this.ticketService.getTicketsCount().subscribe((data)=>{
       if (this.authService.resultCodeError(data)) {
