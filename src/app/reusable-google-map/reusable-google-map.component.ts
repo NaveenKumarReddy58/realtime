@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 declare var google: {
   maps: {
@@ -18,7 +18,8 @@ export class ReusableGoogleMapComponent {
   geoCoder: any;
   initialCoordinates!: google.maps.LatLngLiteral;
   dialogData!: DialogData;
-
+  @Input() height: any;
+  @Input() isComponent: boolean= false;
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData){
