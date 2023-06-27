@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -14,7 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
   providers:[TicketsService]
 })
 export class TicketDetailComponent {
-  
+  @ViewChild('scrollMe') private myScrollContainer: ElementRef | any;
   public id;
   public isCreateTicketMode: boolean= true;
   attachments: any= [];
@@ -45,6 +45,8 @@ export class TicketDetailComponent {
   }
   ngOnInit(): void {
     
+  }
+  ngAfterViewInit(): void {
   }
 
   getTicketDetails(){
@@ -109,17 +111,22 @@ export class TicketDetailComponent {
     }
   }
 
+  scrollToBottom(): void {
+    try {
+        this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+    } catch(err) { }                 
+}
 
   getHeaderName(){
     let tabVal= sessionStorage.getItem('ticket_selected_tab');
     if(tabVal == 'DT'){
-      return "Driver Ticket Details";
+      return "Driver Ticket";
     } else if(tabVal == 'MT'){
-      return "My Ticket Details";
+      return "My Ticket";
     } else if(tabVal == 'CT'){
-      return "Customer Ticket Details";
+      return "Customer Ticket";
     } else if(tabVal == undefined){
-      return "Organisation Ticket Details";
+      return "Organisation Ticket";
     } else{
       return ''
     }
@@ -218,6 +225,7 @@ export class TicketDetailComponent {
         this.messagesHistory.push(element)
       }
     });
+    this.scrollToBottom();
 
   }
   imgs:any = [];

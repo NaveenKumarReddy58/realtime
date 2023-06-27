@@ -92,3 +92,11 @@ span.gallery {
     font-weight: bold;
     cursor: pointer;
   }
+  .right-icon{
+    font-size: 17px;
+    font-weight: bold;
+  }
+  .atchmnt-dlt{
+    background: red !important;
+    color: black !important;
+  }

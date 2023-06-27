@@ -6,7 +6,7 @@
     <div class="col-md-12">
       <div class="HeadingName">
         <h2 *ngIf="!isCreateTicketMode" class="m-0">
-          {{getHeaderName()}}
+          Tickets <i class="fa-solid fa-chevron-right right-icon"></i> {{getHeaderName()}}
         </h2>
         <h2 *ngIf="isCreateTicketMode" >Create Ticket</h2>
 
@@ -48,7 +48,7 @@
           <strong>This ticket is Closed by {{ticketDetails?.messages[ticketDetails.messages.length -1]?.sender_name}} on {{ticketDetails?.messages[ticketDetails.messages.length -1]?.sent_at | date}}! </strong>
         </div>
         
-        <div  class="conversation-container" *ngIf="messagesHistory && messagesHistory.length > 0">
+        <div #scrollMe [scrollTop]="scrollMe.scrollHeight"   class="conversation-container" *ngIf="messagesHistory && messagesHistory.length > 0">
           <ul id="chatBox" *ngFor="let item of messagesHistory">
             <li class="UserName01" *ngIf="item?.user_type == 'USER1'">
               <div class="bubble you"></div>
@@ -87,7 +87,7 @@
             <textarea class="border-0" maxlength="500" [(ngModel)]="customMessage" placeholder="Write your Message"></textarea>
             <div class="position-relative">
               <img *ngIf="attachments.length > 0" [src]="this.attachments[0]" width="100%" height="100%">
-              <i  *ngIf="attachments.length > 0" (click)="removeChatAttachment()" class="fa fa-times ticket-delete" aria-hidden="true"></i>
+              <i  *ngIf="attachments.length > 0" (click)="removeChatAttachment()" class="fa fa-times ticket-delete atchmnt-dlt" aria-hidden="true"></i>
 
             </div>
           </div>

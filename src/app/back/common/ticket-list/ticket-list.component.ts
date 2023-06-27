@@ -54,7 +54,7 @@ export class TicketListComponent {
     })
   }
   convertLastUpdateTime(s:any){
-      return moment(s).format("ddd MM yyyy,h:mm a");
+      return moment(s).format("ddd MM yyyy,h:mm A");
   }
   handlePageEvent(e: any) {
     this.page= e.pageIndex;

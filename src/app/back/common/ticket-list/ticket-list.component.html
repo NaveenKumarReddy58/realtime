@@ -70,7 +70,7 @@
                 <td>{{item.subject}}</td>
                 <td>{{item.created_date}}</td>
                 <td>{{item.created_time}}</td>
-                <td *ngIf="item.messages.length > 0"><span class="">{{convertLastUpdateTime(item.messages[item.messages.length -1].sent_at) | uppercase}}</span></td>
+                <td *ngIf="item.messages.length > 0"><span class="">{{convertLastUpdateTime(item.messages[item.messages.length -1].sent_at)}}</span></td>
                 <td *ngIf="item.messages.length == 0"><span class="">{{item.created_time}}</span></td>
                 <td *ngIf="item.ticket_status == 'open'" class="ticket-close">{{item.ticket_status}}</td>
                 <td *ngIf="item.ticket_status == 'close'" class="ticket-open">{{item.ticket_status}}D</td>
