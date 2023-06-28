@@ -70,9 +70,13 @@ export class AuthService {
   }
 
   resultCodeError(data: any) {
-    if (
+    if(data?.resultCode == 4) {
+      this.toastr.error(data?.errorMessage);
+      
+      this.doLogout();
+      return ;
+    }else if (
       data?.resultCode == '0' ||
-      data?.resultCode == 4 ||
       data?.resultCode == 0
     ) {
       console.log('Api Data Err', data);
