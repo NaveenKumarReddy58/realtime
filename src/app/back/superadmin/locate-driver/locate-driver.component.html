@@ -12,8 +12,8 @@
           </div>
           <div class="row mt-3">
             <div class="col-md-12">
-              <div class="LocateDriver">
-                <app-reusable-google-map [isComponent]="true"></app-reusable-google-map>
+              <div class="LocateDriver" *ngIf="driverLocationsData && driverLocationsData.length > 0">
+                <app-reusable-google-map [isComponent]="true" [driverLocations]="driverLocationsData"></app-reusable-google-map>
               </div>
             </div>
           </div>
