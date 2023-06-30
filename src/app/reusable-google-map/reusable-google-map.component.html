@@ -7,8 +7,12 @@
             width="100%"
             
             [height]="height ? height : '500px'"
-            [center]="initialCoordinates">
-            <map-marker *ngFor="let marker of markerPositions" #marker="mapMarker" 
-                        [position]="marker">
+            [center]="this.markers[0]?.position">
+            <map-marker (mapClick)="openInfoWindow(marker)" *ngFor="let marker of markers" #marker="mapMarker" 
+                        [options]="marker.options"
+                        [label]="marker.label"
+                        [position]="marker.position">
             </map-marker>
+            
 </google-map>
+

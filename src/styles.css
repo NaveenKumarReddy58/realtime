@@ -461,3 +461,7 @@ input[type=number] {
   color: gray;
   float: right;
 }
+
+.marker-label1{
+  font-size: 30px;
+}
