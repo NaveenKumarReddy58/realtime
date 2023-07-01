@@ -463,5 +463,16 @@ input[type=number] {
 }
 
 .marker-label1{
-  font-size: 30px;
+
+  border: 1px solid #0eb002;
+  border-radius: 5px;
+  background: #d8fad6;
+  text-align: center;
+  line-height: 20px;
+  font-weight: bold;
+  font-size: 12px;
+  color: #0eb002;
+  margin-top: 50px;
+  padding: 0px 12px;
+
 }

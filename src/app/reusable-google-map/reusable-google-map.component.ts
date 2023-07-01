@@ -71,10 +71,17 @@ export class ReusableGoogleMapComponent {
       }
 
       if(this.driverLocations && this.driverLocations.length > 0){
-        this.driverLocations.forEach((element:any) => {
-          let name =this.getDriverName(element.driver_id);
-          this.addMarker(element.location.latitude , element.location.longitude , element.driver_id,name);
-        });
+
+        for (let index = 0; index < this.driverLocations.length; index++) {
+          const name = this.getDriverName(this.driverLocations[index].driver_id);
+          this.driverLocations[index]['name']= name;
+        }
+        setTimeout(()=>{
+          this.driverLocations.forEach((element:any) => {
+            this.addMarker(element.location.latitude , element.location.longitude , element.driver_id,element.name);
+          });
+        }, 1000)
+        
       }
     });
   }
@@ -87,12 +94,11 @@ export class ReusableGoogleMapComponent {
           id: id,
           position : cord,
           label: {
-            color: 'red',
-            text: "Driver Name",
+            color: '#0eb002',
+            text: name?name.toString() : '',
             className: 'marker-label1',
             fontWeight: 'bold',
-            top: '20px',
-            fontSize: "18px",
+            labelClass: "marker-label1", // your desired CSS class
           },
           options: {
             icon: 'assets/images/map-icon.png'
@@ -129,7 +135,7 @@ export class ReusableGoogleMapComponent {
     let label= '';
     this.listOfDrivers.filter((elt:any)=>{
       if(elt.id == id){
-       label= elt.first_name;
+       label= elt.first_name+ " "+elt.last_name;
       }
     })
     console.log(label)
