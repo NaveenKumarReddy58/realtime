@@ -58,7 +58,6 @@
                 <th *ngIf="tabName == 'DT'">Driver Name</th>
                 <th *ngIf="tabName == undefined">Admin Name</th>
                 <th>Subject</th>
-                <th>Report Date</th>
                 <th>Report Time</th>
                 <th>Last Update</th>
                 <th>Status</th>
@@ -68,8 +67,7 @@
                 <td><img src="./../../../../assets/images/ticket-icon.png" style="max-width: 15px;" class="mx-2" />{{item?.id}}</td>
                 <td *ngIf="tabName != 'MT'">{{item.created_by}}</td>
                 <td>{{item.subject}}</td>
-                <td>{{item.created_date}}</td>
-                <td>{{item.created_time}}</td>
+                <td>{{item.created_date}} {{item.created_time}}</td>
                 <td *ngIf="item.messages.length > 0"><span class="">{{convertLastUpdateTime(item.messages[item.messages.length -1].sent_at)}}</span></td>
                 <td *ngIf="item.messages.length == 0"><span class="">{{item.created_time}}</span></td>
                 <td *ngIf="item.ticket_status == 'open'" class="ticket-close">{{item.ticket_status}}</td>

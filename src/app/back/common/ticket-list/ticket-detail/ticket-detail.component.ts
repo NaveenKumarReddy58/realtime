@@ -112,9 +112,10 @@ export class TicketDetailComponent {
   }
 
   scrollToBottom(): void {
-    try {
-        this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-    } catch(err) { }                 
+  const element:any = document.getElementById('scollMe');
+   element.scrollTop = element.scrollHeight;  
+   window?.scrollTo(0, document.body.scrollHeight);
+
 }
 
   getHeaderName(){
@@ -225,7 +226,10 @@ export class TicketDetailComponent {
         this.messagesHistory.push(element)
       }
     });
-    this.scrollToBottom();
+    setTimeout(()=>{
+      this.scrollToBottom();
+
+    },200)
 
   }
   imgs:any = [];

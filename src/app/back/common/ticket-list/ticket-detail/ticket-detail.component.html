@@ -48,7 +48,7 @@
           <strong>This ticket is Closed by {{ticketDetails?.messages[ticketDetails.messages.length -1]?.sender_name}} on {{ticketDetails?.messages[ticketDetails.messages.length -1]?.sent_at | date}}! </strong>
         </div>
         
-        <div #scrollMe [scrollTop]="scrollMe.scrollHeight"   class="conversation-container" *ngIf="messagesHistory && messagesHistory.length > 0">
+        <div id="scollMe"  class="conversation-container" *ngIf="messagesHistory && messagesHistory.length > 0">
           <ul id="chatBox" *ngFor="let item of messagesHistory">
             <li class="UserName01" *ngIf="item?.user_type == 'USER1'">
               <div class="bubble you"></div>
