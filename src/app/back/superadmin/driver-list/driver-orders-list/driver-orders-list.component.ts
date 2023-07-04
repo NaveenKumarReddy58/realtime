@@ -14,6 +14,7 @@ export class DriverOrdersListComponent {
   @Input() modelData: any;
 
   @Input() assignedOrdersCount: any;
+  @Input() pageName: any;
   orderData: any;
   copyDriverId: any;
 
@@ -23,6 +24,41 @@ export class DriverOrdersListComponent {
   }
 
   ngOnInit(){
+    if(this.pageName == 'order-details'){
+      this.getDriverList();
+      this.getDriverOrders(this.dataDriverId);
+    }else if(this.pageName == 'driver-details'){
+      this.getDriverOrdersList();
+    }
+  }
+
+  ngDoCheck(){
+    if(this.pageName == 'order-details'){
+      if(this.copyDriverId != this.driverId){
+        this.copyDriverId = this.driverId;
+        this.getDriverOrders(this.driverId);
+      }
+    }
+  }
+
+  getDriverOrdersList(){
+    let formatDate;
+    let status;
+    let id = this.modelData.id;
+    if(this.modelData.status == 'today'){
+      let date = new Date();
+      formatDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+    } else {
+      status = this.modelData.status;
+    }
+    this.driverService.orderList(id, status, formatDate).subscribe((res:any)=>{
+      if(res && res.result){
+          this.orderData= res?.result?.results;
+      }
+    });
+  }
+  
+  getDriverList(){
     this.driverService.driverList();
     this.driver$ = this.driverService.getDrivers();
 
@@ -40,16 +76,7 @@ export class DriverOrdersListComponent {
       }
     });
 
-    this.getDriverOrders(this.dataDriverId);
   }
-
-  ngDoCheck(){
-    if(this.copyDriverId != this.driverId){
-      this.copyDriverId = this.driverId;
-      this.getDriverOrders(this.driverId);
-    }
-  }
-  
 
   getDriverOrders(id:any){
     this.driverService.driverOrders(id).subscribe((res:any)=>{

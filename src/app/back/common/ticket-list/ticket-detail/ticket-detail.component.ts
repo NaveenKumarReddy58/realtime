@@ -112,7 +112,7 @@ export class TicketDetailComponent {
   }
 
   scrollToBottom(): void {
-  const element:any = document.getElementById('scollMe');
+   const element:any = document.getElementById('scollMe');
    element.scrollTop = element.scrollHeight;  
    window?.scrollTo(0, document.body.scrollHeight);
 

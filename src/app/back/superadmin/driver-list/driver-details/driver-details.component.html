@@ -69,10 +69,10 @@
                                                 </table>
                                                 <table class="TodayOrder mt-4">
                                                     <tr>
-                                                        <td (click)="showOrdersList('today')">Today's Order: 0</td>
-                                                        <td  (click)="showOrdersList('pending')">Pending: 0</td>
-                                                        <td  (click)="showOrdersList('successful')">Successful: 0</td>
-                                                        <td  (click)="showOrdersList('unsuccessful')">UnSuccessful: 0</td>
+                                                        <td (click)="showOrdersList('today')">Today's Order: {{todayOrderCount}}</td>
+                                                        <td  (click)="showOrdersList('pending')">Pending: {{pendingOrderCount}}</td>
+                                                        <td  (click)="showOrdersList('successful')">Successful: {{successfullOrderCount}}</td>
+                                                        <td  (click)="showOrdersList('unsuccessful')">UnSuccessful: {{unSuccessfullOrderCount}}</td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -123,7 +123,7 @@
                                             <div class="col-md-6 mb-4">
                                                 <label for="Documents"
                                                     class="Password FileUpload">
-                                                    <strong>Upload Documents:</strong>
+                                                    <strong>Uploaded Documents:</strong>
                                                     <br>
                                                     <a href="{{certificate.image}}" target="_blank" download="{{certificate.doc_name}}" class="uploaded-documenst mx-1 cursor-pointer" *ngFor="let certificate of editDriverForm.value.certificates; let index=index">
                                                         <i class="fa-light fa-file"></i>

@@ -28,6 +28,11 @@ export class DriverDetailsComponent {
   isShowRecentNotifications: boolean = false;
   geoCoder: any;
   isSubmitted: boolean = false;
+  todayOrderCount: number=0;
+  pendingOrderCount: number=0;
+  successfullOrderCount: number=0;
+  unSuccessfullOrderCount: number=0;
+
 
 
   constructor(private dialog: MatDialog,
@@ -84,9 +89,35 @@ export class DriverDetailsComponent {
           });
         }
       }
+      this.getDriverOrderCounts();
     })
   }
 
+  getDriverOrderCounts() {
+    this.driverService.orderCount(this.driverId).subscribe((data: any) => {
+      let driverOrderCount= data?.result;
+        if(driverOrderCount?.all?.length > 0){
+          driverOrderCount?.all.forEach((element:any)=>{
+            if(element.order_status == 'pending'){
+              this.pendingOrderCount= element.count;
+            }else if(element.order_status == 'shipped'){
+              this.pendingOrderCount= this.pendingOrderCount + element.count;
+            }else if(element.order_status == 'successful'){
+              this.successfullOrderCount= element.count;
+            }else if(element.order_status == 'unsuccessful'){
+              this.unSuccessfullOrderCount= element.count;
+            }
+          })
+        }
+        if(driverOrderCount?.today?.length > 0){
+          driverOrderCount?.today.forEach((element:any)=>{
+              this.todayOrderCount= this.todayOrderCount + element.count;
+          })
+        }
+    });
+  }
+
+  
   ngOnInit() {
   }
 
@@ -185,7 +216,7 @@ export class DriverDetailsComponent {
       panelClass: 'order-detail',
       data: {
         title: 'List of Orders',
-        pageName: 'order-details',
+        pageName: 'driver-details',
         driverData: {
           id: this.driverId,
           status: status,

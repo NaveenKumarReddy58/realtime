@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './auth.service';
-import { map, catchError, BehaviorSubject, Observable } from 'rxjs';
+import { map, catchError, BehaviorSubject, Observable, switchMap, concatMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -26,16 +26,6 @@ export class DriverService {
     return this._drivers.asObservable();
   }
 
-  // first_name:Sandeep
-  // last_name:Singh
-  // email:flutterguruu@gmail.com
-  // password:Admin@123#
-  // phone_number:7528943768
-  // address:chandigarh
-  // is_head_driver:true
-  // is_active:true
-  // certificates: file
-
   driverAdd(form: any) {
     return this.http
       .post<any>(`${this._liveApiUrl}/account/add-driver/`, form)
@@ -49,7 +39,7 @@ export class DriverService {
 
   driverEdit(id: Number, form: any) {
     return this.http
-      .put<any>(`${this._liveApiUrl}/account/edit-driver/${id}`, form)
+      .post<any>(`${this._liveApiUrl}/account/edit-driver/${id}`, form)
       .pipe(
         map((data) => {
           return data;
@@ -75,6 +65,22 @@ export class DriverService {
     );
   }
 
+  convertBlobToBase64(blob: Blob) {
+    return Observable.create((observer:any) => {
+      const reader = new FileReader();
+      const binaryString = reader.readAsDataURL(blob);
+      reader.onload = (event: any) => {
+        observer.next(event.target.result);
+        observer.complete();
+      };
+
+      reader.onerror = (event: any) => {
+        console.log("File could not be read: " + event.target.error.code);
+        observer.next(event.target.error.code);
+        observer.complete();
+      };
+    });
+  }
   driverDetails(id:any){
     return this.http.get<any>(
       `${this._liveApiUrl}/account/driver-details/${id}`
@@ -116,5 +122,56 @@ export class DriverService {
       tail = `${id}`;
     }
     return this.http.get<any>(`${this._liveApiUrl}/company/driver-orders/${tail}`)
+  }
+
+  orderCount(driverId?:any) {
+    let tail = '';
+    let params = new URLSearchParams();
+    if (params) {
+      if(driverId && driverId.length > 0){
+        params.set('driver_id', driverId)
+      }
+    }
+    if(driverId){
+      tail += `?` + params.toString();
+    }
+    return this.http
+      .get<any>(`${this._liveApiUrl}/company/order-counts/${tail}`)
+      .pipe(
+        map((data) => {
+          return data;
+        }),
+        catchError(this.authService.handleError)
+      )
+  }
+
+  orderList(driver_id?:any, order_status?:any,order_date?: any, page?:any) {
+    let tail = '';
+    let params = new URLSearchParams();
+    if (params) {
+      if(order_date && order_date.length > 0){
+        params.set('order_date', order_date)
+      }
+      if(order_status && order_status.length > 0){
+        params.set('order_status', order_status)
+      }
+      if(driver_id && driver_id.length > 0){
+        params.set('driver_id', driver_id)
+      }
+      if(page){
+        params.set('page', page+1)
+      }
+    }
+    if(order_date ||order_status || driver_id || page){
+      tail += `?` + params.toString();
+    }
+    return this.http
+      .get<any>(`${this._liveApiUrl}/company/order-listing/${tail}`)
+      .pipe(
+        map((data) => {
+          return data;
+        }),
+        catchError(this.authService.handleError)
+      )
   }
 }

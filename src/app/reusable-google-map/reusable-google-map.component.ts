@@ -43,8 +43,9 @@ export class ReusableGoogleMapComponent {
   }
 
   ngAfterViewInit(){
+    if(this.isComponent){
     this.driverList();
-    
+    }
   }
 
   getCurrentLocation(){

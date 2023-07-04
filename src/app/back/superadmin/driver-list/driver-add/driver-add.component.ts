@@ -26,7 +26,7 @@ export class DriverAddComponent {
   countryCodes: any = CountryPhoneCodes;
   certificatesItems: any = [
     {
-      name: 'License',
+      name: 'Licence',
       img: 'assets/images/edit-icon.png',
     },
     {
@@ -42,17 +42,13 @@ export class DriverAddComponent {
       img: 'assets/images/edit-icon.png',
     },
     {
-      name: 'Safety Certificate',
+      name: 'Safety',
       img: 'assets/images/edit-icon.png',
     },
     {
       name: 'Insurance',
       img: 'assets/images/edit-icon.png',
-    },
-    {
-      name: 'Add more',
-      img: 'assets/images/edit-icon.png',
-    },
+    }
   ];
 
   drivers$!: Observable<object[]>;
@@ -60,6 +56,7 @@ export class DriverAddComponent {
   certificateName: any;
   isShowCertificationErr: boolean = false;
   moreCertificates: any=[];
+  moreAttachments: any= [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -93,7 +90,6 @@ export class DriverAddComponent {
       driver_abstract:[''],
       driver_certificate:[''],
       driver_cvor:[''],
-      other_certificates:[]
     });
     if(this.id){
       this.getDriverDetails(this.id);
@@ -101,17 +97,17 @@ export class DriverAddComponent {
       this.addDriver.get('password')?.clearValidators();
 
     }
-    if (this.isAddMode) {
-      this.driverService.driverList(this.id);
-      this.drivers$ = this.driverService.getDrivers();
+    if (!this.isAddMode) {
+      // this.driverService.driverList(this.id);
+      // this.drivers$ = this.driverService.getDrivers();
 
-      this.drivers$.subscribe((data: any) => {
-        this.editDriver = data?.results;
-        if (data?.results?.img) {
-          this.imageSrc = data?.results?.img;
-        }
-        this.addDriver.patchValue(data?.results);
-      });
+      // this.drivers$.subscribe((data: any) => {
+      //   this.editDriver = data?.results;
+      //   if (data?.results?.img) {
+      //     this.imageSrc = data?.results?.img;
+      //   }
+      //   this.addDriver.patchValue(data?.results);
+      // });
     }
   }
 
@@ -150,8 +146,20 @@ export class DriverAddComponent {
             is_head_driver: true,
           });
         }
+        driverDetails.certificate.forEach((element:any) => {
+          if(element.doc_name.indexOf('Other') > -1){
+            this.moreAttachments.push(element.image);
+          }
+        });
+
         for (let index = 0; index < this.certificatesItems.length; index++) {
           for (let j = 0; j < driverDetails.certificate.length; j++) {
+            if(driverDetails.certificate[j].doc_name == 'License'){
+              driverDetails.certificate[j].doc_name = 'Licence';
+            }
+            if(driverDetails.certificate[j].doc_name == 'Safety Certificate'){
+              driverDetails.certificate[j].doc_name = 'Safety';
+            }
             if(this.certificatesItems[index].name == driverDetails.certificate[j].doc_name){
               this.certificatesItems[index].img = driverDetails.certificate[j].image;
             }
@@ -161,27 +169,12 @@ export class DriverAddComponent {
       }
     })
   }
+
   handleSubmit() {
     this.isSubmitted = true;
-    // for (var i = 0; i < this.certificatesItems.length - 1; i++) {
-    //   if (this.certificatesItems[i].img.indexOf('edit-icon') > -1) {
-    //     this.isShowCertificationErr = true;
-    //     return;
-    //   }
-    // }
-
-    // stop here if form is invalid
     if (this.addDriver.invalid) {
       return;
     }
-    if(this.moreCertificates.length > 0){
-      this.addDriver.patchValue({
-        other_certificates: this.moreCertificates,
-      });
-    }
-    
-    
-
     if(!this.isAddMode){
       this.addDriver.patchValue({
         is_head_driver: this.addDriver.value['is_head_driver'],
@@ -212,10 +205,15 @@ export class DriverAddComponent {
             this.addDriver.value[i].name ? this.addDriver.value[i].name : ''
           );
         }
-        // console.log('blob');
       } else {
         formData.append(i, this.addDriver.value[i]);
       }
+    }
+
+    if(this.moreCertificates.length > 0){
+        for(var i=0; this.moreCertificates.length > i; i++){
+          formData.append('other_certificates',this.moreCertificates[i])
+        }
     }
 
     if (this.isAddMode) {
@@ -225,7 +223,7 @@ export class DriverAddComponent {
             this.loading = false;
             return;
           }
-          this.toastr.success(data?.actionPerformed);
+          this.toastr.success(data?.resultDescription);
             this.router.navigate([
               '/' + this.authService._isRoleName + '/driver',
             ]);
@@ -277,8 +275,6 @@ export class DriverAddComponent {
   readCertificatesURL(event: any): void {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files;
-
-      console.log('certificates', file);
 
       const singleFile = event.target.files[0];
       const reader = new FileReader();
@@ -333,18 +329,26 @@ export class DriverAddComponent {
       
 
       reader.readAsDataURL(singleFile);
+    }
+  }
 
-      setTimeout(() => {
-        const i = this.certificatesItems.findIndex(
-          (e: any) => e.name === 'Add more'
-        );
-        if (i == -1) {
-          this.certificatesItems.push({
-            name: 'Add more',
-            img: 'assets/images/edit-icon.png',
-          });
-        }
-      }, 500);
+  readAddMoreCertificatesURL(event:any):void{
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+     
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.moreAttachments.push(reader.result);
+        };
+        this.moreCertificates.push(file)
+        reader.readAsDataURL(file);
+      
+    }
+  }
+  removeMoreAttachment(data:any){
+    let indx = this.moreAttachments.indexOf(data);
+    if(indx > -1){
+      this.moreAttachments.splice(indx, 1)
     }
   }
   removePhoto(e: any, imgName: any) {

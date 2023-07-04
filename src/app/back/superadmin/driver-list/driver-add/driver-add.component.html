@@ -23,7 +23,7 @@
               <div class="ProfilePik">
                 <div class="driver-profile-image-container">
                   <i
-                    *ngIf="!(imageSrc.indexOf('profilephoto') > 0)"
+                    *ngIf="!(imageSrc.indexOf('profilephoto') > 0) && isAddMode"
                     class="fa fa-trash Delete"
                     (click)="removeProfilePhoto($event)"
                   ></i>
@@ -257,7 +257,42 @@
                               <span>{{ item.name }}</span>
                             </label>
                           </li>
+
+
+                          <li *ngFor="
+                              let item of moreAttachments;
+                              let index = index
+                            "
+                          >
+                            <label class="with-img">
+                              <i
+                                class="fa fa-trash Delete"
+                                (click)="removeMoreAttachment(item)"
+                              ></i>
+                              <img
+                                [src]="item"
+                                class="c-width-100"
+                              />
+                              <span>Other - {{ index + 1}}</span>
+                            </label>
+                          </li>
+                          <li (click)="addMoreCertificatesInput.click();">
+                            <label>
+                              <img
+                                src="assets/images/edit-icon.png"
+                              />
+                              <span>Add More</span>
+                            </label>
+                          </li>
                         </ul>
+                        <input
+                          #addMoreCertificatesInput
+                          type="file"
+                          (change)="readAddMoreCertificatesURL($event)"
+                          style="display: none"
+                          accept="image/*"
+                          multiple="true"
+                        />
                         <input
                           #fileCertificatesInput
                           type="file"

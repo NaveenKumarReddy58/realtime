@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>{{data.title}}</h1>
 <div mat-dialog-content>{{data.message}}
-  <div *ngIf="data.pageName == 'order-details'">
-    <app-driver-orders-list [modelData]="data.driverData" [dataDriverId]="data.driverData.id" [assignedOrdersCount]="data.driverData.assignedOrdersCount"></app-driver-orders-list>
+  <div *ngIf="(data.pageName == 'order-details') || (data.pageName == 'driver-details')">
+    <app-driver-orders-list [pageName]="data.pageName" [modelData]="data.driverData" [dataDriverId]="data.driverData.id" [assignedOrdersCount]="data.driverData.assignedOrdersCount"></app-driver-orders-list>
   </div>
   <div *ngIf="data.pageName == 'order-listing'">
     <ul class="priority-numbers">
