@@ -155,7 +155,7 @@ export class DriverService {
       if(order_status && order_status.length > 0){
         params.set('order_status', order_status)
       }
-      if(driver_id && driver_id.length > 0){
+      if(driver_id){
         params.set('driver_id', driver_id)
       }
       if(page){

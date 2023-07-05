@@ -61,6 +61,10 @@ export class DialogAnimationsComponent {
     this.selectedPriorityNumber= val;
   }
 
+  onChangeDriver(id:any){
+    this.driverId= id;
+  }
+
   updatePriority(){
     this.loading = true;
     // console.log('Api Data Err ffff', this.f, this.frmValues);
