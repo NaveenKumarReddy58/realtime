@@ -39,7 +39,7 @@ export class DriverService {
 
   driverEdit(id: Number, form: any) {
     return this.http
-      .post<any>(`${this._liveApiUrl}/account/edit-driver/${id}`, form)
+      .put<any>(`${this._liveApiUrl}/account/edit-driver/${id}`, form)
       .pipe(
         map((data) => {
           return data;
