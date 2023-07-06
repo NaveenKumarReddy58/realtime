@@ -143,13 +143,13 @@ export class OrderDetailComponent {
 
       this.orderService.orderAssign(formdata).subscribe(
         (data: any) => {
+          this.loading = false;
           if (this.authService.resultCodeError(data)) {
-            this.loading = false;
             return;
           }
 
           this.toastr.success(data?.resultDescription);
-          this.loading = false;
+          this.orderDetail(this.id);
         },
         (error) => {
           this.authService.dataError(error);
