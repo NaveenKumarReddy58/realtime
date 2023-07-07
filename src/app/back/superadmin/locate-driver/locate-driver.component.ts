@@ -11,11 +11,7 @@ export class LocateDriverComponent {
   constructor(private locateDriverService: LocateDriverService) {}
   public driverLocationsData:any = [];
   ngOnInit(): void {
-      this.locateDriverService.getDriversInfo().subscribe((res)=>{
-        
-        this.driverLocationsData= res;
-        console.log(this.driverLocationsData)
-      });
+     
   }
   
 }

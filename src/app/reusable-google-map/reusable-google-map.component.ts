@@ -1,21 +1,36 @@
 import { Component, Inject, Input, ViewChild } from '@angular/core';
-import { GoogleMap, MapInfoWindow } from '@angular/google-maps';
+import { GoogleMap, MapDirectionsService,MapTrafficLayer, MapInfoWindow } from '@angular/google-maps';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { DriverService } from '../_service/driver.service';
+import { Observable, map } from 'rxjs';
+import { LocateDriverService } from '../back/superadmin/locate-driver/locate-driver.service';
 declare var google: {
   maps: {
+    Marker: any;
+    Map: any;
+    LatLngBounds: any;
+    DistanceMatrixService: any;
+    UnitSystem: any;
+    TravelMode: any;
     Geocoder: new () => any;
     places: { Autocomplete: new (arg0: any) => any };
   };
 };
 export interface DialogData {
   height: string;
+  isShowDirections?: boolean;
+  orderData?:any;
+}
+export interface MapDirectionsResponse {
+  status: google.maps.DirectionsStatus;
+  result?: google.maps.DirectionsResult;
 }
 @Component({
   selector: 'app-reusable-google-map',
   templateUrl: './reusable-google-map.component.html',
-  styleUrls: ['./reusable-google-map.component.css']
+  styleUrls: ['./reusable-google-map.component.css'],
+  providers:[LocateDriverService]
 })
 export class ReusableGoogleMapComponent {
   geoCoder: any;
@@ -24,7 +39,7 @@ export class ReusableGoogleMapComponent {
   @Input() height: any;
   @Input() isComponent: boolean= false;
   markerPositions: google.maps.LatLngLiteral[] = [];
-  @Input() driverLocations: any;
+  driverLocations: any;
   lat = 51.678418;
   lng = 7.809007;
   options: any;
@@ -32,20 +47,59 @@ export class ReusableGoogleMapComponent {
   markers: any= [];
   driver$: any;
   listOfDrivers: any= [];
+  public directionsResults$!: Observable<google.maps.DirectionsResult|undefined>;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData ,
-   private router : Router, private driverService: DriverService){
 
+  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData ,private locateDriverService: LocateDriverService,
+   private router : Router, private driverService: DriverService,private mapDirectionsService: MapDirectionsService){
+    
   }
   ngOnInit(){
     this.getCurrentLocation();
-    
+
+    if(this.data.isShowDirections){
+      this.getDirections()
+    }
   }
 
   ngAfterViewInit(){
     if(this.isComponent){
-    this.driverList();
+    this.getDriverLocationsFromFirebase();
     }
+   
+  }
+
+  getDirections(){
+      this.locateDriverService.getDriversInfo().subscribe((res:any)=>{
+        if(res && res.length > 0){
+          let driverCurrentLocation = res.filter((element:any) => {
+            return element.order_id == this.data.orderData.id
+          });
+
+          if(driverCurrentLocation && driverCurrentLocation.length >0){
+            const request: google.maps.DirectionsRequest = {
+              destination: {lat: Number(this.data.orderData.dely_address.latitude), lng: Number(this.data.orderData.dely_address.longitude)},
+              origin: {lat:Number(driverCurrentLocation[0].location.latitude), lng: Number(driverCurrentLocation[0].location.longitude)},
+              travelMode: google?.maps?.TravelMode?.DRIVING,
+              unitSystem: google.maps.UnitSystem.METRIC,
+              avoidHighways: false,
+              avoidTolls: false,
+            };
+            this.directionsResults$ = this.mapDirectionsService.route(request).pipe(map((response:any) => {
+              return response.result;
+            }));
+            this.getDistance(request?.origin, "",request?.destination, "");
+          }
+        }
+      });
+      
+  }
+
+  getDriverLocationsFromFirebase(){
+    this.locateDriverService.getDriversInfo().subscribe((res)=>{
+      this.driverLocations= res;
+      this.driverList();
+    });
   }
 
   getCurrentLocation(){
@@ -166,5 +220,28 @@ export class ReusableGoogleMapComponent {
   openInfoWindow(marker:any){
 
     this.router.navigate(['/admin/driver/details' , marker.id]);
+  }
+
+
+  getDistance(originOne:any, originOneName:any, originTwo:any, originTwoName:any) {
+    const bounds = new google.maps.LatLngBounds();
+    const markersArray:any = [];
+    const geocoder = new google.maps.Geocoder();
+    const service = new google.maps.DistanceMatrixService();
+    const origin1 = originOne;
+    const origin2 = "Greenwich, England";
+    const destinationA = "Kadapa";
+
+    const destinationB = originTwo;
+    const request = {
+      origins: [origin1, origin2],
+      destinations: [destinationA, destinationB],
+      travelMode: google.maps.TravelMode.DRIVING,
+      unitSystem: google.maps.UnitSystem.METRIC,
+      
+    };
+    service.getDistanceMatrix(request).then((response:any) => {
+      console.log(response)
+    });
   }
 }

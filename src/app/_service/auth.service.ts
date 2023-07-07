@@ -299,30 +299,31 @@ export class AuthService {
     if (!refresh) {
       return;
     }
-    return this.http
-      .post<any>(`${this._liveApiUrl}/account/token/refresh/`, {
-        refresh,
-      })
-      .pipe(
-        map((data) => {
-          this.setLS('access_token', data?.access);
-          // this.setLS('user', JSON.stringify(data));
-          return data;
-        }),
-        catchError(this.handleError)
-      )
-      .subscribe(
-        (data: any) => {
-          if (this.resultCodeError(data)) {
-            return;
-          }
+    // return this.http
+    //   .post<any>(`${this._liveApiUrl}/account/token/refresh/`, {
+    //     refresh,
+    //   })
+    //   .pipe(
+    //     map((data) => {
+    //       this.setLS('access_token', data?.access);
+    //       // this.setLS('user', JSON.stringify(data));
+    //       return data;
+    //     }),
+    //     catchError(this.handleError)
+    //   )
+    //   .subscribe(
+    //     (data: any) => {
+    //       if (this.resultCodeError(data)) {
+    //         return;
+    //       }
 
-          console.log('TokenRefresh');
-        },
-        (error) => {
-          this.dataError(error);
-        }
-      );
+    //       console.log('TokenRefresh');
+    //     },
+    //     (error) => {
+    //       this.dataError(error);
+    //     }
+    //   );
+    
   }
 
   clearRouter() {

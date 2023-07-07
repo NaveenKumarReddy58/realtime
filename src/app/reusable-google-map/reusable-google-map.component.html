@@ -1,6 +1,13 @@
+
+
 <google-map *ngIf="!isComponent" class="GoogleMap" width="100%" [height]="data.height ? data.height : '75px'"
     [center]="initialCoordinates">
-
+    <ng-container *ngIf="data?.isShowDirections">
+        <map-directions-renderer *ngIf="(directionsResults$ | async) as directionsResults"
+        [directions]="directionsResults"></map-directions-renderer>
+    </ng-container>
+    
+    
 </google-map>
 <google-map *ngIf="isComponent"
             class="GoogleMap"
@@ -13,6 +20,5 @@
                         [label]="marker.label"
                         [position]="marker.position">
             </map-marker>
-            
 </google-map>
 

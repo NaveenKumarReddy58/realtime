@@ -28,7 +28,7 @@
                   Delivery : {{ orderData?.dely_time }} |
                   {{ orderData?.dely_date | date : "fullDate" }}
                 </div>
-                <div class="NoPhoto mt-4 google-map">
+                <div class="NoPhoto mt-4 google-map"  *ngIf="orderData">
                   <app-reusable-google-map></app-reusable-google-map>
               </div>
                 <div class="TrackDriver mt-3" (click)="trackDriver()">

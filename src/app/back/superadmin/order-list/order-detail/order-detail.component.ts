@@ -170,6 +170,8 @@ export class OrderDetailComponent {
         exitAnimationDuration,
         data: {
           height: '500px',
+          isShowDirections: true,
+          orderData: this.orderData
         },
   
       });
