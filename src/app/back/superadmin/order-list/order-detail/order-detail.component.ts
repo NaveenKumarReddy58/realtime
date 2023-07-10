@@ -42,7 +42,8 @@ export class OrderDetailComponent {
     this.id = this.route.snapshot.params['id'];
     this.orderDetail(this.id);
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
   get f() {
     return this.orderDetailsPushForm.controls;
   }
@@ -164,12 +165,12 @@ export class OrderDetailComponent {
       let exitAnimationDuration = '200ms';
   
       const dialogRef = this.dialog.open(ReusableGoogleMapComponent, {
-        width: '750px',
-        height: '500px',
+        width: '800px',
+        height: '600px',
         enterAnimationDuration,
         exitAnimationDuration,
         data: {
-          height: '500px',
+          height: '450px',
           isShowDirections: true,
           orderData: this.orderData
         },

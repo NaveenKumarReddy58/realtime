@@ -7,6 +7,8 @@ import { Observable, map } from 'rxjs';
 import { LocateDriverService } from '../back/superadmin/locate-driver/locate-driver.service';
 declare var google: {
   maps: {
+    DirectionsRenderer: any;
+    DirectionsService: any;
     Marker: any;
     Map: any;
     LatLngBounds: any;
@@ -48,6 +50,8 @@ export class ReusableGoogleMapComponent {
   driver$: any;
   listOfDrivers: any= [];
   public directionsResults$!: Observable<google.maps.DirectionsResult|undefined>;
+  estimatedTime: any;
+  distance: any;
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData ,private locateDriverService: LocateDriverService,
@@ -73,7 +77,7 @@ export class ReusableGoogleMapComponent {
       this.locateDriverService.getDriversInfo().subscribe((res:any)=>{
         if(res && res.length > 0){
           let driverCurrentLocation = res.filter((element:any) => {
-            return element.order_id == this.data.orderData.id
+            return element.order_id == this.data?.orderData?.id
           });
 
           if(driverCurrentLocation && driverCurrentLocation.length >0){
@@ -84,6 +88,7 @@ export class ReusableGoogleMapComponent {
               unitSystem: google.maps.UnitSystem.METRIC,
               avoidHighways: false,
               avoidTolls: false,
+              provideRouteAlternatives: true
             };
             this.directionsResults$ = this.mapDirectionsService.route(request).pipe(map((response:any) => {
               return response.result;
@@ -225,6 +230,7 @@ export class ReusableGoogleMapComponent {
 
   getDistance(originOne:any, originOneName:any, originTwo:any, originTwoName:any) {
     const bounds = new google.maps.LatLngBounds();
+    var directionsRenderer = new google.maps.DirectionsRenderer();
     const markersArray:any = [];
     const geocoder = new google.maps.Geocoder();
     const service = new google.maps.DistanceMatrixService();
@@ -241,7 +247,12 @@ export class ReusableGoogleMapComponent {
       
     };
     service.getDistanceMatrix(request).then((response:any) => {
+      directionsRenderer.setDirections(response);
+
       console.log(response)
+      this.estimatedTime= response?.rows[0].elements[1].duration.text;
+      this.distance=response?.rows[0].elements[1].distance.text;
+    
     });
   }
 }

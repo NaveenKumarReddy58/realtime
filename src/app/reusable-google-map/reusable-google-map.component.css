@@ -1,0 +1,10 @@
+.track-order-details{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: white;
+    padding: 10px;
+    box-shadow: 0 2px 3px rgba(0,0,0,.1), 0 -1px 1px rgba(0,0,0,.1);
+    border-top-right-radius: 10px;
+    width: 100%;
+}
