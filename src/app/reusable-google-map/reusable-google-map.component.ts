@@ -127,7 +127,6 @@ export class ReusableGoogleMapComponent {
     this.driver$.subscribe((data: any) => {
       if(data && data.result && data.result.results){
         this.listOfDrivers= data.result.results;
-        console.log(this.listOfDrivers)
       }
 
       if(this.driverLocations && this.driverLocations.length > 0){
@@ -191,14 +190,12 @@ export class ReusableGoogleMapComponent {
   }
 
   getDriverName(id:any){
-    console.log(this.listOfDrivers)
     let label= '';
     this.listOfDrivers.filter((elt:any)=>{
       if(elt.id == id){
        label= elt.first_name+ " "+elt.last_name;
       }
     })
-    console.log(label)
     return label.toString();
 
     //return "Asdf";
@@ -249,7 +246,6 @@ export class ReusableGoogleMapComponent {
     service.getDistanceMatrix(request).then((response:any) => {
       directionsRenderer.setDirections(response);
 
-      console.log(response)
       this.estimatedTime= response?.rows[0].elements[1].duration.text;
       this.distance=response?.rows[0].elements[1].distance.text;
     

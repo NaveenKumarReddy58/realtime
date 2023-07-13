@@ -79,6 +79,7 @@
                                   )
                                 "
                                 class="head-driver mx-2"
+                                [ngClass]="warehouseData && warehouseData.hasOwnProperty('id') > 0 ? '' : 'disabled-custom'"
                                 type="checkbox"
                                 [checked]="isCheckedWarehous[0].pickup"
                                 formControlName="is_pickup_warehouse"
@@ -373,6 +374,7 @@
                               <div class="filed-input mb-3 text-end">
                                 Is this warehouse?
                                 <input
+                                [ngClass]="warehouseData && warehouseData.hasOwnProperty('id') ? '' : 'disabled-custom'"
                                 (click)="changeStatus('to',isCheckedWarehous[1].to)"
                                 class="head-driver mx-2"
                                   type="checkbox"

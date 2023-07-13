@@ -75,7 +75,6 @@ export class DriverService {
       };
 
       reader.onerror = (event: any) => {
-        console.log("File could not be read: " + event.target.error.code);
         observer.next(event.target.error.code);
         observer.complete();
       };

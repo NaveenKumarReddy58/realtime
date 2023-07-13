@@ -236,7 +236,7 @@
                     NA
                   </td>
                   <td>
-                    {{ item?.current_driver?.first_name+" "+item?.current_driver?.last_name }}
+                    {{ item?.current_driver?.first_name ?  item?.current_driver?.first_name+" "+item?.current_driver?.last_name : '' }}
                   </td>
                   <td>
                     <button

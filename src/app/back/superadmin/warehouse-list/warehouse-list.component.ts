@@ -52,9 +52,6 @@ export class WarehouseListComponent {
       this.showPaginator= true;
       this.totalWarehouses= data?.result?.count;
       this.warehouseData = data?.result?.results;
-      console.log("compoennt",data)
-      // this.warehouseData &&
-      //   this.warehouseData.forEach((obj: any) => (obj['is_main_localation'] = false));
     });
   }
 

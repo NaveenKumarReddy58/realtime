@@ -312,7 +312,6 @@ export class OrderAddComponent {
     }
 
     this.loading = true;
-    console.log('Api Data Err ffff', this.f, this.frmValues);
 
     const formData = new FormData();
     for (let i in this.addOrderF.value) {

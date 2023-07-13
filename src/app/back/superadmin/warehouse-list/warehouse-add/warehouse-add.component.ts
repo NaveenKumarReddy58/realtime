@@ -92,10 +92,10 @@ export class WarehouseAddComponent {
     this.address$ = this.addressService.getAddress();
 
     this.address$.subscribe((data: any) => {
-      this.addressData = data?.result;
-      if (data?.result) {
-        data?.result.forEach((data: any) => {
-          // console.log(data);
+      this.addressData = data?.result?.results;
+      if (data?.result?.results) {
+        this.data= [];
+        data?.result?.results.forEach((data: any) => {
           this.data.push({
             value: data?.id,
             label: data?.address,
@@ -120,7 +120,6 @@ export class WarehouseAddComponent {
     }
 
     this.loading = true;
-    console.log('Api Data Err ffff', this.f, this.frmValues);
 
     const formData = new FormData();
     for (let i in this.addWare.value) {
@@ -130,7 +129,6 @@ export class WarehouseAddComponent {
           this.addWare.value[i],
           this.addWare.value[i].name ? this.addWare.value[i].name : ''
         );
-        // console.log('blob');
       } else {
         formData.append(i, this.addWare.value[i]);
       }

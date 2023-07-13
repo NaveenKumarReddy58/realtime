@@ -69,7 +69,6 @@ export class DriverDetailsComponent {
   getDriverDetails(driverId: string | null) {
     this.driverService.driverDetails(driverId).subscribe((res) => {
       if (res && res.result) {
-        console.log(res.result)
         let driverDetails = res.result
         this.editDriverForm.patchValue({
           first_name: driverDetails.first_name,

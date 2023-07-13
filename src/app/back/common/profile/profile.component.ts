@@ -52,7 +52,6 @@ export class ProfileComponent {
     this.getProfile();
   }
   ngOnInit(): void {
-    console.log(this.ProfileFor)
   }
 
   getProfile() {
@@ -111,7 +110,6 @@ export class ProfileComponent {
       this.isLoading= false;
       this.toastr.error("Failed to Update")
     });
-    console.log(formData);
   }
   sendOTP(){
     this.isSubmitted= true;
@@ -158,7 +156,6 @@ export class ProfileComponent {
   readURL(event: any): void {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
-      console.log('image', file);
 
       const reader = new FileReader();
       reader.onload = (e) => {

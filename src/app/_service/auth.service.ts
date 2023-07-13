@@ -61,12 +61,10 @@ export class AuthService {
     } else {
       msg = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    console.log('Err', msg);
     return throwError(msg);
   }
 
   dataError(error: any) {
-    console.log('Api Err', error);
   }
 
   resultCodeError(data: any) {
@@ -79,7 +77,6 @@ export class AuthService {
       data?.resultCode == '0' ||
       data?.resultCode == 0
     ) {
-      console.log('Api Data Err', data);
       this.toastr.error(data?.errorMessage);
       return true;
     } else {
@@ -323,7 +320,7 @@ export class AuthService {
     //       this.dataError(error);
     //     }
     //   );
-    
+
   }
 
   clearRouter() {

@@ -119,7 +119,6 @@ export class TopComponent {
 
   updateSearch(){
     this.searchbox = !this.searchbox;
-    console.log(this.searchForm.controls['order_number'].value)
     if(this.searchForm.controls['order_number'].value && this.searchForm.controls['order_number'].value.length > 0){
       this.searchText=this.searchForm.controls['order_number'].value;
       this.orderService.updateSearchText(this.searchForm.controls['order_number'].value);

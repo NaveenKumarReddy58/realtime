@@ -216,15 +216,12 @@ addMarker(latitude:any, long:any) {
                 ),
               };
 
-              console.log('addr', obj);
             }
 
             this.addMarker(latitude, longitude);
           } else {
-            console.log('No results found');
           }
         } else {
-          console.log('Geocoder failed due to:' + status);
         }
       }
     );
@@ -253,7 +250,6 @@ addMarker(latitude:any, long:any) {
     }
 
     this.loading = true;
-    console.log('Api Data Err ffff', this.f, this.frmValues);
 
     const formData = new FormData();
     for (let i in this.addressF.value) {

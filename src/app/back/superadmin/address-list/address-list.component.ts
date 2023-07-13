@@ -63,8 +63,7 @@ export class AddressListComponent {
           return;
         }
 
-        this.addressList();
-        this.router.navigate(['/admin/address']);
+        this.addressList(this.page);
         this.toastr.success('Address Deleted');
         this.delloading = false;
       },

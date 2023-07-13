@@ -16,7 +16,7 @@ import { ReusableGoogleMapComponent } from 'src/app/reusable-google-map/reusable
   styleUrls: ['./order-detail.component.css'],
 })
 export class OrderDetailComponent {
-  id: number;
+  id: any;
   orderData: any;
   loading: any;
   order$!: Observable<object[]>;
@@ -39,8 +39,11 @@ export class OrderDetailComponent {
       pnMsgDriver: ['', [Validators.required]],
       pnMsgCustomer:['',[Validators.required]]
     });
+    this.id= undefined;
     this.id = this.route.snapshot.params['id'];
-    this.orderDetail(this.id);
+    if(this.id){
+      this.orderDetail(this.id);
+    }
   }
   ngOnInit(): void {
   }
@@ -163,7 +166,6 @@ export class OrderDetailComponent {
 
       let enterAnimationDuration = '200ms';
       let exitAnimationDuration = '200ms';
-  
       const dialogRef = this.dialog.open(ReusableGoogleMapComponent, {
         width: '800px',
         height: '600px',
