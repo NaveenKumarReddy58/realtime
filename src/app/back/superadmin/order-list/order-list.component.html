@@ -254,7 +254,7 @@
                         <div *ngIf="(isShowContactDialog && index == phoneIndex)" class="drivers-list-phone-dialog">
                           <div class="confirmation-msg">
                             <div class="row mx-2">
-                                <span class="contact-number">+91 9874359345 <i class="fa fa-copy px-2"  (click)="copyText('+91 9874359345')" aria-hidden="true"></i></span>
+                                <span class="contact-number">+91 {{item?.customer_phone}} <i class="fa fa-copy px-2"  (click)="copyText('+91 9874359345')" aria-hidden="true"></i></span>
                             </div>
                           </div>
                         </div>
