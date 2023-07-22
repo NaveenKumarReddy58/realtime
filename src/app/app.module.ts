@@ -66,19 +66,20 @@ import {MatSelectModule} from '@angular/material/select';
 import { DriverOrdersListComponent } from './back/superadmin/driver-list/driver-orders-list/driver-orders-list.component';
 import { ReusableGoogleMapComponent } from './reusable-google-map/reusable-google-map.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import { FirebaseAppModule, initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { FirebaseAppModule,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideDatabase,getDatabase, DatabaseModule } from '@angular/fire/database';
 import { provideFirestore,getFirestore, FirestoreModule } from '@angular/fire/firestore';
 import { provideFunctions,getFunctions } from '@angular/fire/functions';
-import { provideMessaging,getMessaging } from '@angular/fire/messaging';
+import { provideMessaging,getMessaging, MessagingModule } from '@angular/fire/messaging';
 import { providePerformance,getPerformance } from '@angular/fire/performance';
 import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire/compat';
 
-
+import { initializeApp } from "firebase/app";
+initializeApp(environment.firebase);
 
 @NgModule({
   declarations: [
@@ -125,6 +126,7 @@ import { AngularFireModule } from '@angular/fire/compat';
     ReusableGoogleMapComponent,
   ],
   imports: [
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
     CommonModule,
     RouterModule,
     BrowserModule,
@@ -147,7 +149,6 @@ import { AngularFireModule } from '@angular/fire/compat';
     GoogleMapsModule,
     MatSelectModule,
     MatPaginatorModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
   ],
   providers: [

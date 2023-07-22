@@ -323,7 +323,9 @@ export class OrderAddComponent {
         );
         // console.log('blob');
       } else {
-        formData.append(i, this.addOrderF.value[i]);
+        if(this.addOrderF.value[i]){
+          formData.append(i, this.addOrderF.value[i]);
+        }
       }
     }
 

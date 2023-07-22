@@ -7,6 +7,7 @@ export const environment = {
     authDomain: 'realtimetrac-48416.firebaseapp.com',
     messagingSenderId: '511883410480',
     measurementId: 'G-TF5Z0SJ142',
+    vapidKey: 'BLnv7a068wOip89QJmGE-i-D2afhuiG1gICk-pWRCS9B_ShtoeL_gk5LEQ2NP0sjMPe8NsEkQWdVL4l0eAahZu4'
   },
   production: false,
   port: '8090',

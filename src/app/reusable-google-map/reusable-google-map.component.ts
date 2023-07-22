@@ -244,8 +244,6 @@ export class ReusableGoogleMapComponent {
       
     };
     service.getDistanceMatrix(request).then((response:any) => {
-      directionsRenderer.setDirections(response);
-
       this.estimatedTime= response?.rows[0].elements[1].duration.text;
       this.distance=response?.rows[0].elements[1].distance.text;
     

@@ -22,3 +22,21 @@
     </div>
   </div>
 </section>
+<!-- //" -->
+<div *ngIf="notification && notification.length > 0" class="notification-container">
+  <div class="notification-modal">
+    <h2 class="px-3 py-2 text-primary"><strong>Notification:</strong></h2>
+    <h2 class="px-3">{{notification}}
+    </h2>
+    <div>
+      <button
+                    type="submit"
+                    class="ButtonStyle notification-ok"
+                    (click)="closeNotification()"
+                  >
+                    Ok
+                  </button>
+    </div>
+  </div>
+  
+</div>

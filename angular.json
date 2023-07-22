@@ -48,6 +48,8 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/firebase-messaging-sw.js", 
+    "src/manifest.json" ,
               {
                 "glob": "**/*",
                 "input": "node_modules/svg-country-flags/svg",
@@ -138,6 +140,8 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/firebase-messaging-sw.js", 
+    "src/manifest.json" ,
               {
                 "glob": "**/*",
                 "input": "node_modules/svg-country-flags/svg",
