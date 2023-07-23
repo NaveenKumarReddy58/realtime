@@ -134,11 +134,11 @@ export class OrderAddComponent {
         setTimeout(function(){
           if(addressType == 'pickup'){
             self.addOrderF.patchValue({
-              pickup_address: self.addressData[self.addressData.length-1].id,
+              pickup_address: self.addressData[0].id,
             });
           } else if(addressType == 'to'){
             self.addOrderF.patchValue({
-              dely_address: self.addressData[self.addressData.length-1].id,
+              dely_address: self.addressData[0].id,
             });
           }
         },1500)
