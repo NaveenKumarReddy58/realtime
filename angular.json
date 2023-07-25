@@ -49,7 +49,8 @@
               "src/favicon.ico",
               "src/assets",
               "src/firebase-messaging-sw.js", 
-    "src/manifest.json" ,
+              "src/manifest.json" ,
+              "src/web.config",
               {
                 "glob": "**/*",
                 "input": "node_modules/svg-country-flags/svg",

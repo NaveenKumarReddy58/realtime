@@ -86,7 +86,6 @@ export class AppComponent {
      { vapidKey: environment.firebase.vapidKey}).then(
        (currentToken) => {
          if (currentToken) {
-          console.log(currentToken)
           this.listen();
          }
      }).catch((err) => {

@@ -78,6 +78,8 @@ import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire/compat';
 
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+
 import { initializeApp } from "firebase/app";
 initializeApp(environment.firebase);
 
@@ -158,7 +160,8 @@ initializeApp(environment.firebase);
       multi: true,
     },
     { provide: MAT_DIALOG_DATA, useValue: {} },
-    { provide: MatDialogRef, useValue: {} }
+    { provide: MatDialogRef, useValue: {} },
+    { provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent],
 })
