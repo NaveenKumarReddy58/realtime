@@ -40,6 +40,7 @@
     "ngx-toastr": "^16.0.2",
     "rxjs": "~7.5.0",
     "slick-carousel": "^1.8.1",
+    "stripe": "^12.14.0",
     "svg-country-flags": "^1.2.10",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"

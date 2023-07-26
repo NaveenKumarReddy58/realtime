@@ -81,6 +81,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 import { initializeApp } from "firebase/app";
+import { PublicCompanyRegistrationComponent } from './public-company-registration/public-company-registration.component';
 initializeApp(environment.firebase);
 
 @NgModule({
@@ -126,6 +127,7 @@ initializeApp(environment.firebase);
     DriverDetailsComponent,
     DriverOrdersListComponent,
     ReusableGoogleMapComponent,
+    PublicCompanyRegistrationComponent,
   ],
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),

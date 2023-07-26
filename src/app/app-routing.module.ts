@@ -34,6 +34,7 @@ import { AddressAddComponent } from './back/superadmin/address-list/address-add/
 import { AddressListComponent } from './back/superadmin/address-list/address-list.component';
 import { DriverDetailsComponent } from './back/superadmin/driver-list/driver-details/driver-details.component';
 import { OrderDetailComponent } from './back/superadmin/order-list/order-detail/order-detail.component';
+import { PublicCompanyRegistrationComponent } from './public-company-registration/public-company-registration.component';
 
 const routes: Routes = [
   {
@@ -274,10 +275,16 @@ const routes: Routes = [
     ],
   },
   {
+    path: 'company-registration',
+    component: PublicCompanyRegistrationComponent,
+    title: 'Company Registration',
+  },
+  {
     path: '**',
     redirectTo: '/',
     title: 'Not Found',
   },
+  
 ];
 
 @Injectable()
