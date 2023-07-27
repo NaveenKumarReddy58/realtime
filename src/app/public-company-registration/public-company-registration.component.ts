@@ -119,7 +119,7 @@ export class PublicCompanyRegistrationComponent {
     formData.append('state', '');
     formData.append('last_name', '');
 
-    this.pay(10);
+    this.pay(formData);
 
   }
 

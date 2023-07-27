@@ -172,9 +172,10 @@
                 <div class="col-md-12 mt-4">
                   <span class="Password">
                     <input
-                      type="tel"
+                      type="number"
                       id="phone"
                       formControlName="phone_number"
+                      onKeyPress="if(this.value.length==10) return false;"
                       placeholder="Phone No."
                       class="Pro_input_Field Pro_input_Field_Phone"
                     />
