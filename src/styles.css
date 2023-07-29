@@ -461,7 +461,9 @@ input[type=number] {
   color: gray;
   float: right;
 }
-
+.text-right{
+  text-align: right !important;
+}
 .marker-label1{
 
   border: 1px solid #0eb002;

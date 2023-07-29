@@ -14,11 +14,11 @@
 </div>
 <ng-container *ngIf="data.btns&&data.btns.length > 0">
   <div mat-dialog-actions class="dialog-btn">
-    <button class="Yes-btn" (click)="onConfirm()" mat-button mat-dialog-close cdkFocusInitial>
+    <button *ngIf="data.btns[1] && data.btns[1].length > 0" class="Yes-btn" (click)="onConfirm()" mat-button mat-dialog-close cdkFocusInitial>
       {{data.btns[1]}}
       <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
     </button>
-    <button class="No-btn" (click)="onDismiss()" mat-button mat-dialog-close>{{data.btns[0]}}</button>
+    <button *ngIf="data.btns[0] && data.btns[0].length > 0"  class="No-btn" (click)="onDismiss()" mat-button mat-dialog-close>{{data.btns[0]}}</button>
   </div>
 </ng-container>
 <ng-container *ngIf="data.btns == undefined">

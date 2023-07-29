@@ -1587,9 +1587,12 @@ span.SendNoti button.SendButton_S {
   display: flex;
   justify-content: space-between;
   position: relative;
+  margin-left: 30px;
+
 }
 .Step_List ul li {
   list-style: none;
+  position: relative;
 }
 .Step_List ul li a {
   color: #333;
@@ -1600,13 +1603,12 @@ span.SendNoti button.SendButton_S {
   width: 15px;
   height: 15px;
   display: block;
-  background: #fff;
+  background: #bbc2c7;
   border-radius: 50%;
-  margin: 0 auto 5px auto;
-  border: 1px solid #3c4348;
+  border: 1px solid #bbc2c7;
   position: relative;
 }
-.Step_List ul:before {
+/* .Step_List ul:before {
   content: "";
   width: 95%;
   position: absolute;
@@ -1617,7 +1619,7 @@ span.SendNoti button.SendButton_S {
   z-index: 0;
   margin: 0 auto;
   right: 0;
-}
+} */
 .Step_List ul li:hover span.DotSpan,
 .Step_List ul li.active span.DotSpan {
   background: #0eb002;

@@ -25,7 +25,7 @@ export class AppComponent {
   notification: any;
 
   ngOnInit(): void {
-      this.requestPermission();
+     // this.requestPermission();
     
   }
 

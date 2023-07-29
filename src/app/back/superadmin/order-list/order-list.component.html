@@ -17,7 +17,7 @@
       <div class="ButtonTab" *ngIf="!isViewAllMode">
         <ul>
           <ng-container *ngFor="let item of allOrdersCount">
-            <li *ngIf="item.order_status != 'shipped'" (click)="onClickStatus(item.order_status)" class="cursor-pointer" [ngClass]="{
+            <li *ngIf="item.order_status != 'shipped' && item.order_status != 'en-route'" (click)="onClickStatus(item.order_status)" class="cursor-pointer" [ngClass]="{
             'All': item.order_status == 'all',
             'Pending': item.order_status == 'pending',
             'Successful': item.order_status == 'successful',
@@ -31,8 +31,20 @@
               <span *ngIf="item.order_status == 'unsuccessful'" class="All">Unsuccessful</span>
               <span *ngIf="item.order_status == 'cancelled'" class="All">Cancelled</span>
 
-              <span class="All-Noti">
-                {{item.order_status == 'all' ? getCountOfAllOrders() : item.count}}
+              <span class="All-Noti" *ngIf="item.order_status == 'all'">
+                {{getCountOfAllOrders()}}
+              </span>
+              <span class="All-Noti"  *ngIf="item.order_status == 'pending'">
+                {{pendingOrdersCount}}
+              </span>
+              <span class="All-Noti"  *ngIf="item.order_status == 'successful'">
+                {{item.count}}
+              </span>
+              <span class="All-Noti"  *ngIf="item.order_status == 'unsuccessful'">
+                {{item.count}}
+              </span>
+              <span class="All-Noti"  *ngIf="item.order_status == 'cancelled'">
+                {{item.count}}
               </span>
             </a>
           </li>

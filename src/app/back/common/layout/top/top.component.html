@@ -218,11 +218,11 @@
           </ul> -->
         </li>
         <li class="link-driver" >
-          <a>
+          <a routerLink="/{{ _isRoleName }}/driver/add"  routerLinkActive="active-link">
             <img src="assets/images/top-icon01.png" />
-            <span>Drivers</span>
+            <span>Add Driver</span>
           </a>
-          <ul class="SubMenuBar">
+          <!-- <ul class="SubMenuBar">
             <li (click)="onClickTopItem('driver')">
               <a routerLink="/{{ _isRoleName }}/driver/add"  routerLinkActive="active-link">
                 <img src="assets/images/top-icon01.png" />
@@ -241,7 +241,7 @@
                 <span>Inactive Driver</span>
               </a>
             </li>
-          </ul>
+          </ul> -->
         </li>
         <li (click)="onClickTopItem('locate')">
           <a routerLink="/{{ _isRoleName }}/driver/locate" routerLinkActive="active-link">
@@ -252,7 +252,7 @@
         <li>
           <a>
             <img src="assets/images/top-icon04.png" />
-            <span>Push Not.</span>
+            <span>Send Notification</span>
           </a>
         </li>
         <li (click)="onClickTopItem('tickets')">
@@ -267,11 +267,23 @@
             <span>Help</span>
           </a>
         </li>
-        <li>
-          <a>
+        <li class="position-relative cursor-pointer">
+          <a (click)="showNotifications()">
             <img src="assets/images/top-icon07.png" />
             <span>Notification</span>
           </a>
+          <div *ngIf="isShowNotifications" class="top-header-notification">
+            <h2>No Notifications</h2>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="text-right">
+              <button class="ButtonStyle" (click)="showNotifications()">Close</button>
+
+            </div>
+          </div>
         </li>
       </ul>
     </div>

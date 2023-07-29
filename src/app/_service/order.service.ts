@@ -154,6 +154,16 @@ export class OrderService {
         catchError(this.authService.handleError)
       );
   }
+  uploadInvoice(form: any) {
+    return this.http
+      .post<any>(`${this._liveApiUrl}/company/upload-invoice/`, form)
+      .pipe(
+        map((data: any) => {
+          return data;
+        }),
+        catchError(this.authService.handleError)
+      );
+  }
 
   orderCount(order_date?: any, order_type?:any) {
     let tail = '';

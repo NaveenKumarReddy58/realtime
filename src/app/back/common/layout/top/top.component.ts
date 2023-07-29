@@ -27,6 +27,7 @@ export class TopComponent {
   planCount$!: Observable<object[]>;
   clickedItem: string= '';
   searchText: any;
+  isShowNotifications: boolean = false;
 
   ngOnInit(): void {}
 
@@ -143,5 +144,8 @@ export class TopComponent {
       address:''
     })
     this.orderService.updateSearchText('');
+  }
+  showNotifications(){
+    this.isShowNotifications= !this.isShowNotifications
   }
 }

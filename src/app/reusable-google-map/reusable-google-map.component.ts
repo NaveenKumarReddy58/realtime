@@ -74,7 +74,7 @@ export class ReusableGoogleMapComponent {
   }
 
   getDirections(){
-      this.locateDriverService.getDriversInfo().subscribe((res:any)=>{
+      this.locateDriverService.getDriversInfo().then((res:any)=>{
         if(res && res.length > 0){
           let driverCurrentLocation = res.filter((element:any) => {
             return element.order_id == this.data?.orderData?.id
@@ -101,7 +101,7 @@ export class ReusableGoogleMapComponent {
   }
 
   getDriverLocationsFromFirebase(){
-    this.locateDriverService.getDriversInfo().subscribe((res)=>{
+    this.locateDriverService.getDriversInfo().then((res)=>{
       this.driverLocations= res;
       this.driverList();
     });
@@ -167,25 +167,6 @@ export class ReusableGoogleMapComponent {
     }
     const bounds = this.getBounds(this.markers);
     this.map?.googleMap?.fitBounds(bounds);
-
-    // const markers = [{
-
-    //   position:{
-    //   lat: 27  + ((Math.random() - 0.5) * 2) / 10,
-    //   lng: 80 + ((Math.random() - 0.5) * 2) / 10,
-    // },
-    //   visible: false,
-    //   opacity: 0.1,
-    //   label: {
-    //     color: 'black',
-    //     text: 'Marker label ',
-    //   },
-    //   title: 'Marker title ',
-    //   options: {
-    //     animation: google.maps.Animation.DROP,
-    //     icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
-    //   }
-    // }]
 
   }
 

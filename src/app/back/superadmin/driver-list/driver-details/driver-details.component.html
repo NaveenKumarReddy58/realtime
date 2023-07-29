@@ -159,10 +159,10 @@
                                             <div class="col-md-12 mb-4">
                                                 <label><strong>Title:</strong></label>
                                                 <span class="Password">
-                                                    <textarea class="HelpArea" maxlength="200" placeholder="Custome Message/Push Notification" style="height: 150px"
+                                                    <textarea class="HelpArea" maxlength="500" placeholder="Custome Message/Push Notification" style="height: 150px"
                                                         formControlName="push_notification">
                                                     </textarea>
-                                                    <div class="notes-msg">{{200 - editDriverForm.value.push_notification.length}}/200</div>
+                                                    <div class="notes-msg">{{500 - editDriverForm.value.push_notification.length}}/500</div>
 
                                                     <div *ngIf="isSubmitted && editDriverForm.controls.push_notification.errors" class="text-danger">
                                                         <div *ngIf="isSubmitted && editDriverForm.controls.push_notification.errors['required']">

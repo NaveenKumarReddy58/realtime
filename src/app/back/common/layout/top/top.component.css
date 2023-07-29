@@ -1,12 +1,26 @@
-.active-link{
+.active-link {
     color: #0eb002;
 
 }
 
-.link-driver:has(a.active-link){
+.link-driver:has(a.active-link) {
     color: #0eb002;
 
 }
-.clear{
+
+.clear {
     float: left;
+}
+
+.top-header-notification {
+    width: 500px;
+    height: 250px;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border-radius: 25px;
+    z-index: 1;
+    box-shadow: 0 0 20px rgb(0 0 0 / 10%);
+    padding: 30px 10px;
 }

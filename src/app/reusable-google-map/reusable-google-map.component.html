@@ -22,7 +22,7 @@
     </google-map>
     </div>
     <div *ngIf="data?.isShowDirections" class="track-order-details">
-        <p><strong>Esitimated Time:</strong> {{estimatedTime}}</p>
+        <p><strong>Esitimated Arrival Time:</strong> {{estimatedTime}}</p>
         <p><strong>Distance:</strong> {{distance}}</p>
         <p><strong>Delivery Address:</strong> {{this.data.orderData?.dely_address.address}}</p>
         <p><strong>Delivery Date:</strong> {{this.data.orderData?.dely_date | date : "fullDate"}}</p>

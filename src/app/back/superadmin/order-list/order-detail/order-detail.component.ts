@@ -24,6 +24,8 @@ export class OrderDetailComponent {
   isSubmitted: boolean= false;
   isSubmittedCustomer: boolean= false;
   isShowRecentNotifications: boolean= false;
+  invoiceImageSrc: any = 'assets/images/edit-icon.png';
+  isInvoiceLoading: boolean= false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -59,6 +61,10 @@ export class OrderDetailComponent {
           return;
         }
         this.orderData = data?.result;
+        if(this.orderData.order_invoice?.length > 0){
+          this.invoiceImageSrc= this.orderData.order_invoice[this.orderData.order_invoice?.length-1].invoice_doc;
+
+        }
         this.loading = false;
       },
       (error) => {
@@ -67,9 +73,41 @@ export class OrderDetailComponent {
       }
     );
   }
+  invoice: any;
+  readURL(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.invoiceImageSrc = reader.result;
+      };
+      this.invoice = file;
+      reader.readAsDataURL(file);
+    }
+  }
+  removeProfilePhoto(e: any) {
+    e.stopPropagation();
+    this.invoiceImageSrc = 'assets/images/edit-icon.png';
+  }
   sendMessage(){
     this.isSubmitted= true;
 
+  }
+  uploadInvoice(){
+    var formdata = new FormData();
+      formdata.append('order', JSON.stringify(Number(this.orderData?.id)));
+      if(this.invoice){
+        formdata.append('invoice_doc', this.invoice);
+      }
+      this.isInvoiceLoading= true;
+      this.orderService.uploadInvoice(formdata).subscribe((res:any)=>{
+        this.isInvoiceLoading= false;
+        this.toastr.success("Invoice Uploaded Successfully")
+      } , (err:any)=>{
+        this.isInvoiceLoading= false;
+        this.toastr.error("Failed to Upload")
+      })
   }
   sendMessageToCustomer(){
     this.isSubmittedCustomer= true;

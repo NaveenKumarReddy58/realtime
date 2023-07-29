@@ -32,3 +32,30 @@
     border-radius: 25px !important;
 
   }
+
+  .order-details-line{
+    border: 1px solid #bbc2c7;
+    display: block;
+    position: absolute;
+    top: 16%;
+    width: 100%;
+  }
+  .DotSpan_Title{
+    margin-left: -17px;
+  }
+  .line-active{
+    border: 1px solid #0eb002;
+  }
+  i.Delete{
+    position: absolute;
+    right: 2%;
+    top: 2%;
+}
+.invoice-image{
+    padding: 20px;
+    border-radius: 0% !important;
+
+}
+.invoice-image-container{
+    width: 100% !important;
+}

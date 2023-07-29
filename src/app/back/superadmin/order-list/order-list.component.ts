@@ -90,7 +90,12 @@ export class OrderListComponent {
       "order_status": "shipped",
       "count": 0,
       "isActive": false
-    },   
+    },
+    {
+      "order_status": "en-route",
+      "count": 0,
+      "isActive": false
+    },
   ]
   orderDate: any;
   orderType: any;
@@ -106,6 +111,7 @@ export class OrderListComponent {
   public isViewAllMode: boolean= false;
   driverData: any = [];
   copyOrderData: any;
+  pendingOrdersCount: any;
 
 
   constructor(
@@ -205,6 +211,8 @@ export class OrderListComponent {
           data?.result.all.forEach((element:any) => {
             this.updateAllCount(element);
           });
+          this.preparePendingOrdersCount(data?.result.all)
+
         } else if(data.result.all.length == 0){
           this.makeDefaultCount();
         }
@@ -213,7 +221,15 @@ export class OrderListComponent {
       
     });
   }
-
+  preparePendingOrdersCount(orders:any){
+    let count = 0;
+    orders.forEach((el: any) => {
+      if(el.order_status == 'pending' || el.order_status == 'shipped' || el.order_status == 'en-route'){
+        count = count + el.count;
+      }
+    });
+    this.pendingOrdersCount= count;
+  }
   makeDefaultCount(){
     this.allOrdersCount=[
       {
@@ -238,6 +254,10 @@ export class OrderListComponent {
       },   
       {
         "order_status": "shipped",
+        "count": 0
+      }, 
+      {
+        "order_status": "en-route",
         "count": 0
       },   
     ]
@@ -341,6 +361,7 @@ export class OrderListComponent {
       this.isShowContactDialog= !this.isShowContactDialog;
 
   }
+
   driverList(id?: number) {
     this.data= []
     this.driverService.driverList(id);

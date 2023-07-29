@@ -187,7 +187,6 @@ export class DriverAddComponent {
       }
     }
 
-    this.loading = true;
     // console.log('Api Data Err ffff', this.f, this.frmValues);
 
     const formData = new FormData();
@@ -215,7 +214,7 @@ export class DriverAddComponent {
           formData.append('other_certificates',this.moreCertificates[i])
         }
     }
-
+    this.loading = true;
     if (this.isAddMode) {
       this.driverService.driverAdd(formData).subscribe(
         (data: any) => {
@@ -237,8 +236,8 @@ export class DriverAddComponent {
     } else {
       this.driverService.driverEdit(this.id, formData).subscribe(
         (data: any) => {
+          this.loading = false;
           if (this.authService.resultCodeError(data)) {
-            this.loading = false;
             return;
           }
 
@@ -246,8 +245,8 @@ export class DriverAddComponent {
 
         },
         (error) => {
-          this.authService.dataError(error);
           this.loading = false;
+          this.authService.dataError(error);
         }
       );
     }
