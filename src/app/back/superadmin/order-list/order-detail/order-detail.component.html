@@ -19,17 +19,20 @@
               <div class="ProfilePik">
                 <div class="ChangePic P_Photo">
                   <img src="assets/images/p-icon02.png" />
-                  <div class="ChangeImg NoPhoto fontSize12">
+                  <!-- <div class="ChangeImg NoPhoto fontSize12">
                     <i class="fa fa-star"></i> Priority Delivery
-                  </div>
+                  </div> -->
                 </div>
                 <div class="DeliveryNumber fontSize10">
                   <h4>{{ orderData?.po ? orderData?.po : orderData?.order_no }}</h4>
                   Delivery : {{ orderData?.dely_time }} |
                   {{ orderData?.dely_date | date : "fullDate" }}
                 </div>
-                <div class="NoPhoto mt-4 google-map" *ngIf="orderData">
+                <div [ngClass]="orderData?.order_status != 'en-route' ? 'disabled-custom':'' " class="NoPhoto mt-4 google-map" *ngIf="orderData">
                   <app-reusable-google-map></app-reusable-google-map>
+                </div>
+                <div *ngIf="orderData?.order_status != 'en-route'" class="DeliveryNumber fontSize10">
+                  Track Order will be enabled only when Order is En-route.
                 </div>
                 <div [ngClass]="orderData?.order_status != 'en-route' ? 'disabled-custom':'' " class="TrackDriver mt-3"
                   (click)="trackDriver()">
@@ -45,11 +48,23 @@
                   <img *ngIf="(invoiceImageSrc.indexOf('edit-icon') > 0)  && invoiceImageSrc" class="driver-profile-image invoice-image" [src]="invoiceImageSrc" [alt]="'logo'" width="50%"
                     height="90%" (click)="fileInput.click()" />
                 </div>
+                <a *ngIf="this.orderData && this.orderData.order_invoice.length > 0" target="_blank" class="uploaded-documenst mx-1 cursor-pointer" [href]="invoiceImageSrc">
+                  <span style="font-size: 12px;">View Full Image</span>
+                </a>
                 <div class="cursor-pointer mt-3 "
                   (click)="uploadInvoice()">
-                  <button class="ButtonStyle"> Upload Invoice <i class="fa fa-spinner fa-spin" *ngIf="isInvoiceLoading"></i>
+                  <button class="ButtonStyle"> {{this.orderData && this.orderData.order_invoice.length > 0 ? 'Edit Invoice': 'Upload Invoice'}} <i class="fa fa-spinner fa-spin" *ngIf="isInvoiceLoading"></i>
                   </button>
                 </div>
+                <br>
+                <div *ngIf="this.orderData && this.orderData.order_invoice.length > 0" class="driver-profile-image-container invoice-image-container ">
+                  <img class="driver-profile-image invoice-image" [src]="invoiceImageSrc" [alt]="'logo'" width="100%"
+                    height="100%" />
+                </div>
+                <a *ngIf="this.orderData && this.orderData.order_invoice.length > 0" target="_blank" class="uploaded-documenst mx-1 cursor-pointer" [href]="invoiceImageSrc">
+                  <span style="font-size: 12px;">View Proof of Delivery Image</span>
+                </a>
+                
                 <input #fileInput type="file" (change)="readURL($event)" style="display: none" accept="image/*" />
               </div>
             </div>
@@ -86,7 +101,8 @@
                       <a>
                         <span class="DotSpan">&nbsp;</span>
                         <span class="DotSpan_Title fontSize10"> Processed </span>
-                      </a>
+                        <div  *ngIf='getDateTime("pending") != "NA"' class="DotSpan_Title fontSize12" style="color: black;"> {{getDateTime("pending") | date:'medium'}} </div>
+                        <div  *ngIf='getDateTime("pending") == "NA"' class="DotSpan_Title fontSize12" style="color: black;">NA </div>                          </a>
                       <span
                         [ngClass]="(orderData?.order_status== 'shipped' || orderData?.order_status== 'en-route' || orderData?.order_status== 'successful' || orderData?.order_status== 'pending' )?'line-active':'' "
                         class="order-details-line"></span>
@@ -97,7 +113,8 @@
                       <a>
                         <span class="DotSpan">&nbsp;</span>
                         <span class="DotSpan_Title fontSize10"> Shipped </span>
-                      </a>
+                        <div  *ngIf='getDateTime("shipped") != "NA"' class="DotSpan_Title fontSize12" style="color: black;"> {{getDateTime("shipped") | date:'medium'}} </div>
+                        <div  *ngIf='getDateTime("shipped") == "NA"' class="DotSpan_Title fontSize12" style="color: black;"> NA </div>                          </a>
                       <span
                         [ngClass]="(orderData?.order_status== 'shipped' || orderData?.order_status== 'en-route' || orderData?.order_status== 'successful')?'line-active':'' "
                         class="order-details-line"></span>
@@ -109,6 +126,10 @@
                       <a>
                         <span class="DotSpan">&nbsp;</span>
                         <span class="DotSpan_Title fontSize10"> En route </span>
+                        <div  *ngIf='getDateTime("en-route") != "NA"' class="DotSpan_Title fontSize12" style="color: black;"> {{getDateTime("en-route") | date:'medium'}} </div>
+                        <div  *ngIf='getDateTime("en-route") == "NA"' class="DotSpan_Title fontSize12" style="color: black;"> NA </div>
+
+
                       </a>
                       <span
                         [ngClass]="(orderData?.order_status== 'en-route' || orderData?.order_status== 'successful')?'line-active':'' "
@@ -119,11 +140,13 @@
                       <a>
                         <span class="DotSpan">&nbsp;</span>
                         <span class="DotSpan_Title fontSize10"> Delivered </span>
-                      </a>
+                        <div  *ngIf='getDateTime("successful") != "NA"' class="DotSpan_Title fontSize12" style="color: black;"> {{getDateTime("successful") | date:'medium'}} </div>
+                        <div  *ngIf='getDateTime("successful") == "NA"' class="DotSpan_Title fontSize12" style="color: black;">NA </div>                      </a>
                     </li>
                   </ul>
                 </div>
               </div>
+              <br>
               <!-- Step Title List ///// -->
               <!-- Step Content Area -->
               <form [formGroup]="orderDetailsPushForm" class="ProfileFor">

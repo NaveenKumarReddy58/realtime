@@ -52,6 +52,16 @@ export class OrderDetailComponent {
   get f() {
     return this.orderDetailsPushForm.controls;
   }
+  getDateTime(status: string){
+    console.log(this.orderData?.status_history)
+    var item = this.orderData?.status_history.find((item:any) => item.status === status);
+    console.log(item)
+    if(item){
+      return item.updated_at;
+    } else{
+      return "NA";
+    }
+  }
   orderDetail(id: number) {
     this.orderService.orderDetail(id).subscribe(
       (data: any) => {
