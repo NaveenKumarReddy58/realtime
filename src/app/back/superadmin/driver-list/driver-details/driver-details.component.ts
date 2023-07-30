@@ -32,6 +32,7 @@ export class DriverDetailsComponent {
   pendingOrderCount: number=0;
   successfullOrderCount: number=0;
   unSuccessfullOrderCount: number=0;
+  tripHistory: any;
 
 
 
@@ -147,9 +148,17 @@ export class DriverDetailsComponent {
 
   showRecentNotifications() {
     this.isShowRecentNotifications = true;
+
+    this.driverService.orderHistory(this.driverId).subscribe((data: any) => {
+        this.tripHistory= data?.result?.results;      
+    });
+
   }
   closeRecentNotifications() {
     this.isShowRecentNotifications = false;
+  }
+  viewOrder(id:number){
+    this.router.navigate(['admin/orders/detail', id])
   }
   deleteDriver() {
 

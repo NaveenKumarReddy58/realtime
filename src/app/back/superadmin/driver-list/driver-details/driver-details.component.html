@@ -199,83 +199,28 @@
                                             src="assets/images/filter-icon.png"></a>
                                 </span>
                             </div>
-                             <div class="mt-4 PacelId">
+                             <div  *ngIf="tripHistory&& tripHistory.length == 0" class="mt-4 PacelId">
                                 No Recent Trip History
                             </div>
-                            <!-- <div class="PacelId mt-4">
+                            <div *ngIf="tripHistory&& tripHistory.length > 0" class="PacelId mt-4">
                                 <ul>
-                                    <li>
-                                        <span class="Parcel_T">Parcel ID 001199001199 <span
-                                                class="min-ago">58 min ago</span></span>
+                                    <li *ngFor="let trip of tripHistory">
+                                        <span class="Parcel_T">Parcel ID {{trip.order_no}} <span
+                                                class="min-ago">{{trip.dely_date}}</span></span>
                                         <div class="AddressTitle">
-                                            <img src="assets/images/d-icon.png">
+                                            <img *ngIf="trip.order_type == 'pickup'" src="assets/images/p-icon.png">
+                                            <img *ngIf="trip.order_type == 'delivery'" src="assets/images/d-icon.png">
+
                                             <p>
-                                                Delivered To: Sandeep Singh
-                                                <span>Addrees: 012, XYZ, Dummy text</span>
-                                                <span class="InfoHere">Any other info
-                                                    here</span>
-                                                <button class="ViewButton">View</button>
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <span class="Parcel_T">Parcel ID 001199001199 <span
-                                                class="min-ago">58 min ago</span></span>
-                                        <div class="AddressTitle">
-                                            <img src="assets/images/d-icon.png">
-                                            <p>
-                                                Delivered To: Sandeep Singh
-                                                <span>Addrees: 012, XYZ, Dummy text</span>
-                                                <span class="InfoHere">Any other info
-                                                    here</span>
-                                                <button class="ViewButton">View</button>
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <span class="Parcel_T">Parcel ID 001199001199 <span
-                                                class="min-ago">58 min ago</span></span>
-                                        <div class="AddressTitle">
-                                            <img src="assets/images/d-icon.png">
-                                            <p>
-                                                Delivered To: Sandeep Singh
-                                                <span>Addrees: 012, XYZ, Dummy text</span>
-                                                <span class="InfoHere">Any other info
-                                                    here</span>
-                                                <button class="ViewButton">View</button>
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <span class="Parcel_T">Parcel ID 001199001199 <span
-                                                class="min-ago">58 min ago</span></span>
-                                        <div class="AddressTitle">
-                                            <img src="assets/images/d-icon.png">
-                                            <p>
-                                                Delivered To: Sandeep Singh
-                                                <span>Addrees: 012, XYZ, Dummy text</span>
-                                                <span class="InfoHere">Any other info
-                                                    here</span>
-                                                <button class="ViewButton">View</button>
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <span class="Parcel_T">Parcel ID 001199001199 <span
-                                                class="min-ago">58 min ago</span></span>
-                                        <div class="AddressTitle">
-                                            <img src="assets/images/d-icon.png">
-                                            <p>
-                                                Delivered To: Sandeep Singh
-                                                <span>Addrees: 012, XYZ, Dummy text</span>
-                                                <span class="InfoHere">Any other info
-                                                    here</span>
-                                                <button class="ViewButton">View</button>
+                                                <strong>Delivered To: {{trip.customer_name}}</strong>
+                                                <span>Addrees: {{trip.customer_addr}}</span>
+                                                <span class="InfoHere">Phone Number: {{trip.customer_phone}}</span>
+                                                <button (click)="viewOrder(trip.id)" class="ViewButton">View</button>
                                             </p>
                                         </div>
                                     </li>
                                 </ul>
-                            </div> -->
+                            </div>
                         </div>
                     </div>
                 </div>

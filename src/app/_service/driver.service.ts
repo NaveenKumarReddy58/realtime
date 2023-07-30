@@ -143,7 +143,26 @@ export class DriverService {
         catchError(this.authService.handleError)
       )
   }
-
+  orderHistory(driverId?:any) {
+    let tail = '';
+    let params = new URLSearchParams();
+    if (params) {
+      if(driverId && driverId.length > 0){
+        params.set('driver_id', driverId)
+      }
+    }
+    if(driverId){
+      tail += `?` + params.toString();
+    }
+    return this.http
+      .get<any>(`${this._liveApiUrl}/company/order-history/${tail}`)
+      .pipe(
+        map((data) => {
+          return data;
+        }),
+        catchError(this.authService.handleError)
+      )
+  }
   orderList(driver_id?:any, order_status?:any,order_date?: any, page?:any) {
     let tail = '';
     let params = new URLSearchParams();

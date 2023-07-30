@@ -219,6 +219,12 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
+        path: 'send-notification',
+        component: DriverAddComponent,
+        title: 'Send Notification',
+        canActivate: [AuthGuard],
+      },
+      {
         path: 'driver/edit/:id',
         component: DriverAddComponent,
         title: 'Driver Edit',
