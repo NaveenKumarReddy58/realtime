@@ -35,6 +35,7 @@ import { AddressListComponent } from './back/superadmin/address-list/address-lis
 import { DriverDetailsComponent } from './back/superadmin/driver-list/driver-details/driver-details.component';
 import { OrderDetailComponent } from './back/superadmin/order-list/order-detail/order-detail.component';
 import { PublicCompanyRegistrationComponent } from './public-company-registration/public-company-registration.component';
+import { HelpComponent } from './back/superadmin/help/help.component';
 
 const routes: Routes = [
   {
@@ -222,6 +223,12 @@ const routes: Routes = [
         path: 'send-notification',
         component: DriverAddComponent,
         title: 'Send Notification',
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'help',
+        component: HelpComponent,
+        title: 'Help',
         canActivate: [AuthGuard],
       },
       {

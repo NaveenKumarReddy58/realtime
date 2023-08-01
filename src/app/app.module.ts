@@ -82,6 +82,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 // import { initializeApp } from "firebase/app";
 import { PublicCompanyRegistrationComponent } from './public-company-registration/public-company-registration.component';
+import { HelpComponent } from './back/superadmin/help/help.component';
 // initializeApp(environment.firebase);
 
 @NgModule({
@@ -128,6 +129,7 @@ import { PublicCompanyRegistrationComponent } from './public-company-registratio
     DriverOrdersListComponent,
     ReusableGoogleMapComponent,
     PublicCompanyRegistrationComponent,
+    HelpComponent,
   ],
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),

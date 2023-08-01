@@ -1,0 +1,67 @@
+<div class="ContentArea p-5">
+    <div class="row mb-2">
+      <div class="col-md-6">
+        <div class="HeadingName">
+          <h2>Help</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="ProfilePik">
+          <div class="driver-profile-image-container">
+            <img
+              class="driver-profile-image"
+              *ngIf="imageSrc"
+              [src]="imageSrc"
+              [alt]="'logo'"
+              width="100px"
+              height="100px"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <form class="ProfileFor">
+          <div class="row">
+            <div class="col-md-6">
+              <input
+                type="text"
+                name="first_name"
+                value="Praveen Kumar"
+                placeholder="First Name"
+                class="Pro_input_Field"
+              />
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col-md-6">
+              <input type="text" value="+91 9843534544" placeholder="Mobile Number"
+                class="Pro_input_Field driver-input-field" />
+            </div>
+            
+          </div>
+          <div class="row mt-4">
+            <div class="col-md-6">
+                <input
+                  type="text"
+                  name="email"
+                  value="techlandspace@company.com"
+                  placeholder="Email"
+                  class="Pro_input_Field"
+                />
+              </div>
+          </div>
+          <br>
+          <div class="row mt-4">
+            <div class="col-md-6">
+                <a class="create-ticket" routerLink="/{{ _isRoleName }}/tickets" routerLinkActive="active-link">
+                    <span>Create Ticket <img _ngcontent-dsu-c61="" src="./../../../../assets/images/ticket-icon.png" class="mx-2" style="max-width: 15px;"></span>
+                  </a>
+              </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

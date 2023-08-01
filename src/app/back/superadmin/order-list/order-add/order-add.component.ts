@@ -389,6 +389,9 @@ export class OrderAddComponent {
       }
     }
     if (this.isCheckedWarehous[0].pickup) {
+      if(this.isDelyWareHouseEnabled){
+        this.setNullDelyValue();
+      }
       this.isPickupWareHouseEnabled = true;
       this.isDelyWareHouseEnabled = false;
 
@@ -400,9 +403,11 @@ export class OrderAddComponent {
         pickup_email: this.warehouseData?.email,
         pickup_alt_phone: this.warehouseData?.alt_phone ? this.warehouseData?.alt_phone.replace('+91',''):''
       });
-      this.setNullDelyValue();
     }
     else if(this.isCheckedWarehous[1].to){
+      if(this.isPickupWareHouseEnabled){
+        this.setNullPickupValue();
+      }
       this.isPickupWareHouseEnabled = false;
       this.isDelyWareHouseEnabled = true;
       this.addOrderF.patchValue({
@@ -413,7 +418,6 @@ export class OrderAddComponent {
         dely_phone: this.warehouseData?.phone ? this.warehouseData?.phone.replace('+91',''):'',
         dely_alt_phone: this.warehouseData?.alt_phone ? this.warehouseData?.alt_phone.replace('+91',''):''
       });
-      this.setNullPickupValue();
     } else{
       this.isPickupWareHouseEnabled = false;
       this.isDelyWareHouseEnabled = false;
@@ -460,5 +464,9 @@ export class OrderAddComponent {
       dely_phone: null,
       dely_alt_phone: null
      });
+  }
+
+  ngOnDestroy(){
+    this.isAddMode= true;
   }
 }
