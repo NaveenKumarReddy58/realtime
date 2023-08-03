@@ -22,14 +22,24 @@
             <div class="col-3">
               <div class="ProfilePik">
                 <div class="driver-profile-image-container">
+
                   <i
-                    *ngIf="!(imageSrc.indexOf('profilephoto') > 0) && isAddMode"
+                    *ngIf="!(imageSrc?.toString().indexOf('profilephoto') > 0) && isAddMode"
                     class="fa fa-trash Delete"
                     (click)="removeProfilePhoto($event)"
                   ></i>
                   <img
+                  *ngIf="!(imageSrc?.toString().indexOf('profilephoto') > 0) && isAddMode"
+                    style="padding: 25px"
                     class="driver-profile-image"
-                    *ngIf="imageSrc"
+                    [src]="imageSrc"
+                    [alt]="'logo'"
+                    width="100%"
+                    height="100%"
+                  />
+                  <img
+                  *ngIf="(imageSrc?.toString().indexOf('profilephoto') > 0) && isAddMode"
+                    class="driver-profile-image"
                     [src]="imageSrc"
                     [alt]="'logo'"
                     width="100px"

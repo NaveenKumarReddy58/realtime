@@ -158,6 +158,7 @@ export class WarehouseListComponent {
       exitAnimationDuration,
       data: {
         title: 'Alert?',
+        pageName: 'warehouse-listing',
         message:
           'Do you want to make this Warehouse address as your default address?',
       },

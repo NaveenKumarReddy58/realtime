@@ -17,9 +17,9 @@
                     <div class="row mt-4">
                         <div class="col-md-2">
                             <div class="ProfilePik">
-                                <div class="ChangePic NoPhoto position-relative"  [ngClass]="!isEditMode? 'view-mode' : ''">
+                                <div class="ChangePic NoPhoto p-0 position-relative"  [ngClass]="!isEditMode? 'view-mode' : ''">
                                     <span class="percentage">90%</span>
-                                    <img [src]="editDriverForm.value.profile_img">
+                                    <img class="driver-details-profilepic" [src]="editDriverForm.value.profile_img">
                                 </div>
                                 <div class="ChangeImg NoPhoto mt-2">
                                     <p class="m-0 driver-name">{{editDriverForm.value.first_name+" "+editDriverForm.value.last_name}} <span *ngIf="editDriverForm.value.is_head_driver">(HD)</span></p>

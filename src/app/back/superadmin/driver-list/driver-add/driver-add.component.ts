@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
@@ -7,6 +8,7 @@ import { CountryPhoneCodes } from 'src/app/_interface/country-phone-codes';
 import { AuthService } from 'src/app/_service/auth.service';
 import { DriverService } from 'src/app/_service/driver.service';
 import { PlanService } from 'src/app/_service/plan.service';
+import { DialogAnimationsComponent } from 'src/app/back/common/dialog-animations/dialog-animations.component';
 
 @Component({
   selector: 'app-driver-add',
@@ -64,7 +66,8 @@ export class DriverAddComponent {
     private router: Router,
     public authService: AuthService,
     public driverService: DriverService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private dialog: MatDialog
   ) {
     this.id = this.route.snapshot.params['id'];
     
@@ -96,18 +99,6 @@ export class DriverAddComponent {
       this.isAddMode = false;
       this.addDriver.get('password')?.clearValidators();
 
-    }
-    if (!this.isAddMode) {
-      // this.driverService.driverList(this.id);
-      // this.drivers$ = this.driverService.getDrivers();
-
-      // this.drivers$.subscribe((data: any) => {
-      //   this.editDriver = data?.results;
-      //   if (data?.results?.img) {
-      //     this.imageSrc = data?.results?.img;
-      //   }
-      //   this.addDriver.patchValue(data?.results);
-      // });
     }
   }
 
@@ -169,7 +160,30 @@ export class DriverAddComponent {
       }
     })
   }
-
+  cropImage(
+    enterAnimationDuration: string,
+    exitAnimationDuration: string,
+    event:any
+  ): void {
+    const dialogRef= this.dialog.open(DialogAnimationsComponent, {
+      width: '500px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+      data: {
+        btns: ['Cancel','Crop'],
+        pageName: 'crop-image',
+        image: event
+      },
+    });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if(dialogResult){
+        this.imageSrc= dialogResult.croppedImage.base64;
+        this.addDriver.patchValue({
+          image: dialogResult.croppedImage.file,
+        });
+      }
+    });
+  }
   handleSubmit() {
     this.isSubmitted = true;
     if (this.addDriver.invalid) {
@@ -258,11 +272,9 @@ export class DriverAddComponent {
 
       const reader = new FileReader();
       reader.onload = (e) => {
-        this.imageSrc = reader.result;
+        this.cropImage('250ms','250ms',event);
       };
-      this.addDriver.patchValue({
-        image: file,
-      });
+      
 
       reader.readAsDataURL(file);
     }
@@ -384,4 +396,5 @@ export class DriverAddComponent {
     e.stopPropagation();
     this.imageSrc = 'assets/images/profilephoto.png';
   }
+  
 }

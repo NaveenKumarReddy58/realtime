@@ -11,6 +11,9 @@
       </li>
     </ul>
   </div>
+  <div *ngIf="data.pageName == 'crop-image'">
+    <app-reusable-crop-image (afterImageCropped)="setImage($event)" [image]="data.image"></app-reusable-crop-image>
+  </div>
 </div>
 <ng-container *ngIf="data.btns&&data.btns.length > 0">
   <div mat-dialog-actions class="dialog-btn">

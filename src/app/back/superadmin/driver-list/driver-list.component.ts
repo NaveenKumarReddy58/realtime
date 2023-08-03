@@ -104,6 +104,9 @@ export class DriverListComponent {
       width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,
+      data: {
+        pageName: 'driver-listing',
+      },
     });
   }
   stopNav(event:any){

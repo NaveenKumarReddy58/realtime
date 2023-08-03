@@ -92,3 +92,8 @@ input.Pro_input_Field {
   color: gray;
   float: right;
 }
+.driver-details-profilepic{
+  width: 100%;
+    max-width: 100%;
+    padding: 20px;
+}

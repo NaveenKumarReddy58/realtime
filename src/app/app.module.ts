@@ -83,6 +83,9 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 // import { initializeApp } from "firebase/app";
 import { PublicCompanyRegistrationComponent } from './public-company-registration/public-company-registration.component';
 import { HelpComponent } from './back/superadmin/help/help.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { ReusableCropImageComponent } from './reusable-crop-image/reusable-crop-image.component';
+
 // initializeApp(environment.firebase);
 
 @NgModule({
@@ -130,6 +133,7 @@ import { HelpComponent } from './back/superadmin/help/help.component';
     ReusableGoogleMapComponent,
     PublicCompanyRegistrationComponent,
     HelpComponent,
+    ReusableCropImageComponent,
   ],
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),
@@ -155,6 +159,7 @@ import { HelpComponent } from './back/superadmin/help/help.component';
     GoogleMapsModule,
     MatSelectModule,
     MatPaginatorModule,
+    ImageCropperModule,
     provideFirestore(() => getFirestore()),
   ],
   providers: [

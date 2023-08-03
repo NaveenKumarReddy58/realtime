@@ -12,8 +12,7 @@ export interface DialogData {
   assignedOrdersCount: string;
   driverData: any;
   orderListingData:any;
-
-
+  image:any;
 }
 @Component({
   selector: 'app-dialog-animations',
@@ -31,6 +30,7 @@ export class DialogAnimationsComponent {
   lengthOfOrders!: number[];
   selectedPriorityNumber: number=1;
   loading: boolean= false;
+  croppedImage: any;
   ngOnInit(): void {
     if(this.data.pageName == 'order-listing'){
       this.lengthOfOrders = [...Array(this.data.orderListingData.totalOrders).keys()]
@@ -49,11 +49,22 @@ export class DialogAnimationsComponent {
     } else if(this.data.pageName == 'order-listing'){
       this.updatePriority();
       this.dialogRef.close(true)
+    } else if(this.data.pageName == 'crop-image'){
+      this.dialogRef.close(
+        {
+          res: true,
+          croppedImage: this.croppedImage
+        }
+      );
     } else{
       this.dialogRef.close(true);
     }
   }
 
+  setImage(event:any){
+    console.log(event)
+    this.croppedImage= event;
+  }
   onDismiss(): void {
       this.dialogRef.close(false);
   }

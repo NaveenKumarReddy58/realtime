@@ -442,6 +442,7 @@ input[type=number] {
   border: 1px solid #ccd2d8;
   border-radius: 20px;
   line-height: 180px;
+  
 
 }
 .driver-profile-image{
@@ -449,7 +450,7 @@ input[type=number] {
 }
 .Edit_Img{
   position: absolute;
-  bottom: -36%;
+  bottom: -26%;
   right: 5%;
 }
 .disabled-custom{
