@@ -35,6 +35,9 @@ export class PlanService {
   getPlanCount(): Observable<any[]> {
     return this._planCount.asObservable();
   }
+  getNotificationCount(): Observable<any[]> {
+    return this._planCount.asObservable();
+  }
 
   planList(id?: Number) {
     let tail = '';
@@ -112,5 +115,17 @@ export class PlanService {
           this.authService.dataError(error);
         }
       );
+  }
+  notificationCount() {
+    return this.http
+      .get<any>(`${this._liveApiUrl}/notification/notification-count/`)
+  }
+  notificationList() {
+    return this.http
+      .get<any>(`${this._liveApiUrl}/notification/user-notification/`)
+  }
+  clearNotification(formData:any) {
+    return this.http
+      .put<any>(`${this._liveApiUrl}/notification/clear-notification/`, formData)
   }
 }

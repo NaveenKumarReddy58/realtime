@@ -19,6 +19,8 @@ export class AuthService {
   _apiUrl = new BehaviorSubject<any>(this.apiUrl);
   _isDashboard = new BehaviorSubject<any>(false);
   _isRole = new BehaviorSubject<any>('0');
+  _fcm_token = new BehaviorSubject<any>('0');
+
   _profile = new BehaviorSubject<any>(false);
 
   _liveApiUrl = this.apiUrl;
@@ -30,7 +32,7 @@ export class AuthService {
     private route: ActivatedRoute,
     private router: Router,
     private http: HttpClient,
-    private toastr: ToastrService
+    private toastr: ToastrService,
   ) {
     this.getApiUrl.subscribe((data: any) => {
       this._liveApiUrl = data;
@@ -117,6 +119,11 @@ export class AuthService {
     this._isRole.next(role !== null ? role : '0');
     return this._isRole.asObservable();
   }
+  getfcm_token(){
+    let token = this.getLS('fcm_token');
+    this._fcm_token.next(token !== null ? token : '0');
+    return token;
+  }
 
   get getApiUrl(): Observable<any[]> {
     let orgDomain = this.getLS('org_domain');
@@ -189,11 +196,13 @@ export class AuthService {
       );
   }
 
-  login(email: string, password: string) {
+  login(email: string, password: string, fcm_token:any, device_type:string) {
     return this.http
       .post<any>(`${this._liveApiUrl}/account/token/`, {
         email,
         password,
+        fcm_token,
+        device_type
       })
       .pipe(
         map((data) => {

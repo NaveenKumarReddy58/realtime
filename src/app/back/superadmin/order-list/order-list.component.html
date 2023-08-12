@@ -325,13 +325,6 @@
                 <div class="col-md-7 ">
 
                   <div class="pagination" *ngIf="showPaginator">
-                    <!-- <span [ngClass]="page == 0 ? 'disabled' : ''" class="prev" (click)="prevPage()">
-                      <i class="mx-2 fa fa-angle-left"></i>
-                    </span>
-                    <span class="numbers">{{startNumber}}-{{endNumber}} of {{ordersListCount}}</span> 
-                    <span [ngClass]="endNumber == ordersListCount ? 'disabled' : ''"  (click)="nextPage()" class="next">
-                      <i class="mx-2 fa fa-angle-right"></i>
-                    </span> -->
                     <mat-paginator [length]="ordersListCount"
                         [pageSize]="10"
                         (page)="handlePageEvent($event)"

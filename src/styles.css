@@ -479,3 +479,16 @@ input[type=number] {
   padding: 0px 12px;
 
 }
+.unread{
+  position: absolute;
+  top: -1px;
+  right: -2px;
+  font-size: 10px;
+  height: 10px;
+  width: 10px;
+  border-radius: 10px;
+  background: red;
+  font-weight: bold;
+  margin-top: auto;
+  padding-top: 3px;
+}

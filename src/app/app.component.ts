@@ -5,6 +5,7 @@ import { Keepalive } from '@ng-idle/keepalive';
 import { AuthService } from './_service/auth.service';
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import { environment } from 'src/environments/environment';
+import { PlanService } from './_service/plan.service';
 
 @Component({
   selector: 'app-root',
@@ -23,9 +24,15 @@ export class AppComponent {
   url: any;
   urlName: any;
   notification: any;
+  fcm_token: any;
+  notificationCountData: any;
+
 
   ngOnInit(): void {
-     // this.requestPermission();
+    if(this.isLoggedIn){
+      this.notificationCount();
+    }
+     this.requestPermission();
     
   }
 
@@ -33,7 +40,8 @@ export class AppComponent {
     private idle: Idle,
     private keepalive: Keepalive,
     public authService: AuthService,
-    public router: Router
+    public router: Router,
+    private planService: PlanService
   ) {
     this.authService.getDashboard().subscribe((data: any) => {
       this.isLoggedIn = data;
@@ -86,6 +94,8 @@ export class AppComponent {
      { vapidKey: environment.firebase.vapidKey}).then(
        (currentToken) => {
          if (currentToken) {
+          this.authService.setLS('fcm_token',currentToken)
+          this.fcm_token= currentToken;
           this.listen();
          }
      }).catch((err) => {
@@ -95,11 +105,17 @@ export class AppComponent {
     const messaging = getMessaging();
     onMessage(messaging, (payload) => {
       if(this.isLoggedIn){
+        this.notificationCount();
         this.notification= payload?.notification?.body;
       }
     });
   }
   closeNotification(){
     this.notification = undefined;
+  }
+  notificationCount(){
+    this.planService.notificationCount().subscribe((res)=>{
+      this.notificationCountData= res.result.num_unread;
+    })
   }
 }

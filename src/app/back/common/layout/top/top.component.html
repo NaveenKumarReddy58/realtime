@@ -270,20 +270,35 @@
         <li class="position-relative cursor-pointer">
           <a (click)="showNotifications()">
             <img src="assets/images/top-icon07.png" />
-            <span>Notification</span>
-          </a>
-          <div *ngIf="isShowNotifications" class="top-header-notification">
-            <h2>No Notifications</h2>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <div class="text-right">
-              <button class="ButtonStyle" (click)="showNotifications()">Close</button>
+            <span>Notification
+              <span *ngIf="notificationCountData && notificationCountData > 0" class="notification-badge">{{notificationCountData}}</span>
 
+            </span>
+          </a>
+          <div *ngIf="isShowNotifications" class="box shadow-sm rounded bg-white mb-3 top-header-notification">
+            <div class="box-title d-flex border-bottom justify-content-between p-3 text-start">
+                <h2 class="m-0 d-inline-block">Recent Notifications</h2>
+                <h2 class="m-0 d-inline-block text-muted" (click)="showNotifications()">Close
+                </h2>
             </div>
-          </div>
+            <div class="box-body notification-body p-0">
+                <div *ngFor="let notification of notificationListData; let index = index">
+                <div  class="p-3 d-flex gap-3 align-items-center bg-light border-bottom osahan-post-header">
+                    <div class="dropdown-list-image mr-3">
+                        <img class="rounded-circle" width="50px" height="50px" src="assets/images/profilephoto.png" alt="" />
+                    </div>
+                    <div class=" mr-3 text-start">
+                        <div class="text-truncate fw-bold">{{notification.notif_type}}<span style="padding-left: 10px;" class="text-right text-muted mr-auto">3d</span></div>
+                        <div class="small d-inline-block">{{notification.notification}}</div>
+                    </div>
+                    <span class="ms-auto">
+                      <i class="fa fa-close"></i>
+                    </span>
+                </div>
+                </div>
+            </div>
+        </div>
+          
         </li>
       </ul>
     </div>

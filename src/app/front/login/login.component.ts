@@ -77,9 +77,9 @@ export class LoginComponent {
     }
 
     this.loading = true;
-
+    let device_type= "web";
     this.authService
-      .login(this.f['username'].value, this.f['password'].value)
+      .login(this.f['username'].value, this.f['password'].value, this.authService.getfcm_token(),device_type)
       .subscribe(
         (data: any) => {
           this.loading = false;

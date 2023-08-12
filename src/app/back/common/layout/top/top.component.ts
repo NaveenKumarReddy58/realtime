@@ -22,14 +22,17 @@ export class TopComponent {
   address:any;
   name:any;
   searchForm!: FormGroup;
+  @Input() notificationCountData:any;
 
 
   planCount$!: Observable<object[]>;
   clickedItem: string= '';
   searchText: any;
   isShowNotifications: boolean = false;
+  notificationListData: any;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   constructor(
     private route: ActivatedRoute,
@@ -48,6 +51,9 @@ export class TopComponent {
     });
     this.authService.getDashboard().subscribe((data: any) => {
       this.isLoggedIn = data;
+      if(this.isLoggedIn){
+
+      }
     });
 
     this.authService.getRole().subscribe((data: any) => {
@@ -72,6 +78,25 @@ export class TopComponent {
     this.planCount$.subscribe((data: any) => {
       this.plandata = data?.result;
     });
+  }
+  clearNotification(id:any){
+    var formdata = new FormData();
+    formdata.append('notif_ids', JSON.stringify(id));
+    this.planService.clearNotification(formdata).subscribe((res:any)=>{
+      this.notificationCountData= 0;
+    })
+  }
+  
+
+  notificationList(){
+    this.planService.notificationList().subscribe((res)=>{
+      
+      this.notificationListData= res.result.results;
+     let ids=  this.notificationListData.filter(function(e:any){return e}).map(function(e:any){
+        return e.id
+        });
+this.clearNotification(ids)
+    })
   }
 
   searchboxopen() {
@@ -146,6 +171,8 @@ export class TopComponent {
     this.orderService.updateSearchText('');
   }
   showNotifications(){
+
     this.isShowNotifications= !this.isShowNotifications
+    this.notificationList();
   }
 }
