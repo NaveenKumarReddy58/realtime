@@ -221,7 +221,7 @@ const routes: Routes = [
       },
       {
         path: 'send-notification',
-        component: DriverAddComponent,
+        component: NotificationListComponent,
         title: 'Send Notification',
         canActivate: [AuthGuard],
       },

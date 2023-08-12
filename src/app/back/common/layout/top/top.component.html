@@ -250,10 +250,10 @@
           </a>
         </li>
         <li>
-          <a>
-            <img src="assets/images/top-icon04.png" />
-            <span>Send Notification</span>
-          </a>
+            <a routerLink="/{{ _isRoleName }}/send-notification" routerLinkActive="active-link">
+              <img src="assets/images/top-icon04.png" />
+              <span>Send Notification</span>
+            </a>
         </li>
         <li (click)="onClickTopItem('tickets')">
           <a routerLink="/{{ _isRoleName }}/tickets" routerLinkActive="active-link">

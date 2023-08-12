@@ -101,7 +101,6 @@ export class TopComponent {
         }
     })
   }
-
   deleteNotification(id:any){
     var formdata = new FormData();
     formdata.append('notif_ids', JSON.stringify([Number(id)]));
