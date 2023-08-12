@@ -101,7 +101,8 @@
                       <a>
                         <span class="DotSpan">&nbsp;</span>
                         <span class="DotSpan_Title fontSize10"> Processed </span>
-                        <div  *ngIf='getDateTime("pending") != "NA"' class="DotSpan_Title fontSize12" style="color: black;"> {{getDateTime("pending") | date:'medium'}} </div>
+                        <div  *ngIf='getDateTime("pending") != "NA"' class="DotSpan_Title fontSize12" style="color: black;"> {{getDateTime("pending") | date:'mediumDate'}} </div>
+                        <div  *ngIf='getDateTime("pending") != "NA"' class="DotSpan_Title fontSize12" style="color: black;"> {{getDateTime("pending") | date:'shortTime'}} </div>
                         <div  *ngIf='getDateTime("pending") == "NA"' class="DotSpan_Title fontSize12" style="color: black;">NA </div>                          </a>
                       <span
                         [ngClass]="(orderData?.order_status== 'shipped' || orderData?.order_status== 'en-route' || orderData?.order_status== 'successful' || orderData?.order_status== 'pending' )?'line-active':'' "
@@ -113,7 +114,8 @@
                       <a>
                         <span class="DotSpan">&nbsp;</span>
                         <span class="DotSpan_Title fontSize10"> Shipped </span>
-                        <div  *ngIf='getDateTime("shipped") != "NA"' class="DotSpan_Title fontSize12" style="color: black;"> {{getDateTime("shipped") | date:'medium'}} </div>
+                        <div  *ngIf='getDateTime("shipped") != "NA"' class="DotSpan_Title fontSize12" style="color: black;"> {{getDateTime("shipped") | date:'mediumDate'}} </div>
+                        <div  *ngIf='getDateTime("shipped") != "NA"' class="DotSpan_Title fontSize12" style="color: black;"> {{getDateTime("shipped") | date:'shortTime'}} </div>
                         <div  *ngIf='getDateTime("shipped") == "NA"' class="DotSpan_Title fontSize12" style="color: black;"> NA </div>                          </a>
                       <span
                         [ngClass]="(orderData?.order_status== 'shipped' || orderData?.order_status== 'en-route' || orderData?.order_status== 'successful')?'line-active':'' "
@@ -126,10 +128,9 @@
                       <a>
                         <span class="DotSpan">&nbsp;</span>
                         <span class="DotSpan_Title fontSize10"> En route </span>
-                        <div  *ngIf='getDateTime("en-route") != "NA"' class="DotSpan_Title fontSize12" style="color: black;"> {{getDateTime("en-route") | date:'medium'}} </div>
+                        <div  *ngIf='getDateTime("en-route") != "NA"' class="DotSpan_Title fontSize12" style="color: black;"> {{getDateTime("en-route") | date:'mediumDate'}} </div>
+                        <div  *ngIf='getDateTime("en-route") != "NA"' class="DotSpan_Title fontSize12" style="color: black;"> {{getDateTime("en-route") | date:'shortTime'}} </div>
                         <div  *ngIf='getDateTime("en-route") == "NA"' class="DotSpan_Title fontSize12" style="color: black;"> NA </div>
-
-
                       </a>
                       <span
                         [ngClass]="(orderData?.order_status== 'en-route' || orderData?.order_status== 'successful')?'line-active':'' "
@@ -140,7 +141,8 @@
                       <a>
                         <span class="DotSpan">&nbsp;</span>
                         <span class="DotSpan_Title fontSize10"> Delivered </span>
-                        <div  *ngIf='getDateTime("successful") != "NA"' class="DotSpan_Title fontSize12" style="color: black;"> {{getDateTime("successful") | date:'medium'}} </div>
+                        <div  *ngIf='getDateTime("successful") != "NA"' class="DotSpan_Title fontSize12" style="color: black;"> {{getDateTime("successful") | date:'mediumDate'}} </div>
+                        <div  *ngIf='getDateTime("successful") != "NA"' class="DotSpan_Title fontSize12" style="color: black;"> {{getDateTime("successful") | date:'shortTime'}} </div>
                         <div  *ngIf='getDateTime("successful") == "NA"' class="DotSpan_Title fontSize12" style="color: black;">NA </div>                      </a>
                     </li>
                   </ul>
