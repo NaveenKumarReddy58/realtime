@@ -196,7 +196,8 @@ export class AuthService {
       );
   }
 
-  login(email: string, password: string, fcm_token:any, device_type:string) {
+  login(email: string, password: string, token:any, device_type:string) {
+    let fcm_token:any= token ? token : '123'
     return this.http
       .post<any>(`${this._liveApiUrl}/account/token/`, {
         email,
