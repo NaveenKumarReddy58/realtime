@@ -262,12 +262,21 @@
                   <td>
                     <div class="GetIocn">
                       <a class="drivers-phone-container position-relative">
-                        <img (click)="onClickPhone(index)" class="push-notification" src="../../../../assets/images/phone.jpg" />
+                        <img (click)="onClickPhone(index)" class="push-notification cursor-pointer" src="../../../../assets/images/phone.jpg" />
                         <div *ngIf="(isShowContactDialog && index == phoneIndex)" class="drivers-list-phone-dialog">
                           <div class="confirmation-msg">
                             <div class="row mx-2">
-                                <span class="contact-number">+91 {{item?.customer_phone}} <i class="fa fa-copy px-2"  (click)="copyText('+91 9874359345')" aria-hidden="true"></i></span>
+                                <p class="text-start text-muted my-1">Customer Phone No.</p>
+                                <span class="contact-number text-start">+91 {{item?.customer_phone}} <i class="fa fa-copy px-2"  (click)="copyText(item?.customer_phone)" aria-hidden="true"></i></span>
                             </div>
+                            <div *ngIf="item?.current_driver?.phone_number" class="row mx-2 my-2">
+                            <hr >
+                              <p class="text-start  my-1 text-muted">Driver Phone No.</p>
+                              <span class="contact-number text-start">+91 {{ item?.current_driver?.phone_number ?  item?.current_driver?.phone_number : '' }}
+                                <i class="fa fa-copy px-2"  (click)="copyText(item?.current_driver?.phone_number
+                                )" aria-hidden="true"></i></span>
+                          </div>
+
                           </div>
                         </div>
                       </a>

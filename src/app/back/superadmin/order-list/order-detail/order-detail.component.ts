@@ -165,6 +165,7 @@ export class OrderDetailComponent {
         data: {
           title: 'Update?',
           pageName: 'order-details',
+          btns: ['Close','Update'],
           driverData: {
             id: this.orderData?.current_driver?.id,
             assignedOrdersCount:this.orderData?.assigned_order[0]?.driver?.assigned_orders_count,

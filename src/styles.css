@@ -492,3 +492,10 @@ input[type=number] {
   margin-top: auto;
   padding-top: 3px;
 }
+
+.realtime-btn:hover{
+  background: #0eb002;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+}

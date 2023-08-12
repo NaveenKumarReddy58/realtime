@@ -292,7 +292,7 @@
                         <div class="small d-inline-block">{{notification.notification}}</div>
                     </div>
                     <span class="ms-auto">
-                      <i class="fa fa-close"></i>
+                      <i (click)="deleteNotification(notification.id)" class="fa fa-close"></i>
                     </span>
                 </div>
                 </div>

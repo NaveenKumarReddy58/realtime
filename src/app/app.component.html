@@ -1,4 +1,4 @@
-<app-splash></app-splash>
+<app-splash *ngIf="!isLoggedIn"></app-splash>
 <section *ngIf="!isLoggedIn"  style="background: white; height: 100%;">
   <router-outlet></router-outlet>
 </section>

@@ -59,20 +59,20 @@
 
                                                         </td> -->
                                                         <td class="px-0 float-end">
-                                                            <span (click)="edit()" class="mx-3">Edit <i
+                                                            <span (click)="edit()" class="mx-3 cursor-pointer realtime-btn">Edit <i
                                                                     class="fa fa-pencil action-icon"></i></span>
-                                                            <span (click)="deleteDriver()">Delete <i
+                                                            <span (click)="deleteDriver()" class="cursor-pointer realtime-btn">Delete <i
                                                                     class="fa fa-trash action-icon"></i></span>
-                                                            <span class="mx-3 cursor-pointer" (click)="showRecentNotifications()">Recent Notifications <i class="fa fa-bell mx-2" aria-hidden="true"></i></span>
+                                                            <span class="mx-3 cursor-pointer realtime-btn" (click)="showRecentNotifications()">Recent Notifications <i class="fa fa-bell mx-2" aria-hidden="true"></i></span>
                                                         </td>
                                                     </tr>
                                                 </table>
                                                 <table class="TodayOrder mt-4">
                                                     <tr>
-                                                        <td (click)="showOrdersList('today')">Today's Order: {{todayOrderCount}}</td>
-                                                        <td  (click)="showOrdersList('pending')">Pending: {{pendingOrderCount}}</td>
-                                                        <td  (click)="showOrdersList('successful')">Successful: {{successfullOrderCount}}</td>
-                                                        <td  (click)="showOrdersList('unsuccessful')">UnSuccessful: {{unSuccessfullOrderCount}}</td>
+                                                        <td><span class="cursor-pointer" (click)="showOrdersList('today')">Today's Order: {{todayOrderCount}}</span></td>
+                                                        <td><span class="cursor-pointer" (click)="showOrdersList('pending')">Pending: {{pendingOrderCount}}</span></td>
+                                                        <td><span class="cursor-pointer" (click)="showOrdersList('successful')">Successful: {{successfullOrderCount}}</span></td>
+                                                        <td><span class="cursor-pointer" (click)="showOrdersList('unsuccessful')">UnSuccessful: {{unSuccessfullOrderCount}}</span></td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -137,7 +137,7 @@
                                                         id="Documents">
                                                 </label>
                                             </div>
-                                            <div class="col-md-6 mb-4" [ngClass]="!isEditMode? 'view-mode' : ''">
+                                            <!-- <div class="col-md-6 mb-4" [ngClass]="!isEditMode? 'view-mode' : ''">
                                                 <span class="Password">
                                                     <input type="text" name=""
                                                         placeholder="Vehicle Number"
@@ -150,7 +150,7 @@
                                                         placeholder="Vehicle Type"
                                                         class="Pro_input_Field">
                                                 </span>
-                                            </div>
+                                            </div> -->
                                             <div class="col-md-12 mb-4"  [ngClass]="!isEditMode? 'view-mode' : ''">
                                                 <span class="Password FileUpload">
                                                     <strong>Vehicle Documents:</strong>

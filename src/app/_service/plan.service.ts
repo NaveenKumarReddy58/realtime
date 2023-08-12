@@ -128,4 +128,8 @@ export class PlanService {
     return this.http
       .put<any>(`${this._liveApiUrl}/notification/clear-notification/`, formData)
   }
+  deletNotification(formData:any) {
+    return this.http
+      .post<any>(`${this._liveApiUrl}/notification/clear-notification/`, formData)
+  }
 }

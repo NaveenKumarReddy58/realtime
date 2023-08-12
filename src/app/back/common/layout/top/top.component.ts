@@ -88,17 +88,30 @@ export class TopComponent {
   }
   
 
-  notificationList(){
+  notificationList(isClearNotification:boolean){
+    
     this.planService.notificationList().subscribe((res)=>{
       
       this.notificationListData= res.result.results;
      let ids=  this.notificationListData.filter(function(e:any){return e}).map(function(e:any){
         return e.id
         });
-this.clearNotification(ids)
+        if(isClearNotification){
+          this.clearNotification(ids)
+        }
     })
   }
 
+  deleteNotification(id:any){
+    var formdata = new FormData();
+    formdata.append('notif_ids', JSON.stringify([Number(id)]));
+    this.planService.deletNotification(formdata).subscribe((res)=>{
+      
+      this.notificationListData= res.result.results;
+     
+        this.notificationList(false);
+      })
+  }
   searchboxopen() {
     this.searchbox = !this.searchbox;
   }
@@ -173,6 +186,6 @@ this.clearNotification(ids)
   showNotifications(){
 
     this.isShowNotifications= !this.isShowNotifications
-    this.notificationList();
+    this.notificationList(true);
   }
 }

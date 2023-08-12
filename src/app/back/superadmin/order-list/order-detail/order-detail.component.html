@@ -34,7 +34,7 @@
                 <div *ngIf="orderData?.order_status != 'en-route'" class="DeliveryNumber fontSize10">
                   Track Order will be enabled only when Order is En-route.
                 </div>
-                <div [ngClass]="orderData?.order_status != 'en-route' ? 'disabled-custom':'' " class="TrackDriver mt-3"
+                <div [ngClass]="orderData?.order_status != 'en-route' ? 'disabled-custom':'' " class="TrackDriver mt-3 cursor-pointer"
                   (click)="trackDriver()">
                   <a> Track Order</a>
                 </div>
@@ -53,7 +53,7 @@
                 </a>
                 <div class="cursor-pointer mt-3 "
                   (click)="uploadInvoice()">
-                  <button class="ButtonStyle"> {{this.orderData && this.orderData.order_invoice.length > 0 ? 'Edit Invoice': 'Upload Invoice'}} <i class="fa fa-spinner fa-spin" *ngIf="isInvoiceLoading"></i>
+                  <button class="ButtonStyle"> {{this.orderData && this.orderData.order_invoice.length > 0 ? 'Edit Packing Slip': 'Upload Packing Slip'}} <i class="fa fa-spinner fa-spin" *ngIf="isInvoiceLoading"></i>
                   </button>
                 </div>
                 <br>
@@ -186,7 +186,7 @@
                         </tr>
                         <tr>
                           <th class="fontSize12">Delivery Time:</th>
-                          <td class="fontSize12">{{ orderData?.dely_time }}</td>
+                          <td class="fontSize12">{{ orderData?.dely_time ?  orderData?.dely_time : 'NA' }}</td>
                         </tr>
                         <tr>
                           <th class="fontSize12">Remarks:</th>
@@ -201,7 +201,7 @@
                   <div class="CardPopup">
                     <div class="row">
                       <div class="col-8 mb-3">
-                        <span class="Password FileUpload lh-50">
+                        <span  *ngIf="orderData?.current_driver.first_name" class="Password FileUpload lh-50">
                           <strong>Assigned To:
                             {{
                             orderData?.current_driver.first_name
@@ -211,16 +211,19 @@
                             }}</strong>
                           On {{ orderData?.dely_date | date : "fullDate" }}
                         </span>
+                        <span *ngIf="!orderData?.current_driver.first_name" class="Password FileUpload lh-50">
+                          <strong>Assigned To:</strong>UNASSIGNED
+                        </span>
                       </div>
-                      <div class="col-4 mb-2 p-0">
+                      <div *ngIf="orderData?.current_driver.first_name" class="col-4 mb-2 p-0">
                         <div (click)="reassignNewDriver('200ms','200ms')" class="NewDriver">
-                          <a>Reassign to new driver</a>
+                          <a>Reassign</a>
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-md-6 mb-4">
-                        <label class="fontSize12 fw-bold">Contact Driver</label>
+                        <label class="fontSize12 fw-bold">Driver Phone Number</label>
 
                         <span class="Password">
                           <input type="text" name="" disabled placeholder="Contact Driver "
@@ -234,7 +237,7 @@
                       </div>
 
                       <div class="col-md-6 mb-4">
-                        <label class="fontSize12 fw-bold">Contact Customer</label>
+                        <label class="fontSize12 fw-bold">Customer Phone Number</label>
                         <span class="Password">
                           <input type="text" name="" placeholder="Contact Customer" class="Pro_input_Field fontSize12"
                             disabled value="{{ orderData?.customer_phone }}" />
