@@ -356,4 +356,9 @@ export class AuthService {
       queryParamsHandling: 'merge', //merge
     });
   }
+
+  convertImageIntoBinary(imageSrc:any){
+    return this.http.get(imageSrc, { responseType: 'arraybuffer' });
+      
+  }
 }

@@ -24,12 +24,12 @@
                 <div class="driver-profile-image-container">
 
                   <i
-                    *ngIf="!(imageSrc?.toString().indexOf('profilephoto') > 0) && isAddMode"
+                    *ngIf="!(imageSrc?.toString().indexOf('profilephoto') > 0)"
                     class="fa fa-trash Delete"
                     (click)="removeProfilePhoto($event)"
                   ></i>
                   <img
-                  *ngIf="!(imageSrc?.toString().indexOf('profilephoto') > 0) && isAddMode"
+                  *ngIf="!(imageSrc?.toString().indexOf('profilephoto') > 0)"
                     style="padding: 25px"
                     class="driver-profile-image"
                     [src]="imageSrc"
@@ -38,12 +38,11 @@
                     height="100%"
                   />
                   <img
-                  *ngIf="(imageSrc?.toString().indexOf('profilephoto') > 0) && isAddMode"
+                  *ngIf="(imageSrc?.toString().indexOf('profilephoto') > 0)"
                     class="driver-profile-image"
                     [src]="imageSrc"
                     [alt]="'logo'"
                     width="100px"
-                    height="100px"
                   />
                   <span (click)="fileInput.click()" class="Edit_Img">
                     <img
@@ -154,7 +153,7 @@
                             </select>
                         </span>
                       </div>
-                      <div class="col-md-6 mb-3">
+                      <div class="col-md-5 mb-3">
                         <span class="Password">
                           <input
                             type="number"
@@ -172,6 +171,22 @@
                             </div>
                             <div *ngIf="f['phone_number'].errors['pattern']">
                               Phone number must be 10 digits
+                            </div>
+                          </div>
+                        </span>
+                      </div>
+                      <div class="col-md-5 mb-3">
+                        <span class="Password">
+                          <input
+                            type="number"
+                            formControlName="confirm_phone_number"
+                            placeholder="Confirm Mobile Number"
+                            onKeyPress="if(this.value.length==10) return false;"
+                            class="Pro_input_Field driver-input-field"
+                          />
+                          <div *ngIf="isSubmitted" class="text-danger">
+                            <div *ngIf="this.frmValues.confirm_phone_number != this.frmValues.phone_number">
+                              Phone Number doesn't match
                             </div>
                           </div>
                         </span>

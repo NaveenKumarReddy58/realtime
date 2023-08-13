@@ -26,6 +26,10 @@
         <p><strong>Distance:</strong> {{distance}}</p>
         <p><strong>Delivery Address:</strong> {{this.data.orderData?.dely_address.address}}</p>
         <p><strong>Delivery Date:</strong> {{this.data.orderData?.dely_date | date : "fullDate"}}</p>
+        <div mat-dialog-actions class="dialog-btn">
+            <button class="No-btn" (click)="onDismiss()" mat-button mat-dialog-close>Close</button>
+        </div>
+
     </div>
     
 </div>

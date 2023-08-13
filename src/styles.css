@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
+html, body { height: 100%;
+  font-family: system-ui !important;
+ }
 body { margin: 0; font-family: serif; background: #ebeff2;}
 
 .back-to-list button{
@@ -229,7 +231,7 @@ input[type=number] {
     font-weight: bold;
 }
 .mdc-dialog__actions .No-btn{
-  background: white;
+  background: hsl(205,46%,92%);
     padding: 10px;
     width: 100px;
     border-radius: 10px;
@@ -498,4 +500,5 @@ input[type=number] {
     color: white;
     padding: 10px;
     border-radius: 10px;
+    cursor: pointer;
 }

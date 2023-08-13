@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -67,7 +68,8 @@ export class DriverAddComponent {
     public authService: AuthService,
     public driverService: DriverService,
     private toastr: ToastrService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private http: HttpClient
   ) {
     this.id = this.route.snapshot.params['id'];
     
@@ -81,8 +83,12 @@ export class DriverAddComponent {
         '',
         [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
       ],
+      confirm_phone_number: [
+        '',
+        [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
+      ],
       address: ['', [Validators.required]],
-      is_head_driver: [''],
+      is_head_driver: [false],
       is_active: ['true'],
       image: [''],
       driver_insurance:[''],
@@ -124,13 +130,14 @@ export class DriverAddComponent {
           email: driverDetails.email,
           password: driverDetails?.password, 
           phone_number: driverDetails.phone_number,
+          confirm_phone_number: driverDetails.phone_number,
           country_code:driverDetails.country_code,
           address: driverDetails.address,
           is_active: driverDetails.is_active,
           date_joined: driverDetails.date_joined,
           profile_img: driverDetails.profile_image,
           certificates: driverDetails.certificate,
-          is_head_driver: '',
+          is_head_driver: false,
         });
         if (driverDetails.groups[0].name == 'Head Driver') {
           this.addDriver.patchValue({
@@ -186,19 +193,13 @@ export class DriverAddComponent {
   }
   handleSubmit() {
     this.isSubmitted = true;
-    if (this.addDriver.invalid) {
+    if (this.addDriver.invalid || (this.frmValues.confirm_phone_number != this.frmValues.phone_number)) {
       return;
     }
     if(!this.isAddMode){
       this.addDriver.patchValue({
         is_head_driver: this.addDriver.value['is_head_driver'],
       });
-    } else{
-      if (this.addDriver.value['is_head_driver'] == '') {
-        this.addDriver.patchValue({
-          is_head_driver: true,
-        });
-      }
     }
 
     // console.log('Api Data Err ffff', this.f, this.frmValues);
@@ -395,6 +396,14 @@ export class DriverAddComponent {
   removeProfilePhoto(e: any) {
     e.stopPropagation();
     this.imageSrc = 'assets/images/profilephoto.png';
+   
+    this.authService.convertImageIntoBinary(this.imageSrc).subscribe((res:any) => {
+      let randomNum = Math.floor((Math.random() * 10000000) + 1);
+      var file = new File([res], "profile_"+randomNum);
+      this.addDriver.patchValue({
+        image: file
+      })
+    });;
   }
   
 }

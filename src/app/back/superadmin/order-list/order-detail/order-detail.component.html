@@ -58,8 +58,10 @@
                 </div>
                 <br>
                 <div *ngIf="this.orderData && this.orderData.order_invoice.length > 0" class="driver-profile-image-container invoice-image-container ">
-                  <img class="driver-profile-image invoice-image" [src]="invoiceImageSrc" [alt]="'logo'" width="100%"
-                    height="100%" />
+                  <img *ngIf="!(invoiceImageSrc.indexOf('edit-icon') > 0) && invoiceImageSrc" class="driver-profile-image invoice-image" [src]="invoiceImageSrc" [alt]="'logo'" width="100%"
+                    height="100%" (click)="fileInput.click()" />
+                    <img *ngIf="(invoiceImageSrc.indexOf('edit-icon') > 0)  && invoiceImageSrc" class="driver-profile-image invoice-image" [src]="invoiceImageSrc" [alt]="'logo'" width="50%"
+                    height="90%" (click)="fileInput.click()" />
                 </div>
                 <a *ngIf="this.orderData && this.orderData.order_invoice.length > 0" target="_blank" class="uploaded-documenst mx-1 cursor-pointer" [href]="invoiceImageSrc">
                   <span style="font-size: 12px;">View Proof of Delivery Image</span>
@@ -75,14 +77,14 @@
                 <div class="AddEdit-Delete">
                   <span class="fontSize12">Status</span>
                   <div class="Edi_Delete">
-                    <span *ngIf="orderData && orderData.id" class="__Edit fontSize12"
+                    <span *ngIf="orderData && orderData.id" class="__Edit fontSize12 p-2 realtime-btn"
                       routerLink="/admin/orders/{{ orderData.id }}">
                       <span>Edit <i class="fa fa-pencil"></i></span>
                     </span>
-                    <span class="__Edit fontSize12" (click)="orderDelete(orderData.id)">
+                    <span class="__Edit fontSize12 realtime-btn p-2" (click)="orderDelete(orderData.id)">
                       <span>Delete <i class="fa fa-trash"></i></span>
                     </span>
-                    <span class="__Edit cursor-pointer fontSize12" (click)="getRecentNotifications()">
+                    <span class="__Edit cursor-pointer fontSize12 realtime-btn p-2" (click)="getRecentNotifications()">
                       <span>Recent Notifications <i class="fa fa-bell" aria-hidden="true"></i>
                       </span>
                     </span>

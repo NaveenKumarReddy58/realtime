@@ -1,6 +1,6 @@
 import { Component, Inject, Input, ViewChild } from '@angular/core';
 import { GoogleMap, MapDirectionsService,MapTrafficLayer, MapInfoWindow } from '@angular/google-maps';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { DriverService } from '../_service/driver.service';
 import { Observable, map } from 'rxjs';
@@ -55,7 +55,8 @@ export class ReusableGoogleMapComponent {
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData ,private locateDriverService: LocateDriverService,
-   private router : Router, private driverService: DriverService,private mapDirectionsService: MapDirectionsService){
+   private router : Router, private driverService: DriverService,private mapDirectionsService: MapDirectionsService,
+   public dialogRef: MatDialogRef<ReusableGoogleMapComponent>,){
     
   }
   ngOnInit(){
@@ -98,6 +99,9 @@ export class ReusableGoogleMapComponent {
         }
       });
       
+  }
+  onDismiss(){
+    this.dialogRef.close();
   }
 
   getDriverLocationsFromFirebase(){

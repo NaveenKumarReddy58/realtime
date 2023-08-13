@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, ResolveStart, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/_service/auth.service';
@@ -90,6 +90,7 @@ export class OrderDetailComponent {
       reader.onload = (e) => {
         this.invoiceImageSrc = reader.result;
       };
+      console.log(file)
       this.invoice = file;
       reader.readAsDataURL(file);
     }
@@ -97,6 +98,10 @@ export class OrderDetailComponent {
   removeProfilePhoto(e: any) {
     e.stopPropagation();
     this.invoiceImageSrc = 'assets/images/edit-icon.png';
+    this.authService.convertImageIntoBinary(this.invoiceImageSrc).subscribe((res:any) => {
+      var file = new File([res], "packing_slip", { type: "image/jpeg", lastModified: Date.now() })
+      this.invoice = file;
+    });;
   }
   sendMessage(){
     this.isSubmitted= true;
