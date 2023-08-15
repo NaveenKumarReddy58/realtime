@@ -359,6 +359,13 @@ export class AuthService {
 
   convertImageIntoBinary(imageSrc:any){
     return this.http.get(imageSrc, { responseType: 'arraybuffer' });
-      
+  }
+  async getFileFromUrl(url:any){
+    const response = await fetch(url);
+    let randomNum = Math.floor((Math.random() * 10000000) + 1);
+    const data = await response.blob();
+    return new File([data], "sa_profile_"+randomNum, {
+      type: "image/jpeg",
+    });
   }
 }

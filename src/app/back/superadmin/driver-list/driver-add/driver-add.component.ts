@@ -397,11 +397,9 @@ export class DriverAddComponent {
     e.stopPropagation();
     this.imageSrc = 'assets/images/profilephoto.png';
    
-    this.authService.convertImageIntoBinary(this.imageSrc).subscribe((res:any) => {
-      let randomNum = Math.floor((Math.random() * 10000000) + 1);
-      var file = new File([res], "profile_"+randomNum);
+    this.authService.getFileFromUrl(this.imageSrc).then((res:any) => {
       this.addDriver.patchValue({
-        image: file
+        image: res
       })
     });;
   }

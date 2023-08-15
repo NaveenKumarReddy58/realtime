@@ -14,21 +14,21 @@ export class ProfileComponent {
   ProfileFor!: FormGroup;
   profileData: any;
   loading = false;
-  isSendOTPSuccess: boolean= false;
+  isSendOTPSuccess: boolean = false;
   imageSrc: any = 'assets/images/profilephoto.png';
 
   profile$!: Observable<object[]>;
-  isSubmitted: boolean= false;
-  isLoading: boolean= false;
+  isSubmitted: boolean = false;
+  isLoading: boolean = false;
   sendOtp$!: Observable<any>;
   isOtpSent: boolean = false;
-  upLoading: boolean =false;
+  upLoading: boolean = false;
   otp: any;
   verifyOtp$!: Observable<any>;
   resetPassword$!: any;
   phone_number = '7528943768';
-  otpSubmitted: boolean= false;
-  isProfileSubmitted: boolean= false;
+  otpSubmitted: boolean = false;
+  isProfileSubmitted: boolean = false;
   profileUpdate$: any;
 
   constructor(
@@ -45,7 +45,7 @@ export class ProfileComponent {
       last_name: ['', [Validators.required]],
       phone_number: ['', [Validators.required]],
       email: ['', [Validators.required]],
-      profile_image:[''],
+      profile_image: [''],
       country_code: ['+91']
     });
 
@@ -67,20 +67,28 @@ export class ProfileComponent {
         profile_image: this.profileData?.profile_image,
 
       })
-      this.imageSrc= this.profileData?.profile_image;
-      this.phone_number= this.profileData?.phone_number
+      this.imageSrc = this.profileData?.profile_image;
+      this.phone_number = this.profileData?.phone_number
+      if(this.imageSrc){
+        this.authService.getFileFromUrl(this.imageSrc).then((result: any) => { 
+          this.ProfileFor.patchValue({
+            profile_image: result,
+          })
+        }).catch(err => console.error(err));
+      }
+      
     });
   }
 
-  onOtpChange(otp: any){
-    this.otp= otp;
+  onOtpChange(otp: any) {
+    this.otp = otp;
   }
-  saveChanges(){
-    this.isProfileSubmitted= true;
-    if(this.ProfileFor.controls['first_name'].status == 'INVALID' || 
-    this.ProfileFor.controls['last_name'].status == 'INVALID' ||
-    this.ProfileFor.controls['email'].status == 'INVALID' ||
-    this.ProfileFor.controls['phone_number'].status == 'INVALID'){
+  saveChanges() {
+    this.isProfileSubmitted = true;
+    if (this.ProfileFor.controls['first_name'].status == 'INVALID' ||
+      this.ProfileFor.controls['last_name'].status == 'INVALID' ||
+      this.ProfileFor.controls['email'].status == 'INVALID' ||
+      this.ProfileFor.controls['phone_number'].status == 'INVALID') {
       return;
     }
 
@@ -103,20 +111,20 @@ export class ProfileComponent {
     this.profileUpdate$ = this.authService.profileUpdate(formData);
 
     this.profileUpdate$.subscribe((data: any) => {
-      this.isLoading= false;
+      this.isLoading = false;
       this.toastr.success(data.resultDescription)
       this.getProfile()
-    }, (err:any)=>{
-      this.isLoading= false;
+    }, (err: any) => {
+      this.isLoading = false;
       this.toastr.error("Failed to Update")
     });
   }
-  sendOTP(){
-    this.isSubmitted= true;
-    if(this.ProfileFor.controls['pswd'].status == 'INVALID' || 
-    this.ProfileFor.controls['confirm_password'].status == 'INVALID' || 
-     !(this.ProfileFor.value.pswd?.length >= 6) ||
-    (this.ProfileFor.value.confirm_password != this.ProfileFor.value.pswd)){
+  sendOTP() {
+    this.isSubmitted = true;
+    if (this.ProfileFor.controls['pswd'].status == 'INVALID' ||
+      this.ProfileFor.controls['confirm_password'].status == 'INVALID' ||
+      !(this.ProfileFor.value.pswd?.length >= 6) ||
+      (this.ProfileFor.value.confirm_password != this.ProfileFor.value.pswd)) {
       return;
     }
     this.isLoading = true;
@@ -124,32 +132,32 @@ export class ProfileComponent {
     this.sendOtp$ = this.authService.sendMobileOtp(this.phone_number, '+91');
 
     this.sendOtp$.subscribe((data: any) => {
-      this.isOtpSent= true;
-      this.isLoading= false;
+      this.isOtpSent = true;
+      this.isLoading = false;
       this.toastr.success(data.message)
-    }, (err)=>{
-      this.isLoading= false;
+    }, (err) => {
+      this.isLoading = false;
       this.toastr.error("Failed to Send an OTP")
     });
   }
 
-  updatePassword(){
+  updatePassword() {
     this.upLoading = true;
-    this.otpSubmitted= true;
+    this.otpSubmitted = true;
     this.verifyOtp$ = this.authService.verifyResetOtp(this.phone_number, this.otp);
 
     this.verifyOtp$.subscribe((data: any) => {
-      if(data.resultCode == '1'){
-        this.upLoading= false;
+      if (data.resultCode == '1') {
+        this.upLoading = false;
         this.toastr.success("Please Wait...")
         this.resetPassword();
-      } else{
+      } else {
         this.toastr.error(data.message)
       }
 
-      
-    }, (err)=>{
-      this.isLoading= false;
+
+    }, (err) => {
+      this.isLoading = false;
       this.toastr.error("Failed to Verify an OTP")
     });
   }
@@ -168,20 +176,20 @@ export class ProfileComponent {
       reader.readAsDataURL(file);
     }
   }
-  resetPassword(){
+  resetPassword() {
     this.resetPassword$ = this.authService.resetPassword(this.profileData?.email, this.ProfileFor.value.pswd);
     this.resetPassword$.subscribe((data: any) => {
 
-      this.isOtpSent= false;
-      this.isSubmitted= false;
+      this.isOtpSent = false;
+      this.isSubmitted = false;
       this.ProfileFor.patchValue({
         pswd: '',
         confirm_password: ''
       });
       this.toastr.success("Password has been updated successfully!")
-    }, (err:any)=>{
-      this.isOtpSent= false;
-      this.isSubmitted= false;
+    }, (err: any) => {
+      this.isOtpSent = false;
+      this.isSubmitted = false;
       this.ProfileFor.patchValue({
         pswd: '',
         confirm_password: ''
@@ -189,4 +197,7 @@ export class ProfileComponent {
       this.toastr.error("Failed to Update the Password")
     });
   }
+
+
+  
 }

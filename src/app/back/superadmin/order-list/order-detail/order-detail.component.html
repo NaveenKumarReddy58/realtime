@@ -45,7 +45,7 @@
                     (click)="removeProfilePhoto($event)"></i>
                   <img *ngIf="!(invoiceImageSrc.indexOf('edit-icon') > 0) && invoiceImageSrc" class="driver-profile-image invoice-image" [src]="invoiceImageSrc" [alt]="'logo'" width="100%"
                     height="100%" (click)="fileInput.click()" />
-                  <img *ngIf="(invoiceImageSrc.indexOf('edit-icon') > 0)  && invoiceImageSrc" class="driver-profile-image invoice-image" [src]="invoiceImageSrc" [alt]="'logo'" width="50%"
+                  <img *ngIf="(invoiceImageSrc.indexOf('edit-icon') > 0)  && invoiceImageSrc" class="invoice-image" [src]="invoiceImageSrc" [alt]="'logo'" width="50%"
                     height="90%" (click)="fileInput.click()" />
                 </div>
                 <a *ngIf="this.orderData && this.orderData.order_invoice.length > 0" target="_blank" class="uploaded-documenst mx-1 cursor-pointer" [href]="invoiceImageSrc">

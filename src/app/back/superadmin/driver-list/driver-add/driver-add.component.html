@@ -10,12 +10,8 @@
         <div class="OrderList">
           <div class="row">
             <div class="col-md-12 Oreder">
-              <span class="RecentTitle AddOrder" *ngIf="isAddMode"
-                >Add Driver</span
-              >
-              <span class="RecentTitle AddOrder" *ngIf="!isAddMode"
-                >Edit Driver</span
-              >
+              <span class="RecentTitle AddOrder" *ngIf="isAddMode">Add Driver</span>
+              <span class="RecentTitle AddOrder" *ngIf="!isAddMode">Edit Driver</span>
             </div>
           </div>
           <div class="row mt-4">
@@ -23,58 +19,27 @@
               <div class="ProfilePik">
                 <div class="driver-profile-image-container">
 
-                  <i
-                    *ngIf="!(imageSrc?.toString().indexOf('profilephoto') > 0)"
-                    class="fa fa-trash Delete"
-                    (click)="removeProfilePhoto($event)"
-                  ></i>
-                  <img
-                  *ngIf="!(imageSrc?.toString().indexOf('profilephoto') > 0)"
-                    style="padding: 25px"
-                    class="driver-profile-image"
-                    [src]="imageSrc"
-                    [alt]="'logo'"
-                    width="100%"
-                    height="100%"
-                  />
-                  <img
-                  *ngIf="(imageSrc?.toString().indexOf('profilephoto') > 0)"
-                    class="driver-profile-image"
-                    [src]="imageSrc"
-                    [alt]="'logo'"
-                    width="100px"
-                  />
+                  <i *ngIf="!(imageSrc?.toString().indexOf('profilephoto') > 0)" class="fa fa-trash Delete"
+                    (click)="removeProfilePhoto($event)"></i>
+                  <img *ngIf="!(imageSrc?.toString().indexOf('profilephoto') > 0)" class="driver-profile-image"
+                    [src]="imageSrc" [alt]="'logo'" width="100%" height="100%" />
+                  <img *ngIf="(imageSrc?.toString().indexOf('profilephoto') > 0)" class="driver-profile-image"
+                    [src]="imageSrc" [alt]="'logo'" width="100px" />
                   <span (click)="fileInput.click()" class="Edit_Img">
-                    <img
-                      src="assets/images/edir-img.png"
-                      width="30px"
-                      height="30px"
-                    />
+                    <img src="assets/images/edir-img.png" width="30px" height="30px" />
                   </span>
                 </div>
-                <div class="my-2 driver-name">{{(this.frmValues.first_name | titlecase) +" "+ (this.frmValues.last_name | titlecase)}} <span *ngIf="frmValues.is_head_driver">(HD)</span></div>
+                <div class="my-2 driver-name">{{(this.frmValues.first_name | titlecase) +" "+ (this.frmValues.last_name
+                  | titlecase)}} <span *ngIf="frmValues.is_head_driver">(HD)</span></div>
                 <div (click)="fileInput.click()" class="ChangeImg">
                   Change Profile Photo
                 </div>
               </div>
             </div>
             <div class="col-9">
-              <form
-                [formGroup]="addDriver"
-                class="ProfileFor"
-                enctype="multipart/form-data"
-              >
-                <input
-                  #fileInput
-                  type="file"
-                  (change)="readURL($event)"
-                  style="display: none"
-                  accept="image/*"
-                />
-                <div
-                  *ngIf="isSubmitted && f['image'].errors"
-                  class="text-danger"
-                >
+              <form [formGroup]="addDriver" class="ProfileFor" enctype="multipart/form-data">
+                <input #fileInput type="file" (change)="readURL($event)" style="display: none" accept="image/*" />
+                <div *ngIf="isSubmitted && f['image'].errors" class="text-danger">
                   <div *ngIf="f['image'].errors['required']">
                     Logo is required
                   </div>
@@ -87,37 +52,22 @@
                       <div class="col-md-6">
                         <div class="head-driver">
                           <strong>Head Driver:</strong>
-                          <input
-                            class="head-driver mx-2"
-                            type="checkbox"
-                            formControlName="is_head_driver"
-                          />
+                          <input class="head-driver mx-2" type="checkbox" formControlName="is_head_driver" />
                         </div>
                       </div>
                       <!-- <div class="col-md-6 text-right">
                         <div class="Div01 Div02">
                           Deriver Status: Active -->
-                      <input
-                        type="hidden"
-                        value="true"
-                        formControlName="is_active"
-                      />
+                      <input type="hidden" value="true" formControlName="is_active" />
                       <!-- </div>
                       </div> -->
                     </div>
                     <div class="row">
                       <div class="col-md-6 mb-3">
                         <span class="Password">
-                          <input
-                            type="text"
-                            formControlName="first_name"
-                            placeholder="First Name"
-                            class="Pro_input_Field driver-input-field"
-                          />
-                          <div
-                            *ngIf="isSubmitted && f['first_name'].errors"
-                            class="text-danger"
-                          >
+                          <input type="text" formControlName="first_name" placeholder="First Name"
+                            class="Pro_input_Field driver-input-field" />
+                          <div *ngIf="isSubmitted && f['first_name'].errors" class="text-danger">
                             <div *ngIf="f['first_name'].errors['required']">
                               First Name is required
                             </div>
@@ -126,16 +76,9 @@
                       </div>
                       <div class="col-md-6 mb-3">
                         <span class="Password">
-                          <input
-                            type="text"
-                            formControlName="last_name"
-                            placeholder="Last Name"
-                            class="Pro_input_Field driver-input-field"
-                          />
-                          <div
-                            *ngIf="isSubmitted && f['last_name'].errors"
-                            class="text-danger"
-                          >
+                          <input type="text" formControlName="last_name" placeholder="Last Name"
+                            class="Pro_input_Field driver-input-field" />
+                          <div *ngIf="isSubmitted && f['last_name'].errors" class="text-danger">
                             <div *ngIf="f['last_name'].errors['required']">
                               Last Name is required
                             </div>
@@ -145,27 +88,21 @@
                       <div class="col-md-2 mb-3">
                         <span class="Password">
 
-                           <select aria-placeholder="Country" formControlName="country_code" class="Pro_input_Field selectpicker countrypicker">
-                              <option value="" disabled selected>Select Country</option>
-                              <option *ngFor="let country of countryCodes" [value]="country.dial_code">
-                               <span class="mx-3 fw-bold">{{country.name+" "+country.dial_code}}</span>
-                              </option>
-                            </select>
+                          <select aria-placeholder="Country" formControlName="country_code"
+                            class="Pro_input_Field selectpicker countrypicker">
+                            <option value="" disabled selected>Select Country</option>
+                            <option *ngFor="let country of countryCodes" [value]="country.dial_code">
+                              <span class="mx-3 fw-bold">{{country.name+" "+country.dial_code}}</span>
+                            </option>
+                          </select>
                         </span>
                       </div>
                       <div class="col-md-5 mb-3">
                         <span class="Password">
-                          <input
-                            type="number"
-                            formControlName="phone_number"
-                            placeholder="Mobile Number"
+                          <input type="number" formControlName="phone_number" placeholder="Mobile Number"
                             onKeyPress="if(this.value.length==10) return false;"
-                            class="Pro_input_Field driver-input-field"
-                          />
-                          <div
-                            *ngIf="isSubmitted && f['phone_number'].errors"
-                            class="text-danger"
-                          >
+                            class="Pro_input_Field driver-input-field" />
+                          <div *ngIf="isSubmitted && f['phone_number'].errors" class="text-danger">
                             <div *ngIf="f['phone_number'].errors['required']">
                               Phone number is required
                             </div>
@@ -177,13 +114,9 @@
                       </div>
                       <div class="col-md-5 mb-3">
                         <span class="Password">
-                          <input
-                            type="number"
-                            formControlName="confirm_phone_number"
-                            placeholder="Confirm Mobile Number"
-                            onKeyPress="if(this.value.length==10) return false;"
-                            class="Pro_input_Field driver-input-field"
-                          />
+                          <input type="number" formControlName="confirm_phone_number"
+                            placeholder="Confirm Mobile Number" onKeyPress="if(this.value.length==10) return false;"
+                            class="Pro_input_Field driver-input-field" />
                           <div *ngIf="isSubmitted" class="text-danger">
                             <div *ngIf="this.frmValues.confirm_phone_number != this.frmValues.phone_number">
                               Phone Number doesn't match
@@ -193,15 +126,9 @@
                       </div>
                       <div class="col-md-12 mb-3">
                         <span class="Password">
-                          <textarea
-                            formControlName="address"
-                            placeholder="Address"
-                            class="CompanyField Address mb-0"
-                          ></textarea>
-                          <div
-                            *ngIf="isSubmitted && f['address'].errors"
-                            class="text-danger"
-                          >
+                          <textarea formControlName="address" placeholder="Address"
+                            class="CompanyField Address mb-0"></textarea>
+                          <div *ngIf="isSubmitted && f['address'].errors" class="text-danger">
                             <div *ngIf="f['address'].errors['required']">
                               Address is required
                             </div>
@@ -210,16 +137,9 @@
                       </div>
                       <div class="col-md-6 mb-3">
                         <span class="Password">
-                          <input
-                            type="text"
-                            formControlName="email"
-                            placeholder="Email"
-                            class="Pro_input_Field driver-input-field"
-                          />
-                          <div
-                            *ngIf="isSubmitted && f['email'].errors"
-                            class="text-danger"
-                          >
+                          <input type="text" formControlName="email" placeholder="Email"
+                            class="Pro_input_Field driver-input-field" />
+                          <div *ngIf="isSubmitted && f['email'].errors" class="text-danger">
                             <div *ngIf="f['email'].errors['required']">
                               Email is required
                             </div>
@@ -231,16 +151,9 @@
                       </div>
                       <div class="col-md-6 mb-" *ngIf="isAddMode">
                         <span class="Password">
-                          <input
-                            type="password"
-                            formControlName="password"
-                            placeholder="Password"
-                            class="Pro_input_Field driver-input-field"
-                          />
-                          <div
-                            *ngIf="isSubmitted && f['password'].errors"
-                            class="text-danger"
-                          >
+                          <input type="password" formControlName="password" placeholder="Password"
+                            class="Pro_input_Field driver-input-field" />
+                          <div *ngIf="isSubmitted && f['password'].errors" class="text-danger">
                             <div *ngIf="f['password'].errors['required']">
                               Password is required
                             </div>
@@ -249,36 +162,25 @@
                       </div>
                       <div class="col-md-12">
                         <ul class="UploadMedia Addmedia certificates-container">
-                          <li
-                            (click)="
+                          <li (click)="
                               fileCertificatesInput.click();
                               onCertificateClick(item.name)
-                            "
-                            *ngFor="
+                            " *ngFor="
                               let item of certificatesItems;
                               let index = index
-                            "
-                          >
-                            <label
-                              [ngClass]="
+                            ">
+                            <label [ngClass]="
                                 item.img.indexOf('edit-icon') > 0
                                   ? ''
                                   : 'with-img'
-                              "
-                            >
-                              <i
-                                *ngIf="!(item.img.indexOf('edit-icon') > 0)"
-                                class="fa fa-trash Delete"
-                                (click)="removePhoto($event, item.name)"
-                              ></i>
-                              <img
-                                [src]="item.img"
-                                [ngClass]="
+                              ">
+                              <i *ngIf="!(item.img.indexOf('edit-icon') > 0)" class="fa fa-trash Delete"
+                                (click)="removePhoto($event, item.name)"></i>
+                              <img [src]="item.img" [ngClass]="
                                   item.img.indexOf('edit-icon') > 0
                                     ? ''
                                     : 'c-width-100'
-                                "
-                              />
+                                " />
                               <span>{{ item.name }}</span>
                             </label>
                           </li>
@@ -287,49 +189,25 @@
                           <li *ngFor="
                               let item of moreAttachments;
                               let index = index
-                            "
-                          >
+                            ">
                             <label class="with-img">
-                              <i
-                                class="fa fa-trash Delete"
-                                (click)="removeMoreAttachment(item)"
-                              ></i>
-                              <img
-                                [src]="item"
-                                class="c-width-100"
-                              />
+                              <i class="fa fa-trash Delete" (click)="removeMoreAttachment(item)"></i>
+                              <img [src]="item" class="c-width-100" />
                               <span>Other - {{ index + 1}}</span>
                             </label>
                           </li>
                           <li (click)="addMoreCertificatesInput.click();">
                             <label>
-                              <img
-                                src="assets/images/edit-icon.png"
-                              />
+                              <img src="assets/images/edit-icon.png" />
                               <span>Add More</span>
                             </label>
                           </li>
                         </ul>
-                        <input
-                          #addMoreCertificatesInput
-                          type="file"
-                          (change)="readAddMoreCertificatesURL($event)"
-                          style="display: none"
-                          accept="image/*"
-                          multiple="true"
-                        />
-                        <input
-                          #fileCertificatesInput
-                          type="file"
-                          (change)="readCertificatesURL($event)"
-                          style="display: none"
-                          accept="image/*"
-                          multiple="true"
-                        />
-                        <div
-                          *ngIf="isSubmitted && f['image'].errors"
-                          class="text-danger"
-                        >
+                        <input #addMoreCertificatesInput type="file" (change)="readAddMoreCertificatesURL($event)"
+                          style="display: none" accept="image/*" multiple="true" />
+                        <input #fileCertificatesInput type="file" (change)="readCertificatesURL($event)"
+                          style="display: none" accept="image/*" multiple="true" />
+                        <div *ngIf="isSubmitted && f['image'].errors" class="text-danger">
                           <div *ngIf="f['image'].errors['required']">
                             Certificates are required
                           </div>
@@ -352,38 +230,19 @@
                       </div> -->
                       <div class="row mt-4">
                         <div class="col-md-12">
-                          <div
-                            class="d-flex justify-content-between Cancel_Save"
-                          >
-                            <button
-                              routerLink="/admin/driver"
-                              class="CancelButton"
-                            >
+                          <div class="d-flex justify-content-between Cancel_Save">
+                            <button routerLink="/admin/driver" class="CancelButton">
                               Cancel
                             </button>
-                            <button
-                              type="submit"
-                              (click)="handleSubmit()"
-                              class="SaveButton ButtonStyle"
-                              *ngIf="isAddMode"
-                            >
+                            <button type="submit" (click)="handleSubmit()" class="SaveButton ButtonStyle"
+                              *ngIf="isAddMode">
                               Add Driver
-                              <i
-                                class="fa fa-spinner fa-spin"
-                                *ngIf="loading"
-                              ></i>
+                              <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
                             </button>
-                            <button
-                              type="submit"
-                              (click)="handleSubmit()"
-                              class="SaveButton ButtonStyle"
-                              *ngIf="!isAddMode"
-                            >
+                            <button type="submit" (click)="handleSubmit()" class="SaveButton ButtonStyle"
+                              *ngIf="!isAddMode">
                               Update Driver
-                              <i
-                                class="fa fa-spinner fa-spin"
-                                *ngIf="loading"
-                              ></i>
+                              <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
                             </button>
                           </div>
                         </div>

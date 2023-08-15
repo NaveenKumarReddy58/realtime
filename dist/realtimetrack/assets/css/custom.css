@@ -519,6 +519,9 @@ button.ButtonStyle {
   border-radius: 15px;
   font-weight: 600;
 }
+button.ButtonStyle:hover {
+  background: #0eb002bd;
+}
 button.ButtonStyle:disabled,
 button.ButtonStyle[disabled]{
   background: #b8ceb6;
@@ -919,6 +922,8 @@ input.Pro_input_Field {
   border: 1px solid #ccd2d8;
   padding-left: 15px;
   font-size: 17px;
+  color: darkslategray;
+  font-weight: 500;
 }
 textarea.HelpArea {
   width: 100%;

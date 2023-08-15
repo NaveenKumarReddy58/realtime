@@ -146,7 +146,10 @@ import { ReusableCropImageComponent } from './reusable-crop-image/reusable-crop-
     HttpClientModule,
     NgOtpInputModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      preventDuplicates: true,
+      
+    }),
     SlickCarouselModule,
     CountdownModule,
     StoreModule.forRoot({}, {}),
