@@ -85,6 +85,7 @@ import { PublicCompanyRegistrationComponent } from './public-company-registratio
 import { HelpComponent } from './back/superadmin/help/help.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { ReusableCropImageComponent } from './reusable-crop-image/reusable-crop-image.component';
+import { CallIconComponent } from './call-icon/call-icon.component';
 
 // initializeApp(environment.firebase);
 
@@ -134,6 +135,7 @@ import { ReusableCropImageComponent } from './reusable-crop-image/reusable-crop-
     PublicCompanyRegistrationComponent,
     HelpComponent,
     ReusableCropImageComponent,
+    CallIconComponent,
   ],
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),

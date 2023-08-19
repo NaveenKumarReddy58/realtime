@@ -1,3 +1,26 @@
 .app-timer{
     position: unset;
 }
+.KnowMore {
+    text-decoration: none;
+    font-size: 13px;
+    padding: 5px 8px;
+    border-radius: 10px;
+    margin-top: 15px;
+    display: inline-block;
+    background: #fff3bb;
+    color: #fcaa17;
+  }
+  .plan-img{
+    max-width: 65px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 30px;
+  }
+  .sa-phonenumber .intl-tel-input{
+    width: 100% !important;
+  }
+
+  .LSDIconImgSet{
+    gap: 0px;
+  }

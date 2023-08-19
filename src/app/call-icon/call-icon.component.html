@@ -1,0 +1,14 @@
+
+
+                        <a class="drivers-phone-container position-relative">
+                            <i class="fa fa-phone mx-2" (click)="onClickPhone(cIndex)"></i>
+                        <span class="call-pop" >Call</span>
+                            <div class="drivers-list-phone-dialog" *ngIf="cIndex == phoneIndex && isShowCaller">
+                              <div class="confirmation-msg">
+                                <div class="row mx-2">
+                                    <span class="contact-number text-start">+91 9842354345 <i class="fa fa-copy px-2"  (click)="copyText('+91 9842354345')" aria-hidden="true"></i></span>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        <div  *ngIf="cIndex == phoneIndex && isShowCaller" (click)="onClickPhone(cIndex)" class="overlay"></div>

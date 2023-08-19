@@ -1,138 +1,354 @@
-<div class="ContentArea p-5">
-  <div class="row mb-2">
-    <div class="col-md-6">
-      <div class="HeadingName">
-        <h2>My Profile</h2>
+
+<div class="ContentArea">
+  <div class="TabsList">
+    <ul class="Tab_List">
+      <li class=" cursor-pointer" [ngClass]="tabName == 'MY' ? 'active' : ''" (click)="onTabClick('MY')">
+        <a >My Profile</a>
+      </li>
+      <li class="cursor-pointer" [ngClass]="tabName == 'LSD' ? 'active' : ''"  (click)="onTabClick('LSD')">
+        <a>List of Super Admins </a>
+      </li>
+    </ul>
+  </div>
+  <div class="p-5" *ngIf="tabName == 'MY'">
+    <div class="row mb-2">
+      <div class="col-md-6">
+        <div class="HeadingName">
+          <h2>My Profile</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-12 col-xs-12 col-sm-12">
+        <div class="ProfilePik">
+          <div class="driver-profile-image-container">
+            <img class="driver-profile-image" *ngIf="imageSrc" [src]="imageSrc" [alt]="'logo'" />
+            <span (click)="fileInput.click()" class="Edit_Img">
+              <img src="assets/images/edir-img.png" width="30px" height="30px" />
+            </span>
+          </div>
+          <div (click)="fileInput.click()" class="ChangeImg">
+            Change Profile Photo
+          </div>
+        </div>
+        <input autocomplete="autocomplete_off" #fileInput type="file" (change)="readURL($event)" style="display: none" accept="image/*" />
+      </div>
+      <div class="col-lg-9 col-md-12  col-xs-12 col-sm-12">
+        <form [formGroup]="ProfileFor" class="ProfileFor">
+          <div class="row">
+            <div class="col-md-6">
+              <input autocomplete="autocomplete_off" type="text" name="first_name" formControlName="first_name" placeholder="First Name"
+                class="Pro_input_Field" />
+              <div *ngIf="isProfileSubmitted && ProfileFor.controls['first_name'].errors" class="text-danger">
+                <div *ngIf="isProfileSubmitted && ProfileFor.controls['first_name'].errors['required']">
+                  First Name Required
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <input autocomplete="autocomplete_off" type="text" formControlName="last_name" name="last_name" placeholder="Last Name"
+                class="Pro_input_Field" />
+              <div *ngIf="isProfileSubmitted && ProfileFor.controls['last_name'].errors" class="text-danger">
+                <div *ngIf="isProfileSubmitted && ProfileFor.controls['last_name'].errors['required']">
+                  Last Name Required
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col-md-6">
+              <input autocomplete="autocomplete_off" type="number" formControlName="phone_number" placeholder="Mobile Number"
+                onKeyPress="if(this.value.length==10) return false;" class="Pro_input_Field driver-input-field" />
+              <div *ngIf="isProfileSubmitted && ProfileFor.controls['phone_number'].errors" class="text-danger">
+                <div *ngIf="isProfileSubmitted && ProfileFor.controls['phone_number'].errors['required']">
+                  Phone Number Required
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <input autocomplete="autocomplete_off" type="text" name="email" formControlName="email" placeholder="Email" class="Pro_input_Field" />
+              <div *ngIf="isProfileSubmitted && ProfileFor.controls['email'].errors" class="text-danger">
+                <div *ngIf="isProfileSubmitted && ProfileFor.controls['email'].errors['required']">
+                  Email Required
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="justify-content-between mt-3 text-end Cancel_Save">
+            <button (click)="saveChanges()" class="SaveButton ButtonStyle">Save Changes</button>
+          </div>
+          <h2 class="mt-3">Change Password</h2>
+          <div class="row">
+            <div class="col-md-6">
+              <span class="Password">
+                <input autocomplete="autocomplete_off" type="password" name="password" placeholder="Enter New Password" formControlName="pswd"
+                  class="Pro_input_Field" />
+                <div *ngIf="isSubmitted && ProfileFor.controls['pswd'].errors" class="text-danger">
+                  <div *ngIf="isSubmitted && ProfileFor.controls['pswd'].errors['required']">
+                    Password Required
+                  </div>
+                </div>
+                <div *ngIf="isSubmitted" class="text-danger">
+                  <div *ngIf="ProfileFor.value.pswd?.length < 6">
+                    Password must contain at least 6 or more characters
+                  </div>
+                </div>
+              </span>
+            </div>
+            <div class="col-md-6">
+              <span class="Password">
+                <input autocomplete="autocomplete_off" type="password" name="confirmpassword" placeholder="Confirm Password"
+                  formControlName="confirm_password" class="Pro_input_Field" />
+                <div *ngIf="isSubmitted && ProfileFor.controls['confirm_password'].errors" class="text-danger">
+                  <div *ngIf="isSubmitted && ProfileFor.controls['confirm_password'].errors['required']">
+                    Confirm Password Required
+                  </div>
+                </div>
+                <div class="text-danger">
+                  <div
+                    *ngIf=" (ProfileFor.value.pswd.length > 0 || ProfileFor.value.confirm_password.length > 0) &&  (ProfileFor.value.confirm_password != ProfileFor.value.pswd) ">
+                    Password should match
+                  </div>
+                </div>
+              </span>
+              <div *ngIf="!isOtpSent" class="justify-content-between mt-3 text-end Cancel_Save">
+                <button class="SaveButton ButtonStyle" (click)="sendOTP()">Send OTP <i class="fa fa-spinner fa-spin"
+                    *ngIf="isLoading"></i></button>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-4" *ngIf="isOtpSent">
+  
+            <div class="col-md-12 mb-3">
+  
+              <label>
+                <ng-otp-input class="ng-otp-input" (onInputChange)="onOtpChange($event)"
+                  [config]="{ length: 6, allowNumbersOnly: true, containerClass: 'otp-input-field' }"></ng-otp-input>
+  
+                <button class="Verify mx-3" (click)="updatePassword()">Change Password</button>
+  
+                <div class="position-relative d-inline-block">
+                  <app-timer [mobileNumber]="phone_number" [countryCode]="'+91'" class="app-timer"></app-timer>
+                </div>
+                <div *ngIf="otpSubmitted" class="text-danger">
+                  <div *ngIf="otp && otp.length != 6 || otp == null">
+                    OTP Should be 6 digit long.
+                  </div>
+                </div>
+              </label>
+            </div>
+            <div>
+  
+              <div class="col-md-12">
+                <span>To change password enter OTP Sent to: ********{{phone_number!.substr(-2)}}</span>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-lg-3 col-md-12 col-xs-12 col-sm-12">
+        <div class="ProfilePik">
+          <div class="driver-profile-image-container p-4">
+            <img class="plan-img" src="../../../../assets/images/sper-top-icon02.png" [alt]="'logo'" />
+            <div>
+              <a class="KnowMore">
+                Know More
+                <i class="fa fa-angle-down angle-down" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-9 col-md-12  col-xs-12 col-sm-12">
+        <form [formGroup]="ProfileFor" class="ProfileFor">
+          <div class="row">
+            <div class="col-md-6">
+                <div class="Pro_input_Field">
+                  <span class="mx-2"><strong>Type:</strong></span>                
+                  <span class="mx-4"><strong>Gold</strong>/Silver/Bronze</span>
+                </div>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col-md-6">
+              <div class="Pro_input_Field">
+                <span class="mx-2"><strong>Expired:</strong></span>                
+                <span class="mx-2">24 Aug, 2024 </span>
+              </div>  
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col-md-6">
+              <div class="Pro_input_Field">
+                <span class="mx-2"><strong>Data:</strong></span>                
+                <span class="mx-4">2 Supre Admin, 2 of 3 is pending </span>
+              </div>  
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-md-6">
+        <div class="HeadingName">
+          <h2>Add Super Admin</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-12 col-xs-12 col-sm-12">
+        <div class="ProfilePik">
+          <div class="driver-profile-image-container">
+            <img class="driver-profile-image" *ngIf="imageSrcSA" [src]="imageSrcSA" [alt]="'logo'" />
+            <span (click)="fileInputSA.click()" class="Edit_Img">
+              <img src="assets/images/edir-img.png" width="30px" height="30px" />
+            </span>
+          </div>
+        </div>
+        <input autocomplete="autocomplete_off" #fileInputSA type="file" (change)="readURLSA($event)" style="display: none" accept="image/*" />
+      </div>
+      <div class="col-lg-9 col-md-12  col-xs-12 col-sm-12">
+        <form [formGroup]="ProfileForSA" class="ProfileForSA">
+          <div class="row">
+            <div class="col-md-6">
+              <input autocomplete="autocomplete_off" type="text" name="first_name" formControlName="first_name" placeholder="First Name"
+                class="Pro_input_Field" />
+              <div *ngIf="isProfileSubmittedSA && ProfileForSA.controls['first_name'].errors" class="text-danger">
+                <div *ngIf="isProfileSubmittedSA && ProfileForSA.controls['first_name'].errors['required']">
+                  First Name Required
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <input autocomplete="autocomplete_off" type="text" formControlName="last_name" name="last_name" placeholder="Last Name"
+                class="Pro_input_Field" />
+              <div *ngIf="isProfileSubmittedSA && ProfileForSA.controls['last_name'].errors" class="text-danger">
+                <div *ngIf="isProfileSubmittedSA && ProfileForSA.controls['last_name'].errors['required']">
+                  Last Name Required
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col-md-6 Password">
+              <input autocomplete="autocomplete_off" type="number" formControlName="phone_number" placeholder="Mobile Number"
+               class="w-100 Pro_input_Field Pro_input_Field_Phone driver-input-field" />
+              <div *ngIf="isProfileSubmittedSA && ProfileForSA.controls['phone_number'].errors" class="text-danger">
+                <div *ngIf="isProfileSubmittedSA && ProfileForSA.controls['phone_number'].errors['required']">
+                  Phone Number Required
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <input autocomplete="autocomplete_off" type="text" name="ConfirmPhoneNumber" formControlName="confirm_phone_number" placeholder="Confirm Phone Number" class="Pro_input_Field" />
+                <div class="text-danger" *ngIf="(ProfileForSA.value.phone_number.length > 0 || ProfileForSA.value.confirm_phone_number.length > 0) &&  (ProfileForSA.value.confirm_phone_number != ProfileForSA.value.phone_number)">
+                  Password doesn't match
+                </div>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col-md-6">
+              <input autocomplete="autocomplete_off" type="text" name="email" formControlName="email" placeholder="Email" class="Pro_input_Field" />
+              <div *ngIf="isProfileSubmittedSA && ProfileForSA.controls['email'].errors" class="text-danger">
+                <div *ngIf="isProfileSubmittedSA && ProfileForSA.controls['email'].errors['required']">
+                  Email Required
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="justify-content-between text-end Cancel_Save">
+                <button (click)="saveChangesSA()" class="SaveButton ButtonStyle">Add</button>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-lg-3 col-md-12 col-xs-12 col-sm-12">
-      <div class="ProfilePik">
-        <div class="driver-profile-image-container">
-          <img class="driver-profile-image" *ngIf="imageSrc" [src]="imageSrc" [alt]="'logo'" />
-          <span (click)="fileInput.click()" class="Edit_Img">
-            <img src="assets/images/edir-img.png" width="30px" height="30px" />
-          </span>
-        </div>
-        <div (click)="fileInput.click()" class="ChangeImg">
-          Change Profile Photo
+  <div class="p-5" *ngIf="tabName == 'LSD'">
+    <div class="ContentArea_Inner">
+      <div class="ConpanyDetail home-filter mb-5">
+        <div class="row pb-1">
+          <cdk-accordion class="example-accordion">
+            <cdk-accordion-item
+            *ngFor="let item of [1,2,3]; let index=index"
+              #lsdaccordionItem="cdkAccordionItem"
+              class="example-accordion-item"
+              role="button"
+              tabindex="0"
+              [attr.id]="'lsd-accordion-header-' + index"
+              [attr.aria-expanded]="lsdaccordionItem.expanded"
+              [attr.aria-controls]="'lsd-accordion-body-' + index"
+            >
+              <ul class="Company_Detail_cnt Company_Detail_cnt02 border-bottom">
+                <li>
+                  <div class="IconImgSet Starworld LSDIconImgSet">
+                    <img
+                      src="assets/images/profilephoto.png"
+                    />
+                    <img />
+                    <span class="IconHeading"
+                      >Admin
+                      <span class="SurName">Super</span>
+                    </span>
+                  </div>
+                </li>
+                
+                <li>
+                  <div class="BookMarkCnt border-0">
+                    <ul class="d-inline-block">
+                      <li class="d-inline">
+                        <app-call-icon [cIndex]="index"></app-call-icon>
+                      </li>
+                      <li class="d-inline mx-4">
+                        <i class="fa fa-envelope mx-2"></i>
+                        <span>Email</span>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <div class="AddEdit-Delete my-0 d-inline-block mx-3">
+                    <div class="Edi_Delete gap-0">
+                      <span class="__Edit p-2 realtime-btn">
+                        <span>Edit <i class="fa fa-pencil"></i></span>
+                      </span>
+                      <span class="__Edit realtime-btn p-2" (click)="deleteSuperAdmin()">
+                        <span>Delete <i class="fa fa-trash"></i></span>
+                      </span>
+                    </div>
+                  </div>
+                  <a (click)="lsdaccordionItem.toggle()">
+                    <img
+                      *ngIf="!lsdaccordionItem.expanded"
+                      src="assets/images/round-arrow.png"
+                    />
+                    <img
+                      *ngIf="lsdaccordionItem.expanded"
+                      src="assets/images/round-arrow-up.png"
+                    />
+                  </a>
+                </li>
+              </ul>
+              <div
+                *ngIf="lsdaccordionItem.expanded"
+                class="example-accordion-item-body"
+                role="region"
+                [style.display]="lsdaccordionItem.expanded ? '' : 'none'"
+                [attr.id]="'lsd-accordion-body-' + index"
+                [attr.aria-labelledby]="'lsd-accordion-header-' + index"
+              >
+                Email: <strong>techlandspace@gmail.com</strong><br><br>
+                Phone Number: <strong>7456745676</strong><br><br>
+                Address: <strong>India, Mumbai</strong><br><br>
+              </div>
+            </cdk-accordion-item>
+          
+          </cdk-accordion>
         </div>
       </div>
-      <input autocomplete="autocomplete_off" #fileInput type="file" (change)="readURL($event)" style="display: none" accept="image/*" />
-    </div>
-    <div class="col-lg-9 col-md-12  col-xs-12 col-sm-12">
-      <form [formGroup]="ProfileFor" class="ProfileFor">
-        <div class="row">
-          <div class="col-md-6">
-            <input autocomplete="autocomplete_off" type="text" name="first_name" formControlName="first_name" placeholder="First Name"
-              class="Pro_input_Field" />
-            <div *ngIf="isProfileSubmitted && ProfileFor.controls['first_name'].errors" class="text-danger">
-              <div *ngIf="isProfileSubmitted && ProfileFor.controls['first_name'].errors['required']">
-                First Name Required
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <input autocomplete="autocomplete_off" type="text" formControlName="last_name" name="last_name" placeholder="Last Name"
-              class="Pro_input_Field" />
-            <div *ngIf="isProfileSubmitted && ProfileFor.controls['last_name'].errors" class="text-danger">
-              <div *ngIf="isProfileSubmitted && ProfileFor.controls['last_name'].errors['required']">
-                Last Name Required
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row mt-4">
-          <div class="col-md-6">
-            <input autocomplete="autocomplete_off" type="number" formControlName="phone_number" placeholder="Mobile Number"
-              onKeyPress="if(this.value.length==10) return false;" class="Pro_input_Field driver-input-field" />
-            <div *ngIf="isProfileSubmitted && ProfileFor.controls['phone_number'].errors" class="text-danger">
-              <div *ngIf="isProfileSubmitted && ProfileFor.controls['phone_number'].errors['required']">
-                Phone Number Required
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <input autocomplete="autocomplete_off" type="text" name="email" formControlName="email" placeholder="Email" class="Pro_input_Field" />
-            <div *ngIf="isProfileSubmitted && ProfileFor.controls['email'].errors" class="text-danger">
-              <div *ngIf="isProfileSubmitted && ProfileFor.controls['email'].errors['required']">
-                Email Required
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="justify-content-between mt-3 text-end Cancel_Save">
-          <button (click)="saveChanges()" class="SaveButton ButtonStyle">Save Changes</button>
-        </div>
-        <h2 class="mt-3">Change Password</h2>
-        <div class="row">
-          <div class="col-md-6">
-            <span class="Password">
-              <input autocomplete="autocomplete_off" type="password" name="password" placeholder="Enter New Password" formControlName="pswd"
-                class="Pro_input_Field" />
-              <div *ngIf="isSubmitted && ProfileFor.controls['pswd'].errors" class="text-danger">
-                <div *ngIf="isSubmitted && ProfileFor.controls['pswd'].errors['required']">
-                  Password Required
-                </div>
-              </div>
-              <div *ngIf="isSubmitted" class="text-danger">
-                <div *ngIf="ProfileFor.value.pswd?.length < 6">
-                  Password must contain at least 6 or more characters
-                </div>
-              </div>
-            </span>
-          </div>
-          <div class="col-md-6">
-            <span class="Password">
-              <input autocomplete="autocomplete_off" type="password" name="confirmpassword" placeholder="Confirm Password"
-                formControlName="confirm_password" class="Pro_input_Field" />
-              <div *ngIf="isSubmitted && ProfileFor.controls['confirm_password'].errors" class="text-danger">
-                <div *ngIf="isSubmitted && ProfileFor.controls['confirm_password'].errors['required']">
-                  Confirm Password Required
-                </div>
-              </div>
-              <div class="text-danger">
-                <div
-                  *ngIf=" (ProfileFor.value.pswd.length > 0 || ProfileFor.value.confirm_password.length > 0) &&  (ProfileFor.value.confirm_password != ProfileFor.value.pswd) ">
-                  Password should match
-                </div>
-              </div>
-            </span>
-            <div *ngIf="!isOtpSent" class="justify-content-between mt-3 text-end Cancel_Save">
-              <button class="SaveButton ButtonStyle" (click)="sendOTP()">Send OTP <i class="fa fa-spinner fa-spin"
-                  *ngIf="isLoading"></i></button>
-            </div>
-          </div>
-        </div>
-        <div class="row mt-4" *ngIf="isOtpSent">
-
-          <div class="col-md-12 mb-3">
-
-            <label>
-              <ng-otp-input class="ng-otp-input" (onInputChange)="onOtpChange($event)"
-                [config]="{ length: 6, allowNumbersOnly: true, containerClass: 'otp-input-field' }"></ng-otp-input>
-
-              <button class="Verify mx-3" (click)="updatePassword()">Change Password</button>
-
-              <div class="position-relative d-inline-block">
-                <app-timer [mobileNumber]="phone_number" [countryCode]="'+91'" class="app-timer"></app-timer>
-              </div>
-              <div *ngIf="otpSubmitted" class="text-danger">
-                <div *ngIf="otp && otp.length != 6 || otp == null">
-                  OTP Should be 6 digit long.
-                </div>
-              </div>
-            </label>
-          </div>
-          <div>
-
-            <div class="col-md-12">
-              <span>To change password enter OTP Sent to: ********{{phone_number!.substr(-2)}}</span>
-            </div>
-          </div>
-        </div>
-      </form>
     </div>
   </div>
 </div>

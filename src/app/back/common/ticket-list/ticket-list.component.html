@@ -4,7 +4,7 @@
       <li (click)="driverTickets()" [ngClass]="tabName == 'DT' ? 'active' : ''">
         <a >Driver Tickets : {{headerCountsData[0]?.count}}</a>
       </li>
-      <li (click)="customerTickets()" [ngClass]="tabName == 'CT' ? 'active' : ''">
+    <li (click)="customerTickets()" [ngClass]="tabName == 'CT' ? 'active' : ''">
         <a>Customer Tickets: {{headerCountsData[1]?.count}} </a>
       </li>
       <li (click)="myTickets()" [ngClass]="tabName == 'MT' ? 'active' : ''">

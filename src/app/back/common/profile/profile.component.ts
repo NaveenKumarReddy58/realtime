@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/_service/auth.service';
+import { DialogAnimationsComponent } from '../dialog-animations/dialog-animations.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-profile',
@@ -12,10 +14,13 @@ import { AuthService } from 'src/app/_service/auth.service';
 })
 export class ProfileComponent {
   ProfileFor!: FormGroup;
+  ProfileForSA!: FormGroup;
+
   profileData: any;
   loading = false;
   isSendOTPSuccess: boolean = false;
   imageSrc: any = 'assets/images/profilephoto.png';
+  imageSrcSA: any= 'assets/images/profilephoto.png';
 
   profile$!: Observable<object[]>;
   isSubmitted: boolean = false;
@@ -30,13 +35,18 @@ export class ProfileComponent {
   otpSubmitted: boolean = false;
   isProfileSubmitted: boolean = false;
   profileUpdate$: any;
+  isProfileSubmittedSA: boolean = false;
+  loadingSA: boolean = false;
+  tabName: string= "LSD";
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     public authService: AuthService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private dialog: MatDialog
+
   ) {
     this.ProfileFor = formBuilder.group({
       pswd: ['', [Validators.required]],
@@ -48,6 +58,16 @@ export class ProfileComponent {
       profile_image: [''],
       country_code: ['+91']
     });
+    this.ProfileForSA = formBuilder.group({
+      first_name: ['', [Validators.required]],
+      last_name: ['', [Validators.required]],
+      phone_number: ['', [Validators.required]],
+      confirm_phone_number: ['', [Validators.required]],
+      email: ['', [Validators.required]],
+      profile_image: [''],
+      country_code: ['+91']
+    });
+  
 
     this.getProfile();
   }
@@ -119,6 +139,42 @@ export class ProfileComponent {
       this.toastr.error("Failed to Update")
     });
   }
+  saveChangesSA() {
+    this.isProfileSubmittedSA = true;
+    if (this.ProfileForSA.controls['first_name'].status == 'INVALID' ||
+      this.ProfileForSA.controls['last_name'].status == 'INVALID' ||
+      this.ProfileForSA.controls['phone_number'].status == 'INVALID' ||
+      this.ProfileForSA.controls['email'].status == 'INVALID' ) {
+      return;
+    }
+
+    //this.loadingSA = true;
+
+    const formData = new FormData();
+    for (let i in this.ProfileForSA.value) {
+      if (this.ProfileForSA.value[i] instanceof Blob) {
+        formData.append(
+          i,
+          this.ProfileForSA.value[i],
+          this.ProfileForSA.value[i].name ? this.ProfileForSA.value[i].name : ''
+        );
+        // console.log('blob');
+      } else {
+        formData.append(i, this.ProfileForSA.value[i]);
+      }
+    }
+
+    // this.profileUpdate$ = this.authService.profileUpdate(formData);
+
+    // this.profileUpdate$.subscribe((data: any) => {
+    //   this.isLoading = false;
+    //   this.toastr.success(data.resultDescription)
+    //   this.getProfile()
+    // }, (err: any) => {
+    //   this.isLoading = false;
+    //   this.toastr.error("Failed to Update")
+    // });
+  }
   sendOTP() {
     this.isSubmitted = true;
     if (this.ProfileFor.controls['pswd'].status == 'INVALID' ||
@@ -138,6 +194,27 @@ export class ProfileComponent {
     }, (err) => {
       this.isLoading = false;
       this.toastr.error("Failed to Send an OTP")
+    });
+  }
+
+  deleteSuperAdmin(){
+    let enterAnimationDuration = '200ms';
+    let exitAnimationDuration = '200ms';
+
+    const dialogRef = this.dialog.open(DialogAnimationsComponent, {
+      width: '450px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+      data: {
+        title: 'Alert?',
+        message:
+          'Are you sure want to delete this order?',
+      },
+    });
+    dialogRef.afterClosed().subscribe((dialogResult:any) => {
+      if(dialogResult){
+        
+      }
     });
   }
 
@@ -176,6 +253,21 @@ export class ProfileComponent {
       reader.readAsDataURL(file);
     }
   }
+  readURLSA(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.imageSrcSA = reader.result;
+      };
+      // this.ProfileFor.patchValue({
+      //   profile_image: file
+      // })
+
+      reader.readAsDataURL(file);
+    }
+  }
   resetPassword() {
     this.resetPassword$ = this.authService.resetPassword(this.profileData?.email, this.ProfileFor.value.pswd);
     this.resetPassword$.subscribe((data: any) => {
@@ -198,6 +290,8 @@ export class ProfileComponent {
     });
   }
 
-
+  onTabClick(val:string){
+    this.tabName= val;
+  }
   
 }
