@@ -95,7 +95,7 @@ export class OrderAddComponent {
     });
 
 
-    this.addressList(1);
+    this.addressList('all');
     this.warehouseList();
     this.addOrderF.patchValue({ po: this.po });
   }

@@ -37,7 +37,7 @@ export class ProfileComponent {
   profileUpdate$: any;
   isProfileSubmittedSA: boolean = false;
   loadingSA: boolean = false;
-  tabName: string= "LSD";
+  tabName: string= "MY";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -112,8 +112,6 @@ export class ProfileComponent {
       return;
     }
 
-    this.loading = true;
-
     const formData = new FormData();
     for (let i in this.ProfileFor.value) {
       if (this.ProfileFor.value[i] instanceof Blob) {
@@ -127,6 +125,7 @@ export class ProfileComponent {
         formData.append(i, this.ProfileFor.value[i]);
       }
     }
+    this.isLoading = true;
 
     this.profileUpdate$ = this.authService.profileUpdate(formData);
 
@@ -158,22 +157,11 @@ export class ProfileComponent {
           this.ProfileForSA.value[i],
           this.ProfileForSA.value[i].name ? this.ProfileForSA.value[i].name : ''
         );
-        // console.log('blob');
       } else {
         formData.append(i, this.ProfileForSA.value[i]);
       }
     }
 
-    // this.profileUpdate$ = this.authService.profileUpdate(formData);
-
-    // this.profileUpdate$.subscribe((data: any) => {
-    //   this.isLoading = false;
-    //   this.toastr.success(data.resultDescription)
-    //   this.getProfile()
-    // }, (err: any) => {
-    //   this.isLoading = false;
-    //   this.toastr.error("Failed to Update")
-    // });
   }
   sendOTP() {
     this.isSubmitted = true;
@@ -244,11 +232,11 @@ export class ProfileComponent {
 
       const reader = new FileReader();
       reader.onload = (e) => {
-        this.imageSrc = reader.result;
+        this.cropImage('250ms','250ms',event,'profile_image')
       };
-      this.ProfileFor.patchValue({
-        profile_image: file
-      })
+      // this.ProfileFor.patchValue({
+      //   profile_image: file
+      // })
 
       reader.readAsDataURL(file);
     }
@@ -259,7 +247,8 @@ export class ProfileComponent {
 
       const reader = new FileReader();
       reader.onload = (e) => {
-        this.imageSrcSA = reader.result;
+        // this.imageSrcSA = reader.result;
+        this.cropImage('250ms','250ms',event,"super_admin")
       };
       // this.ProfileFor.patchValue({
       //   profile_image: file
@@ -292,6 +281,37 @@ export class ProfileComponent {
 
   onTabClick(val:string){
     this.tabName= val;
+  }
+
+  cropImage(
+    enterAnimationDuration: string,
+    exitAnimationDuration: string,
+    event:any,
+    imageType:string
+  ): void {
+    const dialogRef= this.dialog.open(DialogAnimationsComponent, {
+      width: '500px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+      data: {
+        btns: ['Cancel','Crop'],
+        pageName: 'crop-image',
+        image: event
+      },
+    });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if(dialogResult){
+        if(imageType== "profile_image"){
+          this.imageSrc= dialogResult.croppedImage.base64;
+          this.ProfileFor.patchValue({
+            profile_image: dialogResult.croppedImage.file
+          })
+        } else if(imageType== "super_admin"){
+          this.imageSrcSA = dialogResult.croppedImage.base64;
+        }
+        
+      }
+    });
   }
   
 }

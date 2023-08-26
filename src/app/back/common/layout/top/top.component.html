@@ -283,16 +283,18 @@
             </div>
             <div class="box-body notification-body p-0">
                 <div *ngFor="let notification of notificationListData; let index = index">
-                <div  class="p-3 d-flex gap-3 align-items-center bg-light border-bottom osahan-post-header">
+                <div class="p-3 d-flex gap-3 align-items-center bg-light border-bottom osahan-post-header">
                     <div class="dropdown-list-image mr-3">
                         <img class="rounded-circle" width="50px" height="50px" src="assets/images/profilephoto.png" alt="" />
                     </div>
-                    <div class=" mr-3 text-start">
-                        <div class="text-truncate fw-bold">{{notification.notif_type}}<span style="padding-left: 10px;" class="text-right text-muted mr-auto">3d</span></div>
+                    <div  (click)="navigateToOrderDetails(notification?.notif_detail_id)" class=" mr-3 text-start">
+                        <div class="text-truncate fw-bold">{{notification.notif_type}}<span style="padding-left: 10px;" class="text-right text-muted mr-auto">{{notification.sent_at | dateAgo}} ago</span></div>
                         <div class="small d-inline-block">{{notification.notification}}</div>
                     </div>
                     <span class="ms-auto">
-                      <i (click)="deleteNotification(notification.id)" class="fa fa-close"></i>
+                      <i (click)="deleteNotification(notification.id)" class="fa fa-close">
+                        <i *ngIf="isDeleteLoading && isDeleteId == notification.id" class="fa fa-spinner fa-spin"></i>
+                      </i>
                     </span>
                 </div>
                 </div>

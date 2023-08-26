@@ -9,6 +9,7 @@ import { DriverService } from 'src/app/_service/driver.service';
 import { OrderService } from 'src/app/_service/order.service';
 import { DialogAnimationsComponent } from '../../common/dialog-animations/dialog-animations.component';
 import { MatDialog } from '@angular/material/dialog';
+import { SendNotificationComponent } from 'src/app/send-notification/send-notification.component';
 
 @Component({
   selector: 'app-order-list',
@@ -444,6 +445,28 @@ export class OrderListComponent {
       }
     );
   }
+
+  sendNotification(enterAnimationDuration: string,
+    exitAnimationDuration: string,driverId?:any, customerPhoneNo?:string){
+      const dialogRef = this.dialog.open(SendNotificationComponent, {
+        width:"50%",
+        enterAnimationDuration,
+        exitAnimationDuration,
+        panelClass: 'order-detail',
+        data: {
+          title:'Send Notification To Driver/Customer',
+          btns: ['Close','Send'],
+          isShowSelectGroupSection: true,
+          userId: driverId,
+          customerId: customerPhoneNo
+          
+        },
+      });
+      dialogRef.afterClosed().subscribe((dialogResult:any) => {
+        if(dialogResult){
+        }
+      });
+    }
 
   handleSubmit() {
     this.isSubmitted = true;

@@ -86,6 +86,7 @@ import { HelpComponent } from './back/superadmin/help/help.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { ReusableCropImageComponent } from './reusable-crop-image/reusable-crop-image.component';
 import { CallIconComponent } from './call-icon/call-icon.component';
+import { SendNotificationComponent } from './send-notification/send-notification.component';
 
 // initializeApp(environment.firebase);
 
@@ -136,6 +137,7 @@ import { CallIconComponent } from './call-icon/call-icon.component';
     HelpComponent,
     ReusableCropImageComponent,
     CallIconComponent,
+    SendNotificationComponent
   ],
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),

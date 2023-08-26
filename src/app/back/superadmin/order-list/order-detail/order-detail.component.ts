@@ -9,6 +9,7 @@ import { DriverService } from 'src/app/_service/driver.service';
 import { OrderService } from 'src/app/_service/order.service';
 import { DialogAnimationsComponent } from 'src/app/back/common/dialog-animations/dialog-animations.component';
 import { ReusableGoogleMapComponent } from 'src/app/reusable-google-map/reusable-google-map.component';
+import { SendNotificationComponent } from 'src/app/send-notification/send-notification.component';
 
 @Component({
   selector: 'app-order-detail',
@@ -48,7 +49,9 @@ export class OrderDetailComponent {
     }
   }
   ngOnInit(): void {
+
   }
+  
   get f() {
     return this.orderDetailsPushForm.controls;
   }
@@ -60,6 +63,27 @@ export class OrderDetailComponent {
       return "NA";
     }
   }
+  sendNotification(enterAnimationDuration: string,
+    exitAnimationDuration: string,userId?:any, groupType?:string){
+      const dialogRef = this.dialog.open(SendNotificationComponent, {
+        width:"50%",
+        enterAnimationDuration,
+        exitAnimationDuration,
+        panelClass: 'order-detail',
+        data: {
+          title:'Send Notification To '+groupType,
+          btns: ['Close','Send'],
+          isShowSelectGroupSection: false,
+          groupType: groupType,
+          userId: userId
+          
+        },
+      });
+      dialogRef.afterClosed().subscribe((dialogResult:any) => {
+        if(dialogResult){
+        }
+      });
+    }
   orderDetail(id: number) {
     this.orderService.orderDetail(id).subscribe(
       (data: any) => {
@@ -90,7 +114,6 @@ export class OrderDetailComponent {
       reader.onload = (e) => {
         this.invoiceImageSrc = reader.result;
       };
-      console.log(file)
       this.invoice = file;
       reader.readAsDataURL(file);
     }

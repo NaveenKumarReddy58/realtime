@@ -62,7 +62,6 @@ export class DialogAnimationsComponent {
   }
 
   setImage(event:any){
-    console.log(event)
     this.croppedImage= event;
   }
   onDismiss(): void {

@@ -518,6 +518,7 @@ button.ButtonStyle {
   padding: 15px 25px;
   border-radius: 15px;
   font-weight: 600;
+  min-width: 175px;
 }
 button.ButtonStyle:hover {
   background: #0eb002bd;
@@ -1389,6 +1390,8 @@ span.TitleNae {
   border-right: 2px solid #0eb002;
   padding: 0 20px;
   font-weight: 600;
+  width: 100%;
+    display: block;
 }
 a.ClearButton {
   background: #bff0ba;
@@ -2830,7 +2833,7 @@ form.Search button {
   border: 0;
   background: none;
   left: 10px;
-  top: 10px;
+  top: 15px;
   color: #dcdcdc;
 }
 .OrderTrackingSearch ul {

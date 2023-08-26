@@ -232,10 +232,10 @@
                         <span class="Password">
                           <input type="text" name="" disabled placeholder="Contact Driver "
                             class="Pro_input_Field fontSize12" value="{{
-                                orderData?.assigned_order[0]?.driver?.phone_number
+                              orderData?.current_driver.phone_number
                               }}" />
-                          <i *ngIf="orderData?.assigned_order[0]?.driver?.phone_number?.length > 0"
-                            (click)="copyText(orderData?.assigned_order[0]?.driver?.phone_number)"
+                          <i *ngIf="orderData?.current_driver.phone_number?.length > 0"
+                            (click)="copyText(orderData?.current_driver.phone_number)"
                             class="fa-solid fa-copy order-details-copy"></i>
                         </span>
                       </div>
@@ -250,8 +250,19 @@
                             class="fa-solid fa-copy order-details-copy"></i>
                         </span>
                       </div>
+                      <div  class="col-md-12 my-4 d-flex justify-between">
+                        <button class="ButtonStyle" (click)="sendNotification('500ms','500ms',orderData?.current_driver?.id , 'Driver')">
+                          Send Notification to Driver <img class="send" src="../../assets/images/pushnotification-white.jpg">
 
-                      <div class="col-md-10 mb-4">
+                        </button>
+                        <button class="ButtonStyle" (click)="sendNotification('500ms','500ms',orderData?.customer_phone, 'Customer' )">
+                          Send Notification to Customer <img class="send" src="../../assets/images/pushnotification-white.jpg">
+
+                        </button>
+                        
+                      </div>
+
+                      <!-- <div class="col-md-10 mb-4">
                         <span class="Password">
                           <input type="text" name="" formControlName="pnMsgCustomer"
                             placeholder="Push Notification message to Customer" class="Pro_input_Field" />
@@ -291,7 +302,7 @@
                             <img class="send" src="../../assets/images/pushnotification-white.jpg">
                           </button>
                         </span>
-                      </div>
+                      </div> -->
                     </div>
 
                     <!-- <div class="d-flex justify-content-between mt-4 Cancel_Save">

@@ -233,7 +233,7 @@
                           src="./../../../../assets/images/d_assigned.svg"
                         />
                       </ng-container>
-                    {{ item.order_type == 'pickup' ? item.po :  item.order_no}}
+                    {{ item.po ? item.po :  item.order_no}}
                     </div>
                     
                   </td>
@@ -280,7 +280,7 @@
                           </div>
                         </div>
                       </a>
-                      <img (click)="onClickPushNotification()" class="push-notification" src="../../../../assets/images/pushnotification.png.jpg" />
+                      <img (click)="sendNotification('500ms','500ms',item?.current_driver?.id, item?.customer_phone)" class="push-notification" src="../../../../assets/images/pushnotification.png.jpg" />
                       <input
                         *ngIf="item?.assigned_order.length == 0"
                         (change)="updateAsign(item.id, $event)"

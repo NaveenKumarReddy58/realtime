@@ -78,7 +78,7 @@ export class ReusableGoogleMapComponent {
       this.locateDriverService.getDriversInfo().then((res:any)=>{
         if(res && res.length > 0){
           let driverCurrentLocation = res.filter((element:any) => {
-            return element.order_id == this.data?.orderData?.id
+            return element.driver_id == this.data?.orderData?.current_driver?.id
           });
 
           if(driverCurrentLocation && driverCurrentLocation.length >0){
@@ -229,6 +229,7 @@ export class ReusableGoogleMapComponent {
       
     };
     service.getDistanceMatrix(request).then((response:any) => {
+      console.log(response)
       this.estimatedTime= response?.rows[0].elements[1].duration.text;
       this.distance=response?.rows[0].elements[1].distance.text;
     

@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/_service/auth.service';
 import { DriverService } from 'src/app/_service/driver.service';
 import { DialogAnimationsComponent } from 'src/app/back/common/dialog-animations/dialog-animations.component';
 import { ReusableGoogleMapComponent } from 'src/app/reusable-google-map/reusable-google-map.component';
+import { SendNotificationComponent } from 'src/app/send-notification/send-notification.component';
 declare var google: {
   maps: {
     Geocoder: new () => any;
@@ -71,6 +72,7 @@ export class DriverDetailsComponent {
     this.driverService.driverDetails(driverId).subscribe((res) => {
       if (res && res.result) {
         let driverDetails = res.result
+        
         this.editDriverForm.patchValue({
           first_name: driverDetails.first_name,
           last_name: driverDetails.last_name,
@@ -145,7 +147,27 @@ export class DriverDetailsComponent {
   edit() {
     this.router.navigate(['admin/driver/edit', this.driverId]);
   }
-
+  sendNotification(enterAnimationDuration: string,
+    exitAnimationDuration: string,userId?:any, groupType:string='Driver'){
+      const dialogRef = this.dialog.open(SendNotificationComponent, {
+        width:"50%",
+        enterAnimationDuration,
+        exitAnimationDuration,
+        panelClass: 'order-detail',
+        data: {
+          title:'Send Notification To '+groupType,
+          btns: ['Close','Send'],
+          isShowSelectGroupSection: false,
+          groupType: groupType,
+          userId: userId
+          
+        },
+      });
+      dialogRef.afterClosed().subscribe((dialogResult:any) => {
+        if(dialogResult){
+        }
+      });
+    }
   showRecentNotifications() {
     this.isShowRecentNotifications = true;
 

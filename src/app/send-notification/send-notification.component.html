@@ -1,0 +1,40 @@
+<div class="p-4">
+    <h1 class="cpn mx-2"><strong>{{data.title}}</strong></h1>
+    <form  [formGroup]="sendNotificationForm">
+    <div class="row m-0">
+        <div class="col-8 cpn-form-container">
+            <input formControlName="title" type="text" placeholder="Enter Title" />
+            <br>
+            <textarea  formControlName="message" placeholder="Enter Your Message here..."></textarea>
+        </div>
+        <div class="col-4 text-center">
+            <div class="add-files order-list-add-files" (click)="fileInput.click()">
+                <img *ngIf="imageSrc" [src]="imageSrc" />
+                <div>Add Files</div>
+                <input #fileInput type="file" (change)="readURL($event)" style="display: none" accept="image/*" />
+            </div>
+        </div>
+
+    </div>
+    <div class="row m-0 mt-3">
+        <div class="col-12">
+            <div *ngIf="data.isShowSelectGroupSection" class="d-flex gap-3" style="align-items: center;">
+                <h3 class="fw-bold m-0">Select Group :</h3>
+                    <div class="radio d-flex gap-2">
+                        <span (click)="selectGroup('Customer')" class="d-flex gap-1"><span class="dot" [ngClass]="selectedGroup == 'Customer' ? 'active-bg':''"></span> <strong>Customer</strong></span>
+                        <span (click)="selectGroup('Driver')" class="d-flex gap-1"><span class="dot" [ngClass]="selectedGroup == 'Driver' ? 'active-bg':''"></span> <strong>Driver</strong></span>
+                      </div>
+            </div>
+            
+            <div class="d-flex gap-3 mt-4" style="justify-content: space-between;">
+                <div class="">
+                    <button class="SecondaryButtonStyle" (click)="onDismiss(false)">Close</button>
+                </div>
+                <div class="">
+                    <button class="ButtonStyle" (click)="send()">Send <i *ngIf="isSending" class="fa fa-spinner fa-spin"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>

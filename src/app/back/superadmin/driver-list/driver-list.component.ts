@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/_service/auth.service';
 import { DriverService } from 'src/app/_service/driver.service';
 import { PlanService } from 'src/app/_service/plan.service';
 import { DialogAnimationsComponent } from '../../common/dialog-animations/dialog-animations.component';
+import { SendNotificationComponent } from 'src/app/send-notification/send-notification.component';
 
 @Component({
   selector: 'app-driver-list',
@@ -131,6 +132,28 @@ export class DriverListComponent {
       }
     );
   }
+  sendNotification(enterAnimationDuration: string,
+    exitAnimationDuration: string,driverId?:any){
+      const dialogRef = this.dialog.open(SendNotificationComponent, {
+        width:"50%",
+        enterAnimationDuration,
+        exitAnimationDuration,
+        panelClass: 'order-detail',
+        data: {
+          title: driverId ? 'Send Notification To Driver' : 'Send Notification To All Drivers',
+          btns: ['Close','Send'],
+          isShowSelectGroupSection: false,
+          groupType: 'Driver',
+          userId: driverId,
+          message:
+            'Do you want to assign this order to new driver?',
+        },
+      });
+      dialogRef.afterClosed().subscribe((dialogResult:any) => {
+        if(dialogResult){
+        }
+      });
+    }
   readURL(event: any): void {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];

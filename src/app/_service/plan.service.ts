@@ -121,8 +121,9 @@ export class PlanService {
       .get<any>(`${this._liveApiUrl}/notification/notification-count/`)
   }
   notificationList() {
+    let tail = '?page=all'
     return this.http
-      .get<any>(`${this._liveApiUrl}/notification/user-notification/`)
+      .get<any>(`${this._liveApiUrl}/notification/user-notification/${tail}`)
   }
   clearNotification(formData:any) {
     return this.http
@@ -131,5 +132,59 @@ export class PlanService {
   deletNotification(formData:any) {
     return this.http
       .post<any>(`${this._liveApiUrl}/notification/clear-notification/`, formData)
+  }
+  sendNotificationToGroup(formData:any) {
+    return this.http
+      .post<any>(`${this._liveApiUrl}/notification/send-notification/`,formData)
+  }
+
+  getAdminSentNotificationList(tabName:string,searchVal:string){
+    let tail = '';
+    let params = new URLSearchParams();
+    if (params) {
+      if(searchVal && searchVal.length > 0){
+         if(tabName == 'all'){
+             tabName= '';
+         }
+      }
+        if(tabName && tabName.length > 0){
+          params.set('notif_type', tabName)
+        }
+        if(searchVal && searchVal.length > 0){
+          params.set('search_text', searchVal)
+        }
+    }
+    if(tabName || searchVal){
+      tail += `?` + params.toString();
+    }
+   return this.http
+      .get<any>(`${this._liveApiUrl}/notification/admin-notification-listing/${tail}`)
+      .pipe(
+        map((data) => {
+          return data;
+        }),
+        catchError(this.authService.handleError)
+      )
+      
+  }
+  clearAdminNotification(formData:any){
+    return this.http
+      .put<any>(`${this._liveApiUrl}/notification/clear-admin-notification/`,formData)
+      .pipe(
+        map((data) => {
+          return data;
+        }),
+        catchError(this.authService.handleError)
+      )
+  }
+  clearAllAdminNotification(){
+    return this.http
+      .put<any>(`${this._liveApiUrl}/notification/clear-admin-notification/all/`,{})
+      .pipe(
+        map((data) => {
+          return data;
+        }),
+        catchError(this.authService.handleError)
+      )
   }
 }

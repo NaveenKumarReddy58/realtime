@@ -150,7 +150,6 @@ export class PublicCompanyRegistrationComponent {
             source: token.id
           }
         ).then((customer:any)=>{
-          console.log(customer)
           return stripe.paymentIntents.create({
             amount : Math.round(9.95*100),
             currency: 'INR',

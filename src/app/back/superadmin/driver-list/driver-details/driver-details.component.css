@@ -97,3 +97,7 @@ input.Pro_input_Field {
     max-width: 100%;
     padding: 20px;
 }
+.send{
+  width: 24px;
+  margin-top: -5px;
+}

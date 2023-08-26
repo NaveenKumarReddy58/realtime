@@ -3,7 +3,7 @@
     <!-- Tab Content Area Start 01-->
     <div id="Tb-Tabs01" class="Tabs01 TabsMain">
       <div class="TabsList">
-        <ul class="Tab_List">
+        <ul class="Tab_List cursor-pointer">
           <li (click)="totalDrivers()" [ngClass]="tabName == 'TD' ? 'active' : ''">
             <a *ngIf="copyOfDriversList">Total Drivers : {{copyOfDriversList.length}}</a>
           </li>
@@ -25,7 +25,7 @@
             <span>Filter Results <img src="assets/images/filter-icon.png"/></span>
           </div>
           <div class="action-btns">
-            <a class="mx-3" (click)="onClickPushNotification()">Send Push Notification to all <img class="push-notification" src="../../../../assets/images/pushnotification-black.jpg" /></a>
+            <a class="mx-3" (click)="sendNotification('500ms','500ms')">Send Push Notification to all <img class="push-notification" src="../../../../assets/images/pushnotification-black.jpg" /></a>
             <a class="slected-count">{{selectedDriversCount}} Selected</a>
             <a class="select-all-dl" (click)="selectAll()">Select All </a>
             <a class="deselect-all-dl" (click)="deSelectAll()">Deselect All</a>
@@ -136,7 +136,7 @@
                           </div>
                         </div>
                       </a>
-                      <img (click)="onClickPushNotification()" class="push-notification" src="../../../../assets/images/pushnotification.png.jpg" />
+                      <img (click)="sendNotification('500ms','500ms',item.id)" class="push-notification" src="../../../../assets/images/pushnotification.png.jpg" />
                       <input
                             class="head-driver mx-2"
                             type="checkbox"

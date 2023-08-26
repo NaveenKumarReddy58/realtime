@@ -156,7 +156,7 @@
                                                     <strong>Vehicle Documents:</strong>
                                                 </span>
                                             </div>
-                                            <div class="col-md-12 mb-4">
+                                            <!-- <div class="col-md-12 mb-4">
                                                 <label><strong>Title:</strong></label>
                                                 <span class="Password">
                                                     <textarea class="HelpArea" maxlength="500" placeholder="Custome Message/Push Notification" style="height: 150px"
@@ -170,17 +170,15 @@
                                                         </div>
                                                     </div>
                                                 </span>
-                                            </div>
+                                            </div> -->
+                                            <br>
 
-                                            <div
-                                                class="text-end mt-4 Cancel_Save my-3">
-                                                <!-- <button style="float: left;" (click)="updateDriverStatus()" [disabled]="!isEnabledSave" class="SaveButton ButtonStyle">Update <i
-                                                    class="fa fa-spinner fa-spin"
-                                                    *ngIf="delloading"
-                                                  ></i></button> -->
-                                                <button class="SaveButton ButtonStyle" (click)="sendPushNotification()">Send
-                                                    Push Notification</button>
-                                            </div>
+                                            <div  class="col-md-12 my-4 text-end">
+                                                <button class="ButtonStyle" (click)="sendNotification('500ms','500ms',this.driverId , 'Driver')">
+                                                  Send Notification to Driver <img class="send" src="../../assets/images/pushnotification-white.jpg">
+                                                </button>
+                                                
+                                              </div>
                                         </div>
                                     </div>
                                     <!-- Popup Box ///////// -->

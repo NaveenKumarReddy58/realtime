@@ -30,6 +30,8 @@ export class TopComponent {
   searchText: any;
   isShowNotifications: boolean = false;
   notificationListData: any;
+  isDeleteLoading: boolean= false;
+  isDeleteId: any;
 
   ngOnInit(): void {
   }
@@ -104,17 +106,26 @@ export class TopComponent {
   deleteNotification(id:any){
     var formdata = new FormData();
     formdata.append('notif_ids', JSON.stringify([Number(id)]));
+    this.isDeleteLoading= true;
+    this.isDeleteId = id;
     this.planService.deletNotification(formdata).subscribe((res)=>{
-      
+      this.isDeleteLoading= false;
       this.notificationListData= res.result.results;
      
         this.notificationList(false);
-      })
+    } , (err:any)=>{
+      this.isDeleteLoading= false;
+    })
   }
   searchboxopen() {
     this.searchbox = !this.searchbox;
   }
 
+  navigateToOrderDetails(id:any){
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.isShowNotifications= !this.isShowNotifications
+    this.router.navigate(['admin/orders/detail', Number(id)]);
+  }
   bookmarkedfield() {
     this.authService.setRouter({
       bookmarked: true,

@@ -24,7 +24,6 @@ export class ReusableCropImageComponent {
         this.imageChangedEvent = event;
     }
     imageCropped(event: any) {
-      console.log(event)
       let self= this;
         var reader:any = new FileReader();
           reader.readAsDataURL(event?.blob);
