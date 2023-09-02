@@ -11,6 +11,7 @@ export interface DialogData {
   groupType?: string;
   userId?:any;
   customerId?:any;
+  orderId?:any;
 }
 @Component({
   selector: 'app-send-notification',
@@ -54,7 +55,40 @@ export class SendNotificationComponent {
     this.dialogRef.close(val);
   }
   send(){
-    const formData = new FormData();
+    if(this.data.orderId){
+      const formData = new FormData();
+      for (let i in this.sendNotificationForm.value) {
+        if (this.sendNotificationForm.value[i] instanceof Blob) {
+          formData.append(
+            i,
+            this.sendNotificationForm.value[i],
+            this.sendNotificationForm.value[i].name ? this.sendNotificationForm.value[i].name : ''
+          );
+        } else {
+          formData.append(i, this.sendNotificationForm.value[i]);
+        }
+      }
+      if(this.data.groupType){
+        formData.append("send_to", this.data.groupType)
+      } else{
+        formData.append("send_to", this.selectedGroup)
+      }
+      formData.append("order_id", this.data.orderId)
+      this.isSending= true;
+        this.planService.sendNotificationToDriverCustomer(formData).subscribe((res:any)=>{
+          this.isSending= false;
+          if(res?.resultCode == '0'){
+            this.toastr.error(res?.errorMessage)
+          } else{
+            this.toastr.success(res?.resultDescription)
+          }
+          this.onDismiss(true)
+        } , (err:any)=>{
+          this.isSending= false;
+          this.toastr.error("Failed to Send Notification")
+        })
+    } else {
+      const formData = new FormData();
     for (let i in this.sendNotificationForm.value) {
       if (this.sendNotificationForm.value[i] instanceof Blob) {
         formData.append(
@@ -88,6 +122,8 @@ export class SendNotificationComponent {
         this.isSending= false;
         this.toastr.error("Failed to Send Notification")
       })
+    }
+    
   }
   
 }

@@ -75,8 +75,8 @@ export class OrderDetailComponent {
           btns: ['Close','Send'],
           isShowSelectGroupSection: false,
           groupType: groupType,
-          userId: userId
-          
+          userId: userId,
+          orderId: this.orderData.id
         },
       });
       dialogRef.afterClosed().subscribe((dialogResult:any) => {

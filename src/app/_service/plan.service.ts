@@ -137,6 +137,10 @@ export class PlanService {
     return this.http
       .post<any>(`${this._liveApiUrl}/notification/send-notification/`,formData)
   }
+  sendNotificationToDriverCustomer(formData:any) {
+    return this.http
+      .post<any>(`${this._liveApiUrl}/notification/send-order-notification/`,formData)
+  }
 
   getAdminSentNotificationList(tabName:string,searchVal:string){
     let tail = '';

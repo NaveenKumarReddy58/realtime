@@ -280,7 +280,7 @@
                           </div>
                         </div>
                       </a>
-                      <img (click)="sendNotification('500ms','500ms',item?.current_driver?.id, item?.customer_phone)" class="push-notification" src="../../../../assets/images/pushnotification.png.jpg" />
+                      <img (click)="sendNotification('500ms','500ms',item?.current_driver?.id, item?.customer_phone, item.id)" class="push-notification" src="../../../../assets/images/pushnotification.png.jpg" />
                       <input
                         *ngIf="item?.assigned_order.length == 0"
                         (change)="updateAsign(item.id, $event)"

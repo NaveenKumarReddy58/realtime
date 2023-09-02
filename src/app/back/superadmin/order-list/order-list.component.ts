@@ -447,7 +447,7 @@ export class OrderListComponent {
   }
 
   sendNotification(enterAnimationDuration: string,
-    exitAnimationDuration: string,driverId?:any, customerPhoneNo?:string){
+    exitAnimationDuration: string,driverId?:any, customerPhoneNo?:string,orderId?:any){
       const dialogRef = this.dialog.open(SendNotificationComponent, {
         width:"50%",
         enterAnimationDuration,
@@ -458,8 +458,8 @@ export class OrderListComponent {
           btns: ['Close','Send'],
           isShowSelectGroupSection: true,
           userId: driverId,
-          customerId: customerPhoneNo
-          
+          customerId: customerPhoneNo,
+          orderId: orderId
         },
       });
       dialogRef.afterClosed().subscribe((dialogResult:any) => {
