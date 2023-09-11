@@ -126,7 +126,6 @@ export class OrderListComponent {
     private dialog: MatDialog
   ) {
     // this.orderList(this.orderDate, this.orderType, this.orderStatus, this.page);
-    this.driverList(0);
 
     this.addAssign = formBuilder.group({
       driver_id: ['', [Validators.required]],
@@ -152,6 +151,12 @@ export class OrderListComponent {
         this.orderList(this.orderDate,this.orderType, this.orderStatus, this.page)
       }
     })
+  }
+
+  getDriverList(){
+    if(this.driverData.length == 0){
+      this.driverList()
+    }
   }
 
   orderList(order_date?: any, order_type?:any, order_status?:any, page?:any,search_text?:any) {
