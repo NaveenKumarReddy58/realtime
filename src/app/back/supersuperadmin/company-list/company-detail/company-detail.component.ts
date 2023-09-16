@@ -25,6 +25,10 @@ export class CompanyDetailComponent {
     public companyService: CompanyService,
     private toastr: ToastrService
   ) {
+    
+  }
+
+  ngOnInit(): void {
     this.companyService.companyDetail(this.companyid).subscribe(
       (data: any) => {
         if (this.authService.resultCodeError(data)) {
@@ -40,8 +44,6 @@ export class CompanyDetailComponent {
       }
     );
   }
-
-  ngOnInit(): void {}
 
   companyActivateDeactivate(id: Number) {
     if (this.cpreason == '') {

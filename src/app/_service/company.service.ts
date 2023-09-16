@@ -56,7 +56,7 @@ export class CompanyService {
       }
     }
     if (filter) {
-      tail += `?` + params.toString();
+      tail += `?` + params;
     }
     this.http
       .get<any>(`${this._liveApiUrl}/tenant/organization-listing/${tail}`)

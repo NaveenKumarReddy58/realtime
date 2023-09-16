@@ -91,6 +91,7 @@ export class CompanyListComponent {
       bookmarked: null,
       start_date: null,
       end_date: null,
+      filter_type: null
     });
   }
 
@@ -126,6 +127,7 @@ export class CompanyListComponent {
         search_text: null,
         bookmarked: null,
         deactivated: null,
+        filter_type: 'all'
       });
     } else {
       this.authService.setRouter({
@@ -135,13 +137,14 @@ export class CompanyListComponent {
         search_text: null,
         bookmarked: null,
         deactivated: null,
+        filter_type: type
       });
     }
   }
 
   setCount(count: any) {
     if (count > 0) {
-      return count - 1;
+      return count;
     } else {
       return count;
     }
