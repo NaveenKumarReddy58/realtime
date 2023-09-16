@@ -72,7 +72,7 @@ export class WarehouseAddComponent {
       });
     }
 
-    this.addressList(1);
+    this.addressList('all');
   }
 
   // convenience getter for easy access to form fields
