@@ -558,3 +558,8 @@ a.link{
   text-decoration: underline;
   color: #2196F3;
 }
+.container-width{
+  width: calc(100% - 220px);
+}
+
+

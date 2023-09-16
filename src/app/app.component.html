@@ -3,10 +3,22 @@
   <router-outlet></router-outlet>
 </section>
 <section *ngIf="isLoggedIn" class="section" style="height: 100%">
-  <div class="container-fluid" style="height: 100%">
+  <div class="main-container">
+    <div>
+      <app-menu [isRoleIn]="isRoleIn"></app-menu>
+
+    </div>
+    <div class="main-content-container">
+      <app-top [notificationCountData]="notificationCountData" [isRoleIn]="isRoleIn"></app-top>
+      <router-outlet></router-outlet>
+
+    </div>
+
+  </div>
+  <!-- <div class="container-fluid" style="height: 100%">
     <div class="row main_box"  style="height: 100%">
       <div class="col-md-2">
-        <a routerLink="/" class="side_menu">
+        <a routerLink="/" class="side_menu"> 
           <i class="fa-regular fa-bars"></i>
         </a>
         <app-menu [isRoleIn]="isRoleIn"></app-menu>
@@ -20,7 +32,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </section>
 <!-- //" -->
 <div *ngIf="notification && notification.length > 0" class="notification-container">

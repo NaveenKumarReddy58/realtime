@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -18,22 +18,60 @@ export class TopComponent {
   isLoggedIn: any = false;
   @Input() isRoleIn: any;
   _isRoleName: any = '0';
-  orderNumber:any;
-  address:any;
-  name:any;
+  orderNumber: any;
+  address: any;
+  name: any;
   searchForm!: FormGroup;
-  @Input() notificationCountData:any;
+  @Input() notificationCountData: any;
 
 
   planCount$!: Observable<object[]>;
-  clickedItem: string= '';
+  clickedItem: string = '';
   searchText: any;
   isShowNotifications: boolean = false;
   notificationListData: any;
-  isDeleteLoading: boolean= false;
+  isDeleteLoading: boolean = false;
   isDeleteId: any;
-
+  superAdminTabList = [
+    {
+      label: 'Add Order',
+      width: 70, display: true
+    },
+    {
+      label: 'Add Driver',
+      width: 70, display: true
+    },
+    {
+      label: 'Locate Order',
+      width: 70, display: true
+    },
+    {
+      label: 'Send Notification',
+      width: 70, display: true
+    },
+    {
+      label: 'Tickets',
+      width: 70, display: true
+    },
+    {
+      label: 'Help',
+      width: 70, display: true
+    },
+    {
+      label: 'Notifications',
+      width: 70, display: true
+    }
+  ]
+  @ViewChild('topBarTabList') topBarTabList: ElementRef | undefined;
   ngOnInit(): void {
+  }
+
+  ngAfterViewInit() {
+    var width: any = this.topBarTabList?.nativeElement.offsetWidth;
+    var height: any = this.topBarTabList?.nativeElement.offsetHeight;
+
+    console.log('Width:' + width);
+    console.log('Height: ' + height);
   }
 
   constructor(
@@ -48,12 +86,12 @@ export class TopComponent {
 
     this.searchForm = formBuilder.group({
       order_number: [''],
-      name:[''],
+      name: [''],
       address: ['']
     });
     this.authService.getDashboard().subscribe((data: any) => {
       this.isLoggedIn = data;
-      if(this.isLoggedIn){
+      if (this.isLoggedIn) {
 
       }
     });
@@ -81,49 +119,49 @@ export class TopComponent {
       this.plandata = data?.result;
     });
   }
-  clearNotification(id:any){
+  clearNotification(id: any) {
     var formdata = new FormData();
     formdata.append('notif_ids', JSON.stringify(id));
-    this.planService.clearNotification(formdata).subscribe((res:any)=>{
-      this.notificationCountData= 0;
+    this.planService.clearNotification(formdata).subscribe((res: any) => {
+      this.notificationCountData = 0;
     })
   }
-  
 
-  notificationList(isClearNotification:boolean){
-    
-    this.planService.notificationList().subscribe((res)=>{
-      
-      this.notificationListData= res.result.results;
-     let ids=  this.notificationListData.filter(function(e:any){return e}).map(function(e:any){
+
+  notificationList(isClearNotification: boolean) {
+
+    this.planService.notificationList().subscribe((res) => {
+
+      this.notificationListData = res.result.results;
+      let ids = this.notificationListData.filter(function (e: any) { return e }).map(function (e: any) {
         return e.id
-        });
-        if(isClearNotification){
-          this.clearNotification(ids)
-        }
+      });
+      if (isClearNotification) {
+        this.clearNotification(ids)
+      }
     })
   }
-  deleteNotification(id:any){
+  deleteNotification(id: any) {
     var formdata = new FormData();
     formdata.append('notif_ids', JSON.stringify([Number(id)]));
-    this.isDeleteLoading= true;
+    this.isDeleteLoading = true;
     this.isDeleteId = id;
-    this.planService.deletNotification(formdata).subscribe((res)=>{
-      this.isDeleteLoading= false;
-      this.notificationListData= res.result.results;
-     
-        this.notificationList(false);
-    } , (err:any)=>{
-      this.isDeleteLoading= false;
+    this.planService.deletNotification(formdata).subscribe((res) => {
+      this.isDeleteLoading = false;
+      this.notificationListData = res.result.results;
+
+      this.notificationList(false);
+    }, (err: any) => {
+      this.isDeleteLoading = false;
     })
   }
   searchboxopen() {
     this.searchbox = !this.searchbox;
   }
 
-  navigateToOrderDetails(id:any){
+  navigateToOrderDetails(id: any) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.isShowNotifications= !this.isShowNotifications
+    this.isShowNotifications = !this.isShowNotifications
     this.router.navigate(['admin/orders/detail', Number(id)]);
   }
   bookmarkedfield() {
@@ -162,40 +200,40 @@ export class TopComponent {
       end_date: null,
     });
   }
-  onClickTopItem(item:string){
+  onClickTopItem(item: string) {
     this.clickedItem = item;
   }
 
-  updateSearch(){
+  updateSearch() {
     this.searchbox = !this.searchbox;
-    if(this.searchForm.controls['order_number'].value && this.searchForm.controls['order_number'].value.length > 0){
-      this.searchText=this.searchForm.controls['order_number'].value;
+    if (this.searchForm.controls['order_number'].value && this.searchForm.controls['order_number'].value.length > 0) {
+      this.searchText = this.searchForm.controls['order_number'].value;
       this.orderService.updateSearchText(this.searchForm.controls['order_number'].value);
-    } else if(this.searchForm.controls['name'].value && this.searchForm.controls['name'].value.length > 0){
-      this.searchText=this.searchForm.controls['name'].value;
+    } else if (this.searchForm.controls['name'].value && this.searchForm.controls['name'].value.length > 0) {
+      this.searchText = this.searchForm.controls['name'].value;
       this.orderService.updateSearchText(this.searchForm.controls['name'].value);
-    }else if(this.searchForm.controls['address'].value && this.searchForm.controls['address'].value.length > 0){
-      this.searchText=this.searchForm.controls['address'].value;
+    } else if (this.searchForm.controls['address'].value && this.searchForm.controls['address'].value.length > 0) {
+      this.searchText = this.searchForm.controls['address'].value;
       this.orderService.updateSearchText(this.searchForm.controls['address'].value);
-    } else{
-      this.searchText=undefined;
+    } else {
+      this.searchText = undefined;
       this.orderService.updateSearchText('');
 
     }
   }
-  clearSearch(){
+  clearSearch() {
     this.searchbox = !this.searchbox;
-    this.searchText=undefined;
+    this.searchText = undefined;
     this.searchForm.patchValue({
       order_number: '',
-      name:'',
-      address:''
+      name: '',
+      address: ''
     })
     this.orderService.updateSearchText('');
   }
-  showNotifications(){
+  showNotifications() {
 
-    this.isShowNotifications= !this.isShowNotifications
+    this.isShowNotifications = !this.isShowNotifications
     this.notificationList(true);
   }
 }

@@ -1,6 +1,6 @@
 <div class="row mb-4" *ngIf="isRoleIn == 1">
   <!-- Search Bar -->
-  <div class="col-md-4">
+  <div class="col-md-12 col-lg-4">
     <div class="SearchDivInner">
       <div class="SearchDiv">
         <form class="SearchForm">
@@ -71,7 +71,7 @@
     </div>
   </div>
   <!-- Search Bar /////////// -->
-  <div class="col-md-8">
+  <div class="col-md-12 mt-md-2 col-lg-8">
     <div class="MyPlan">
       <div class="MyPlanList">
         <ul>
@@ -112,7 +112,7 @@
 
 <div class="row mb-4" *ngIf="isRoleIn == 2">
   <!-- Search Bar -->
-  <div class="col-md-4">
+  <div class="col-md-12 col-lg-4">
     <div class="SearchDivInner">
       <div class="SearchDiv">
         <form class="SearchForm">
@@ -188,8 +188,8 @@
     </div>
   </div>
   <!-- Search Bar /////////// -->
-  <div class="col-md-8">
-    <div class="TabList">
+  <div class="col-md-12 mt-sm-2 mt-lg-0 col-lg-8">
+    <div #topBarTabList class="TabList">
       <ul class="TopMenu">
         <li (click)="onClickTopItem('orders')">
           <a routerLink="/{{ _isRoleName }}/orders/add" routerLinkActive="active-link">
@@ -249,7 +249,7 @@
             <span>Locate Driver</span>
           </a>
         </li>
-        <li>
+        <li> 
             <a routerLink="/{{ _isRoleName }}/send-notification" routerLinkActive="active-link">
               <img src="assets/images/top-icon04.png" />
               <span>Send Notification</span>

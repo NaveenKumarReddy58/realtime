@@ -24,3 +24,19 @@
     bottom: 10%;
     right: 5%;
 }
+.main-container{
+    
+    display: flex;
+    flex-direction: row;
+
+}
+.main-content-container{
+    width: calc(100% - 250px);
+    right: 13px;
+    position: absolute;
+}
+@media screen and (max-width: 991px) {
+    .main-content-container{
+      width: calc(100% - 210px);
+    }
+  }

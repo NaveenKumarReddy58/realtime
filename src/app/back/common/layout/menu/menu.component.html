@@ -1,10 +1,10 @@
-<div class="SideBar" *ngIf="isRoleIn == 1">
+<div class="side-bar" *ngIf="isRoleIn == 1">
   <div class="LogoDiv">
     <a routerLink="/{{ _isRoleName }}/dashboard"
       ><img src="assets/images/logo.png"
     /></a>
   </div>
-  <ul class="SideBarList">
+  <ul class="sidebar-list">
     <li [routerLinkActive]="['active']">
       <a routerLink="/{{ _isRoleName }}/dashboard"
         ><img src="assets/images/super-super-icon101.png" /><span
@@ -54,7 +54,7 @@
     </li>
   </ul>
   <div class="LogoutDiv">
-    <ul class="SideBarList">
+    <ul class="sidebar-list">
       <li>
         <a (click)="doLogout()">
           <img src="assets/images/logout-icon.png" />
@@ -73,13 +73,13 @@
   </div>
 </div>
 
-<div class="SideBar" *ngIf="isRoleIn == 2">
+<div class="side-bar" *ngIf="isRoleIn == 2">
   <div class="LogoDiv">
     <a routerLink="/{{ _isRoleName }}/dashboard"
       ><img src="assets/images/logo.png"
     /></a>
   </div>
-  <ul class="SideBarList">
+  <ul class="sidebar-list">
     <li [routerLinkActive]="['active']">
       <a routerLink="/{{ _isRoleName }}/dashboard"
         ><img src="assets/images/super-super-icon101.png" /><span
@@ -131,21 +131,21 @@
     </li>
   </ul>
   <div class="LogoutDiv">
-    <ul class="SideBarList">
+    <ul class="sidebar-list">
       <li>
         <a (click)="doLogout()">
           <img src="assets/images/logout-icon.png" />
           <span>Logout</span></a
         >
       </li>
-      <li class="NextPreview">
+      <!-- <li class="NextPreview">
         <span class="NextTab">
           <i class="fa fa-angle-left" aria-hidden="true"></i>
         </span>
         <span class="PreviewTab">
           <i class="fa fa-angle-right" aria-hidden="true"></i>
         </span>
-      </li>
+      </li> -->
     </ul>
   </div>
 </div>
