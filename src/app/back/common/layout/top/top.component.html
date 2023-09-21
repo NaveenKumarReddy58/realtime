@@ -281,7 +281,7 @@
                 <h2 class="m-0 d-inline-block text-muted" (click)="showNotifications()">Close
                 </h2>
             </div>
-            <div class="box-body notification-body p-0">
+            <div class="box-body notification-body p-0" *ngIf="notificationListData && notificationListData.length > 0">
                 <div *ngFor="let notification of notificationListData; let index = index">
                 <div class="p-3 d-flex gap-3 align-items-center bg-light border-bottom osahan-post-header">
                     <div class="dropdown-list-image mr-3">
@@ -298,6 +298,12 @@
                     </span>
                 </div>
                 </div>
+            </div>
+            <div class="box-body notification-body p-0" *ngIf="notificationListData && notificationListData.length == 0">
+              Zero Notifications
+            </div>
+            <div *ngIf="notificationListData && notificationListData.length > 0">
+              <a (click)="clearAllNotifications()" class="clear-all-noti">Clear All Notifications <i *ngIf="isClearAllDeleteLoading" class="fa fa-spinner fa-spin"></i></a>
             </div>
         </div>
           

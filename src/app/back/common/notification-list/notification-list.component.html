@@ -24,8 +24,8 @@
       <form class="Search max-width-230px">
         <input (keyup)="search(searchText)" type="text" [(ngModel)]="searchText" name="searchText" value="" placeholder="Search" />
         <button><i class="fa fa-search"></i></button>
-        <button><i (click)="search('')" class="fa fa-close cursor-pointer"></i>
-        </button>
+        <!-- <button><i (click)="search('')" class="fa fa-close cursor-pointer"></i> -->
+        <!-- </button> -->
       </form>
       <button class="ClearButton" (click)="clearAll()">Clear All <i *ngIf="isClearAllLoading" class="fa fa-spinner fa-spin"></i>
       </button>

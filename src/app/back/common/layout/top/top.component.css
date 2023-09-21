@@ -11,6 +11,12 @@
 .clear {
     float: left;
 }
+.clear-all-noti{
+    padding: 8px;
+    text-decoration: underline;
+    color: blue;
+    text-align: end;
+}
 
 .top-header-notification {
     width: 500px;

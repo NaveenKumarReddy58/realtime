@@ -63,6 +63,7 @@ export class TopComponent {
     }
   ]
   @ViewChild('topBarTabList') topBarTabList: ElementRef | undefined;
+  isClearAllDeleteLoading: boolean= false;
   ngOnInit(): void {
   }
 
@@ -127,6 +128,22 @@ export class TopComponent {
     })
   }
 
+  clearAllNotifications(){
+    let ids = this.notificationListData.filter(function (e: any) { return e }).map(function (e: any) {
+      return e.id
+    });
+    var formdata = new FormData();
+    formdata.append('notif_ids', JSON.stringify(ids));
+    this.isClearAllDeleteLoading = true;
+    this.planService.deletNotification(formdata).subscribe((res) => {
+      this.isClearAllDeleteLoading = false;
+      this.notificationListData = res.result.results;
+
+      this.notificationList(false);
+    }, (err: any) => {
+      this.isClearAllDeleteLoading = false;
+    })
+  }
 
   notificationList(isClearNotification: boolean) {
 
