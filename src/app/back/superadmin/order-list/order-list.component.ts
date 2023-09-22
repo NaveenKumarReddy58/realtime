@@ -113,6 +113,7 @@ export class OrderListComponent {
   driverData: any = [];
   copyOrderData: any;
   pendingOrdersCount: any;
+  isShowRefreshSpin:boolean= false;
 
 
   constructor(
@@ -142,6 +143,7 @@ export class OrderListComponent {
     return this.addAssign.value;
   }
 
+
   ngOnInit(): void {
     this.orderCount();
     this.orderService.getSearchText().subscribe((res)=>{
@@ -158,12 +160,23 @@ export class OrderListComponent {
       this.driverList()
     }
   }
+  
+  refresh(){
+    this.isShowRefreshSpin= true;
+    this.orderList(this.orderDate,this.orderType, this.orderStatus, this.page)
+    this.orderCount();
+  }
 
   orderList(order_date?: any, order_type?:any, order_status?:any, page?:any,search_text?:any) {
     this.orderService.orderList(order_date, order_type, order_status,page,search_text);
     this.order$ = this.orderService.getOrder();
     this.showPaginator= false;
+    this.isShowRefreshSpin= true;
     this.order$.subscribe((data: any) => {
+      let self= this;
+      setTimeout(function(){
+        self.isShowRefreshSpin= false;
+      },500)
       this.copyOrderData= [];
       this.orderData = data?.result?.results;
       this.copyOrderData= this.orderData;
@@ -188,6 +201,8 @@ export class OrderListComponent {
       this.options = this._unfilteredOptions;
       this.statusOptions= this._unfilteredStatus;
 
+    },(err)=>{
+      this.isShowRefreshSpin= false;
     });
   }
 

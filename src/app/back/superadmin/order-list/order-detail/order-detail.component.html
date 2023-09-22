@@ -28,14 +28,15 @@
                   Delivery : {{ orderData?.dely_time }} |
                   {{ orderData?.dely_date | date : "fullDate" }}
                 </div>
-                <div [ngClass]="orderData?.order_status != 'en-route' ? 'disabled-custom':'' " class="NoPhoto mt-4 google-map" *ngIf="orderData">
+                <div [ngClass]="orderData?.order_status != 'en-route' ? 'disabled-custom':'' "
+                  class="NoPhoto mt-4 google-map" *ngIf="orderData">
                   <app-reusable-google-map></app-reusable-google-map>
                 </div>
                 <div *ngIf="orderData?.order_status != 'en-route'" class="DeliveryNumber fontSize10">
                   Track Order will be enabled only when Order is En-route.
                 </div>
-                <div [ngClass]="orderData?.order_status != 'en-route' ? 'disabled-custom':'' " class="TrackDriver mt-3 cursor-pointer"
-                  (click)="trackDriver()">
+                <div [ngClass]="orderData?.order_status != 'en-route' ? 'disabled-custom':'' "
+                  class="TrackDriver mt-3 cursor-pointer" (click)="trackDriver()">
                   <a> Track Order</a>
                 </div>
                 <br>
@@ -43,30 +44,37 @@
                 <div class="driver-profile-image-container invoice-image-container ">
                   <i *ngIf="!(invoiceImageSrc.indexOf('edit-icon') > 0)" class="fa fa-trash Delete"
                     (click)="removeProfilePhoto($event)"></i>
-                  <img *ngIf="!(invoiceImageSrc.indexOf('edit-icon') > 0) && invoiceImageSrc" class="driver-profile-image invoice-image" [src]="invoiceImageSrc" [alt]="'logo'" width="100%"
+                  <img *ngIf="!(invoiceImageSrc.indexOf('edit-icon') > 0) && invoiceImageSrc"
+                    class="driver-profile-image invoice-image" [src]="invoiceImageSrc" [alt]="'logo'" width="100%"
                     height="100%" (click)="fileInput.click()" />
-                  <img *ngIf="(invoiceImageSrc.indexOf('edit-icon') > 0)  && invoiceImageSrc" class="invoice-image" [src]="invoiceImageSrc" [alt]="'logo'" width="50%"
-                    height="90%" (click)="fileInput.click()" />
+                  <img *ngIf="(invoiceImageSrc.indexOf('edit-icon') > 0)  && invoiceImageSrc" class="invoice-image"
+                    [src]="invoiceImageSrc" [alt]="'logo'" width="50%" height="90%" (click)="fileInput.click()" />
                 </div>
-                <a *ngIf="this.orderData && this.orderData.order_invoice.length > 0" target="_blank" class="uploaded-documenst mx-1 cursor-pointer" [href]="invoiceImageSrc">
+                <a *ngIf="this.orderData && this.orderData.order_invoice.length > 0" target="_blank"
+                  class="uploaded-documenst mx-1 cursor-pointer" [href]="invoiceImageSrc">
                   <span style="font-size: 12px;">View Full Image</span>
                 </a>
-                <div class="cursor-pointer mt-3 "
-                  (click)="uploadInvoice()">
-                  <button class="ButtonStyle"> {{this.orderData && this.orderData.order_invoice.length > 0 ? 'Edit Packing Slip': 'Upload Packing Slip'}} <i class="fa fa-spinner fa-spin" *ngIf="isInvoiceLoading"></i>
+                <div class="cursor-pointer mt-3 " (click)="uploadInvoice()">
+                  <button class="ButtonStyle"> {{this.orderData && this.orderData.order_invoice.length > 0 ? 'Edit
+                    Packing Slip': 'Upload Packing Slip'}} <i class="fa fa-spinner fa-spin"
+                      *ngIf="isInvoiceLoading"></i>
                   </button>
                 </div>
                 <br>
-                <div *ngIf="this.orderData && this.orderData.order_invoice.length > 0" class="driver-profile-image-container invoice-image-container ">
-                  <img *ngIf="!(invoiceImageSrc.indexOf('edit-icon') > 0) && invoiceImageSrc" class="driver-profile-image invoice-image" [src]="invoiceImageSrc" [alt]="'logo'" width="100%"
+                <div *ngIf="this.orderData && this.orderData.order_invoice.length > 0"
+                  class="driver-profile-image-container invoice-image-container ">
+                  <img *ngIf="!(invoiceImageSrc.indexOf('edit-icon') > 0) && invoiceImageSrc"
+                    class="driver-profile-image invoice-image" [src]="invoiceImageSrc" [alt]="'logo'" width="100%"
                     height="100%" (click)="fileInput.click()" />
-                    <img *ngIf="(invoiceImageSrc.indexOf('edit-icon') > 0)  && invoiceImageSrc" class="driver-profile-image invoice-image" [src]="invoiceImageSrc" [alt]="'logo'" width="50%"
+                  <img *ngIf="(invoiceImageSrc.indexOf('edit-icon') > 0)  && invoiceImageSrc"
+                    class="driver-profile-image invoice-image" [src]="invoiceImageSrc" [alt]="'logo'" width="50%"
                     height="90%" (click)="fileInput.click()" />
                 </div>
-                <a *ngIf="this.orderData && this.orderData.order_invoice.length > 0" target="_blank" class="uploaded-documenst mx-1 cursor-pointer" [href]="invoiceImageSrc">
+                <a *ngIf="this.orderData && this.orderData.order_invoice.length > 0" target="_blank"
+                  class="uploaded-documenst mx-1 cursor-pointer" [href]="invoiceImageSrc">
                   <span style="font-size: 12px;">View Proof of Delivery Image</span>
                 </a>
-                
+
                 <input #fileInput type="file" (change)="readURL($event)" style="display: none" accept="image/*" />
               </div>
             </div>
@@ -74,7 +82,7 @@
             <div class="col-md-8">
               <!--Edit Delete -->
               <div class="col-md-12">
-                <div class="AddEdit-Delete">
+                <div class="AddEdit-Delete items-center">
                   <span class="fontSize12">Status</span>
                   <div class="Edi_Delete">
                     <span *ngIf="orderData && orderData.id" class="__Edit fontSize12 p-2 realtime-btn"
@@ -92,120 +100,163 @@
                 </div>
               </div>
               <!-- Edit Delete ///// -->
-
-              <!-- Step Title List -->
-              <div class="col-md-12 mb-4">
-                <div class="Step_List">
-                  <ul>
-                    <li
-                      [ngClass]="(orderData?.order_status== 'shipped' || orderData?.order_status== 'en-route' || orderData?.order_status== 'successful' || orderData?.order_status== 'pending' )?'active':'' "
-                      class="w-100">
-                      <a>
-                        <span class="DotSpan">&nbsp;</span>
-                        <span class="DotSpan_Title fontSize10"> Processed </span>
-                        <div  *ngIf='getDateTime("pending") != "NA"' class="DotSpan_Title fontSize12" style="color: black;"> {{getDateTime("pending") | date:'mediumDate'}} </div>
-                        <div  *ngIf='getDateTime("pending") != "NA"' class="DotSpan_Title fontSize12" style="color: black;"> {{getDateTime("pending") | date:'shortTime'}} </div>
-                        <div  *ngIf='getDateTime("pending") == "NA"' class="DotSpan_Title fontSize12" style="color: black;">NA </div>                          </a>
-                      <span
-                        [ngClass]="(orderData?.order_status== 'shipped' || orderData?.order_status== 'en-route' || orderData?.order_status== 'successful' || orderData?.order_status== 'pending' )?'line-active':'' "
-                        class="order-details-line"></span>
-                    </li>
-                    <li
-                      [ngClass]="(orderData?.order_status== 'shipped' || orderData?.order_status== 'en-route' || orderData?.order_status== 'successful') ?'active':'' "
-                      class=" w-100">
-                      <a>
-                        <span class="DotSpan">&nbsp;</span>
-                        <span class="DotSpan_Title fontSize10"> Shipped </span>
-                        <div  *ngIf='getDateTime("shipped") != "NA"' class="DotSpan_Title fontSize12" style="color: black;"> {{getDateTime("shipped") | date:'mediumDate'}} </div>
-                        <div  *ngIf='getDateTime("shipped") != "NA"' class="DotSpan_Title fontSize12" style="color: black;"> {{getDateTime("shipped") | date:'shortTime'}} </div>
-                        <div  *ngIf='getDateTime("shipped") == "NA"' class="DotSpan_Title fontSize12" style="color: black;"> NA </div>                          </a>
-                      <span
-                        [ngClass]="(orderData?.order_status== 'shipped' || orderData?.order_status== 'en-route' || orderData?.order_status== 'successful')?'line-active':'' "
-                        class="order-details-line"></span>
-
-                    </li>
-                    <li
-                      [ngClass]="(orderData?.order_status== 'en-route' || orderData?.order_status== 'successful')?'active':'' "
-                      class="w-100">
-                      <a>
-                        <span class="DotSpan">&nbsp;</span>
-                        <span class="DotSpan_Title fontSize10"> En route </span>
-                        <div  *ngIf='getDateTime("en-route") != "NA"' class="DotSpan_Title fontSize12" style="color: black;"> {{getDateTime("en-route") | date:'mediumDate'}} </div>
-                        <div  *ngIf='getDateTime("en-route") != "NA"' class="DotSpan_Title fontSize12" style="color: black;"> {{getDateTime("en-route") | date:'shortTime'}} </div>
-                        <div  *ngIf='getDateTime("en-route") == "NA"' class="DotSpan_Title fontSize12" style="color: black;"> NA </div>
-                      </a>
-                      <span
-                        [ngClass]="(orderData?.order_status== 'en-route' || orderData?.order_status== 'successful')?'line-active':'' "
-                        class="order-details-line"></span>
-
-                    </li>
-                    <li [ngClass]="orderData?.order_status== 'successful'?'active':'' " class=" w-100">
-                      <a>
-                        <span class="DotSpan">&nbsp;</span>
-                        <span class="DotSpan_Title fontSize10"> Delivered </span>
-                        <div  *ngIf='getDateTime("successful") != "NA"' class="DotSpan_Title fontSize12" style="color: black;"> {{getDateTime("successful") | date:'mediumDate'}} </div>
-                        <div  *ngIf='getDateTime("successful") != "NA"' class="DotSpan_Title fontSize12" style="color: black;"> {{getDateTime("successful") | date:'shortTime'}} </div>
-                        <div  *ngIf='getDateTime("successful") == "NA"' class="DotSpan_Title fontSize12" style="color: black;">NA </div>                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <br>
-              <!-- Step Title List ///// -->
               <!-- Step Content Area -->
               <form [formGroup]="orderDetailsPushForm" class="ProfileFor">
                 <div class="row mb-4">
-                  <div class="col-md-6">
-                    <table class="order-details-table">
-                      <tbody>
-                        <tr>
-                          <th class="fontSize12">Order (Services ID):</th>
-                          <td class="fontSize12">{{ orderData?.po ? orderData?.po : orderData?.order_no }}</td>
-                        </tr>
-                        <tr>
-                          <th class="fontSize12">Requested By:</th>
-                          <td class="fontSize12">{{ orderData?.created_by?.first_name }}</td>
-                        </tr>
-                        <tr>
-                          <th class="fontSize12">Order Date:</th>
-                          <td class="fontSize12">{{ orderData?.created_at | date : "fullDate" }}</td>
-                        </tr>
-                        <tr>
-                          <th class="fontSize12">Order Time:</th>
-                          <td class="fontSize12">{{ orderData?.created_at | date : "shortTime" }}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div class="col-md-6 p-0">
-                    <table class="w-100 order-details-table">
-                      <tbody>
-                        <!-- <tr>
-                          <th class="fontSize12">Estimated Time Arrival:</th>
-                          <td class="fontSize12"></td>
-                        </tr> -->
-                        <tr>
-                          <th class="fontSize12">Delivery Date:</th>
-                          <td class="fontSize12">{{ orderData?.dely_date | date : "fullDate" }}</td>
-                        </tr>
-                        <tr>
-                          <th class="fontSize12">Delivery Time:</th>
-                          <td class="fontSize12">{{ orderData?.dely_time ?  orderData?.dely_time : 'NA' }}</td>
-                        </tr>
-                        <tr>
-                          <th class="fontSize12">Remarks:</th>
-                          <td class="fontSize12">{{ orderData?.dely_note }}</td>
-                        </tr>
-                      </tbody>
-                    </table>
+                  <div class="CardPopup">
+                    <div class="row">
+                      <div class="col-md-12 mb-4">
+                        <div class="Step_List">
+                          <ul>
+                            <li
+                              [ngClass]="(orderData?.order_status== 'shipped' || orderData?.order_status== 'en-route' || orderData?.order_status== 'successful' || orderData?.order_status== 'pending' )?'active':'' "
+                              class="w-100">
+                              <a>
+                                <span class="DotSpan">&nbsp;</span>
+                                <span class="DotSpan_Title fontSize10"> Processed </span>
+                                <div *ngIf='getDateTime("pending") != "NA"' class="DotSpan_Title fontSize12"
+                                  style="color: black;"> {{getDateTime("pending") | date:'mediumDate'}} </div>
+                                <div *ngIf='getDateTime("pending") != "NA"' class="DotSpan_Title fontSize12"
+                                  style="color: black;"> {{getDateTime("pending") | date:'shortTime'}} </div>
+                                <div *ngIf='getDateTime("pending") == "NA"' class="DotSpan_Title fontSize12"
+                                  style="color: black;">NA </div>
+                              </a>
+                              <span
+                                [ngClass]="(orderData?.order_status== 'shipped' || orderData?.order_status== 'en-route' || orderData?.order_status== 'successful' || orderData?.order_status== 'pending' )?'line-active':'' "
+                                class="order-details-line"></span>
+                            </li>
+                            <li
+                              [ngClass]="(orderData?.order_status== 'shipped' || orderData?.order_status== 'en-route' || orderData?.order_status== 'successful') ?'active':'' "
+                              class=" w-100">
+                              <a>
+                                <span class="DotSpan">&nbsp;</span>
+                                <span class="DotSpan_Title fontSize10"> Shipped </span>
+                                <div *ngIf='getDateTime("shipped") != "NA"' class="DotSpan_Title fontSize12"
+                                  style="color: black;"> {{getDateTime("shipped") | date:'mediumDate'}} </div>
+                                <div *ngIf='getDateTime("shipped") != "NA"' class="DotSpan_Title fontSize12"
+                                  style="color: black;"> {{getDateTime("shipped") | date:'shortTime'}} </div>
+                                <div *ngIf='getDateTime("shipped") == "NA"' class="DotSpan_Title fontSize12"
+                                  style="color: black;"> NA </div>
+                              </a>
+                              <span
+                                [ngClass]="(orderData?.order_status== 'shipped' || orderData?.order_status== 'en-route' || orderData?.order_status== 'successful')?'line-active':'' "
+                                class="order-details-line"></span>
+
+                            </li>
+                            <li
+                              [ngClass]="(orderData?.order_status== 'en-route' || orderData?.order_status== 'successful')?'active':'' "
+                              class="w-100">
+                              <a>
+                                <span class="DotSpan">&nbsp;</span>
+                                <span class="DotSpan_Title fontSize10"> En route </span>
+                                <div *ngIf='getDateTime("en-route") != "NA"' class="DotSpan_Title fontSize12"
+                                  style="color: black;"> {{getDateTime("en-route") | date:'mediumDate'}} </div>
+                                <div *ngIf='getDateTime("en-route") != "NA"' class="DotSpan_Title fontSize12"
+                                  style="color: black;"> {{getDateTime("en-route") | date:'shortTime'}} </div>
+                                <div *ngIf='getDateTime("en-route") == "NA"' class="DotSpan_Title fontSize12"
+                                  style="color: black;"> NA </div>
+                              </a>
+                              <span
+                                [ngClass]="(orderData?.order_status== 'en-route' || orderData?.order_status== 'successful')?'line-active':'' "
+                                class="order-details-line"></span>
+
+                            </li>
+                            <li [ngClass]="orderData?.order_status== 'successful'?'active':'' " class=" w-100">
+                              <a>
+                                <span class="DotSpan">&nbsp;</span>
+                                <span class="DotSpan_Title fontSize10"> Delivered </span>
+                                <div *ngIf='getDateTime("successful") != "NA"' class="DotSpan_Title fontSize12"
+                                  style="color: black;"> {{getDateTime("successful") | date:'mediumDate'}} </div>
+                                <div *ngIf='getDateTime("successful") != "NA"' class="DotSpan_Title fontSize12"
+                                  style="color: black;"> {{getDateTime("successful") | date:'shortTime'}} </div>
+                                <div *ngIf='getDateTime("successful") == "NA"' class="DotSpan_Title fontSize12"
+                                  style="color: black;">NA </div>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <br>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <table class="order-details-table">
+                          <tbody>
+                            <tr>
+                              <th class="fontSize12">Order (Services ID):</th>
+                              <td class="fontSize12">{{ orderData?.po ? orderData?.po : orderData?.order_no }}</td>
+                            </tr>
+                            <tr>
+                              <th class="fontSize12">Requested By:</th>
+                              <td class="fontSize12">{{ orderData?.created_by?.first_name }}</td>
+                            </tr>
+                            <tr>
+                              <th class="fontSize12">Order Date:</th>
+                              <td class="fontSize12">{{ orderData?.created_at | date : "fullDate" }}</td>
+                            </tr>
+                            <tr>
+                              <th class="fontSize12">Order Time:</th>
+                              <td class="fontSize12">{{ orderData?.created_at | date : "shortTime" }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="col-md-6 p-0">
+                        <table class="w-100 order-details-table">
+                          <tbody>
+                            <!-- <tr>
+                                <th class="fontSize12">Estimated Time Arrival:</th>
+                                <td class="fontSize12"></td>
+                              </tr> -->
+                            <tr>
+                              <th class="fontSize12">Delivery Date:</th>
+                              <td class="fontSize12">{{ orderData?.dely_date | date : "fullDate" }}</td>
+                            </tr>
+                            <tr>
+                              <th class="fontSize12">Delivery Time:</th>
+                              <td class="fontSize12">{{ orderData?.dely_time ? orderData?.dely_time : 'NA' }}</td>
+                            </tr>
+                            <tr>
+                              <th class="fontSize12">Remarks:</th>
+                              <td class="fontSize12">{{ orderData?.dely_note }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
                   </div>
                 </div>
+                
                 <div class="row">
                   <!-- Order Detail -->
                   <div class="CardPopup">
-                    <div class="row">
+                    <div class="d-flex justify-content-between">
+                      <div>
+                        <span *ngIf="orderData?.current_driver.first_name" class="Password FileUpload lh-50">
+                          <strong>Assigned To:
+                            {{
+                            orderData?.current_driver.first_name
+                            }}
+                            {{
+                            orderData?.current_driver?.last_name
+                            }}</strong>
+                          On {{ orderData?.dely_date | date : "fullDate" }}
+                        </span>
+                        <span *ngIf="!orderData?.current_driver.first_name" class="Password FileUpload lh-50">
+                          <strong>Assigned To:</strong>UNASSIGNED
+                        </span>
+                      </div>
+                      <div *ngIf="orderData?.current_driver.first_name" class="mb-2 p-0">
+                        <div (click)="reassignNewDriver('200ms','200ms')" class="NewDriver d-inline-block">
+                          <a>Reassign</a>
+                        </div>
+                      </div>
+                    </div>
+                    <br>
+                    <!-- <div class="row">
                       <div class="col-8 mb-3">
-                        <span  *ngIf="orderData?.current_driver.first_name" class="Password FileUpload lh-50">
+                        <span *ngIf="orderData?.current_driver.first_name" class="Password FileUpload lh-50">
                           <strong>Assigned To:
                             {{
                             orderData?.current_driver.first_name
@@ -224,7 +275,7 @@
                           <a>Reassign</a>
                         </div>
                       </div>
-                    </div>
+                    </div> -->
                     <div class="row">
                       <div class="col-md-6 mb-4">
                         <label class="fontSize12 fw-bold">Driver Phone Number</label>
@@ -250,16 +301,20 @@
                             class="fa-solid fa-copy order-details-copy"></i>
                         </span>
                       </div>
-                      <div  class="col-md-12 my-4 d-flex justify-between">
-                        <button class="ButtonStyle" (click)="sendNotification('500ms','500ms',orderData?.current_driver?.id , 'Driver')">
-                          Send Notification to Driver <img class="send" src="../../assets/images/pushnotification-white.jpg">
+                      <div class="col-md-12 my-4 d-flex justify-between">
+                        <button class="ButtonStyle"
+                          (click)="sendNotification('500ms','500ms',orderData?.current_driver?.id , 'Driver')">
+                          Send Notification to Driver <img class="send"
+                            src="../../assets/images/pushnotification-white.jpg">
 
                         </button>
-                        <button class="ButtonStyle" (click)="sendNotification('500ms','500ms',orderData?.customer_phone, 'Customer' )">
-                          Send Notification to Customer <img class="send" src="../../assets/images/pushnotification-white.jpg">
+                        <button class="ButtonStyle"
+                          (click)="sendNotification('500ms','500ms',orderData?.customer_phone, 'Customer' )">
+                          Send Notification to Customer <img class="send"
+                            src="../../assets/images/pushnotification-white.jpg">
 
                         </button>
-                        
+
                       </div>
 
                       <!-- <div class="col-md-10 mb-4">
