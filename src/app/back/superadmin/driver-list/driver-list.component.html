@@ -117,8 +117,10 @@
                     <!-- <td>{{ item.email }}</td> -->
                     <td>{{item.assigned_orders_count}}</td>
                     <td>0</td>
-                    <td>--</td>
-                    <td>--</td>
+                    <td *ngIf="item.drivertime && item.drivertime.length > 0 && item.drivertime[0].last_delivery_time">{{item.drivertime && item.drivertime.length > 0 && item.drivertime[0].last_delivery_time}}</td>
+                    <td *ngIf="!(item.drivertime && item.drivertime.length > 0 && item.drivertime[0].last_delivery_time)">--</td>
+                    <td *ngIf="item.drivertime && item.drivertime.length > 0 && item.drivertime[0].time_back_warehouse">{{item.drivertime && item.drivertime.length > 0 && item.drivertime[0].time_back_warehouse}}</td>
+                    <td *ngIf="!(item.drivertime && item.drivertime.length > 0 && item.drivertime[0].time_back_warehouse)">--</td>
                     <td>
                       <button class="button-Pending status_button_style" [ngClass]="item.is_active ? 'active-status' : 'inactive-status'"> 
                         {{item.is_active ? "ACTIVE" : "INACTIVE"}}
