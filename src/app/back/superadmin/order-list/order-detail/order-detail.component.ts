@@ -51,11 +51,28 @@ export class OrderDetailComponent {
   ngOnInit(): void {
 
   }
-  
   get f() {
     return this.orderDetailsPushForm.controls;
   }
   getDateTime(status: string){
+    //if shipped time is not there then make enroute time as shipped time
+    let obj = {
+      "status": "shipped",
+      "updated_at": "2023-09-30T07:12:40.614870Z",
+      "updated_by": "sandeep@gmail.com",
+      "status_reason": []
+    };
+    let shippedItem = this.orderData?.status_history.find((item:any) => item.status == 'shipped');
+    if(shippedItem == undefined){
+      let enRouteItem = this.orderData?.status_history.find((item:any) => item.status == 'en-route');
+      if(enRouteItem){
+        obj.updated_at= enRouteItem.updated_at;
+        obj.updated_by= enRouteItem.updated_by;
+        obj.status_reason= enRouteItem.status_reason;
+        this.orderData.status_history.push(obj);
+      }
+    }
+    //end
     var item = this.orderData?.status_history.find((item:any) => item.status === status);
     if(item){
       return item.updated_at;

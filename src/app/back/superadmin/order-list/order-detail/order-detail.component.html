@@ -35,7 +35,7 @@
                 <div *ngIf="orderData?.order_status != 'en-route'" class="DeliveryNumber fontSize10">
                   Track Order will be enabled only when Order is En-route.
                 </div>
-                <div [ngClass]="orderData?.order_status != 'en-route' ? 'disabled-custom':'' "
+                <div
                   class="TrackDriver mt-3 cursor-pointer" (click)="trackDriver()">
                   <a> Track Order</a>
                 </div>

@@ -61,7 +61,7 @@ export class OrderAddComponent {
       po: [''],
       pickup_company_name: ['', [Validators.required]],
       pickup_address: ['', [Validators.required]],
-      is_pickup_warehouse: ['false'],
+      is_pickup_warehouse: [''],
       pickup_date: ['', [Validators.required]],
       pickup_time: [''],
       pickup_contact_name: ['', [Validators.required]],
@@ -77,7 +77,7 @@ export class OrderAddComponent {
       pickup_note: [''],
       dely_company_name: ['', [Validators.required]],
       dely_address: ['', [Validators.required]],
-      is_dely_warehouse: ['false'],
+      is_dely_warehouse: [''],
       dely_date: ['', [Validators.required]],
       dely_time: [''],
       dely_contact_name: ['', [Validators.required]],
@@ -310,9 +310,8 @@ export class OrderAddComponent {
     if (this.addOrderF.invalid) {
       return;
     }
-
+   
     this.loading = true;
-
     const formData = new FormData();
     for (let i in this.addOrderF.value) {
       if (this.addOrderF.value[i] instanceof Blob) {
@@ -328,7 +327,12 @@ export class OrderAddComponent {
         }
       }
     }
-
+    if(this.addOrderF.value.is_pickup_warehouse == ''){
+      formData.append('is_pickup_warehouse','false')
+    }
+    if(this.addOrderF.value.is_dely_warehouse == ''){
+      formData.append('is_dely_warehouse','false')
+    }
     if (this.isAddMode) {
       this.orderService.orderAdd(formData).subscribe(
         (data: any) => {
