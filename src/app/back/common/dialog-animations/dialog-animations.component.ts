@@ -78,7 +78,7 @@ export class DialogAnimationsComponent {
   updatePriority(){
     this.loading = true;
     // console.log('Api Data Err ffff', this.f, this.frmValues);
-    this.selectedPriorityNumber = this.selectedPriorityNumber-1;
+    this.selectedPriorityNumber = this.selectedPriorityNumber;
     var formdata = new FormData();
     formdata.append('order_id', this.data.orderListingData.order_id);
     formdata.append('priority', this.selectedPriorityNumber.toString());
