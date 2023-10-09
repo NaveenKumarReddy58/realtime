@@ -75,7 +75,7 @@
                   <td>{{ item.contact_name }}</td>
                   <td>{{ item.email }}</td>
                   <td>{{ item.phone }}</td>
-                  <td>{{ item.alt_phone }}</td>
+                  <td>{{ item.alt_phone!= 'null' ? item.alt_phone : '--' }}</td>
                   <td>
 
                     <div class="GetIocn">

@@ -64,3 +64,48 @@
     background-color: #e5f7f0;
     border-color: #d8f7eb;
 }
+@media screen and (max-width: 1200px) {
+    .top-bar-more{
+        display: block !important;
+      }
+      .top-bar-send-notification, .top-bar-tickets, .top-bar-help{
+        display: none !important;
+      }
+}
+@media screen and (max-width: 992px) {
+    .top-bar-more{
+        display: none !important;
+      }
+      .top-bar-send-notification, .top-bar-tickets, .top-bar-help{
+        display: block !important;
+      }
+}
+@media screen and (max-width: 840px) {
+    .top-bar-more,.top-bar-locate{
+        display: block !important;
+      }
+      .top-bar-send-notification, .top-bar-tickets, .top-bar-help{
+        display: none !important;
+      }
+}
+@media screen and (max-width: 660px) {
+    .top-bar-more{
+        display: block !important;
+      }
+      .top-bar-send-notification, .top-bar-tickets, .top-bar-help,.top-bar-locate{
+        display: none !important;
+      }
+}
+  .more-items{
+    right: 0;
+    cursor: pointer;
+  }
+  .top-bar-more{
+    display: none;
+    cursor: pointer;
+  }
+  @media screen and (max-width: 575px) {
+    .topbar-section{
+        margin-top: .5rem !important;
+    }
+} 

@@ -4,15 +4,9 @@
     <div class="SearchDivInner">
       <div class="SearchDiv">
         <form class="SearchForm">
-          <span class="SearchIcon"
-            ><i class="fa fa-search" aria-hidden="true"></i>
-            <input
-              type="text"
-              placeholder="Search by Order"
-              class="InPutField"
-              disabled
-              (keyup)="searchfield($event)"
-            />
+          <span class="SearchIcon"><i class="fa fa-search" aria-hidden="true"></i>
+            <input type="text" placeholder="Search by Order" class="InPutField" disabled
+              (keyup)="searchfield($event)" />
           </span>
           <button class="ButtonIcon" (click)="searchboxopen()">
             <img src="assets/images/searchicon.png" />
@@ -30,35 +24,17 @@
           </div>
           <ul class="OrderTracking">
             <li>
-              <label
-                ><img src="assets/images/search-icon01.png" />
-                <input
-                  type="text"
-                  name=""
-                  placeholder="Enter Tracking/Order Number"
-                  class="InPutField_S"
-              /></label>
+              <label><img src="assets/images/search-icon01.png" />
+                <input type="text" name="" placeholder="Enter Tracking/Order Number" class="InPutField_S" /></label>
             </li>
             <li>
               <span class="searchTitle">Search by Name or Address</span>
-              <label
-                ><img src="assets/images/search-icon02.png" />
-                <input
-                  type="text"
-                  name=""
-                  placeholder="Enter Name"
-                  class="InPutField_S"
-              /></label>
+              <label><img src="assets/images/search-icon02.png" />
+                <input type="text" name="" placeholder="Enter Name" class="InPutField_S" /></label>
             </li>
             <li>
-              <label
-                ><img src="assets/images/search-icon03.png" />
-                <input
-                  type="text"
-                  name=""
-                  placeholder="Enter Address"
-                  class="InPutField_S"
-              /></label>
+              <label><img src="assets/images/search-icon03.png" />
+                <input type="text" name="" placeholder="Enter Address" class="InPutField_S" /></label>
             </li>
           </ul>
           <div class="SearchButton">
@@ -82,11 +58,7 @@
             </div>
             <span class="__Plan GoldPlan">Companies</span>
           </li>
-          <li
-            class="BookMark_Title"
-            *ngFor="let item of plandata; let index = index"
-            (click)="planfield(item.id)"
-          >
+          <li class="BookMark_Title" *ngFor="let item of plandata; let index = index" (click)="planfield(item.id)">
             <div class="IconImg">
               <img *ngIf="!item.img" src="assets/images/sper-top-icon02.png" />
               <img *ngIf="item.img" [src]="item.img" />
@@ -116,16 +88,9 @@
     <div class="SearchDivInner">
       <div class="SearchDiv">
         <form class="SearchForm">
-          <span class="SearchIcon"
-            ><i class="fa fa-search" aria-hidden="true"></i>
-            <input
-              type="text"
-              disabled
-              placeholder="Search for Orders"
-              class="InPutField"
-              value="{{searchText}}"
-              (keyup)="searchfield($event)"
-            />
+          <span class="SearchIcon"><i class="fa fa-search" aria-hidden="true"></i>
+            <input type="text" disabled placeholder="Search for Orders" class="InPutField" value="{{searchText}}"
+              (keyup)="searchfield($event)" />
           </span>
           <button class="ButtonIcon" (click)="searchboxopen()">
             <img src="assets/images/searchicon.png" />
@@ -133,8 +98,7 @@
         </form>
       </div>
       <!-- Search Box -->
-      <form class="SearchContentForm" [formGroup]="searchForm"
-      *ngIf="searchbox">
+      <form class="SearchContentForm" [formGroup]="searchForm" *ngIf="searchbox">
         <div class="SearchContent">
           <div class="SearchOrder">
             <span class="searchTitle">Search by Order</span>
@@ -144,43 +108,25 @@
           </div>
           <ul class="OrderTracking">
             <li>
-              <label
-                ><img src="assets/images/search-icon01.png" />{{orderNumber}}
-                <input
-                  type="text"
-                  name=""
-                  formControlName="order_number"
-                  placeholder="Enter Tracking/Order Number"
-                  class="InPutField_S"
-              /></label>
+              <label><img src="assets/images/search-icon01.png" />{{orderNumber}}
+                <input type="text" name="" formControlName="order_number" placeholder="Enter Tracking/Order Number"
+                  class="InPutField_S" /></label>
             </li>
             <li>
               <span class="searchTitle">Search by Name or Address</span>
-              <label
-                ><img src="assets/images/search-icon02.png" />
-                <input
-                  type="text"
-                  name=""
-                  formControlName="name"
-                  placeholder="Enter Name"
-                  class="InPutField_S"
-              /></label>
+              <label><img src="assets/images/search-icon02.png" />
+                <input type="text" name="" formControlName="name" placeholder="Enter Name"
+                  class="InPutField_S" /></label>
             </li>
             <li>
-              <label
-                ><img src="assets/images/search-icon03.png" />
-                <input
-                  type="text"
-                  name=""
-                  formControlName="address"
-                  placeholder="Enter Address"
-                  class="InPutField_S"
-              /></label>
+              <label><img src="assets/images/search-icon03.png" />
+                <input type="text" name="" formControlName="address" placeholder="Enter Address"
+                  class="InPutField_S" /></label>
             </li>
           </ul>
           <div class="SearchButton">
-            <button class="ButtonStyle clear"  (click)="clearSearch()">Clear</button>
-            <button class="ButtonStyle"  (click)="updateSearch()">Search</button>
+            <button class="ButtonStyle clear" (click)="clearSearch()">Clear</button>
+            <button class="ButtonStyle" (click)="updateSearch()">Search</button>
           </div>
         </div>
       </form>
@@ -188,7 +134,7 @@
     </div>
   </div>
   <!-- Search Bar /////////// -->
-  <div class="col-md-12 mt-sm-2 mt-lg-0 col-lg-8">
+  <div class="col-md-12 topbar-section mt-sm-2 mt-lg-0 col-lg-8">
     <div #topBarTabList class="TabList">
       <ul class="TopMenu">
         <li (click)="onClickTopItem('orders')">
@@ -217,8 +163,8 @@
             </li>
           </ul> -->
         </li>
-        <li class="link-driver" >
-          <a routerLink="/{{ _isRoleName }}/driver/add"  routerLinkActive="active-link">
+        <li class="link-driver">
+          <a routerLink="/{{ _isRoleName }}/driver/add" routerLinkActive="active-link">
             <img src="assets/images/top-icon01.png" />
             <span>Add Driver</span>
           </a>
@@ -243,70 +189,106 @@
             </li>
           </ul> -->
         </li>
-        <li (click)="onClickTopItem('locate')">
+        <li class="top-bar-locate" (click)="onClickTopItem('locate')">
           <a routerLink="/{{ _isRoleName }}/driver/locate" routerLinkActive="active-link">
             <img src="assets/images/top-icon03.png" />
             <span>Locate Driver</span>
           </a>
         </li>
-        <li> 
-            <a routerLink="/{{ _isRoleName }}/send-notification" routerLinkActive="active-link">
-              <img src="assets/images/top-icon04.png" />
-              <span>Send Notification</span>
-            </a>
+        <li class="top-bar-send-notification">
+          <a routerLink="/{{ _isRoleName }}/send-notification" routerLinkActive="active-link">
+            <img src="assets/images/top-icon04.png" />
+            <span>Send Notification</span>
+          </a>
         </li>
-        <li (click)="onClickTopItem('tickets')">
+        <li class="top-bar-tickets" (click)="onClickTopItem('tickets')">
           <a routerLink="/{{ _isRoleName }}/tickets" routerLinkActive="active-link">
             <img src="assets/images/top-icon05.png" />
             <span>Tickets</span>
           </a>
         </li>
-        <li>
+        <li class="top-bar-help">
           <a routerLink="/{{ _isRoleName }}/help" routerLinkActive="active-link">
             <img src="assets/images/top-icon06.png" />
             <span>Help</span>
           </a>
         </li>
-        <li class="position-relative cursor-pointer">
+        <li class="position-relative cursor-pointer ">
           <a (click)="showNotifications()">
             <img src="assets/images/top-icon07.png" />
             <span>Notification
-              <span *ngIf="notificationCountData && notificationCountData > 0" class="notification-badge">{{notificationCountData}}</span>
-
+              <span *ngIf="notificationCountData && notificationCountData > 0"
+                class="notification-badge">{{notificationCountData}}</span>
             </span>
           </a>
           <div *ngIf="isShowNotifications" class="box shadow-sm rounded bg-white mb-3 top-header-notification">
             <div class="box-title d-flex border-bottom justify-content-between p-3 text-start">
-                <h2 class="m-0 d-inline-block">Recent Notifications</h2>
-                <h2 class="m-0 d-inline-block text-muted" (click)="showNotifications()">Close
-                </h2>
+              <h2 class="m-0 d-inline-block">Recent Notifications</h2>
+              <h2 class="m-0 d-inline-block text-muted" (click)="showNotifications()">Close
+              </h2>
             </div>
             <div class="box-body notification-body p-0" *ngIf="notificationListData && notificationListData.length > 0">
-                <div *ngFor="let notification of notificationListData; let index = index">
+              <div *ngFor="let notification of notificationListData; let index = index">
                 <div class="p-3 d-flex gap-3 align-items-center bg-light border-bottom osahan-post-header">
-                    <div class="dropdown-list-image mr-3">
-                        <img class="rounded-circle" width="50px" height="50px" src="assets/images/profilephoto.png" alt="" />
-                    </div>
-                    <div  (click)="navigateToOrderDetails(notification?.notif_detail_id)" class=" mr-3 text-start">
-                        <div class="text-truncate fw-bold">{{notification.notif_type}}<span style="padding-left: 10px;" class="text-right text-muted mr-auto">{{notification.sent_at | dateAgo}} ago</span></div>
-                        <div class="small d-inline-block">{{notification.notification}}</div>
-                    </div>
-                    <span class="ms-auto">
-                      <i (click)="deleteNotification(notification.id)" class="fa fa-close">
-                        <i *ngIf="isDeleteLoading && isDeleteId == notification.id" class="fa fa-spinner fa-spin"></i>
-                      </i>
-                    </span>
+                  <div class="dropdown-list-image mr-3">
+                    <img class="rounded-circle" width="50px" height="50px" src="assets/images/profilephoto.png"
+                      alt="" />
+                  </div>
+                  <div (click)="navigateToOrderDetails(notification?.notif_detail_id)" class=" mr-3 text-start">
+                    <div class="text-truncate fw-bold">{{notification.notif_type}}<span style="padding-left: 10px;"
+                        class="text-right text-muted mr-auto">{{notification.sent_at | dateAgo}} ago</span></div>
+                    <div class="small d-inline-block">{{notification.notification}}</div>
+                  </div>
+                  <span class="ms-auto">
+                    <i (click)="deleteNotification(notification.id)" class="fa fa-close">
+                      <i *ngIf="isDeleteLoading && isDeleteId == notification.id" class="fa fa-spinner fa-spin"></i>
+                    </i>
+                  </span>
                 </div>
-                </div>
+              </div>
             </div>
-            <div class="box-body notification-body p-0" *ngIf="notificationListData && notificationListData.length == 0">
+            <div class="box-body notification-body p-0"
+              *ngIf="notificationListData && notificationListData.length == 0">
               Zero Notifications
             </div>
             <div *ngIf="notificationListData && notificationListData.length > 0">
-              <a (click)="clearAllNotifications()" class="clear-all-noti">Clear All Notifications <i *ngIf="isClearAllDeleteLoading" class="fa fa-spinner fa-spin"></i></a>
+              <a (click)="clearAllNotifications()" class="clear-all-noti">Clear All Notifications <i
+                  *ngIf="isClearAllDeleteLoading" class="fa fa-spinner fa-spin"></i></a>
             </div>
-        </div>
-          
+          </div>
+
+        </li>
+        <li class="top-bar-more">
+          <a>
+            <i style="font-size: x-large;color: gray;" class="fa fa-info-circle" aria-hidden="true"></i>
+            <span>More</span>
+          </a>
+          <ul class="SubMenuBar more-items">
+            <li>
+              <a routerLink="/{{ _isRoleName }}/send-notification" routerLinkActive="active-link">
+                <img src="assets/images/top-icon04.png" />
+                <span>Send Notification</span>
+              </a>
+            </li>
+            <li (click)="onClickTopItem('tickets')">
+              <a routerLink="/{{ _isRoleName }}/tickets" routerLinkActive="active-link">
+                <img src="assets/images/top-icon05.png" />
+                <span>Tickets</span>
+              </a>
+            </li>
+            <li>
+              <a routerLink="/{{ _isRoleName }}/help" routerLinkActive="active-link">
+                <img src="assets/images/top-icon06.png" />
+                <span>Help</span>
+              </a>
+            </li>
+            <li (click)="onClickTopItem('locate')">
+              <a routerLink="/{{ _isRoleName }}/driver/locate" routerLinkActive="active-link">
+                <img src="assets/images/top-icon03.png" />
+                <span>Locate Driver</span>
+              </a>
+            </li>
+          </ul>
         </li>
       </ul>
     </div>

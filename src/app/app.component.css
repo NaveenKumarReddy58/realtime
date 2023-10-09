@@ -30,13 +30,15 @@
     flex-direction: row;
 
 }
-.main-content-container{
+ .main-content-container{
     width: calc(100% - 250px);
     right: 13px;
     position: absolute;
 }
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 570px) {
     .main-content-container{
-      width: calc(100% - 210px);
+      width: 100%;
+      right: 0;
+      padding: 0px 20px;
     }
-  }
+} 
