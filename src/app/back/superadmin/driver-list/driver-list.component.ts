@@ -61,6 +61,9 @@ export class DriverListComponent {
             return 1;
           return 0;
         });
+        // this.items.forEach((element:any, index:number) => {
+        //   element['sNo']= (index+1)+(10*(this.page-1)) ;
+        // });
         this.copyOfDriversList= this.items;
         this.items.forEach((obj:any) => obj["checked"] = false)
         this.getCountOfActiveDrivers();

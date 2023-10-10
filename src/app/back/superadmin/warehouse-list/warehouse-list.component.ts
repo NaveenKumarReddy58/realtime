@@ -43,7 +43,7 @@ export class WarehouseListComponent {
 
   ngOnInit(): void {}
 
-  warehouseList(page?: number) {
+  warehouseList(page?: any) {
     this.warehouseService.warehouseList(page);
     this.warehouse$ = this.warehouseService.getWarehouse();
 
@@ -52,6 +52,9 @@ export class WarehouseListComponent {
       this.showPaginator= true;
       this.totalWarehouses= data?.result?.count;
       this.warehouseData = data?.result?.results;
+      this.warehouseData.forEach((element:any, index:number) => {
+        element['sNo']= (index+1)+(10*(page-1)) ;
+      });
     });
   }
 

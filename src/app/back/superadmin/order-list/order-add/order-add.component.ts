@@ -305,11 +305,26 @@ export class OrderAddComponent {
 
   handleSubmit() {
     this.isSubmitted = true;
-    
+    console.log(this.addOrderF.value.is_pickup_warehouse)
+    console.log(this.addOrderF.value.is_dely_warehouse)
+
+    if(this.addOrderF.value.is_pickup_warehouse == ''){
+      this.addOrderF.patchValue({
+        is_pickup_warehouse: false,
+      })
+    }
+    if(this.addOrderF.value.is_dely_warehouse == ''){
+      this.addOrderF.patchValue({
+        is_dely_warehouse: false
+      })
+    }
+    console.log(this.addOrderF.value.is_pickup_warehouse)
+    console.log(this.addOrderF.value.is_dely_warehouse)
     // stop here if form is invalid
     if (this.addOrderF.invalid) {
       return;
     }
+    
    
     this.loading = true;
     const formData = new FormData();
@@ -322,17 +337,13 @@ export class OrderAddComponent {
         );
         // console.log('blob');
       } else {
-        if(this.addOrderF.value[i]){
+        if(this.addOrderF.value[i]?.toString() != ''){
           formData.append(i, this.addOrderF.value[i]);
+          console.log(i, this.addOrderF.value[i])
         }
       }
     }
-    if(this.addOrderF.value.is_pickup_warehouse == ''){
-      formData.append('is_pickup_warehouse','false')
-    }
-    if(this.addOrderF.value.is_dely_warehouse == ''){
-      formData.append('is_dely_warehouse','false')
-    }
+    
     if (this.isAddMode) {
       this.orderService.orderAdd(formData).subscribe(
         (data: any) => {

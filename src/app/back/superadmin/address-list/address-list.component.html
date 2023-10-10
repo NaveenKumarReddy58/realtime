@@ -18,14 +18,14 @@
                 border="0"
               >
                 <tr class="T_Head">
-                  <th>S.No</th>
+                  <th>#</th>
                   <th>Address</th>
                   <th>Latitude</th>
                   <th>Longitude</th>
                   <th>Action</th>
                 </tr>
                 <tr *ngFor="let item of addressData; let index = index">
-                  <td>{{ index + 1 }}</td>
+                  <td>{{ item.sNo }}</td>
                   <td>{{ item.address }}</td>
                   <td>{{ item.latitude | number : '1.6-6'}}</td>
                   <td>{{ item.longitude | number : '1.6-6'}}</td>

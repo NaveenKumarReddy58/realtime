@@ -47,6 +47,9 @@ export class AddressListComponent {
       this.totalAddressess= data?.result?.count;
 
       this.addressData = data?.result?.results;
+      this.addressData.forEach((element:any, index:number) => {
+        element['sNo']= (index+1)+(10*(this.page-1)) ;
+      });
     });
   }
   handlePageEvent(e: any) {

@@ -59,7 +59,7 @@
                 border="0"
               >
                 <tr class="T_Head">
-                  <th>S.No</th>
+                  <th>#</th>
                   <th>Warehouse Name</th>
                   <th>Address</th>
                   <th>Contact Name</th>
@@ -69,7 +69,7 @@
                   <th>Action</th>
                 </tr>
                 <tr *ngFor="let item of warehouseData; let index = index">
-                  <td>{{ index + 1 }}</td>
+                  <td>{{ item.sNo }}</td>
                   <td>{{ item.warehouse_name }}</td>
                   <td>{{ item?.address?.address }}</td>
                   <td>{{ item.contact_name }}</td>
