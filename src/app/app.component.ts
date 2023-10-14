@@ -26,6 +26,7 @@ export class AppComponent {
   notification: any;
   fcm_token: any;
   notificationCountData: any;
+  isShowMenu:boolean= false;
 
 
   ngOnInit(): void {
@@ -87,6 +88,14 @@ export class AppComponent {
     this.idleState = 'Started.';
     this.timedOut = false;
   }
+
+  showSidebar(){
+    // this.isShowMenu= !this.isShowMenu;
+    let val:any = 'block';
+    const element:any = document.getElementById('sideBar');
+   element.style.display = val;  
+  }
+  
 
   requestPermission() {
     const messaging = getMessaging();

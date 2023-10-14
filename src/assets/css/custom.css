@@ -2913,14 +2913,14 @@ img.searchicon {
   border-radius: 30px;
 }
 * {
-  scrollbar-width: 10px;
+  scrollbar-width: 5px;
   scrollbar-color: #999999;
 }
 *::-webkit-scrollbar {
   width: 12px;
 }
 *::-webkit-scrollbar-track {
-  height: 4px;
+  height: 2px;
 }
 *::-webkit-scrollbar-thumb {
   background-color: #999999;

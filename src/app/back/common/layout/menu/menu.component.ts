@@ -35,4 +35,10 @@ export class MenuComponent {
     this.authService.doLogout();
     this.toastr.success('Logout!');
   }
+  hideSidebar(){
+    // this.isShowMenu= !this.isShowMenu;
+    let val:any = 'none';
+    const element:any = document.getElementById('sideBar');
+   element.style.display = val;  
+  }
 }

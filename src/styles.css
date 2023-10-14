@@ -563,3 +563,16 @@ a.link{
 }
 
 
+@media screen and (max-width: 570px) {
+  .side-bar{
+      z-index: 3;
+display: none;  
+    border-top-left-radius: 0 !important;
+  }
+  ul.Tab_List li:first-child a {
+    padding: 0 !important;
+  }
+  .SearchDivInner{
+    display: none;
+  }
+} 

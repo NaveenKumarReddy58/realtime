@@ -1,5 +1,5 @@
 <app-splash *ngIf="!isLoggedIn"></app-splash>
-<section *ngIf="!isLoggedIn"  style="background: white; height: 100%;">
+<section *ngIf="!isLoggedIn" style="background: white; height: 100%;">
   <router-outlet></router-outlet>
 </section>
 <section *ngIf="isLoggedIn" class="section" style="height: 100%">
@@ -8,6 +8,17 @@
       <app-menu [isRoleIn]="isRoleIn"></app-menu>
     </div>
     <div class="main-content-container">
+      <div class="top-menu-container">
+        <div class="top-menu">
+          <div>
+            <i (click)="showSidebar()" class="fa fa-bars" aria-hidden="true"></i>
+
+          </div>
+          <div>
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
       <app-top [notificationCountData]="notificationCountData" [isRoleIn]="isRoleIn"></app-top>
       <router-outlet></router-outlet>
 
@@ -40,14 +51,10 @@
     <h2 class="px-3">{{notification}}
     </h2>
     <div>
-      <button
-                    type="submit"
-                    class="ButtonStyle notification-ok"
-                    (click)="closeNotification()"
-                  >
-                    Ok
-                  </button>
+      <button type="submit" class="ButtonStyle notification-ok" (click)="closeNotification()">
+        Ok
+      </button>
     </div>
   </div>
-  
+
 </div>

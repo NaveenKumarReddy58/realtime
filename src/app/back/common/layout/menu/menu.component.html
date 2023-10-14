@@ -1,4 +1,5 @@
-<div class="side-bar" *ngIf="isRoleIn == 1">
+<div id="sideBar" class="side-bar" *ngIf="isRoleIn == 1">
+    <i (click)="hideSidebar()" class="fa fa-close menu-close"></i>
   <div class="LogoDiv">
     <a routerLink="/{{ _isRoleName }}/dashboard"
       ><img src="assets/images/logo.png"
@@ -73,7 +74,8 @@
   </div>
 </div>
 
-<div class="side-bar" *ngIf="isRoleIn == 2">
+<div id="sideBar" class="side-bar" *ngIf="isRoleIn == 2">
+    <i (click)="hideSidebar()" class="fa fa-close menu-close"></i>
   <div class="LogoDiv">
     <a routerLink="/{{ _isRoleName }}/dashboard"
       ><img src="assets/images/logo.png"

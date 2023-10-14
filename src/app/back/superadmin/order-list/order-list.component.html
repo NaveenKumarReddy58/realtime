@@ -9,7 +9,7 @@
         </a>
       </li>
     </ul>
-    <div class="mx-4">
+    <div class="mx-lg-4 refresh-spin">
       <i *ngIf="!isShowRefreshSpin" (click)="refresh()" style="color: #0eb002;font-size: 18px;cursor: pointer;" class="fa fa-refresh" aria-hidden="true"></i>
 
       <i *ngIf="isShowRefreshSpin" style="color: #0eb002;font-size: 18px;" class="fa fa-refresh fa-spin" aria-hidden="true"></i>
@@ -148,7 +148,7 @@
               <a class="Select_Date"> Filter <i class="fa fa-sliders"></i> </a>
             </div>
           </div>
-          <div class="row mt-3">
+          <div class="row mt-3" style="overflow-x: auto;padding-bottom: 10px;">
             <div class="">
               <table
                 class="Order_Table"

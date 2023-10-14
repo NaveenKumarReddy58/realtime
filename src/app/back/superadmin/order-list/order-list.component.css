@@ -144,3 +144,8 @@ ul.Tab_List li.active a {
     border-radius: 18px;
     font-weight: 600;
 }
+@media screen and (max-width: 570px) {
+    .refresh-spin{
+        display: none;
+    }
+  } 
