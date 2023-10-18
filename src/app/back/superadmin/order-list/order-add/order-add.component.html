@@ -13,54 +13,37 @@
         <div class="OrderList">
           <div class="row">
             <div class="col-md-12 Oreder">
-              <span *ngIf="isAddMode" class="RecentTitle AddOrder"
-                >Add Order</span
-              >
-              <span *ngIf="!isAddMode" class="RecentTitle AddOrder"
-                >Edit Order</span
-              >
+              <span *ngIf="isAddMode" class="RecentTitle AddOrder">Add Order</span>
+              <span *ngIf="!isAddMode" class="RecentTitle AddOrder">Edit Order</span>
             </div>
           </div>
           <div class="row mt-3">
             <div class="form-div">
-              <form
-                [formGroup]="addOrderF"
-                class="Form-Form"
-                enctype="multipart/form-data"
-              >
+              <form [formGroup]="addOrderF" class="Form-Form" enctype="multipart/form-data">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="from-to-pick">
                       <div class="from-to-pick-inner">
                         <div class="Pickup-title">
                           <span class="DeliveryTo">
-                            Pickup <strong>From</strong>
+                            Pickup <strong>From </strong>
                           </span>
                           <span class="DeliveryTo">
-                            <strong>PO#</strong>
-                            <span [ngClass]="isCheckedWarehous[0].pickup ? 'input-disabled':''" class="Number"
-                              ><input
-                                type="text"
-                                formControlName="po"
-                                placeholder="PO#"
-                                class="border-0 fw-bold"
-                                [ngClass]="isCheckedWarehous[0].pickup ? 'input-disabled':''" 
+                            <strong> PO#</strong>
+                            <span [ngClass]="isCheckedWarehous[0].pickup ? 'input-disabled':''" class="Number add-order-number"><input
+                                type="text" formControlName="po" placeholder="PO#" class="border-0 fw-bold"
+                                [ngClass]="isCheckedWarehous[0].pickup ? 'input-disabled':''"
                                 [attr.disabled]="isCheckedWarehous[0].pickup?'disabled':null"
-                                (keyup)="isAlphaNumeric($event, 'PO')"
-                            />
-                          </span>
-                          <div *ngIf="isSubmitted && f['po'].errors" class="text-danger">
-                            <div *ngIf="f['po'].errors['required']">
-                              <span class="invisible">PO###</span>PO is required
+                                (keyup)="isAlphaNumeric($event, 'PO')" />
+                            </span>
+                            <div *ngIf="isSubmitted && f['po'].errors" class="text-danger">
+                              <div *ngIf="f['po'].errors['required']">
+                                <span class="invisible">PO###</span>PO is required
+                              </div>
                             </div>
-                          </div>
                           </span>
                         </div>
-                        <input
-                          type="hidden"
-                          formControlName="po"
-                          value="{{ po }}"
-                        />
+                        <input type="hidden" formControlName="po" value="{{ po }}" />
                         <!-- <input
                           type="hidden"
                           formControlName="order_no"
@@ -70,42 +53,27 @@
                           <div class="col-md-12 mb-3">
                             <div class="filed-input mb-3 text-end">
                               Is this warehouse?
-                              <input
-                                disable
-                                (click)="
+                              <input disable (click)="
                                   changeStatus(
                                     'pickup',
                                     isCheckedWarehous[0].pickup
                                   )
-                                "
-                                class="head-driver mx-2"
+                                " class="head-driver mx-2"
                                 [ngClass]="warehouseData && warehouseData.hasOwnProperty('id') > 0 ? '' : 'disabled-custom'"
-                                type="checkbox"
-                                [checked]="isCheckedWarehous[0].pickup"
-                                formControlName="is_pickup_warehouse"
-                                (change)="setPickupWarehouse($event)"
-                              />
+                                type="checkbox" [checked]="isCheckedWarehous[0].pickup"
+                                formControlName="is_pickup_warehouse" (change)="setPickupWarehouse($event)" />
                             </div>
                           </div>
                           <div class="col-md-12">
                             <div class="filed-input mb-3">
-                              <input
-                                type="text"
-                                formControlName="pickup_company_name"
-                                placeholder="Company Name"
-                                class="CompanyField mb-0"
-                              />
-                              <div
-                                *ngIf="
+                              <input type="text" formControlName="pickup_company_name" placeholder="Company Name"
+                                class="CompanyField mb-0" />
+                              <div *ngIf="
                                   isSubmitted && f['pickup_company_name'].errors
-                                "
-                                class="text-danger"
-                              >
-                                <div
-                                  *ngIf="
+                                " class="text-danger">
+                                <div *ngIf="
                                     f['pickup_company_name'].errors['required']
-                                  "
-                                >
+                                  ">
                                   Company Name is required
                                 </div>
                               </div>
@@ -113,21 +81,12 @@
                           </div>
                           <div class="col-md-12">
                             <div class="filed-input mb-3">
-                              <select2
-                                [data]="data"
-                                class="CompanyField mb-0"
-                                formControlName="pickup_address"
-                                placeholder="Company Address"
-                              ></select2>
-                              <div
-                                *ngIf="
+                              <select2 [data]="data" class="CompanyField mb-0" formControlName="pickup_address"
+                                placeholder="Company Address"></select2>
+                              <div *ngIf="
                                   isSubmitted && f['pickup_address'].errors
-                                "
-                                class="text-danger"
-                              >
-                                <div
-                                  *ngIf="f['pickup_address'].errors['required']"
-                                >
+                                " class="text-danger">
+                                <div *ngIf="f['pickup_address'].errors['required']">
                                   Company Address is required
                                 </div>
                               </div>
@@ -137,19 +96,10 @@
                         <div class="row">
                           <div class="col-md-4">
                             <div class="filed-input mb-3">
-                              <input
-                                type="date"
-                                formControlName="pickup_date"
-                                placeholder="Date"
-                                class="CompanyField mb-0"
-                              />
-                              <div
-                                *ngIf="isSubmitted && f['pickup_date'].errors"
-                                class="text-danger"
-                              >
-                                <div
-                                  *ngIf="f['pickup_date'].errors['required']"
-                                >
+                              <input type="date" formControlName="pickup_date" placeholder="Date"
+                                class="CompanyField mb-0" />
+                              <div *ngIf="isSubmitted && f['pickup_date'].errors" class="text-danger">
+                                <div *ngIf="f['pickup_date'].errors['required']">
                                   Date is required
                                 </div>
                               </div>
@@ -157,19 +107,10 @@
                           </div>
                           <div class="col-md-4">
                             <div class="filed-input mb-3">
-                              <input
-                                type="time"
-                                formControlName="pickup_time"
-                                placeholder="Time"
-                                class="CompanyField mb-0"
-                              />
-                              <div
-                                *ngIf="isSubmitted && f['pickup_time'].errors"
-                                class="text-danger"
-                              >
-                                <div
-                                  *ngIf="f['pickup_time'].errors['required']"
-                                >
+                              <input type="time" formControlName="pickup_time" placeholder="Time"
+                                class="CompanyField mb-0" />
+                              <div *ngIf="isSubmitted && f['pickup_time'].errors" class="text-danger">
+                                <div *ngIf="f['pickup_time'].errors['required']">
                                   Time field is required
                                 </div>
                               </div>
@@ -177,11 +118,8 @@
                           </div>
                           <div class="col-md-4">
                             <div class="filed-input mb-3">
-                              <button
-                                class="ButtonStyle"
-                                mat-raised-button
-                                (click)="openDialog('0ms', '0ms', 'pickup')"
-                              >
+                              <button class="ButtonStyle" mat-raised-button
+                                (click)="openDialog('0ms', '0ms', 'pickup')">
                                 Add Address
                               </button>
                             </div>
@@ -190,24 +128,15 @@
                         <div class="row">
                           <div class="col-md-6">
                             <div class="filed-input mb-3">
-                              <input
-                                type="text"
-                                formControlName="pickup_contact_name"
-                                placeholder="Contact Name"
-                                class="CompanyField mb-0"
-                              />
+                              <input type="text" formControlName="pickup_contact_name" placeholder="Contact Name"
+                                class="CompanyField mb-0" />
 
-                              <div
-                                *ngIf="
+                              <div *ngIf="
                                   isSubmitted && f['pickup_contact_name'].errors
-                                "
-                                class="text-danger"
-                              >
-                                <div
-                                  *ngIf="
+                                " class="text-danger">
+                                <div *ngIf="
                                     f['pickup_contact_name'].errors['required']
-                                  "
-                                >
+                                  ">
                                   Contact Name is required
                                 </div>
                               </div>
@@ -215,19 +144,10 @@
                           </div>
                           <div class="col-md-6">
                             <div class="filed-input mb-3">
-                              <input
-                                type="text"
-                                formControlName="pickup_email"
-                                placeholder="Email"
-                                class="CompanyField mb-0"
-                              />
-                              <div
-                                *ngIf="isSubmitted && f['pickup_email'].errors"
-                                class="text-danger"
-                              >
-                                <div
-                                  *ngIf="f['pickup_email'].errors['required']"
-                                >
+                              <input type="text" formControlName="pickup_email" placeholder="Email"
+                                class="CompanyField mb-0" />
+                              <div *ngIf="isSubmitted && f['pickup_email'].errors" class="text-danger">
+                                <div *ngIf="f['pickup_email'].errors['required']">
                                   Email is required
                                 </div>
                                 <div *ngIf="f['pickup_email'].errors['email']">
@@ -238,44 +158,33 @@
                           </div>
                         </div>
                         <div class="row">
-                          <div class="col-md-2">
+                          <div class="col-md-2 col-4">
                             <span class="Password">
                               <span class="pickup-country">{{addOrderF.value.pickup_country_code}}</span>
-                              <select placeholder="Country" formControlName="pickup_country_code" class="CompanyField country-addorder">
-                                 <option value="" disabled [selected]="true">Country</option>
-                                 <option *ngFor="let country of countryCodes" [value]="country.dial_code">
+                              <select placeholder="Country" formControlName="pickup_country_code"
+                                class="CompanyField country-addorder">
+                                <option value="" disabled [selected]="true">Country</option>
+                                <option *ngFor="let country of countryCodes" [value]="country.dial_code">
                                   <span class="mx-3 fw-bold">{{country.name+" "+ country.dial_code }}</span>
-                                 </option>
-                               </select>
-                               <div *ngIf="isSubmitted && f['pickup_country_code'].errors" class="text-danger">
+                                </option>
+                              </select>
+                              <div *ngIf="isSubmitted && f['pickup_country_code'].errors" class="text-danger">
                                 <div *ngIf="f['pickup_country_code'].errors['required']">
                                   Country is required
                                 </div>
                               </div>
                             </span>
                           </div>
-                          <div class="col-md-5">
+                          <div class="col-md-5 col-8">
                             <div class="filed-input mb-3">
-                              <input
-                                type="number"
-                                formControlName="pickup_phone"
-                                placeholder="Phone Number"
-                                class="CompanyField mb-0"
-                                onKeyPress="if(this.value.length==10) return false;"
-                              />
+                              <input type="number" formControlName="pickup_phone" placeholder="Phone Number"
+                                class="CompanyField mb-0" onKeyPress="if(this.value.length==10) return false;" />
 
-                              <div
-                                *ngIf="isSubmitted && f['pickup_phone'].errors"
-                                class="text-danger"
-                              >
-                                <div
-                                  *ngIf="f['pickup_phone'].errors['required']"
-                                >
+                              <div *ngIf="isSubmitted && f['pickup_phone'].errors" class="text-danger">
+                                <div *ngIf="f['pickup_phone'].errors['required']">
                                   Phone Number is required
                                 </div>
-                                <div
-                                  *ngIf="f['pickup_phone'].errors['pattern']"
-                                >
+                                <div *ngIf="f['pickup_phone'].errors['pattern']">
                                   Phone Number must be 10 digits
                                 </div>
                               </div>
@@ -283,31 +192,19 @@
                           </div>
                           <div class="col-md-5">
                             <div class="filed-input mb-3">
-                              <input
-                                type="number"
-                                formControlName="pickup_alt_phone"
-                                placeholder="Alternate Phone"
-                                class="CompanyField mb-0"
-                                onKeyPress="if(this.value.length==10) return false;"
-                              />
-                              <div
-                                *ngIf="
+                              <input type="number" formControlName="pickup_alt_phone" placeholder="Alternate Phone"
+                                class="CompanyField mb-0" onKeyPress="if(this.value.length==10) return false;" />
+                              <div *ngIf="
                                   isSubmitted && f['pickup_alt_phone'].errors
-                                "
-                                class="text-danger"
-                              >
-                                <div
-                                  *ngIf="
+                                " class="text-danger">
+                                <div *ngIf="
                                     f['pickup_alt_phone'].errors['required']
-                                  "
-                                >
+                                  ">
                                   Alternative Phone number is required
                                 </div>
-                                <div
-                                  *ngIf="
+                                <div *ngIf="
                                     f['pickup_alt_phone'].errors['pattern']
-                                  "
-                                >
+                                  ">
                                   Alternative Phone number must be 10 digits
                                 </div>
                               </div>
@@ -317,20 +214,11 @@
                         <div class="row">
                           <div class="col-md-12">
                             <div class="filed-input mb-3">
-                              <textarea
-                                formControlName="pickup_note"
-                                placeholder="Note"
-                                maxlength="200"
-                                class="CompanyField mb-0 TextareaField"
-                              ></textarea>
+                              <textarea formControlName="pickup_note" placeholder="Note" maxlength="200"
+                                class="CompanyField mb-0 TextareaField"></textarea>
                               <div class="notes-msg">{{200 - addOrderF.value.pickup_note.length}}/200</div>
-                              <div
-                                *ngIf="isSubmitted && f['pickup_note'].errors"
-                                class="text-danger"
-                              >
-                                <div
-                                  *ngIf="f['pickup_note'].errors['required']"
-                                >
+                              <div *ngIf="isSubmitted && f['pickup_note'].errors" class="text-danger">
+                                <div *ngIf="f['pickup_note'].errors['required']">
                                   Note Field is required
                                 </div>
                               </div>
@@ -340,26 +228,20 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-6 mt-xs-4">
                     <div class="from-to-pick">
                       <div class="from-to-pick-inner">
                         <div class="Pickup-title">
                           <span class="DeliveryTo">
-                            Delivery <strong>TO</strong>
+                            Delivery <strong>TO </strong>
                           </span>
                           <span class="DeliveryTo">
-                            <strong>ON#</strong>
-                            <span class="Number" [ngClass]="isCheckedWarehous[1].to ? 'input-disabled':''" 
-                            >
-                              <input
-                                type="text"
-                                formControlName="order_no"
-                                placeholder="ON#"
-                                [ngClass]="isCheckedWarehous[1].to ? 'input-disabled':''" 
-                                class="border-0 fw-bold"
+                            <strong> ON#</strong>
+                            <span class="Number add-order-number" [ngClass]="isCheckedWarehous[1].to ? 'input-disabled':''">
+                              <input type="text" formControlName="order_no" placeholder="ON#"
+                                [ngClass]="isCheckedWarehous[1].to ? 'input-disabled':''" class="border-0 fw-bold"
                                 [attr.disabled]="isCheckedWarehous[1].to?'disabled':null"
-                                (keyup)="isAlphaNumeric($event, 'ON')"
-                              />
+                                (keyup)="isAlphaNumeric($event, 'ON')" />
                             </span>
                             <div *ngIf="isSubmitted && f['order_no'].errors" class="text-danger">
                               <div *ngIf="f['order_no'].errors['required']">
@@ -374,35 +256,22 @@
                               <div class="filed-input mb-3 text-end">
                                 Is this warehouse?
                                 <input
-                                [ngClass]="warehouseData && warehouseData.hasOwnProperty('id') ? '' : 'disabled-custom'"
-                                (click)="changeStatus('to',isCheckedWarehous[1].to)"
-                                class="head-driver mx-2"
-                                  type="checkbox"
-                                  [checked]="isCheckedWarehous[1].to"
-                                  formControlName="is_dely_warehouse"
-                                  (change)="setDelyWarehouse($event)"
-                                />
+                                  [ngClass]="warehouseData && warehouseData.hasOwnProperty('id') ? '' : 'disabled-custom'"
+                                  (click)="changeStatus('to',isCheckedWarehous[1].to)" class="head-driver mx-2"
+                                  type="checkbox" [checked]="isCheckedWarehous[1].to"
+                                  formControlName="is_dely_warehouse" (change)="setDelyWarehouse($event)" />
                               </div>
                             </div>
                             <div class="col-md-12">
                               <div class="filed-input mb-3">
-                                <input
-                                  type="text"
-                                  formControlName="dely_company_name"
-                                  placeholder="Company Name"
-                                  class="CompanyField mb-0"
-                                />
-                                <div
-                                  *ngIf="
+                                <input type="text" formControlName="dely_company_name" placeholder="Company Name"
+                                  class="CompanyField mb-0" />
+                                <div *ngIf="
                                     isSubmitted && f['dely_company_name'].errors
-                                  "
-                                  class="text-danger"
-                                >
-                                  <div
-                                    *ngIf="
+                                  " class="text-danger">
+                                  <div *ngIf="
                                       f['dely_company_name'].errors['required']
-                                    "
-                                  >
+                                    ">
                                     Company Name is required
                                   </div>
                                 </div>
@@ -410,21 +279,12 @@
                             </div>
                             <div class="col-md-12">
                               <div class="filed-input mb-3">
-                                <select2
-                                  [data]="data"
-                                  class="CompanyField mb-0"
-                                  formControlName="dely_address"
-                                  placeholder="Company Address"
-                                ></select2>
-                                <div
-                                  *ngIf="
+                                <select2 [data]="data" class="CompanyField mb-0" formControlName="dely_address"
+                                  placeholder="Company Address"></select2>
+                                <div *ngIf="
                                     isSubmitted && f['dely_address'].errors
-                                  "
-                                  class="text-danger"
-                                >
-                                  <div
-                                    *ngIf="f['dely_address'].errors['required']"
-                                  >
+                                  " class="text-danger">
+                                  <div *ngIf="f['dely_address'].errors['required']">
                                     Company Address is required
                                   </div>
                                 </div>
@@ -434,19 +294,10 @@
                           <div class="row">
                             <div class="col-md-4">
                               <div class="filed-input mb-3">
-                                <input
-                                  type="date"
-                                  formControlName="dely_date"
-                                  placeholder="Date"
-                                  class="CompanyField mb-0 date"
-                                />
-                                <div
-                                  *ngIf="isSubmitted && f['dely_date'].errors"
-                                  class="text-danger"
-                                >
-                                  <div
-                                    *ngIf="f['dely_date'].errors['required']"
-                                  >
+                                <input type="date" formControlName="dely_date" placeholder="Date"
+                                  class="CompanyField mb-0 date" />
+                                <div *ngIf="isSubmitted && f['dely_date'].errors" class="text-danger">
+                                  <div *ngIf="f['dely_date'].errors['required']">
                                     Date is required
                                   </div>
                                 </div>
@@ -454,19 +305,10 @@
                             </div>
                             <div class="col-md-4">
                               <div class="filed-input mb-3">
-                                <input
-                                  type="time"
-                                  formControlName="dely_time"
-                                  placeholder="Time"
-                                  class="CompanyField mb-0"
-                                />
-                                <div
-                                  *ngIf="isSubmitted && f['dely_time'].errors"
-                                  class="text-danger"
-                                >
-                                  <div
-                                    *ngIf="f['dely_time'].errors['required']"
-                                  >
+                                <input type="time" formControlName="dely_time" placeholder="Time"
+                                  class="CompanyField mb-0" />
+                                <div *ngIf="isSubmitted && f['dely_time'].errors" class="text-danger">
+                                  <div *ngIf="f['dely_time'].errors['required']">
                                     Time is required
                                   </div>
                                 </div>
@@ -474,11 +316,7 @@
                             </div>
                             <div class="col-md-4">
                               <div class="filed-input mb-3">
-                                <button
-                                  class="ButtonStyle"
-                                  mat-raised-button
-                                  (click)="openDialog('0ms', '0ms','to')"
-                                >
+                                <button class="ButtonStyle" mat-raised-button (click)="openDialog('0ms', '0ms','to')">
                                   Add Address
                                 </button>
                               </div>
@@ -487,24 +325,15 @@
                           <div class="row">
                             <div class="col-md-6">
                               <div class="filed-input mb-3">
-                                <input
-                                  type="text"
-                                  formControlName="dely_contact_name"
-                                  placeholder="Contact Name"
-                                  class="CompanyField mb-0"
-                                />
+                                <input type="text" formControlName="dely_contact_name" placeholder="Contact Name"
+                                  class="CompanyField mb-0" />
 
-                                <div
-                                  *ngIf="
+                                <div *ngIf="
                                     isSubmitted && f['dely_contact_name'].errors
-                                  "
-                                  class="text-danger"
-                                >
-                                  <div
-                                    *ngIf="
+                                  " class="text-danger">
+                                  <div *ngIf="
                                       f['dely_contact_name'].errors['required']
-                                    "
-                                  >
+                                    ">
                                     Contact Name is required
                                   </div>
                                 </div>
@@ -512,19 +341,10 @@
                             </div>
                             <div class="col-md-6">
                               <div class="filed-input mb-3">
-                                <input
-                                  type="text"
-                                  formControlName="dely_email"
-                                  placeholder="Email"
-                                  class="CompanyField mb-0"
-                                />
-                                <div
-                                  *ngIf="isSubmitted && f['dely_email'].errors"
-                                  class="text-danger"
-                                >
-                                  <div
-                                    *ngIf="f['dely_email'].errors['required']"
-                                  >
+                                <input type="text" formControlName="dely_email" placeholder="Email"
+                                  class="CompanyField mb-0" />
+                                <div *ngIf="isSubmitted && f['dely_email'].errors" class="text-danger">
+                                  <div *ngIf="f['dely_email'].errors['required']">
                                     Email is required
                                   </div>
                                   <div *ngIf="f['dely_email'].errors['email']">
@@ -535,64 +355,39 @@
                             </div>
                           </div>
                           <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-2 col-4">
                               <span class="Password">
                                 <span class="pickup-country">{{addOrderF.value.dely_country_code}}</span>
-                                <select
-                                  
-                                  id="delyCountryCode"
-                                  placeholder="Country"
-                                  formControlName="dely_country_code"
-                                  class="CompanyField country-addorder"
-                                >
+                                <select id="delyCountryCode" placeholder="Country" formControlName="dely_country_code"
+                                  class="CompanyField country-addorder">
                                   <option value="" disabled [selected]="true">
                                     Country
                                   </option>
-                                  <option
-                                    *ngFor="let country of countryCodes"
-                                    [value]="country.dial_code"
-                                  >
+                                  <option *ngFor="let country of countryCodes" [value]="country.dial_code">
                                     <span class="mx-3 fw-bold">{{
                                       country.name + " " + country.dial_code
-                                    }}</span>
+                                      }}</span>
                                   </option>
                                 </select>
-                                <div
-                                  *ngIf="
+                                <div *ngIf="
                                     isSubmitted && f['dely_country_code'].errors
-                                  "
-                                  class="text-danger"
-                                >
-                                  <div
-                                    *ngIf="f['dely_country_code'].errors['required']"
-                                  >
+                                  " class="text-danger">
+                                  <div *ngIf="f['dely_country_code'].errors['required']">
                                     Country is required
                                   </div>
                                 </div>
                               </span>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-5 col-8">
                               <div class="filed-input mb-3">
-                                <input
-                                  type="number"
-                                  formControlName="dely_phone"
-                                  placeholder="Phone Number"
-                                  class="CompanyField mb-0"
-                                  onKeyPress="if(this.value.length==10) return false;"
-                                />
+                                <input type="number" formControlName="dely_phone" placeholder="Phone Number"
+                                  class="CompanyField mb-0" onKeyPress="if(this.value.length==10) return false;" />
 
-                                <div
-                                  *ngIf="isSubmitted && f['dely_phone'].errors"
-                                  class="text-danger"
-                                >
-                                  <div
-                                    *ngIf="f['dely_phone'].errors['required']"
-                                  >
+                                <div *ngIf="isSubmitted && f['dely_phone'].errors" class="text-danger">
+                                  <div *ngIf="f['dely_phone'].errors['required']">
                                     Phone Number is required
                                   </div>
-                                  <div
-                                    *ngIf="f['dely_phone'].errors['pattern']"
-                                  >
+                                  <div *ngIf="f['dely_phone'].errors['pattern']">
                                     Phone Number must be 10 digits
                                   </div>
                                 </div>
@@ -600,31 +395,19 @@
                             </div>
                             <div class="col-md-5">
                               <div class="filed-input mb-3">
-                                <input
-                                  type="number"
-                                  formControlName="dely_alt_phone"
-                                  placeholder="Alternate Phone"
-                                  class="CompanyField mb-0"
-                                  onKeyPress="if(this.value.length==10) return false;"
-                                />
-                                <div
-                                  *ngIf="
+                                <input type="number" formControlName="dely_alt_phone" placeholder="Alternate Phone"
+                                  class="CompanyField mb-0" onKeyPress="if(this.value.length==10) return false;" />
+                                <div *ngIf="
                                     isSubmitted && f['dely_alt_phone'].errors
-                                  "
-                                  class="text-danger"
-                                >
-                                  <div
-                                    *ngIf="
+                                  " class="text-danger">
+                                  <div *ngIf="
                                       f['dely_alt_phone'].errors['required']
-                                    "
-                                  >
+                                    ">
                                     Alternative Phone number is required
                                   </div>
-                                  <div
-                                    *ngIf="
+                                  <div *ngIf="
                                       f['dely_alt_phone'].errors['pattern']
-                                    "
-                                  >
+                                    ">
                                     Alternative Phone number must be 10 digits
                                   </div>
                                 </div>
@@ -634,20 +417,11 @@
                           <div class="row">
                             <div class="col-md-12">
                               <div class="filed-input mb-3">
-                                <textarea
-                                  formControlName="dely_note"
-                                  placeholder="Note"
-                                  maxlength="200"
-                                  class="CompanyField mb-0 TextareaField"
-                                ></textarea>
+                                <textarea formControlName="dely_note" placeholder="Note" maxlength="200"
+                                  class="CompanyField mb-0 TextareaField"></textarea>
                                 <div class="notes-msg">{{200 - addOrderF.value.dely_note.length}}/200</div>
-                                <div
-                                  *ngIf="isSubmitted && f['dely_note'].errors"
-                                  class="text-danger"
-                                >
-                                  <div
-                                    *ngIf="f['dely_note'].errors['required']"
-                                  >
+                                <div *ngIf="isSubmitted && f['dely_note'].errors" class="text-danger">
+                                  <div *ngIf="f['dely_note'].errors['required']">
                                     Note Field is required
                                   </div>
                                 </div>
@@ -663,21 +437,12 @@
                     <div class="col-md-10"></div>
                     <div class="col-md-2">
                       <div class="text-right Cancel_Save" style="float: right">
-                        <button
-                          type="submit"
-                          (click)="handleSubmit()"
-                          class="SaveButton ButtonStyle"
-                          *ngIf="isAddMode"
-                        >
+                        <button type="submit" (click)="handleSubmit()" class="SaveButton ButtonStyle" *ngIf="isAddMode">
                           Add Order
                           <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
                         </button>
-                        <button
-                          type="submit"
-                          (click)="handleSubmit()"
-                          class="SaveButton ButtonStyle"
-                          *ngIf="!isAddMode"
-                        >
+                        <button type="submit" (click)="handleSubmit()" class="SaveButton ButtonStyle"
+                          *ngIf="!isAddMode">
                           Update Order
                           <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
                         </button>

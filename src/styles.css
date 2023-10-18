@@ -575,4 +575,16 @@ display: none;
   .SearchDivInner{
     display: none;
   }
+  .mt-xs-4{
+    margin-top: 18px !important;
+  }
+  .add-order-number{
+    width: 100%;
+    display: block;
+    margin: 0 !important;
+    margin-top: 7px !important;
+  }
+  .Pickup-title{
+    display: block !important;
+  }
 } 
