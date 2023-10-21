@@ -23,6 +23,7 @@ export class SendNotificationComponent {
   selectedGroup: string= 'Customer';
   isSending: boolean= false;
   sendNotificationForm!: FormGroup;
+  isSubmitted: boolean= false;
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData,private formBuilder: FormBuilder, private toastr: ToastrService, public dialogRef: MatDialogRef<SendNotificationComponent>,private planService: PlanService){
@@ -31,6 +32,9 @@ export class SendNotificationComponent {
       message: ['', [Validators.required]],
       notification_image: ['']
     });
+  }
+  get f() {
+    return this.sendNotificationForm.controls;
   }
   readURL(event: any): void {
     if (event.target.files && event.target.files[0]) {
@@ -56,6 +60,11 @@ export class SendNotificationComponent {
   }
   send(){
     if(this.data.orderId){
+      this.isSubmitted= true;
+      if (this.sendNotificationForm.invalid) {
+        return;
+      }
+      
       const formData = new FormData();
       for (let i in this.sendNotificationForm.value) {
         if (this.sendNotificationForm.value[i] instanceof Blob) {

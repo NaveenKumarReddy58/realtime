@@ -63,3 +63,9 @@
 .invoice-image-container{
     width: 100% !important;
 }
+
+@media screen and (max-width: 1265px){
+    .sn-customer{
+        margin-top: 10px;
+    }
+}
