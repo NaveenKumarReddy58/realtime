@@ -35,9 +35,6 @@ MIT
 @angular/core
 MIT
 
-@angular/fire
-MIT
-
 @angular/forms
 MIT
 
@@ -123,16 +120,7 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-@firebase/analytics
-Apache-2.0
-
 @firebase/app
-Apache-2.0
-
-@firebase/app-check
-Apache-2.0
-
-@firebase/auth
 Apache-2.0
 
 @firebase/component
@@ -148,9 +136,6 @@ Apache-2.0
 Apache-2.0
 
 @firebase/messaging
-Apache-2.0
-
-@firebase/remote-config
 Apache-2.0
 
 @firebase/util
@@ -247,19 +232,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
-firebase/analytics
-
 firebase/app
-
-firebase/app-check
-
-firebase/auth
 
 firebase/firestore
 
 firebase/messaging
-
-firebase/remote-config
 
 function-bind
 MIT

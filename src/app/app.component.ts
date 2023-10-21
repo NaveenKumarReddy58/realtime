@@ -33,7 +33,7 @@ export class AppComponent {
     if(this.isLoggedIn){
       this.notificationCount();
     }
-     this.requestPermission();
+     //this.requestPermission();
     
   }
 

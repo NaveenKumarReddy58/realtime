@@ -140,7 +140,7 @@ import { SendNotificationComponent } from './send-notification/send-notification
     SendNotificationComponent
   ],
   imports: [
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    //provideFirebaseApp(() => initializeApp(environment.firebase)),
     CommonModule,
     RouterModule,
     BrowserModule,
@@ -167,7 +167,7 @@ import { SendNotificationComponent } from './send-notification/send-notification
     MatSelectModule,
     MatPaginatorModule,
     ImageCropperModule,
-    provideFirestore(() => getFirestore()),
+    //provideFirestore(() => getFirestore()),
   ],
   providers: [
     {
