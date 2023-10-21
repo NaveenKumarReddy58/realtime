@@ -35,7 +35,7 @@
     right: 13px;
     position: absolute;
 }
-@media screen and (max-width: 570px) {
+@media screen and (max-width: 821px) {
     .main-content-container{
       width: 100%;
       right: 0;
@@ -54,7 +54,7 @@
     align-items: center;
     justify-content: space-between;
 }
-@media screen and (max-width: 570px) {
+@media screen and (max-width: 821px) {
     .top-menu-container{
       display: block;
       margin-bottom: 8px;

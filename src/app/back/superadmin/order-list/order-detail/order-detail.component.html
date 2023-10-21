@@ -179,6 +179,7 @@
                       <br>
                     </div>
                     <br>
+                    
                     <div class="row">
                       <div class="col-md-6">
                         <table class="order-details-table">
@@ -205,10 +206,13 @@
                       <div class="col-md-6 p-0">
                         <table class="w-100 order-details-table">
                           <tbody>
-                            <!-- <tr>
-                                <th class="fontSize12">Estimated Time Arrival:</th>
-                                <td class="fontSize12"></td>
-                              </tr> -->
+                            
+                              <tr>
+                                <th class="fontSize12">Order Status:</th>
+                                <td><button class="orderstatus-btn button-{{
+                                  orderData?.order_status | titlecase
+                                }} status_button_style fontSize12">{{ orderData?.order_status }}</button></td>
+                              </tr>
                             <tr>
                               <th class="fontSize12">Delivery Date:</th>
                               <td class="fontSize12">{{ orderData?.dely_date | date : "fullDate" }}</td>
@@ -225,6 +229,29 @@
                         </table>
                       </div>
                     </div>
+                  </div>
+                </div>
+
+                <div class="row mb-4" *ngIf="orderData?.order_status == 'unsuccessful'">
+                  <div class="CardPopup">
+                    <p style="font-size: 18px;">Order is <strong>UNSUCCESSFUL</strong>. Below Are the Reasons</p>
+                    <div class="row m-0">
+                      <div *ngIf="unsuccessfullReasons.length > 0" class="col-12 col-md-6 col-lg-6 p-0">
+                        <h3 class="m-0" style="text-decoration: underline;"><strong>Driver Reasons:</strong></h3>
+                        <dl *ngFor="let reason of unsuccessfullReasons">
+                          <dt class="fontSize12">{{reason.reason.title}}:</dt>
+                          <dd class="fontSize12">{{reason.reason.reason_text}}</dd>
+                        </dl>
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-6 p-0" *ngIf="orderData?.customer_reason?.length > 0">
+                        <h3 class="m-0" style="text-decoration: underline;"><strong>Customer Reasons:</strong></h3>
+                        <dl *ngFor="let reason of orderData.customer_reason">
+                          <dt class="fontSize12">{{reason.reason.title}}:</dt>
+                          <dd class="fontSize12">{{reason.reason.reason_text}}</dd>
+                        </dl>
+                      </div>
+                    </div>
+                    
                   </div>
                 </div>
                 
@@ -301,14 +328,15 @@
                             class="fa-solid fa-copy order-details-copy"></i>
                         </span>
                       </div>
-                      <div class="col-md-12 my-4 d-flex justify-between">
+                      <div class="col-md-12 my-4 d-flex justify-between flex-wrap">
+                        
                         <button class="ButtonStyle"
                           (click)="sendNotification('500ms','500ms',orderData?.current_driver?.id , 'Driver')">
                           Send Notification to Driver <img class="send"
                             src="../../assets/images/pushnotification-white.jpg">
 
                         </button>
-                        <button class="ButtonStyle"
+                        <button class="ButtonStyle mt-xs-4"
                           (click)="sendNotification('500ms','500ms',orderData?.customer_phone, 'Customer' )">
                           Send Notification to Customer <img class="send"
                             src="../../assets/images/pushnotification-white.jpg">
