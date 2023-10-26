@@ -143,7 +143,7 @@
             <div class="col-md-6 SelectDate">
               <a class="Select_Date">
                 Select Date: <i class="fa fa-calendar-o"></i>
-                <input type="date" [(ngModel)]="selectedDateVal" class="border-0" (change)="selectedDate($event)"/>
+                <input type="date" [(ngModel)]="selectedDateVal" class="" (change)="selectedDate($event)"/>
               </a>
               <a class="Select_Date"> Filter <i class="fa fa-sliders"></i> </a>
             </div>
@@ -354,7 +354,7 @@
                     [data]="data"
                     class="Pro_input_Field"
                     formControlName="driver_id"
-                    placeholder="Search Driver"
+                    placeholder="Select Driver"
                   ></select2>
                   <div
                     *ngIf="isSubmitted && f['driver_id'].errors"

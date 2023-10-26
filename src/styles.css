@@ -699,7 +699,7 @@ a.link {
   }
 }
 
-input[type="date"]
+/* input[type="date"]
 {
     display:block;
     -webkit-appearance: textfield;
@@ -713,4 +713,4 @@ input[type="time"]
     -webkit-appearance: textfield;
     -moz-appearance: textfield;
     min-height: 1.2em;
-}
+} */

@@ -93,7 +93,7 @@ export class DriverAddComponent {
       image: [''],
       driver_insurance:[''],
       certificates: [''],
-      country_code:[''],
+      country_code:['+91'],
       driver_license:[''],
       driver_safety:[''],
       driver_abstract:[''],

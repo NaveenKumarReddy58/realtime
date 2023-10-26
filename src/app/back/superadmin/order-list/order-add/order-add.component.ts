@@ -413,9 +413,11 @@ export class OrderAddComponent {
       this.addOrderF.patchValue({
         pickup_address: this.warehouseData?.address?.id,
         pickup_company_name: this.warehouseData?.warehouse_name,
-        pickup_contact_name: this.warehouseData?.contact_name,
-        pickup_phone: this.warehouseData?.phone ? this.warehouseData?.phone.replace('+91',''):'',
-        pickup_email: this.warehouseData?.email,
+        pickup_contact_name:"Shipping dept",
+        //pickup_contact_name: this.warehouseData?.contact_name,
+        pickup_phone: '9999999999',
+        //pickup_phone: this.warehouseData?.phone ? this.warehouseData?.phone.replace('+91',''):'',
+        pickup_email: 'shippingdept@gmaill.com',
         pickup_alt_phone: this.warehouseData?.alt_phone ? this.warehouseData?.alt_phone.replace('+91',''):''
       });
     }

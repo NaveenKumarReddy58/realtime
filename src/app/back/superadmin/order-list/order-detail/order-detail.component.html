@@ -18,12 +18,30 @@
             <div class="col-md-3">
               <div class="ProfilePik">
                 <div class="ChangePic P_Photo">
-                  <img src="assets/images/p-icon02.png" />
+                  <ng-container *ngIf="orderData.order_type == 'pickup'" >
+                  <img *ngIf="(!(orderData?.assigned_order[0]?.driver?.first_name) || orderData?.assigned_order[0]?.driver?.first_name?.length == 0)" src="assets/images/p-icon02.png" />
+                  <img *ngIf="orderData?.assigned_order[0]?.driver?.first_name?.length > 0" src="assets/images/p_assigned.svg"/>
+                </ng-container>
+
                   <!-- <div class="ChangeImg NoPhoto fontSize12">
                     <i class="fa fa-star"></i> Priority Delivery
                   </div> -->
+                    
+                  <ng-container *ngIf="orderData.order_type == 'delivery'">
+                    <img *ngIf="(!(orderData?.assigned_order[0]?.driver?.first_name) ||orderData?.assigned_order[0]?.driver?.first_name?.length == 0)"
+                    src="./../../../../assets/images/d-icon.png"
+                    />
+                    <img *ngIf="orderData?.assigned_order[0]?.driver?.first_name?.length > 0"
+                      src="./../../../../assets/images/d_assigned.svg"
+                    />
+                  </ng-container>
                 </div>
-                <div class="DeliveryNumber fontSize10">
+                <div  *ngIf="orderData.order_type == 'pickup'"  class="DeliveryNumber fontSize10">
+                  <h4>{{ orderData?.po ? orderData?.po : orderData?.order_no }}</h4>
+                  Pickup : {{ orderData?.dely_time }} |
+                  {{ orderData?.dely_date | date : "fullDate" }}
+                </div>
+                <div  *ngIf="orderData.order_type == 'delivery'"  class="DeliveryNumber fontSize10">
                   <h4>{{ orderData?.po ? orderData?.po : orderData?.order_no }}</h4>
                   Delivery : {{ orderData?.dely_time }} |
                   {{ orderData?.dely_date | date : "fullDate" }}
@@ -214,11 +232,14 @@
                                 }} status_button_style fontSize12">{{ orderData?.order_status }}</button></td>
                               </tr>
                             <tr>
-                              <th class="fontSize12">Delivery Date:</th>
+                              <th class="fontSize12"  *ngIf="orderData.order_type == 'pickup'">Pickup Date:</th>
+                              <th class="fontSize12"  *ngIf="orderData.order_type == 'delivery'">Delivery Date:</th>
                               <td class="fontSize12">{{ orderData?.dely_date | date : "fullDate" }}</td>
                             </tr>
                             <tr>
-                              <th class="fontSize12">Delivery Time:</th>
+                              <th class="fontSize12" *ngIf="orderData.order_type == 'pickup'">Pickup Time:</th>
+                              <th class="fontSize12" *ngIf="orderData.order_type == 'delivery'">Delivery Time:</th>
+
                               <td class="fontSize12">{{ orderData?.dely_time ? orderData?.dely_time : 'NA' }}</td>
                             </tr>
                             <tr>
