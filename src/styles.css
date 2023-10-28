@@ -270,7 +270,7 @@ input:checked+.slider:before {
 .Yes-btn:active {
   background: #0eb002;
   padding: 12px;
-  width: auto;
+  width: 100px;
   border-radius: 10px;
   border: none;
   color: white;
@@ -587,6 +587,9 @@ textarea::placeholder {
   font-weight: bold;
   margin-top: auto;
   padding-top: 3px;
+}
+.dialog-btn{
+  gap: 10px;
 }
 
 .realtime-btn:hover {

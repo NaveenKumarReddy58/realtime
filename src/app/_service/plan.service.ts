@@ -118,28 +118,28 @@ export class PlanService {
   }
   notificationCount() {
     return this.http
-      .get<any>(`${this._liveApiUrl}/notification/notification-count/`)
+      .get<any>(`${this.authService._liveApiUrl}/notification/notification-count/`)
   }
   notificationList() {
     let tail = '?page=all'
     return this.http
-      .get<any>(`${this._liveApiUrl}/notification/user-notification/${tail}`)
+      .get<any>(`${this.authService._liveApiUrl}/notification/user-notification/${tail}`)
   }
   clearNotification(formData:any) {
     return this.http
-      .put<any>(`${this._liveApiUrl}/notification/clear-notification/`, formData)
+      .put<any>(`${this.authService._liveApiUrl}/notification/clear-notification/`, formData)
   }
   deletNotification(formData:any) {
     return this.http
-      .post<any>(`${this._liveApiUrl}/notification/clear-notification/`, formData)
+      .post<any>(`${this.authService._liveApiUrl}/notification/clear-notification/`, formData)
   }
   sendNotificationToGroup(formData:any) {
     return this.http
-      .post<any>(`${this._liveApiUrl}/notification/send-notification/`,formData)
+      .post<any>(`${this.authService._liveApiUrl}/notification/send-notification/`,formData)
   }
   sendNotificationToDriverCustomer(formData:any) {
     return this.http
-      .post<any>(`${this._liveApiUrl}/notification/send-order-notification/`,formData)
+      .post<any>(`${this.authService._liveApiUrl}/notification/send-order-notification/`,formData)
   }
 
   getAdminSentNotificationList(tabName:string,searchVal:string){
@@ -174,7 +174,7 @@ export class PlanService {
   }
   clearAdminNotification(formData:any){
     return this.http
-      .put<any>(`${this._liveApiUrl}/notification/clear-admin-notification/`,formData)
+      .put<any>(`${this.authService._liveApiUrl}/notification/clear-admin-notification/`,formData)
       .pipe(
         map((data) => {
           return data;
@@ -184,7 +184,7 @@ export class PlanService {
   }
   clearAllAdminNotification(){
     return this.http
-      .put<any>(`${this._liveApiUrl}/notification/clear-admin-notification/all/`,{})
+      .put<any>(`${this.authService._liveApiUrl}/notification/clear-admin-notification/all/`,{})
       .pipe(
         map((data) => {
           return data;
