@@ -186,19 +186,22 @@ export class ReusableGoogleMapComponent {
     //return "Asdf";
   }
   getBounds(markers:any){
+    console.log(markers)
+
     let north;
     let south;
     let east;
     let west;
   
-    for (const marker of markers){
+    //for (const marker of markers){
+  
       // set the coordinates to marker's lat and lng on the first run.
       // if the coordinates exist, get max or min depends on the coordinates.
-      north = north !== undefined ? Math.max(north, marker.position.lat) : marker.position.lat;
-    south = south !== undefined ? Math.min(south, marker.position.lat) : marker.position.lat;
-    east = east !== undefined ? Math.max(east, marker.position.lng) : marker.position.lng;
-    west = west !== undefined ? Math.min(west, marker.position.lng) : marker.position.lng;
-    };
+      north = north !== undefined ? Math.max(north, 43.64727323339819) : 43.64727323339819;
+    south = south !== undefined ? Math.min(south,43.64727323339819) : 43.64727323339819;
+    east = east !== undefined ? Math.max(east, -79.37134663004699) : -79.37134663004699;
+    west = west !== undefined ? Math.min(west, -79.37134663004699) : -79.37134663004699;
+   // };
   
     const bounds = { north, south, east, west };
   
@@ -229,7 +232,6 @@ export class ReusableGoogleMapComponent {
       
     };
     service.getDistanceMatrix(request).then((response:any) => {
-      console.log(response)
       this.estimatedTime= response?.rows[0].elements[1].duration.text;
       this.distance=response?.rows[0].elements[1].distance.text;
     

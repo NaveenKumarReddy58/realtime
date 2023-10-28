@@ -59,7 +59,7 @@ span.LabelT {
   width: auto;
   top: 12px;
   left: 20px;
-  color: #ccc;
+  color: gray;
   transform: translateY(-25px);
   background: #fff;
 }

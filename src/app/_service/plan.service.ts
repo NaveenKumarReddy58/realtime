@@ -143,6 +143,7 @@ export class PlanService {
   }
 
   getAdminSentNotificationList(tabName:string,searchVal:string){
+    
     let tail = '';
     let params = new URLSearchParams();
     if (params) {
@@ -162,7 +163,7 @@ export class PlanService {
       tail += `?` + params.toString();
     }
    return this.http
-      .get<any>(`${this._liveApiUrl}/notification/admin-notification-listing/${tail}`)
+      .get<any>(`${this.authService._liveApiUrl}/notification/admin-notification-listing/${tail}`)
       .pipe(
         map((data) => {
           return data;

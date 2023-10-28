@@ -295,7 +295,7 @@
                           <strong>Assigned To:</strong>UNASSIGNED
                         </span>
                       </div>
-                      <div *ngIf="orderData?.current_driver.first_name" class="mb-2 p-0">
+                      <div *ngIf="orderData?.current_driver.first_name && orderData?.order_status.toLowerCase() != 'successful' && orderData?.order_status.toLowerCase() != 'unsuccessful'" class="mb-2 p-0">
                         <div (click)="reassignNewDriver('200ms','200ms')" class="NewDriver d-inline-block">
                           <a>Reassign</a>
                         </div>

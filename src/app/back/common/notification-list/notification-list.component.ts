@@ -49,6 +49,7 @@ export class NotificationListComponent {
 
   notificationList() {
     this.loader = true;
+    
     this.planService.getAdminSentNotificationList(this.tabName, this.searchValue).subscribe(
       (data: any) => {
         this.loader = false;

@@ -413,11 +413,12 @@ export class OrderAddComponent {
       this.addOrderF.patchValue({
         pickup_address: this.warehouseData?.address?.id,
         pickup_company_name: this.warehouseData?.warehouse_name,
-        pickup_contact_name:"Shipping dept",
-        //pickup_contact_name: this.warehouseData?.contact_name,
-        pickup_phone: '9999999999',
-        //pickup_phone: this.warehouseData?.phone ? this.warehouseData?.phone.replace('+91',''):'',
-        pickup_email: 'shippingdept@gmaill.com',
+        //pickup_contact_name:"Shipping dept",
+        pickup_contact_name: this.warehouseData?.contact_name,
+        //pickup_phone: '9999999999',
+        pickup_phone: this.warehouseData?.phone ? this.warehouseData?.phone.replace('+91',''):'',
+       // pickup_email: 'shippingdept@gmaill.com',
+       pickup_email:this.warehouseData?.email,
         pickup_alt_phone: this.warehouseData?.alt_phone ? this.warehouseData?.alt_phone.replace('+91',''):''
       });
     }
@@ -431,9 +432,17 @@ export class OrderAddComponent {
         dely_address: this.warehouseData?.address?.id,
         dely_company_name: this.warehouseData?.warehouse_name,
         dely_contact_name: this.warehouseData?.contact_name,
+        //dely_contact_name:"Shipping dept",
         dely_email:this.warehouseData?.email,
+        //dely_email:'shippingdept@gmaill.com',
         dely_phone: this.warehouseData?.phone ? this.warehouseData?.phone.replace('+91',''):'',
+        //dely_phone:'9999999999',
         dely_alt_phone: this.warehouseData?.alt_phone ? this.warehouseData?.alt_phone.replace('+91',''):''
+      });
+      this.addOrderF.patchValue({
+        pickup_contact_name:"Shipping dept",
+        pickup_phone: '9999999999',
+       pickup_email: 'shippingdept@gmaill.com',
       });
     } else{
       this.isPickupWareHouseEnabled = false;
