@@ -60,6 +60,7 @@ span.LabelT {
   top: 12px;
   left: 20px;
   color: gray;
+  font-weight: bold;
   transform: translateY(-25px);
   background: #fff;
 }
