@@ -28,6 +28,7 @@ export class OrderDetailComponent {
   invoiceImageSrc: any = 'assets/images/edit-icon.png';
   isInvoiceLoading: boolean= false;
   unsuccessfullReasons:any=[];
+  receiverImage: any = 'assets/images/edit-icon.png';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -113,7 +114,7 @@ export class OrderDetailComponent {
         this.orderData = data?.result;
         if(this.orderData.order_invoice?.length > 0){
           this.invoiceImageSrc= this.orderData.order_invoice[this.orderData.order_invoice?.length-1].invoice_doc;
-
+          this.receiverImage= this.orderData.receiver_details[this.orderData.receiver_details?.length-1].photo;
         }
         this.orderData?.status_history?.find((elt:any)=>{
           if(elt.status == 'unsuccessful'){

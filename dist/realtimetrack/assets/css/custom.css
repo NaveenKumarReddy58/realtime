@@ -624,16 +624,23 @@ ul.Tab_List li.active a {
   background: #c7ffc3;
 }
 .ButtonTab ul li.Pending a:before {
-  background: #fff3bb;
+  background: #FFB000;
+  opacity: 0.5;
 }
 .ButtonTab ul li.Successful a:before {
-  background: #d8fad6;
+  background: #0EB002;
+  opacity: 0.5;
+
 }
 .ButtonTab ul li.Unsuccessful a:before {
-  background: #ffbbbb;
+  background: #DF2525;
+  opacity: 0.5;
+
 }
 .ButtonTab ul li.Cancelled a:before {
-  background: #d0ecfa;
+  background: Blue;
+  opacity: 0.5;
+
 }
 .SelectDate {
   text-align: right;

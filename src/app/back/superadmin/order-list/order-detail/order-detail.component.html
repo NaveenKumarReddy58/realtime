@@ -64,7 +64,7 @@
                     (click)="removeProfilePhoto($event)"></i>
                   <img *ngIf="!(invoiceImageSrc.indexOf('edit-icon') > 0) && invoiceImageSrc"
                     class="driver-profile-image invoice-image" [src]="invoiceImageSrc" [alt]="'logo'" width="100%"
-                    height="100%" (click)="fileInput.click()" />
+                    style="height: 180px;" (click)="fileInput.click()" />
                   <img *ngIf="(invoiceImageSrc.indexOf('edit-icon') > 0)  && invoiceImageSrc" class="invoice-image"
                     [src]="invoiceImageSrc" [alt]="'logo'" width="50%" height="90%" (click)="fileInput.click()" />
                 </div>
@@ -81,15 +81,15 @@
                 <br>
                 <div *ngIf="this.orderData && this.orderData.order_invoice.length > 0"
                   class="driver-profile-image-container invoice-image-container ">
-                  <img *ngIf="!(invoiceImageSrc.indexOf('edit-icon') > 0) && invoiceImageSrc"
-                    class="driver-profile-image invoice-image" [src]="invoiceImageSrc" [alt]="'logo'" width="100%"
-                    height="100%" (click)="fileInput.click()" />
-                  <img *ngIf="(invoiceImageSrc.indexOf('edit-icon') > 0)  && invoiceImageSrc"
-                    class="driver-profile-image invoice-image" [src]="invoiceImageSrc" [alt]="'logo'" width="50%"
+                  <img *ngIf="!(receiverImage.indexOf('edit-icon') > 0) && receiverImage"
+                    class="driver-profile-image invoice-image" [src]="receiverImage" [alt]="'logo'" width="100%"
+                  style="height: 180px;" (click)="fileInput.click()" />
+                  <img *ngIf="(receiverImage.indexOf('edit-icon') > 0)  && receiverImage"
+                    class="driver-profile-image invoice-image" [src]="receiverImage" [alt]="'logo'" width="50%"
                     height="90%" (click)="fileInput.click()" />
                 </div>
                 <a *ngIf="this.orderData && this.orderData.order_invoice.length > 0" target="_blank"
-                  class="uploaded-documenst mx-1 cursor-pointer" [href]="invoiceImageSrc">
+                  class="uploaded-documenst mx-1 cursor-pointer" [href]="receiverImage">
                   <span style="font-size: 12px;">View Proof of Delivery Image</span>
                 </a>
 
