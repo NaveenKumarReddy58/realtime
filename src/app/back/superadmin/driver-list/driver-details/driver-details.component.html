@@ -41,7 +41,7 @@
                                     <div class="CardPopup py-0">
                                         <div class="row">
                                             <div class="col-md-12 mb-4">
-                                                <table class="__TodayOrder">
+                                                <table class="__TodayOrder mt-4">
                                                     <tr>
                                                         <td class="px-0">
                                                             Driver Status: {{editDriverForm.value.is_active ? 'ACTIVE':'INACTIVE'}}
@@ -67,14 +67,21 @@
                                                         </td>
                                                     </tr>
                                                 </table>
-                                                <table class="TodayOrder mt-4">
+                                                <!-- <table class="TodayOrder">
                                                     <tr>
-                                                        <td><span class="cursor-pointer" (click)="showOrdersList('today')">Today's Order: {{todayOrderCount}}</span></td>
-                                                        <td><span class="cursor-pointer" (click)="showOrdersList('pending')">Pending: {{pendingOrderCount}}</span></td>
-                                                        <td><span class="cursor-pointer" (click)="showOrdersList('successful')">Successful: {{successfullOrderCount}}</span></td>
-                                                        <td><span class="cursor-pointer" (click)="showOrdersList('unsuccessful')">UnSuccessful: {{unSuccessfullOrderCount}}</span></td>
+                                                        <td><span class="cursor-pointer">Today's Order: {{todayOrderCount}}</span></td>
+                                                        <td><span class="cursor-pointer">Pending: {{pendingOrderCount}}</span></td>
+                                                        <td><span class="cursor-pointer">Successful: {{successfullOrderCount}}</span></td>
+                                                        <td><span class="cursor-pointer">UnSuccessful: {{unSuccessfullOrderCount}}</span></td>
                                                     </tr>
-                                                </table>
+                                                </table> -->
+
+                                                <div class=" mt-4 d-flex justify-content-between flex-wrap">
+                                                    <button class="p-2 todays-order-btn button-Pending status_button_style" (click)="showOrdersList('today')">Today's Order: {{todayOrderCount}}</button>
+                                                    <button class="p-2 dt-pending-btn button-Pending status_button_style" (click)="showOrdersList('pending')">Pending: {{pendingOrderCount}}</button>
+                                                    <button class="p-2 dt-successful-btn button-Pending status_button_style" (click)="showOrdersList('successful')">Successful: {{successfullOrderCount}}</button>
+                                                    <button class="p-2 dt-unsuccessful-btn button-Pending status_button_style" (click)="showOrdersList('unsuccessful')">UnSuccessful: {{unSuccessfullOrderCount}}</button>
+                                                </div>
                                             </div>
                                             <div class="col-md-6 mb-4"  [ngClass]="!isEditMode? 'view-mode' : ''">
                                                 <span class="Password">

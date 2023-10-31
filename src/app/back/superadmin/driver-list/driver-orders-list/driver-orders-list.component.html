@@ -38,7 +38,7 @@
               </div>
               
             </td>
-            <td>{{ item.customer_name }}</td>
+            <td><strong>{{ item.customer_name }}</strong>({{item.order_type == 'pickup' ? item.pickup_company_name :  item.dely_company_name}})</td>
             <td>{{ item.customer_addr }}</td>
             <td>{{ item.dely_date | date : "fullDate" }}</td>
             <td>{{ item.dely_time }}</td>

@@ -159,9 +159,9 @@
                 <tr class="T_Head">
                   <!-- <th>Priority</th> -->
                   <th>Order ID</th>
-                  <th>Contact Name</th>
-                  <th>Customer Address</th>
-                  <th>Delivery Date</th>
+                  <th  class="w-250">Contact Name</th>
+                  <th class="w-250">Customer Address</th>
+                  <th class="w-250">Delivery Date</th>
                   <th>Delivery Time</th>
                   <th>Actual time</th>
                   <th [ngClass]="isShowDriversFilter? 'drop-down-active':''" class=" cursor-pointer position-relative width-130">
@@ -242,7 +242,7 @@
                     </div>
                     
                   </td>
-                  <td>{{ item.customer_name }}</td>
+                  <td><strong>{{ item.customer_name }}</strong>({{item.order_type == 'pickup'? item.pickup_company_name : item.dely_company_name}})</td>
                   <td>{{ item.customer_addr }}</td>
                   <td>{{ item.dely_date | date : "fullDate" }}</td>
                   <td>{{ item.dely_time }}</td>

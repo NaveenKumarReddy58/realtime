@@ -247,7 +247,7 @@ export class DriverDetailsComponent {
       data: {
         title: 'List of Orders',
         pageName: 'driver-details',
-        btns:['Close'],
+        btns:['','Close'],
         driverData: {
           id: this.driverId,
           status: status,

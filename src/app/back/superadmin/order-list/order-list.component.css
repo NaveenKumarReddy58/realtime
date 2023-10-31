@@ -149,3 +149,8 @@ ul.Tab_List li.active a {
         display: none;
     }
   } 
+
+
+  .w-250{
+    min-width: 200px;
+  }
