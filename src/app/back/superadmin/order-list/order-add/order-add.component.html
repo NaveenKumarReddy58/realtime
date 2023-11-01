@@ -106,9 +106,10 @@
                             </div>
                           </div>
                           <div class="col-md-4">
-                            <div class="filed-input mb-3">
+                            <div class="filed-input mb-3 position-relative">
                               <input type="time" formControlName="pickup_time" placeholder="Time"
                                 class="CompanyField mb-0" />
+                                <span *ngIf="f['pickup_time']?.value?.toString().length > 0" class="remove-time" (click)="removeTime('pickup')">&times;</span>
                               <div *ngIf="isSubmitted && f['pickup_time'].errors" class="text-danger">
                                 <div *ngIf="f['pickup_time'].errors['required']">
                                   Time field is required
@@ -304,9 +305,10 @@
                               </div>
                             </div>
                             <div class="col-md-4">
-                              <div class="filed-input mb-3">
+                              <div class="filed-input mb-3 position-relative">
                                 <input type="time" formControlName="dely_time" placeholder="Time"
                                   class="CompanyField mb-0" />
+                                  <span *ngIf="f['dely_time']?.value?.toString().length > 0" class="remove-time" (click)="removeTime('dely')">&times;</span>
                                 <div *ngIf="isSubmitted && f['dely_time'].errors" class="text-danger">
                                   <div *ngIf="f['dely_time'].errors['required']">
                                     Time is required

@@ -305,8 +305,6 @@ export class OrderAddComponent {
 
   handleSubmit() {
     this.isSubmitted = true;
-    console.log(this.addOrderF.value.is_pickup_warehouse)
-    console.log(this.addOrderF.value.is_dely_warehouse)
 
     if(this.addOrderF.value.is_pickup_warehouse == ''){
       this.addOrderF.patchValue({
@@ -318,8 +316,6 @@ export class OrderAddComponent {
         is_dely_warehouse: false
       })
     }
-    console.log(this.addOrderF.value.is_pickup_warehouse)
-    console.log(this.addOrderF.value.is_dely_warehouse)
     // stop here if form is invalid
     if (this.addOrderF.invalid) {
       return;
@@ -335,11 +331,9 @@ export class OrderAddComponent {
           this.addOrderF.value[i],
           this.addOrderF.value[i].name ? this.addOrderF.value[i].name : ''
         );
-        // console.log('blob');
       } else {
         if(this.addOrderF.value[i]?.toString() != ''){
           formData.append(i, this.addOrderF.value[i]);
-          console.log(i, this.addOrderF.value[i])
         }
       }
     }
@@ -452,6 +446,17 @@ export class OrderAddComponent {
     }
 
     this.setTheValidatorsForPOON();
+  }
+  removeTime(val:string){
+    if(val == 'dely'){
+      this.addOrderF.patchValue({
+        dely_time: '',
+       });
+    } else {
+      this.addOrderF.patchValue({
+       pickup_time: '',
+      });
+    }
   }
   setTheValidatorsForPOON(){
     if(!this.isCheckedWarehous[1].to){

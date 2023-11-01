@@ -5,3 +5,10 @@
     border: 1px solid gray;
     border-radius: 50%;
 }
+.x-icon{
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    padding: 10px;
+}

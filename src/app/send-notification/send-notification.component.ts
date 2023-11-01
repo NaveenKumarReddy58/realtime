@@ -37,6 +37,8 @@ export class SendNotificationComponent {
     return this.sendNotificationForm.controls;
   }
   readURL(event: any): void {
+    event.stopPropagation();
+    event.preventDefault();
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
 
@@ -55,6 +57,14 @@ export class SendNotificationComponent {
      this.selectedGroup = val;
   }
 
+  removeAttachment(event:any){
+    event.stopPropagation();
+    event.preventDefault();
+    this.imageSrc= '../../assets/images/photoupload.png';
+    this.sendNotificationForm.patchValue({
+      notification_image: '',
+    })
+  }
   onDismiss(val:boolean): void {
     this.dialogRef.close(val);
   }

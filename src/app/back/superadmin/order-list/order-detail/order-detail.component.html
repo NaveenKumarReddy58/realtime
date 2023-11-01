@@ -18,7 +18,7 @@
             <div class="col-md-3">
               <div class="ProfilePik">
                 <div class="ChangePic P_Photo">
-                  <ng-container *ngIf="orderData.order_type == 'pickup'" >
+                  <ng-container *ngIf="orderData?.order_type == 'pickup'" >
                   <img *ngIf="(!(orderData?.assigned_order[0]?.driver?.first_name) || orderData?.assigned_order[0]?.driver?.first_name?.length == 0)" src="assets/images/p-icon02.png" />
                   <img *ngIf="orderData?.assigned_order[0]?.driver?.first_name?.length > 0" src="assets/images/p_assigned.svg"/>
                 </ng-container>
@@ -27,7 +27,7 @@
                     <i class="fa fa-star"></i> Priority Delivery
                   </div> -->
                     
-                  <ng-container *ngIf="orderData.order_type == 'delivery'">
+                  <ng-container *ngIf="orderData?.order_type == 'delivery'">
                     <img *ngIf="(!(orderData?.assigned_order[0]?.driver?.first_name) ||orderData?.assigned_order[0]?.driver?.first_name?.length == 0)"
                     src="./../../../../assets/images/d-icon.png"
                     />
@@ -36,12 +36,12 @@
                     />
                   </ng-container>
                 </div>
-                <div  *ngIf="orderData.order_type == 'pickup'"  class="DeliveryNumber fontSize10">
+                <div  *ngIf="orderData?.order_type == 'pickup'"  class="DeliveryNumber fontSize10">
                   <h4>{{ orderData?.po ? orderData?.po : orderData?.order_no }}</h4>
                   Pickup : {{ orderData?.dely_time }} |
                   {{ orderData?.dely_date | date : "fullDate" }}
                 </div>
-                <div  *ngIf="orderData.order_type == 'delivery'"  class="DeliveryNumber fontSize10">
+                <div  *ngIf="orderData?.order_type == 'delivery'"  class="DeliveryNumber fontSize10">
                   <h4>{{ orderData?.po ? orderData?.po : orderData?.order_no }}</h4>
                   Delivery : {{ orderData?.dely_time }} |
                   {{ orderData?.dely_date | date : "fullDate" }}
@@ -232,13 +232,13 @@
                                 }} status_button_style fontSize12">{{ orderData?.order_status }}</button></td>
                               </tr>
                             <tr>
-                              <th class="fontSize12"  *ngIf="orderData.order_type == 'pickup'">Pickup Date:</th>
-                              <th class="fontSize12"  *ngIf="orderData.order_type == 'delivery'">Delivery Date:</th>
+                              <th class="fontSize12"  *ngIf="orderData?.order_type == 'pickup'">Pickup Date:</th>
+                              <th class="fontSize12"  *ngIf="orderData?.order_type == 'delivery'">Delivery Date:</th>
                               <td class="fontSize12">{{ orderData?.dely_date | date : "fullDate" }}</td>
                             </tr>
                             <tr>
-                              <th class="fontSize12" *ngIf="orderData.order_type == 'pickup'">Pickup Time:</th>
-                              <th class="fontSize12" *ngIf="orderData.order_type == 'delivery'">Delivery Time:</th>
+                              <th class="fontSize12" *ngIf="orderData?.order_type == 'pickup'">Pickup Time:</th>
+                              <th class="fontSize12" *ngIf="orderData?.order_type == 'delivery'">Delivery Time:</th>
 
                               <td class="fontSize12">{{ orderData?.dely_time ? orderData?.dely_time : 'NA' }}</td>
                             </tr>
@@ -292,7 +292,7 @@
                           On {{ orderData?.dely_date | date : "fullDate" }}
                         </span>
                         <span *ngIf="!orderData?.current_driver.first_name" class="Password FileUpload lh-50">
-                          <strong>Assigned To:</strong>UNASSIGNED
+                          <strong>Assigned To: </strong>UNASSIGNED
                         </span>
                       </div>
                       <div *ngIf="orderData?.current_driver.first_name && orderData?.order_status.toLowerCase() != 'successful' && orderData?.order_status.toLowerCase() != 'unsuccessful'" class="mb-2 p-0">
@@ -349,9 +349,17 @@
                             class="fa-solid fa-copy order-details-copy"></i>
                         </span>
                       </div>
-                      <div class="col-md-12 my-4 d-flex justify-between flex-wrap">
-                        
-                        <button class="ButtonStyle"
+                      <div class="col-md-12 my-4 d-flex gap-1 flex-wrap">
+                        <strong>Send Notification To: </strong>
+                        <div class="mx-1 form-check form-check-inline" (click)="sendNotification('500ms','500ms',orderData?.current_driver?.id , 'Driver')">
+                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                          <label class="form-check-label" for="inlineRadio1">Driver</label>
+                        </div>
+                        <div class="form-check form-check-inline" (click)="sendNotification('500ms','500ms',orderData?.customer_phone, 'Customer' )">
+                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                          <label class="form-check-label" for="inlineRadio2">Customer</label>
+                        </div>
+                        <!-- <button class="ButtonStyle"
                           (click)="sendNotification('500ms','500ms',orderData?.current_driver?.id , 'Driver')">
                           Send Notification to Driver <img class="send"
                             src="../../assets/images/pushnotification-white.jpg">
@@ -362,7 +370,7 @@
                           Send Notification to Customer <img class="send"
                             src="../../assets/images/pushnotification-white.jpg">
 
-                        </button>
+                        </button> -->
 
                       </div>
 

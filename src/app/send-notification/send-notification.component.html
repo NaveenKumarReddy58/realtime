@@ -8,10 +8,12 @@
             <textarea  formControlName="message" placeholder="Enter Your Message here..."></textarea>
         </div>
         <div class="col-4 text-center">
-            <div class="add-files order-list-add-files" (click)="fileInput.click()">
+            <div class="add-files order-list-add-files position-relative" (click)="fileInput.click()">
                 <img *ngIf="imageSrc" [src]="imageSrc" />
                 <div>Add Files</div>
                 <input #fileInput type="file" (change)="readURL($event)" style="display: none" accept="image/*" />
+                <i  *ngIf="!(imageSrc.indexOf('photoupload') > -1)" (click)="removeAttachment($event)" class="fa fa-times x-icon" aria-hidden="true"></i>
+
             </div>
         </div>
 

@@ -23,3 +23,10 @@
     text-align: right;
     color: gray;
 }
+.remove-time{
+    position: absolute;
+    left: calc(100% - 55px);
+    font-size: 18px;
+    top: 25%;
+    cursor: pointer;
+}
