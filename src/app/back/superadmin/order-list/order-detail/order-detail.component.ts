@@ -112,12 +112,12 @@ export class OrderDetailComponent {
           return;
         }
         this.orderData = data?.result;
-        if(this.orderData.order_invoice?.length > 0){
+        if(this.orderData?.order_invoice?.length > 0){
           this.invoiceImageSrc= this.orderData.order_invoice[this.orderData.order_invoice?.length-1].invoice_doc;
           this.receiverImage= this.orderData.receiver_details[this.orderData.receiver_details?.length-1].photo;
         }
         this.orderData?.status_history?.find((elt:any)=>{
-          if(elt.status == 'unsuccessful'){
+          if(elt.status == 'unsuccessful' || elt.status == 'successful'){
             elt.status_reason.forEach((reason:any) => {
               this.unsuccessfullReasons.push(reason)
             });    

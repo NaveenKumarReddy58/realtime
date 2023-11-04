@@ -240,7 +240,7 @@
                               <th class="fontSize12" *ngIf="orderData?.order_type == 'pickup'">Pickup Time:</th>
                               <th class="fontSize12" *ngIf="orderData?.order_type == 'delivery'">Delivery Time:</th>
 
-                              <td class="fontSize12">{{ orderData?.dely_time ? orderData?.dely_time : 'NA' }}</td>
+                              <td class="fontSize12"  *ngIf="getDateTime(orderData?.order_status)!= 'NA'">{{ getDateTime(orderData?.order_status) | date:'shortTime'}}</td>
                             </tr>
                             <tr>
                               <th class="fontSize12">Remarks:</th>
@@ -253,23 +253,34 @@
                   </div>
                 </div>
 
-                <div class="row mb-4" *ngIf="orderData?.order_status == 'unsuccessful'">
+                <div class="row mb-4" *ngIf="orderData?.order_status == 'unsuccessful' || orderData?.order_status == 'successful'">
                   <div class="CardPopup">
-                    <p style="font-size: 18px;">Order is <strong>UNSUCCESSFUL</strong>. Below Are the Reasons</p>
+                    <p style="font-size: 18px;">Order is <strong>{{orderData?.order_status | uppercase}}</strong>. Below Are the Reasons</p>
                     <div class="row m-0">
-                      <div *ngIf="unsuccessfullReasons.length > 0" class="col-12 col-md-6 col-lg-6 p-0">
+                      <div class="col-12 col-md-6 col-lg-6 p-0">
                         <h3 class="m-0" style="text-decoration: underline;"><strong>Driver Reasons:</strong></h3>
-                        <dl *ngFor="let reason of unsuccessfullReasons">
-                          <dt class="fontSize12">{{reason.reason.title}}:</dt>
-                          <dd class="fontSize12">{{reason.reason.reason_text}}</dd>
-                        </dl>
+                        <ng-container  *ngIf="unsuccessfullReasons.length > 0">
+                          <dl *ngFor="let reason of unsuccessfullReasons">
+                            <dt class="fontSize12">{{reason.reason.title}}:</dt>
+                            <dd class="fontSize12">{{reason.reason.reason_text}}</dd>
+                          </dl>
+                        </ng-container>
+                        <div  *ngIf="unsuccessfullReasons.length == 0">
+                          No Reasons found
+                        </div>
                       </div>
-                      <div class="col-12 col-md-6 col-lg-6 p-0" *ngIf="orderData?.customer_reason?.length > 0">
+                      
+                      <div class="col-12 col-md-6 col-lg-6 p-0">
                         <h3 class="m-0" style="text-decoration: underline;"><strong>Customer Reasons:</strong></h3>
-                        <dl *ngFor="let reason of orderData.customer_reason">
-                          <dt class="fontSize12">{{reason.reason.title}}:</dt>
-                          <dd class="fontSize12">{{reason.reason.reason_text}}</dd>
-                        </dl>
+                        <ng-container *ngIf="orderData?.customer_reason?.length > 0">
+                          <dl *ngFor="let reason of orderData.customer_reason">
+                            <dt class="fontSize12" *ngIf="reason?.reason">{{reason?.reason?.title}}:</dt>
+                            <dd class="fontSize12">{{reason?.reason?.reason_text}}</dd>
+                          </dl>
+                        </ng-container>
+                        <div  *ngIf="orderData?.customer_reason?.length == 0">
+                          No Reasons found
+                        </div>
                       </div>
                     </div>
                     

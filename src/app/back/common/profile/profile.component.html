@@ -35,115 +35,120 @@
       </div>
       <div class=" col-xl-8 col-lg-8 col-md-12  col-xs-12 col-sm-12">
         <form [formGroup]="ProfileFor" class="ProfileFor">
-          <div class="row">
-            <div class="col-md-6">
-              <input autocomplete="autocomplete_off" type="text" name="first_name" formControlName="first_name" placeholder="First Name"
-                class="Pro_input_Field" />
-              <div *ngIf="isProfileSubmitted && ProfileFor.controls['first_name'].errors" class="text-danger">
-                <div *ngIf="isProfileSubmitted && ProfileFor.controls['first_name'].errors['required']">
-                  First Name Required
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <input autocomplete="autocomplete_off" type="text" formControlName="last_name" name="last_name" placeholder="Last Name"
-                class="Pro_input_Field" />
-              <div *ngIf="isProfileSubmitted && ProfileFor.controls['last_name'].errors" class="text-danger">
-                <div *ngIf="isProfileSubmitted && ProfileFor.controls['last_name'].errors['required']">
-                  Last Name Required
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row mt-4">
-            <div class="col-md-6">
-              <input autocomplete="autocomplete_off" type="number" formControlName="phone_number" placeholder="Mobile Number"
-                onKeyPress="if(this.value.length==10) return false;" class="Pro_input_Field driver-input-field" />
-              <div *ngIf="isProfileSubmitted && ProfileFor.controls['phone_number'].errors" class="text-danger">
-                <div *ngIf="isProfileSubmitted && ProfileFor.controls['phone_number'].errors['required']">
-                  Phone Number Required
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <input autocomplete="autocomplete_off" type="text" name="email" formControlName="email" placeholder="Email" class="Pro_input_Field" />
-              <div *ngIf="isProfileSubmitted && ProfileFor.controls['email'].errors" class="text-danger">
-                <div *ngIf="isProfileSubmitted && ProfileFor.controls['email'].errors['required']">
-                  Email Required
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="justify-content-between mt-3 text-end Cancel_Save">
-            <button (click)="saveChanges()" class="SaveButton ButtonStyle">Save Changes <i *ngIf="isLoading" class="fa fa-spinner fa-spin"></i></button>
-          </div>
-          <h2 class="mt-3">Change Password</h2>
-          <div class="row">
-            <div class="col-md-6">
-              <span class="Password">
-                <input autocomplete="autocomplete_off" type="password" name="password" placeholder="Enter New Password" formControlName="pswd"
+          <div class="CardPopup">
+            <div class="row">
+              <div class="col-md-6">
+                <input autocomplete="autocomplete_off" type="text" name="first_name" formControlName="first_name" placeholder="First Name"
                   class="Pro_input_Field" />
-                <div *ngIf="isSubmitted && ProfileFor.controls['pswd'].errors" class="text-danger">
-                  <div *ngIf="isSubmitted && ProfileFor.controls['pswd'].errors['required']">
-                    Password Required
+                <div *ngIf="isProfileSubmitted && ProfileFor.controls['first_name'].errors" class="text-danger">
+                  <div *ngIf="isProfileSubmitted && ProfileFor.controls['first_name'].errors['required']">
+                    First Name Required
                   </div>
                 </div>
-                <div *ngIf="isSubmitted" class="text-danger">
-                  <div *ngIf="ProfileFor.value.pswd?.length < 6">
-                    Password must contain at least 6 or more characters
+              </div>
+              <div class="col-md-6">
+                <input autocomplete="autocomplete_off" type="text" formControlName="last_name" name="last_name" placeholder="Last Name"
+                  class="Pro_input_Field" />
+                <div *ngIf="isProfileSubmitted && ProfileFor.controls['last_name'].errors" class="text-danger">
+                  <div *ngIf="isProfileSubmitted && ProfileFor.controls['last_name'].errors['required']">
+                    Last Name Required
                   </div>
                 </div>
-              </span>
+              </div>
             </div>
-            <div class="col-md-6">
-              <span class="Password">
-                <input autocomplete="autocomplete_off" type="password" name="confirmpassword" placeholder="Confirm Password"
-                  formControlName="confirm_password" class="Pro_input_Field" />
-                <div *ngIf="isSubmitted && ProfileFor.controls['confirm_password'].errors" class="text-danger">
-                  <div *ngIf="isSubmitted && ProfileFor.controls['confirm_password'].errors['required']">
-                    Confirm Password Required
+            <div class="row mt-4">
+              <div class="col-md-6">
+                <input autocomplete="autocomplete_off" type="number" formControlName="phone_number" placeholder="Mobile Number"
+                  onKeyPress="if(this.value.length==10) return false;" class="Pro_input_Field driver-input-field" />
+                <div *ngIf="isProfileSubmitted && ProfileFor.controls['phone_number'].errors" class="text-danger">
+                  <div *ngIf="isProfileSubmitted && ProfileFor.controls['phone_number'].errors['required']">
+                    Phone Number Required
                   </div>
                 </div>
-                <div class="text-danger">
-                  <div
-                    *ngIf=" (ProfileFor.value.pswd.length > 0 || ProfileFor.value.confirm_password.length > 0) &&  (ProfileFor.value.confirm_password != ProfileFor.value.pswd) ">
-                    Password should match
+              </div>
+              <div class="col-md-6">
+                <input autocomplete="autocomplete_off" type="text" name="email" formControlName="email" placeholder="Email" class="Pro_input_Field" />
+                <div *ngIf="isProfileSubmitted && ProfileFor.controls['email'].errors" class="text-danger">
+                  <div *ngIf="isProfileSubmitted && ProfileFor.controls['email'].errors['required']">
+                    Email Required
                   </div>
                 </div>
-              </span>
-              <div *ngIf="!isOtpSent" class="justify-content-between mt-3 text-end Cancel_Save">
-                <button class="SaveButton ButtonStyle" (click)="sendOTP()">Send OTP <i class="fa fa-spinner fa-spin"
-                    *ngIf="isLoading"></i></button>
+              </div>
+            </div>
+            <div class="justify-content-between mt-3 text-end Cancel_Save">
+              <button (click)="saveChanges()" class="SaveButton ButtonStyle">Save Changes <i *ngIf="isLoading" class="fa fa-spinner fa-spin"></i></button>
+            </div>
+          </div>
+          <div class="CardPopup mt-4">
+            <h2 class="mt-3">Change Password</h2>
+            <div class="row">
+              <div class="col-md-6">
+                <span class="Password">
+                  <input autocomplete="autocomplete_off" type="password" name="password" placeholder="Enter New Password" formControlName="pswd"
+                    class="Pro_input_Field" />
+                  <div *ngIf="isSubmitted && ProfileFor.controls['pswd'].errors" class="text-danger">
+                    <div *ngIf="isSubmitted && ProfileFor.controls['pswd'].errors['required']">
+                      Password Required
+                    </div>
+                  </div>
+                  <div *ngIf="isSubmitted" class="text-danger">
+                    <div *ngIf="ProfileFor.value.pswd?.length < 6">
+                      Password must contain at least 6 or more characters
+                    </div>
+                  </div>
+                </span>
+              </div>
+              <div class="col-md-6">
+                <span class="Password">
+                  <input autocomplete="autocomplete_off" type="password" name="confirmpassword" placeholder="Confirm Password"
+                    formControlName="confirm_password" class="Pro_input_Field" />
+                  <div *ngIf="isSubmitted && ProfileFor.controls['confirm_password'].errors" class="text-danger">
+                    <div *ngIf="isSubmitted && ProfileFor.controls['confirm_password'].errors['required']">
+                      Confirm Password Required
+                    </div>
+                  </div>
+                  <div class="text-danger">
+                    <div
+                      *ngIf=" (ProfileFor.value.pswd.length > 0 || ProfileFor.value.confirm_password.length > 0) &&  (ProfileFor.value.confirm_password != ProfileFor.value.pswd) ">
+                      Password should match
+                    </div>
+                  </div>
+                </span>
+                <div *ngIf="!isOtpSent" class="justify-content-between mt-3 text-end Cancel_Save">
+                  <button class="SaveButton ButtonStyle" (click)="sendOTP()">Send OTP <i class="fa fa-spinner fa-spin"
+                      *ngIf="isLoading"></i></button>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-4" *ngIf="isOtpSent">
+    
+              <div class="col-md-12 mb-3">
+    
+                <label>
+                  <ng-otp-input class="ng-otp-input" (onInputChange)="onOtpChange($event)"
+                    [config]="{ length: 6, allowNumbersOnly: true, containerClass: 'otp-input-field' }"></ng-otp-input>
+    
+                  <button class="Verify mx-3" (click)="updatePassword()">Change Password</button>
+    
+                  <div class="position-relative d-inline-block">
+                    <app-timer [mobileNumber]="phone_number" [countryCode]="'+91'" class="app-timer"></app-timer>
+                  </div>
+                  <div *ngIf="otpSubmitted" class="text-danger">
+                    <div *ngIf="otp && otp.length != 6 || otp == null">
+                      OTP Should be 6 digit long.
+                    </div>
+                  </div>
+                </label>
+              </div>
+              <div>
+    
+                <div class="col-md-12">
+                  <span>To change password enter OTP Sent to: ********{{phone_number!.substr(-2)}}</span>
+                </div>
               </div>
             </div>
           </div>
-          <div class="row mt-4" *ngIf="isOtpSent">
-  
-            <div class="col-md-12 mb-3">
-  
-              <label>
-                <ng-otp-input class="ng-otp-input" (onInputChange)="onOtpChange($event)"
-                  [config]="{ length: 6, allowNumbersOnly: true, containerClass: 'otp-input-field' }"></ng-otp-input>
-  
-                <button class="Verify mx-3" (click)="updatePassword()">Change Password</button>
-  
-                <div class="position-relative d-inline-block">
-                  <app-timer [mobileNumber]="phone_number" [countryCode]="'+91'" class="app-timer"></app-timer>
-                </div>
-                <div *ngIf="otpSubmitted" class="text-danger">
-                  <div *ngIf="otp && otp.length != 6 || otp == null">
-                    OTP Should be 6 digit long.
-                  </div>
-                </div>
-              </label>
-            </div>
-            <div>
-  
-              <div class="col-md-12">
-                <span>To change password enter OTP Sent to: ********{{phone_number!.substr(-2)}}</span>
-              </div>
-            </div>
-          </div>
+          
         </form>
       </div>
     </div>
@@ -161,10 +166,10 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-9 col-md-12  col-xs-12 col-sm-12">
-        <form [formGroup]="ProfileFor" class="ProfileFor">
+      <div class="col-lg-8 col-md-12  col-xs-12 col-sm-12">
+        <form [formGroup]="ProfileFor" class="ProfileFor CardPopup">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <div class="Pro_input_Field">
                   <span class="mx-2"><strong>Type:</strong></span>                
                   <span class="mx-4"><strong>Gold</strong>/Silver/Bronze</span>
@@ -172,7 +177,7 @@
             </div>
           </div>
           <div class="row mt-4">
-            <div class="col-md-6">
+            <div class="col-md-8">
               <div class="Pro_input_Field">
                 <span class="mx-2"><strong>Expired:</strong></span>                
                 <span class="mx-2">24 Aug, 2024 </span>
@@ -180,7 +185,7 @@
             </div>
           </div>
           <div class="row mt-4">
-            <div class="col-md-6">
+            <div class="col-md-8">
               <div class="Pro_input_Field">
                 <span class="mx-2"><strong>Data:</strong></span>                
                 <span class="mx-4">2 Supre Admin, 2 of 3 is pending </span>
@@ -210,7 +215,7 @@
         <input autocomplete="autocomplete_off" #fileInputSA type="file" (change)="readURLSA($event)" style="display: none" accept="image/*" />
       </div>
       <div class="col-lg-9 col-md-12  col-xs-12 col-sm-12">
-        <form [formGroup]="ProfileForSA" class="ProfileForSA">
+        <form [formGroup]="ProfileForSA" class="ProfileForSA CardPopup">
           <div class="row">
             <div class="col-md-6">
               <input autocomplete="autocomplete_off" type="text" name="first_name" formControlName="first_name" placeholder="First Name"

@@ -124,7 +124,7 @@ export class AppComponent {
   }
   notificationCount(){
     this.planService.notificationCount().subscribe((res)=>{
-      this.notificationCountData= res.result.num_unread;
+      this.notificationCountData= res?.result?.num_unread;
     })
   }
 }

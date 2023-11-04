@@ -626,12 +626,10 @@ ul.Tab_List li.active a {
   background: #c7ffc3;
 }
 .ButtonTab ul li.Pending a:before {
-  background: #FFB000;
-  opacity: 0.5;
+  background: rgb(255, 176, 0,0.3);  /* opacity: 0.5; */
 }
 .ButtonTab ul li.Successful a:before {
-  background: #0EB002;
-  opacity: 0.5;
+  background: rgb(14, 176, 2,0.3);  /* opacity: 0.5; */
 
 }
 .ButtonTab ul li.Unsuccessful a:before {
@@ -641,7 +639,7 @@ ul.Tab_List li.active a {
 }
 .ButtonTab ul li.Cancelled a:before {
   background: Blue;
-  opacity: 0.5;
+  opacity: 0.7;
 
 }
 .SelectDate {
