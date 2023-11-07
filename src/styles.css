@@ -717,3 +717,6 @@ input[type="time"]
     -moz-appearance: textfield;
     min-height: 1.2em;
 } */
+.delete-btn-rt:hover{
+  background-color: #dc3545 !important;
+}

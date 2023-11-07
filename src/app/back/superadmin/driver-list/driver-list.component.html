@@ -34,7 +34,7 @@
             <a class="deselect-all-dl" (click)="deSelectAll()">Deselect All</a>
             <a class="drivers-list-delete" [ngClass]="selectedDriversCount > 0 ? '' : 'pe-none'">
               <button class="btn btn-danger btn-sm" [disabled]="!(selectedDriversCount > 0)" (click)="onClickDeleteDriverDialog($event)">Delete <i class="fa fa-trash"></i></button>
-              <div *ngIf="isShowDeleteDriverDialog" class="drivers-list-delete-dialog">
+              <div *ngIf="isShowDeleteDriverDialog" class="drivers-list-delete-dialog" style="width: 430px;">
                 <div class="delete-drivers">Delete Drivers</div>
                 <div class="confirmation-msg">
                   <div class="row">
