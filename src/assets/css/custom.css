@@ -622,25 +622,43 @@ ul.Tab_List li.active a {
   left: 0;
   right: 0;
 }
-.ButtonTab ul li.All a:before {
+/* .ButtonTab ul li.All a:before {
   background: #c7ffc3;
 }
 .ButtonTab ul li.Pending a:before {
-  background: rgb(255, 176, 0,0.3);  /* opacity: 0.5; */
+  background: rgb(255, 176, 0,0.3);  opacity: 0.5; 
+  background: #fff3bb;
 }
 .ButtonTab ul li.Successful a:before {
-  background: rgb(14, 176, 2,0.3);  /* opacity: 0.5; */
+   background: rgb(14, 176, 2,0.3);  opacity: 0.5; 
+  background: #d8fad6;
 
 }
 .ButtonTab ul li.Unsuccessful a:before {
   background: #DF2525;
-  opacity: 0.5;
+  opacity: 0.5; 
+  background-color: #ffbbbb;
 
 }
 .ButtonTab ul li.Cancelled a:before {
   background: Blue;
   opacity: 0.7;
 
+} */
+.ButtonTab ul li.All a:before {
+  background: #c7ffc3;
+}
+.ButtonTab ul li.Pending a:before {
+  background: #fff3bb;
+}
+.ButtonTab ul li.Successful a:before {
+  background: #d8fad6;
+}
+.ButtonTab ul li.Unsuccessful a:before {
+  background: #ffbbbb;
+}
+.ButtonTab ul li.Cancelled a:before {
+  background: #8191ff;
 }
 .SelectDate {
   text-align: right;

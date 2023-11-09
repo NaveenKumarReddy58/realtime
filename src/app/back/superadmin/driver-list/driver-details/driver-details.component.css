@@ -103,23 +103,27 @@ input.Pro_input_Field {
 }
 .todays-order-btn{
   background: #aedff6;
-  min-width: 150px;
-  width: 150px;
+  min-width: 200px;
+  width: 200px;
+
 }
 .dt-pending-btn{
   background: rgb(255, 176, 0,0.3);
-  min-width: 150px;
-  width: 150px;
+  min-width: 200px;
+  width: 200px;
+
 }
 .dt-successful-btn{
   background: rgb(14, 176, 2,0.3);
   /* opacity: 0.5; */
-  min-width: 150px;
-  width: 150px;
+  min-width: 200px;
+  width: 200px;
+
 }
 .dt-unsuccessful-btn{
   background: rgba(223, 37, 37,0.3);
-  min-width: 150px;
-  width: 150px;
+  min-width: 200px;
+  width: 200px;
+
 }
 

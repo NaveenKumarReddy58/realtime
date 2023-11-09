@@ -242,6 +242,33 @@ export class OrderListComponent {
       
     });
   }
+  getDateTime(item:any,status: string){
+    //if shipped time is not there then make enroute time as shipped time
+    let obj = {
+      "status": "shipped",
+      "updated_at": "2023-09-30T07:12:40.614870Z",
+      "updated_by": "sandeep@gmail.com",
+      "status_reason": []
+    };
+    let shippedItem = item?.status_history.find((item:any) => item.status == 'shipped');
+    if(shippedItem == undefined){
+      let enRouteItem = item?.status_history.find((item:any) => item.status == 'en-route');
+      if(enRouteItem){
+        obj.updated_at= enRouteItem.updated_at;
+        obj.updated_by= enRouteItem.updated_by;
+        obj.status_reason= enRouteItem.status_reason;
+        item.status_history.push(obj);
+      }
+    }
+    //end
+    var sitem = item?.status_history.find((item:any) => item.status === status);
+    if(sitem){
+      console.log(sitem)
+      return sitem.updated_at;
+    } else{
+      return "NA";
+    }
+  }
   preparePendingOrdersCount(orders:any){
     let count = 0;
     orders.forEach((el: any) => {

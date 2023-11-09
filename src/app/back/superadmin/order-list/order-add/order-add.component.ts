@@ -306,16 +306,12 @@ export class OrderAddComponent {
   handleSubmit() {
     this.isSubmitted = true;
 
-    if(this.addOrderF.value.is_pickup_warehouse == ''){
-      this.addOrderF.patchValue({
-        is_pickup_warehouse: false,
-      })
-    }
-    if(this.addOrderF.value.is_dely_warehouse == ''){
-      this.addOrderF.patchValue({
-        is_dely_warehouse: false
-      })
-    }
+    this.addOrderF.patchValue({
+      is_pickup_warehouse: this.isCheckedWarehous[0].pickup,
+    })
+    this.addOrderF.patchValue({
+      is_dely_warehouse: this.isCheckedWarehous[1].to
+    })
     // stop here if form is invalid
     if (this.addOrderF.invalid) {
       return;
