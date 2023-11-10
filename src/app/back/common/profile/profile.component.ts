@@ -56,7 +56,7 @@ export class ProfileComponent {
       phone_number: ['', [Validators.required]],
       email: ['', [Validators.required]],
       profile_image: [''],
-      country_code: ['+91']
+      country_code: ['+1']
     });
     this.ProfileForSA = formBuilder.group({
       first_name: ['', [Validators.required]],
@@ -65,7 +65,7 @@ export class ProfileComponent {
       confirm_phone_number: ['', [Validators.required]],
       email: ['', [Validators.required]],
       profile_image: [''],
-      country_code: ['+91']
+      country_code: ['+1']
     });
   
 
@@ -173,7 +173,7 @@ export class ProfileComponent {
     }
     this.isLoading = true;
 
-    this.sendOtp$ = this.authService.sendMobileOtp(this.phone_number, '+91');
+    this.sendOtp$ = this.authService.sendMobileOtp(this.phone_number, '+1');
 
     this.sendOtp$.subscribe((data: any) => {
       this.isOtpSent = true;

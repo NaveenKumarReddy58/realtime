@@ -720,3 +720,14 @@ input[type="time"]
 .delete-btn-rt:hover{
   background-color: #dc3545 !important;
 }
+
+.realtime-secondary-btn{
+  background: gray;
+  border: 0;
+  color: #fff;
+  font-size: 13px;
+  padding: 9px 25px;
+  border-radius: 15px;
+  font-weight: 600;
+  min-width: 175px;
+}

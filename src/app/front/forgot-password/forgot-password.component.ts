@@ -32,7 +32,7 @@ export class ForgotPasswordComponent {
     this.forgot = formBuilder.group({
       username: [
         '',
-        [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
+        [Validators.required, Validators.pattern('^((\\+1-?)|0)?[0-9]{10}$')],
       ],
       password: ['', []],
     });

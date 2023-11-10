@@ -47,7 +47,7 @@ export class WarehouseAddComponent {
       email: ['', [Validators.required, Validators.email]],
       phone: [
         '',
-        [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
+        [Validators.required, Validators.pattern('^((\\+1-?)|0)?[0-9]{10}$')],
       ],
       alt_phone: [''],
       is_main_localation: [false],

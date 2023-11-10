@@ -23,6 +23,9 @@
     text-align: right;
     color: gray;
 }
+.add-address{
+    min-width: auto !important;
+}
 .remove-time{
     position: absolute;
     left: calc(100% - 55px);

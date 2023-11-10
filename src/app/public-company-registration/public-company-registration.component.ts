@@ -52,7 +52,7 @@ export class PublicCompanyRegistrationComponent {
       // last_name: ['', [Validators.required]],
       phone_number: [
         '',
-        [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
+        [Validators.required, Validators.pattern('^((\\+1-?)|0)?[0-9]{10}$')],
       ],
       password: ['', [Validators.required]],
       logo: [''],

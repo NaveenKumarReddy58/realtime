@@ -81,11 +81,11 @@ export class DriverAddComponent {
       password: ['', [Validators.required]],
       phone_number: [
         '',
-        [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
+        [Validators.required, Validators.pattern('^((\\+1-?)|0)?[0-9]{10}$')],
       ],
       confirm_phone_number: [
         '',
-        [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
+        [Validators.required, Validators.pattern('^((\\+1-?)|0)?[0-9]{10}$')],
       ],
       address: ['', [Validators.required]],
       is_head_driver: [false],
@@ -93,7 +93,7 @@ export class DriverAddComponent {
       image: [''],
       driver_insurance:[''],
       certificates: [''],
-      country_code:['+91'],
+      country_code:['+1'],
       driver_license:[''],
       driver_safety:[''],
       driver_abstract:[''],

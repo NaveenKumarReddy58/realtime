@@ -66,10 +66,10 @@ export class OrderAddComponent {
       pickup_time: [''],
       pickup_contact_name: ['', [Validators.required]],
       pickup_email: ['', [Validators.required, Validators.email]],
-      pickup_country_code: ['+91'],
+      pickup_country_code: ['+1'],
       pickup_phone: [
         '',
-        [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
+        [Validators.required, Validators.pattern('^((\\+1-?)|0)?[0-9]{10}$')],
       ],
       pickup_alt_phone: [
         ''
@@ -84,9 +84,9 @@ export class OrderAddComponent {
       dely_email: ['', [Validators.required, Validators.email]],
       dely_phone: [
         '',
-        [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
+        [Validators.required, Validators.pattern('^((\\+1-?)|0)?[0-9]{10}$')],
       ],
-      dely_country_code: ['+91'],
+      dely_country_code: ['+1'],
       dely_alt_phone: [
         ''
       ],
@@ -201,7 +201,7 @@ export class OrderAddComponent {
           dely_time: this.orderData?.dely_time,
           dely_contact_name: this.orderData?.dely_contact_name,
           dely_email:this.orderData?.dely_email,
-          dely_phone: this.orderData?.dely_phone ? this.orderData?.dely_phone.replace('+91',''):'',
+          dely_phone: this.orderData?.dely_phone ? this.orderData?.dely_phone.replace('+1',''):'',
           dely_country_code: this.orderData?.country_code,
           dely_alt_phone: this.orderData?.dely_alt_phone,
           dely_note: this.orderData?.dely_note?this.orderData?.dely_note : '',
@@ -406,10 +406,10 @@ export class OrderAddComponent {
         //pickup_contact_name:"Shipping dept",
         pickup_contact_name: this.warehouseData?.contact_name,
         //pickup_phone: '9999999999',
-        pickup_phone: this.warehouseData?.phone ? this.warehouseData?.phone.replace('+91',''):'',
+        pickup_phone: this.warehouseData?.phone ? this.warehouseData?.phone.replace('+1',''):'',
        // pickup_email: 'shippingdept@gmaill.com',
        pickup_email:this.warehouseData?.email,
-        pickup_alt_phone: this.warehouseData?.alt_phone ? this.warehouseData?.alt_phone.replace('+91',''):''
+        pickup_alt_phone: this.warehouseData?.alt_phone ? this.warehouseData?.alt_phone.replace('+1',''):''
       });
     }
     else if(this.isCheckedWarehous[1].to){
@@ -425,9 +425,9 @@ export class OrderAddComponent {
         //dely_contact_name:"Shipping dept",
         dely_email:this.warehouseData?.email,
         //dely_email:'shippingdept@gmaill.com',
-        dely_phone: this.warehouseData?.phone ? this.warehouseData?.phone.replace('+91',''):'',
+        dely_phone: this.warehouseData?.phone ? this.warehouseData?.phone.replace('+1',''):'',
         //dely_phone:'9999999999',
-        dely_alt_phone: this.warehouseData?.alt_phone ? this.warehouseData?.alt_phone.replace('+91',''):''
+        dely_alt_phone: this.warehouseData?.alt_phone ? this.warehouseData?.alt_phone.replace('+1',''):''
       });
       this.addOrderF.patchValue({
         pickup_contact_name:"Shipping dept",

@@ -658,7 +658,7 @@ ul.Tab_List li.active a {
   background: #ffbbbb;
 }
 .ButtonTab ul li.Cancelled a:before {
-  background: #8191ff;
+  background: #d0ecfa;
 }
 .SelectDate {
   text-align: right;

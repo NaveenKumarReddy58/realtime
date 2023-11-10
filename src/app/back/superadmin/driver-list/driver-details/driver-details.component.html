@@ -138,10 +138,10 @@
                                                         <span style="font-size: 12px;">img{{index+1}}</span>
                                                     </a>
 
-                                                    <input type="file" name=""
+                                                    <!-- <input type="file" name=""
                                                         placeholder="Email"
                                                         class="Pro_input_Field"
-                                                        id="Documents">
+                                                        id="Documents"> -->
                                                 </label>
                                             </div>
                                             <!-- <div class="col-md-6 mb-4" [ngClass]="!isEditMode? 'view-mode' : ''">
@@ -180,11 +180,18 @@
                                             </div> -->
                                             <br>
 
-                                            <div  class="col-md-12 my-4 text-end">
+                                            <!-- <div  class="col-md-12 my-4 text-end">
                                                 <button class="ButtonStyle" (click)="sendNotification('500ms','500ms',this.driverId , 'Driver')">
                                                   Send Notification to Driver <img class="send" src="../../assets/images/pushnotification-white.jpg">
                                                 </button>
                                                 
+                                            </div> -->
+                                            <div class="col-md-12 my-4 d-flex gap-1 flex-wrap">
+                                                <strong>Send Notification To: </strong>
+                                                <div class="mx-1 form-check form-check-inline" (click)="sendNotification('500ms','500ms',this.driverId , 'Driver')">
+                                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                                  <label class="form-check-label" for="inlineRadio1">Driver</label>
+                                                </div>
                                               </div>
                                         </div>
                                     </div>

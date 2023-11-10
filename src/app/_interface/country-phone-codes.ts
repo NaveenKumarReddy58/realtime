@@ -486,7 +486,7 @@ export var CountryPhoneCodes = [
     },
     {
         name: "India",
-        dial_code: "+91",
+        dial_code: "+1",
         code: "IN"
     },
     {

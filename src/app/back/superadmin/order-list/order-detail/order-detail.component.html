@@ -14,10 +14,10 @@
             </div>
           </div>
           <!-- Step Div Area -->
-          <div class="row mt-4">
+          <div class="row gap-3 mt-4">
             <div class="col-md-3">
               <div class="ProfilePik">
-                <div class="ChangePic P_Photo">
+                <div class="ChangePic P_Photo p-4">
                   <ng-container *ngIf="orderData?.order_type == 'pickup'" >
                   <img *ngIf="(!(orderData?.assigned_order[0]?.driver?.first_name) || orderData?.assigned_order[0]?.driver?.first_name?.length == 0)" src="assets/images/p-icon02.png" />
                   <img *ngIf="orderData?.assigned_order[0]?.driver?.first_name?.length > 0" src="assets/images/p_assigned.svg"/>
@@ -59,21 +59,21 @@
                 </div>
                 <br>
 
-                <div class="driver-profile-image-container invoice-image-container ">
+                <div class="driver-profile-image-container invoice-image-container d-flex justify-content-center items-center">
                   <i *ngIf="!(invoiceImageSrc.indexOf('edit-icon') > 0)" class="fa fa-trash Delete"
                     (click)="removeProfilePhoto($event)"></i>
                   <img *ngIf="!(invoiceImageSrc.indexOf('edit-icon') > 0) && invoiceImageSrc"
                     class="driver-profile-image invoice-image" [src]="invoiceImageSrc" [alt]="'logo'" width="100%"
                     style="height: 180px;" (click)="fileInput.click()" />
                   <img *ngIf="(invoiceImageSrc.indexOf('edit-icon') > 0)  && invoiceImageSrc" class="invoice-image"
-                    [src]="invoiceImageSrc" [alt]="'logo'" width="50%" height="90%" (click)="fileInput.click()" />
+                    [src]="invoiceImageSrc" [alt]="'logo'" width="35%" height="90%" (click)="fileInput.click()" />
                 </div>
                 <a *ngIf="this.orderData && this.orderData.order_invoice.length > 0" target="_blank"
                   class="uploaded-documenst mx-1 cursor-pointer" [href]="invoiceImageSrc">
                   <span style="font-size: 12px;">View Full Image</span>
                 </a>
                 <div class="cursor-pointer mt-3 " (click)="uploadInvoice()">
-                  <button class="ButtonStyle"> {{this.orderData && this.orderData.order_invoice.length > 0 ? 'Edit
+                  <button class="realtime-secondary-btn"> {{this.orderData && this.orderData.order_invoice.length > 0 ? 'Edit
                     Packing Slip': 'Upload Packing Slip'}} <i class="fa fa-spinner fa-spin"
                       *ngIf="isInvoiceLoading"></i>
                   </button>
