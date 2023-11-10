@@ -770,12 +770,15 @@ span.RecentTitle.AddOrder {
   color: #0d0d0d;
 }
 .from-to-pick {
-  background: #d9effb;
+  /* background: #d9effb; */
+  
+  background: #e2e5e6;
   border-radius: 15px;
   overflow: hidden;
 }
 .Pickup-title {
-  background: #94d1f2;
+  /* background: #94d1f2; */
+  background: #afbac5;
   padding: 15px 20px;
   display: flex;
   align-items: center;
