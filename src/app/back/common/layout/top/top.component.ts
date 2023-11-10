@@ -176,6 +176,29 @@ export class TopComponent {
     this.searchbox = !this.searchbox;
   }
 
+  showSidebar(){
+    let val: any = 'block';
+    const element: any = document.getElementById('sideBar');
+    element.style.display = val;
+
+    let width: any = 'calc(100% - 250px)';
+    let padding:any="0px";
+    let right:any="13px";
+
+    const element2: any = document.getElementById('mainContentContainer');
+    element2.style.width = width;
+    element2.style.padding = padding;
+    element2.style.right = right;
+
+    let display: any = 'none';
+
+    const element3: any = document.getElementById('show-menu-bar');
+    element3.style.display = display;
+
+    const element4: any = document.getElementById('topBarLinks');
+    element4.classList.remove('col-lg-7');
+    element4.classList.add('col-lg-8');
+  }
   navigateToOrderDetails(id: any) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.isShowNotifications = !this.isShowNotifications

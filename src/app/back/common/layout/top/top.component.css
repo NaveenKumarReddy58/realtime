@@ -109,3 +109,25 @@
         margin-top: .5rem !important;
     }
 } 
+
+#show-menu-bar{
+  display: flex;
+  justify-content: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: none;
+  
+}
+
+#show-menu-bar .fa-bars{
+  background: black;
+    color: white;
+    height: max-content;
+    border-radius: 15px;
+    font-size: 24px;
+    padding: 13px;
+    vertical-align: middle;
+    width: 80px;
+    cursor: pointer;
+    text-align: center;
+}

@@ -15,7 +15,7 @@ export class MenuComponent {
 
   @Input() isRoleIn: any;
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   constructor(
     private formBuilder: FormBuilder,
@@ -35,10 +35,29 @@ export class MenuComponent {
     this.authService.doLogout();
     this.toastr.success('Logout!');
   }
-  hideSidebar(){
+  hideSidebar() {
     // this.isShowMenu= !this.isShowMenu;
-    let val:any = 'none';
-    const element:any = document.getElementById('sideBar');
-   element.style.display = val;  
+    let val: any = 'none';
+    const element: any = document.getElementById('sideBar');
+    element.style.display = val;
+
+    let width: any = '100%';
+    let padding:any="0px 12px";
+    let right:any="0px";
+
+    const element2: any = document.getElementById('mainContentContainer');
+    element2.style.width = width;
+    element2.style.padding = padding;
+    element2.style.right = right;
+
+    let display: any = 'flex';
+
+    const element3: any = document.getElementById('show-menu-bar');
+    element3.style.display = display;
+
+    const element4: any = document.getElementById('topBarLinks');
+    element4.classList.remove('col-lg-8');
+    element4.classList.add('col-lg-7');
+
   }
 }

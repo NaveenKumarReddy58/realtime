@@ -690,6 +690,9 @@ a.link {
     display: none;
     border-top-left-radius: 0 !important;
   }
+  #show-menu-bar{
+    display: none;
+  }
   .mt-xs-4 {
     margin-top: 18px !important;
   }
