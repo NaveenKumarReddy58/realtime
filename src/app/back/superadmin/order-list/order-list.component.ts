@@ -114,6 +114,8 @@ export class OrderListComponent {
   copyOrderData: any;
   pendingOrdersCount: any;
   isShowRefreshSpin:boolean= false;
+  pickupTime: any;
+  delyTime: any;
 
 
   constructor(
@@ -242,25 +244,42 @@ export class OrderListComponent {
       
     });
   }
+
+  convertTime24To12(val:any){
+    if(val != 'null' && val != '' && val){
+      let timeWithout00=val.split(':');
+      var time:any = timeWithout00[0]+':'+timeWithout00[1];
+      time = time.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+  
+      if (time.length > 1) { // If time format correct
+        time = time.slice (1);  // Remove full string match value
+        time[5] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
+        time[0] = +time[0] % 12 || 12; // Adjust hours
+      }
+      
+      return time.join('');
+    }
+   
+  }
   getDateTime(item:any,status: string){
     //if shipped time is not there then make enroute time as shipped time
-    let obj = {
-      "status": "shipped",
-      "updated_at": "2023-09-30T07:12:40.614870Z",
-      "updated_by": "sandeep@gmail.com",
-      "status_reason": []
-    };
-    let shippedItem = item?.status_history.find((item:any) => item.status == 'shipped');
-    if(shippedItem == undefined){
-      let enRouteItem = item?.status_history.find((item:any) => item.status == 'en-route');
-      if(enRouteItem){
-        obj.updated_at= enRouteItem.updated_at;
-        obj.updated_by= enRouteItem.updated_by;
-        obj.status_reason= enRouteItem.status_reason;
-        item.status_history.push(obj);
-      }
-    }
-    //end
+    // let obj = {
+    //   "status": "shipped",
+    //   "updated_at": "2023-09-30T07:12:40.614870Z",
+    //   "updated_by": "sandeep@gmail.com",
+    //   "status_reason": []
+    // };
+    // let shippedItem = item?.status_history.find((item:any) => item.status == 'shipped');
+    // if(shippedItem == undefined){
+    //   let enRouteItem = item?.status_history.find((item:any) => item.status == 'en-route');
+    //   if(enRouteItem){
+    //     obj.updated_at= enRouteItem.updated_at;
+    //     obj.updated_by= enRouteItem.updated_by;
+    //     obj.status_reason= enRouteItem.status_reason;
+    //     item.status_history.push(obj);
+    //   }
+    // }
+    // //end
     var sitem = item?.status_history.find((item:any) => item.status === status);
     if(sitem){
       console.log(sitem)

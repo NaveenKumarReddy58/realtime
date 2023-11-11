@@ -14,8 +14,8 @@
                             <span *ngIf="editDriverForm.value.is_head_driver" class="RecentTitle AddOrder">Head Driver </span>
                         </div>
                     </div>
-                    <div class="row mt-4">
-                        <div class="col-md-2">
+                    <div class="row mt-4 gap-3">
+                        <div class="col-md-2 col-lg-2">
                             <div class="ProfilePik">
                                 <div class="ChangePic NoPhoto p-0 position-relative"  [ngClass]="!isEditMode? 'view-mode' : ''">
                                     <span class="percentage">90%</span>
@@ -34,7 +34,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-9 col-lg-9">
                             <form class="ProfileFor" [formGroup]="editDriverForm">
                                 <div class="row">
                                     <!-- Popup Box -->
@@ -50,14 +50,6 @@
                                                                 <span class="slider round"></span>
                                                               </label>
                                                         </td>
-                                                        <!-- <td  [ngClass]="!isEditMode? 'view-mode' : ''">
-                                                            Head Driver: <input
-                                                            class="head-driver mx-2"
-                                                            type="checkbox"
-                                                            formControlName="is_head_driver"
-                                                          />
-
-                                                        </td> -->
                                                         <td class="px-0 float-end">
                                                             <span (click)="edit()" class="mx-3 cursor-pointer realtime-btn p-2">Edit <i
                                                                     class="fa fa-pencil action-icon"></i></span>
@@ -67,21 +59,90 @@
                                                         </td>
                                                     </tr>
                                                 </table>
-                                                <!-- <table class="TodayOrder">
-                                                    <tr>
-                                                        <td><span class="cursor-pointer">Today's Order: {{todayOrderCount}}</span></td>
-                                                        <td><span class="cursor-pointer">Pending: {{pendingOrderCount}}</span></td>
-                                                        <td><span class="cursor-pointer">Successful: {{successfullOrderCount}}</span></td>
-                                                        <td><span class="cursor-pointer">UnSuccessful: {{unSuccessfullOrderCount}}</span></td>
-                                                    </tr>
-                                                </table> -->
 
-                                                <div class=" mt-4 d-flex justify-content-between flex-wrap">
+                                                <!-- <div class=" mt-4 d-flex justify-content-between flex-wrap">
                                                     <button class="p-2 todays-order-btn button-Pending status_button_style" (click)="showOrdersList('today')">Today's Order: {{todayOrderCount}}</button>
                                                     <button class="p-2 dt-pending-btn button-Pending status_button_style" (click)="showOrdersList('pending')">Pending: {{pendingOrderCount}}</button>
                                                     <button class="p-2 dt-successful-btn button-Pending status_button_style" (click)="showOrdersList('successful')">Successful: {{successfullOrderCount}}</button>
                                                     <button class="p-2 dt-unsuccessful-btn button-Pending status_button_style" (click)="showOrdersList('unsuccessful')">UnSuccessful: {{unSuccessfullOrderCount}}</button>
+                                                </div> -->
+
+                                                <div class="ButtonTab driver-details-filters mt-4 pt-4">
+                                                    <ul class=" d-flex justify-content-between flex-wrap">
+                                                        <li (click)="showOrdersList('today')" class="todays-order cursor-pointer">
+                                                            <a>
+                                                                <span class="All">Today's Order: </span>
+                                                                <span class="All-Noti">
+                                                                    {{todayOrderCount}}
+                                                                  </span>
+                                                            </a>
+                                                        </li>
+                                                        <li (click)="showOrdersList('pending')" class="Pending cursor-pointer">
+                                                            <a>
+                                                                <span class="All">Pending: </span>
+                                                                <span class="All-Noti">
+                                                                    {{pendingOrderCount}}
+                                                                  </span>
+                                                            </a>
+                                                        </li>
+                                                        <li (click)="showOrdersList('successful')" class="Successful cursor-pointer">
+                                                            <a>
+                                                                <span class="All">Successful: </span>
+                                                                <span class="All-Noti">
+                                                                    {{successfullOrderCount}}
+                                                                  </span>
+                                                            </a>
+                                                        </li>
+                                                        <li (click)="showOrdersList('unsuccessful')" class="Unsuccessful cursor-pointer">
+                                                            <a>
+                                                                <span class="All">UnSuccessful: </span>
+                                                                <span class="All-Noti">
+                                                                    {{unSuccessfullOrderCount}}
+                                                                  </span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
                                                 </div>
+
+                                                <!-- <div class="ButtonTab">
+                                                    <ul>
+                                                        <li *ngIf="item.order_status != 'shipped' && item.order_status != 'en-route'" (click)="onClickStatus(item.order_status)" class="cursor-pointer" [ngClass]="{
+                                                        'All': item.order_status == 'all',
+                                                        'Pending': item.order_status == 'pending',
+                                                        'Successful': item.order_status == 'successful',
+                                                        'Unsuccessful': item.order_status == 'unsuccessful',
+                                                        'Cancelled': item.order_status == 'cancelled'
+                                                        }">
+                                                        <a [ngClass]="item.isActive? 'active': ''">
+                                                          <span *ngIf="item.order_status == 'all'" class="All">All</span>
+                                                          <span *ngIf="item.order_status == 'pending'" class="All">Pending</span>
+                                                          <span *ngIf="item.order_status == 'successful'" class="All">Successful</span>
+                                                          <span *ngIf="item.order_status == 'unsuccessful'" class="All">Unsuccessful</span>
+                                                          <span *ngIf="item.order_status == 'cancelled'" class="All">Cancelled</span>
+                                            
+                                                          <span class="All-Noti" *ngIf="item.order_status == 'all'">
+                                                            {{getCountOfAllOrders()}}
+                                                          </span>
+                                                          <span class="All-Noti"  *ngIf="item.order_status == 'pending'">
+                                                            {{pendingOrdersCount}}
+                                                          </span>
+                                                          <span class="All-Noti"  *ngIf="item.order_status == 'successful'">
+                                                            {{item.count}}
+                                                          </span>
+                                                          <span class="All-Noti"  *ngIf="item.order_status == 'unsuccessful'">
+                                                            {{item.count}}
+                                                          </span>
+                                                          <span class="All-Noti"  *ngIf="item.order_status == 'cancelled'">
+                                                            {{item.count}}
+                                                          </span>
+                                                        </a>
+                                                      </li>
+                                                    </ul>
+                                                  </div> -->
+
+
+
+
                                             </div>
                                             <div class="col-md-6 mb-4"  [ngClass]="!isEditMode? 'view-mode' : ''">
                                                 <span class="Password">

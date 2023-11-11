@@ -245,12 +245,14 @@
                   <td><strong>{{ item.customer_name }}</strong>({{item.order_type == 'pickup'? item.pickup_company_name : item.dely_company_name}})</td>
                   <td>{{ item.customer_addr }}</td>
                   <td>{{ item.dely_date | date : "fullDate" }}</td>
-                  <td>{{ item.dely_time }}</td>
+                  <td>{{ item.order_type == 'pickup' ? convertTime24To12(item.pickup_time) : convertTime24To12(item.dely_time) }}</td>
                   <td>
                     <!-- <span class="GreenColor">{{
                       item.created_at | date : "shortTime"
                     }}</span> -->
-                    NA
+                    <span *ngIf="item.order_status != 'successful' && item.order_status != 'unsuccessful'" class="">NA</span>
+                    
+                    <span *ngIf="item.order_status == 'successful' || item.order_status == 'unsuccessful'">{{getDateTime(item,item.order_status)  | date:'shortTime'}}</span>
                   </td>
                   <td>
                     {{ item?.current_driver?.first_name ?  item?.current_driver?.first_name+" "+item?.current_driver?.last_name : '' }}
