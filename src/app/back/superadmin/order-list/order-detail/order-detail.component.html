@@ -18,30 +18,32 @@
             <div class="col-md-3">
               <div class="ProfilePik">
                 <div class="ChangePic P_Photo p-4">
-                  <ng-container *ngIf="orderData?.order_type == 'pickup'" >
-                  <img *ngIf="(!(orderData?.assigned_order[0]?.driver?.first_name) || orderData?.assigned_order[0]?.driver?.first_name?.length == 0)" src="assets/images/p-icon02.png" />
-                  <img *ngIf="orderData?.assigned_order[0]?.driver?.first_name?.length > 0" src="assets/images/p_assigned.svg"/>
-                </ng-container>
+                  <ng-container *ngIf="orderData?.order_type == 'pickup'">
+                    <img
+                      *ngIf="(!(orderData?.assigned_order[0]?.driver?.first_name) || orderData?.assigned_order[0]?.driver?.first_name?.length == 0)"
+                      src="assets/images/p-icon02.png" />
+                    <img *ngIf="orderData?.assigned_order[0]?.driver?.first_name?.length > 0"
+                      src="assets/images/p_assigned.svg" />
+                  </ng-container>
 
                   <!-- <div class="ChangeImg NoPhoto fontSize12">
                     <i class="fa fa-star"></i> Priority Delivery
                   </div> -->
-                    
+
                   <ng-container *ngIf="orderData?.order_type == 'delivery'">
-                    <img *ngIf="(!(orderData?.assigned_order[0]?.driver?.first_name) ||orderData?.assigned_order[0]?.driver?.first_name?.length == 0)"
-                    src="./../../../../assets/images/d-icon.png"
-                    />
+                    <img
+                      *ngIf="(!(orderData?.assigned_order[0]?.driver?.first_name) ||orderData?.assigned_order[0]?.driver?.first_name?.length == 0)"
+                      src="./../../../../assets/images/d-icon.png" />
                     <img *ngIf="orderData?.assigned_order[0]?.driver?.first_name?.length > 0"
-                      src="./../../../../assets/images/d_assigned.svg"
-                    />
+                      src="./../../../../assets/images/d_assigned.svg" />
                   </ng-container>
                 </div>
-                <div  *ngIf="orderData?.order_type == 'pickup'"  class="DeliveryNumber fontSize10">
+                <div *ngIf="orderData?.order_type == 'pickup'" class="DeliveryNumber fontSize10">
                   <h4>{{ orderData?.po ? orderData?.po : orderData?.order_no }}</h4>
                   Pickup : {{ orderData?.dely_time }} |
                   {{ orderData?.dely_date | date : "fullDate" }}
                 </div>
-                <div  *ngIf="orderData?.order_type == 'delivery'"  class="DeliveryNumber fontSize10">
+                <div *ngIf="orderData?.order_type == 'delivery'" class="DeliveryNumber fontSize10">
                   <h4>{{ orderData?.po ? orderData?.po : orderData?.order_no }}</h4>
                   Delivery : {{ orderData?.dely_time }} |
                   {{ orderData?.dely_date | date : "fullDate" }}
@@ -59,7 +61,8 @@
                 </div>
                 <br>
 
-                <div class="driver-profile-image-container invoice-image-container d-flex justify-content-center items-center">
+                <div
+                  class="driver-profile-image-container invoice-image-container d-flex justify-content-center items-center">
                   <i *ngIf="!(invoiceImageSrc.indexOf('edit-icon') > 0)" class="fa fa-trash Delete"
                     (click)="removeProfilePhoto($event)"></i>
                   <img *ngIf="!(invoiceImageSrc.indexOf('edit-icon') > 0) && invoiceImageSrc"
@@ -73,7 +76,8 @@
                   <span style="font-size: 12px;">View Full Image</span>
                 </a>
                 <div class="cursor-pointer mt-3 " (click)="uploadInvoice()">
-                  <button class="realtime-secondary-btn"> {{this.orderData && this.orderData.order_invoice.length > 0 ? 'Edit
+                  <button class="realtime-secondary-btn"> {{this.orderData && this.orderData.order_invoice.length > 0 ?
+                    'Edit
                     Packing Slip': 'Upload Packing Slip'}} <i class="fa fa-spinner fa-spin"
                       *ngIf="isInvoiceLoading"></i>
                   </button>
@@ -83,7 +87,7 @@
                   class="driver-profile-image-container invoice-image-container ">
                   <img *ngIf="!(receiverImage.indexOf('edit-icon') > 0) && receiverImage"
                     class="driver-profile-image invoice-image" [src]="receiverImage" [alt]="'logo'" width="100%"
-                  style="height: 180px;" (click)="fileInput.click()" />
+                    style="height: 180px;" (click)="fileInput.click()" />
                   <img *ngIf="(receiverImage.indexOf('edit-icon') > 0)  && receiverImage"
                     class="driver-profile-image invoice-image" [src]="receiverImage" [alt]="'logo'" width="50%"
                     height="90%" (click)="fileInput.click()" />
@@ -126,9 +130,7 @@
                       <div class="col-md-12 mb-4">
                         <div class="Step_List">
                           <ul>
-                            <li
-                              [ngClass]="(getDateTime('pending') != 'NA'?'active':'') "
-                              class="w-100">
+                            <li [ngClass]="(getDateTime('pending') != 'NA'?'active':'') " class="w-100">
                               <a>
                                 <span class="DotSpan">&nbsp;</span>
                                 <span class="DotSpan_Title fontSize10"> Processed </span>
@@ -139,13 +141,10 @@
                                 <div *ngIf='getDateTime("pending") == "NA"' class="DotSpan_Title fontSize12"
                                   style="color: black;">NA </div>
                               </a>
-                              <span
-                                [ngClass]="(getDateTime('pending') != 'NA')?'line-active':'' "
+                              <span [ngClass]="(getDateTime('pending') != 'NA')?'line-active':'' "
                                 class="order-details-line"></span>
                             </li>
-                            <li
-                              [ngClass]="(getDateTime('shipped') != 'NA') ?'active':'' "
-                              class=" w-100">
+                            <li [ngClass]="(getDateTime('shipped') != 'NA') ?'active':'' " class=" w-100">
                               <a>
                                 <span class="DotSpan">&nbsp;</span>
                                 <span class="DotSpan_Title fontSize10"> Shipped </span>
@@ -156,14 +155,11 @@
                                 <div *ngIf='getDateTime("shipped") == "NA"' class="DotSpan_Title fontSize12"
                                   style="color: black;"> NA </div>
                               </a>
-                              <span
-                                [ngClass]="(getDateTime('shipped') != 'NA')?'line-active':'' "
+                              <span [ngClass]="(getDateTime('shipped') != 'NA')?'line-active':'' "
                                 class="order-details-line"></span>
 
                             </li>
-                            <li
-                              [ngClass]="(getDateTime('en-route') != 'NA')?'active':'' "
-                              class="w-100">
+                            <li [ngClass]="(getDateTime('en-route') != 'NA')?'active':'' " class="w-100">
                               <a>
                                 <span class="DotSpan">&nbsp;</span>
                                 <span class="DotSpan_Title fontSize10"> En route </span>
@@ -174,12 +170,12 @@
                                 <div *ngIf='getDateTime("en-route") == "NA"' class="DotSpan_Title fontSize12"
                                   style="color: black;"> NA </div>
                               </a>
-                              <span
-                                [ngClass]="(getDateTime('en-route') != 'NA')?'line-active':'' "
+                              <span [ngClass]="(getDateTime('en-route') != 'NA')?'line-active':'' "
                                 class="order-details-line"></span>
 
                             </li>
-                            <li *ngIf="orderData?.order_status== 'successful'" [ngClass]="orderData?.order_status== 'successful'?'active':'' " class=" w-100">
+                            <li *ngIf="orderData?.order_status== 'successful'"
+                              [ngClass]="orderData?.order_status== 'successful'?'active':'' " class=" w-100">
                               <a>
                                 <span class="DotSpan">&nbsp;</span>
                                 <span class="DotSpan_Title fontSize10"> Delivered </span>
@@ -191,7 +187,9 @@
                                   style="color: black;">NA </div>
                               </a>
                             </li>
-                            <li *ngIf="orderData?.order_status== 'unsuccessful'" [ngClass]="orderData?.order_status== 'unsuccessful'?'unsuccessful-active':'' " class=" w-100">
+                            <li *ngIf="orderData?.order_status== 'unsuccessful'"
+                              [ngClass]="orderData?.order_status== 'unsuccessful'?'unsuccessful-active':'' "
+                              class=" w-100">
                               <a>
                                 <span class="DotSpan">&nbsp;</span>
                                 <span class="DotSpan_Title fontSize10"> Delivered </span>
@@ -203,7 +201,8 @@
                                   style="color: black;">NA </div>
                               </a>
                             </li>
-                            <li *ngIf="orderData?.order_status== 'cancelled'" [ngClass]="orderData?.order_status== 'cancelled'?'cancelled-active':'' " class=" w-100">
+                            <li *ngIf="orderData?.order_status== 'cancelled'"
+                              [ngClass]="orderData?.order_status== 'cancelled'?'cancelled-active':'' " class=" w-100">
                               <a>
                                 <span class="DotSpan">&nbsp;</span>
                                 <span class="DotSpan_Title fontSize10"> Delivered </span>
@@ -215,12 +214,13 @@
                                   style="color: black;">NA </div>
                               </a>
                             </li>
-                            <li *ngIf="orderData?.order_status!= 'cancelled' && orderData?.order_status!= 'successful' && orderData?.order_status!= 'unsuccessful'" [ngClass]="orderData?.order_status== 'cancelled'?'cancelled-active':'' " class=" w-100">
+                            <li
+                              *ngIf="orderData?.order_status!= 'cancelled' && orderData?.order_status!= 'successful' && orderData?.order_status!= 'unsuccessful'"
+                              [ngClass]="orderData?.order_status== 'cancelled'?'cancelled-active':'' " class=" w-100">
                               <a>
                                 <span class="DotSpan">&nbsp;</span>
                                 <span class="DotSpan_Title fontSize10"> Delivered </span>
-                                <div class="DotSpan_Title fontSize12"
-                                  style="color: black;">NA </div>
+                                <div class="DotSpan_Title fontSize12" style="color: black;">NA </div>
                               </a>
                             </li>
                           </ul>
@@ -229,7 +229,7 @@
                       <br>
                     </div>
                     <br>
-                    
+
                     <div class="row">
                       <div class="col-md-6">
                         <table class="order-details-table">
@@ -256,23 +256,24 @@
                       <div class="col-md-6 p-0">
                         <table class="w-100 order-details-table">
                           <tbody>
-                            
-                              <tr>
-                                <th class="fontSize12">Order Status:</th>
-                                <td><button class="orderstatus-btn button-{{
+
+                            <tr>
+                              <th class="fontSize12">Order Status:</th>
+                              <td><button class="orderstatus-btn button-{{
                                   orderData?.order_status | titlecase
                                 }} status_button_style fontSize12">{{ orderData?.order_status }}</button></td>
-                              </tr>
+                            </tr>
                             <tr>
-                              <th class="fontSize12"  *ngIf="orderData?.order_type == 'pickup'">Pickup Date:</th>
-                              <th class="fontSize12"  *ngIf="orderData?.order_type == 'delivery'">Delivery Date:</th>
+                              <th class="fontSize12" *ngIf="orderData?.order_type == 'pickup'">Pickup Date:</th>
+                              <th class="fontSize12" *ngIf="orderData?.order_type == 'delivery'">Delivery Date:</th>
                               <td class="fontSize12">{{ orderData?.dely_date | date : "fullDate" }}</td>
                             </tr>
                             <tr>
                               <th class="fontSize12" *ngIf="orderData?.order_type == 'pickup'">Pickup Time:</th>
                               <th class="fontSize12" *ngIf="orderData?.order_type == 'delivery'">Delivery Time:</th>
 
-                              <td class="fontSize12"  *ngIf="getDateTime(orderData?.order_status)!= 'NA'">{{ getDateTime(orderData?.order_status) | date:'shortTime'}}</td>
+                              <td class="fontSize12" *ngIf="getDateTime(orderData?.order_status)!= 'NA'">{{
+                                getDateTime(orderData?.order_status) | date:'shortTime'}}</td>
                             </tr>
                             <tr>
                               <th class="fontSize12">Remarks:</th>
@@ -285,13 +286,14 @@
                   </div>
                 </div>
 
-                <div class="row mb-4" *ngIf="orderData?.order_status == 'unsuccessful' || orderData?.order_status == 'successful' || orderData?.order_status == 'cancelled'">
+                <div class="row mb-4"
+                  *ngIf="orderData?.order_status == 'unsuccessful' || orderData?.order_status == 'successful' || orderData?.order_status == 'cancelled'">
                   <div class="CardPopup">
                     <p style="font-size: 18px;">Order is <strong>{{orderData?.order_status | uppercase}}.</strong></p>
                     <div class="row m-0">
                       <div class="col-12 col-md-6 col-lg-6 p-0">
                         <h3 class="m-0" style="text-decoration: underline;"><strong>Driver Reasons:</strong></h3>
-                        <ng-container  *ngIf="unsuccessfullReasons.length > 0">
+                        <ng-container *ngIf="unsuccessfullReasons.length > 0">
                           <dl *ngFor="let reason of unsuccessfullReasons">
                             <dt class="fontSize12" *ngIf="reason?.reason">{{reason?.reason?.title}}:</dt>
                             <dd class="fontSize12" *ngIf="reason?.reason">{{reason?.reason?.reason_text}}</dd>
@@ -300,11 +302,11 @@
                             <dd class="fontSize12" *ngIf="reason?.other_reason">{{reason?.other_reason}}</dd>
                           </dl>
                         </ng-container>
-                        <div  *ngIf="unsuccessfullReasons.length == 0">
+                        <div *ngIf="unsuccessfullReasons.length == 0">
                           No Reasons Provided
                         </div>
                       </div>
-                      
+
                       <div class="col-12 col-md-6 col-lg-6 p-0">
                         <h3 class="m-0" style="text-decoration: underline;"><strong>Customer Reasons:</strong></h3>
                         <ng-container *ngIf="orderData?.customer_reason?.length > 0">
@@ -316,15 +318,15 @@
                             <dd class="fontSize12" *ngIf="reason?.other_reason">{{reason?.other_reason}}</dd>
                           </dl>
                         </ng-container>
-                        <div  *ngIf="orderData?.customer_reason?.length == 0">
+                        <div *ngIf="orderData?.customer_reason?.length == 0">
                           No Reasons Provided
                         </div>
                       </div>
                     </div>
-                    
+
                   </div>
                 </div>
-                
+
                 <div class="row">
                   <!-- Order Detail -->
                   <div class="CardPopup">
@@ -344,7 +346,9 @@
                           <strong>Assigned To: </strong>UNASSIGNED
                         </span>
                       </div>
-                      <div *ngIf="orderData?.current_driver.first_name && orderData?.order_status.toLowerCase() != 'successful' && orderData?.order_status.toLowerCase() != 'unsuccessful'" class="mb-2 p-0">
+                      <div
+                        *ngIf="orderData?.current_driver.first_name && orderData?.order_status.toLowerCase() != 'successful' && orderData?.order_status.toLowerCase() != 'unsuccessful'"
+                        class="mb-2 p-0">
                         <div (click)="reassignNewDriver('200ms','200ms')" class="NewDriver d-inline-block">
                           <a>Reassign</a>
                         </div>
@@ -400,12 +404,16 @@
                       </div>
                       <div class="col-md-12 my-4 d-flex gap-1 flex-wrap">
                         <strong>Send Notification To: </strong>
-                        <div class="mx-1 form-check form-check-inline" (click)="sendNotification('500ms','500ms',orderData?.current_driver?.id , 'Driver')">
-                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                        <div class="mx-1 form-check form-check-inline"
+                          (click)="sendNotification('500ms','500ms',orderData?.current_driver?.id , 'Driver')">
+                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                            value="option1">
                           <label class="form-check-label" for="inlineRadio1">Driver</label>
                         </div>
-                        <div class="form-check form-check-inline" (click)="sendNotification('500ms','500ms',orderData?.customer_phone, 'Customer' )">
-                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                        <div class="form-check form-check-inline"
+                          (click)="sendNotification('500ms','500ms',orderData?.customer_phone, 'Customer' )">
+                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                            value="option2">
                           <label class="form-check-label" for="inlineRadio2">Customer</label>
                         </div>
                         <!-- <button class="ButtonStyle"
