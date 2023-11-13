@@ -66,7 +66,6 @@ export class OrderAddComponent {
       pickup_time: [''],
       pickup_contact_name: ['', [Validators.required]],
       pickup_email: ['', [Validators.required, Validators.email]],
-      pickup_country_code: ['+1'],
       pickup_phone: [
         '',
         [Validators.required, Validators.pattern('^((\\+1-?)|0)?[0-9]{10}$')],
@@ -86,7 +85,7 @@ export class OrderAddComponent {
         '',
         [Validators.required, Validators.pattern('^((\\+1-?)|0)?[0-9]{10}$')],
       ],
-      dely_country_code: ['+1'],
+      country_code: ['+1'],
       dely_alt_phone: [
         ''
       ],
@@ -190,7 +189,6 @@ export class OrderAddComponent {
           pickup_time: this.orderData?.pickup_time,
           pickup_contact_name: this.orderData?.pickup_contact_name,
           pickup_email: this.orderData?.pickup_email,
-          pickup_country_code: this.orderData?.country_code,
           pickup_phone: this.orderData?.pickup_phone,
           pickup_alt_phone: this.orderData?.pickup_alt_phone,
           pickup_note: this.orderData?.pickup_note?this.orderData?.pickup_note : '',
@@ -202,7 +200,7 @@ export class OrderAddComponent {
           dely_contact_name: this.orderData?.dely_contact_name,
           dely_email:this.orderData?.dely_email,
           dely_phone: this.orderData?.dely_phone ? this.orderData?.dely_phone.replace('+1',''):'',
-          dely_country_code: this.orderData?.country_code,
+          country_code: this.orderData?.country_code,
           dely_alt_phone: this.orderData?.dely_alt_phone,
           dely_note: this.orderData?.dely_note?this.orderData?.dely_note : '',
           order_no: this.orderData?.order_no ? this.orderData?.order_no:'',

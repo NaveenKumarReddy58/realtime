@@ -161,16 +161,16 @@
                         <div class="row">
                           <div class="col-md-2 col-4">
                             <span class="Password">
-                              <span class="pickup-country">{{addOrderF.value.pickup_country_code}}</span>
-                              <select placeholder="Country" formControlName="pickup_country_code"
+                              <span class="pickup-country">{{addOrderF.value.country_code}}</span>
+                              <select placeholder="Country" formControlName="country_code"
                                 class="CompanyField country-addorder">
                                 <option value="" disabled [selected]="true">Country</option>
                                 <option *ngFor="let country of countryCodes" [value]="country.dial_code">
                                   <span class="mx-3 fw-bold">{{country.name+" "+ country.dial_code }}</span>
                                 </option>
                               </select>
-                              <div *ngIf="isSubmitted && f['pickup_country_code'].errors" class="text-danger">
-                                <div *ngIf="f['pickup_country_code'].errors['required']">
+                              <div *ngIf="isSubmitted && f['country_code'].errors" class="text-danger">
+                                <div *ngIf="f['country_code'].errors['required']">
                                   Country is required
                                 </div>
                               </div>
@@ -359,8 +359,8 @@
                           <div class="row">
                             <div class="col-md-2 col-4">
                               <span class="Password">
-                                <span class="pickup-country">{{addOrderF.value.dely_country_code}}</span>
-                                <select id="delyCountryCode" placeholder="Country" formControlName="dely_country_code"
+                                <span class="pickup-country">{{addOrderF.value.country_code}}</span>
+                                <select id="delyCountryCode" placeholder="Country" formControlName="country_code"
                                   class="CompanyField country-addorder">
                                   <option value="" disabled [selected]="true">
                                     Country
@@ -372,9 +372,9 @@
                                   </option>
                                 </select>
                                 <div *ngIf="
-                                    isSubmitted && f['dely_country_code'].errors
+                                    isSubmitted && f['country_code'].errors
                                   " class="text-danger">
-                                  <div *ngIf="f['dely_country_code'].errors['required']">
+                                  <div *ngIf="f['country_code'].errors['required']">
                                     Country is required
                                   </div>
                                 </div>

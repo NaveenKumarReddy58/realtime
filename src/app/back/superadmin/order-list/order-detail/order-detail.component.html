@@ -215,6 +215,14 @@
                                   style="color: black;">NA </div>
                               </a>
                             </li>
+                            <li *ngIf="orderData?.order_status!= 'cancelled' && orderData?.order_status!= 'successful' && orderData?.order_status!= 'unsuccessful'" [ngClass]="orderData?.order_status== 'cancelled'?'cancelled-active':'' " class=" w-100">
+                              <a>
+                                <span class="DotSpan">&nbsp;</span>
+                                <span class="DotSpan_Title fontSize10"> Delivered </span>
+                                <div class="DotSpan_Title fontSize12"
+                                  style="color: black;">NA </div>
+                              </a>
+                            </li>
                           </ul>
                         </div>
                       </div>

@@ -13,11 +13,12 @@
     height: 38px;
     top: 6%;
     line-height: 40px;
-    width: 79%;
-    left: 0;
+    width: 71%;
+    left: 2px;
     vertical-align: middle;
     background: white;
     text-align: center;
+    border-radius: 19px;
 }
 .notes-msg{
     text-align: right;
