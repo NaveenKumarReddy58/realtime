@@ -98,7 +98,6 @@ export class CompanyAddComponent {
     }
 
     this.loading = true;
-    // console.log('Api Data Err ffff', this.f, this.frmValues);
 
     const formData = new FormData();
     for (let i in this.addCP.value) {
@@ -108,7 +107,6 @@ export class CompanyAddComponent {
           this.addCP.value[i],
           this.addCP.value[i].name ? this.addCP.value[i].name : ''
         );
-        // console.log('blob');
       } else {
         formData.append(i, this.addCP.value[i]);
       }

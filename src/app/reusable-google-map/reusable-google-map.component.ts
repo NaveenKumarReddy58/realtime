@@ -186,7 +186,6 @@ export class ReusableGoogleMapComponent {
     //return "Asdf";
   }
   getBounds(markers:any){
-    console.log(markers)
 
     let north;
     let south;

@@ -127,7 +127,7 @@
                         <div class="Step_List">
                           <ul>
                             <li
-                              [ngClass]="(orderData?.order_status== 'shipped' || orderData?.order_status== 'en-route' || orderData?.order_status== 'successful' || orderData?.order_status== 'pending' )?'active':'' "
+                              [ngClass]="(getDateTime('pending') != 'NA'?'active':'') "
                               class="w-100">
                               <a>
                                 <span class="DotSpan">&nbsp;</span>
@@ -140,11 +140,11 @@
                                   style="color: black;">NA </div>
                               </a>
                               <span
-                                [ngClass]="(orderData?.order_status== 'shipped' || orderData?.order_status== 'en-route' || orderData?.order_status== 'successful' || orderData?.order_status== 'pending' )?'line-active':'' "
+                                [ngClass]="(getDateTime('pending') != 'NA')?'line-active':'' "
                                 class="order-details-line"></span>
                             </li>
                             <li
-                              [ngClass]="(orderData?.order_status== 'shipped' || orderData?.order_status== 'en-route' || orderData?.order_status== 'successful') ?'active':'' "
+                              [ngClass]="(getDateTime('shipped') != 'NA') ?'active':'' "
                               class=" w-100">
                               <a>
                                 <span class="DotSpan">&nbsp;</span>
@@ -157,12 +157,12 @@
                                   style="color: black;"> NA </div>
                               </a>
                               <span
-                                [ngClass]="(orderData?.order_status== 'shipped' || orderData?.order_status== 'en-route' || orderData?.order_status== 'successful')?'line-active':'' "
+                                [ngClass]="(getDateTime('shipped') != 'NA')?'line-active':'' "
                                 class="order-details-line"></span>
 
                             </li>
                             <li
-                              [ngClass]="(orderData?.order_status== 'en-route' || orderData?.order_status== 'successful')?'active':'' "
+                              [ngClass]="(getDateTime('en-route') != 'NA')?'active':'' "
                               class="w-100">
                               <a>
                                 <span class="DotSpan">&nbsp;</span>
@@ -175,11 +175,11 @@
                                   style="color: black;"> NA </div>
                               </a>
                               <span
-                                [ngClass]="(orderData?.order_status== 'en-route' || orderData?.order_status== 'successful')?'line-active':'' "
+                                [ngClass]="(getDateTime('en-route') != 'NA')?'line-active':'' "
                                 class="order-details-line"></span>
 
                             </li>
-                            <li [ngClass]="orderData?.order_status== 'successful'?'active':'' " class=" w-100">
+                            <li *ngIf="orderData?.order_status== 'successful'" [ngClass]="orderData?.order_status== 'successful'?'active':'' " class=" w-100">
                               <a>
                                 <span class="DotSpan">&nbsp;</span>
                                 <span class="DotSpan_Title fontSize10"> Delivered </span>
@@ -188,6 +188,30 @@
                                 <div *ngIf='getDateTime("successful") != "NA"' class="DotSpan_Title fontSize12"
                                   style="color: black;"> {{getDateTime("successful") | date:'shortTime'}} </div>
                                 <div *ngIf='getDateTime("successful") == "NA"' class="DotSpan_Title fontSize12"
+                                  style="color: black;">NA </div>
+                              </a>
+                            </li>
+                            <li *ngIf="orderData?.order_status== 'unsuccessful'" [ngClass]="orderData?.order_status== 'unsuccessful'?'unsuccessful-active':'' " class=" w-100">
+                              <a>
+                                <span class="DotSpan">&nbsp;</span>
+                                <span class="DotSpan_Title fontSize10"> Delivered </span>
+                                <div *ngIf='getDateTime("unsuccessful") != "NA"' class="DotSpan_Title fontSize12"
+                                  style="color: black;"> {{getDateTime("unsuccessful") | date:'mediumDate'}} </div>
+                                <div *ngIf='getDateTime("unsuccessful") != "NA"' class="DotSpan_Title fontSize12"
+                                  style="color: black;"> {{getDateTime("unsuccessful") | date:'shortTime'}} </div>
+                                <div *ngIf='getDateTime("unsuccessful") == "NA"' class="DotSpan_Title fontSize12"
+                                  style="color: black;">NA </div>
+                              </a>
+                            </li>
+                            <li *ngIf="orderData?.order_status== 'cancelled'" [ngClass]="orderData?.order_status== 'cancelled'?'cancelled-active':'' " class=" w-100">
+                              <a>
+                                <span class="DotSpan">&nbsp;</span>
+                                <span class="DotSpan_Title fontSize10"> Delivered </span>
+                                <div *ngIf='getDateTime("cancelled") != "NA"' class="DotSpan_Title fontSize12"
+                                  style="color: black;"> {{getDateTime("cancelled") | date:'mediumDate'}} </div>
+                                <div *ngIf='getDateTime("cancelled") != "NA"' class="DotSpan_Title fontSize12"
+                                  style="color: black;"> {{getDateTime("cancelled") | date:'shortTime'}} </div>
+                                <div *ngIf='getDateTime("cancelled") == "NA"' class="DotSpan_Title fontSize12"
                                   style="color: black;">NA </div>
                               </a>
                             </li>
@@ -253,20 +277,23 @@
                   </div>
                 </div>
 
-                <div class="row mb-4" *ngIf="orderData?.order_status == 'unsuccessful' || orderData?.order_status == 'successful'">
+                <div class="row mb-4" *ngIf="orderData?.order_status == 'unsuccessful' || orderData?.order_status == 'successful' || orderData?.order_status == 'cancelled'">
                   <div class="CardPopup">
-                    <p style="font-size: 18px;">Order is <strong>{{orderData?.order_status | uppercase}}</strong>. Below Are the Reasons</p>
+                    <p style="font-size: 18px;">Order is <strong>{{orderData?.order_status | uppercase}}.</strong></p>
                     <div class="row m-0">
                       <div class="col-12 col-md-6 col-lg-6 p-0">
                         <h3 class="m-0" style="text-decoration: underline;"><strong>Driver Reasons:</strong></h3>
                         <ng-container  *ngIf="unsuccessfullReasons.length > 0">
                           <dl *ngFor="let reason of unsuccessfullReasons">
-                            <dt class="fontSize12">{{reason.reason.title}}:</dt>
-                            <dd class="fontSize12">{{reason.reason.reason_text}}</dd>
+                            <dt class="fontSize12" *ngIf="reason?.reason">{{reason?.reason?.title}}:</dt>
+                            <dd class="fontSize12" *ngIf="reason?.reason">{{reason?.reason?.reason_text}}</dd>
+
+                            <dt class="fontSize12" *ngIf="reason?.other_reason">Other Reasons:</dt>
+                            <dd class="fontSize12" *ngIf="reason?.other_reason">{{reason?.other_reason}}</dd>
                           </dl>
                         </ng-container>
                         <div  *ngIf="unsuccessfullReasons.length == 0">
-                          No Reasons found
+                          No Reasons Provided
                         </div>
                       </div>
                       
@@ -276,10 +303,13 @@
                           <dl *ngFor="let reason of orderData.customer_reason">
                             <dt class="fontSize12" *ngIf="reason?.reason">{{reason?.reason?.title}}:</dt>
                             <dd class="fontSize12">{{reason?.reason?.reason_text}}</dd>
+
+                            <dt class="fontSize12" *ngIf="reason?.other_reason">Other Reasons:</dt>
+                            <dd class="fontSize12" *ngIf="reason?.other_reason">{{reason?.other_reason}}</dd>
                           </dl>
                         </ng-container>
                         <div  *ngIf="orderData?.customer_reason?.length == 0">
-                          No Reasons found
+                          No Reasons Provided
                         </div>
                       </div>
                     </div>

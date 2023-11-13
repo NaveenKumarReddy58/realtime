@@ -71,8 +71,6 @@ export class TopComponent {
     var width: any = this.topBarTabList?.nativeElement.offsetWidth;
     var height: any = this.topBarTabList?.nativeElement.offsetHeight;
 
-    console.log('Width:' + width);
-    console.log('Height: ' + height);
   }
 
   constructor(

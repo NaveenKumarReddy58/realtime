@@ -80,7 +80,6 @@ export class PlanAddComponent {
     }
 
     this.loading = true;
-    // console.log('Api Data Err ffff', this.f, this.frmValues);
 
     const formData = new FormData();
     for (let i in this.addPlan.value) {
@@ -90,7 +89,6 @@ export class PlanAddComponent {
           this.addPlan.value[i],
           this.addPlan.value[i].name ? this.addPlan.value[i].name : ''
         );
-        // console.log('blob');
       } else {
         formData.append(i, this.addPlan.value[i]);
       }

@@ -145,7 +145,7 @@
                 Select Date: <i class="fa fa-calendar-o"></i>
                 <input type="date" [(ngModel)]="selectedDateVal" class="" (change)="selectedDate($event)"/>
               </a>
-              <a class="Select_Date"> Filter <i class="fa fa-sliders"></i> </a>
+              <!-- <a class="Select_Date"> Filter <i class="fa fa-sliders"></i> </a> -->
             </div>
           </div>
           <div class="row mt-3" style="overflow-x: auto;padding-bottom: 10px;">
@@ -163,7 +163,7 @@
                   <th class="w-250">Customer Address</th>
                   <th class="w-250">Delivery Date</th>
                   <th>Delivery Time</th>
-                  <th>Actual time</th>
+                  <th>Real time</th>
                   <th [ngClass]="isShowDriversFilter? 'drop-down-active':''" class=" cursor-pointer position-relative width-130">
                      <span (click)="openDriversFilter()">Driver <i class="fa-regular fa-filter"></i>
                      </span>
@@ -244,8 +244,9 @@
                   </td>
                   <td><strong>{{ item.customer_name }}</strong>({{item.order_type == 'pickup'? item.pickup_company_name : item.dely_company_name}})</td>
                   <td>{{ item.customer_addr }}</td>
-                  <td>{{ item.dely_date | date : "fullDate" }}</td>
-                  <td>{{ item.order_type == 'pickup' ? convertTime24To12(item.pickup_time) : convertTime24To12(item.dely_time) }}</td>
+                  <td>{{ item.dely_date | date}}</td>
+                  <td>{{convertTime24To12(item.dely_time)}}</td>
+                  <!-- <td>{{ item.order_type == 'pickup' ? convertTime24To12(item.pickup_time) : convertTime24To12(item.dely_time) }}</td> -->
                   <td>
                     <!-- <span class="GreenColor">{{
                       item.created_at | date : "shortTime"

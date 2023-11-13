@@ -259,7 +259,6 @@ addMarker(latitude:any, long:any) {
           this.addressF.value[i],
           this.addressF.value[i].name ? this.addressF.value[i].name : ''
         );
-        // console.log('blob');
       } else {
         formData.append(i, this.addressF.value[i]);
       }

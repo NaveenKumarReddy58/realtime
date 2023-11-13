@@ -74,3 +74,12 @@
     background-color: #0eb002;
     border-color: #0eb002;
 }
+
+.Step_List ul li.cancelled-active span.DotSpan{
+    background-color: #d0ecfa;
+    border-color: #d0ecfa;
+}
+.Step_List ul li.unsuccessful-active span.DotSpan{
+    background-color: #ffbbbb;
+    border-color: #ffbbbb;
+}

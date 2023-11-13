@@ -109,7 +109,6 @@ export class PublicCompanyRegistrationComponent {
           this.addCP.value[i],
           this.addCP.value[i].name ? this.addCP.value[i].name : ''
         );
-        // console.log('blob');
       } else {
         formData.append(i, this.addCP.value[i]);
       }

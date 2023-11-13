@@ -599,6 +599,21 @@ textarea::placeholder {
   border-radius: 10px;
   cursor: pointer;
 }
+.realtime-btn .fa-pencil , .realtime-btn .fa-bell{
+  color: #0eb002;
+ }
+ .realtime-btn .fa-trash{
+  color: #de2525;
+ }
+
+.realtime-btn:hover .fa-pencil,.realtime-btn:hover .fa-bell{
+  color: white;
+}
+.realtime-btn:hover .fa-trash{
+  color: white;
+}
+
+
 
 div.Pro_input_Field {
   width: 100%;
@@ -691,7 +706,7 @@ a.link {
     border-top-left-radius: 0 !important;
   }
   #show-menu-bar{
-    display: none;
+    display: none !important;
   }
   .mt-xs-4 {
     margin-top: 18px !important;

@@ -120,7 +120,6 @@ export class ProfileComponent {
           this.ProfileFor.value[i],
           this.ProfileFor.value[i].name ? this.ProfileFor.value[i].name : ''
         );
-        // console.log('blob');
       } else {
         formData.append(i, this.ProfileFor.value[i]);
       }

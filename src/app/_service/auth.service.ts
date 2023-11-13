@@ -324,7 +324,6 @@ export class AuthService {
     //         return;
     //       }
 
-    //       console.log('TokenRefresh');
     //     },
     //     (error) => {
     //       this.dataError(error);

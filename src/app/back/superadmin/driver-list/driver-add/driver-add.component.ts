@@ -202,7 +202,6 @@ export class DriverAddComponent {
       });
     }
 
-    // console.log('Api Data Err ffff', this.f, this.frmValues);
 
     const formData = new FormData();
     for (let i in this.addDriver.value) {

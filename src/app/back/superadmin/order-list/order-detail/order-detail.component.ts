@@ -117,7 +117,7 @@ export class OrderDetailComponent {
           this.receiverImage= this.orderData.receiver_details[this.orderData.receiver_details?.length-1].photo;
         }
         this.orderData?.status_history?.find((elt:any)=>{
-          if(elt.status == 'unsuccessful' || elt.status == 'successful'){
+          if(elt.status == 'unsuccessful' || elt.status == 'successful' || elt.status == 'cancelled'){
             elt.status_reason.forEach((reason:any) => {
               this.unsuccessfullReasons.push(reason)
             });    

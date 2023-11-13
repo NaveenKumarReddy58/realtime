@@ -21,14 +21,14 @@
             <input (keyup)="search($event)" type="text" name="" placeholder="Search" />
             <button><i class="fa fa-search"></i></button>
           </form>
-          <div class="Filter_Set">
+          <!-- <div class="Filter_Set">
             <span>Filter Results <img src="assets/images/filter-icon.png"/></span>
-          </div>
+          </div> -->
           <div class="action-btns">
             <!-- <button class="ButtonStyle p-2" (click)="sendNotification('500ms','500ms')">
               Send Push Notification to all <img class="send mb-1" width="25px" src="../../assets/images/pushnotification-white.jpg">
             </button> -->
-            <a class="mx-3" (click)="sendNotification('500ms','500ms')">Send Push Notification to all <img class="push-notification" src="../../../../assets/images/pushnotification-black.jpg" /></a>
+            <a class="mx-3" (click)="sendNotification('500ms','500ms')">Send Push Notification to all <img class="push-notification" src="../../../../assets/images/pushnotification.png.jpg"  /></a>
             <a class="slected-count">{{selectedDriversCount}} Selected</a>
             <a class="select-all-dl" (click)="selectAll()">Select All </a>
             <a class="deselect-all-dl" (click)="deSelectAll()">Deselect All</a>

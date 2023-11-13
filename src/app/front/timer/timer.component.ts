@@ -29,10 +29,8 @@ export class TimerComponent {
     if (e.action === 'notify') {
       this.notify += ` - ${e.left} ms`;
     }
-    // console.log('Notify', e, e.action, this.username);
     if (e.action == 'done') {
       this.isActive = true;
-      // console.log('Notify', e, e.action, this.username);
     }
   }
 

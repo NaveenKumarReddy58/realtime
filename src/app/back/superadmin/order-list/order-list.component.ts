@@ -281,8 +281,8 @@ export class OrderListComponent {
     // }
     // //end
     var sitem = item?.status_history.find((item:any) => item.status === status);
+
     if(sitem){
-      console.log(sitem)
       return sitem.updated_at;
     } else{
       return "NA";
@@ -542,7 +542,6 @@ export class OrderListComponent {
       return;
     }
     this.loading= true;
-    // console.log('Api Data Err ffff', this.f, this.frmValues);
 
     var formdata = new FormData();
     formdata.append('order_ids', JSON.stringify(this.assignArr));
