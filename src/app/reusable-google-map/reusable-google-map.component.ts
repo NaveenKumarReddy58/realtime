@@ -23,6 +23,8 @@ export interface DialogData {
   height: string;
   isShowDirections?: boolean;
   orderData?:any;
+  driverData?:any;
+  isComponent?:any;
 }
 export interface MapDirectionsResponse {
   status: google.maps.DirectionsStatus;
@@ -40,6 +42,7 @@ export class ReusableGoogleMapComponent {
   dialogData!: DialogData;
   @Input() height: any;
   @Input() isComponent: boolean= false;
+  @Input() driverData: any;
   markerPositions: google.maps.LatLngLiteral[] = [];
   driverLocations: any;
   lat = 51.678418;
@@ -71,6 +74,11 @@ export class ReusableGoogleMapComponent {
     if(this.isComponent){
     this.getDriverLocationsFromFirebase();
     }
+
+    if(this.data.isComponent){
+      this.getDriverLocationsFromFirebase();
+    }
+    
    
   }
 
@@ -105,9 +113,21 @@ export class ReusableGoogleMapComponent {
   }
 
   getDriverLocationsFromFirebase(){
+    console.log("Sdfad")
     this.locateDriverService.getDriversInfo().then((res)=>{
       this.driverLocations= res;
-      this.driverList();
+      if(this.data.driverData || this.driverData){
+        let element = this.driverLocations.find((element:any)=>{
+          return element.driver_id == this.data.driverData.id;
+        })
+        let name = this.data.driverData.first_name+ " "+this.data.driverData.last_name;
+        this.addMarker(element.location.latitude , element.location.longitude , element.driver_id,name);
+        setTimeout(()=>{
+          this.isComponent= this.data.isComponent;
+        },1000)
+      } else{
+        this.driverList();
+      }
     });
   }
 
@@ -169,8 +189,14 @@ export class ReusableGoogleMapComponent {
         }
       )
     }
-    const bounds = this.getBounds(this.markers);
+    let bounds;
+    if(this.data.driverData){
+      bounds = this.getBounds(this.markers);
+    } else{
+      bounds = this.getDefaultBounds(this.markers);    }
+    
     this.map?.googleMap?.fitBounds(bounds);
+    this.map?.googleMap?.setZoom(10)
 
   }
 
@@ -185,7 +211,9 @@ export class ReusableGoogleMapComponent {
 
     //return "Asdf";
   }
-  getBounds(markers:any){
+  getDefaultBounds(markers:any){
+    let lat = 43.651070;
+    let long = -79.347015;
 
     let north;
     let south;
@@ -196,11 +224,31 @@ export class ReusableGoogleMapComponent {
   
       // set the coordinates to marker's lat and lng on the first run.
       // if the coordinates exist, get max or min depends on the coordinates.
-      north = north !== undefined ? Math.max(north, 43.64727323339819) : 43.64727323339819;
-    south = south !== undefined ? Math.min(south,43.64727323339819) : 43.64727323339819;
-    east = east !== undefined ? Math.max(east, -79.37134663004699) : -79.37134663004699;
-    west = west !== undefined ? Math.min(west, -79.37134663004699) : -79.37134663004699;
+      north = north !== undefined ? Math.max(north, lat) : lat;
+    south = south !== undefined ? Math.min(south,lat) : lat;
+    east = east !== undefined ? Math.max(east, long) : long;
+    west = west !== undefined ? Math.min(west, long) : long;
    // };
+  
+    const bounds = { north, south, east, west };
+  
+    return bounds;
+  }
+
+  getBounds(markers:any){
+    let north;
+    let south;
+    let east;
+    let west;
+  
+    for (const marker of markers){
+      // set the coordinates to marker's lat and lng on the first run.
+      // if the coordinates exist, get max or min depends on the coordinates.
+      north = north !== undefined ? Math.max(north, marker.position.lat) : marker.position.lat;
+    south = south !== undefined ? Math.min(south, marker.position.lat) : marker.position.lat;
+    east = east !== undefined ? Math.max(east, marker.position.lng) : marker.position.lng;
+    west = west !== undefined ? Math.min(west, marker.position.lng) : marker.position.lng;
+    };
   
     const bounds = { north, south, east, west };
   

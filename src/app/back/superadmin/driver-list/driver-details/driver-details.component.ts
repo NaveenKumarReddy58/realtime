@@ -34,6 +34,7 @@ export class DriverDetailsComponent {
   successfullOrderCount: number=0;
   unSuccessfullOrderCount: number=0;
   tripHistory: any;
+  driverData: any;
 
 
 
@@ -72,6 +73,7 @@ export class DriverDetailsComponent {
     this.driverService.driverDetails(driverId).subscribe((res) => {
       if (res && res.result) {
         let driverDetails = res.result
+        this.driverData = driverDetails;
         
         this.editDriverForm.patchValue({
           first_name: driverDetails.first_name,
@@ -275,6 +277,8 @@ export class DriverDetailsComponent {
       exitAnimationDuration,
       data: {
         height: '500px',
+        driverData:this.driverData,
+        isComponent: true
       },
 
     });
@@ -283,5 +287,7 @@ export class DriverDetailsComponent {
 
       }
     });
+
+   
   }
 }

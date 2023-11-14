@@ -9,7 +9,13 @@
 }
 
 .clear {
-    float: left;
+    float: right;
+    min-width: 150px !important;
+
+}
+.search{
+  float: left;
+  min-width: 150px !important;
 }
 .clear-all-noti{
     padding: 8px;

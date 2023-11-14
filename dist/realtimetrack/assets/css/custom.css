@@ -243,6 +243,7 @@ form.SearchForm input.InPutField {
   width: 100%;
   border: 0;
   padding: 0 10px;
+  background: none;
   /* font-size: 20px; */
 }
 form.SearchForm input::placeholder {
@@ -474,7 +475,8 @@ li.Status span {
   border-bottom: 1px solid #ebeff2;
 }
 .SearchOrder span.Cross img {
-  max-width: 25px;
+  max-width: 14px;
+  margin-bottom: 4px;
 }
 ul.OrderTracking li {
   list-style: none;
@@ -771,7 +773,7 @@ span.RecentTitle.AddOrder {
 }
 .from-to-pick {
   /* background: #d9effb; */
-  
+
   background: #e2e5e6;
   border-radius: 15px;
   overflow: hidden;
