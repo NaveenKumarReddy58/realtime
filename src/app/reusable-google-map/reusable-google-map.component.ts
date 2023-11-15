@@ -113,7 +113,6 @@ export class ReusableGoogleMapComponent {
   }
 
   getDriverLocationsFromFirebase(){
-    console.log("Sdfad")
     this.locateDriverService.getDriversInfo().then((res)=>{
       this.driverLocations= res;
       if(this.data.driverData || this.driverData){
@@ -161,7 +160,9 @@ export class ReusableGoogleMapComponent {
         }
         setTimeout(()=>{
           this.driverLocations.forEach((element:any) => {
-            this.addMarker(element.location.latitude , element.location.longitude , element.driver_id,element.name);
+            if(element.location && element.name.toString().length != 0){
+              this.addMarker(element.location.latitude , element.location.longitude , element.driver_id,element.name);
+            }
           });
         }, 1000)
         
