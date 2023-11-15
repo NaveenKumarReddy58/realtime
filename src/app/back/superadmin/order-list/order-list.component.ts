@@ -453,6 +453,7 @@ export class OrderListComponent {
   }
 
   updateAsign(id: number, e: any) {
+
     if (e.target.checked) {
       this.assignArr.push(id);
     } else {
@@ -594,6 +595,8 @@ export class OrderListComponent {
   assignOrder(formdata:any){
     this.orderService.orderAssign(formdata).subscribe(
       (data: any) => {
+        this.assignArr= [];
+        this.loading = false;
         if (this.authService.resultCodeError(data)) {
           this.loading = false;
           return;
@@ -607,7 +610,6 @@ export class OrderListComponent {
         this.router.navigate([
           '/' + this.authService._isRoleName + '/dashboard',
         ]);
-        this.loading = false;
       },
       (error) => {
         this.authService.dataError(error);
